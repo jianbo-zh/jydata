@@ -1,0 +1,6 @@
+{{ define "model/fields/additional" }}
+    {{- if eq $.Name "User" }}
+        // StaticField defined by template.
+        ScenicAreaName string `json:"scenic_area_name,omitempty"`
+    {{- end }}
+{{ end }}

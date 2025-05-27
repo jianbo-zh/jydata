@@ -1,0 +1,135 @@
+server:
+  grpc_tls:
+    svr_key: /Users/jianbo/workspace/grandrace/jiuyou/micros/aaa_infra/certs/grpc/joyorover/server.key
+    svr_crt: /Users/jianbo/workspace/grandrace/jiuyou/micros/aaa_infra/certs/grpc/joyorover/server.crt
+    ca_crt: /Users/jianbo/workspace/grandrace/jiuyou/micros/aaa_infra/certs/grpc/ca.crt
+  web_admin:
+    addr: 0.0.0.0:8201
+    timeout: 60s
+  wxmp_user:
+    addr: 0.0.0.0:8301
+    timeout: 60s
+  wxmp_ops:
+    addr: 0.0.0.0:8301
+    timeout: 60s
+  app_user:
+    addr: 0.0.0.0:8401
+    timeout: 60s
+  hapi_wxnotify:
+    addr: 0.0.0.0:8501
+    timeout: 60s
+  gw_carproxy7:
+    addr: 0.0.0.0:9201
+    timeout: 30s
+  gw_carproxy10:
+    addr: 0.0.0.0:9202
+    timeout: 30s
+  gw_carproxy10quic:
+    addr: 0.0.0.0:9203
+    timeout: 30s
+  ms_order:
+    addr: 0.0.0.0:9301
+    timeout: 30s
+  ms_filestorage:
+    addr: 0.0.0.0:9302
+    timeout: 30s
+  ms_message:
+    addr: 0.0.0.0:9303
+    timeout: 30s
+  ms_parkmap:
+    addr: 0.0.0.0:9304
+    timeout: 30s
+  ms_carmeasure:
+    addr: 0.0.0.0:9401
+    timeout: 30s
+  ms_carauth:
+    addr: 0.0.0.0:9402
+    timeout: 30s
+  ms_carconfig:
+    addr: 0.0.0.0:9403
+    timeout: 30s
+  ms_cardispatch:
+    addr: 0.0.0.0:9404
+    timeout: 30s
+
+infra:
+  database:
+    driver: postgres
+    source: "user=postgres password=MOf#FSpW%AjsgIYb host=127.0.0.1 port=5432 dbname=postgres sslmode=disable"
+  redis:
+    network: tcp
+    addr: 127.0.0.1:6379
+    password: "123456"
+    db: 0
+    dial_timeout: 3s
+    read_timeout: 3s
+    write_timeout: 3s
+  influxdb:
+    url: http://localhost:8086
+    org: jiuyou
+    token: myauthtoken123
+    bucket: jiuyou
+  etcd:
+    username: root
+    password: "123456"
+    endpoints:
+      - https://127.0.0.1:2379
+    tls:
+      svr_key: /Users/jianbo/workspace/grandrace/jiuyou/micros/aaa_infra/certs/etcd/s1-key.pem
+      svr_crt: /Users/jianbo/workspace/grandrace/jiuyou/micros/aaa_infra/certs/etcd/s1.pem
+      ca_crt: /Users/jianbo/workspace/grandrace/jiuyou/micros/aaa_infra/certs/etcd/etcd-root-ca.pem
+    dial_timeout: 3s
+  otelcol:
+    endpoint: "localhost:4318"
+
+app:
+  env: test
+  api_domain: "apidomain"
+  static_resource_url: "http://staticresource/"
+  storage_path: "/Users/jianbo/workspace/grandrace/jiuyou/micros/zzz_storage"
+  auth:
+    service_key: some_jwt_sign_key
+    api_key: some_api_key
+  jpush:
+    app_key: "appkey"
+    master_secret: "appsecret"
+  user_wxmp:
+    app_id: wxfef4306defa54093
+    app_secret: 9fbdf73fd3bca020fc99d65b3f50adcc
+  ops_wxmp:
+    app_id: wxcfed59eec444442f
+    app_secret: eeab82dd85d973fdd0eb7c94c1fb6034
+  wxpay:
+    mch_id: "1711796550"
+    mch_certificate_serial_number: 3333A0185EDF6B447B7C78C41966D4566B0C09F3
+    mch_apiv3_key: dX0nP5wP4bO4bD6wB8uP1zY8wX3xQ0aL
+    mch_public_key_id: PUB_KEY_ID_0117117965502025040200389500003093
+    mch_public_key_path: ./certs/partner/pub_key.pem
+    mch_private_key_path: ./certs/partner/apiclient_key.pem
+    app_id: wxfef4306defa54093
+    app_secret: 9fbdf73fd3bca020fc99d65b3f50adcc
+    notify_url: https://jyapi.znwlqc.com/applet/wxnotify
+  upload_log_ftp:
+    host: "host"
+    port: 20
+    username: "username"
+    password: "password"
+  download_log_url: "https://example.com/download_log"
+  yokee:
+    app_id: "100000"
+    app_key: "123456"
+    domain_url: "https://api.yokee.com"
+  order_test_amount: 10
+  order_free_amount_sec: 10
+  mockcar7_device_id: MXR202500016
+  mockcar10_device_id: MXR202500016
+  mockcar10quic_device_id: MXR202500016
+
+log:
+  level: debug
+  save_dir: /Users/jianbo/workspace/grandrace/jiuyou/micros/zzz_logs
+  max_size_mb: 10
+  max_age_day: 20
+  max_backups: 30
+  local_time: true
+  compress: true
