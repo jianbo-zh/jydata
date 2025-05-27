@@ -5,12 +5,12 @@ package ent
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/caralarm"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/caralarm"
 )
 
 // CarAlarm is the model entity for the CarAlarm schema.

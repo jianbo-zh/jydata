@@ -4,13 +4,13 @@ package ent
 
 import (
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
-	"github.com/jianbo-zh/jydata/database/ent/scenicareamap"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
+	"github.com/jianbo-zh/jydata/database/ent/scenicareamap"
 )
 
 // ScenicArea is the model entity for the ScenicArea schema.

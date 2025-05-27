@@ -3,10 +3,10 @@
 package statshourlyscenicarea
 
 import (
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
 	"time"
 
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
 )
 
 // ID filters vertices based on their ID field.

@@ -6,16 +6,16 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/order"
-	"github.com/jianbo-zh/jydata/database/ent/ordersharing"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
-	"github.com/jianbo-zh/jydata/database/schema/types"
 	"time"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/dialect/sql/sqljson"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/order"
+	"github.com/jianbo-zh/jydata/database/ent/ordersharing"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
+	"github.com/jianbo-zh/jydata/database/schema/types"
 )
 
 // OrderSharingUpdate is the builder for updating OrderSharing entities.

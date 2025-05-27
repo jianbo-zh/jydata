@@ -4,12 +4,12 @@ package ent
 
 import (
 	"context"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
-	"github.com/jianbo-zh/jydata/database/ent/statsdailyscenicarea"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
+	"github.com/jianbo-zh/jydata/database/ent/statsdailyscenicarea"
 )
 
 // StatsDailyScenicAreaDelete is the builder for deleting a StatsDailyScenicArea entity.

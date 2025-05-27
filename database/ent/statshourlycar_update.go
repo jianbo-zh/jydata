@@ -6,15 +6,15 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/car"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
-	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
-	"github.com/jianbo-zh/jydata/database/ent/statshourlycar"
 	"time"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/car"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
+	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
+	"github.com/jianbo-zh/jydata/database/ent/statshourlycar"
 )
 
 // StatsHourlyCarUpdate is the builder for updating StatsHourlyCar entities.

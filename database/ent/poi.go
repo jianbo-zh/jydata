@@ -5,13 +5,13 @@ package ent
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/poi"
-	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/poi"
+	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 )
 
 // Poi is the model entity for the Poi schema.

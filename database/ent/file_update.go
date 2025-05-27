@@ -6,13 +6,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/file"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
 	"time"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/file"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
 )
 
 // FileUpdate is the builder for updating File entities.

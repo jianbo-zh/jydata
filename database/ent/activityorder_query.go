@@ -5,14 +5,14 @@ package ent
 import (
 	"context"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/activityorder"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
 	"math"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/activityorder"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
 )
 
 // ActivityOrderQuery is the builder for querying ActivityOrder entities.

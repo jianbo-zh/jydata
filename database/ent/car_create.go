@@ -6,6 +6,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
+	"entgo.io/ent/dialect/sql/sqlgraph"
+	"entgo.io/ent/schema/field"
 	"github.com/jianbo-zh/jydata/database/ent/car"
 	"github.com/jianbo-zh/jydata/database/ent/carconfig"
 	"github.com/jianbo-zh/jydata/database/ent/carconfigdownload"
@@ -15,10 +19,6 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 	"github.com/jianbo-zh/jydata/database/ent/schetask"
 	"github.com/jianbo-zh/jydata/database/ent/statshourlycar"
-	"time"
-
-	"entgo.io/ent/dialect/sql/sqlgraph"
-	"entgo.io/ent/schema/field"
 )
 
 // CarCreate is the builder for creating a Car entity.

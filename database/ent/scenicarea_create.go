@@ -6,6 +6,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
+	"entgo.io/ent/dialect/sql/sqlgraph"
+	"entgo.io/ent/schema/field"
 	"github.com/jianbo-zh/jydata/database/ent/account"
 	"github.com/jianbo-zh/jydata/database/ent/billingstrategy"
 	"github.com/jianbo-zh/jydata/database/ent/car"
@@ -20,10 +24,6 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/scenicareamap"
 	"github.com/jianbo-zh/jydata/database/ent/statshourlycar"
 	"github.com/jianbo-zh/jydata/database/ent/user"
-	"time"
-
-	"entgo.io/ent/dialect/sql/sqlgraph"
-	"entgo.io/ent/schema/field"
 )
 
 // ScenicAreaCreate is the builder for creating a ScenicArea entity.

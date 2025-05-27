@@ -5,12 +5,12 @@ package ent
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/carconfigpack"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/carconfigpack"
 )
 
 // CarConfigPack is the model entity for the CarConfigPack schema.

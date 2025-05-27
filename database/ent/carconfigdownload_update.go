@@ -6,14 +6,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/carconfigdownload"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
 	"time"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/dialect/sql/sqljson"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/carconfigdownload"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
 )
 
 // CarConfigDownloadUpdate is the builder for updating CarConfigDownload entities.

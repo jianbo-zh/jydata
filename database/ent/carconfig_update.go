@@ -6,16 +6,16 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/car"
-	"github.com/jianbo-zh/jydata/database/ent/carconfig"
-	"github.com/jianbo-zh/jydata/database/ent/carsmodels"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
-	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/dialect/sql/sqljson"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/car"
+	"github.com/jianbo-zh/jydata/database/ent/carconfig"
+	"github.com/jianbo-zh/jydata/database/ent/carsmodels"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
+	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 )
 
 // CarConfigUpdate is the builder for updating CarConfig entities.

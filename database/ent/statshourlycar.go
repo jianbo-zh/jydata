@@ -4,14 +4,14 @@ package ent
 
 import (
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/car"
-	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
-	"github.com/jianbo-zh/jydata/database/ent/statshourlycar"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/car"
+	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
+	"github.com/jianbo-zh/jydata/database/ent/statshourlycar"
 )
 
 // StatsHourlyCar is the model entity for the StatsHourlyCar schema.

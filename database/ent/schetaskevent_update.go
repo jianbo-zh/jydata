@@ -6,13 +6,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
-	"github.com/jianbo-zh/jydata/database/ent/schetask"
-	"github.com/jianbo-zh/jydata/database/ent/schetaskevent"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
+	"github.com/jianbo-zh/jydata/database/ent/schetask"
+	"github.com/jianbo-zh/jydata/database/ent/schetaskevent"
 )
 
 // ScheTaskEventUpdate is the builder for updating ScheTaskEvent entities.

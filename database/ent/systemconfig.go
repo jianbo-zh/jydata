@@ -4,12 +4,12 @@ package ent
 
 import (
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/systemconfig"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/systemconfig"
 )
 
 // SystemConfig is the model entity for the SystemConfig schema.

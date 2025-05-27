@@ -5,16 +5,16 @@ package ent
 import (
 	"context"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/car"
-	"github.com/jianbo-zh/jydata/database/ent/carsoperatelog"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
-	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 	"math"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/car"
+	"github.com/jianbo-zh/jydata/database/ent/carsoperatelog"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
+	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 )
 
 // CarsOperateLogQuery is the builder for querying CarsOperateLog entities.

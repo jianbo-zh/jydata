@@ -6,6 +6,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"reflect"
+	"sync"
+
+	"entgo.io/ent"
+	"entgo.io/ent/dialect/sql"
+	"entgo.io/ent/dialect/sql/sqlgraph"
 	"github.com/jianbo-zh/jydata/database/ent/access"
 	"github.com/jianbo-zh/jydata/database/ent/account"
 	"github.com/jianbo-zh/jydata/database/ent/activityorder"
@@ -59,12 +65,6 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/systemlog"
 	"github.com/jianbo-zh/jydata/database/ent/task"
 	"github.com/jianbo-zh/jydata/database/ent/user"
-	"reflect"
-	"sync"
-
-	"entgo.io/ent"
-	"entgo.io/ent/dialect/sql"
-	"entgo.io/ent/dialect/sql/sqlgraph"
 )
 
 // ent aliases to avoid import conflicts in user's code.

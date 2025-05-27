@@ -4,12 +4,12 @@ package ent
 
 import (
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/operationuser"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/operationuser"
 )
 
 // OperationUser is the model entity for the OperationUser schema.

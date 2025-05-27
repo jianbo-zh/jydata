@@ -4,12 +4,12 @@ package ent
 
 import (
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/statsdailycar"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/statsdailycar"
 )
 
 // StatsDailyCar is the model entity for the StatsDailyCar schema.

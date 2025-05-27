@@ -6,14 +6,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/car"
-	"github.com/jianbo-zh/jydata/database/ent/schetask"
-	"github.com/jianbo-zh/jydata/database/ent/schetaskevent"
-	"github.com/jianbo-zh/jydata/database/schema/types"
 	"time"
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/car"
+	"github.com/jianbo-zh/jydata/database/ent/schetask"
+	"github.com/jianbo-zh/jydata/database/ent/schetaskevent"
+	"github.com/jianbo-zh/jydata/database/schema/types"
 )
 
 // ScheTaskCreate is the builder for creating a ScheTask entity.

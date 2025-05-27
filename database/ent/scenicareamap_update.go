@@ -6,14 +6,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
-	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
-	"github.com/jianbo-zh/jydata/database/ent/scenicareamap"
 	"time"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
+	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
+	"github.com/jianbo-zh/jydata/database/ent/scenicareamap"
 )
 
 // ScenicAreaMapUpdate is the builder for updating ScenicAreaMap entities.

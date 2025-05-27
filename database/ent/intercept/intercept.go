@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 
+	"entgo.io/ent/dialect/sql"
 	"github.com/jianbo-zh/jydata/database/ent"
 	"github.com/jianbo-zh/jydata/database/ent/access"
 	"github.com/jianbo-zh/jydata/database/ent/account"
@@ -61,8 +62,6 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/systemlog"
 	"github.com/jianbo-zh/jydata/database/ent/task"
 	"github.com/jianbo-zh/jydata/database/ent/user"
-
-	"entgo.io/ent/dialect/sql"
 )
 
 // The Query interface represents an operation that queries a graph.

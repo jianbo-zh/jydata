@@ -6,11 +6,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/carsflightextendyokee"
 	"time"
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/carsflightextendyokee"
 )
 
 // CarsFlightExtendYokeeCreate is the builder for creating a CarsFlightExtendYokee entity.

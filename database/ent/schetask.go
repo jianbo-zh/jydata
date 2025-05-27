@@ -5,14 +5,14 @@ package ent
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/car"
-	"github.com/jianbo-zh/jydata/database/ent/schetask"
-	"github.com/jianbo-zh/jydata/database/schema/types"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/car"
+	"github.com/jianbo-zh/jydata/database/ent/schetask"
+	"github.com/jianbo-zh/jydata/database/schema/types"
 )
 
 // ScheTask is the model entity for the ScheTask schema.

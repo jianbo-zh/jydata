@@ -6,14 +6,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/orderextendflight"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
 	"time"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/dialect/sql/sqljson"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/orderextendflight"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
 )
 
 // OrderExtendFlightUpdate is the builder for updating OrderExtendFlight entities.

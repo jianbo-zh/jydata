@@ -6,13 +6,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/activityorder"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
 	"time"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/activityorder"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
 )
 
 // ActivityOrderUpdate is the builder for updating ActivityOrder entities.

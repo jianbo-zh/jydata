@@ -6,12 +6,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/carsflight"
-	"github.com/jianbo-zh/jydata/database/schema/types"
 	"time"
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/carsflight"
+	"github.com/jianbo-zh/jydata/database/schema/types"
 )
 
 // CarsFlightCreate is the builder for creating a CarsFlight entity.

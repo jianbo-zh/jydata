@@ -4,12 +4,12 @@ package ent
 
 import (
 	"context"
-	"github.com/jianbo-zh/jydata/database/ent/file"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/file"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
 )
 
 // FileDelete is the builder for deleting a File entity.

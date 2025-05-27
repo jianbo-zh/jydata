@@ -6,16 +6,16 @@ import (
 	"context"
 	"database/sql/driver"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/car"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
-	"github.com/jianbo-zh/jydata/database/ent/schetask"
-	"github.com/jianbo-zh/jydata/database/ent/schetaskevent"
 	"math"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/car"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
+	"github.com/jianbo-zh/jydata/database/ent/schetask"
+	"github.com/jianbo-zh/jydata/database/ent/schetaskevent"
 )
 
 // ScheTaskQuery is the builder for querying ScheTask entities.

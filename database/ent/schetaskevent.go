@@ -4,13 +4,13 @@ package ent
 
 import (
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/schetask"
-	"github.com/jianbo-zh/jydata/database/ent/schetaskevent"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/schetask"
+	"github.com/jianbo-zh/jydata/database/ent/schetaskevent"
 )
 
 // ScheTaskEvent is the model entity for the ScheTaskEvent schema.

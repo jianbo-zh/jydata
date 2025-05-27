@@ -5,14 +5,14 @@ package ent
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/order"
-	"github.com/jianbo-zh/jydata/database/ent/ordersharing"
-	"github.com/jianbo-zh/jydata/database/schema/types"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/order"
+	"github.com/jianbo-zh/jydata/database/ent/ordersharing"
+	"github.com/jianbo-zh/jydata/database/schema/types"
 )
 
 // OrderSharing is the model entity for the OrderSharing schema.

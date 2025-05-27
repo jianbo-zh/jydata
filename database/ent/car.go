@@ -5,14 +5,14 @@ package ent
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/car"
-	"github.com/jianbo-zh/jydata/database/ent/carsmodels"
-	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/car"
+	"github.com/jianbo-zh/jydata/database/ent/carsmodels"
+	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 )
 
 // Car is the model entity for the Car schema.

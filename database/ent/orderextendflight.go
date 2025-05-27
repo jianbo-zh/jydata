@@ -5,12 +5,12 @@ package ent
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/orderextendflight"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/orderextendflight"
 )
 
 // OrderExtendFlight is the model entity for the OrderExtendFlight schema.

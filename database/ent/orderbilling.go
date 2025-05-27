@@ -4,13 +4,13 @@ package ent
 
 import (
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/order"
-	"github.com/jianbo-zh/jydata/database/ent/orderbilling"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/order"
+	"github.com/jianbo-zh/jydata/database/ent/orderbilling"
 )
 
 // OrderBilling is the model entity for the OrderBilling schema.

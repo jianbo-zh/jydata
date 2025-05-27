@@ -4,12 +4,12 @@ package ent
 
 import (
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/carsflightextendyokee"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/carsflightextendyokee"
 )
 
 // CarsFlightExtendYokee is the model entity for the CarsFlightExtendYokee schema.

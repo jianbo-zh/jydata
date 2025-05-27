@@ -5,15 +5,15 @@ package ent
 import (
 	"context"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/mapversion"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
-	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 	"math"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/mapversion"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
+	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 )
 
 // MapVersionQuery is the builder for querying MapVersion entities.

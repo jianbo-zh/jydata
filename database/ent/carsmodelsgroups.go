@@ -4,13 +4,13 @@ package ent
 
 import (
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/carsmodels"
-	"github.com/jianbo-zh/jydata/database/ent/carsmodelsgroups"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/carsmodels"
+	"github.com/jianbo-zh/jydata/database/ent/carsmodelsgroups"
 )
 
 // CarsModelsGroups is the model entity for the CarsModelsGroups schema.

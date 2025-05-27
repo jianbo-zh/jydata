@@ -6,6 +6,12 @@ import (
 	"context"
 	"database/sql/driver"
 	"fmt"
+	"math"
+
+	"entgo.io/ent"
+	"entgo.io/ent/dialect/sql"
+	"entgo.io/ent/dialect/sql/sqlgraph"
+	"entgo.io/ent/schema/field"
 	"github.com/jianbo-zh/jydata/database/ent/car"
 	"github.com/jianbo-zh/jydata/database/ent/carconfig"
 	"github.com/jianbo-zh/jydata/database/ent/carconfigdownload"
@@ -16,12 +22,6 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 	"github.com/jianbo-zh/jydata/database/ent/schetask"
 	"github.com/jianbo-zh/jydata/database/ent/statshourlycar"
-	"math"
-
-	"entgo.io/ent"
-	"entgo.io/ent/dialect/sql"
-	"entgo.io/ent/dialect/sql/sqlgraph"
-	"entgo.io/ent/schema/field"
 )
 
 // CarQuery is the builder for querying Car entities.

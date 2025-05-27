@@ -5,13 +5,13 @@ package ent
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/carsflight"
-	"github.com/jianbo-zh/jydata/database/schema/types"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/carsflight"
+	"github.com/jianbo-zh/jydata/database/schema/types"
 )
 
 // CarsFlight is the model entity for the CarsFlight schema.

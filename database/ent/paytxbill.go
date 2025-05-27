@@ -4,13 +4,13 @@ package ent
 
 import (
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/paytxbill"
-	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/paytxbill"
+	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 )
 
 // PayTxBill is the model entity for the PayTxBill schema.

@@ -11,6 +11,10 @@ import (
 
 	"github.com/jianbo-zh/jydata/database/ent/migrate"
 
+	"entgo.io/ent"
+	"entgo.io/ent/dialect"
+	"entgo.io/ent/dialect/sql"
+	"entgo.io/ent/dialect/sql/sqlgraph"
 	"github.com/jianbo-zh/jydata/database/ent/access"
 	"github.com/jianbo-zh/jydata/database/ent/account"
 	"github.com/jianbo-zh/jydata/database/ent/activityorder"
@@ -64,11 +68,6 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/systemlog"
 	"github.com/jianbo-zh/jydata/database/ent/task"
 	"github.com/jianbo-zh/jydata/database/ent/user"
-
-	"entgo.io/ent"
-	"entgo.io/ent/dialect"
-	"entgo.io/ent/dialect/sql"
-	"entgo.io/ent/dialect/sql/sqlgraph"
 )
 
 // Client is the client that holds all ent builders.

@@ -9,9 +9,8 @@ import (
 	// required by schema hooks.
 	_ "github.com/jianbo-zh/jydata/database/ent/runtime"
 
-	"github.com/jianbo-zh/jydata/database/ent/migrate"
-
 	"entgo.io/ent/dialect/sql/schema"
+	"github.com/jianbo-zh/jydata/database/ent/migrate"
 )
 
 type (

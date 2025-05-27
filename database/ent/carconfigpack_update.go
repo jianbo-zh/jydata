@@ -6,13 +6,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/carconfigpack"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/dialect/sql/sqljson"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/carconfigpack"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
 )
 
 // CarConfigPackUpdate is the builder for updating CarConfigPack entities.

@@ -4,12 +4,12 @@ package ent
 
 import (
 	"context"
-	"github.com/jianbo-zh/jydata/database/ent/caralarm"
-	"github.com/jianbo-zh/jydata/database/ent/predicate"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/ent/caralarm"
+	"github.com/jianbo-zh/jydata/database/ent/predicate"
 )
 
 // CarAlarmDelete is the builder for deleting a CarAlarm entity.

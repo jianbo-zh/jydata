@@ -4,16 +4,16 @@ package ent
 
 import (
 	"fmt"
-	"github.com/jianbo-zh/jydata/database/ent/car"
-	"github.com/jianbo-zh/jydata/database/ent/order"
-	"github.com/jianbo-zh/jydata/database/ent/orderbilling"
-	"github.com/jianbo-zh/jydata/database/ent/ordersharing"
-	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 	"strings"
 	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
+	"github.com/jianbo-zh/jydata/database/ent/car"
+	"github.com/jianbo-zh/jydata/database/ent/order"
+	"github.com/jianbo-zh/jydata/database/ent/orderbilling"
+	"github.com/jianbo-zh/jydata/database/ent/ordersharing"
+	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
 )
 
 // Order is the model entity for the Order schema.

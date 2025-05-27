@@ -6,6 +6,12 @@ import (
 	"context"
 	"database/sql/driver"
 	"fmt"
+	"math"
+
+	"entgo.io/ent"
+	"entgo.io/ent/dialect/sql"
+	"entgo.io/ent/dialect/sql/sqlgraph"
+	"entgo.io/ent/schema/field"
 	"github.com/jianbo-zh/jydata/database/ent/car"
 	"github.com/jianbo-zh/jydata/database/ent/order"
 	"github.com/jianbo-zh/jydata/database/ent/orderbilling"
@@ -13,12 +19,6 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/ordersharing"
 	"github.com/jianbo-zh/jydata/database/ent/predicate"
 	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
-	"math"
-
-	"entgo.io/ent"
-	"entgo.io/ent/dialect/sql"
-	"entgo.io/ent/dialect/sql/sqlgraph"
-	"entgo.io/ent/schema/field"
 )
 
 // OrderQuery is the builder for querying Order entities.
