@@ -21,6 +21,12 @@ const (
 	CarUseState_Dispatching = 6 // 调度中
 )
 
+const (
+	CarEmergencyState_No     int = 0 // 无紧急
+	CarEmergencyState_Yes    int = 1 // 紧急呼救
+	CarEmergencyState_Cancel int = 2 // 已取消紧急呼救
+)
+
 type DrivingState int
 
 const (
