@@ -9,20 +9,6 @@ import (
 	"entgo.io/ent/dialect/sql"
 )
 
-type OrderRefundType int
-
-const (
-	OrderRefundType_Settlement OrderRefundType = 0 // 结算退款
-	OrderRefundType_Manual     OrderRefundType = 1 // 运管退款
-)
-
-type OrderRefundState int
-
-const (
-	OrderRefundState_Pending  = 1 // 待退款
-	OrderRefundState_Refunded = 2 // 已退款
-)
-
 func (db *Database) CreateOrderRefund(ctx context.Context, refund *ent.OrderRefund) (*ent.OrderRefund, error) {
 	return db.MainDB().OrderRefund.Create().
 		SetType(refund.Type).

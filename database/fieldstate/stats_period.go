@@ -1,4 +1,4 @@
-package database
+package fieldstate
 
 const (
 	// 工作日（普通工作日和调休工作日）

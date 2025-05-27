@@ -1,12 +1,13 @@
-package database
+package fieldtype
 
 type BillTxType int
-type BillTxChannel int
 
 const (
 	BillTxType_In  BillTxType = 1 // 收入
 	BillTxType_Out BillTxType = 0 // 支出
 )
+
+type BillTxChannel int
 
 const (
 	BillTxChannel_Deposit BillTxChannel = 1 // 用车押金

@@ -39,6 +39,9 @@ type File struct {
 	// 更新时间
 	UpdateTime   time.Time `json:"update_time,omitempty"`
 	selectValues sql.SelectValues
+
+	// StaticField defined by template.
+	DownloadUrl string `json:"download_url,omitempty"`
 }
 
 // scanValues returns the types for scanning values from sql.Rows.

@@ -6,14 +6,7 @@ import (
 
 	"github.com/jianbo-zh/jydata/database/ent"
 	"github.com/jianbo-zh/jydata/database/ent/activityorder"
-)
-
-type ActivityOrderState int
-
-const (
-	// 订单状态(0-待支付、1-已支付)
-	ActivityOrderState_Pending = 0 // 待付押金
-	ActivityOrderState_Paid    = 1 // 待使用
+	"github.com/jianbo-zh/jydata/database/fieldstate"
 )
 
 func (db *Database) CreateActivityOrder(ctx context.Context, req *ent.ActivityOrder) (*ent.ActivityOrder, error) {
@@ -39,9 +32,9 @@ func (db *Database) GetActivityOrderByOrderNo(ctx context.Context, orderNo strin
 
 func (db *Database) UpdateActivityOrderPaid(ctx context.Context, orderID int, txID string, paidTime time.Time) (*ent.ActivityOrder, error) {
 	return db.MainDB().ActivityOrder.UpdateOneID(orderID).
-		Where(activityorder.OrderStateEQ(ActivityOrderState_Pending)).
+		Where(activityorder.OrderStateEQ(fieldstate.ActivityOrderState_Pending)).
 		SetWxTxID(txID).
-		SetOrderState(ActivityOrderState_Paid).
+		SetOrderState(fieldstate.ActivityOrderState_Paid).
 		SetPaidTime(paidTime).
 		Save(ctx)
 }

@@ -1,4 +1,4 @@
-package database
+package fieldtype
 
 // 配置内容类型
 type CarConfigContentType int

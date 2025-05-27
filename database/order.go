@@ -6,31 +6,7 @@ import (
 
 	"github.com/jianbo-zh/jydata/database/ent"
 	"github.com/jianbo-zh/jydata/database/ent/order"
-)
-
-type OrderState int
-
-const (
-	// 订单状态(0-待付押金、1-待使用、2-进行中、3-待支付、4-待退费、5-已完成、6-已取消)
-	OrderState_PendingDeposit = 0 // 待付押金
-	OrderState_PendingUseCar  = 1 // 待使用
-	OrderState_UsingCar       = 2 // 进行中
-	OrderState_PendingPayment = 3 // 待支付
-	OrderState_PendingRefund  = 4 // 待退费
-	OrderState_Completed      = 5 // 已完成
-	OrderState_Cancelled      = 6 // 已取消
-)
-
-const (
-	DepositState_No      = 0 // 无押金
-	DepositState_Pending = 1 // 待付押金
-	DepositState_Paid    = 2 // 已付押金
-)
-
-const (
-	EmergencyState_No     = 0 // 无紧急
-	EmergencyState_Yes    = 1 // 紧急呼救
-	EmergencyState_Cancel = 2 // 已取消紧急呼救
+	"github.com/jianbo-zh/jydata/database/fieldstate"
 )
 
 func (db *Database) CreateOrder(ctx context.Context, req *ent.Order) (*ent.Order, error) {
@@ -62,7 +38,7 @@ func (db *Database) CreateOrder(ctx context.Context, req *ent.Order) (*ent.Order
 func (db *Database) GetUserOngoingOrder(ctx context.Context, userID int) (*ent.Order, error) {
 	return db.MainDB().Order.Query().
 		Where(order.UserIDEQ(userID)).
-		Where(order.OrderStateNotIn(OrderState_Completed, OrderState_Cancelled)).
+		Where(order.OrderStateNotIn(fieldstate.OrderState_Completed, fieldstate.OrderState_Cancelled)).
 		First(ctx)
 }
 
@@ -76,10 +52,10 @@ func (db *Database) GetOrderByOrderNo(ctx context.Context, orderNo string) (*ent
 
 func (db *Database) UpdateOrderDepositPaid(ctx context.Context, orderID int, txID string, depositTime time.Time) (*ent.Order, error) {
 	return db.MainDB().Order.UpdateOneID(orderID).
-		Where(order.OrderStateEQ(OrderState_PendingDeposit)).
+		Where(order.OrderStateEQ(fieldstate.OrderState_PendingDeposit)).
 		SetWxTxID(txID).
-		SetOrderState(OrderState_UsingCar).
-		SetDepositState(DepositState_Paid).
+		SetOrderState(fieldstate.OrderState_UsingCar).
+		SetDepositState(fieldstate.DepositState_Paid).
 		SetDepositTime(depositTime).
 		Save(ctx)
 }
