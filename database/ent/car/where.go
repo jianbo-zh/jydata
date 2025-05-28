@@ -145,6 +145,11 @@ func DispatchTaskID(v int) predicate.Car {
 	return predicate.Car(sql.FieldEQ(FieldDispatchTaskID, v))
 }
 
+// UseFlightID applies equality check predicate on the "use_flight_id" field. It's identical to UseFlightIDEQ.
+func UseFlightID(v int) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldUseFlightID, v))
+}
+
 // BindOrderCount applies equality check predicate on the "bind_order_count" field. It's identical to BindOrderCountEQ.
 func BindOrderCount(v int) predicate.Car {
 	return predicate.Car(sql.FieldEQ(FieldBindOrderCount, v))
@@ -1048,6 +1053,46 @@ func DispatchTaskIDLT(v int) predicate.Car {
 // DispatchTaskIDLTE applies the LTE predicate on the "dispatch_task_id" field.
 func DispatchTaskIDLTE(v int) predicate.Car {
 	return predicate.Car(sql.FieldLTE(FieldDispatchTaskID, v))
+}
+
+// UseFlightIDEQ applies the EQ predicate on the "use_flight_id" field.
+func UseFlightIDEQ(v int) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldUseFlightID, v))
+}
+
+// UseFlightIDNEQ applies the NEQ predicate on the "use_flight_id" field.
+func UseFlightIDNEQ(v int) predicate.Car {
+	return predicate.Car(sql.FieldNEQ(FieldUseFlightID, v))
+}
+
+// UseFlightIDIn applies the In predicate on the "use_flight_id" field.
+func UseFlightIDIn(vs ...int) predicate.Car {
+	return predicate.Car(sql.FieldIn(FieldUseFlightID, vs...))
+}
+
+// UseFlightIDNotIn applies the NotIn predicate on the "use_flight_id" field.
+func UseFlightIDNotIn(vs ...int) predicate.Car {
+	return predicate.Car(sql.FieldNotIn(FieldUseFlightID, vs...))
+}
+
+// UseFlightIDGT applies the GT predicate on the "use_flight_id" field.
+func UseFlightIDGT(v int) predicate.Car {
+	return predicate.Car(sql.FieldGT(FieldUseFlightID, v))
+}
+
+// UseFlightIDGTE applies the GTE predicate on the "use_flight_id" field.
+func UseFlightIDGTE(v int) predicate.Car {
+	return predicate.Car(sql.FieldGTE(FieldUseFlightID, v))
+}
+
+// UseFlightIDLT applies the LT predicate on the "use_flight_id" field.
+func UseFlightIDLT(v int) predicate.Car {
+	return predicate.Car(sql.FieldLT(FieldUseFlightID, v))
+}
+
+// UseFlightIDLTE applies the LTE predicate on the "use_flight_id" field.
+func UseFlightIDLTE(v int) predicate.Car {
+	return predicate.Car(sql.FieldLTE(FieldUseFlightID, v))
 }
 
 // BindOrderCountEQ applies the EQ predicate on the "bind_order_count" field.

@@ -6191,6 +6191,8 @@ type CarMutation struct {
 	adduse_order_id               *int
 	dispatch_task_id              *int
 	adddispatch_task_id           *int
+	use_flight_id                 *int
+	adduse_flight_id              *int
 	bind_order_count              *int
 	addbind_order_count           *int
 	total_order_mileage           *int
@@ -7268,6 +7270,62 @@ func (m *CarMutation) AddedDispatchTaskID() (r int, exists bool) {
 func (m *CarMutation) ResetDispatchTaskID() {
 	m.dispatch_task_id = nil
 	m.adddispatch_task_id = nil
+}
+
+// SetUseFlightID sets the "use_flight_id" field.
+func (m *CarMutation) SetUseFlightID(i int) {
+	m.use_flight_id = &i
+	m.adduse_flight_id = nil
+}
+
+// UseFlightID returns the value of the "use_flight_id" field in the mutation.
+func (m *CarMutation) UseFlightID() (r int, exists bool) {
+	v := m.use_flight_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldUseFlightID returns the old "use_flight_id" field's value of the Car entity.
+// If the Car object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *CarMutation) OldUseFlightID(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldUseFlightID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldUseFlightID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldUseFlightID: %w", err)
+	}
+	return oldValue.UseFlightID, nil
+}
+
+// AddUseFlightID adds i to the "use_flight_id" field.
+func (m *CarMutation) AddUseFlightID(i int) {
+	if m.adduse_flight_id != nil {
+		*m.adduse_flight_id += i
+	} else {
+		m.adduse_flight_id = &i
+	}
+}
+
+// AddedUseFlightID returns the value that was added to the "use_flight_id" field in this mutation.
+func (m *CarMutation) AddedUseFlightID() (r int, exists bool) {
+	v := m.adduse_flight_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetUseFlightID resets all changes to the "use_flight_id" field.
+func (m *CarMutation) ResetUseFlightID() {
+	m.use_flight_id = nil
+	m.adduse_flight_id = nil
 }
 
 // SetBindOrderCount sets the "bind_order_count" field.
@@ -8829,7 +8887,7 @@ func (m *CarMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *CarMutation) Fields() []string {
-	fields := make([]string, 0, 42)
+	fields := make([]string, 0, 43)
 	if m.delete_time != nil {
 		fields = append(fields, car.FieldDeleteTime)
 	}
@@ -8886,6 +8944,9 @@ func (m *CarMutation) Fields() []string {
 	}
 	if m.dispatch_task_id != nil {
 		fields = append(fields, car.FieldDispatchTaskID)
+	}
+	if m.use_flight_id != nil {
+		fields = append(fields, car.FieldUseFlightID)
 	}
 	if m.bind_order_count != nil {
 		fields = append(fields, car.FieldBindOrderCount)
@@ -9002,6 +9063,8 @@ func (m *CarMutation) Field(name string) (ent.Value, bool) {
 		return m.UseOrderID()
 	case car.FieldDispatchTaskID:
 		return m.DispatchTaskID()
+	case car.FieldUseFlightID:
+		return m.UseFlightID()
 	case car.FieldBindOrderCount:
 		return m.BindOrderCount()
 	case car.FieldTotalOrderMileage:
@@ -9095,6 +9158,8 @@ func (m *CarMutation) OldField(ctx context.Context, name string) (ent.Value, err
 		return m.OldUseOrderID(ctx)
 	case car.FieldDispatchTaskID:
 		return m.OldDispatchTaskID(ctx)
+	case car.FieldUseFlightID:
+		return m.OldUseFlightID(ctx)
 	case car.FieldBindOrderCount:
 		return m.OldBindOrderCount(ctx)
 	case car.FieldTotalOrderMileage:
@@ -9282,6 +9347,13 @@ func (m *CarMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetDispatchTaskID(v)
+		return nil
+	case car.FieldUseFlightID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetUseFlightID(v)
 		return nil
 	case car.FieldBindOrderCount:
 		v, ok := value.(int)
@@ -9482,6 +9554,9 @@ func (m *CarMutation) AddedFields() []string {
 	if m.adddispatch_task_id != nil {
 		fields = append(fields, car.FieldDispatchTaskID)
 	}
+	if m.adduse_flight_id != nil {
+		fields = append(fields, car.FieldUseFlightID)
+	}
 	if m.addbind_order_count != nil {
 		fields = append(fields, car.FieldBindOrderCount)
 	}
@@ -9546,6 +9621,8 @@ func (m *CarMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedUseOrderID()
 	case car.FieldDispatchTaskID:
 		return m.AddedDispatchTaskID()
+	case car.FieldUseFlightID:
+		return m.AddedUseFlightID()
 	case car.FieldBindOrderCount:
 		return m.AddedBindOrderCount()
 	case car.FieldTotalOrderMileage:
@@ -9648,6 +9725,13 @@ func (m *CarMutation) AddField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddDispatchTaskID(v)
+		return nil
+	case car.FieldUseFlightID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddUseFlightID(v)
 		return nil
 	case car.FieldBindOrderCount:
 		v, ok := value.(int)
@@ -9849,6 +9933,9 @@ func (m *CarMutation) ResetField(name string) error {
 		return nil
 	case car.FieldDispatchTaskID:
 		m.ResetDispatchTaskID()
+		return nil
+	case car.FieldUseFlightID:
+		m.ResetUseFlightID()
 		return nil
 	case car.FieldBindOrderCount:
 		m.ResetBindOrderCount()

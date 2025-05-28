@@ -214,6 +214,20 @@ func (cc *CarCreate) SetNillableDispatchTaskID(i *int) *CarCreate {
 	return cc
 }
 
+// SetUseFlightID sets the "use_flight_id" field.
+func (cc *CarCreate) SetUseFlightID(i int) *CarCreate {
+	cc.mutation.SetUseFlightID(i)
+	return cc
+}
+
+// SetNillableUseFlightID sets the "use_flight_id" field if the given value is not nil.
+func (cc *CarCreate) SetNillableUseFlightID(i *int) *CarCreate {
+	if i != nil {
+		cc.SetUseFlightID(*i)
+	}
+	return cc
+}
+
 // SetBindOrderCount sets the "bind_order_count" field.
 func (cc *CarCreate) SetBindOrderCount(i int) *CarCreate {
 	cc.mutation.SetBindOrderCount(i)
@@ -723,6 +737,10 @@ func (cc *CarCreate) defaults() error {
 		v := car.DefaultDispatchTaskID
 		cc.mutation.SetDispatchTaskID(v)
 	}
+	if _, ok := cc.mutation.UseFlightID(); !ok {
+		v := car.DefaultUseFlightID
+		cc.mutation.SetUseFlightID(v)
+	}
 	if _, ok := cc.mutation.BindOrderCount(); !ok {
 		v := car.DefaultBindOrderCount
 		cc.mutation.SetBindOrderCount(v)
@@ -863,6 +881,9 @@ func (cc *CarCreate) check() error {
 	}
 	if _, ok := cc.mutation.DispatchTaskID(); !ok {
 		return &ValidationError{Name: "dispatch_task_id", err: errors.New(`ent: missing required field "Car.dispatch_task_id"`)}
+	}
+	if _, ok := cc.mutation.UseFlightID(); !ok {
+		return &ValidationError{Name: "use_flight_id", err: errors.New(`ent: missing required field "Car.use_flight_id"`)}
 	}
 	if _, ok := cc.mutation.BindOrderCount(); !ok {
 		return &ValidationError{Name: "bind_order_count", err: errors.New(`ent: missing required field "Car.bind_order_count"`)}
@@ -1026,6 +1047,10 @@ func (cc *CarCreate) createSpec() (*Car, *sqlgraph.CreateSpec) {
 	if value, ok := cc.mutation.DispatchTaskID(); ok {
 		_spec.SetField(car.FieldDispatchTaskID, field.TypeInt, value)
 		_node.DispatchTaskID = value
+	}
+	if value, ok := cc.mutation.UseFlightID(); ok {
+		_spec.SetField(car.FieldUseFlightID, field.TypeInt, value)
+		_node.UseFlightID = value
 	}
 	if value, ok := cc.mutation.BindOrderCount(); ok {
 		_spec.SetField(car.FieldBindOrderCount, field.TypeInt, value)

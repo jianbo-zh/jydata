@@ -34,7 +34,7 @@ type CarsFlight struct {
 	RouteName string `json:"route_name,omitempty"`
 	// 可售卖座位数
 	SeatsNum int `json:"seats_num,omitempty"`
-	// 班次状态(1-进行中 2-已结束 3-已取消)
+	// 班次状态(1-待发车 2-行驶中 2-已结束 3-已取消)
 	State int `json:"state,omitempty"`
 	// 站点列表
 	StopIds []int `json:"stop_ids,omitempty"`

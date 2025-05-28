@@ -8,6 +8,7 @@ require (
 	github.com/go-redis/redis/extra/redisotel v0.3.0
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/go-sql-driver/mysql v1.9.2
+	github.com/google/uuid v1.6.0
 	github.com/google/wire v0.6.0
 	github.com/influxdata/influxdb-client-go/v2 v2.14.0
 	github.com/jianbo-zh/jylib v0.1.47
@@ -45,7 +46,6 @@ require (
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
-	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/consul/api v1.32.1 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect

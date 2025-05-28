@@ -25,7 +25,7 @@ func (CarsFlight) Fields() []ent.Field {
 		field.Int("route_id").Comment("路线ID"),
 		field.String("route_name").Comment("路线名称"),
 		field.Int("seats_num").Comment("可售卖座位数"),
-		field.Int("state").Default(1).Comment("班次状态(1-进行中 2-已结束 3-已取消)"),
+		field.Int("state").Default(1).Comment("班次状态(1-待发车 2-行驶中 2-已结束 3-已取消)"),
 		field.Ints("stop_ids").Optional().Comment("站点列表"),
 		field.Ints("pass_ids").Optional().Comment("过站列表"),
 		field.String("remark").Default("").Comment("备注"),

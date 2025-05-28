@@ -288,80 +288,84 @@ func init() {
 	carDescDispatchTaskID := carFields[18].Descriptor()
 	// car.DefaultDispatchTaskID holds the default value on creation for the dispatch_task_id field.
 	car.DefaultDispatchTaskID = carDescDispatchTaskID.Default.(int)
+	// carDescUseFlightID is the schema descriptor for use_flight_id field.
+	carDescUseFlightID := carFields[19].Descriptor()
+	// car.DefaultUseFlightID holds the default value on creation for the use_flight_id field.
+	car.DefaultUseFlightID = carDescUseFlightID.Default.(int)
 	// carDescBindOrderCount is the schema descriptor for bind_order_count field.
-	carDescBindOrderCount := carFields[19].Descriptor()
+	carDescBindOrderCount := carFields[20].Descriptor()
 	// car.DefaultBindOrderCount holds the default value on creation for the bind_order_count field.
 	car.DefaultBindOrderCount = carDescBindOrderCount.Default.(int)
 	// carDescTotalOrderMileage is the schema descriptor for total_order_mileage field.
-	carDescTotalOrderMileage := carFields[20].Descriptor()
+	carDescTotalOrderMileage := carFields[21].Descriptor()
 	// car.DefaultTotalOrderMileage holds the default value on creation for the total_order_mileage field.
 	car.DefaultTotalOrderMileage = carDescTotalOrderMileage.Default.(int)
 	// carDescTotalOrderTime is the schema descriptor for total_order_time field.
-	carDescTotalOrderTime := carFields[21].Descriptor()
+	carDescTotalOrderTime := carFields[22].Descriptor()
 	// car.DefaultTotalOrderTime holds the default value on creation for the total_order_time field.
 	car.DefaultTotalOrderTime = carDescTotalOrderTime.Default.(int)
 	// carDescTotalOrderCount is the schema descriptor for total_order_count field.
-	carDescTotalOrderCount := carFields[22].Descriptor()
+	carDescTotalOrderCount := carFields[23].Descriptor()
 	// car.DefaultTotalOrderCount holds the default value on creation for the total_order_count field.
 	car.DefaultTotalOrderCount = carDescTotalOrderCount.Default.(int)
 	// carDescTotalOrderAmount is the schema descriptor for total_order_amount field.
-	carDescTotalOrderAmount := carFields[23].Descriptor()
+	carDescTotalOrderAmount := carFields[24].Descriptor()
 	// car.DefaultTotalOrderAmount holds the default value on creation for the total_order_amount field.
 	car.DefaultTotalOrderAmount = carDescTotalOrderAmount.Default.(int)
 	// carDescPowerRemaining is the schema descriptor for power_remaining field.
-	carDescPowerRemaining := carFields[24].Descriptor()
+	carDescPowerRemaining := carFields[25].Descriptor()
 	// car.DefaultPowerRemaining holds the default value on creation for the power_remaining field.
 	car.DefaultPowerRemaining = carDescPowerRemaining.Default.(int)
 	// carDescErrorCount is the schema descriptor for error_count field.
-	carDescErrorCount := carFields[25].Descriptor()
+	carDescErrorCount := carFields[26].Descriptor()
 	// car.DefaultErrorCount holds the default value on creation for the error_count field.
 	car.DefaultErrorCount = carDescErrorCount.Default.(int)
 	// carDescErrorMessage is the schema descriptor for error_message field.
-	carDescErrorMessage := carFields[26].Descriptor()
+	carDescErrorMessage := carFields[27].Descriptor()
 	// car.DefaultErrorMessage holds the default value on creation for the error_message field.
 	car.DefaultErrorMessage = carDescErrorMessage.Default.(string)
 	// carDescIsDeleted is the schema descriptor for is_deleted field.
-	carDescIsDeleted := carFields[27].Descriptor()
+	carDescIsDeleted := carFields[28].Descriptor()
 	// car.DefaultIsDeleted holds the default value on creation for the is_deleted field.
 	car.DefaultIsDeleted = carDescIsDeleted.Default.(int)
 	// carDescIsCommercialCar is the schema descriptor for is_commercial_car field.
-	carDescIsCommercialCar := carFields[28].Descriptor()
+	carDescIsCommercialCar := carFields[29].Descriptor()
 	// car.DefaultIsCommercialCar holds the default value on creation for the is_commercial_car field.
 	car.DefaultIsCommercialCar = carDescIsCommercialCar.Default.(int)
 	// carDescIsDrivingStateValid is the schema descriptor for is_driving_state_valid field.
-	carDescIsDrivingStateValid := carFields[29].Descriptor()
+	carDescIsDrivingStateValid := carFields[30].Descriptor()
 	// car.DefaultIsDrivingStateValid holds the default value on creation for the is_driving_state_valid field.
 	car.DefaultIsDrivingStateValid = carDescIsDrivingStateValid.Default.(int)
 	// carDescMapVersion is the schema descriptor for map_version field.
-	carDescMapVersion := carFields[30].Descriptor()
+	carDescMapVersion := carFields[31].Descriptor()
 	// car.DefaultMapVersion holds the default value on creation for the map_version field.
 	car.DefaultMapVersion = carDescMapVersion.Default.(string)
 	// carDescNextMapVersion is the schema descriptor for next_map_version field.
-	carDescNextMapVersion := carFields[31].Descriptor()
+	carDescNextMapVersion := carFields[32].Descriptor()
 	// car.DefaultNextMapVersion holds the default value on creation for the next_map_version field.
 	car.DefaultNextMapVersion = carDescNextMapVersion.Default.(string)
 	// carDescNextMapVersionState is the schema descriptor for next_map_version_state field.
-	carDescNextMapVersionState := carFields[32].Descriptor()
+	carDescNextMapVersionState := carFields[33].Descriptor()
 	// car.DefaultNextMapVersionState holds the default value on creation for the next_map_version_state field.
 	car.DefaultNextMapVersionState = carDescNextMapVersionState.Default.(string)
 	// carDescNextMapVersionProcess is the schema descriptor for next_map_version_process field.
-	carDescNextMapVersionProcess := carFields[33].Descriptor()
+	carDescNextMapVersionProcess := carFields[34].Descriptor()
 	// car.DefaultNextMapVersionProcess holds the default value on creation for the next_map_version_process field.
 	car.DefaultNextMapVersionProcess = carDescNextMapVersionProcess.Default.(int)
 	// carDescGrAutoVersion is the schema descriptor for gr_auto_version field.
-	carDescGrAutoVersion := carFields[34].Descriptor()
+	carDescGrAutoVersion := carFields[35].Descriptor()
 	// car.DefaultGrAutoVersion holds the default value on creation for the gr_auto_version field.
 	car.DefaultGrAutoVersion = carDescGrAutoVersion.Default.(string)
 	// carDescGrUIVersion is the schema descriptor for gr_ui_version field.
-	carDescGrUIVersion := carFields[35].Descriptor()
+	carDescGrUIVersion := carFields[36].Descriptor()
 	// car.DefaultGrUIVersion holds the default value on creation for the gr_ui_version field.
 	car.DefaultGrUIVersion = carDescGrUIVersion.Default.(string)
 	// carDescCreateTime is the schema descriptor for create_time field.
-	carDescCreateTime := carFields[40].Descriptor()
+	carDescCreateTime := carFields[41].Descriptor()
 	// car.DefaultCreateTime holds the default value on creation for the create_time field.
 	car.DefaultCreateTime = carDescCreateTime.Default.(func() time.Time)
 	// carDescUpdateTime is the schema descriptor for update_time field.
-	carDescUpdateTime := carFields[41].Descriptor()
+	carDescUpdateTime := carFields[42].Descriptor()
 	// car.DefaultUpdateTime holds the default value on creation for the update_time field.
 	car.DefaultUpdateTime = carDescUpdateTime.Default.(func() time.Time)
 	// car.UpdateDefaultUpdateTime holds the default value on update for the update_time field.

@@ -41,6 +41,7 @@ func (Car) Fields() []ent.Field {
 
 		field.Int("use_order_id").Default(0).Comment("绑定订单ID"),
 		field.Int("dispatch_task_id").Default(0).Comment("调度任务ID"),
+		field.Int("use_flight_id").Default(0).Comment("班次任务ID"),
 
 		field.Int("bind_order_count").Default(0).Comment("绑定订单数"),
 		field.Int("total_order_mileage").Default(0).Comment("累积订单里程（米）"),

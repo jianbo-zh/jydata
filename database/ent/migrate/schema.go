@@ -174,6 +174,7 @@ var (
 		{Name: "emergency_state", Type: field.TypeInt, Default: 0},
 		{Name: "use_order_id", Type: field.TypeInt, Default: 0},
 		{Name: "dispatch_task_id", Type: field.TypeInt, Default: 0},
+		{Name: "use_flight_id", Type: field.TypeInt, Default: 0},
 		{Name: "bind_order_count", Type: field.TypeInt, Default: 0},
 		{Name: "total_order_mileage", Type: field.TypeInt, Default: 0},
 		{Name: "total_order_time", Type: field.TypeInt, Default: 0},
@@ -208,13 +209,13 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "cars_cars_models_cars",
-				Columns:    []*schema.Column{CarsColumns[41]},
+				Columns:    []*schema.Column{CarsColumns[42]},
 				RefColumns: []*schema.Column{CarsModelsColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
 			{
 				Symbol:     "cars_scenic_areas_cars",
-				Columns:    []*schema.Column{CarsColumns[42]},
+				Columns:    []*schema.Column{CarsColumns[43]},
 				RefColumns: []*schema.Column{ScenicAreasColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
@@ -1452,7 +1453,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1748334738},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1748392982},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},

@@ -53,6 +53,8 @@ const (
 	FieldUseOrderID = "use_order_id"
 	// FieldDispatchTaskID holds the string denoting the dispatch_task_id field in the database.
 	FieldDispatchTaskID = "dispatch_task_id"
+	// FieldUseFlightID holds the string denoting the use_flight_id field in the database.
+	FieldUseFlightID = "use_flight_id"
 	// FieldBindOrderCount holds the string denoting the bind_order_count field in the database.
 	FieldBindOrderCount = "bind_order_count"
 	// FieldTotalOrderMileage holds the string denoting the total_order_mileage field in the database.
@@ -197,6 +199,7 @@ var Columns = []string{
 	FieldEmergencyState,
 	FieldUseOrderID,
 	FieldDispatchTaskID,
+	FieldUseFlightID,
 	FieldBindOrderCount,
 	FieldTotalOrderMileage,
 	FieldTotalOrderTime,
@@ -256,6 +259,8 @@ var (
 	DefaultUseOrderID int
 	// DefaultDispatchTaskID holds the default value on creation for the "dispatch_task_id" field.
 	DefaultDispatchTaskID int
+	// DefaultUseFlightID holds the default value on creation for the "use_flight_id" field.
+	DefaultUseFlightID int
 	// DefaultBindOrderCount holds the default value on creation for the "bind_order_count" field.
 	DefaultBindOrderCount int
 	// DefaultTotalOrderMileage holds the default value on creation for the "total_order_mileage" field.
@@ -394,6 +399,11 @@ func ByUseOrderID(opts ...sql.OrderTermOption) OrderOption {
 // ByDispatchTaskID orders the results by the dispatch_task_id field.
 func ByDispatchTaskID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldDispatchTaskID, opts...).ToFunc()
+}
+
+// ByUseFlightID orders the results by the use_flight_id field.
+func ByUseFlightID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldUseFlightID, opts...).ToFunc()
 }
 
 // ByBindOrderCount orders the results by the bind_order_count field.
