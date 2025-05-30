@@ -1,5 +1,12 @@
 package fieldtype
 
+type CarOperationModel int
+
+const (
+	CarOperationModel_Rental    CarOperationModel = 1 // 租车模式
+	CarOperationModel_PublicBus CarOperationModel = 2 // 公交模式
+)
+
 const (
 	CarEmergencyState_No     int = 0 // 无紧急
 	CarEmergencyState_Yes    int = 1 // 紧急呼救

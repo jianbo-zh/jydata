@@ -54,9 +54,43 @@ func (oefc *OrderExtendFlightCreate) SetNillableFlightNo(s *string) *OrderExtend
 	return oefc
 }
 
-// SetStopIds sets the "stop_ids" field.
-func (oefc *OrderExtendFlightCreate) SetStopIds(i []int) *OrderExtendFlightCreate {
-	oefc.mutation.SetStopIds(i)
+// SetRouteID sets the "route_id" field.
+func (oefc *OrderExtendFlightCreate) SetRouteID(i int) *OrderExtendFlightCreate {
+	oefc.mutation.SetRouteID(i)
+	return oefc
+}
+
+// SetNillableRouteID sets the "route_id" field if the given value is not nil.
+func (oefc *OrderExtendFlightCreate) SetNillableRouteID(i *int) *OrderExtendFlightCreate {
+	if i != nil {
+		oefc.SetRouteID(*i)
+	}
+	return oefc
+}
+
+// SetRouteName sets the "route_name" field.
+func (oefc *OrderExtendFlightCreate) SetRouteName(s string) *OrderExtendFlightCreate {
+	oefc.mutation.SetRouteName(s)
+	return oefc
+}
+
+// SetNillableRouteName sets the "route_name" field if the given value is not nil.
+func (oefc *OrderExtendFlightCreate) SetNillableRouteName(s *string) *OrderExtendFlightCreate {
+	if s != nil {
+		oefc.SetRouteName(*s)
+	}
+	return oefc
+}
+
+// SetStartStopID sets the "start_stop_id" field.
+func (oefc *OrderExtendFlightCreate) SetStartStopID(i int) *OrderExtendFlightCreate {
+	oefc.mutation.SetStartStopID(i)
+	return oefc
+}
+
+// SetEndStopID sets the "end_stop_id" field.
+func (oefc *OrderExtendFlightCreate) SetEndStopID(i int) *OrderExtendFlightCreate {
+	oefc.mutation.SetEndStopID(i)
 	return oefc
 }
 
@@ -151,6 +185,14 @@ func (oefc *OrderExtendFlightCreate) defaults() {
 		v := orderextendflight.DefaultFlightNo
 		oefc.mutation.SetFlightNo(v)
 	}
+	if _, ok := oefc.mutation.RouteID(); !ok {
+		v := orderextendflight.DefaultRouteID
+		oefc.mutation.SetRouteID(v)
+	}
+	if _, ok := oefc.mutation.RouteName(); !ok {
+		v := orderextendflight.DefaultRouteName
+		oefc.mutation.SetRouteName(v)
+	}
 	if _, ok := oefc.mutation.TicketCount(); !ok {
 		v := orderextendflight.DefaultTicketCount
 		oefc.mutation.SetTicketCount(v)
@@ -176,8 +218,17 @@ func (oefc *OrderExtendFlightCreate) check() error {
 	if _, ok := oefc.mutation.FlightNo(); !ok {
 		return &ValidationError{Name: "flight_no", err: errors.New(`ent: missing required field "OrderExtendFlight.flight_no"`)}
 	}
-	if _, ok := oefc.mutation.StopIds(); !ok {
-		return &ValidationError{Name: "stop_ids", err: errors.New(`ent: missing required field "OrderExtendFlight.stop_ids"`)}
+	if _, ok := oefc.mutation.RouteID(); !ok {
+		return &ValidationError{Name: "route_id", err: errors.New(`ent: missing required field "OrderExtendFlight.route_id"`)}
+	}
+	if _, ok := oefc.mutation.RouteName(); !ok {
+		return &ValidationError{Name: "route_name", err: errors.New(`ent: missing required field "OrderExtendFlight.route_name"`)}
+	}
+	if _, ok := oefc.mutation.StartStopID(); !ok {
+		return &ValidationError{Name: "start_stop_id", err: errors.New(`ent: missing required field "OrderExtendFlight.start_stop_id"`)}
+	}
+	if _, ok := oefc.mutation.EndStopID(); !ok {
+		return &ValidationError{Name: "end_stop_id", err: errors.New(`ent: missing required field "OrderExtendFlight.end_stop_id"`)}
 	}
 	if _, ok := oefc.mutation.TicketCount(); !ok {
 		return &ValidationError{Name: "ticket_count", err: errors.New(`ent: missing required field "OrderExtendFlight.ticket_count"`)}
@@ -232,9 +283,21 @@ func (oefc *OrderExtendFlightCreate) createSpec() (*OrderExtendFlight, *sqlgraph
 		_spec.SetField(orderextendflight.FieldFlightNo, field.TypeString, value)
 		_node.FlightNo = value
 	}
-	if value, ok := oefc.mutation.StopIds(); ok {
-		_spec.SetField(orderextendflight.FieldStopIds, field.TypeJSON, value)
-		_node.StopIds = value
+	if value, ok := oefc.mutation.RouteID(); ok {
+		_spec.SetField(orderextendflight.FieldRouteID, field.TypeInt, value)
+		_node.RouteID = value
+	}
+	if value, ok := oefc.mutation.RouteName(); ok {
+		_spec.SetField(orderextendflight.FieldRouteName, field.TypeString, value)
+		_node.RouteName = value
+	}
+	if value, ok := oefc.mutation.StartStopID(); ok {
+		_spec.SetField(orderextendflight.FieldStartStopID, field.TypeInt, value)
+		_node.StartStopID = value
+	}
+	if value, ok := oefc.mutation.EndStopID(); ok {
+		_spec.SetField(orderextendflight.FieldEndStopID, field.TypeInt, value)
+		_node.EndStopID = value
 	}
 	if value, ok := oefc.mutation.TicketCount(); ok {
 		_spec.SetField(orderextendflight.FieldTicketCount, field.TypeInt, value)

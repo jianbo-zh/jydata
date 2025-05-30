@@ -2,13 +2,13 @@ package database
 
 import (
 	"context"
-	"jiuyouzx/pkg/util"
 	"time"
 
 	"github.com/jianbo-zh/jydata/database/ent"
 	"github.com/jianbo-zh/jydata/database/ent/schetask"
 	"github.com/jianbo-zh/jydata/database/fieldstate"
 	"github.com/jianbo-zh/jydata/database/schema/types"
+	"github.com/jianbo-zh/jylib/util"
 
 	"entgo.io/ent/dialect/sql"
 )

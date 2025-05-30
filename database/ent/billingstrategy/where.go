@@ -115,6 +115,26 @@ func NormalMileageUnit(v int) predicate.BillingStrategy {
 	return predicate.BillingStrategy(sql.FieldEQ(FieldNormalMileageUnit, v))
 }
 
+// StartStopPrice applies equality check predicate on the "start_stop_price" field. It's identical to StartStopPriceEQ.
+func StartStopPrice(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldEQ(FieldStartStopPrice, v))
+}
+
+// StartStopUnit applies equality check predicate on the "start_stop_unit" field. It's identical to StartStopUnitEQ.
+func StartStopUnit(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldEQ(FieldStartStopUnit, v))
+}
+
+// NormalStopPrice applies equality check predicate on the "normal_stop_price" field. It's identical to NormalStopPriceEQ.
+func NormalStopPrice(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldEQ(FieldNormalStopPrice, v))
+}
+
+// NormalStopUnit applies equality check predicate on the "normal_stop_unit" field. It's identical to NormalStopUnitEQ.
+func NormalStopUnit(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldEQ(FieldNormalStopUnit, v))
+}
+
 // CappedAmount applies equality check predicate on the "capped_amount" field. It's identical to CappedAmountEQ.
 func CappedAmount(v int) predicate.BillingStrategy {
 	return predicate.BillingStrategy(sql.FieldEQ(FieldCappedAmount, v))
@@ -618,6 +638,166 @@ func NormalMileageUnitLT(v int) predicate.BillingStrategy {
 // NormalMileageUnitLTE applies the LTE predicate on the "normal_mileage_unit" field.
 func NormalMileageUnitLTE(v int) predicate.BillingStrategy {
 	return predicate.BillingStrategy(sql.FieldLTE(FieldNormalMileageUnit, v))
+}
+
+// StartStopPriceEQ applies the EQ predicate on the "start_stop_price" field.
+func StartStopPriceEQ(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldEQ(FieldStartStopPrice, v))
+}
+
+// StartStopPriceNEQ applies the NEQ predicate on the "start_stop_price" field.
+func StartStopPriceNEQ(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldNEQ(FieldStartStopPrice, v))
+}
+
+// StartStopPriceIn applies the In predicate on the "start_stop_price" field.
+func StartStopPriceIn(vs ...int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldIn(FieldStartStopPrice, vs...))
+}
+
+// StartStopPriceNotIn applies the NotIn predicate on the "start_stop_price" field.
+func StartStopPriceNotIn(vs ...int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldNotIn(FieldStartStopPrice, vs...))
+}
+
+// StartStopPriceGT applies the GT predicate on the "start_stop_price" field.
+func StartStopPriceGT(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldGT(FieldStartStopPrice, v))
+}
+
+// StartStopPriceGTE applies the GTE predicate on the "start_stop_price" field.
+func StartStopPriceGTE(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldGTE(FieldStartStopPrice, v))
+}
+
+// StartStopPriceLT applies the LT predicate on the "start_stop_price" field.
+func StartStopPriceLT(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldLT(FieldStartStopPrice, v))
+}
+
+// StartStopPriceLTE applies the LTE predicate on the "start_stop_price" field.
+func StartStopPriceLTE(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldLTE(FieldStartStopPrice, v))
+}
+
+// StartStopUnitEQ applies the EQ predicate on the "start_stop_unit" field.
+func StartStopUnitEQ(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldEQ(FieldStartStopUnit, v))
+}
+
+// StartStopUnitNEQ applies the NEQ predicate on the "start_stop_unit" field.
+func StartStopUnitNEQ(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldNEQ(FieldStartStopUnit, v))
+}
+
+// StartStopUnitIn applies the In predicate on the "start_stop_unit" field.
+func StartStopUnitIn(vs ...int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldIn(FieldStartStopUnit, vs...))
+}
+
+// StartStopUnitNotIn applies the NotIn predicate on the "start_stop_unit" field.
+func StartStopUnitNotIn(vs ...int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldNotIn(FieldStartStopUnit, vs...))
+}
+
+// StartStopUnitGT applies the GT predicate on the "start_stop_unit" field.
+func StartStopUnitGT(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldGT(FieldStartStopUnit, v))
+}
+
+// StartStopUnitGTE applies the GTE predicate on the "start_stop_unit" field.
+func StartStopUnitGTE(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldGTE(FieldStartStopUnit, v))
+}
+
+// StartStopUnitLT applies the LT predicate on the "start_stop_unit" field.
+func StartStopUnitLT(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldLT(FieldStartStopUnit, v))
+}
+
+// StartStopUnitLTE applies the LTE predicate on the "start_stop_unit" field.
+func StartStopUnitLTE(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldLTE(FieldStartStopUnit, v))
+}
+
+// NormalStopPriceEQ applies the EQ predicate on the "normal_stop_price" field.
+func NormalStopPriceEQ(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldEQ(FieldNormalStopPrice, v))
+}
+
+// NormalStopPriceNEQ applies the NEQ predicate on the "normal_stop_price" field.
+func NormalStopPriceNEQ(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldNEQ(FieldNormalStopPrice, v))
+}
+
+// NormalStopPriceIn applies the In predicate on the "normal_stop_price" field.
+func NormalStopPriceIn(vs ...int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldIn(FieldNormalStopPrice, vs...))
+}
+
+// NormalStopPriceNotIn applies the NotIn predicate on the "normal_stop_price" field.
+func NormalStopPriceNotIn(vs ...int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldNotIn(FieldNormalStopPrice, vs...))
+}
+
+// NormalStopPriceGT applies the GT predicate on the "normal_stop_price" field.
+func NormalStopPriceGT(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldGT(FieldNormalStopPrice, v))
+}
+
+// NormalStopPriceGTE applies the GTE predicate on the "normal_stop_price" field.
+func NormalStopPriceGTE(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldGTE(FieldNormalStopPrice, v))
+}
+
+// NormalStopPriceLT applies the LT predicate on the "normal_stop_price" field.
+func NormalStopPriceLT(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldLT(FieldNormalStopPrice, v))
+}
+
+// NormalStopPriceLTE applies the LTE predicate on the "normal_stop_price" field.
+func NormalStopPriceLTE(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldLTE(FieldNormalStopPrice, v))
+}
+
+// NormalStopUnitEQ applies the EQ predicate on the "normal_stop_unit" field.
+func NormalStopUnitEQ(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldEQ(FieldNormalStopUnit, v))
+}
+
+// NormalStopUnitNEQ applies the NEQ predicate on the "normal_stop_unit" field.
+func NormalStopUnitNEQ(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldNEQ(FieldNormalStopUnit, v))
+}
+
+// NormalStopUnitIn applies the In predicate on the "normal_stop_unit" field.
+func NormalStopUnitIn(vs ...int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldIn(FieldNormalStopUnit, vs...))
+}
+
+// NormalStopUnitNotIn applies the NotIn predicate on the "normal_stop_unit" field.
+func NormalStopUnitNotIn(vs ...int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldNotIn(FieldNormalStopUnit, vs...))
+}
+
+// NormalStopUnitGT applies the GT predicate on the "normal_stop_unit" field.
+func NormalStopUnitGT(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldGT(FieldNormalStopUnit, v))
+}
+
+// NormalStopUnitGTE applies the GTE predicate on the "normal_stop_unit" field.
+func NormalStopUnitGTE(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldGTE(FieldNormalStopUnit, v))
+}
+
+// NormalStopUnitLT applies the LT predicate on the "normal_stop_unit" field.
+func NormalStopUnitLT(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldLT(FieldNormalStopUnit, v))
+}
+
+// NormalStopUnitLTE applies the LTE predicate on the "normal_stop_unit" field.
+func NormalStopUnitLTE(v int) predicate.BillingStrategy {
+	return predicate.BillingStrategy(sql.FieldLTE(FieldNormalStopUnit, v))
 }
 
 // CappedAmountEQ applies the EQ predicate on the "capped_amount" field.

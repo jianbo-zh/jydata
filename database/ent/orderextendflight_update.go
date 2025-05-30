@@ -10,7 +10,6 @@ import (
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
-	"entgo.io/ent/dialect/sql/sqljson"
 	"entgo.io/ent/schema/field"
 	"github.com/jianbo-zh/jydata/database/ent/orderextendflight"
 	"github.com/jianbo-zh/jydata/database/ent/predicate"
@@ -85,15 +84,80 @@ func (oefu *OrderExtendFlightUpdate) SetNillableFlightNo(s *string) *OrderExtend
 	return oefu
 }
 
-// SetStopIds sets the "stop_ids" field.
-func (oefu *OrderExtendFlightUpdate) SetStopIds(i []int) *OrderExtendFlightUpdate {
-	oefu.mutation.SetStopIds(i)
+// SetRouteID sets the "route_id" field.
+func (oefu *OrderExtendFlightUpdate) SetRouteID(i int) *OrderExtendFlightUpdate {
+	oefu.mutation.ResetRouteID()
+	oefu.mutation.SetRouteID(i)
 	return oefu
 }
 
-// AppendStopIds appends i to the "stop_ids" field.
-func (oefu *OrderExtendFlightUpdate) AppendStopIds(i []int) *OrderExtendFlightUpdate {
-	oefu.mutation.AppendStopIds(i)
+// SetNillableRouteID sets the "route_id" field if the given value is not nil.
+func (oefu *OrderExtendFlightUpdate) SetNillableRouteID(i *int) *OrderExtendFlightUpdate {
+	if i != nil {
+		oefu.SetRouteID(*i)
+	}
+	return oefu
+}
+
+// AddRouteID adds i to the "route_id" field.
+func (oefu *OrderExtendFlightUpdate) AddRouteID(i int) *OrderExtendFlightUpdate {
+	oefu.mutation.AddRouteID(i)
+	return oefu
+}
+
+// SetRouteName sets the "route_name" field.
+func (oefu *OrderExtendFlightUpdate) SetRouteName(s string) *OrderExtendFlightUpdate {
+	oefu.mutation.SetRouteName(s)
+	return oefu
+}
+
+// SetNillableRouteName sets the "route_name" field if the given value is not nil.
+func (oefu *OrderExtendFlightUpdate) SetNillableRouteName(s *string) *OrderExtendFlightUpdate {
+	if s != nil {
+		oefu.SetRouteName(*s)
+	}
+	return oefu
+}
+
+// SetStartStopID sets the "start_stop_id" field.
+func (oefu *OrderExtendFlightUpdate) SetStartStopID(i int) *OrderExtendFlightUpdate {
+	oefu.mutation.ResetStartStopID()
+	oefu.mutation.SetStartStopID(i)
+	return oefu
+}
+
+// SetNillableStartStopID sets the "start_stop_id" field if the given value is not nil.
+func (oefu *OrderExtendFlightUpdate) SetNillableStartStopID(i *int) *OrderExtendFlightUpdate {
+	if i != nil {
+		oefu.SetStartStopID(*i)
+	}
+	return oefu
+}
+
+// AddStartStopID adds i to the "start_stop_id" field.
+func (oefu *OrderExtendFlightUpdate) AddStartStopID(i int) *OrderExtendFlightUpdate {
+	oefu.mutation.AddStartStopID(i)
+	return oefu
+}
+
+// SetEndStopID sets the "end_stop_id" field.
+func (oefu *OrderExtendFlightUpdate) SetEndStopID(i int) *OrderExtendFlightUpdate {
+	oefu.mutation.ResetEndStopID()
+	oefu.mutation.SetEndStopID(i)
+	return oefu
+}
+
+// SetNillableEndStopID sets the "end_stop_id" field if the given value is not nil.
+func (oefu *OrderExtendFlightUpdate) SetNillableEndStopID(i *int) *OrderExtendFlightUpdate {
+	if i != nil {
+		oefu.SetEndStopID(*i)
+	}
+	return oefu
+}
+
+// AddEndStopID adds i to the "end_stop_id" field.
+func (oefu *OrderExtendFlightUpdate) AddEndStopID(i int) *OrderExtendFlightUpdate {
+	oefu.mutation.AddEndStopID(i)
 	return oefu
 }
 
@@ -189,13 +253,26 @@ func (oefu *OrderExtendFlightUpdate) sqlSave(ctx context.Context) (n int, err er
 	if value, ok := oefu.mutation.FlightNo(); ok {
 		_spec.SetField(orderextendflight.FieldFlightNo, field.TypeString, value)
 	}
-	if value, ok := oefu.mutation.StopIds(); ok {
-		_spec.SetField(orderextendflight.FieldStopIds, field.TypeJSON, value)
+	if value, ok := oefu.mutation.RouteID(); ok {
+		_spec.SetField(orderextendflight.FieldRouteID, field.TypeInt, value)
 	}
-	if value, ok := oefu.mutation.AppendedStopIds(); ok {
-		_spec.AddModifier(func(u *sql.UpdateBuilder) {
-			sqljson.Append(u, orderextendflight.FieldStopIds, value)
-		})
+	if value, ok := oefu.mutation.AddedRouteID(); ok {
+		_spec.AddField(orderextendflight.FieldRouteID, field.TypeInt, value)
+	}
+	if value, ok := oefu.mutation.RouteName(); ok {
+		_spec.SetField(orderextendflight.FieldRouteName, field.TypeString, value)
+	}
+	if value, ok := oefu.mutation.StartStopID(); ok {
+		_spec.SetField(orderextendflight.FieldStartStopID, field.TypeInt, value)
+	}
+	if value, ok := oefu.mutation.AddedStartStopID(); ok {
+		_spec.AddField(orderextendflight.FieldStartStopID, field.TypeInt, value)
+	}
+	if value, ok := oefu.mutation.EndStopID(); ok {
+		_spec.SetField(orderextendflight.FieldEndStopID, field.TypeInt, value)
+	}
+	if value, ok := oefu.mutation.AddedEndStopID(); ok {
+		_spec.AddField(orderextendflight.FieldEndStopID, field.TypeInt, value)
 	}
 	if value, ok := oefu.mutation.TicketCount(); ok {
 		_spec.SetField(orderextendflight.FieldTicketCount, field.TypeInt, value)
@@ -282,15 +359,80 @@ func (oefuo *OrderExtendFlightUpdateOne) SetNillableFlightNo(s *string) *OrderEx
 	return oefuo
 }
 
-// SetStopIds sets the "stop_ids" field.
-func (oefuo *OrderExtendFlightUpdateOne) SetStopIds(i []int) *OrderExtendFlightUpdateOne {
-	oefuo.mutation.SetStopIds(i)
+// SetRouteID sets the "route_id" field.
+func (oefuo *OrderExtendFlightUpdateOne) SetRouteID(i int) *OrderExtendFlightUpdateOne {
+	oefuo.mutation.ResetRouteID()
+	oefuo.mutation.SetRouteID(i)
 	return oefuo
 }
 
-// AppendStopIds appends i to the "stop_ids" field.
-func (oefuo *OrderExtendFlightUpdateOne) AppendStopIds(i []int) *OrderExtendFlightUpdateOne {
-	oefuo.mutation.AppendStopIds(i)
+// SetNillableRouteID sets the "route_id" field if the given value is not nil.
+func (oefuo *OrderExtendFlightUpdateOne) SetNillableRouteID(i *int) *OrderExtendFlightUpdateOne {
+	if i != nil {
+		oefuo.SetRouteID(*i)
+	}
+	return oefuo
+}
+
+// AddRouteID adds i to the "route_id" field.
+func (oefuo *OrderExtendFlightUpdateOne) AddRouteID(i int) *OrderExtendFlightUpdateOne {
+	oefuo.mutation.AddRouteID(i)
+	return oefuo
+}
+
+// SetRouteName sets the "route_name" field.
+func (oefuo *OrderExtendFlightUpdateOne) SetRouteName(s string) *OrderExtendFlightUpdateOne {
+	oefuo.mutation.SetRouteName(s)
+	return oefuo
+}
+
+// SetNillableRouteName sets the "route_name" field if the given value is not nil.
+func (oefuo *OrderExtendFlightUpdateOne) SetNillableRouteName(s *string) *OrderExtendFlightUpdateOne {
+	if s != nil {
+		oefuo.SetRouteName(*s)
+	}
+	return oefuo
+}
+
+// SetStartStopID sets the "start_stop_id" field.
+func (oefuo *OrderExtendFlightUpdateOne) SetStartStopID(i int) *OrderExtendFlightUpdateOne {
+	oefuo.mutation.ResetStartStopID()
+	oefuo.mutation.SetStartStopID(i)
+	return oefuo
+}
+
+// SetNillableStartStopID sets the "start_stop_id" field if the given value is not nil.
+func (oefuo *OrderExtendFlightUpdateOne) SetNillableStartStopID(i *int) *OrderExtendFlightUpdateOne {
+	if i != nil {
+		oefuo.SetStartStopID(*i)
+	}
+	return oefuo
+}
+
+// AddStartStopID adds i to the "start_stop_id" field.
+func (oefuo *OrderExtendFlightUpdateOne) AddStartStopID(i int) *OrderExtendFlightUpdateOne {
+	oefuo.mutation.AddStartStopID(i)
+	return oefuo
+}
+
+// SetEndStopID sets the "end_stop_id" field.
+func (oefuo *OrderExtendFlightUpdateOne) SetEndStopID(i int) *OrderExtendFlightUpdateOne {
+	oefuo.mutation.ResetEndStopID()
+	oefuo.mutation.SetEndStopID(i)
+	return oefuo
+}
+
+// SetNillableEndStopID sets the "end_stop_id" field if the given value is not nil.
+func (oefuo *OrderExtendFlightUpdateOne) SetNillableEndStopID(i *int) *OrderExtendFlightUpdateOne {
+	if i != nil {
+		oefuo.SetEndStopID(*i)
+	}
+	return oefuo
+}
+
+// AddEndStopID adds i to the "end_stop_id" field.
+func (oefuo *OrderExtendFlightUpdateOne) AddEndStopID(i int) *OrderExtendFlightUpdateOne {
+	oefuo.mutation.AddEndStopID(i)
 	return oefuo
 }
 
@@ -416,13 +558,26 @@ func (oefuo *OrderExtendFlightUpdateOne) sqlSave(ctx context.Context) (_node *Or
 	if value, ok := oefuo.mutation.FlightNo(); ok {
 		_spec.SetField(orderextendflight.FieldFlightNo, field.TypeString, value)
 	}
-	if value, ok := oefuo.mutation.StopIds(); ok {
-		_spec.SetField(orderextendflight.FieldStopIds, field.TypeJSON, value)
+	if value, ok := oefuo.mutation.RouteID(); ok {
+		_spec.SetField(orderextendflight.FieldRouteID, field.TypeInt, value)
 	}
-	if value, ok := oefuo.mutation.AppendedStopIds(); ok {
-		_spec.AddModifier(func(u *sql.UpdateBuilder) {
-			sqljson.Append(u, orderextendflight.FieldStopIds, value)
-		})
+	if value, ok := oefuo.mutation.AddedRouteID(); ok {
+		_spec.AddField(orderextendflight.FieldRouteID, field.TypeInt, value)
+	}
+	if value, ok := oefuo.mutation.RouteName(); ok {
+		_spec.SetField(orderextendflight.FieldRouteName, field.TypeString, value)
+	}
+	if value, ok := oefuo.mutation.StartStopID(); ok {
+		_spec.SetField(orderextendflight.FieldStartStopID, field.TypeInt, value)
+	}
+	if value, ok := oefuo.mutation.AddedStartStopID(); ok {
+		_spec.AddField(orderextendflight.FieldStartStopID, field.TypeInt, value)
+	}
+	if value, ok := oefuo.mutation.EndStopID(); ok {
+		_spec.SetField(orderextendflight.FieldEndStopID, field.TypeInt, value)
+	}
+	if value, ok := oefuo.mutation.AddedEndStopID(); ok {
+		_spec.AddField(orderextendflight.FieldEndStopID, field.TypeInt, value)
 	}
 	if value, ok := oefuo.mutation.TicketCount(); ok {
 		_spec.SetField(orderextendflight.FieldTicketCount, field.TypeInt, value)

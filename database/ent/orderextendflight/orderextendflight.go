@@ -19,8 +19,14 @@ const (
 	FieldFlightID = "flight_id"
 	// FieldFlightNo holds the string denoting the flight_no field in the database.
 	FieldFlightNo = "flight_no"
-	// FieldStopIds holds the string denoting the stop_ids field in the database.
-	FieldStopIds = "stop_ids"
+	// FieldRouteID holds the string denoting the route_id field in the database.
+	FieldRouteID = "route_id"
+	// FieldRouteName holds the string denoting the route_name field in the database.
+	FieldRouteName = "route_name"
+	// FieldStartStopID holds the string denoting the start_stop_id field in the database.
+	FieldStartStopID = "start_stop_id"
+	// FieldEndStopID holds the string denoting the end_stop_id field in the database.
+	FieldEndStopID = "end_stop_id"
 	// FieldTicketCount holds the string denoting the ticket_count field in the database.
 	FieldTicketCount = "ticket_count"
 	// FieldCreateTime holds the string denoting the create_time field in the database.
@@ -37,7 +43,10 @@ var Columns = []string{
 	FieldOrderID,
 	FieldFlightID,
 	FieldFlightNo,
-	FieldStopIds,
+	FieldRouteID,
+	FieldRouteName,
+	FieldStartStopID,
+	FieldEndStopID,
 	FieldTicketCount,
 	FieldCreateTime,
 	FieldUpdateTime,
@@ -58,6 +67,10 @@ var (
 	DefaultFlightID int
 	// DefaultFlightNo holds the default value on creation for the "flight_no" field.
 	DefaultFlightNo string
+	// DefaultRouteID holds the default value on creation for the "route_id" field.
+	DefaultRouteID int
+	// DefaultRouteName holds the default value on creation for the "route_name" field.
+	DefaultRouteName string
 	// DefaultTicketCount holds the default value on creation for the "ticket_count" field.
 	DefaultTicketCount int
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.
@@ -89,6 +102,26 @@ func ByFlightID(opts ...sql.OrderTermOption) OrderOption {
 // ByFlightNo orders the results by the flight_no field.
 func ByFlightNo(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldFlightNo, opts...).ToFunc()
+}
+
+// ByRouteID orders the results by the route_id field.
+func ByRouteID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldRouteID, opts...).ToFunc()
+}
+
+// ByRouteName orders the results by the route_name field.
+func ByRouteName(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldRouteName, opts...).ToFunc()
+}
+
+// ByStartStopID orders the results by the start_stop_id field.
+func ByStartStopID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldStartStopID, opts...).ToFunc()
+}
+
+// ByEndStopID orders the results by the end_stop_id field.
+func ByEndStopID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldEndStopID, opts...).ToFunc()
 }
 
 // ByTicketCount orders the results by the ticket_count field.

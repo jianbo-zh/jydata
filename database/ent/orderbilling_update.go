@@ -29,6 +29,27 @@ func (obu *OrderBillingUpdate) Where(ps ...predicate.OrderBilling) *OrderBilling
 	return obu
 }
 
+// SetType sets the "type" field.
+func (obu *OrderBillingUpdate) SetType(i int) *OrderBillingUpdate {
+	obu.mutation.ResetType()
+	obu.mutation.SetType(i)
+	return obu
+}
+
+// SetNillableType sets the "type" field if the given value is not nil.
+func (obu *OrderBillingUpdate) SetNillableType(i *int) *OrderBillingUpdate {
+	if i != nil {
+		obu.SetType(*i)
+	}
+	return obu
+}
+
+// AddType adds i to the "type" field.
+func (obu *OrderBillingUpdate) AddType(i int) *OrderBillingUpdate {
+	obu.mutation.AddType(i)
+	return obu
+}
+
 // SetOrderID sets the "order_id" field.
 func (obu *OrderBillingUpdate) SetOrderID(i int) *OrderBillingUpdate {
 	obu.mutation.SetOrderID(i)
@@ -127,27 +148,6 @@ func (obu *OrderBillingUpdate) AddNormalTimeUnit(i int) *OrderBillingUpdate {
 	return obu
 }
 
-// SetCappedAmount sets the "capped_amount" field.
-func (obu *OrderBillingUpdate) SetCappedAmount(i int) *OrderBillingUpdate {
-	obu.mutation.ResetCappedAmount()
-	obu.mutation.SetCappedAmount(i)
-	return obu
-}
-
-// SetNillableCappedAmount sets the "capped_amount" field if the given value is not nil.
-func (obu *OrderBillingUpdate) SetNillableCappedAmount(i *int) *OrderBillingUpdate {
-	if i != nil {
-		obu.SetCappedAmount(*i)
-	}
-	return obu
-}
-
-// AddCappedAmount adds i to the "capped_amount" field.
-func (obu *OrderBillingUpdate) AddCappedAmount(i int) *OrderBillingUpdate {
-	obu.mutation.AddCappedAmount(i)
-	return obu
-}
-
 // SetCumulativeSecond sets the "cumulative_second" field.
 func (obu *OrderBillingUpdate) SetCumulativeSecond(f float64) *OrderBillingUpdate {
 	obu.mutation.ResetCumulativeSecond()
@@ -187,6 +187,195 @@ func (obu *OrderBillingUpdate) SetNillableCumulativeMeter(f *float64) *OrderBill
 // AddCumulativeMeter adds f to the "cumulative_meter" field.
 func (obu *OrderBillingUpdate) AddCumulativeMeter(f float64) *OrderBillingUpdate {
 	obu.mutation.AddCumulativeMeter(f)
+	return obu
+}
+
+// SetCumulativeStop sets the "cumulative_stop" field.
+func (obu *OrderBillingUpdate) SetCumulativeStop(i int) *OrderBillingUpdate {
+	obu.mutation.ResetCumulativeStop()
+	obu.mutation.SetCumulativeStop(i)
+	return obu
+}
+
+// SetNillableCumulativeStop sets the "cumulative_stop" field if the given value is not nil.
+func (obu *OrderBillingUpdate) SetNillableCumulativeStop(i *int) *OrderBillingUpdate {
+	if i != nil {
+		obu.SetCumulativeStop(*i)
+	}
+	return obu
+}
+
+// AddCumulativeStop adds i to the "cumulative_stop" field.
+func (obu *OrderBillingUpdate) AddCumulativeStop(i int) *OrderBillingUpdate {
+	obu.mutation.AddCumulativeStop(i)
+	return obu
+}
+
+// SetStartStopPrice sets the "start_stop_price" field.
+func (obu *OrderBillingUpdate) SetStartStopPrice(i int) *OrderBillingUpdate {
+	obu.mutation.ResetStartStopPrice()
+	obu.mutation.SetStartStopPrice(i)
+	return obu
+}
+
+// SetNillableStartStopPrice sets the "start_stop_price" field if the given value is not nil.
+func (obu *OrderBillingUpdate) SetNillableStartStopPrice(i *int) *OrderBillingUpdate {
+	if i != nil {
+		obu.SetStartStopPrice(*i)
+	}
+	return obu
+}
+
+// AddStartStopPrice adds i to the "start_stop_price" field.
+func (obu *OrderBillingUpdate) AddStartStopPrice(i int) *OrderBillingUpdate {
+	obu.mutation.AddStartStopPrice(i)
+	return obu
+}
+
+// SetStartStopUnit sets the "start_stop_unit" field.
+func (obu *OrderBillingUpdate) SetStartStopUnit(i int) *OrderBillingUpdate {
+	obu.mutation.ResetStartStopUnit()
+	obu.mutation.SetStartStopUnit(i)
+	return obu
+}
+
+// SetNillableStartStopUnit sets the "start_stop_unit" field if the given value is not nil.
+func (obu *OrderBillingUpdate) SetNillableStartStopUnit(i *int) *OrderBillingUpdate {
+	if i != nil {
+		obu.SetStartStopUnit(*i)
+	}
+	return obu
+}
+
+// AddStartStopUnit adds i to the "start_stop_unit" field.
+func (obu *OrderBillingUpdate) AddStartStopUnit(i int) *OrderBillingUpdate {
+	obu.mutation.AddStartStopUnit(i)
+	return obu
+}
+
+// SetNormalStopPrice sets the "normal_stop_price" field.
+func (obu *OrderBillingUpdate) SetNormalStopPrice(i int) *OrderBillingUpdate {
+	obu.mutation.ResetNormalStopPrice()
+	obu.mutation.SetNormalStopPrice(i)
+	return obu
+}
+
+// SetNillableNormalStopPrice sets the "normal_stop_price" field if the given value is not nil.
+func (obu *OrderBillingUpdate) SetNillableNormalStopPrice(i *int) *OrderBillingUpdate {
+	if i != nil {
+		obu.SetNormalStopPrice(*i)
+	}
+	return obu
+}
+
+// AddNormalStopPrice adds i to the "normal_stop_price" field.
+func (obu *OrderBillingUpdate) AddNormalStopPrice(i int) *OrderBillingUpdate {
+	obu.mutation.AddNormalStopPrice(i)
+	return obu
+}
+
+// SetNormalStopUnit sets the "normal_stop_unit" field.
+func (obu *OrderBillingUpdate) SetNormalStopUnit(i int) *OrderBillingUpdate {
+	obu.mutation.ResetNormalStopUnit()
+	obu.mutation.SetNormalStopUnit(i)
+	return obu
+}
+
+// SetNillableNormalStopUnit sets the "normal_stop_unit" field if the given value is not nil.
+func (obu *OrderBillingUpdate) SetNillableNormalStopUnit(i *int) *OrderBillingUpdate {
+	if i != nil {
+		obu.SetNormalStopUnit(*i)
+	}
+	return obu
+}
+
+// AddNormalStopUnit adds i to the "normal_stop_unit" field.
+func (obu *OrderBillingUpdate) AddNormalStopUnit(i int) *OrderBillingUpdate {
+	obu.mutation.AddNormalStopUnit(i)
+	return obu
+}
+
+// SetCouponID sets the "coupon_id" field.
+func (obu *OrderBillingUpdate) SetCouponID(i int) *OrderBillingUpdate {
+	obu.mutation.ResetCouponID()
+	obu.mutation.SetCouponID(i)
+	return obu
+}
+
+// SetNillableCouponID sets the "coupon_id" field if the given value is not nil.
+func (obu *OrderBillingUpdate) SetNillableCouponID(i *int) *OrderBillingUpdate {
+	if i != nil {
+		obu.SetCouponID(*i)
+	}
+	return obu
+}
+
+// AddCouponID adds i to the "coupon_id" field.
+func (obu *OrderBillingUpdate) AddCouponID(i int) *OrderBillingUpdate {
+	obu.mutation.AddCouponID(i)
+	return obu
+}
+
+// SetCouponLimitAmount sets the "coupon_limit_amount" field.
+func (obu *OrderBillingUpdate) SetCouponLimitAmount(i int) *OrderBillingUpdate {
+	obu.mutation.ResetCouponLimitAmount()
+	obu.mutation.SetCouponLimitAmount(i)
+	return obu
+}
+
+// SetNillableCouponLimitAmount sets the "coupon_limit_amount" field if the given value is not nil.
+func (obu *OrderBillingUpdate) SetNillableCouponLimitAmount(i *int) *OrderBillingUpdate {
+	if i != nil {
+		obu.SetCouponLimitAmount(*i)
+	}
+	return obu
+}
+
+// AddCouponLimitAmount adds i to the "coupon_limit_amount" field.
+func (obu *OrderBillingUpdate) AddCouponLimitAmount(i int) *OrderBillingUpdate {
+	obu.mutation.AddCouponLimitAmount(i)
+	return obu
+}
+
+// SetCouponDeductionAmount sets the "coupon_deduction_amount" field.
+func (obu *OrderBillingUpdate) SetCouponDeductionAmount(i int) *OrderBillingUpdate {
+	obu.mutation.ResetCouponDeductionAmount()
+	obu.mutation.SetCouponDeductionAmount(i)
+	return obu
+}
+
+// SetNillableCouponDeductionAmount sets the "coupon_deduction_amount" field if the given value is not nil.
+func (obu *OrderBillingUpdate) SetNillableCouponDeductionAmount(i *int) *OrderBillingUpdate {
+	if i != nil {
+		obu.SetCouponDeductionAmount(*i)
+	}
+	return obu
+}
+
+// AddCouponDeductionAmount adds i to the "coupon_deduction_amount" field.
+func (obu *OrderBillingUpdate) AddCouponDeductionAmount(i int) *OrderBillingUpdate {
+	obu.mutation.AddCouponDeductionAmount(i)
+	return obu
+}
+
+// SetCappedAmount sets the "capped_amount" field.
+func (obu *OrderBillingUpdate) SetCappedAmount(i int) *OrderBillingUpdate {
+	obu.mutation.ResetCappedAmount()
+	obu.mutation.SetCappedAmount(i)
+	return obu
+}
+
+// SetNillableCappedAmount sets the "capped_amount" field if the given value is not nil.
+func (obu *OrderBillingUpdate) SetNillableCappedAmount(i *int) *OrderBillingUpdate {
+	if i != nil {
+		obu.SetCappedAmount(*i)
+	}
+	return obu
+}
+
+// AddCappedAmount adds i to the "capped_amount" field.
+func (obu *OrderBillingUpdate) AddCappedAmount(i int) *OrderBillingUpdate {
+	obu.mutation.AddCappedAmount(i)
 	return obu
 }
 
@@ -329,6 +518,12 @@ func (obu *OrderBillingUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			}
 		}
 	}
+	if value, ok := obu.mutation.GetType(); ok {
+		_spec.SetField(orderbilling.FieldType, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.AddedType(); ok {
+		_spec.AddField(orderbilling.FieldType, field.TypeInt, value)
+	}
 	if value, ok := obu.mutation.StartTimePrice(); ok {
 		_spec.SetField(orderbilling.FieldStartTimePrice, field.TypeInt, value)
 	}
@@ -353,12 +548,6 @@ func (obu *OrderBillingUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := obu.mutation.AddedNormalTimeUnit(); ok {
 		_spec.AddField(orderbilling.FieldNormalTimeUnit, field.TypeInt, value)
 	}
-	if value, ok := obu.mutation.CappedAmount(); ok {
-		_spec.SetField(orderbilling.FieldCappedAmount, field.TypeInt, value)
-	}
-	if value, ok := obu.mutation.AddedCappedAmount(); ok {
-		_spec.AddField(orderbilling.FieldCappedAmount, field.TypeInt, value)
-	}
 	if value, ok := obu.mutation.CumulativeSecond(); ok {
 		_spec.SetField(orderbilling.FieldCumulativeSecond, field.TypeFloat64, value)
 	}
@@ -370,6 +559,60 @@ func (obu *OrderBillingUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := obu.mutation.AddedCumulativeMeter(); ok {
 		_spec.AddField(orderbilling.FieldCumulativeMeter, field.TypeFloat64, value)
+	}
+	if value, ok := obu.mutation.CumulativeStop(); ok {
+		_spec.SetField(orderbilling.FieldCumulativeStop, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.AddedCumulativeStop(); ok {
+		_spec.AddField(orderbilling.FieldCumulativeStop, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.StartStopPrice(); ok {
+		_spec.SetField(orderbilling.FieldStartStopPrice, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.AddedStartStopPrice(); ok {
+		_spec.AddField(orderbilling.FieldStartStopPrice, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.StartStopUnit(); ok {
+		_spec.SetField(orderbilling.FieldStartStopUnit, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.AddedStartStopUnit(); ok {
+		_spec.AddField(orderbilling.FieldStartStopUnit, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.NormalStopPrice(); ok {
+		_spec.SetField(orderbilling.FieldNormalStopPrice, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.AddedNormalStopPrice(); ok {
+		_spec.AddField(orderbilling.FieldNormalStopPrice, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.NormalStopUnit(); ok {
+		_spec.SetField(orderbilling.FieldNormalStopUnit, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.AddedNormalStopUnit(); ok {
+		_spec.AddField(orderbilling.FieldNormalStopUnit, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.CouponID(); ok {
+		_spec.SetField(orderbilling.FieldCouponID, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.AddedCouponID(); ok {
+		_spec.AddField(orderbilling.FieldCouponID, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.CouponLimitAmount(); ok {
+		_spec.SetField(orderbilling.FieldCouponLimitAmount, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.AddedCouponLimitAmount(); ok {
+		_spec.AddField(orderbilling.FieldCouponLimitAmount, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.CouponDeductionAmount(); ok {
+		_spec.SetField(orderbilling.FieldCouponDeductionAmount, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.AddedCouponDeductionAmount(); ok {
+		_spec.AddField(orderbilling.FieldCouponDeductionAmount, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.CappedAmount(); ok {
+		_spec.SetField(orderbilling.FieldCappedAmount, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.AddedCappedAmount(); ok {
+		_spec.AddField(orderbilling.FieldCappedAmount, field.TypeInt, value)
 	}
 	if value, ok := obu.mutation.State(); ok {
 		_spec.SetField(orderbilling.FieldState, field.TypeInt, value)
@@ -439,6 +682,27 @@ type OrderBillingUpdateOne struct {
 	fields   []string
 	hooks    []Hook
 	mutation *OrderBillingMutation
+}
+
+// SetType sets the "type" field.
+func (obuo *OrderBillingUpdateOne) SetType(i int) *OrderBillingUpdateOne {
+	obuo.mutation.ResetType()
+	obuo.mutation.SetType(i)
+	return obuo
+}
+
+// SetNillableType sets the "type" field if the given value is not nil.
+func (obuo *OrderBillingUpdateOne) SetNillableType(i *int) *OrderBillingUpdateOne {
+	if i != nil {
+		obuo.SetType(*i)
+	}
+	return obuo
+}
+
+// AddType adds i to the "type" field.
+func (obuo *OrderBillingUpdateOne) AddType(i int) *OrderBillingUpdateOne {
+	obuo.mutation.AddType(i)
+	return obuo
 }
 
 // SetOrderID sets the "order_id" field.
@@ -539,27 +803,6 @@ func (obuo *OrderBillingUpdateOne) AddNormalTimeUnit(i int) *OrderBillingUpdateO
 	return obuo
 }
 
-// SetCappedAmount sets the "capped_amount" field.
-func (obuo *OrderBillingUpdateOne) SetCappedAmount(i int) *OrderBillingUpdateOne {
-	obuo.mutation.ResetCappedAmount()
-	obuo.mutation.SetCappedAmount(i)
-	return obuo
-}
-
-// SetNillableCappedAmount sets the "capped_amount" field if the given value is not nil.
-func (obuo *OrderBillingUpdateOne) SetNillableCappedAmount(i *int) *OrderBillingUpdateOne {
-	if i != nil {
-		obuo.SetCappedAmount(*i)
-	}
-	return obuo
-}
-
-// AddCappedAmount adds i to the "capped_amount" field.
-func (obuo *OrderBillingUpdateOne) AddCappedAmount(i int) *OrderBillingUpdateOne {
-	obuo.mutation.AddCappedAmount(i)
-	return obuo
-}
-
 // SetCumulativeSecond sets the "cumulative_second" field.
 func (obuo *OrderBillingUpdateOne) SetCumulativeSecond(f float64) *OrderBillingUpdateOne {
 	obuo.mutation.ResetCumulativeSecond()
@@ -599,6 +842,195 @@ func (obuo *OrderBillingUpdateOne) SetNillableCumulativeMeter(f *float64) *Order
 // AddCumulativeMeter adds f to the "cumulative_meter" field.
 func (obuo *OrderBillingUpdateOne) AddCumulativeMeter(f float64) *OrderBillingUpdateOne {
 	obuo.mutation.AddCumulativeMeter(f)
+	return obuo
+}
+
+// SetCumulativeStop sets the "cumulative_stop" field.
+func (obuo *OrderBillingUpdateOne) SetCumulativeStop(i int) *OrderBillingUpdateOne {
+	obuo.mutation.ResetCumulativeStop()
+	obuo.mutation.SetCumulativeStop(i)
+	return obuo
+}
+
+// SetNillableCumulativeStop sets the "cumulative_stop" field if the given value is not nil.
+func (obuo *OrderBillingUpdateOne) SetNillableCumulativeStop(i *int) *OrderBillingUpdateOne {
+	if i != nil {
+		obuo.SetCumulativeStop(*i)
+	}
+	return obuo
+}
+
+// AddCumulativeStop adds i to the "cumulative_stop" field.
+func (obuo *OrderBillingUpdateOne) AddCumulativeStop(i int) *OrderBillingUpdateOne {
+	obuo.mutation.AddCumulativeStop(i)
+	return obuo
+}
+
+// SetStartStopPrice sets the "start_stop_price" field.
+func (obuo *OrderBillingUpdateOne) SetStartStopPrice(i int) *OrderBillingUpdateOne {
+	obuo.mutation.ResetStartStopPrice()
+	obuo.mutation.SetStartStopPrice(i)
+	return obuo
+}
+
+// SetNillableStartStopPrice sets the "start_stop_price" field if the given value is not nil.
+func (obuo *OrderBillingUpdateOne) SetNillableStartStopPrice(i *int) *OrderBillingUpdateOne {
+	if i != nil {
+		obuo.SetStartStopPrice(*i)
+	}
+	return obuo
+}
+
+// AddStartStopPrice adds i to the "start_stop_price" field.
+func (obuo *OrderBillingUpdateOne) AddStartStopPrice(i int) *OrderBillingUpdateOne {
+	obuo.mutation.AddStartStopPrice(i)
+	return obuo
+}
+
+// SetStartStopUnit sets the "start_stop_unit" field.
+func (obuo *OrderBillingUpdateOne) SetStartStopUnit(i int) *OrderBillingUpdateOne {
+	obuo.mutation.ResetStartStopUnit()
+	obuo.mutation.SetStartStopUnit(i)
+	return obuo
+}
+
+// SetNillableStartStopUnit sets the "start_stop_unit" field if the given value is not nil.
+func (obuo *OrderBillingUpdateOne) SetNillableStartStopUnit(i *int) *OrderBillingUpdateOne {
+	if i != nil {
+		obuo.SetStartStopUnit(*i)
+	}
+	return obuo
+}
+
+// AddStartStopUnit adds i to the "start_stop_unit" field.
+func (obuo *OrderBillingUpdateOne) AddStartStopUnit(i int) *OrderBillingUpdateOne {
+	obuo.mutation.AddStartStopUnit(i)
+	return obuo
+}
+
+// SetNormalStopPrice sets the "normal_stop_price" field.
+func (obuo *OrderBillingUpdateOne) SetNormalStopPrice(i int) *OrderBillingUpdateOne {
+	obuo.mutation.ResetNormalStopPrice()
+	obuo.mutation.SetNormalStopPrice(i)
+	return obuo
+}
+
+// SetNillableNormalStopPrice sets the "normal_stop_price" field if the given value is not nil.
+func (obuo *OrderBillingUpdateOne) SetNillableNormalStopPrice(i *int) *OrderBillingUpdateOne {
+	if i != nil {
+		obuo.SetNormalStopPrice(*i)
+	}
+	return obuo
+}
+
+// AddNormalStopPrice adds i to the "normal_stop_price" field.
+func (obuo *OrderBillingUpdateOne) AddNormalStopPrice(i int) *OrderBillingUpdateOne {
+	obuo.mutation.AddNormalStopPrice(i)
+	return obuo
+}
+
+// SetNormalStopUnit sets the "normal_stop_unit" field.
+func (obuo *OrderBillingUpdateOne) SetNormalStopUnit(i int) *OrderBillingUpdateOne {
+	obuo.mutation.ResetNormalStopUnit()
+	obuo.mutation.SetNormalStopUnit(i)
+	return obuo
+}
+
+// SetNillableNormalStopUnit sets the "normal_stop_unit" field if the given value is not nil.
+func (obuo *OrderBillingUpdateOne) SetNillableNormalStopUnit(i *int) *OrderBillingUpdateOne {
+	if i != nil {
+		obuo.SetNormalStopUnit(*i)
+	}
+	return obuo
+}
+
+// AddNormalStopUnit adds i to the "normal_stop_unit" field.
+func (obuo *OrderBillingUpdateOne) AddNormalStopUnit(i int) *OrderBillingUpdateOne {
+	obuo.mutation.AddNormalStopUnit(i)
+	return obuo
+}
+
+// SetCouponID sets the "coupon_id" field.
+func (obuo *OrderBillingUpdateOne) SetCouponID(i int) *OrderBillingUpdateOne {
+	obuo.mutation.ResetCouponID()
+	obuo.mutation.SetCouponID(i)
+	return obuo
+}
+
+// SetNillableCouponID sets the "coupon_id" field if the given value is not nil.
+func (obuo *OrderBillingUpdateOne) SetNillableCouponID(i *int) *OrderBillingUpdateOne {
+	if i != nil {
+		obuo.SetCouponID(*i)
+	}
+	return obuo
+}
+
+// AddCouponID adds i to the "coupon_id" field.
+func (obuo *OrderBillingUpdateOne) AddCouponID(i int) *OrderBillingUpdateOne {
+	obuo.mutation.AddCouponID(i)
+	return obuo
+}
+
+// SetCouponLimitAmount sets the "coupon_limit_amount" field.
+func (obuo *OrderBillingUpdateOne) SetCouponLimitAmount(i int) *OrderBillingUpdateOne {
+	obuo.mutation.ResetCouponLimitAmount()
+	obuo.mutation.SetCouponLimitAmount(i)
+	return obuo
+}
+
+// SetNillableCouponLimitAmount sets the "coupon_limit_amount" field if the given value is not nil.
+func (obuo *OrderBillingUpdateOne) SetNillableCouponLimitAmount(i *int) *OrderBillingUpdateOne {
+	if i != nil {
+		obuo.SetCouponLimitAmount(*i)
+	}
+	return obuo
+}
+
+// AddCouponLimitAmount adds i to the "coupon_limit_amount" field.
+func (obuo *OrderBillingUpdateOne) AddCouponLimitAmount(i int) *OrderBillingUpdateOne {
+	obuo.mutation.AddCouponLimitAmount(i)
+	return obuo
+}
+
+// SetCouponDeductionAmount sets the "coupon_deduction_amount" field.
+func (obuo *OrderBillingUpdateOne) SetCouponDeductionAmount(i int) *OrderBillingUpdateOne {
+	obuo.mutation.ResetCouponDeductionAmount()
+	obuo.mutation.SetCouponDeductionAmount(i)
+	return obuo
+}
+
+// SetNillableCouponDeductionAmount sets the "coupon_deduction_amount" field if the given value is not nil.
+func (obuo *OrderBillingUpdateOne) SetNillableCouponDeductionAmount(i *int) *OrderBillingUpdateOne {
+	if i != nil {
+		obuo.SetCouponDeductionAmount(*i)
+	}
+	return obuo
+}
+
+// AddCouponDeductionAmount adds i to the "coupon_deduction_amount" field.
+func (obuo *OrderBillingUpdateOne) AddCouponDeductionAmount(i int) *OrderBillingUpdateOne {
+	obuo.mutation.AddCouponDeductionAmount(i)
+	return obuo
+}
+
+// SetCappedAmount sets the "capped_amount" field.
+func (obuo *OrderBillingUpdateOne) SetCappedAmount(i int) *OrderBillingUpdateOne {
+	obuo.mutation.ResetCappedAmount()
+	obuo.mutation.SetCappedAmount(i)
+	return obuo
+}
+
+// SetNillableCappedAmount sets the "capped_amount" field if the given value is not nil.
+func (obuo *OrderBillingUpdateOne) SetNillableCappedAmount(i *int) *OrderBillingUpdateOne {
+	if i != nil {
+		obuo.SetCappedAmount(*i)
+	}
+	return obuo
+}
+
+// AddCappedAmount adds i to the "capped_amount" field.
+func (obuo *OrderBillingUpdateOne) AddCappedAmount(i int) *OrderBillingUpdateOne {
+	obuo.mutation.AddCappedAmount(i)
 	return obuo
 }
 
@@ -771,6 +1203,12 @@ func (obuo *OrderBillingUpdateOne) sqlSave(ctx context.Context) (_node *OrderBil
 			}
 		}
 	}
+	if value, ok := obuo.mutation.GetType(); ok {
+		_spec.SetField(orderbilling.FieldType, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.AddedType(); ok {
+		_spec.AddField(orderbilling.FieldType, field.TypeInt, value)
+	}
 	if value, ok := obuo.mutation.StartTimePrice(); ok {
 		_spec.SetField(orderbilling.FieldStartTimePrice, field.TypeInt, value)
 	}
@@ -795,12 +1233,6 @@ func (obuo *OrderBillingUpdateOne) sqlSave(ctx context.Context) (_node *OrderBil
 	if value, ok := obuo.mutation.AddedNormalTimeUnit(); ok {
 		_spec.AddField(orderbilling.FieldNormalTimeUnit, field.TypeInt, value)
 	}
-	if value, ok := obuo.mutation.CappedAmount(); ok {
-		_spec.SetField(orderbilling.FieldCappedAmount, field.TypeInt, value)
-	}
-	if value, ok := obuo.mutation.AddedCappedAmount(); ok {
-		_spec.AddField(orderbilling.FieldCappedAmount, field.TypeInt, value)
-	}
 	if value, ok := obuo.mutation.CumulativeSecond(); ok {
 		_spec.SetField(orderbilling.FieldCumulativeSecond, field.TypeFloat64, value)
 	}
@@ -812,6 +1244,60 @@ func (obuo *OrderBillingUpdateOne) sqlSave(ctx context.Context) (_node *OrderBil
 	}
 	if value, ok := obuo.mutation.AddedCumulativeMeter(); ok {
 		_spec.AddField(orderbilling.FieldCumulativeMeter, field.TypeFloat64, value)
+	}
+	if value, ok := obuo.mutation.CumulativeStop(); ok {
+		_spec.SetField(orderbilling.FieldCumulativeStop, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.AddedCumulativeStop(); ok {
+		_spec.AddField(orderbilling.FieldCumulativeStop, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.StartStopPrice(); ok {
+		_spec.SetField(orderbilling.FieldStartStopPrice, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.AddedStartStopPrice(); ok {
+		_spec.AddField(orderbilling.FieldStartStopPrice, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.StartStopUnit(); ok {
+		_spec.SetField(orderbilling.FieldStartStopUnit, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.AddedStartStopUnit(); ok {
+		_spec.AddField(orderbilling.FieldStartStopUnit, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.NormalStopPrice(); ok {
+		_spec.SetField(orderbilling.FieldNormalStopPrice, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.AddedNormalStopPrice(); ok {
+		_spec.AddField(orderbilling.FieldNormalStopPrice, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.NormalStopUnit(); ok {
+		_spec.SetField(orderbilling.FieldNormalStopUnit, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.AddedNormalStopUnit(); ok {
+		_spec.AddField(orderbilling.FieldNormalStopUnit, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.CouponID(); ok {
+		_spec.SetField(orderbilling.FieldCouponID, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.AddedCouponID(); ok {
+		_spec.AddField(orderbilling.FieldCouponID, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.CouponLimitAmount(); ok {
+		_spec.SetField(orderbilling.FieldCouponLimitAmount, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.AddedCouponLimitAmount(); ok {
+		_spec.AddField(orderbilling.FieldCouponLimitAmount, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.CouponDeductionAmount(); ok {
+		_spec.SetField(orderbilling.FieldCouponDeductionAmount, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.AddedCouponDeductionAmount(); ok {
+		_spec.AddField(orderbilling.FieldCouponDeductionAmount, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.CappedAmount(); ok {
+		_spec.SetField(orderbilling.FieldCappedAmount, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.AddedCappedAmount(); ok {
+		_spec.AddField(orderbilling.FieldCappedAmount, field.TypeInt, value)
 	}
 	if value, ok := obuo.mutation.State(); ok {
 		_spec.SetField(orderbilling.FieldState, field.TypeInt, value)

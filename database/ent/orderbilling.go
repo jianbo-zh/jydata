@@ -19,6 +19,8 @@ type OrderBilling struct {
 	// ID of the ent.
 	// ID
 	ID int `json:"id,omitempty"`
+	// 订单类型(1-按租车计费 2-按班次计费)
+	Type int `json:"type,omitempty"`
 	// 订单ID
 	OrderID int `json:"order_id,omitempty"`
 	// 起步价(按时)收费价格(单位：分)
@@ -29,12 +31,28 @@ type OrderBilling struct {
 	NormalTimePrice int `json:"normal_time_price,omitempty"`
 	// 时间计量单位（单位：秒）
 	NormalTimeUnit int `json:"normal_time_unit,omitempty"`
-	// 每天封顶价格（单位：分）
-	CappedAmount int `json:"capped_amount,omitempty"`
 	// 累积时长(秒)
 	CumulativeSecond float64 `json:"cumulative_second,omitempty"`
 	// 累积里程(米)
 	CumulativeMeter float64 `json:"cumulative_meter,omitempty"`
+	// 累积站点(站)
+	CumulativeStop int `json:"cumulative_stop,omitempty"`
+	// 起步价(按站)收费价格(单位：分)
+	StartStopPrice int `json:"start_stop_price,omitempty"`
+	// 起步价(按站)计量单位（单位：站）
+	StartStopUnit int `json:"start_stop_unit,omitempty"`
+	// 按站收费价格(单位：分)
+	NormalStopPrice int `json:"normal_stop_price,omitempty"`
+	// 按站计量单位（单位：站）
+	NormalStopUnit int `json:"normal_stop_unit,omitempty"`
+	// 优惠卷ID
+	CouponID int `json:"coupon_id,omitempty"`
+	// 优惠限制金额（单位：分）
+	CouponLimitAmount int `json:"coupon_limit_amount,omitempty"`
+	// 优惠卷抵扣金额（单位：分）
+	CouponDeductionAmount int `json:"coupon_deduction_amount,omitempty"`
+	// 封顶价格（单位：分）
+	CappedAmount int `json:"capped_amount,omitempty"`
 	// 计时状态(0-未开始 1-计时中 2-暂停中 4-已结束)
 	State int `json:"state,omitempty"`
 	// 开始时间
@@ -78,7 +96,7 @@ func (*OrderBilling) scanValues(columns []string) ([]any, error) {
 		switch columns[i] {
 		case orderbilling.FieldCumulativeSecond, orderbilling.FieldCumulativeMeter:
 			values[i] = new(sql.NullFloat64)
-		case orderbilling.FieldID, orderbilling.FieldOrderID, orderbilling.FieldStartTimePrice, orderbilling.FieldStartTimeUnit, orderbilling.FieldNormalTimePrice, orderbilling.FieldNormalTimeUnit, orderbilling.FieldCappedAmount, orderbilling.FieldState:
+		case orderbilling.FieldID, orderbilling.FieldType, orderbilling.FieldOrderID, orderbilling.FieldStartTimePrice, orderbilling.FieldStartTimeUnit, orderbilling.FieldNormalTimePrice, orderbilling.FieldNormalTimeUnit, orderbilling.FieldCumulativeStop, orderbilling.FieldStartStopPrice, orderbilling.FieldStartStopUnit, orderbilling.FieldNormalStopPrice, orderbilling.FieldNormalStopUnit, orderbilling.FieldCouponID, orderbilling.FieldCouponLimitAmount, orderbilling.FieldCouponDeductionAmount, orderbilling.FieldCappedAmount, orderbilling.FieldState:
 			values[i] = new(sql.NullInt64)
 		case orderbilling.FieldStartTime, orderbilling.FieldFinishTime, orderbilling.FieldCreateTime, orderbilling.FieldUpdateTime:
 			values[i] = new(sql.NullTime)
@@ -103,6 +121,12 @@ func (ob *OrderBilling) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
 			ob.ID = int(value.Int64)
+		case orderbilling.FieldType:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field type", values[i])
+			} else if value.Valid {
+				ob.Type = int(value.Int64)
+			}
 		case orderbilling.FieldOrderID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field order_id", values[i])
@@ -133,12 +157,6 @@ func (ob *OrderBilling) assignValues(columns []string, values []any) error {
 			} else if value.Valid {
 				ob.NormalTimeUnit = int(value.Int64)
 			}
-		case orderbilling.FieldCappedAmount:
-			if value, ok := values[i].(*sql.NullInt64); !ok {
-				return fmt.Errorf("unexpected type %T for field capped_amount", values[i])
-			} else if value.Valid {
-				ob.CappedAmount = int(value.Int64)
-			}
 		case orderbilling.FieldCumulativeSecond:
 			if value, ok := values[i].(*sql.NullFloat64); !ok {
 				return fmt.Errorf("unexpected type %T for field cumulative_second", values[i])
@@ -150,6 +168,60 @@ func (ob *OrderBilling) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field cumulative_meter", values[i])
 			} else if value.Valid {
 				ob.CumulativeMeter = value.Float64
+			}
+		case orderbilling.FieldCumulativeStop:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field cumulative_stop", values[i])
+			} else if value.Valid {
+				ob.CumulativeStop = int(value.Int64)
+			}
+		case orderbilling.FieldStartStopPrice:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field start_stop_price", values[i])
+			} else if value.Valid {
+				ob.StartStopPrice = int(value.Int64)
+			}
+		case orderbilling.FieldStartStopUnit:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field start_stop_unit", values[i])
+			} else if value.Valid {
+				ob.StartStopUnit = int(value.Int64)
+			}
+		case orderbilling.FieldNormalStopPrice:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field normal_stop_price", values[i])
+			} else if value.Valid {
+				ob.NormalStopPrice = int(value.Int64)
+			}
+		case orderbilling.FieldNormalStopUnit:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field normal_stop_unit", values[i])
+			} else if value.Valid {
+				ob.NormalStopUnit = int(value.Int64)
+			}
+		case orderbilling.FieldCouponID:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field coupon_id", values[i])
+			} else if value.Valid {
+				ob.CouponID = int(value.Int64)
+			}
+		case orderbilling.FieldCouponLimitAmount:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field coupon_limit_amount", values[i])
+			} else if value.Valid {
+				ob.CouponLimitAmount = int(value.Int64)
+			}
+		case orderbilling.FieldCouponDeductionAmount:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field coupon_deduction_amount", values[i])
+			} else if value.Valid {
+				ob.CouponDeductionAmount = int(value.Int64)
+			}
+		case orderbilling.FieldCappedAmount:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field capped_amount", values[i])
+			} else if value.Valid {
+				ob.CappedAmount = int(value.Int64)
 			}
 		case orderbilling.FieldState:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -222,6 +294,9 @@ func (ob *OrderBilling) String() string {
 	var builder strings.Builder
 	builder.WriteString("OrderBilling(")
 	builder.WriteString(fmt.Sprintf("id=%v, ", ob.ID))
+	builder.WriteString("type=")
+	builder.WriteString(fmt.Sprintf("%v", ob.Type))
+	builder.WriteString(", ")
 	builder.WriteString("order_id=")
 	builder.WriteString(fmt.Sprintf("%v", ob.OrderID))
 	builder.WriteString(", ")
@@ -237,14 +312,38 @@ func (ob *OrderBilling) String() string {
 	builder.WriteString("normal_time_unit=")
 	builder.WriteString(fmt.Sprintf("%v", ob.NormalTimeUnit))
 	builder.WriteString(", ")
-	builder.WriteString("capped_amount=")
-	builder.WriteString(fmt.Sprintf("%v", ob.CappedAmount))
-	builder.WriteString(", ")
 	builder.WriteString("cumulative_second=")
 	builder.WriteString(fmt.Sprintf("%v", ob.CumulativeSecond))
 	builder.WriteString(", ")
 	builder.WriteString("cumulative_meter=")
 	builder.WriteString(fmt.Sprintf("%v", ob.CumulativeMeter))
+	builder.WriteString(", ")
+	builder.WriteString("cumulative_stop=")
+	builder.WriteString(fmt.Sprintf("%v", ob.CumulativeStop))
+	builder.WriteString(", ")
+	builder.WriteString("start_stop_price=")
+	builder.WriteString(fmt.Sprintf("%v", ob.StartStopPrice))
+	builder.WriteString(", ")
+	builder.WriteString("start_stop_unit=")
+	builder.WriteString(fmt.Sprintf("%v", ob.StartStopUnit))
+	builder.WriteString(", ")
+	builder.WriteString("normal_stop_price=")
+	builder.WriteString(fmt.Sprintf("%v", ob.NormalStopPrice))
+	builder.WriteString(", ")
+	builder.WriteString("normal_stop_unit=")
+	builder.WriteString(fmt.Sprintf("%v", ob.NormalStopUnit))
+	builder.WriteString(", ")
+	builder.WriteString("coupon_id=")
+	builder.WriteString(fmt.Sprintf("%v", ob.CouponID))
+	builder.WriteString(", ")
+	builder.WriteString("coupon_limit_amount=")
+	builder.WriteString(fmt.Sprintf("%v", ob.CouponLimitAmount))
+	builder.WriteString(", ")
+	builder.WriteString("coupon_deduction_amount=")
+	builder.WriteString(fmt.Sprintf("%v", ob.CouponDeductionAmount))
+	builder.WriteString(", ")
+	builder.WriteString("capped_amount=")
+	builder.WriteString(fmt.Sprintf("%v", ob.CappedAmount))
 	builder.WriteString(", ")
 	builder.WriteString("state=")
 	builder.WriteString(fmt.Sprintf("%v", ob.State))

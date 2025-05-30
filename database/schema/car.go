@@ -21,7 +21,8 @@ type Car struct {
 func (Car) Fields() []ent.Field {
 	return []ent.Field{
 		field.Int("id").Unique(),
-		field.Int("type").Default(1).Comment("车辆类型（1-共享型 2-运力型）"),
+		// field.Int("type").Default(1).Comment("车辆类型（1-共享型 2-运力型）"),
+		field.Int("operation_mode").Default(1).Comment("运营模式（1-租车模式 2-公交模式）"),
 		field.String("car_name").Comment("车辆名称"),
 		field.Int("scenic_area_id").Comment("景区ID"),
 		field.String("device_id").Unique().Comment("设备ID"),

@@ -38,6 +38,14 @@ const (
 	FieldNormalMileagePrice = "normal_mileage_price"
 	// FieldNormalMileageUnit holds the string denoting the normal_mileage_unit field in the database.
 	FieldNormalMileageUnit = "normal_mileage_unit"
+	// FieldStartStopPrice holds the string denoting the start_stop_price field in the database.
+	FieldStartStopPrice = "start_stop_price"
+	// FieldStartStopUnit holds the string denoting the start_stop_unit field in the database.
+	FieldStartStopUnit = "start_stop_unit"
+	// FieldNormalStopPrice holds the string denoting the normal_stop_price field in the database.
+	FieldNormalStopPrice = "normal_stop_price"
+	// FieldNormalStopUnit holds the string denoting the normal_stop_unit field in the database.
+	FieldNormalStopUnit = "normal_stop_unit"
 	// FieldCappedAmount holds the string denoting the capped_amount field in the database.
 	FieldCappedAmount = "capped_amount"
 	// FieldDepositAmount holds the string denoting the deposit_amount field in the database.
@@ -74,6 +82,10 @@ var Columns = []string{
 	FieldStartMileageUnit,
 	FieldNormalMileagePrice,
 	FieldNormalMileageUnit,
+	FieldStartStopPrice,
+	FieldStartStopUnit,
+	FieldNormalStopPrice,
+	FieldNormalStopUnit,
 	FieldCappedAmount,
 	FieldDepositAmount,
 	FieldCreateTime,
@@ -91,14 +103,36 @@ func ValidColumn(column string) bool {
 }
 
 var (
+	// DefaultMainMode holds the default value on creation for the "main_mode" field.
+	DefaultMainMode int
+	// DefaultStartTimePrice holds the default value on creation for the "start_time_price" field.
+	DefaultStartTimePrice int
 	// DefaultStartTimeUnit holds the default value on creation for the "start_time_unit" field.
 	DefaultStartTimeUnit int
+	// DefaultNormalTimePrice holds the default value on creation for the "normal_time_price" field.
+	DefaultNormalTimePrice int
 	// DefaultNormalTimeUnit holds the default value on creation for the "normal_time_unit" field.
 	DefaultNormalTimeUnit int
+	// DefaultStartMileagePrice holds the default value on creation for the "start_mileage_price" field.
+	DefaultStartMileagePrice int
 	// DefaultStartMileageUnit holds the default value on creation for the "start_mileage_unit" field.
 	DefaultStartMileageUnit int
+	// DefaultNormalMileagePrice holds the default value on creation for the "normal_mileage_price" field.
+	DefaultNormalMileagePrice int
 	// DefaultNormalMileageUnit holds the default value on creation for the "normal_mileage_unit" field.
 	DefaultNormalMileageUnit int
+	// DefaultStartStopPrice holds the default value on creation for the "start_stop_price" field.
+	DefaultStartStopPrice int
+	// DefaultStartStopUnit holds the default value on creation for the "start_stop_unit" field.
+	DefaultStartStopUnit int
+	// DefaultNormalStopPrice holds the default value on creation for the "normal_stop_price" field.
+	DefaultNormalStopPrice int
+	// DefaultNormalStopUnit holds the default value on creation for the "normal_stop_unit" field.
+	DefaultNormalStopUnit int
+	// DefaultCappedAmount holds the default value on creation for the "capped_amount" field.
+	DefaultCappedAmount int
+	// DefaultDepositAmount holds the default value on creation for the "deposit_amount" field.
+	DefaultDepositAmount int
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.
 	DefaultCreateTime func() time.Time
 	// DefaultUpdateTime holds the default value on creation for the "update_time" field.
@@ -173,6 +207,26 @@ func ByNormalMileagePrice(opts ...sql.OrderTermOption) OrderOption {
 // ByNormalMileageUnit orders the results by the normal_mileage_unit field.
 func ByNormalMileageUnit(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldNormalMileageUnit, opts...).ToFunc()
+}
+
+// ByStartStopPrice orders the results by the start_stop_price field.
+func ByStartStopPrice(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldStartStopPrice, opts...).ToFunc()
+}
+
+// ByStartStopUnit orders the results by the start_stop_unit field.
+func ByStartStopUnit(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldStartStopUnit, opts...).ToFunc()
+}
+
+// ByNormalStopPrice orders the results by the normal_stop_price field.
+func ByNormalStopPrice(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldNormalStopPrice, opts...).ToFunc()
+}
+
+// ByNormalStopUnit orders the results by the normal_stop_unit field.
+func ByNormalStopUnit(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldNormalStopUnit, opts...).ToFunc()
 }
 
 // ByCappedAmount orders the results by the capped_amount field.

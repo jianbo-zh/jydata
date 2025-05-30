@@ -223,28 +223,72 @@ func init() {
 	appversion.UpdateDefaultUpdateTime = appversionDescUpdateTime.UpdateDefault.(func() time.Time)
 	billingstrategyFields := schema.BillingStrategy{}.Fields()
 	_ = billingstrategyFields
+	// billingstrategyDescMainMode is the schema descriptor for main_mode field.
+	billingstrategyDescMainMode := billingstrategyFields[4].Descriptor()
+	// billingstrategy.DefaultMainMode holds the default value on creation for the main_mode field.
+	billingstrategy.DefaultMainMode = billingstrategyDescMainMode.Default.(int)
+	// billingstrategyDescStartTimePrice is the schema descriptor for start_time_price field.
+	billingstrategyDescStartTimePrice := billingstrategyFields[5].Descriptor()
+	// billingstrategy.DefaultStartTimePrice holds the default value on creation for the start_time_price field.
+	billingstrategy.DefaultStartTimePrice = billingstrategyDescStartTimePrice.Default.(int)
 	// billingstrategyDescStartTimeUnit is the schema descriptor for start_time_unit field.
 	billingstrategyDescStartTimeUnit := billingstrategyFields[6].Descriptor()
 	// billingstrategy.DefaultStartTimeUnit holds the default value on creation for the start_time_unit field.
 	billingstrategy.DefaultStartTimeUnit = billingstrategyDescStartTimeUnit.Default.(int)
+	// billingstrategyDescNormalTimePrice is the schema descriptor for normal_time_price field.
+	billingstrategyDescNormalTimePrice := billingstrategyFields[7].Descriptor()
+	// billingstrategy.DefaultNormalTimePrice holds the default value on creation for the normal_time_price field.
+	billingstrategy.DefaultNormalTimePrice = billingstrategyDescNormalTimePrice.Default.(int)
 	// billingstrategyDescNormalTimeUnit is the schema descriptor for normal_time_unit field.
 	billingstrategyDescNormalTimeUnit := billingstrategyFields[8].Descriptor()
 	// billingstrategy.DefaultNormalTimeUnit holds the default value on creation for the normal_time_unit field.
 	billingstrategy.DefaultNormalTimeUnit = billingstrategyDescNormalTimeUnit.Default.(int)
+	// billingstrategyDescStartMileagePrice is the schema descriptor for start_mileage_price field.
+	billingstrategyDescStartMileagePrice := billingstrategyFields[9].Descriptor()
+	// billingstrategy.DefaultStartMileagePrice holds the default value on creation for the start_mileage_price field.
+	billingstrategy.DefaultStartMileagePrice = billingstrategyDescStartMileagePrice.Default.(int)
 	// billingstrategyDescStartMileageUnit is the schema descriptor for start_mileage_unit field.
 	billingstrategyDescStartMileageUnit := billingstrategyFields[10].Descriptor()
 	// billingstrategy.DefaultStartMileageUnit holds the default value on creation for the start_mileage_unit field.
 	billingstrategy.DefaultStartMileageUnit = billingstrategyDescStartMileageUnit.Default.(int)
+	// billingstrategyDescNormalMileagePrice is the schema descriptor for normal_mileage_price field.
+	billingstrategyDescNormalMileagePrice := billingstrategyFields[11].Descriptor()
+	// billingstrategy.DefaultNormalMileagePrice holds the default value on creation for the normal_mileage_price field.
+	billingstrategy.DefaultNormalMileagePrice = billingstrategyDescNormalMileagePrice.Default.(int)
 	// billingstrategyDescNormalMileageUnit is the schema descriptor for normal_mileage_unit field.
 	billingstrategyDescNormalMileageUnit := billingstrategyFields[12].Descriptor()
 	// billingstrategy.DefaultNormalMileageUnit holds the default value on creation for the normal_mileage_unit field.
 	billingstrategy.DefaultNormalMileageUnit = billingstrategyDescNormalMileageUnit.Default.(int)
+	// billingstrategyDescStartStopPrice is the schema descriptor for start_stop_price field.
+	billingstrategyDescStartStopPrice := billingstrategyFields[13].Descriptor()
+	// billingstrategy.DefaultStartStopPrice holds the default value on creation for the start_stop_price field.
+	billingstrategy.DefaultStartStopPrice = billingstrategyDescStartStopPrice.Default.(int)
+	// billingstrategyDescStartStopUnit is the schema descriptor for start_stop_unit field.
+	billingstrategyDescStartStopUnit := billingstrategyFields[14].Descriptor()
+	// billingstrategy.DefaultStartStopUnit holds the default value on creation for the start_stop_unit field.
+	billingstrategy.DefaultStartStopUnit = billingstrategyDescStartStopUnit.Default.(int)
+	// billingstrategyDescNormalStopPrice is the schema descriptor for normal_stop_price field.
+	billingstrategyDescNormalStopPrice := billingstrategyFields[15].Descriptor()
+	// billingstrategy.DefaultNormalStopPrice holds the default value on creation for the normal_stop_price field.
+	billingstrategy.DefaultNormalStopPrice = billingstrategyDescNormalStopPrice.Default.(int)
+	// billingstrategyDescNormalStopUnit is the schema descriptor for normal_stop_unit field.
+	billingstrategyDescNormalStopUnit := billingstrategyFields[16].Descriptor()
+	// billingstrategy.DefaultNormalStopUnit holds the default value on creation for the normal_stop_unit field.
+	billingstrategy.DefaultNormalStopUnit = billingstrategyDescNormalStopUnit.Default.(int)
+	// billingstrategyDescCappedAmount is the schema descriptor for capped_amount field.
+	billingstrategyDescCappedAmount := billingstrategyFields[17].Descriptor()
+	// billingstrategy.DefaultCappedAmount holds the default value on creation for the capped_amount field.
+	billingstrategy.DefaultCappedAmount = billingstrategyDescCappedAmount.Default.(int)
+	// billingstrategyDescDepositAmount is the schema descriptor for deposit_amount field.
+	billingstrategyDescDepositAmount := billingstrategyFields[18].Descriptor()
+	// billingstrategy.DefaultDepositAmount holds the default value on creation for the deposit_amount field.
+	billingstrategy.DefaultDepositAmount = billingstrategyDescDepositAmount.Default.(int)
 	// billingstrategyDescCreateTime is the schema descriptor for create_time field.
-	billingstrategyDescCreateTime := billingstrategyFields[15].Descriptor()
+	billingstrategyDescCreateTime := billingstrategyFields[19].Descriptor()
 	// billingstrategy.DefaultCreateTime holds the default value on creation for the create_time field.
 	billingstrategy.DefaultCreateTime = billingstrategyDescCreateTime.Default.(func() time.Time)
 	// billingstrategyDescUpdateTime is the schema descriptor for update_time field.
-	billingstrategyDescUpdateTime := billingstrategyFields[16].Descriptor()
+	billingstrategyDescUpdateTime := billingstrategyFields[20].Descriptor()
 	// billingstrategy.DefaultUpdateTime holds the default value on creation for the update_time field.
 	billingstrategy.DefaultUpdateTime = billingstrategyDescUpdateTime.Default.(func() time.Time)
 	// billingstrategy.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
@@ -256,10 +300,10 @@ func init() {
 	car.Interceptors[0] = carMixinInters0[0]
 	carFields := schema.Car{}.Fields()
 	_ = carFields
-	// carDescType is the schema descriptor for type field.
-	carDescType := carFields[1].Descriptor()
-	// car.DefaultType holds the default value on creation for the type field.
-	car.DefaultType = carDescType.Default.(int)
+	// carDescOperationMode is the schema descriptor for operation_mode field.
+	carDescOperationMode := carFields[1].Descriptor()
+	// car.DefaultOperationMode holds the default value on creation for the operation_mode field.
+	car.DefaultOperationMode = carDescOperationMode.Default.(int)
 	// carDescReservedSeats is the schema descriptor for reserved_seats field.
 	carDescReservedSeats := carFields[9].Descriptor()
 	// car.DefaultReservedSeats holds the default value on creation for the reserved_seats field.
@@ -978,18 +1022,26 @@ func init() {
 	orderappeal.UpdateDefaultUpdateTime = orderappealDescUpdateTime.UpdateDefault.(func() time.Time)
 	orderbillingFields := schema.OrderBilling{}.Fields()
 	_ = orderbillingFields
+	// orderbillingDescType is the schema descriptor for type field.
+	orderbillingDescType := orderbillingFields[1].Descriptor()
+	// orderbilling.DefaultType holds the default value on creation for the type field.
+	orderbilling.DefaultType = orderbillingDescType.Default.(int)
+	// orderbillingDescStartTimePrice is the schema descriptor for start_time_price field.
+	orderbillingDescStartTimePrice := orderbillingFields[3].Descriptor()
+	// orderbilling.DefaultStartTimePrice holds the default value on creation for the start_time_price field.
+	orderbilling.DefaultStartTimePrice = orderbillingDescStartTimePrice.Default.(int)
 	// orderbillingDescStartTimeUnit is the schema descriptor for start_time_unit field.
-	orderbillingDescStartTimeUnit := orderbillingFields[3].Descriptor()
+	orderbillingDescStartTimeUnit := orderbillingFields[4].Descriptor()
 	// orderbilling.DefaultStartTimeUnit holds the default value on creation for the start_time_unit field.
 	orderbilling.DefaultStartTimeUnit = orderbillingDescStartTimeUnit.Default.(int)
+	// orderbillingDescNormalTimePrice is the schema descriptor for normal_time_price field.
+	orderbillingDescNormalTimePrice := orderbillingFields[5].Descriptor()
+	// orderbilling.DefaultNormalTimePrice holds the default value on creation for the normal_time_price field.
+	orderbilling.DefaultNormalTimePrice = orderbillingDescNormalTimePrice.Default.(int)
 	// orderbillingDescNormalTimeUnit is the schema descriptor for normal_time_unit field.
-	orderbillingDescNormalTimeUnit := orderbillingFields[5].Descriptor()
+	orderbillingDescNormalTimeUnit := orderbillingFields[6].Descriptor()
 	// orderbilling.DefaultNormalTimeUnit holds the default value on creation for the normal_time_unit field.
 	orderbilling.DefaultNormalTimeUnit = orderbillingDescNormalTimeUnit.Default.(int)
-	// orderbillingDescCappedAmount is the schema descriptor for capped_amount field.
-	orderbillingDescCappedAmount := orderbillingFields[6].Descriptor()
-	// orderbilling.DefaultCappedAmount holds the default value on creation for the capped_amount field.
-	orderbilling.DefaultCappedAmount = orderbillingDescCappedAmount.Default.(int)
 	// orderbillingDescCumulativeSecond is the schema descriptor for cumulative_second field.
 	orderbillingDescCumulativeSecond := orderbillingFields[7].Descriptor()
 	// orderbilling.DefaultCumulativeSecond holds the default value on creation for the cumulative_second field.
@@ -998,16 +1050,52 @@ func init() {
 	orderbillingDescCumulativeMeter := orderbillingFields[8].Descriptor()
 	// orderbilling.DefaultCumulativeMeter holds the default value on creation for the cumulative_meter field.
 	orderbilling.DefaultCumulativeMeter = orderbillingDescCumulativeMeter.Default.(float64)
+	// orderbillingDescCumulativeStop is the schema descriptor for cumulative_stop field.
+	orderbillingDescCumulativeStop := orderbillingFields[9].Descriptor()
+	// orderbilling.DefaultCumulativeStop holds the default value on creation for the cumulative_stop field.
+	orderbilling.DefaultCumulativeStop = orderbillingDescCumulativeStop.Default.(int)
+	// orderbillingDescStartStopPrice is the schema descriptor for start_stop_price field.
+	orderbillingDescStartStopPrice := orderbillingFields[10].Descriptor()
+	// orderbilling.DefaultStartStopPrice holds the default value on creation for the start_stop_price field.
+	orderbilling.DefaultStartStopPrice = orderbillingDescStartStopPrice.Default.(int)
+	// orderbillingDescStartStopUnit is the schema descriptor for start_stop_unit field.
+	orderbillingDescStartStopUnit := orderbillingFields[11].Descriptor()
+	// orderbilling.DefaultStartStopUnit holds the default value on creation for the start_stop_unit field.
+	orderbilling.DefaultStartStopUnit = orderbillingDescStartStopUnit.Default.(int)
+	// orderbillingDescNormalStopPrice is the schema descriptor for normal_stop_price field.
+	orderbillingDescNormalStopPrice := orderbillingFields[12].Descriptor()
+	// orderbilling.DefaultNormalStopPrice holds the default value on creation for the normal_stop_price field.
+	orderbilling.DefaultNormalStopPrice = orderbillingDescNormalStopPrice.Default.(int)
+	// orderbillingDescNormalStopUnit is the schema descriptor for normal_stop_unit field.
+	orderbillingDescNormalStopUnit := orderbillingFields[13].Descriptor()
+	// orderbilling.DefaultNormalStopUnit holds the default value on creation for the normal_stop_unit field.
+	orderbilling.DefaultNormalStopUnit = orderbillingDescNormalStopUnit.Default.(int)
+	// orderbillingDescCouponID is the schema descriptor for coupon_id field.
+	orderbillingDescCouponID := orderbillingFields[14].Descriptor()
+	// orderbilling.DefaultCouponID holds the default value on creation for the coupon_id field.
+	orderbilling.DefaultCouponID = orderbillingDescCouponID.Default.(int)
+	// orderbillingDescCouponLimitAmount is the schema descriptor for coupon_limit_amount field.
+	orderbillingDescCouponLimitAmount := orderbillingFields[15].Descriptor()
+	// orderbilling.DefaultCouponLimitAmount holds the default value on creation for the coupon_limit_amount field.
+	orderbilling.DefaultCouponLimitAmount = orderbillingDescCouponLimitAmount.Default.(int)
+	// orderbillingDescCouponDeductionAmount is the schema descriptor for coupon_deduction_amount field.
+	orderbillingDescCouponDeductionAmount := orderbillingFields[16].Descriptor()
+	// orderbilling.DefaultCouponDeductionAmount holds the default value on creation for the coupon_deduction_amount field.
+	orderbilling.DefaultCouponDeductionAmount = orderbillingDescCouponDeductionAmount.Default.(int)
+	// orderbillingDescCappedAmount is the schema descriptor for capped_amount field.
+	orderbillingDescCappedAmount := orderbillingFields[17].Descriptor()
+	// orderbilling.DefaultCappedAmount holds the default value on creation for the capped_amount field.
+	orderbilling.DefaultCappedAmount = orderbillingDescCappedAmount.Default.(int)
 	// orderbillingDescState is the schema descriptor for state field.
-	orderbillingDescState := orderbillingFields[9].Descriptor()
+	orderbillingDescState := orderbillingFields[18].Descriptor()
 	// orderbilling.DefaultState holds the default value on creation for the state field.
 	orderbilling.DefaultState = orderbillingDescState.Default.(int)
 	// orderbillingDescCreateTime is the schema descriptor for create_time field.
-	orderbillingDescCreateTime := orderbillingFields[12].Descriptor()
+	orderbillingDescCreateTime := orderbillingFields[21].Descriptor()
 	// orderbilling.DefaultCreateTime holds the default value on creation for the create_time field.
 	orderbilling.DefaultCreateTime = orderbillingDescCreateTime.Default.(func() time.Time)
 	// orderbillingDescUpdateTime is the schema descriptor for update_time field.
-	orderbillingDescUpdateTime := orderbillingFields[13].Descriptor()
+	orderbillingDescUpdateTime := orderbillingFields[22].Descriptor()
 	// orderbilling.DefaultUpdateTime holds the default value on creation for the update_time field.
 	orderbilling.DefaultUpdateTime = orderbillingDescUpdateTime.Default.(func() time.Time)
 	// orderbilling.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
@@ -1022,16 +1110,24 @@ func init() {
 	orderextendflightDescFlightNo := orderextendflightFields[3].Descriptor()
 	// orderextendflight.DefaultFlightNo holds the default value on creation for the flight_no field.
 	orderextendflight.DefaultFlightNo = orderextendflightDescFlightNo.Default.(string)
+	// orderextendflightDescRouteID is the schema descriptor for route_id field.
+	orderextendflightDescRouteID := orderextendflightFields[4].Descriptor()
+	// orderextendflight.DefaultRouteID holds the default value on creation for the route_id field.
+	orderextendflight.DefaultRouteID = orderextendflightDescRouteID.Default.(int)
+	// orderextendflightDescRouteName is the schema descriptor for route_name field.
+	orderextendflightDescRouteName := orderextendflightFields[5].Descriptor()
+	// orderextendflight.DefaultRouteName holds the default value on creation for the route_name field.
+	orderextendflight.DefaultRouteName = orderextendflightDescRouteName.Default.(string)
 	// orderextendflightDescTicketCount is the schema descriptor for ticket_count field.
-	orderextendflightDescTicketCount := orderextendflightFields[5].Descriptor()
+	orderextendflightDescTicketCount := orderextendflightFields[8].Descriptor()
 	// orderextendflight.DefaultTicketCount holds the default value on creation for the ticket_count field.
 	orderextendflight.DefaultTicketCount = orderextendflightDescTicketCount.Default.(int)
 	// orderextendflightDescCreateTime is the schema descriptor for create_time field.
-	orderextendflightDescCreateTime := orderextendflightFields[6].Descriptor()
+	orderextendflightDescCreateTime := orderextendflightFields[9].Descriptor()
 	// orderextendflight.DefaultCreateTime holds the default value on creation for the create_time field.
 	orderextendflight.DefaultCreateTime = orderextendflightDescCreateTime.Default.(func() time.Time)
 	// orderextendflightDescUpdateTime is the schema descriptor for update_time field.
-	orderextendflightDescUpdateTime := orderextendflightFields[7].Descriptor()
+	orderextendflightDescUpdateTime := orderextendflightFields[10].Descriptor()
 	// orderextendflight.DefaultUpdateTime holds the default value on creation for the update_time field.
 	orderextendflight.DefaultUpdateTime = orderextendflightDescUpdateTime.Default.(func() time.Time)
 	// orderextendflight.UpdateDefaultUpdateTime holds the default value on update for the update_time field.

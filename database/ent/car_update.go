@@ -57,24 +57,24 @@ func (cu *CarUpdate) ClearDeleteTime() *CarUpdate {
 	return cu
 }
 
-// SetType sets the "type" field.
-func (cu *CarUpdate) SetType(i int) *CarUpdate {
-	cu.mutation.ResetType()
-	cu.mutation.SetType(i)
+// SetOperationMode sets the "operation_mode" field.
+func (cu *CarUpdate) SetOperationMode(i int) *CarUpdate {
+	cu.mutation.ResetOperationMode()
+	cu.mutation.SetOperationMode(i)
 	return cu
 }
 
-// SetNillableType sets the "type" field if the given value is not nil.
-func (cu *CarUpdate) SetNillableType(i *int) *CarUpdate {
+// SetNillableOperationMode sets the "operation_mode" field if the given value is not nil.
+func (cu *CarUpdate) SetNillableOperationMode(i *int) *CarUpdate {
 	if i != nil {
-		cu.SetType(*i)
+		cu.SetOperationMode(*i)
 	}
 	return cu
 }
 
-// AddType adds i to the "type" field.
-func (cu *CarUpdate) AddType(i int) *CarUpdate {
-	cu.mutation.AddType(i)
+// AddOperationMode adds i to the "operation_mode" field.
+func (cu *CarUpdate) AddOperationMode(i int) *CarUpdate {
+	cu.mutation.AddOperationMode(i)
 	return cu
 }
 
@@ -1132,11 +1132,11 @@ func (cu *CarUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if cu.mutation.DeleteTimeCleared() {
 		_spec.ClearField(car.FieldDeleteTime, field.TypeTime)
 	}
-	if value, ok := cu.mutation.GetType(); ok {
-		_spec.SetField(car.FieldType, field.TypeInt, value)
+	if value, ok := cu.mutation.OperationMode(); ok {
+		_spec.SetField(car.FieldOperationMode, field.TypeInt, value)
 	}
-	if value, ok := cu.mutation.AddedType(); ok {
-		_spec.AddField(car.FieldType, field.TypeInt, value)
+	if value, ok := cu.mutation.AddedOperationMode(); ok {
+		_spec.AddField(car.FieldOperationMode, field.TypeInt, value)
 	}
 	if value, ok := cu.mutation.CarName(); ok {
 		_spec.SetField(car.FieldCarName, field.TypeString, value)
@@ -1703,24 +1703,24 @@ func (cuo *CarUpdateOne) ClearDeleteTime() *CarUpdateOne {
 	return cuo
 }
 
-// SetType sets the "type" field.
-func (cuo *CarUpdateOne) SetType(i int) *CarUpdateOne {
-	cuo.mutation.ResetType()
-	cuo.mutation.SetType(i)
+// SetOperationMode sets the "operation_mode" field.
+func (cuo *CarUpdateOne) SetOperationMode(i int) *CarUpdateOne {
+	cuo.mutation.ResetOperationMode()
+	cuo.mutation.SetOperationMode(i)
 	return cuo
 }
 
-// SetNillableType sets the "type" field if the given value is not nil.
-func (cuo *CarUpdateOne) SetNillableType(i *int) *CarUpdateOne {
+// SetNillableOperationMode sets the "operation_mode" field if the given value is not nil.
+func (cuo *CarUpdateOne) SetNillableOperationMode(i *int) *CarUpdateOne {
 	if i != nil {
-		cuo.SetType(*i)
+		cuo.SetOperationMode(*i)
 	}
 	return cuo
 }
 
-// AddType adds i to the "type" field.
-func (cuo *CarUpdateOne) AddType(i int) *CarUpdateOne {
-	cuo.mutation.AddType(i)
+// AddOperationMode adds i to the "operation_mode" field.
+func (cuo *CarUpdateOne) AddOperationMode(i int) *CarUpdateOne {
+	cuo.mutation.AddOperationMode(i)
 	return cuo
 }
 
@@ -2808,11 +2808,11 @@ func (cuo *CarUpdateOne) sqlSave(ctx context.Context) (_node *Car, err error) {
 	if cuo.mutation.DeleteTimeCleared() {
 		_spec.ClearField(car.FieldDeleteTime, field.TypeTime)
 	}
-	if value, ok := cuo.mutation.GetType(); ok {
-		_spec.SetField(car.FieldType, field.TypeInt, value)
+	if value, ok := cuo.mutation.OperationMode(); ok {
+		_spec.SetField(car.FieldOperationMode, field.TypeInt, value)
 	}
-	if value, ok := cuo.mutation.AddedType(); ok {
-		_spec.AddField(car.FieldType, field.TypeInt, value)
+	if value, ok := cuo.mutation.AddedOperationMode(); ok {
+		_spec.AddField(car.FieldOperationMode, field.TypeInt, value)
 	}
 	if value, ok := cuo.mutation.CarName(); ok {
 		_spec.SetField(car.FieldCarName, field.TypeString, value)

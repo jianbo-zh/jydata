@@ -60,9 +60,9 @@ func DeleteTime(v time.Time) predicate.Car {
 	return predicate.Car(sql.FieldEQ(FieldDeleteTime, v))
 }
 
-// Type applies equality check predicate on the "type" field. It's identical to TypeEQ.
-func Type(v int) predicate.Car {
-	return predicate.Car(sql.FieldEQ(FieldType, v))
+// OperationMode applies equality check predicate on the "operation_mode" field. It's identical to OperationModeEQ.
+func OperationMode(v int) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldOperationMode, v))
 }
 
 // CarName applies equality check predicate on the "car_name" field. It's identical to CarNameEQ.
@@ -315,44 +315,44 @@ func DeleteTimeNotNil() predicate.Car {
 	return predicate.Car(sql.FieldNotNull(FieldDeleteTime))
 }
 
-// TypeEQ applies the EQ predicate on the "type" field.
-func TypeEQ(v int) predicate.Car {
-	return predicate.Car(sql.FieldEQ(FieldType, v))
+// OperationModeEQ applies the EQ predicate on the "operation_mode" field.
+func OperationModeEQ(v int) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldOperationMode, v))
 }
 
-// TypeNEQ applies the NEQ predicate on the "type" field.
-func TypeNEQ(v int) predicate.Car {
-	return predicate.Car(sql.FieldNEQ(FieldType, v))
+// OperationModeNEQ applies the NEQ predicate on the "operation_mode" field.
+func OperationModeNEQ(v int) predicate.Car {
+	return predicate.Car(sql.FieldNEQ(FieldOperationMode, v))
 }
 
-// TypeIn applies the In predicate on the "type" field.
-func TypeIn(vs ...int) predicate.Car {
-	return predicate.Car(sql.FieldIn(FieldType, vs...))
+// OperationModeIn applies the In predicate on the "operation_mode" field.
+func OperationModeIn(vs ...int) predicate.Car {
+	return predicate.Car(sql.FieldIn(FieldOperationMode, vs...))
 }
 
-// TypeNotIn applies the NotIn predicate on the "type" field.
-func TypeNotIn(vs ...int) predicate.Car {
-	return predicate.Car(sql.FieldNotIn(FieldType, vs...))
+// OperationModeNotIn applies the NotIn predicate on the "operation_mode" field.
+func OperationModeNotIn(vs ...int) predicate.Car {
+	return predicate.Car(sql.FieldNotIn(FieldOperationMode, vs...))
 }
 
-// TypeGT applies the GT predicate on the "type" field.
-func TypeGT(v int) predicate.Car {
-	return predicate.Car(sql.FieldGT(FieldType, v))
+// OperationModeGT applies the GT predicate on the "operation_mode" field.
+func OperationModeGT(v int) predicate.Car {
+	return predicate.Car(sql.FieldGT(FieldOperationMode, v))
 }
 
-// TypeGTE applies the GTE predicate on the "type" field.
-func TypeGTE(v int) predicate.Car {
-	return predicate.Car(sql.FieldGTE(FieldType, v))
+// OperationModeGTE applies the GTE predicate on the "operation_mode" field.
+func OperationModeGTE(v int) predicate.Car {
+	return predicate.Car(sql.FieldGTE(FieldOperationMode, v))
 }
 
-// TypeLT applies the LT predicate on the "type" field.
-func TypeLT(v int) predicate.Car {
-	return predicate.Car(sql.FieldLT(FieldType, v))
+// OperationModeLT applies the LT predicate on the "operation_mode" field.
+func OperationModeLT(v int) predicate.Car {
+	return predicate.Car(sql.FieldLT(FieldOperationMode, v))
 }
 
-// TypeLTE applies the LTE predicate on the "type" field.
-func TypeLTE(v int) predicate.Car {
-	return predicate.Car(sql.FieldLTE(FieldType, v))
+// OperationModeLTE applies the LTE predicate on the "operation_mode" field.
+func OperationModeLTE(v int) predicate.Car {
+	return predicate.Car(sql.FieldLTE(FieldOperationMode, v))
 }
 
 // CarNameEQ applies the EQ predicate on the "car_name" field.

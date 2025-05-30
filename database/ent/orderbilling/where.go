@@ -55,6 +55,11 @@ func IDLTE(id int) predicate.OrderBilling {
 	return predicate.OrderBilling(sql.FieldLTE(FieldID, id))
 }
 
+// Type applies equality check predicate on the "type" field. It's identical to TypeEQ.
+func Type(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldType, v))
+}
+
 // OrderID applies equality check predicate on the "order_id" field. It's identical to OrderIDEQ.
 func OrderID(v int) predicate.OrderBilling {
 	return predicate.OrderBilling(sql.FieldEQ(FieldOrderID, v))
@@ -80,11 +85,6 @@ func NormalTimeUnit(v int) predicate.OrderBilling {
 	return predicate.OrderBilling(sql.FieldEQ(FieldNormalTimeUnit, v))
 }
 
-// CappedAmount applies equality check predicate on the "capped_amount" field. It's identical to CappedAmountEQ.
-func CappedAmount(v int) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldEQ(FieldCappedAmount, v))
-}
-
 // CumulativeSecond applies equality check predicate on the "cumulative_second" field. It's identical to CumulativeSecondEQ.
 func CumulativeSecond(v float64) predicate.OrderBilling {
 	return predicate.OrderBilling(sql.FieldEQ(FieldCumulativeSecond, v))
@@ -93,6 +93,51 @@ func CumulativeSecond(v float64) predicate.OrderBilling {
 // CumulativeMeter applies equality check predicate on the "cumulative_meter" field. It's identical to CumulativeMeterEQ.
 func CumulativeMeter(v float64) predicate.OrderBilling {
 	return predicate.OrderBilling(sql.FieldEQ(FieldCumulativeMeter, v))
+}
+
+// CumulativeStop applies equality check predicate on the "cumulative_stop" field. It's identical to CumulativeStopEQ.
+func CumulativeStop(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldCumulativeStop, v))
+}
+
+// StartStopPrice applies equality check predicate on the "start_stop_price" field. It's identical to StartStopPriceEQ.
+func StartStopPrice(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldStartStopPrice, v))
+}
+
+// StartStopUnit applies equality check predicate on the "start_stop_unit" field. It's identical to StartStopUnitEQ.
+func StartStopUnit(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldStartStopUnit, v))
+}
+
+// NormalStopPrice applies equality check predicate on the "normal_stop_price" field. It's identical to NormalStopPriceEQ.
+func NormalStopPrice(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldNormalStopPrice, v))
+}
+
+// NormalStopUnit applies equality check predicate on the "normal_stop_unit" field. It's identical to NormalStopUnitEQ.
+func NormalStopUnit(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldNormalStopUnit, v))
+}
+
+// CouponID applies equality check predicate on the "coupon_id" field. It's identical to CouponIDEQ.
+func CouponID(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldCouponID, v))
+}
+
+// CouponLimitAmount applies equality check predicate on the "coupon_limit_amount" field. It's identical to CouponLimitAmountEQ.
+func CouponLimitAmount(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldCouponLimitAmount, v))
+}
+
+// CouponDeductionAmount applies equality check predicate on the "coupon_deduction_amount" field. It's identical to CouponDeductionAmountEQ.
+func CouponDeductionAmount(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldCouponDeductionAmount, v))
+}
+
+// CappedAmount applies equality check predicate on the "capped_amount" field. It's identical to CappedAmountEQ.
+func CappedAmount(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldCappedAmount, v))
 }
 
 // State applies equality check predicate on the "state" field. It's identical to StateEQ.
@@ -118,6 +163,46 @@ func CreateTime(v time.Time) predicate.OrderBilling {
 // UpdateTime applies equality check predicate on the "update_time" field. It's identical to UpdateTimeEQ.
 func UpdateTime(v time.Time) predicate.OrderBilling {
 	return predicate.OrderBilling(sql.FieldEQ(FieldUpdateTime, v))
+}
+
+// TypeEQ applies the EQ predicate on the "type" field.
+func TypeEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldType, v))
+}
+
+// TypeNEQ applies the NEQ predicate on the "type" field.
+func TypeNEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNEQ(FieldType, v))
+}
+
+// TypeIn applies the In predicate on the "type" field.
+func TypeIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldIn(FieldType, vs...))
+}
+
+// TypeNotIn applies the NotIn predicate on the "type" field.
+func TypeNotIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNotIn(FieldType, vs...))
+}
+
+// TypeGT applies the GT predicate on the "type" field.
+func TypeGT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGT(FieldType, v))
+}
+
+// TypeGTE applies the GTE predicate on the "type" field.
+func TypeGTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGTE(FieldType, v))
+}
+
+// TypeLT applies the LT predicate on the "type" field.
+func TypeLT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLT(FieldType, v))
+}
+
+// TypeLTE applies the LTE predicate on the "type" field.
+func TypeLTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLTE(FieldType, v))
 }
 
 // OrderIDEQ applies the EQ predicate on the "order_id" field.
@@ -300,46 +385,6 @@ func NormalTimeUnitLTE(v int) predicate.OrderBilling {
 	return predicate.OrderBilling(sql.FieldLTE(FieldNormalTimeUnit, v))
 }
 
-// CappedAmountEQ applies the EQ predicate on the "capped_amount" field.
-func CappedAmountEQ(v int) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldEQ(FieldCappedAmount, v))
-}
-
-// CappedAmountNEQ applies the NEQ predicate on the "capped_amount" field.
-func CappedAmountNEQ(v int) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldNEQ(FieldCappedAmount, v))
-}
-
-// CappedAmountIn applies the In predicate on the "capped_amount" field.
-func CappedAmountIn(vs ...int) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldIn(FieldCappedAmount, vs...))
-}
-
-// CappedAmountNotIn applies the NotIn predicate on the "capped_amount" field.
-func CappedAmountNotIn(vs ...int) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldNotIn(FieldCappedAmount, vs...))
-}
-
-// CappedAmountGT applies the GT predicate on the "capped_amount" field.
-func CappedAmountGT(v int) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldGT(FieldCappedAmount, v))
-}
-
-// CappedAmountGTE applies the GTE predicate on the "capped_amount" field.
-func CappedAmountGTE(v int) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldGTE(FieldCappedAmount, v))
-}
-
-// CappedAmountLT applies the LT predicate on the "capped_amount" field.
-func CappedAmountLT(v int) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldLT(FieldCappedAmount, v))
-}
-
-// CappedAmountLTE applies the LTE predicate on the "capped_amount" field.
-func CappedAmountLTE(v int) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldLTE(FieldCappedAmount, v))
-}
-
 // CumulativeSecondEQ applies the EQ predicate on the "cumulative_second" field.
 func CumulativeSecondEQ(v float64) predicate.OrderBilling {
 	return predicate.OrderBilling(sql.FieldEQ(FieldCumulativeSecond, v))
@@ -418,6 +463,366 @@ func CumulativeMeterLT(v float64) predicate.OrderBilling {
 // CumulativeMeterLTE applies the LTE predicate on the "cumulative_meter" field.
 func CumulativeMeterLTE(v float64) predicate.OrderBilling {
 	return predicate.OrderBilling(sql.FieldLTE(FieldCumulativeMeter, v))
+}
+
+// CumulativeStopEQ applies the EQ predicate on the "cumulative_stop" field.
+func CumulativeStopEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldCumulativeStop, v))
+}
+
+// CumulativeStopNEQ applies the NEQ predicate on the "cumulative_stop" field.
+func CumulativeStopNEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNEQ(FieldCumulativeStop, v))
+}
+
+// CumulativeStopIn applies the In predicate on the "cumulative_stop" field.
+func CumulativeStopIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldIn(FieldCumulativeStop, vs...))
+}
+
+// CumulativeStopNotIn applies the NotIn predicate on the "cumulative_stop" field.
+func CumulativeStopNotIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNotIn(FieldCumulativeStop, vs...))
+}
+
+// CumulativeStopGT applies the GT predicate on the "cumulative_stop" field.
+func CumulativeStopGT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGT(FieldCumulativeStop, v))
+}
+
+// CumulativeStopGTE applies the GTE predicate on the "cumulative_stop" field.
+func CumulativeStopGTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGTE(FieldCumulativeStop, v))
+}
+
+// CumulativeStopLT applies the LT predicate on the "cumulative_stop" field.
+func CumulativeStopLT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLT(FieldCumulativeStop, v))
+}
+
+// CumulativeStopLTE applies the LTE predicate on the "cumulative_stop" field.
+func CumulativeStopLTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLTE(FieldCumulativeStop, v))
+}
+
+// StartStopPriceEQ applies the EQ predicate on the "start_stop_price" field.
+func StartStopPriceEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldStartStopPrice, v))
+}
+
+// StartStopPriceNEQ applies the NEQ predicate on the "start_stop_price" field.
+func StartStopPriceNEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNEQ(FieldStartStopPrice, v))
+}
+
+// StartStopPriceIn applies the In predicate on the "start_stop_price" field.
+func StartStopPriceIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldIn(FieldStartStopPrice, vs...))
+}
+
+// StartStopPriceNotIn applies the NotIn predicate on the "start_stop_price" field.
+func StartStopPriceNotIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNotIn(FieldStartStopPrice, vs...))
+}
+
+// StartStopPriceGT applies the GT predicate on the "start_stop_price" field.
+func StartStopPriceGT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGT(FieldStartStopPrice, v))
+}
+
+// StartStopPriceGTE applies the GTE predicate on the "start_stop_price" field.
+func StartStopPriceGTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGTE(FieldStartStopPrice, v))
+}
+
+// StartStopPriceLT applies the LT predicate on the "start_stop_price" field.
+func StartStopPriceLT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLT(FieldStartStopPrice, v))
+}
+
+// StartStopPriceLTE applies the LTE predicate on the "start_stop_price" field.
+func StartStopPriceLTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLTE(FieldStartStopPrice, v))
+}
+
+// StartStopUnitEQ applies the EQ predicate on the "start_stop_unit" field.
+func StartStopUnitEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldStartStopUnit, v))
+}
+
+// StartStopUnitNEQ applies the NEQ predicate on the "start_stop_unit" field.
+func StartStopUnitNEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNEQ(FieldStartStopUnit, v))
+}
+
+// StartStopUnitIn applies the In predicate on the "start_stop_unit" field.
+func StartStopUnitIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldIn(FieldStartStopUnit, vs...))
+}
+
+// StartStopUnitNotIn applies the NotIn predicate on the "start_stop_unit" field.
+func StartStopUnitNotIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNotIn(FieldStartStopUnit, vs...))
+}
+
+// StartStopUnitGT applies the GT predicate on the "start_stop_unit" field.
+func StartStopUnitGT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGT(FieldStartStopUnit, v))
+}
+
+// StartStopUnitGTE applies the GTE predicate on the "start_stop_unit" field.
+func StartStopUnitGTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGTE(FieldStartStopUnit, v))
+}
+
+// StartStopUnitLT applies the LT predicate on the "start_stop_unit" field.
+func StartStopUnitLT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLT(FieldStartStopUnit, v))
+}
+
+// StartStopUnitLTE applies the LTE predicate on the "start_stop_unit" field.
+func StartStopUnitLTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLTE(FieldStartStopUnit, v))
+}
+
+// NormalStopPriceEQ applies the EQ predicate on the "normal_stop_price" field.
+func NormalStopPriceEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldNormalStopPrice, v))
+}
+
+// NormalStopPriceNEQ applies the NEQ predicate on the "normal_stop_price" field.
+func NormalStopPriceNEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNEQ(FieldNormalStopPrice, v))
+}
+
+// NormalStopPriceIn applies the In predicate on the "normal_stop_price" field.
+func NormalStopPriceIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldIn(FieldNormalStopPrice, vs...))
+}
+
+// NormalStopPriceNotIn applies the NotIn predicate on the "normal_stop_price" field.
+func NormalStopPriceNotIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNotIn(FieldNormalStopPrice, vs...))
+}
+
+// NormalStopPriceGT applies the GT predicate on the "normal_stop_price" field.
+func NormalStopPriceGT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGT(FieldNormalStopPrice, v))
+}
+
+// NormalStopPriceGTE applies the GTE predicate on the "normal_stop_price" field.
+func NormalStopPriceGTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGTE(FieldNormalStopPrice, v))
+}
+
+// NormalStopPriceLT applies the LT predicate on the "normal_stop_price" field.
+func NormalStopPriceLT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLT(FieldNormalStopPrice, v))
+}
+
+// NormalStopPriceLTE applies the LTE predicate on the "normal_stop_price" field.
+func NormalStopPriceLTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLTE(FieldNormalStopPrice, v))
+}
+
+// NormalStopUnitEQ applies the EQ predicate on the "normal_stop_unit" field.
+func NormalStopUnitEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldNormalStopUnit, v))
+}
+
+// NormalStopUnitNEQ applies the NEQ predicate on the "normal_stop_unit" field.
+func NormalStopUnitNEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNEQ(FieldNormalStopUnit, v))
+}
+
+// NormalStopUnitIn applies the In predicate on the "normal_stop_unit" field.
+func NormalStopUnitIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldIn(FieldNormalStopUnit, vs...))
+}
+
+// NormalStopUnitNotIn applies the NotIn predicate on the "normal_stop_unit" field.
+func NormalStopUnitNotIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNotIn(FieldNormalStopUnit, vs...))
+}
+
+// NormalStopUnitGT applies the GT predicate on the "normal_stop_unit" field.
+func NormalStopUnitGT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGT(FieldNormalStopUnit, v))
+}
+
+// NormalStopUnitGTE applies the GTE predicate on the "normal_stop_unit" field.
+func NormalStopUnitGTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGTE(FieldNormalStopUnit, v))
+}
+
+// NormalStopUnitLT applies the LT predicate on the "normal_stop_unit" field.
+func NormalStopUnitLT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLT(FieldNormalStopUnit, v))
+}
+
+// NormalStopUnitLTE applies the LTE predicate on the "normal_stop_unit" field.
+func NormalStopUnitLTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLTE(FieldNormalStopUnit, v))
+}
+
+// CouponIDEQ applies the EQ predicate on the "coupon_id" field.
+func CouponIDEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldCouponID, v))
+}
+
+// CouponIDNEQ applies the NEQ predicate on the "coupon_id" field.
+func CouponIDNEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNEQ(FieldCouponID, v))
+}
+
+// CouponIDIn applies the In predicate on the "coupon_id" field.
+func CouponIDIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldIn(FieldCouponID, vs...))
+}
+
+// CouponIDNotIn applies the NotIn predicate on the "coupon_id" field.
+func CouponIDNotIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNotIn(FieldCouponID, vs...))
+}
+
+// CouponIDGT applies the GT predicate on the "coupon_id" field.
+func CouponIDGT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGT(FieldCouponID, v))
+}
+
+// CouponIDGTE applies the GTE predicate on the "coupon_id" field.
+func CouponIDGTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGTE(FieldCouponID, v))
+}
+
+// CouponIDLT applies the LT predicate on the "coupon_id" field.
+func CouponIDLT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLT(FieldCouponID, v))
+}
+
+// CouponIDLTE applies the LTE predicate on the "coupon_id" field.
+func CouponIDLTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLTE(FieldCouponID, v))
+}
+
+// CouponLimitAmountEQ applies the EQ predicate on the "coupon_limit_amount" field.
+func CouponLimitAmountEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldCouponLimitAmount, v))
+}
+
+// CouponLimitAmountNEQ applies the NEQ predicate on the "coupon_limit_amount" field.
+func CouponLimitAmountNEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNEQ(FieldCouponLimitAmount, v))
+}
+
+// CouponLimitAmountIn applies the In predicate on the "coupon_limit_amount" field.
+func CouponLimitAmountIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldIn(FieldCouponLimitAmount, vs...))
+}
+
+// CouponLimitAmountNotIn applies the NotIn predicate on the "coupon_limit_amount" field.
+func CouponLimitAmountNotIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNotIn(FieldCouponLimitAmount, vs...))
+}
+
+// CouponLimitAmountGT applies the GT predicate on the "coupon_limit_amount" field.
+func CouponLimitAmountGT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGT(FieldCouponLimitAmount, v))
+}
+
+// CouponLimitAmountGTE applies the GTE predicate on the "coupon_limit_amount" field.
+func CouponLimitAmountGTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGTE(FieldCouponLimitAmount, v))
+}
+
+// CouponLimitAmountLT applies the LT predicate on the "coupon_limit_amount" field.
+func CouponLimitAmountLT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLT(FieldCouponLimitAmount, v))
+}
+
+// CouponLimitAmountLTE applies the LTE predicate on the "coupon_limit_amount" field.
+func CouponLimitAmountLTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLTE(FieldCouponLimitAmount, v))
+}
+
+// CouponDeductionAmountEQ applies the EQ predicate on the "coupon_deduction_amount" field.
+func CouponDeductionAmountEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldCouponDeductionAmount, v))
+}
+
+// CouponDeductionAmountNEQ applies the NEQ predicate on the "coupon_deduction_amount" field.
+func CouponDeductionAmountNEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNEQ(FieldCouponDeductionAmount, v))
+}
+
+// CouponDeductionAmountIn applies the In predicate on the "coupon_deduction_amount" field.
+func CouponDeductionAmountIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldIn(FieldCouponDeductionAmount, vs...))
+}
+
+// CouponDeductionAmountNotIn applies the NotIn predicate on the "coupon_deduction_amount" field.
+func CouponDeductionAmountNotIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNotIn(FieldCouponDeductionAmount, vs...))
+}
+
+// CouponDeductionAmountGT applies the GT predicate on the "coupon_deduction_amount" field.
+func CouponDeductionAmountGT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGT(FieldCouponDeductionAmount, v))
+}
+
+// CouponDeductionAmountGTE applies the GTE predicate on the "coupon_deduction_amount" field.
+func CouponDeductionAmountGTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGTE(FieldCouponDeductionAmount, v))
+}
+
+// CouponDeductionAmountLT applies the LT predicate on the "coupon_deduction_amount" field.
+func CouponDeductionAmountLT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLT(FieldCouponDeductionAmount, v))
+}
+
+// CouponDeductionAmountLTE applies the LTE predicate on the "coupon_deduction_amount" field.
+func CouponDeductionAmountLTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLTE(FieldCouponDeductionAmount, v))
+}
+
+// CappedAmountEQ applies the EQ predicate on the "capped_amount" field.
+func CappedAmountEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldEQ(FieldCappedAmount, v))
+}
+
+// CappedAmountNEQ applies the NEQ predicate on the "capped_amount" field.
+func CappedAmountNEQ(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNEQ(FieldCappedAmount, v))
+}
+
+// CappedAmountIn applies the In predicate on the "capped_amount" field.
+func CappedAmountIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldIn(FieldCappedAmount, vs...))
+}
+
+// CappedAmountNotIn applies the NotIn predicate on the "capped_amount" field.
+func CappedAmountNotIn(vs ...int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldNotIn(FieldCappedAmount, vs...))
+}
+
+// CappedAmountGT applies the GT predicate on the "capped_amount" field.
+func CappedAmountGT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGT(FieldCappedAmount, v))
+}
+
+// CappedAmountGTE applies the GTE predicate on the "capped_amount" field.
+func CappedAmountGTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldGTE(FieldCappedAmount, v))
+}
+
+// CappedAmountLT applies the LT predicate on the "capped_amount" field.
+func CappedAmountLT(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLT(FieldCappedAmount, v))
+}
+
+// CappedAmountLTE applies the LTE predicate on the "capped_amount" field.
+func CappedAmountLTE(v int) predicate.OrderBilling {
+	return predicate.OrderBilling(sql.FieldLTE(FieldCappedAmount, v))
 }
 
 // StateEQ applies the EQ predicate on the "state" field.

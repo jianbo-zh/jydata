@@ -298,12 +298,12 @@ func (obq *OrderBillingQuery) WithOrder(opts ...func(*OrderQuery)) *OrderBilling
 // Example:
 //
 //	var v []struct {
-//		OrderID int `json:"order_id,omitempty"`
+//		Type int `json:"type,omitempty"`
 //		Count int `json:"count,omitempty"`
 //	}
 //
 //	client.OrderBilling.Query().
-//		GroupBy(orderbilling.FieldOrderID).
+//		GroupBy(orderbilling.FieldType).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
 func (obq *OrderBillingQuery) GroupBy(field string, fields ...string) *OrderBillingGroupBy {
@@ -321,11 +321,11 @@ func (obq *OrderBillingQuery) GroupBy(field string, fields ...string) *OrderBill
 // Example:
 //
 //	var v []struct {
-//		OrderID int `json:"order_id,omitempty"`
+//		Type int `json:"type,omitempty"`
 //	}
 //
 //	client.OrderBilling.Query().
-//		Select(orderbilling.FieldOrderID).
+//		Select(orderbilling.FieldType).
 //		Scan(ctx, &v)
 func (obq *OrderBillingQuery) Select(fields ...string) *OrderBillingSelect {
 	obq.ctx.Fields = append(obq.ctx.Fields, fields...)

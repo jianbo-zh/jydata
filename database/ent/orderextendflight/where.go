@@ -69,6 +69,26 @@ func FlightNo(v string) predicate.OrderExtendFlight {
 	return predicate.OrderExtendFlight(sql.FieldEQ(FieldFlightNo, v))
 }
 
+// RouteID applies equality check predicate on the "route_id" field. It's identical to RouteIDEQ.
+func RouteID(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldEQ(FieldRouteID, v))
+}
+
+// RouteName applies equality check predicate on the "route_name" field. It's identical to RouteNameEQ.
+func RouteName(v string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldEQ(FieldRouteName, v))
+}
+
+// StartStopID applies equality check predicate on the "start_stop_id" field. It's identical to StartStopIDEQ.
+func StartStopID(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldEQ(FieldStartStopID, v))
+}
+
+// EndStopID applies equality check predicate on the "end_stop_id" field. It's identical to EndStopIDEQ.
+func EndStopID(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldEQ(FieldEndStopID, v))
+}
+
 // TicketCount applies equality check predicate on the "ticket_count" field. It's identical to TicketCountEQ.
 func TicketCount(v int) predicate.OrderExtendFlight {
 	return predicate.OrderExtendFlight(sql.FieldEQ(FieldTicketCount, v))
@@ -227,6 +247,191 @@ func FlightNoEqualFold(v string) predicate.OrderExtendFlight {
 // FlightNoContainsFold applies the ContainsFold predicate on the "flight_no" field.
 func FlightNoContainsFold(v string) predicate.OrderExtendFlight {
 	return predicate.OrderExtendFlight(sql.FieldContainsFold(FieldFlightNo, v))
+}
+
+// RouteIDEQ applies the EQ predicate on the "route_id" field.
+func RouteIDEQ(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldEQ(FieldRouteID, v))
+}
+
+// RouteIDNEQ applies the NEQ predicate on the "route_id" field.
+func RouteIDNEQ(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldNEQ(FieldRouteID, v))
+}
+
+// RouteIDIn applies the In predicate on the "route_id" field.
+func RouteIDIn(vs ...int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldIn(FieldRouteID, vs...))
+}
+
+// RouteIDNotIn applies the NotIn predicate on the "route_id" field.
+func RouteIDNotIn(vs ...int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldNotIn(FieldRouteID, vs...))
+}
+
+// RouteIDGT applies the GT predicate on the "route_id" field.
+func RouteIDGT(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldGT(FieldRouteID, v))
+}
+
+// RouteIDGTE applies the GTE predicate on the "route_id" field.
+func RouteIDGTE(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldGTE(FieldRouteID, v))
+}
+
+// RouteIDLT applies the LT predicate on the "route_id" field.
+func RouteIDLT(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldLT(FieldRouteID, v))
+}
+
+// RouteIDLTE applies the LTE predicate on the "route_id" field.
+func RouteIDLTE(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldLTE(FieldRouteID, v))
+}
+
+// RouteNameEQ applies the EQ predicate on the "route_name" field.
+func RouteNameEQ(v string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldEQ(FieldRouteName, v))
+}
+
+// RouteNameNEQ applies the NEQ predicate on the "route_name" field.
+func RouteNameNEQ(v string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldNEQ(FieldRouteName, v))
+}
+
+// RouteNameIn applies the In predicate on the "route_name" field.
+func RouteNameIn(vs ...string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldIn(FieldRouteName, vs...))
+}
+
+// RouteNameNotIn applies the NotIn predicate on the "route_name" field.
+func RouteNameNotIn(vs ...string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldNotIn(FieldRouteName, vs...))
+}
+
+// RouteNameGT applies the GT predicate on the "route_name" field.
+func RouteNameGT(v string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldGT(FieldRouteName, v))
+}
+
+// RouteNameGTE applies the GTE predicate on the "route_name" field.
+func RouteNameGTE(v string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldGTE(FieldRouteName, v))
+}
+
+// RouteNameLT applies the LT predicate on the "route_name" field.
+func RouteNameLT(v string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldLT(FieldRouteName, v))
+}
+
+// RouteNameLTE applies the LTE predicate on the "route_name" field.
+func RouteNameLTE(v string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldLTE(FieldRouteName, v))
+}
+
+// RouteNameContains applies the Contains predicate on the "route_name" field.
+func RouteNameContains(v string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldContains(FieldRouteName, v))
+}
+
+// RouteNameHasPrefix applies the HasPrefix predicate on the "route_name" field.
+func RouteNameHasPrefix(v string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldHasPrefix(FieldRouteName, v))
+}
+
+// RouteNameHasSuffix applies the HasSuffix predicate on the "route_name" field.
+func RouteNameHasSuffix(v string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldHasSuffix(FieldRouteName, v))
+}
+
+// RouteNameEqualFold applies the EqualFold predicate on the "route_name" field.
+func RouteNameEqualFold(v string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldEqualFold(FieldRouteName, v))
+}
+
+// RouteNameContainsFold applies the ContainsFold predicate on the "route_name" field.
+func RouteNameContainsFold(v string) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldContainsFold(FieldRouteName, v))
+}
+
+// StartStopIDEQ applies the EQ predicate on the "start_stop_id" field.
+func StartStopIDEQ(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldEQ(FieldStartStopID, v))
+}
+
+// StartStopIDNEQ applies the NEQ predicate on the "start_stop_id" field.
+func StartStopIDNEQ(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldNEQ(FieldStartStopID, v))
+}
+
+// StartStopIDIn applies the In predicate on the "start_stop_id" field.
+func StartStopIDIn(vs ...int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldIn(FieldStartStopID, vs...))
+}
+
+// StartStopIDNotIn applies the NotIn predicate on the "start_stop_id" field.
+func StartStopIDNotIn(vs ...int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldNotIn(FieldStartStopID, vs...))
+}
+
+// StartStopIDGT applies the GT predicate on the "start_stop_id" field.
+func StartStopIDGT(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldGT(FieldStartStopID, v))
+}
+
+// StartStopIDGTE applies the GTE predicate on the "start_stop_id" field.
+func StartStopIDGTE(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldGTE(FieldStartStopID, v))
+}
+
+// StartStopIDLT applies the LT predicate on the "start_stop_id" field.
+func StartStopIDLT(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldLT(FieldStartStopID, v))
+}
+
+// StartStopIDLTE applies the LTE predicate on the "start_stop_id" field.
+func StartStopIDLTE(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldLTE(FieldStartStopID, v))
+}
+
+// EndStopIDEQ applies the EQ predicate on the "end_stop_id" field.
+func EndStopIDEQ(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldEQ(FieldEndStopID, v))
+}
+
+// EndStopIDNEQ applies the NEQ predicate on the "end_stop_id" field.
+func EndStopIDNEQ(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldNEQ(FieldEndStopID, v))
+}
+
+// EndStopIDIn applies the In predicate on the "end_stop_id" field.
+func EndStopIDIn(vs ...int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldIn(FieldEndStopID, vs...))
+}
+
+// EndStopIDNotIn applies the NotIn predicate on the "end_stop_id" field.
+func EndStopIDNotIn(vs ...int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldNotIn(FieldEndStopID, vs...))
+}
+
+// EndStopIDGT applies the GT predicate on the "end_stop_id" field.
+func EndStopIDGT(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldGT(FieldEndStopID, v))
+}
+
+// EndStopIDGTE applies the GTE predicate on the "end_stop_id" field.
+func EndStopIDGTE(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldGTE(FieldEndStopID, v))
+}
+
+// EndStopIDLT applies the LT predicate on the "end_stop_id" field.
+func EndStopIDLT(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldLT(FieldEndStopID, v))
+}
+
+// EndStopIDLTE applies the LTE predicate on the "end_stop_id" field.
+func EndStopIDLTE(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldLTE(FieldEndStopID, v))
 }
 
 // TicketCountEQ applies the EQ predicate on the "ticket_count" field.

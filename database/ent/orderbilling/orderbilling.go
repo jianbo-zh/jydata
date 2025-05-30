@@ -14,6 +14,8 @@ const (
 	Label = "order_billing"
 	// FieldID holds the string denoting the id field in the database.
 	FieldID = "id"
+	// FieldType holds the string denoting the type field in the database.
+	FieldType = "type"
 	// FieldOrderID holds the string denoting the order_id field in the database.
 	FieldOrderID = "order_id"
 	// FieldStartTimePrice holds the string denoting the start_time_price field in the database.
@@ -24,12 +26,28 @@ const (
 	FieldNormalTimePrice = "normal_time_price"
 	// FieldNormalTimeUnit holds the string denoting the normal_time_unit field in the database.
 	FieldNormalTimeUnit = "normal_time_unit"
-	// FieldCappedAmount holds the string denoting the capped_amount field in the database.
-	FieldCappedAmount = "capped_amount"
 	// FieldCumulativeSecond holds the string denoting the cumulative_second field in the database.
 	FieldCumulativeSecond = "cumulative_second"
 	// FieldCumulativeMeter holds the string denoting the cumulative_meter field in the database.
 	FieldCumulativeMeter = "cumulative_meter"
+	// FieldCumulativeStop holds the string denoting the cumulative_stop field in the database.
+	FieldCumulativeStop = "cumulative_stop"
+	// FieldStartStopPrice holds the string denoting the start_stop_price field in the database.
+	FieldStartStopPrice = "start_stop_price"
+	// FieldStartStopUnit holds the string denoting the start_stop_unit field in the database.
+	FieldStartStopUnit = "start_stop_unit"
+	// FieldNormalStopPrice holds the string denoting the normal_stop_price field in the database.
+	FieldNormalStopPrice = "normal_stop_price"
+	// FieldNormalStopUnit holds the string denoting the normal_stop_unit field in the database.
+	FieldNormalStopUnit = "normal_stop_unit"
+	// FieldCouponID holds the string denoting the coupon_id field in the database.
+	FieldCouponID = "coupon_id"
+	// FieldCouponLimitAmount holds the string denoting the coupon_limit_amount field in the database.
+	FieldCouponLimitAmount = "coupon_limit_amount"
+	// FieldCouponDeductionAmount holds the string denoting the coupon_deduction_amount field in the database.
+	FieldCouponDeductionAmount = "coupon_deduction_amount"
+	// FieldCappedAmount holds the string denoting the capped_amount field in the database.
+	FieldCappedAmount = "capped_amount"
 	// FieldState holds the string denoting the state field in the database.
 	FieldState = "state"
 	// FieldStartTime holds the string denoting the start_time field in the database.
@@ -56,14 +74,23 @@ const (
 // Columns holds all SQL columns for orderbilling fields.
 var Columns = []string{
 	FieldID,
+	FieldType,
 	FieldOrderID,
 	FieldStartTimePrice,
 	FieldStartTimeUnit,
 	FieldNormalTimePrice,
 	FieldNormalTimeUnit,
-	FieldCappedAmount,
 	FieldCumulativeSecond,
 	FieldCumulativeMeter,
+	FieldCumulativeStop,
+	FieldStartStopPrice,
+	FieldStartStopUnit,
+	FieldNormalStopPrice,
+	FieldNormalStopUnit,
+	FieldCouponID,
+	FieldCouponLimitAmount,
+	FieldCouponDeductionAmount,
+	FieldCappedAmount,
 	FieldState,
 	FieldStartTime,
 	FieldFinishTime,
@@ -82,16 +109,38 @@ func ValidColumn(column string) bool {
 }
 
 var (
+	// DefaultType holds the default value on creation for the "type" field.
+	DefaultType int
+	// DefaultStartTimePrice holds the default value on creation for the "start_time_price" field.
+	DefaultStartTimePrice int
 	// DefaultStartTimeUnit holds the default value on creation for the "start_time_unit" field.
 	DefaultStartTimeUnit int
+	// DefaultNormalTimePrice holds the default value on creation for the "normal_time_price" field.
+	DefaultNormalTimePrice int
 	// DefaultNormalTimeUnit holds the default value on creation for the "normal_time_unit" field.
 	DefaultNormalTimeUnit int
-	// DefaultCappedAmount holds the default value on creation for the "capped_amount" field.
-	DefaultCappedAmount int
 	// DefaultCumulativeSecond holds the default value on creation for the "cumulative_second" field.
 	DefaultCumulativeSecond float64
 	// DefaultCumulativeMeter holds the default value on creation for the "cumulative_meter" field.
 	DefaultCumulativeMeter float64
+	// DefaultCumulativeStop holds the default value on creation for the "cumulative_stop" field.
+	DefaultCumulativeStop int
+	// DefaultStartStopPrice holds the default value on creation for the "start_stop_price" field.
+	DefaultStartStopPrice int
+	// DefaultStartStopUnit holds the default value on creation for the "start_stop_unit" field.
+	DefaultStartStopUnit int
+	// DefaultNormalStopPrice holds the default value on creation for the "normal_stop_price" field.
+	DefaultNormalStopPrice int
+	// DefaultNormalStopUnit holds the default value on creation for the "normal_stop_unit" field.
+	DefaultNormalStopUnit int
+	// DefaultCouponID holds the default value on creation for the "coupon_id" field.
+	DefaultCouponID int
+	// DefaultCouponLimitAmount holds the default value on creation for the "coupon_limit_amount" field.
+	DefaultCouponLimitAmount int
+	// DefaultCouponDeductionAmount holds the default value on creation for the "coupon_deduction_amount" field.
+	DefaultCouponDeductionAmount int
+	// DefaultCappedAmount holds the default value on creation for the "capped_amount" field.
+	DefaultCappedAmount int
 	// DefaultState holds the default value on creation for the "state" field.
 	DefaultState int
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.
@@ -108,6 +157,11 @@ type OrderOption func(*sql.Selector)
 // ByID orders the results by the id field.
 func ByID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldID, opts...).ToFunc()
+}
+
+// ByType orders the results by the type field.
+func ByType(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldType, opts...).ToFunc()
 }
 
 // ByOrderID orders the results by the order_id field.
@@ -135,11 +189,6 @@ func ByNormalTimeUnit(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldNormalTimeUnit, opts...).ToFunc()
 }
 
-// ByCappedAmount orders the results by the capped_amount field.
-func ByCappedAmount(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldCappedAmount, opts...).ToFunc()
-}
-
 // ByCumulativeSecond orders the results by the cumulative_second field.
 func ByCumulativeSecond(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldCumulativeSecond, opts...).ToFunc()
@@ -148,6 +197,51 @@ func ByCumulativeSecond(opts ...sql.OrderTermOption) OrderOption {
 // ByCumulativeMeter orders the results by the cumulative_meter field.
 func ByCumulativeMeter(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldCumulativeMeter, opts...).ToFunc()
+}
+
+// ByCumulativeStop orders the results by the cumulative_stop field.
+func ByCumulativeStop(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldCumulativeStop, opts...).ToFunc()
+}
+
+// ByStartStopPrice orders the results by the start_stop_price field.
+func ByStartStopPrice(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldStartStopPrice, opts...).ToFunc()
+}
+
+// ByStartStopUnit orders the results by the start_stop_unit field.
+func ByStartStopUnit(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldStartStopUnit, opts...).ToFunc()
+}
+
+// ByNormalStopPrice orders the results by the normal_stop_price field.
+func ByNormalStopPrice(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldNormalStopPrice, opts...).ToFunc()
+}
+
+// ByNormalStopUnit orders the results by the normal_stop_unit field.
+func ByNormalStopUnit(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldNormalStopUnit, opts...).ToFunc()
+}
+
+// ByCouponID orders the results by the coupon_id field.
+func ByCouponID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldCouponID, opts...).ToFunc()
+}
+
+// ByCouponLimitAmount orders the results by the coupon_limit_amount field.
+func ByCouponLimitAmount(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldCouponLimitAmount, opts...).ToFunc()
+}
+
+// ByCouponDeductionAmount orders the results by the coupon_deduction_amount field.
+func ByCouponDeductionAmount(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldCouponDeductionAmount, opts...).ToFunc()
+}
+
+// ByCappedAmount orders the results by the capped_amount field.
+func ByCappedAmount(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldCappedAmount, opts...).ToFunc()
 }
 
 // ByState orders the results by the state field.

@@ -45,9 +45,25 @@ func (bsc *BillingStrategyCreate) SetMainMode(i int) *BillingStrategyCreate {
 	return bsc
 }
 
+// SetNillableMainMode sets the "main_mode" field if the given value is not nil.
+func (bsc *BillingStrategyCreate) SetNillableMainMode(i *int) *BillingStrategyCreate {
+	if i != nil {
+		bsc.SetMainMode(*i)
+	}
+	return bsc
+}
+
 // SetStartTimePrice sets the "start_time_price" field.
 func (bsc *BillingStrategyCreate) SetStartTimePrice(i int) *BillingStrategyCreate {
 	bsc.mutation.SetStartTimePrice(i)
+	return bsc
+}
+
+// SetNillableStartTimePrice sets the "start_time_price" field if the given value is not nil.
+func (bsc *BillingStrategyCreate) SetNillableStartTimePrice(i *int) *BillingStrategyCreate {
+	if i != nil {
+		bsc.SetStartTimePrice(*i)
+	}
 	return bsc
 }
 
@@ -71,6 +87,14 @@ func (bsc *BillingStrategyCreate) SetNormalTimePrice(i int) *BillingStrategyCrea
 	return bsc
 }
 
+// SetNillableNormalTimePrice sets the "normal_time_price" field if the given value is not nil.
+func (bsc *BillingStrategyCreate) SetNillableNormalTimePrice(i *int) *BillingStrategyCreate {
+	if i != nil {
+		bsc.SetNormalTimePrice(*i)
+	}
+	return bsc
+}
+
 // SetNormalTimeUnit sets the "normal_time_unit" field.
 func (bsc *BillingStrategyCreate) SetNormalTimeUnit(i int) *BillingStrategyCreate {
 	bsc.mutation.SetNormalTimeUnit(i)
@@ -88,6 +112,14 @@ func (bsc *BillingStrategyCreate) SetNillableNormalTimeUnit(i *int) *BillingStra
 // SetStartMileagePrice sets the "start_mileage_price" field.
 func (bsc *BillingStrategyCreate) SetStartMileagePrice(i int) *BillingStrategyCreate {
 	bsc.mutation.SetStartMileagePrice(i)
+	return bsc
+}
+
+// SetNillableStartMileagePrice sets the "start_mileage_price" field if the given value is not nil.
+func (bsc *BillingStrategyCreate) SetNillableStartMileagePrice(i *int) *BillingStrategyCreate {
+	if i != nil {
+		bsc.SetStartMileagePrice(*i)
+	}
 	return bsc
 }
 
@@ -111,6 +143,14 @@ func (bsc *BillingStrategyCreate) SetNormalMileagePrice(i int) *BillingStrategyC
 	return bsc
 }
 
+// SetNillableNormalMileagePrice sets the "normal_mileage_price" field if the given value is not nil.
+func (bsc *BillingStrategyCreate) SetNillableNormalMileagePrice(i *int) *BillingStrategyCreate {
+	if i != nil {
+		bsc.SetNormalMileagePrice(*i)
+	}
+	return bsc
+}
+
 // SetNormalMileageUnit sets the "normal_mileage_unit" field.
 func (bsc *BillingStrategyCreate) SetNormalMileageUnit(i int) *BillingStrategyCreate {
 	bsc.mutation.SetNormalMileageUnit(i)
@@ -125,15 +165,87 @@ func (bsc *BillingStrategyCreate) SetNillableNormalMileageUnit(i *int) *BillingS
 	return bsc
 }
 
+// SetStartStopPrice sets the "start_stop_price" field.
+func (bsc *BillingStrategyCreate) SetStartStopPrice(i int) *BillingStrategyCreate {
+	bsc.mutation.SetStartStopPrice(i)
+	return bsc
+}
+
+// SetNillableStartStopPrice sets the "start_stop_price" field if the given value is not nil.
+func (bsc *BillingStrategyCreate) SetNillableStartStopPrice(i *int) *BillingStrategyCreate {
+	if i != nil {
+		bsc.SetStartStopPrice(*i)
+	}
+	return bsc
+}
+
+// SetStartStopUnit sets the "start_stop_unit" field.
+func (bsc *BillingStrategyCreate) SetStartStopUnit(i int) *BillingStrategyCreate {
+	bsc.mutation.SetStartStopUnit(i)
+	return bsc
+}
+
+// SetNillableStartStopUnit sets the "start_stop_unit" field if the given value is not nil.
+func (bsc *BillingStrategyCreate) SetNillableStartStopUnit(i *int) *BillingStrategyCreate {
+	if i != nil {
+		bsc.SetStartStopUnit(*i)
+	}
+	return bsc
+}
+
+// SetNormalStopPrice sets the "normal_stop_price" field.
+func (bsc *BillingStrategyCreate) SetNormalStopPrice(i int) *BillingStrategyCreate {
+	bsc.mutation.SetNormalStopPrice(i)
+	return bsc
+}
+
+// SetNillableNormalStopPrice sets the "normal_stop_price" field if the given value is not nil.
+func (bsc *BillingStrategyCreate) SetNillableNormalStopPrice(i *int) *BillingStrategyCreate {
+	if i != nil {
+		bsc.SetNormalStopPrice(*i)
+	}
+	return bsc
+}
+
+// SetNormalStopUnit sets the "normal_stop_unit" field.
+func (bsc *BillingStrategyCreate) SetNormalStopUnit(i int) *BillingStrategyCreate {
+	bsc.mutation.SetNormalStopUnit(i)
+	return bsc
+}
+
+// SetNillableNormalStopUnit sets the "normal_stop_unit" field if the given value is not nil.
+func (bsc *BillingStrategyCreate) SetNillableNormalStopUnit(i *int) *BillingStrategyCreate {
+	if i != nil {
+		bsc.SetNormalStopUnit(*i)
+	}
+	return bsc
+}
+
 // SetCappedAmount sets the "capped_amount" field.
 func (bsc *BillingStrategyCreate) SetCappedAmount(i int) *BillingStrategyCreate {
 	bsc.mutation.SetCappedAmount(i)
 	return bsc
 }
 
+// SetNillableCappedAmount sets the "capped_amount" field if the given value is not nil.
+func (bsc *BillingStrategyCreate) SetNillableCappedAmount(i *int) *BillingStrategyCreate {
+	if i != nil {
+		bsc.SetCappedAmount(*i)
+	}
+	return bsc
+}
+
 // SetDepositAmount sets the "deposit_amount" field.
 func (bsc *BillingStrategyCreate) SetDepositAmount(i int) *BillingStrategyCreate {
 	bsc.mutation.SetDepositAmount(i)
+	return bsc
+}
+
+// SetNillableDepositAmount sets the "deposit_amount" field if the given value is not nil.
+func (bsc *BillingStrategyCreate) SetNillableDepositAmount(i *int) *BillingStrategyCreate {
+	if i != nil {
+		bsc.SetDepositAmount(*i)
+	}
 	return bsc
 }
 
@@ -217,21 +329,65 @@ func (bsc *BillingStrategyCreate) ExecX(ctx context.Context) {
 
 // defaults sets the default values of the builder before save.
 func (bsc *BillingStrategyCreate) defaults() {
+	if _, ok := bsc.mutation.MainMode(); !ok {
+		v := billingstrategy.DefaultMainMode
+		bsc.mutation.SetMainMode(v)
+	}
+	if _, ok := bsc.mutation.StartTimePrice(); !ok {
+		v := billingstrategy.DefaultStartTimePrice
+		bsc.mutation.SetStartTimePrice(v)
+	}
 	if _, ok := bsc.mutation.StartTimeUnit(); !ok {
 		v := billingstrategy.DefaultStartTimeUnit
 		bsc.mutation.SetStartTimeUnit(v)
+	}
+	if _, ok := bsc.mutation.NormalTimePrice(); !ok {
+		v := billingstrategy.DefaultNormalTimePrice
+		bsc.mutation.SetNormalTimePrice(v)
 	}
 	if _, ok := bsc.mutation.NormalTimeUnit(); !ok {
 		v := billingstrategy.DefaultNormalTimeUnit
 		bsc.mutation.SetNormalTimeUnit(v)
 	}
+	if _, ok := bsc.mutation.StartMileagePrice(); !ok {
+		v := billingstrategy.DefaultStartMileagePrice
+		bsc.mutation.SetStartMileagePrice(v)
+	}
 	if _, ok := bsc.mutation.StartMileageUnit(); !ok {
 		v := billingstrategy.DefaultStartMileageUnit
 		bsc.mutation.SetStartMileageUnit(v)
 	}
+	if _, ok := bsc.mutation.NormalMileagePrice(); !ok {
+		v := billingstrategy.DefaultNormalMileagePrice
+		bsc.mutation.SetNormalMileagePrice(v)
+	}
 	if _, ok := bsc.mutation.NormalMileageUnit(); !ok {
 		v := billingstrategy.DefaultNormalMileageUnit
 		bsc.mutation.SetNormalMileageUnit(v)
+	}
+	if _, ok := bsc.mutation.StartStopPrice(); !ok {
+		v := billingstrategy.DefaultStartStopPrice
+		bsc.mutation.SetStartStopPrice(v)
+	}
+	if _, ok := bsc.mutation.StartStopUnit(); !ok {
+		v := billingstrategy.DefaultStartStopUnit
+		bsc.mutation.SetStartStopUnit(v)
+	}
+	if _, ok := bsc.mutation.NormalStopPrice(); !ok {
+		v := billingstrategy.DefaultNormalStopPrice
+		bsc.mutation.SetNormalStopPrice(v)
+	}
+	if _, ok := bsc.mutation.NormalStopUnit(); !ok {
+		v := billingstrategy.DefaultNormalStopUnit
+		bsc.mutation.SetNormalStopUnit(v)
+	}
+	if _, ok := bsc.mutation.CappedAmount(); !ok {
+		v := billingstrategy.DefaultCappedAmount
+		bsc.mutation.SetCappedAmount(v)
+	}
+	if _, ok := bsc.mutation.DepositAmount(); !ok {
+		v := billingstrategy.DefaultDepositAmount
+		bsc.mutation.SetDepositAmount(v)
 	}
 	if _, ok := bsc.mutation.CreateTime(); !ok {
 		v := billingstrategy.DefaultCreateTime()
@@ -280,6 +436,18 @@ func (bsc *BillingStrategyCreate) check() error {
 	}
 	if _, ok := bsc.mutation.NormalMileageUnit(); !ok {
 		return &ValidationError{Name: "normal_mileage_unit", err: errors.New(`ent: missing required field "BillingStrategy.normal_mileage_unit"`)}
+	}
+	if _, ok := bsc.mutation.StartStopPrice(); !ok {
+		return &ValidationError{Name: "start_stop_price", err: errors.New(`ent: missing required field "BillingStrategy.start_stop_price"`)}
+	}
+	if _, ok := bsc.mutation.StartStopUnit(); !ok {
+		return &ValidationError{Name: "start_stop_unit", err: errors.New(`ent: missing required field "BillingStrategy.start_stop_unit"`)}
+	}
+	if _, ok := bsc.mutation.NormalStopPrice(); !ok {
+		return &ValidationError{Name: "normal_stop_price", err: errors.New(`ent: missing required field "BillingStrategy.normal_stop_price"`)}
+	}
+	if _, ok := bsc.mutation.NormalStopUnit(); !ok {
+		return &ValidationError{Name: "normal_stop_unit", err: errors.New(`ent: missing required field "BillingStrategy.normal_stop_unit"`)}
 	}
 	if _, ok := bsc.mutation.CappedAmount(); !ok {
 		return &ValidationError{Name: "capped_amount", err: errors.New(`ent: missing required field "BillingStrategy.capped_amount"`)}
@@ -371,6 +539,22 @@ func (bsc *BillingStrategyCreate) createSpec() (*BillingStrategy, *sqlgraph.Crea
 	if value, ok := bsc.mutation.NormalMileageUnit(); ok {
 		_spec.SetField(billingstrategy.FieldNormalMileageUnit, field.TypeInt, value)
 		_node.NormalMileageUnit = value
+	}
+	if value, ok := bsc.mutation.StartStopPrice(); ok {
+		_spec.SetField(billingstrategy.FieldStartStopPrice, field.TypeInt, value)
+		_node.StartStopPrice = value
+	}
+	if value, ok := bsc.mutation.StartStopUnit(); ok {
+		_spec.SetField(billingstrategy.FieldStartStopUnit, field.TypeInt, value)
+		_node.StartStopUnit = value
+	}
+	if value, ok := bsc.mutation.NormalStopPrice(); ok {
+		_spec.SetField(billingstrategy.FieldNormalStopPrice, field.TypeInt, value)
+		_node.NormalStopPrice = value
+	}
+	if value, ok := bsc.mutation.NormalStopUnit(); ok {
+		_spec.SetField(billingstrategy.FieldNormalStopUnit, field.TypeInt, value)
+		_node.NormalStopUnit = value
 	}
 	if value, ok := bsc.mutation.CappedAmount(); ok {
 		_spec.SetField(billingstrategy.FieldCappedAmount, field.TypeInt, value)

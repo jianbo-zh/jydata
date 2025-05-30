@@ -4576,6 +4576,14 @@ type BillingStrategyMutation struct {
 	addnormal_mileage_price       *int
 	normal_mileage_unit           *int
 	addnormal_mileage_unit        *int
+	start_stop_price              *int
+	addstart_stop_price           *int
+	start_stop_unit               *int
+	addstart_stop_unit            *int
+	normal_stop_price             *int
+	addnormal_stop_price          *int
+	normal_stop_unit              *int
+	addnormal_stop_unit           *int
 	capped_amount                 *int
 	addcapped_amount              *int
 	deposit_amount                *int
@@ -5326,6 +5334,230 @@ func (m *BillingStrategyMutation) ResetNormalMileageUnit() {
 	m.addnormal_mileage_unit = nil
 }
 
+// SetStartStopPrice sets the "start_stop_price" field.
+func (m *BillingStrategyMutation) SetStartStopPrice(i int) {
+	m.start_stop_price = &i
+	m.addstart_stop_price = nil
+}
+
+// StartStopPrice returns the value of the "start_stop_price" field in the mutation.
+func (m *BillingStrategyMutation) StartStopPrice() (r int, exists bool) {
+	v := m.start_stop_price
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldStartStopPrice returns the old "start_stop_price" field's value of the BillingStrategy entity.
+// If the BillingStrategy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *BillingStrategyMutation) OldStartStopPrice(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldStartStopPrice is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldStartStopPrice requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldStartStopPrice: %w", err)
+	}
+	return oldValue.StartStopPrice, nil
+}
+
+// AddStartStopPrice adds i to the "start_stop_price" field.
+func (m *BillingStrategyMutation) AddStartStopPrice(i int) {
+	if m.addstart_stop_price != nil {
+		*m.addstart_stop_price += i
+	} else {
+		m.addstart_stop_price = &i
+	}
+}
+
+// AddedStartStopPrice returns the value that was added to the "start_stop_price" field in this mutation.
+func (m *BillingStrategyMutation) AddedStartStopPrice() (r int, exists bool) {
+	v := m.addstart_stop_price
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetStartStopPrice resets all changes to the "start_stop_price" field.
+func (m *BillingStrategyMutation) ResetStartStopPrice() {
+	m.start_stop_price = nil
+	m.addstart_stop_price = nil
+}
+
+// SetStartStopUnit sets the "start_stop_unit" field.
+func (m *BillingStrategyMutation) SetStartStopUnit(i int) {
+	m.start_stop_unit = &i
+	m.addstart_stop_unit = nil
+}
+
+// StartStopUnit returns the value of the "start_stop_unit" field in the mutation.
+func (m *BillingStrategyMutation) StartStopUnit() (r int, exists bool) {
+	v := m.start_stop_unit
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldStartStopUnit returns the old "start_stop_unit" field's value of the BillingStrategy entity.
+// If the BillingStrategy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *BillingStrategyMutation) OldStartStopUnit(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldStartStopUnit is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldStartStopUnit requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldStartStopUnit: %w", err)
+	}
+	return oldValue.StartStopUnit, nil
+}
+
+// AddStartStopUnit adds i to the "start_stop_unit" field.
+func (m *BillingStrategyMutation) AddStartStopUnit(i int) {
+	if m.addstart_stop_unit != nil {
+		*m.addstart_stop_unit += i
+	} else {
+		m.addstart_stop_unit = &i
+	}
+}
+
+// AddedStartStopUnit returns the value that was added to the "start_stop_unit" field in this mutation.
+func (m *BillingStrategyMutation) AddedStartStopUnit() (r int, exists bool) {
+	v := m.addstart_stop_unit
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetStartStopUnit resets all changes to the "start_stop_unit" field.
+func (m *BillingStrategyMutation) ResetStartStopUnit() {
+	m.start_stop_unit = nil
+	m.addstart_stop_unit = nil
+}
+
+// SetNormalStopPrice sets the "normal_stop_price" field.
+func (m *BillingStrategyMutation) SetNormalStopPrice(i int) {
+	m.normal_stop_price = &i
+	m.addnormal_stop_price = nil
+}
+
+// NormalStopPrice returns the value of the "normal_stop_price" field in the mutation.
+func (m *BillingStrategyMutation) NormalStopPrice() (r int, exists bool) {
+	v := m.normal_stop_price
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldNormalStopPrice returns the old "normal_stop_price" field's value of the BillingStrategy entity.
+// If the BillingStrategy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *BillingStrategyMutation) OldNormalStopPrice(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldNormalStopPrice is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldNormalStopPrice requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldNormalStopPrice: %w", err)
+	}
+	return oldValue.NormalStopPrice, nil
+}
+
+// AddNormalStopPrice adds i to the "normal_stop_price" field.
+func (m *BillingStrategyMutation) AddNormalStopPrice(i int) {
+	if m.addnormal_stop_price != nil {
+		*m.addnormal_stop_price += i
+	} else {
+		m.addnormal_stop_price = &i
+	}
+}
+
+// AddedNormalStopPrice returns the value that was added to the "normal_stop_price" field in this mutation.
+func (m *BillingStrategyMutation) AddedNormalStopPrice() (r int, exists bool) {
+	v := m.addnormal_stop_price
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetNormalStopPrice resets all changes to the "normal_stop_price" field.
+func (m *BillingStrategyMutation) ResetNormalStopPrice() {
+	m.normal_stop_price = nil
+	m.addnormal_stop_price = nil
+}
+
+// SetNormalStopUnit sets the "normal_stop_unit" field.
+func (m *BillingStrategyMutation) SetNormalStopUnit(i int) {
+	m.normal_stop_unit = &i
+	m.addnormal_stop_unit = nil
+}
+
+// NormalStopUnit returns the value of the "normal_stop_unit" field in the mutation.
+func (m *BillingStrategyMutation) NormalStopUnit() (r int, exists bool) {
+	v := m.normal_stop_unit
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldNormalStopUnit returns the old "normal_stop_unit" field's value of the BillingStrategy entity.
+// If the BillingStrategy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *BillingStrategyMutation) OldNormalStopUnit(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldNormalStopUnit is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldNormalStopUnit requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldNormalStopUnit: %w", err)
+	}
+	return oldValue.NormalStopUnit, nil
+}
+
+// AddNormalStopUnit adds i to the "normal_stop_unit" field.
+func (m *BillingStrategyMutation) AddNormalStopUnit(i int) {
+	if m.addnormal_stop_unit != nil {
+		*m.addnormal_stop_unit += i
+	} else {
+		m.addnormal_stop_unit = &i
+	}
+}
+
+// AddedNormalStopUnit returns the value that was added to the "normal_stop_unit" field in this mutation.
+func (m *BillingStrategyMutation) AddedNormalStopUnit() (r int, exists bool) {
+	v := m.addnormal_stop_unit
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetNormalStopUnit resets all changes to the "normal_stop_unit" field.
+func (m *BillingStrategyMutation) ResetNormalStopUnit() {
+	m.normal_stop_unit = nil
+	m.addnormal_stop_unit = nil
+}
+
 // SetCappedAmount sets the "capped_amount" field.
 func (m *BillingStrategyMutation) SetCappedAmount(i int) {
 	m.capped_amount = &i
@@ -5584,7 +5816,7 @@ func (m *BillingStrategyMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *BillingStrategyMutation) Fields() []string {
-	fields := make([]string, 0, 16)
+	fields := make([]string, 0, 20)
 	if m.name != nil {
 		fields = append(fields, billingstrategy.FieldName)
 	}
@@ -5620,6 +5852,18 @@ func (m *BillingStrategyMutation) Fields() []string {
 	}
 	if m.normal_mileage_unit != nil {
 		fields = append(fields, billingstrategy.FieldNormalMileageUnit)
+	}
+	if m.start_stop_price != nil {
+		fields = append(fields, billingstrategy.FieldStartStopPrice)
+	}
+	if m.start_stop_unit != nil {
+		fields = append(fields, billingstrategy.FieldStartStopUnit)
+	}
+	if m.normal_stop_price != nil {
+		fields = append(fields, billingstrategy.FieldNormalStopPrice)
+	}
+	if m.normal_stop_unit != nil {
+		fields = append(fields, billingstrategy.FieldNormalStopUnit)
 	}
 	if m.capped_amount != nil {
 		fields = append(fields, billingstrategy.FieldCappedAmount)
@@ -5665,6 +5909,14 @@ func (m *BillingStrategyMutation) Field(name string) (ent.Value, bool) {
 		return m.NormalMileagePrice()
 	case billingstrategy.FieldNormalMileageUnit:
 		return m.NormalMileageUnit()
+	case billingstrategy.FieldStartStopPrice:
+		return m.StartStopPrice()
+	case billingstrategy.FieldStartStopUnit:
+		return m.StartStopUnit()
+	case billingstrategy.FieldNormalStopPrice:
+		return m.NormalStopPrice()
+	case billingstrategy.FieldNormalStopUnit:
+		return m.NormalStopUnit()
 	case billingstrategy.FieldCappedAmount:
 		return m.CappedAmount()
 	case billingstrategy.FieldDepositAmount:
@@ -5706,6 +5958,14 @@ func (m *BillingStrategyMutation) OldField(ctx context.Context, name string) (en
 		return m.OldNormalMileagePrice(ctx)
 	case billingstrategy.FieldNormalMileageUnit:
 		return m.OldNormalMileageUnit(ctx)
+	case billingstrategy.FieldStartStopPrice:
+		return m.OldStartStopPrice(ctx)
+	case billingstrategy.FieldStartStopUnit:
+		return m.OldStartStopUnit(ctx)
+	case billingstrategy.FieldNormalStopPrice:
+		return m.OldNormalStopPrice(ctx)
+	case billingstrategy.FieldNormalStopUnit:
+		return m.OldNormalStopUnit(ctx)
 	case billingstrategy.FieldCappedAmount:
 		return m.OldCappedAmount(ctx)
 	case billingstrategy.FieldDepositAmount:
@@ -5807,6 +6067,34 @@ func (m *BillingStrategyMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetNormalMileageUnit(v)
 		return nil
+	case billingstrategy.FieldStartStopPrice:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetStartStopPrice(v)
+		return nil
+	case billingstrategy.FieldStartStopUnit:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetStartStopUnit(v)
+		return nil
+	case billingstrategy.FieldNormalStopPrice:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetNormalStopPrice(v)
+		return nil
+	case billingstrategy.FieldNormalStopUnit:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetNormalStopUnit(v)
+		return nil
 	case billingstrategy.FieldCappedAmount:
 		v, ok := value.(int)
 		if !ok {
@@ -5873,6 +6161,18 @@ func (m *BillingStrategyMutation) AddedFields() []string {
 	if m.addnormal_mileage_unit != nil {
 		fields = append(fields, billingstrategy.FieldNormalMileageUnit)
 	}
+	if m.addstart_stop_price != nil {
+		fields = append(fields, billingstrategy.FieldStartStopPrice)
+	}
+	if m.addstart_stop_unit != nil {
+		fields = append(fields, billingstrategy.FieldStartStopUnit)
+	}
+	if m.addnormal_stop_price != nil {
+		fields = append(fields, billingstrategy.FieldNormalStopPrice)
+	}
+	if m.addnormal_stop_unit != nil {
+		fields = append(fields, billingstrategy.FieldNormalStopUnit)
+	}
 	if m.addcapped_amount != nil {
 		fields = append(fields, billingstrategy.FieldCappedAmount)
 	}
@@ -5907,6 +6207,14 @@ func (m *BillingStrategyMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedNormalMileagePrice()
 	case billingstrategy.FieldNormalMileageUnit:
 		return m.AddedNormalMileageUnit()
+	case billingstrategy.FieldStartStopPrice:
+		return m.AddedStartStopPrice()
+	case billingstrategy.FieldStartStopUnit:
+		return m.AddedStartStopUnit()
+	case billingstrategy.FieldNormalStopPrice:
+		return m.AddedNormalStopPrice()
+	case billingstrategy.FieldNormalStopUnit:
+		return m.AddedNormalStopUnit()
 	case billingstrategy.FieldCappedAmount:
 		return m.AddedCappedAmount()
 	case billingstrategy.FieldDepositAmount:
@@ -5990,6 +6298,34 @@ func (m *BillingStrategyMutation) AddField(name string, value ent.Value) error {
 		}
 		m.AddNormalMileageUnit(v)
 		return nil
+	case billingstrategy.FieldStartStopPrice:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddStartStopPrice(v)
+		return nil
+	case billingstrategy.FieldStartStopUnit:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddStartStopUnit(v)
+		return nil
+	case billingstrategy.FieldNormalStopPrice:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddNormalStopPrice(v)
+		return nil
+	case billingstrategy.FieldNormalStopUnit:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddNormalStopUnit(v)
+		return nil
 	case billingstrategy.FieldCappedAmount:
 		v, ok := value.(int)
 		if !ok {
@@ -6066,6 +6402,18 @@ func (m *BillingStrategyMutation) ResetField(name string) error {
 		return nil
 	case billingstrategy.FieldNormalMileageUnit:
 		m.ResetNormalMileageUnit()
+		return nil
+	case billingstrategy.FieldStartStopPrice:
+		m.ResetStartStopPrice()
+		return nil
+	case billingstrategy.FieldStartStopUnit:
+		m.ResetStartStopUnit()
+		return nil
+	case billingstrategy.FieldNormalStopPrice:
+		m.ResetNormalStopPrice()
+		return nil
+	case billingstrategy.FieldNormalStopUnit:
+		m.ResetNormalStopUnit()
 		return nil
 	case billingstrategy.FieldCappedAmount:
 		m.ResetCappedAmount()
@@ -6164,8 +6512,8 @@ type CarMutation struct {
 	typ                           string
 	id                            *int
 	delete_time                   *time.Time
-	_type                         *int
-	add_type                      *int
+	operation_mode                *int
+	addoperation_mode             *int
 	car_name                      *string
 	device_id                     *string
 	images                        *[]int
@@ -6409,60 +6757,60 @@ func (m *CarMutation) ResetDeleteTime() {
 	delete(m.clearedFields, car.FieldDeleteTime)
 }
 
-// SetType sets the "type" field.
-func (m *CarMutation) SetType(i int) {
-	m._type = &i
-	m.add_type = nil
+// SetOperationMode sets the "operation_mode" field.
+func (m *CarMutation) SetOperationMode(i int) {
+	m.operation_mode = &i
+	m.addoperation_mode = nil
 }
 
-// GetType returns the value of the "type" field in the mutation.
-func (m *CarMutation) GetType() (r int, exists bool) {
-	v := m._type
+// OperationMode returns the value of the "operation_mode" field in the mutation.
+func (m *CarMutation) OperationMode() (r int, exists bool) {
+	v := m.operation_mode
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldType returns the old "type" field's value of the Car entity.
+// OldOperationMode returns the old "operation_mode" field's value of the Car entity.
 // If the Car object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *CarMutation) OldType(ctx context.Context) (v int, err error) {
+func (m *CarMutation) OldOperationMode(ctx context.Context) (v int, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldType is only allowed on UpdateOne operations")
+		return v, errors.New("OldOperationMode is only allowed on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldType requires an ID field in the mutation")
+		return v, errors.New("OldOperationMode requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldType: %w", err)
+		return v, fmt.Errorf("querying old value for OldOperationMode: %w", err)
 	}
-	return oldValue.Type, nil
+	return oldValue.OperationMode, nil
 }
 
-// AddType adds i to the "type" field.
-func (m *CarMutation) AddType(i int) {
-	if m.add_type != nil {
-		*m.add_type += i
+// AddOperationMode adds i to the "operation_mode" field.
+func (m *CarMutation) AddOperationMode(i int) {
+	if m.addoperation_mode != nil {
+		*m.addoperation_mode += i
 	} else {
-		m.add_type = &i
+		m.addoperation_mode = &i
 	}
 }
 
-// AddedType returns the value that was added to the "type" field in this mutation.
-func (m *CarMutation) AddedType() (r int, exists bool) {
-	v := m.add_type
+// AddedOperationMode returns the value that was added to the "operation_mode" field in this mutation.
+func (m *CarMutation) AddedOperationMode() (r int, exists bool) {
+	v := m.addoperation_mode
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// ResetType resets all changes to the "type" field.
-func (m *CarMutation) ResetType() {
-	m._type = nil
-	m.add_type = nil
+// ResetOperationMode resets all changes to the "operation_mode" field.
+func (m *CarMutation) ResetOperationMode() {
+	m.operation_mode = nil
+	m.addoperation_mode = nil
 }
 
 // SetCarName sets the "car_name" field.
@@ -8891,8 +9239,8 @@ func (m *CarMutation) Fields() []string {
 	if m.delete_time != nil {
 		fields = append(fields, car.FieldDeleteTime)
 	}
-	if m._type != nil {
-		fields = append(fields, car.FieldType)
+	if m.operation_mode != nil {
+		fields = append(fields, car.FieldOperationMode)
 	}
 	if m.car_name != nil {
 		fields = append(fields, car.FieldCarName)
@@ -9027,8 +9375,8 @@ func (m *CarMutation) Field(name string) (ent.Value, bool) {
 	switch name {
 	case car.FieldDeleteTime:
 		return m.DeleteTime()
-	case car.FieldType:
-		return m.GetType()
+	case car.FieldOperationMode:
+		return m.OperationMode()
 	case car.FieldCarName:
 		return m.CarName()
 	case car.FieldScenicAreaID:
@@ -9122,8 +9470,8 @@ func (m *CarMutation) OldField(ctx context.Context, name string) (ent.Value, err
 	switch name {
 	case car.FieldDeleteTime:
 		return m.OldDeleteTime(ctx)
-	case car.FieldType:
-		return m.OldType(ctx)
+	case car.FieldOperationMode:
+		return m.OldOperationMode(ctx)
 	case car.FieldCarName:
 		return m.OldCarName(ctx)
 	case car.FieldScenicAreaID:
@@ -9222,12 +9570,12 @@ func (m *CarMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetDeleteTime(v)
 		return nil
-	case car.FieldType:
+	case car.FieldOperationMode:
 		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetType(v)
+		m.SetOperationMode(v)
 		return nil
 	case car.FieldCarName:
 		v, ok := value.(string)
@@ -9524,8 +9872,8 @@ func (m *CarMutation) SetField(name string, value ent.Value) error {
 // this mutation.
 func (m *CarMutation) AddedFields() []string {
 	var fields []string
-	if m.add_type != nil {
-		fields = append(fields, car.FieldType)
+	if m.addoperation_mode != nil {
+		fields = append(fields, car.FieldOperationMode)
 	}
 	if m.addpassengers != nil {
 		fields = append(fields, car.FieldPassengers)
@@ -9601,8 +9949,8 @@ func (m *CarMutation) AddedFields() []string {
 // was not set, or was not defined in the schema.
 func (m *CarMutation) AddedField(name string) (ent.Value, bool) {
 	switch name {
-	case car.FieldType:
-		return m.AddedType()
+	case car.FieldOperationMode:
+		return m.AddedOperationMode()
 	case car.FieldPassengers:
 		return m.AddedPassengers()
 	case car.FieldReservedSeats:
@@ -9656,12 +10004,12 @@ func (m *CarMutation) AddedField(name string) (ent.Value, bool) {
 // type.
 func (m *CarMutation) AddField(name string, value ent.Value) error {
 	switch name {
-	case car.FieldType:
+	case car.FieldOperationMode:
 		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.AddType(v)
+		m.AddOperationMode(v)
 		return nil
 	case car.FieldPassengers:
 		v, ok := value.(int)
@@ -9880,8 +10228,8 @@ func (m *CarMutation) ResetField(name string) error {
 	case car.FieldDeleteTime:
 		m.ResetDeleteTime()
 		return nil
-	case car.FieldType:
-		m.ResetType()
+	case car.FieldOperationMode:
+		m.ResetOperationMode()
 		return nil
 	case car.FieldCarName:
 		m.ResetCarName()
@@ -35557,35 +35905,53 @@ func (m *OrderAppealMutation) ResetEdge(name string) error {
 // OrderBillingMutation represents an operation that mutates the OrderBilling nodes in the graph.
 type OrderBillingMutation struct {
 	config
-	op                   Op
-	typ                  string
-	id                   *int
-	start_time_price     *int
-	addstart_time_price  *int
-	start_time_unit      *int
-	addstart_time_unit   *int
-	normal_time_price    *int
-	addnormal_time_price *int
-	normal_time_unit     *int
-	addnormal_time_unit  *int
-	capped_amount        *int
-	addcapped_amount     *int
-	cumulative_second    *float64
-	addcumulative_second *float64
-	cumulative_meter     *float64
-	addcumulative_meter  *float64
-	state                *int
-	addstate             *int
-	start_time           *time.Time
-	finish_time          *time.Time
-	create_time          *time.Time
-	update_time          *time.Time
-	clearedFields        map[string]struct{}
-	_order               *int
-	cleared_order        bool
-	done                 bool
-	oldValue             func(context.Context) (*OrderBilling, error)
-	predicates           []predicate.OrderBilling
+	op                         Op
+	typ                        string
+	id                         *int
+	_type                      *int
+	add_type                   *int
+	start_time_price           *int
+	addstart_time_price        *int
+	start_time_unit            *int
+	addstart_time_unit         *int
+	normal_time_price          *int
+	addnormal_time_price       *int
+	normal_time_unit           *int
+	addnormal_time_unit        *int
+	cumulative_second          *float64
+	addcumulative_second       *float64
+	cumulative_meter           *float64
+	addcumulative_meter        *float64
+	cumulative_stop            *int
+	addcumulative_stop         *int
+	start_stop_price           *int
+	addstart_stop_price        *int
+	start_stop_unit            *int
+	addstart_stop_unit         *int
+	normal_stop_price          *int
+	addnormal_stop_price       *int
+	normal_stop_unit           *int
+	addnormal_stop_unit        *int
+	coupon_id                  *int
+	addcoupon_id               *int
+	coupon_limit_amount        *int
+	addcoupon_limit_amount     *int
+	coupon_deduction_amount    *int
+	addcoupon_deduction_amount *int
+	capped_amount              *int
+	addcapped_amount           *int
+	state                      *int
+	addstate                   *int
+	start_time                 *time.Time
+	finish_time                *time.Time
+	create_time                *time.Time
+	update_time                *time.Time
+	clearedFields              map[string]struct{}
+	_order                     *int
+	cleared_order              bool
+	done                       bool
+	oldValue                   func(context.Context) (*OrderBilling, error)
+	predicates                 []predicate.OrderBilling
 }
 
 var _ ent.Mutation = (*OrderBillingMutation)(nil)
@@ -35690,6 +36056,62 @@ func (m *OrderBillingMutation) IDs(ctx context.Context) ([]int, error) {
 	default:
 		return nil, fmt.Errorf("IDs is not allowed on %s operations", m.op)
 	}
+}
+
+// SetType sets the "type" field.
+func (m *OrderBillingMutation) SetType(i int) {
+	m._type = &i
+	m.add_type = nil
+}
+
+// GetType returns the value of the "type" field in the mutation.
+func (m *OrderBillingMutation) GetType() (r int, exists bool) {
+	v := m._type
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldType returns the old "type" field's value of the OrderBilling entity.
+// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderBillingMutation) OldType(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldType is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldType requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldType: %w", err)
+	}
+	return oldValue.Type, nil
+}
+
+// AddType adds i to the "type" field.
+func (m *OrderBillingMutation) AddType(i int) {
+	if m.add_type != nil {
+		*m.add_type += i
+	} else {
+		m.add_type = &i
+	}
+}
+
+// AddedType returns the value that was added to the "type" field in this mutation.
+func (m *OrderBillingMutation) AddedType() (r int, exists bool) {
+	v := m.add_type
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetType resets all changes to the "type" field.
+func (m *OrderBillingMutation) ResetType() {
+	m._type = nil
+	m.add_type = nil
 }
 
 // SetOrderID sets the "order_id" field.
@@ -35952,62 +36374,6 @@ func (m *OrderBillingMutation) ResetNormalTimeUnit() {
 	m.addnormal_time_unit = nil
 }
 
-// SetCappedAmount sets the "capped_amount" field.
-func (m *OrderBillingMutation) SetCappedAmount(i int) {
-	m.capped_amount = &i
-	m.addcapped_amount = nil
-}
-
-// CappedAmount returns the value of the "capped_amount" field in the mutation.
-func (m *OrderBillingMutation) CappedAmount() (r int, exists bool) {
-	v := m.capped_amount
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldCappedAmount returns the old "capped_amount" field's value of the OrderBilling entity.
-// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *OrderBillingMutation) OldCappedAmount(ctx context.Context) (v int, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldCappedAmount is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldCappedAmount requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldCappedAmount: %w", err)
-	}
-	return oldValue.CappedAmount, nil
-}
-
-// AddCappedAmount adds i to the "capped_amount" field.
-func (m *OrderBillingMutation) AddCappedAmount(i int) {
-	if m.addcapped_amount != nil {
-		*m.addcapped_amount += i
-	} else {
-		m.addcapped_amount = &i
-	}
-}
-
-// AddedCappedAmount returns the value that was added to the "capped_amount" field in this mutation.
-func (m *OrderBillingMutation) AddedCappedAmount() (r int, exists bool) {
-	v := m.addcapped_amount
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// ResetCappedAmount resets all changes to the "capped_amount" field.
-func (m *OrderBillingMutation) ResetCappedAmount() {
-	m.capped_amount = nil
-	m.addcapped_amount = nil
-}
-
 // SetCumulativeSecond sets the "cumulative_second" field.
 func (m *OrderBillingMutation) SetCumulativeSecond(f float64) {
 	m.cumulative_second = &f
@@ -36118,6 +36484,510 @@ func (m *OrderBillingMutation) AddedCumulativeMeter() (r float64, exists bool) {
 func (m *OrderBillingMutation) ResetCumulativeMeter() {
 	m.cumulative_meter = nil
 	m.addcumulative_meter = nil
+}
+
+// SetCumulativeStop sets the "cumulative_stop" field.
+func (m *OrderBillingMutation) SetCumulativeStop(i int) {
+	m.cumulative_stop = &i
+	m.addcumulative_stop = nil
+}
+
+// CumulativeStop returns the value of the "cumulative_stop" field in the mutation.
+func (m *OrderBillingMutation) CumulativeStop() (r int, exists bool) {
+	v := m.cumulative_stop
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCumulativeStop returns the old "cumulative_stop" field's value of the OrderBilling entity.
+// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderBillingMutation) OldCumulativeStop(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCumulativeStop is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCumulativeStop requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCumulativeStop: %w", err)
+	}
+	return oldValue.CumulativeStop, nil
+}
+
+// AddCumulativeStop adds i to the "cumulative_stop" field.
+func (m *OrderBillingMutation) AddCumulativeStop(i int) {
+	if m.addcumulative_stop != nil {
+		*m.addcumulative_stop += i
+	} else {
+		m.addcumulative_stop = &i
+	}
+}
+
+// AddedCumulativeStop returns the value that was added to the "cumulative_stop" field in this mutation.
+func (m *OrderBillingMutation) AddedCumulativeStop() (r int, exists bool) {
+	v := m.addcumulative_stop
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetCumulativeStop resets all changes to the "cumulative_stop" field.
+func (m *OrderBillingMutation) ResetCumulativeStop() {
+	m.cumulative_stop = nil
+	m.addcumulative_stop = nil
+}
+
+// SetStartStopPrice sets the "start_stop_price" field.
+func (m *OrderBillingMutation) SetStartStopPrice(i int) {
+	m.start_stop_price = &i
+	m.addstart_stop_price = nil
+}
+
+// StartStopPrice returns the value of the "start_stop_price" field in the mutation.
+func (m *OrderBillingMutation) StartStopPrice() (r int, exists bool) {
+	v := m.start_stop_price
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldStartStopPrice returns the old "start_stop_price" field's value of the OrderBilling entity.
+// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderBillingMutation) OldStartStopPrice(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldStartStopPrice is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldStartStopPrice requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldStartStopPrice: %w", err)
+	}
+	return oldValue.StartStopPrice, nil
+}
+
+// AddStartStopPrice adds i to the "start_stop_price" field.
+func (m *OrderBillingMutation) AddStartStopPrice(i int) {
+	if m.addstart_stop_price != nil {
+		*m.addstart_stop_price += i
+	} else {
+		m.addstart_stop_price = &i
+	}
+}
+
+// AddedStartStopPrice returns the value that was added to the "start_stop_price" field in this mutation.
+func (m *OrderBillingMutation) AddedStartStopPrice() (r int, exists bool) {
+	v := m.addstart_stop_price
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetStartStopPrice resets all changes to the "start_stop_price" field.
+func (m *OrderBillingMutation) ResetStartStopPrice() {
+	m.start_stop_price = nil
+	m.addstart_stop_price = nil
+}
+
+// SetStartStopUnit sets the "start_stop_unit" field.
+func (m *OrderBillingMutation) SetStartStopUnit(i int) {
+	m.start_stop_unit = &i
+	m.addstart_stop_unit = nil
+}
+
+// StartStopUnit returns the value of the "start_stop_unit" field in the mutation.
+func (m *OrderBillingMutation) StartStopUnit() (r int, exists bool) {
+	v := m.start_stop_unit
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldStartStopUnit returns the old "start_stop_unit" field's value of the OrderBilling entity.
+// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderBillingMutation) OldStartStopUnit(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldStartStopUnit is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldStartStopUnit requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldStartStopUnit: %w", err)
+	}
+	return oldValue.StartStopUnit, nil
+}
+
+// AddStartStopUnit adds i to the "start_stop_unit" field.
+func (m *OrderBillingMutation) AddStartStopUnit(i int) {
+	if m.addstart_stop_unit != nil {
+		*m.addstart_stop_unit += i
+	} else {
+		m.addstart_stop_unit = &i
+	}
+}
+
+// AddedStartStopUnit returns the value that was added to the "start_stop_unit" field in this mutation.
+func (m *OrderBillingMutation) AddedStartStopUnit() (r int, exists bool) {
+	v := m.addstart_stop_unit
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetStartStopUnit resets all changes to the "start_stop_unit" field.
+func (m *OrderBillingMutation) ResetStartStopUnit() {
+	m.start_stop_unit = nil
+	m.addstart_stop_unit = nil
+}
+
+// SetNormalStopPrice sets the "normal_stop_price" field.
+func (m *OrderBillingMutation) SetNormalStopPrice(i int) {
+	m.normal_stop_price = &i
+	m.addnormal_stop_price = nil
+}
+
+// NormalStopPrice returns the value of the "normal_stop_price" field in the mutation.
+func (m *OrderBillingMutation) NormalStopPrice() (r int, exists bool) {
+	v := m.normal_stop_price
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldNormalStopPrice returns the old "normal_stop_price" field's value of the OrderBilling entity.
+// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderBillingMutation) OldNormalStopPrice(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldNormalStopPrice is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldNormalStopPrice requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldNormalStopPrice: %w", err)
+	}
+	return oldValue.NormalStopPrice, nil
+}
+
+// AddNormalStopPrice adds i to the "normal_stop_price" field.
+func (m *OrderBillingMutation) AddNormalStopPrice(i int) {
+	if m.addnormal_stop_price != nil {
+		*m.addnormal_stop_price += i
+	} else {
+		m.addnormal_stop_price = &i
+	}
+}
+
+// AddedNormalStopPrice returns the value that was added to the "normal_stop_price" field in this mutation.
+func (m *OrderBillingMutation) AddedNormalStopPrice() (r int, exists bool) {
+	v := m.addnormal_stop_price
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetNormalStopPrice resets all changes to the "normal_stop_price" field.
+func (m *OrderBillingMutation) ResetNormalStopPrice() {
+	m.normal_stop_price = nil
+	m.addnormal_stop_price = nil
+}
+
+// SetNormalStopUnit sets the "normal_stop_unit" field.
+func (m *OrderBillingMutation) SetNormalStopUnit(i int) {
+	m.normal_stop_unit = &i
+	m.addnormal_stop_unit = nil
+}
+
+// NormalStopUnit returns the value of the "normal_stop_unit" field in the mutation.
+func (m *OrderBillingMutation) NormalStopUnit() (r int, exists bool) {
+	v := m.normal_stop_unit
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldNormalStopUnit returns the old "normal_stop_unit" field's value of the OrderBilling entity.
+// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderBillingMutation) OldNormalStopUnit(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldNormalStopUnit is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldNormalStopUnit requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldNormalStopUnit: %w", err)
+	}
+	return oldValue.NormalStopUnit, nil
+}
+
+// AddNormalStopUnit adds i to the "normal_stop_unit" field.
+func (m *OrderBillingMutation) AddNormalStopUnit(i int) {
+	if m.addnormal_stop_unit != nil {
+		*m.addnormal_stop_unit += i
+	} else {
+		m.addnormal_stop_unit = &i
+	}
+}
+
+// AddedNormalStopUnit returns the value that was added to the "normal_stop_unit" field in this mutation.
+func (m *OrderBillingMutation) AddedNormalStopUnit() (r int, exists bool) {
+	v := m.addnormal_stop_unit
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetNormalStopUnit resets all changes to the "normal_stop_unit" field.
+func (m *OrderBillingMutation) ResetNormalStopUnit() {
+	m.normal_stop_unit = nil
+	m.addnormal_stop_unit = nil
+}
+
+// SetCouponID sets the "coupon_id" field.
+func (m *OrderBillingMutation) SetCouponID(i int) {
+	m.coupon_id = &i
+	m.addcoupon_id = nil
+}
+
+// CouponID returns the value of the "coupon_id" field in the mutation.
+func (m *OrderBillingMutation) CouponID() (r int, exists bool) {
+	v := m.coupon_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCouponID returns the old "coupon_id" field's value of the OrderBilling entity.
+// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderBillingMutation) OldCouponID(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCouponID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCouponID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCouponID: %w", err)
+	}
+	return oldValue.CouponID, nil
+}
+
+// AddCouponID adds i to the "coupon_id" field.
+func (m *OrderBillingMutation) AddCouponID(i int) {
+	if m.addcoupon_id != nil {
+		*m.addcoupon_id += i
+	} else {
+		m.addcoupon_id = &i
+	}
+}
+
+// AddedCouponID returns the value that was added to the "coupon_id" field in this mutation.
+func (m *OrderBillingMutation) AddedCouponID() (r int, exists bool) {
+	v := m.addcoupon_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetCouponID resets all changes to the "coupon_id" field.
+func (m *OrderBillingMutation) ResetCouponID() {
+	m.coupon_id = nil
+	m.addcoupon_id = nil
+}
+
+// SetCouponLimitAmount sets the "coupon_limit_amount" field.
+func (m *OrderBillingMutation) SetCouponLimitAmount(i int) {
+	m.coupon_limit_amount = &i
+	m.addcoupon_limit_amount = nil
+}
+
+// CouponLimitAmount returns the value of the "coupon_limit_amount" field in the mutation.
+func (m *OrderBillingMutation) CouponLimitAmount() (r int, exists bool) {
+	v := m.coupon_limit_amount
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCouponLimitAmount returns the old "coupon_limit_amount" field's value of the OrderBilling entity.
+// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderBillingMutation) OldCouponLimitAmount(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCouponLimitAmount is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCouponLimitAmount requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCouponLimitAmount: %w", err)
+	}
+	return oldValue.CouponLimitAmount, nil
+}
+
+// AddCouponLimitAmount adds i to the "coupon_limit_amount" field.
+func (m *OrderBillingMutation) AddCouponLimitAmount(i int) {
+	if m.addcoupon_limit_amount != nil {
+		*m.addcoupon_limit_amount += i
+	} else {
+		m.addcoupon_limit_amount = &i
+	}
+}
+
+// AddedCouponLimitAmount returns the value that was added to the "coupon_limit_amount" field in this mutation.
+func (m *OrderBillingMutation) AddedCouponLimitAmount() (r int, exists bool) {
+	v := m.addcoupon_limit_amount
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetCouponLimitAmount resets all changes to the "coupon_limit_amount" field.
+func (m *OrderBillingMutation) ResetCouponLimitAmount() {
+	m.coupon_limit_amount = nil
+	m.addcoupon_limit_amount = nil
+}
+
+// SetCouponDeductionAmount sets the "coupon_deduction_amount" field.
+func (m *OrderBillingMutation) SetCouponDeductionAmount(i int) {
+	m.coupon_deduction_amount = &i
+	m.addcoupon_deduction_amount = nil
+}
+
+// CouponDeductionAmount returns the value of the "coupon_deduction_amount" field in the mutation.
+func (m *OrderBillingMutation) CouponDeductionAmount() (r int, exists bool) {
+	v := m.coupon_deduction_amount
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCouponDeductionAmount returns the old "coupon_deduction_amount" field's value of the OrderBilling entity.
+// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderBillingMutation) OldCouponDeductionAmount(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCouponDeductionAmount is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCouponDeductionAmount requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCouponDeductionAmount: %w", err)
+	}
+	return oldValue.CouponDeductionAmount, nil
+}
+
+// AddCouponDeductionAmount adds i to the "coupon_deduction_amount" field.
+func (m *OrderBillingMutation) AddCouponDeductionAmount(i int) {
+	if m.addcoupon_deduction_amount != nil {
+		*m.addcoupon_deduction_amount += i
+	} else {
+		m.addcoupon_deduction_amount = &i
+	}
+}
+
+// AddedCouponDeductionAmount returns the value that was added to the "coupon_deduction_amount" field in this mutation.
+func (m *OrderBillingMutation) AddedCouponDeductionAmount() (r int, exists bool) {
+	v := m.addcoupon_deduction_amount
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetCouponDeductionAmount resets all changes to the "coupon_deduction_amount" field.
+func (m *OrderBillingMutation) ResetCouponDeductionAmount() {
+	m.coupon_deduction_amount = nil
+	m.addcoupon_deduction_amount = nil
+}
+
+// SetCappedAmount sets the "capped_amount" field.
+func (m *OrderBillingMutation) SetCappedAmount(i int) {
+	m.capped_amount = &i
+	m.addcapped_amount = nil
+}
+
+// CappedAmount returns the value of the "capped_amount" field in the mutation.
+func (m *OrderBillingMutation) CappedAmount() (r int, exists bool) {
+	v := m.capped_amount
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCappedAmount returns the old "capped_amount" field's value of the OrderBilling entity.
+// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderBillingMutation) OldCappedAmount(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCappedAmount is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCappedAmount requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCappedAmount: %w", err)
+	}
+	return oldValue.CappedAmount, nil
+}
+
+// AddCappedAmount adds i to the "capped_amount" field.
+func (m *OrderBillingMutation) AddCappedAmount(i int) {
+	if m.addcapped_amount != nil {
+		*m.addcapped_amount += i
+	} else {
+		m.addcapped_amount = &i
+	}
+}
+
+// AddedCappedAmount returns the value that was added to the "capped_amount" field in this mutation.
+func (m *OrderBillingMutation) AddedCappedAmount() (r int, exists bool) {
+	v := m.addcapped_amount
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetCappedAmount resets all changes to the "capped_amount" field.
+func (m *OrderBillingMutation) ResetCappedAmount() {
+	m.capped_amount = nil
+	m.addcapped_amount = nil
 }
 
 // SetState sets the "state" field.
@@ -36407,7 +37277,10 @@ func (m *OrderBillingMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *OrderBillingMutation) Fields() []string {
-	fields := make([]string, 0, 13)
+	fields := make([]string, 0, 22)
+	if m._type != nil {
+		fields = append(fields, orderbilling.FieldType)
+	}
 	if m._order != nil {
 		fields = append(fields, orderbilling.FieldOrderID)
 	}
@@ -36423,14 +37296,38 @@ func (m *OrderBillingMutation) Fields() []string {
 	if m.normal_time_unit != nil {
 		fields = append(fields, orderbilling.FieldNormalTimeUnit)
 	}
-	if m.capped_amount != nil {
-		fields = append(fields, orderbilling.FieldCappedAmount)
-	}
 	if m.cumulative_second != nil {
 		fields = append(fields, orderbilling.FieldCumulativeSecond)
 	}
 	if m.cumulative_meter != nil {
 		fields = append(fields, orderbilling.FieldCumulativeMeter)
+	}
+	if m.cumulative_stop != nil {
+		fields = append(fields, orderbilling.FieldCumulativeStop)
+	}
+	if m.start_stop_price != nil {
+		fields = append(fields, orderbilling.FieldStartStopPrice)
+	}
+	if m.start_stop_unit != nil {
+		fields = append(fields, orderbilling.FieldStartStopUnit)
+	}
+	if m.normal_stop_price != nil {
+		fields = append(fields, orderbilling.FieldNormalStopPrice)
+	}
+	if m.normal_stop_unit != nil {
+		fields = append(fields, orderbilling.FieldNormalStopUnit)
+	}
+	if m.coupon_id != nil {
+		fields = append(fields, orderbilling.FieldCouponID)
+	}
+	if m.coupon_limit_amount != nil {
+		fields = append(fields, orderbilling.FieldCouponLimitAmount)
+	}
+	if m.coupon_deduction_amount != nil {
+		fields = append(fields, orderbilling.FieldCouponDeductionAmount)
+	}
+	if m.capped_amount != nil {
+		fields = append(fields, orderbilling.FieldCappedAmount)
 	}
 	if m.state != nil {
 		fields = append(fields, orderbilling.FieldState)
@@ -36455,6 +37352,8 @@ func (m *OrderBillingMutation) Fields() []string {
 // schema.
 func (m *OrderBillingMutation) Field(name string) (ent.Value, bool) {
 	switch name {
+	case orderbilling.FieldType:
+		return m.GetType()
 	case orderbilling.FieldOrderID:
 		return m.OrderID()
 	case orderbilling.FieldStartTimePrice:
@@ -36465,12 +37364,28 @@ func (m *OrderBillingMutation) Field(name string) (ent.Value, bool) {
 		return m.NormalTimePrice()
 	case orderbilling.FieldNormalTimeUnit:
 		return m.NormalTimeUnit()
-	case orderbilling.FieldCappedAmount:
-		return m.CappedAmount()
 	case orderbilling.FieldCumulativeSecond:
 		return m.CumulativeSecond()
 	case orderbilling.FieldCumulativeMeter:
 		return m.CumulativeMeter()
+	case orderbilling.FieldCumulativeStop:
+		return m.CumulativeStop()
+	case orderbilling.FieldStartStopPrice:
+		return m.StartStopPrice()
+	case orderbilling.FieldStartStopUnit:
+		return m.StartStopUnit()
+	case orderbilling.FieldNormalStopPrice:
+		return m.NormalStopPrice()
+	case orderbilling.FieldNormalStopUnit:
+		return m.NormalStopUnit()
+	case orderbilling.FieldCouponID:
+		return m.CouponID()
+	case orderbilling.FieldCouponLimitAmount:
+		return m.CouponLimitAmount()
+	case orderbilling.FieldCouponDeductionAmount:
+		return m.CouponDeductionAmount()
+	case orderbilling.FieldCappedAmount:
+		return m.CappedAmount()
 	case orderbilling.FieldState:
 		return m.State()
 	case orderbilling.FieldStartTime:
@@ -36490,6 +37405,8 @@ func (m *OrderBillingMutation) Field(name string) (ent.Value, bool) {
 // database failed.
 func (m *OrderBillingMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
 	switch name {
+	case orderbilling.FieldType:
+		return m.OldType(ctx)
 	case orderbilling.FieldOrderID:
 		return m.OldOrderID(ctx)
 	case orderbilling.FieldStartTimePrice:
@@ -36500,12 +37417,28 @@ func (m *OrderBillingMutation) OldField(ctx context.Context, name string) (ent.V
 		return m.OldNormalTimePrice(ctx)
 	case orderbilling.FieldNormalTimeUnit:
 		return m.OldNormalTimeUnit(ctx)
-	case orderbilling.FieldCappedAmount:
-		return m.OldCappedAmount(ctx)
 	case orderbilling.FieldCumulativeSecond:
 		return m.OldCumulativeSecond(ctx)
 	case orderbilling.FieldCumulativeMeter:
 		return m.OldCumulativeMeter(ctx)
+	case orderbilling.FieldCumulativeStop:
+		return m.OldCumulativeStop(ctx)
+	case orderbilling.FieldStartStopPrice:
+		return m.OldStartStopPrice(ctx)
+	case orderbilling.FieldStartStopUnit:
+		return m.OldStartStopUnit(ctx)
+	case orderbilling.FieldNormalStopPrice:
+		return m.OldNormalStopPrice(ctx)
+	case orderbilling.FieldNormalStopUnit:
+		return m.OldNormalStopUnit(ctx)
+	case orderbilling.FieldCouponID:
+		return m.OldCouponID(ctx)
+	case orderbilling.FieldCouponLimitAmount:
+		return m.OldCouponLimitAmount(ctx)
+	case orderbilling.FieldCouponDeductionAmount:
+		return m.OldCouponDeductionAmount(ctx)
+	case orderbilling.FieldCappedAmount:
+		return m.OldCappedAmount(ctx)
 	case orderbilling.FieldState:
 		return m.OldState(ctx)
 	case orderbilling.FieldStartTime:
@@ -36525,6 +37458,13 @@ func (m *OrderBillingMutation) OldField(ctx context.Context, name string) (ent.V
 // type.
 func (m *OrderBillingMutation) SetField(name string, value ent.Value) error {
 	switch name {
+	case orderbilling.FieldType:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetType(v)
+		return nil
 	case orderbilling.FieldOrderID:
 		v, ok := value.(int)
 		if !ok {
@@ -36560,13 +37500,6 @@ func (m *OrderBillingMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetNormalTimeUnit(v)
 		return nil
-	case orderbilling.FieldCappedAmount:
-		v, ok := value.(int)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetCappedAmount(v)
-		return nil
 	case orderbilling.FieldCumulativeSecond:
 		v, ok := value.(float64)
 		if !ok {
@@ -36580,6 +37513,69 @@ func (m *OrderBillingMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetCumulativeMeter(v)
+		return nil
+	case orderbilling.FieldCumulativeStop:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCumulativeStop(v)
+		return nil
+	case orderbilling.FieldStartStopPrice:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetStartStopPrice(v)
+		return nil
+	case orderbilling.FieldStartStopUnit:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetStartStopUnit(v)
+		return nil
+	case orderbilling.FieldNormalStopPrice:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetNormalStopPrice(v)
+		return nil
+	case orderbilling.FieldNormalStopUnit:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetNormalStopUnit(v)
+		return nil
+	case orderbilling.FieldCouponID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCouponID(v)
+		return nil
+	case orderbilling.FieldCouponLimitAmount:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCouponLimitAmount(v)
+		return nil
+	case orderbilling.FieldCouponDeductionAmount:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCouponDeductionAmount(v)
+		return nil
+	case orderbilling.FieldCappedAmount:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCappedAmount(v)
 		return nil
 	case orderbilling.FieldState:
 		v, ok := value.(int)
@@ -36624,6 +37620,9 @@ func (m *OrderBillingMutation) SetField(name string, value ent.Value) error {
 // this mutation.
 func (m *OrderBillingMutation) AddedFields() []string {
 	var fields []string
+	if m.add_type != nil {
+		fields = append(fields, orderbilling.FieldType)
+	}
 	if m.addstart_time_price != nil {
 		fields = append(fields, orderbilling.FieldStartTimePrice)
 	}
@@ -36636,14 +37635,38 @@ func (m *OrderBillingMutation) AddedFields() []string {
 	if m.addnormal_time_unit != nil {
 		fields = append(fields, orderbilling.FieldNormalTimeUnit)
 	}
-	if m.addcapped_amount != nil {
-		fields = append(fields, orderbilling.FieldCappedAmount)
-	}
 	if m.addcumulative_second != nil {
 		fields = append(fields, orderbilling.FieldCumulativeSecond)
 	}
 	if m.addcumulative_meter != nil {
 		fields = append(fields, orderbilling.FieldCumulativeMeter)
+	}
+	if m.addcumulative_stop != nil {
+		fields = append(fields, orderbilling.FieldCumulativeStop)
+	}
+	if m.addstart_stop_price != nil {
+		fields = append(fields, orderbilling.FieldStartStopPrice)
+	}
+	if m.addstart_stop_unit != nil {
+		fields = append(fields, orderbilling.FieldStartStopUnit)
+	}
+	if m.addnormal_stop_price != nil {
+		fields = append(fields, orderbilling.FieldNormalStopPrice)
+	}
+	if m.addnormal_stop_unit != nil {
+		fields = append(fields, orderbilling.FieldNormalStopUnit)
+	}
+	if m.addcoupon_id != nil {
+		fields = append(fields, orderbilling.FieldCouponID)
+	}
+	if m.addcoupon_limit_amount != nil {
+		fields = append(fields, orderbilling.FieldCouponLimitAmount)
+	}
+	if m.addcoupon_deduction_amount != nil {
+		fields = append(fields, orderbilling.FieldCouponDeductionAmount)
+	}
+	if m.addcapped_amount != nil {
+		fields = append(fields, orderbilling.FieldCappedAmount)
 	}
 	if m.addstate != nil {
 		fields = append(fields, orderbilling.FieldState)
@@ -36656,6 +37679,8 @@ func (m *OrderBillingMutation) AddedFields() []string {
 // was not set, or was not defined in the schema.
 func (m *OrderBillingMutation) AddedField(name string) (ent.Value, bool) {
 	switch name {
+	case orderbilling.FieldType:
+		return m.AddedType()
 	case orderbilling.FieldStartTimePrice:
 		return m.AddedStartTimePrice()
 	case orderbilling.FieldStartTimeUnit:
@@ -36664,12 +37689,28 @@ func (m *OrderBillingMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedNormalTimePrice()
 	case orderbilling.FieldNormalTimeUnit:
 		return m.AddedNormalTimeUnit()
-	case orderbilling.FieldCappedAmount:
-		return m.AddedCappedAmount()
 	case orderbilling.FieldCumulativeSecond:
 		return m.AddedCumulativeSecond()
 	case orderbilling.FieldCumulativeMeter:
 		return m.AddedCumulativeMeter()
+	case orderbilling.FieldCumulativeStop:
+		return m.AddedCumulativeStop()
+	case orderbilling.FieldStartStopPrice:
+		return m.AddedStartStopPrice()
+	case orderbilling.FieldStartStopUnit:
+		return m.AddedStartStopUnit()
+	case orderbilling.FieldNormalStopPrice:
+		return m.AddedNormalStopPrice()
+	case orderbilling.FieldNormalStopUnit:
+		return m.AddedNormalStopUnit()
+	case orderbilling.FieldCouponID:
+		return m.AddedCouponID()
+	case orderbilling.FieldCouponLimitAmount:
+		return m.AddedCouponLimitAmount()
+	case orderbilling.FieldCouponDeductionAmount:
+		return m.AddedCouponDeductionAmount()
+	case orderbilling.FieldCappedAmount:
+		return m.AddedCappedAmount()
 	case orderbilling.FieldState:
 		return m.AddedState()
 	}
@@ -36681,6 +37722,13 @@ func (m *OrderBillingMutation) AddedField(name string) (ent.Value, bool) {
 // type.
 func (m *OrderBillingMutation) AddField(name string, value ent.Value) error {
 	switch name {
+	case orderbilling.FieldType:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddType(v)
+		return nil
 	case orderbilling.FieldStartTimePrice:
 		v, ok := value.(int)
 		if !ok {
@@ -36709,13 +37757,6 @@ func (m *OrderBillingMutation) AddField(name string, value ent.Value) error {
 		}
 		m.AddNormalTimeUnit(v)
 		return nil
-	case orderbilling.FieldCappedAmount:
-		v, ok := value.(int)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.AddCappedAmount(v)
-		return nil
 	case orderbilling.FieldCumulativeSecond:
 		v, ok := value.(float64)
 		if !ok {
@@ -36729,6 +37770,69 @@ func (m *OrderBillingMutation) AddField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddCumulativeMeter(v)
+		return nil
+	case orderbilling.FieldCumulativeStop:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddCumulativeStop(v)
+		return nil
+	case orderbilling.FieldStartStopPrice:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddStartStopPrice(v)
+		return nil
+	case orderbilling.FieldStartStopUnit:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddStartStopUnit(v)
+		return nil
+	case orderbilling.FieldNormalStopPrice:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddNormalStopPrice(v)
+		return nil
+	case orderbilling.FieldNormalStopUnit:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddNormalStopUnit(v)
+		return nil
+	case orderbilling.FieldCouponID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddCouponID(v)
+		return nil
+	case orderbilling.FieldCouponLimitAmount:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddCouponLimitAmount(v)
+		return nil
+	case orderbilling.FieldCouponDeductionAmount:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddCouponDeductionAmount(v)
+		return nil
+	case orderbilling.FieldCappedAmount:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddCappedAmount(v)
 		return nil
 	case orderbilling.FieldState:
 		v, ok := value.(int)
@@ -36779,6 +37883,9 @@ func (m *OrderBillingMutation) ClearField(name string) error {
 // It returns an error if the field is not defined in the schema.
 func (m *OrderBillingMutation) ResetField(name string) error {
 	switch name {
+	case orderbilling.FieldType:
+		m.ResetType()
+		return nil
 	case orderbilling.FieldOrderID:
 		m.ResetOrderID()
 		return nil
@@ -36794,14 +37901,38 @@ func (m *OrderBillingMutation) ResetField(name string) error {
 	case orderbilling.FieldNormalTimeUnit:
 		m.ResetNormalTimeUnit()
 		return nil
-	case orderbilling.FieldCappedAmount:
-		m.ResetCappedAmount()
-		return nil
 	case orderbilling.FieldCumulativeSecond:
 		m.ResetCumulativeSecond()
 		return nil
 	case orderbilling.FieldCumulativeMeter:
 		m.ResetCumulativeMeter()
+		return nil
+	case orderbilling.FieldCumulativeStop:
+		m.ResetCumulativeStop()
+		return nil
+	case orderbilling.FieldStartStopPrice:
+		m.ResetStartStopPrice()
+		return nil
+	case orderbilling.FieldStartStopUnit:
+		m.ResetStartStopUnit()
+		return nil
+	case orderbilling.FieldNormalStopPrice:
+		m.ResetNormalStopPrice()
+		return nil
+	case orderbilling.FieldNormalStopUnit:
+		m.ResetNormalStopUnit()
+		return nil
+	case orderbilling.FieldCouponID:
+		m.ResetCouponID()
+		return nil
+	case orderbilling.FieldCouponLimitAmount:
+		m.ResetCouponLimitAmount()
+		return nil
+	case orderbilling.FieldCouponDeductionAmount:
+		m.ResetCouponDeductionAmount()
+		return nil
+	case orderbilling.FieldCappedAmount:
+		m.ResetCappedAmount()
 		return nil
 	case orderbilling.FieldState:
 		m.ResetState()
@@ -36899,24 +38030,29 @@ func (m *OrderBillingMutation) ResetEdge(name string) error {
 // OrderExtendFlightMutation represents an operation that mutates the OrderExtendFlight nodes in the graph.
 type OrderExtendFlightMutation struct {
 	config
-	op              Op
-	typ             string
-	id              *int
-	order_id        *int
-	addorder_id     *int
-	flight_id       *int
-	addflight_id    *int
-	flight_no       *string
-	stop_ids        *[]int
-	appendstop_ids  []int
-	ticket_count    *int
-	addticket_count *int
-	create_time     *time.Time
-	update_time     *time.Time
-	clearedFields   map[string]struct{}
-	done            bool
-	oldValue        func(context.Context) (*OrderExtendFlight, error)
-	predicates      []predicate.OrderExtendFlight
+	op               Op
+	typ              string
+	id               *int
+	order_id         *int
+	addorder_id      *int
+	flight_id        *int
+	addflight_id     *int
+	flight_no        *string
+	route_id         *int
+	addroute_id      *int
+	route_name       *string
+	start_stop_id    *int
+	addstart_stop_id *int
+	end_stop_id      *int
+	addend_stop_id   *int
+	ticket_count     *int
+	addticket_count  *int
+	create_time      *time.Time
+	update_time      *time.Time
+	clearedFields    map[string]struct{}
+	done             bool
+	oldValue         func(context.Context) (*OrderExtendFlight, error)
+	predicates       []predicate.OrderExtendFlight
 }
 
 var _ ent.Mutation = (*OrderExtendFlightMutation)(nil)
@@ -37171,55 +38307,208 @@ func (m *OrderExtendFlightMutation) ResetFlightNo() {
 	m.flight_no = nil
 }
 
-// SetStopIds sets the "stop_ids" field.
-func (m *OrderExtendFlightMutation) SetStopIds(i []int) {
-	m.stop_ids = &i
-	m.appendstop_ids = nil
+// SetRouteID sets the "route_id" field.
+func (m *OrderExtendFlightMutation) SetRouteID(i int) {
+	m.route_id = &i
+	m.addroute_id = nil
 }
 
-// StopIds returns the value of the "stop_ids" field in the mutation.
-func (m *OrderExtendFlightMutation) StopIds() (r []int, exists bool) {
-	v := m.stop_ids
+// RouteID returns the value of the "route_id" field in the mutation.
+func (m *OrderExtendFlightMutation) RouteID() (r int, exists bool) {
+	v := m.route_id
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldStopIds returns the old "stop_ids" field's value of the OrderExtendFlight entity.
+// OldRouteID returns the old "route_id" field's value of the OrderExtendFlight entity.
 // If the OrderExtendFlight object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *OrderExtendFlightMutation) OldStopIds(ctx context.Context) (v []int, err error) {
+func (m *OrderExtendFlightMutation) OldRouteID(ctx context.Context) (v int, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldStopIds is only allowed on UpdateOne operations")
+		return v, errors.New("OldRouteID is only allowed on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldStopIds requires an ID field in the mutation")
+		return v, errors.New("OldRouteID requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldStopIds: %w", err)
+		return v, fmt.Errorf("querying old value for OldRouteID: %w", err)
 	}
-	return oldValue.StopIds, nil
+	return oldValue.RouteID, nil
 }
 
-// AppendStopIds adds i to the "stop_ids" field.
-func (m *OrderExtendFlightMutation) AppendStopIds(i []int) {
-	m.appendstop_ids = append(m.appendstop_ids, i...)
-}
-
-// AppendedStopIds returns the list of values that were appended to the "stop_ids" field in this mutation.
-func (m *OrderExtendFlightMutation) AppendedStopIds() ([]int, bool) {
-	if len(m.appendstop_ids) == 0 {
-		return nil, false
+// AddRouteID adds i to the "route_id" field.
+func (m *OrderExtendFlightMutation) AddRouteID(i int) {
+	if m.addroute_id != nil {
+		*m.addroute_id += i
+	} else {
+		m.addroute_id = &i
 	}
-	return m.appendstop_ids, true
 }
 
-// ResetStopIds resets all changes to the "stop_ids" field.
-func (m *OrderExtendFlightMutation) ResetStopIds() {
-	m.stop_ids = nil
-	m.appendstop_ids = nil
+// AddedRouteID returns the value that was added to the "route_id" field in this mutation.
+func (m *OrderExtendFlightMutation) AddedRouteID() (r int, exists bool) {
+	v := m.addroute_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetRouteID resets all changes to the "route_id" field.
+func (m *OrderExtendFlightMutation) ResetRouteID() {
+	m.route_id = nil
+	m.addroute_id = nil
+}
+
+// SetRouteName sets the "route_name" field.
+func (m *OrderExtendFlightMutation) SetRouteName(s string) {
+	m.route_name = &s
+}
+
+// RouteName returns the value of the "route_name" field in the mutation.
+func (m *OrderExtendFlightMutation) RouteName() (r string, exists bool) {
+	v := m.route_name
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldRouteName returns the old "route_name" field's value of the OrderExtendFlight entity.
+// If the OrderExtendFlight object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderExtendFlightMutation) OldRouteName(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldRouteName is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldRouteName requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldRouteName: %w", err)
+	}
+	return oldValue.RouteName, nil
+}
+
+// ResetRouteName resets all changes to the "route_name" field.
+func (m *OrderExtendFlightMutation) ResetRouteName() {
+	m.route_name = nil
+}
+
+// SetStartStopID sets the "start_stop_id" field.
+func (m *OrderExtendFlightMutation) SetStartStopID(i int) {
+	m.start_stop_id = &i
+	m.addstart_stop_id = nil
+}
+
+// StartStopID returns the value of the "start_stop_id" field in the mutation.
+func (m *OrderExtendFlightMutation) StartStopID() (r int, exists bool) {
+	v := m.start_stop_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldStartStopID returns the old "start_stop_id" field's value of the OrderExtendFlight entity.
+// If the OrderExtendFlight object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderExtendFlightMutation) OldStartStopID(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldStartStopID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldStartStopID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldStartStopID: %w", err)
+	}
+	return oldValue.StartStopID, nil
+}
+
+// AddStartStopID adds i to the "start_stop_id" field.
+func (m *OrderExtendFlightMutation) AddStartStopID(i int) {
+	if m.addstart_stop_id != nil {
+		*m.addstart_stop_id += i
+	} else {
+		m.addstart_stop_id = &i
+	}
+}
+
+// AddedStartStopID returns the value that was added to the "start_stop_id" field in this mutation.
+func (m *OrderExtendFlightMutation) AddedStartStopID() (r int, exists bool) {
+	v := m.addstart_stop_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetStartStopID resets all changes to the "start_stop_id" field.
+func (m *OrderExtendFlightMutation) ResetStartStopID() {
+	m.start_stop_id = nil
+	m.addstart_stop_id = nil
+}
+
+// SetEndStopID sets the "end_stop_id" field.
+func (m *OrderExtendFlightMutation) SetEndStopID(i int) {
+	m.end_stop_id = &i
+	m.addend_stop_id = nil
+}
+
+// EndStopID returns the value of the "end_stop_id" field in the mutation.
+func (m *OrderExtendFlightMutation) EndStopID() (r int, exists bool) {
+	v := m.end_stop_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldEndStopID returns the old "end_stop_id" field's value of the OrderExtendFlight entity.
+// If the OrderExtendFlight object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderExtendFlightMutation) OldEndStopID(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldEndStopID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldEndStopID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldEndStopID: %w", err)
+	}
+	return oldValue.EndStopID, nil
+}
+
+// AddEndStopID adds i to the "end_stop_id" field.
+func (m *OrderExtendFlightMutation) AddEndStopID(i int) {
+	if m.addend_stop_id != nil {
+		*m.addend_stop_id += i
+	} else {
+		m.addend_stop_id = &i
+	}
+}
+
+// AddedEndStopID returns the value that was added to the "end_stop_id" field in this mutation.
+func (m *OrderExtendFlightMutation) AddedEndStopID() (r int, exists bool) {
+	v := m.addend_stop_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetEndStopID resets all changes to the "end_stop_id" field.
+func (m *OrderExtendFlightMutation) ResetEndStopID() {
+	m.end_stop_id = nil
+	m.addend_stop_id = nil
 }
 
 // SetTicketCount sets the "ticket_count" field.
@@ -37384,7 +38673,7 @@ func (m *OrderExtendFlightMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *OrderExtendFlightMutation) Fields() []string {
-	fields := make([]string, 0, 7)
+	fields := make([]string, 0, 10)
 	if m.order_id != nil {
 		fields = append(fields, orderextendflight.FieldOrderID)
 	}
@@ -37394,8 +38683,17 @@ func (m *OrderExtendFlightMutation) Fields() []string {
 	if m.flight_no != nil {
 		fields = append(fields, orderextendflight.FieldFlightNo)
 	}
-	if m.stop_ids != nil {
-		fields = append(fields, orderextendflight.FieldStopIds)
+	if m.route_id != nil {
+		fields = append(fields, orderextendflight.FieldRouteID)
+	}
+	if m.route_name != nil {
+		fields = append(fields, orderextendflight.FieldRouteName)
+	}
+	if m.start_stop_id != nil {
+		fields = append(fields, orderextendflight.FieldStartStopID)
+	}
+	if m.end_stop_id != nil {
+		fields = append(fields, orderextendflight.FieldEndStopID)
 	}
 	if m.ticket_count != nil {
 		fields = append(fields, orderextendflight.FieldTicketCount)
@@ -37420,8 +38718,14 @@ func (m *OrderExtendFlightMutation) Field(name string) (ent.Value, bool) {
 		return m.FlightID()
 	case orderextendflight.FieldFlightNo:
 		return m.FlightNo()
-	case orderextendflight.FieldStopIds:
-		return m.StopIds()
+	case orderextendflight.FieldRouteID:
+		return m.RouteID()
+	case orderextendflight.FieldRouteName:
+		return m.RouteName()
+	case orderextendflight.FieldStartStopID:
+		return m.StartStopID()
+	case orderextendflight.FieldEndStopID:
+		return m.EndStopID()
 	case orderextendflight.FieldTicketCount:
 		return m.TicketCount()
 	case orderextendflight.FieldCreateTime:
@@ -37443,8 +38747,14 @@ func (m *OrderExtendFlightMutation) OldField(ctx context.Context, name string) (
 		return m.OldFlightID(ctx)
 	case orderextendflight.FieldFlightNo:
 		return m.OldFlightNo(ctx)
-	case orderextendflight.FieldStopIds:
-		return m.OldStopIds(ctx)
+	case orderextendflight.FieldRouteID:
+		return m.OldRouteID(ctx)
+	case orderextendflight.FieldRouteName:
+		return m.OldRouteName(ctx)
+	case orderextendflight.FieldStartStopID:
+		return m.OldStartStopID(ctx)
+	case orderextendflight.FieldEndStopID:
+		return m.OldEndStopID(ctx)
 	case orderextendflight.FieldTicketCount:
 		return m.OldTicketCount(ctx)
 	case orderextendflight.FieldCreateTime:
@@ -37481,12 +38791,33 @@ func (m *OrderExtendFlightMutation) SetField(name string, value ent.Value) error
 		}
 		m.SetFlightNo(v)
 		return nil
-	case orderextendflight.FieldStopIds:
-		v, ok := value.([]int)
+	case orderextendflight.FieldRouteID:
+		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetStopIds(v)
+		m.SetRouteID(v)
+		return nil
+	case orderextendflight.FieldRouteName:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetRouteName(v)
+		return nil
+	case orderextendflight.FieldStartStopID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetStartStopID(v)
+		return nil
+	case orderextendflight.FieldEndStopID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetEndStopID(v)
 		return nil
 	case orderextendflight.FieldTicketCount:
 		v, ok := value.(int)
@@ -37523,6 +38854,15 @@ func (m *OrderExtendFlightMutation) AddedFields() []string {
 	if m.addflight_id != nil {
 		fields = append(fields, orderextendflight.FieldFlightID)
 	}
+	if m.addroute_id != nil {
+		fields = append(fields, orderextendflight.FieldRouteID)
+	}
+	if m.addstart_stop_id != nil {
+		fields = append(fields, orderextendflight.FieldStartStopID)
+	}
+	if m.addend_stop_id != nil {
+		fields = append(fields, orderextendflight.FieldEndStopID)
+	}
 	if m.addticket_count != nil {
 		fields = append(fields, orderextendflight.FieldTicketCount)
 	}
@@ -37538,6 +38878,12 @@ func (m *OrderExtendFlightMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedOrderID()
 	case orderextendflight.FieldFlightID:
 		return m.AddedFlightID()
+	case orderextendflight.FieldRouteID:
+		return m.AddedRouteID()
+	case orderextendflight.FieldStartStopID:
+		return m.AddedStartStopID()
+	case orderextendflight.FieldEndStopID:
+		return m.AddedEndStopID()
 	case orderextendflight.FieldTicketCount:
 		return m.AddedTicketCount()
 	}
@@ -37562,6 +38908,27 @@ func (m *OrderExtendFlightMutation) AddField(name string, value ent.Value) error
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddFlightID(v)
+		return nil
+	case orderextendflight.FieldRouteID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddRouteID(v)
+		return nil
+	case orderextendflight.FieldStartStopID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddStartStopID(v)
+		return nil
+	case orderextendflight.FieldEndStopID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddEndStopID(v)
 		return nil
 	case orderextendflight.FieldTicketCount:
 		v, ok := value.(int)
@@ -37606,8 +38973,17 @@ func (m *OrderExtendFlightMutation) ResetField(name string) error {
 	case orderextendflight.FieldFlightNo:
 		m.ResetFlightNo()
 		return nil
-	case orderextendflight.FieldStopIds:
-		m.ResetStopIds()
+	case orderextendflight.FieldRouteID:
+		m.ResetRouteID()
+		return nil
+	case orderextendflight.FieldRouteName:
+		m.ResetRouteName()
+		return nil
+	case orderextendflight.FieldStartStopID:
+		m.ResetStartStopID()
+		return nil
+	case orderextendflight.FieldEndStopID:
+		m.ResetEndStopID()
 		return nil
 	case orderextendflight.FieldTicketCount:
 		m.ResetTicketCount()

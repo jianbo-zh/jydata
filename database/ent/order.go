@@ -22,7 +22,7 @@ type Order struct {
 	// ID of the ent.
 	// ID
 	ID int `json:"id,omitempty"`
-	// 订单类型(1-租车订单 2-班次订单 3-通票订单)
+	// 订单类型(1-租车订单 2-班次订单)
 	Type int `json:"type,omitempty"`
 	// 时间段(0-未知、1-工作日、2-周末、3-节假日)
 	Period int `json:"period,omitempty"`

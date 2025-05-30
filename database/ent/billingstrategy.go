@@ -25,7 +25,7 @@ type BillingStrategy struct {
 	ScenicAreaID int `json:"scenic_area_id,omitempty"`
 	// 型号ID
 	ModelID int `json:"model_id,omitempty"`
-	// 主要模式（0-按时间 1-按里程）
+	// 主要模式（1-按时间 2-按里程 3-按站点）
 	MainMode int `json:"main_mode,omitempty"`
 	// 起步价(按时)收费价格(单位：分)
 	StartTimePrice int `json:"start_time_price,omitempty"`
@@ -43,6 +43,14 @@ type BillingStrategy struct {
 	NormalMileagePrice int `json:"normal_mileage_price,omitempty"`
 	// 里程计量单位（单位：米）
 	NormalMileageUnit int `json:"normal_mileage_unit,omitempty"`
+	// 起步价(按站)收费价格(单位：分)
+	StartStopPrice int `json:"start_stop_price,omitempty"`
+	// 起步价(按站)计量单位（单位：站）
+	StartStopUnit int `json:"start_stop_unit,omitempty"`
+	// 按站收费价格(单位：分)
+	NormalStopPrice int `json:"normal_stop_price,omitempty"`
+	// 按站计量单位（单位：站）
+	NormalStopUnit int `json:"normal_stop_unit,omitempty"`
 	// 封顶价格（单位：分）
 	CappedAmount int `json:"capped_amount,omitempty"`
 	// 押金金额（单位：分）
@@ -82,7 +90,7 @@ func (*BillingStrategy) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case billingstrategy.FieldID, billingstrategy.FieldScenicAreaID, billingstrategy.FieldModelID, billingstrategy.FieldMainMode, billingstrategy.FieldStartTimePrice, billingstrategy.FieldStartTimeUnit, billingstrategy.FieldNormalTimePrice, billingstrategy.FieldNormalTimeUnit, billingstrategy.FieldStartMileagePrice, billingstrategy.FieldStartMileageUnit, billingstrategy.FieldNormalMileagePrice, billingstrategy.FieldNormalMileageUnit, billingstrategy.FieldCappedAmount, billingstrategy.FieldDepositAmount:
+		case billingstrategy.FieldID, billingstrategy.FieldScenicAreaID, billingstrategy.FieldModelID, billingstrategy.FieldMainMode, billingstrategy.FieldStartTimePrice, billingstrategy.FieldStartTimeUnit, billingstrategy.FieldNormalTimePrice, billingstrategy.FieldNormalTimeUnit, billingstrategy.FieldStartMileagePrice, billingstrategy.FieldStartMileageUnit, billingstrategy.FieldNormalMileagePrice, billingstrategy.FieldNormalMileageUnit, billingstrategy.FieldStartStopPrice, billingstrategy.FieldStartStopUnit, billingstrategy.FieldNormalStopPrice, billingstrategy.FieldNormalStopUnit, billingstrategy.FieldCappedAmount, billingstrategy.FieldDepositAmount:
 			values[i] = new(sql.NullInt64)
 		case billingstrategy.FieldName:
 			values[i] = new(sql.NullString)
@@ -180,6 +188,30 @@ func (bs *BillingStrategy) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field normal_mileage_unit", values[i])
 			} else if value.Valid {
 				bs.NormalMileageUnit = int(value.Int64)
+			}
+		case billingstrategy.FieldStartStopPrice:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field start_stop_price", values[i])
+			} else if value.Valid {
+				bs.StartStopPrice = int(value.Int64)
+			}
+		case billingstrategy.FieldStartStopUnit:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field start_stop_unit", values[i])
+			} else if value.Valid {
+				bs.StartStopUnit = int(value.Int64)
+			}
+		case billingstrategy.FieldNormalStopPrice:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field normal_stop_price", values[i])
+			} else if value.Valid {
+				bs.NormalStopPrice = int(value.Int64)
+			}
+		case billingstrategy.FieldNormalStopUnit:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field normal_stop_unit", values[i])
+			} else if value.Valid {
+				bs.NormalStopUnit = int(value.Int64)
 			}
 		case billingstrategy.FieldCappedAmount:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -281,6 +313,18 @@ func (bs *BillingStrategy) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("normal_mileage_unit=")
 	builder.WriteString(fmt.Sprintf("%v", bs.NormalMileageUnit))
+	builder.WriteString(", ")
+	builder.WriteString("start_stop_price=")
+	builder.WriteString(fmt.Sprintf("%v", bs.StartStopPrice))
+	builder.WriteString(", ")
+	builder.WriteString("start_stop_unit=")
+	builder.WriteString(fmt.Sprintf("%v", bs.StartStopUnit))
+	builder.WriteString(", ")
+	builder.WriteString("normal_stop_price=")
+	builder.WriteString(fmt.Sprintf("%v", bs.NormalStopPrice))
+	builder.WriteString(", ")
+	builder.WriteString("normal_stop_unit=")
+	builder.WriteString(fmt.Sprintf("%v", bs.NormalStopUnit))
 	builder.WriteString(", ")
 	builder.WriteString("capped_amount=")
 	builder.WriteString(fmt.Sprintf("%v", bs.CappedAmount))

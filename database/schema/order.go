@@ -19,7 +19,7 @@ type Order struct {
 func (Order) Fields() []ent.Field {
 	return []ent.Field{
 		field.Int("id").Unique().Comment("ID"),
-		field.Int("type").Default(1).Comment("订单类型(1-租车订单 2-班次订单 3-通票订单)"),
+		field.Int("type").Default(1).Comment("订单类型(1-租车订单 2-班次订单)"),
 		field.Int("period").Default(0).Comment("时间段(0-未知、1-工作日、2-周末、3-节假日)"),
 
 		field.String("order_no").Unique().Comment("订单号"),

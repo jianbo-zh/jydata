@@ -22,8 +22,8 @@ type Car struct {
 	ID int `json:"id,omitempty"`
 	// DeleteTime holds the value of the "delete_time" field.
 	DeleteTime time.Time `json:"delete_time,omitempty"`
-	// 车辆类型（1-共享型 2-运力型）
-	Type int `json:"type,omitempty"`
+	// 运营模式（1-租车模式 2-公交模式）
+	OperationMode int `json:"operation_mode,omitempty"`
 	// 车辆名称
 	CarName string `json:"car_name,omitempty"`
 	// 景区ID
@@ -218,7 +218,7 @@ func (*Car) scanValues(columns []string) ([]any, error) {
 		switch columns[i] {
 		case car.FieldImages:
 			values[i] = new([]byte)
-		case car.FieldID, car.FieldType, car.FieldScenicAreaID, car.FieldModelID, car.FieldPassengers, car.FieldReservedSeats, car.FieldPowerThreshold, car.FieldState, car.FieldUseState, car.FieldDrivingState, car.FieldEmergencyState, car.FieldUseOrderID, car.FieldDispatchTaskID, car.FieldUseFlightID, car.FieldBindOrderCount, car.FieldTotalOrderMileage, car.FieldTotalOrderTime, car.FieldTotalOrderCount, car.FieldTotalOrderAmount, car.FieldPowerRemaining, car.FieldErrorCount, car.FieldIsDeleted, car.FieldIsCommercialCar, car.FieldIsDrivingStateValid, car.FieldNextMapVersionProcess, car.FieldExtendYokeeID:
+		case car.FieldID, car.FieldOperationMode, car.FieldScenicAreaID, car.FieldModelID, car.FieldPassengers, car.FieldReservedSeats, car.FieldPowerThreshold, car.FieldState, car.FieldUseState, car.FieldDrivingState, car.FieldEmergencyState, car.FieldUseOrderID, car.FieldDispatchTaskID, car.FieldUseFlightID, car.FieldBindOrderCount, car.FieldTotalOrderMileage, car.FieldTotalOrderTime, car.FieldTotalOrderCount, car.FieldTotalOrderAmount, car.FieldPowerRemaining, car.FieldErrorCount, car.FieldIsDeleted, car.FieldIsCommercialCar, car.FieldIsDrivingStateValid, car.FieldNextMapVersionProcess, car.FieldExtendYokeeID:
 			values[i] = new(sql.NullInt64)
 		case car.FieldCarName, car.FieldDeviceID, car.FieldLicensePlate, car.FieldActivateCode, car.FieldErrorMessage, car.FieldMapVersion, car.FieldNextMapVersion, car.FieldNextMapVersionState, car.FieldGrAutoVersion, car.FieldGrUIVersion:
 			values[i] = new(sql.NullString)
@@ -251,11 +251,11 @@ func (c *Car) assignValues(columns []string, values []any) error {
 			} else if value.Valid {
 				c.DeleteTime = value.Time
 			}
-		case car.FieldType:
+		case car.FieldOperationMode:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
-				return fmt.Errorf("unexpected type %T for field type", values[i])
+				return fmt.Errorf("unexpected type %T for field operation_mode", values[i])
 			} else if value.Valid {
-				c.Type = int(value.Int64)
+				c.OperationMode = int(value.Int64)
 			}
 		case car.FieldCarName:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -585,8 +585,8 @@ func (c *Car) String() string {
 	builder.WriteString("delete_time=")
 	builder.WriteString(c.DeleteTime.Format(time.ANSIC))
 	builder.WriteString(", ")
-	builder.WriteString("type=")
-	builder.WriteString(fmt.Sprintf("%v", c.Type))
+	builder.WriteString("operation_mode=")
+	builder.WriteString(fmt.Sprintf("%v", c.OperationMode))
 	builder.WriteString(", ")
 	builder.WriteString("car_name=")
 	builder.WriteString(c.CarName)

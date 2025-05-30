@@ -267,6 +267,90 @@ func (bsu *BillingStrategyUpdate) AddNormalMileageUnit(i int) *BillingStrategyUp
 	return bsu
 }
 
+// SetStartStopPrice sets the "start_stop_price" field.
+func (bsu *BillingStrategyUpdate) SetStartStopPrice(i int) *BillingStrategyUpdate {
+	bsu.mutation.ResetStartStopPrice()
+	bsu.mutation.SetStartStopPrice(i)
+	return bsu
+}
+
+// SetNillableStartStopPrice sets the "start_stop_price" field if the given value is not nil.
+func (bsu *BillingStrategyUpdate) SetNillableStartStopPrice(i *int) *BillingStrategyUpdate {
+	if i != nil {
+		bsu.SetStartStopPrice(*i)
+	}
+	return bsu
+}
+
+// AddStartStopPrice adds i to the "start_stop_price" field.
+func (bsu *BillingStrategyUpdate) AddStartStopPrice(i int) *BillingStrategyUpdate {
+	bsu.mutation.AddStartStopPrice(i)
+	return bsu
+}
+
+// SetStartStopUnit sets the "start_stop_unit" field.
+func (bsu *BillingStrategyUpdate) SetStartStopUnit(i int) *BillingStrategyUpdate {
+	bsu.mutation.ResetStartStopUnit()
+	bsu.mutation.SetStartStopUnit(i)
+	return bsu
+}
+
+// SetNillableStartStopUnit sets the "start_stop_unit" field if the given value is not nil.
+func (bsu *BillingStrategyUpdate) SetNillableStartStopUnit(i *int) *BillingStrategyUpdate {
+	if i != nil {
+		bsu.SetStartStopUnit(*i)
+	}
+	return bsu
+}
+
+// AddStartStopUnit adds i to the "start_stop_unit" field.
+func (bsu *BillingStrategyUpdate) AddStartStopUnit(i int) *BillingStrategyUpdate {
+	bsu.mutation.AddStartStopUnit(i)
+	return bsu
+}
+
+// SetNormalStopPrice sets the "normal_stop_price" field.
+func (bsu *BillingStrategyUpdate) SetNormalStopPrice(i int) *BillingStrategyUpdate {
+	bsu.mutation.ResetNormalStopPrice()
+	bsu.mutation.SetNormalStopPrice(i)
+	return bsu
+}
+
+// SetNillableNormalStopPrice sets the "normal_stop_price" field if the given value is not nil.
+func (bsu *BillingStrategyUpdate) SetNillableNormalStopPrice(i *int) *BillingStrategyUpdate {
+	if i != nil {
+		bsu.SetNormalStopPrice(*i)
+	}
+	return bsu
+}
+
+// AddNormalStopPrice adds i to the "normal_stop_price" field.
+func (bsu *BillingStrategyUpdate) AddNormalStopPrice(i int) *BillingStrategyUpdate {
+	bsu.mutation.AddNormalStopPrice(i)
+	return bsu
+}
+
+// SetNormalStopUnit sets the "normal_stop_unit" field.
+func (bsu *BillingStrategyUpdate) SetNormalStopUnit(i int) *BillingStrategyUpdate {
+	bsu.mutation.ResetNormalStopUnit()
+	bsu.mutation.SetNormalStopUnit(i)
+	return bsu
+}
+
+// SetNillableNormalStopUnit sets the "normal_stop_unit" field if the given value is not nil.
+func (bsu *BillingStrategyUpdate) SetNillableNormalStopUnit(i *int) *BillingStrategyUpdate {
+	if i != nil {
+		bsu.SetNormalStopUnit(*i)
+	}
+	return bsu
+}
+
+// AddNormalStopUnit adds i to the "normal_stop_unit" field.
+func (bsu *BillingStrategyUpdate) AddNormalStopUnit(i int) *BillingStrategyUpdate {
+	bsu.mutation.AddNormalStopUnit(i)
+	return bsu
+}
+
 // SetCappedAmount sets the "capped_amount" field.
 func (bsu *BillingStrategyUpdate) SetCappedAmount(i int) *BillingStrategyUpdate {
 	bsu.mutation.ResetCappedAmount()
@@ -455,6 +539,30 @@ func (bsu *BillingStrategyUpdate) sqlSave(ctx context.Context) (n int, err error
 	}
 	if value, ok := bsu.mutation.AddedNormalMileageUnit(); ok {
 		_spec.AddField(billingstrategy.FieldNormalMileageUnit, field.TypeInt, value)
+	}
+	if value, ok := bsu.mutation.StartStopPrice(); ok {
+		_spec.SetField(billingstrategy.FieldStartStopPrice, field.TypeInt, value)
+	}
+	if value, ok := bsu.mutation.AddedStartStopPrice(); ok {
+		_spec.AddField(billingstrategy.FieldStartStopPrice, field.TypeInt, value)
+	}
+	if value, ok := bsu.mutation.StartStopUnit(); ok {
+		_spec.SetField(billingstrategy.FieldStartStopUnit, field.TypeInt, value)
+	}
+	if value, ok := bsu.mutation.AddedStartStopUnit(); ok {
+		_spec.AddField(billingstrategy.FieldStartStopUnit, field.TypeInt, value)
+	}
+	if value, ok := bsu.mutation.NormalStopPrice(); ok {
+		_spec.SetField(billingstrategy.FieldNormalStopPrice, field.TypeInt, value)
+	}
+	if value, ok := bsu.mutation.AddedNormalStopPrice(); ok {
+		_spec.AddField(billingstrategy.FieldNormalStopPrice, field.TypeInt, value)
+	}
+	if value, ok := bsu.mutation.NormalStopUnit(); ok {
+		_spec.SetField(billingstrategy.FieldNormalStopUnit, field.TypeInt, value)
+	}
+	if value, ok := bsu.mutation.AddedNormalStopUnit(); ok {
+		_spec.AddField(billingstrategy.FieldNormalStopUnit, field.TypeInt, value)
 	}
 	if value, ok := bsu.mutation.CappedAmount(); ok {
 		_spec.SetField(billingstrategy.FieldCappedAmount, field.TypeInt, value)
@@ -758,6 +866,90 @@ func (bsuo *BillingStrategyUpdateOne) AddNormalMileageUnit(i int) *BillingStrate
 	return bsuo
 }
 
+// SetStartStopPrice sets the "start_stop_price" field.
+func (bsuo *BillingStrategyUpdateOne) SetStartStopPrice(i int) *BillingStrategyUpdateOne {
+	bsuo.mutation.ResetStartStopPrice()
+	bsuo.mutation.SetStartStopPrice(i)
+	return bsuo
+}
+
+// SetNillableStartStopPrice sets the "start_stop_price" field if the given value is not nil.
+func (bsuo *BillingStrategyUpdateOne) SetNillableStartStopPrice(i *int) *BillingStrategyUpdateOne {
+	if i != nil {
+		bsuo.SetStartStopPrice(*i)
+	}
+	return bsuo
+}
+
+// AddStartStopPrice adds i to the "start_stop_price" field.
+func (bsuo *BillingStrategyUpdateOne) AddStartStopPrice(i int) *BillingStrategyUpdateOne {
+	bsuo.mutation.AddStartStopPrice(i)
+	return bsuo
+}
+
+// SetStartStopUnit sets the "start_stop_unit" field.
+func (bsuo *BillingStrategyUpdateOne) SetStartStopUnit(i int) *BillingStrategyUpdateOne {
+	bsuo.mutation.ResetStartStopUnit()
+	bsuo.mutation.SetStartStopUnit(i)
+	return bsuo
+}
+
+// SetNillableStartStopUnit sets the "start_stop_unit" field if the given value is not nil.
+func (bsuo *BillingStrategyUpdateOne) SetNillableStartStopUnit(i *int) *BillingStrategyUpdateOne {
+	if i != nil {
+		bsuo.SetStartStopUnit(*i)
+	}
+	return bsuo
+}
+
+// AddStartStopUnit adds i to the "start_stop_unit" field.
+func (bsuo *BillingStrategyUpdateOne) AddStartStopUnit(i int) *BillingStrategyUpdateOne {
+	bsuo.mutation.AddStartStopUnit(i)
+	return bsuo
+}
+
+// SetNormalStopPrice sets the "normal_stop_price" field.
+func (bsuo *BillingStrategyUpdateOne) SetNormalStopPrice(i int) *BillingStrategyUpdateOne {
+	bsuo.mutation.ResetNormalStopPrice()
+	bsuo.mutation.SetNormalStopPrice(i)
+	return bsuo
+}
+
+// SetNillableNormalStopPrice sets the "normal_stop_price" field if the given value is not nil.
+func (bsuo *BillingStrategyUpdateOne) SetNillableNormalStopPrice(i *int) *BillingStrategyUpdateOne {
+	if i != nil {
+		bsuo.SetNormalStopPrice(*i)
+	}
+	return bsuo
+}
+
+// AddNormalStopPrice adds i to the "normal_stop_price" field.
+func (bsuo *BillingStrategyUpdateOne) AddNormalStopPrice(i int) *BillingStrategyUpdateOne {
+	bsuo.mutation.AddNormalStopPrice(i)
+	return bsuo
+}
+
+// SetNormalStopUnit sets the "normal_stop_unit" field.
+func (bsuo *BillingStrategyUpdateOne) SetNormalStopUnit(i int) *BillingStrategyUpdateOne {
+	bsuo.mutation.ResetNormalStopUnit()
+	bsuo.mutation.SetNormalStopUnit(i)
+	return bsuo
+}
+
+// SetNillableNormalStopUnit sets the "normal_stop_unit" field if the given value is not nil.
+func (bsuo *BillingStrategyUpdateOne) SetNillableNormalStopUnit(i *int) *BillingStrategyUpdateOne {
+	if i != nil {
+		bsuo.SetNormalStopUnit(*i)
+	}
+	return bsuo
+}
+
+// AddNormalStopUnit adds i to the "normal_stop_unit" field.
+func (bsuo *BillingStrategyUpdateOne) AddNormalStopUnit(i int) *BillingStrategyUpdateOne {
+	bsuo.mutation.AddNormalStopUnit(i)
+	return bsuo
+}
+
 // SetCappedAmount sets the "capped_amount" field.
 func (bsuo *BillingStrategyUpdateOne) SetCappedAmount(i int) *BillingStrategyUpdateOne {
 	bsuo.mutation.ResetCappedAmount()
@@ -976,6 +1168,30 @@ func (bsuo *BillingStrategyUpdateOne) sqlSave(ctx context.Context) (_node *Billi
 	}
 	if value, ok := bsuo.mutation.AddedNormalMileageUnit(); ok {
 		_spec.AddField(billingstrategy.FieldNormalMileageUnit, field.TypeInt, value)
+	}
+	if value, ok := bsuo.mutation.StartStopPrice(); ok {
+		_spec.SetField(billingstrategy.FieldStartStopPrice, field.TypeInt, value)
+	}
+	if value, ok := bsuo.mutation.AddedStartStopPrice(); ok {
+		_spec.AddField(billingstrategy.FieldStartStopPrice, field.TypeInt, value)
+	}
+	if value, ok := bsuo.mutation.StartStopUnit(); ok {
+		_spec.SetField(billingstrategy.FieldStartStopUnit, field.TypeInt, value)
+	}
+	if value, ok := bsuo.mutation.AddedStartStopUnit(); ok {
+		_spec.AddField(billingstrategy.FieldStartStopUnit, field.TypeInt, value)
+	}
+	if value, ok := bsuo.mutation.NormalStopPrice(); ok {
+		_spec.SetField(billingstrategy.FieldNormalStopPrice, field.TypeInt, value)
+	}
+	if value, ok := bsuo.mutation.AddedNormalStopPrice(); ok {
+		_spec.AddField(billingstrategy.FieldNormalStopPrice, field.TypeInt, value)
+	}
+	if value, ok := bsuo.mutation.NormalStopUnit(); ok {
+		_spec.SetField(billingstrategy.FieldNormalStopUnit, field.TypeInt, value)
+	}
+	if value, ok := bsuo.mutation.AddedNormalStopUnit(); ok {
+		_spec.AddField(billingstrategy.FieldNormalStopUnit, field.TypeInt, value)
 	}
 	if value, ok := bsuo.mutation.CappedAmount(); ok {
 		_spec.SetField(billingstrategy.FieldCappedAmount, field.TypeInt, value)

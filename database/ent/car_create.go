@@ -42,16 +42,16 @@ func (cc *CarCreate) SetNillableDeleteTime(t *time.Time) *CarCreate {
 	return cc
 }
 
-// SetType sets the "type" field.
-func (cc *CarCreate) SetType(i int) *CarCreate {
-	cc.mutation.SetType(i)
+// SetOperationMode sets the "operation_mode" field.
+func (cc *CarCreate) SetOperationMode(i int) *CarCreate {
+	cc.mutation.SetOperationMode(i)
 	return cc
 }
 
-// SetNillableType sets the "type" field if the given value is not nil.
-func (cc *CarCreate) SetNillableType(i *int) *CarCreate {
+// SetNillableOperationMode sets the "operation_mode" field if the given value is not nil.
+func (cc *CarCreate) SetNillableOperationMode(i *int) *CarCreate {
 	if i != nil {
-		cc.SetType(*i)
+		cc.SetOperationMode(*i)
 	}
 	return cc
 }
@@ -705,9 +705,9 @@ func (cc *CarCreate) ExecX(ctx context.Context) {
 
 // defaults sets the default values of the builder before save.
 func (cc *CarCreate) defaults() error {
-	if _, ok := cc.mutation.GetType(); !ok {
-		v := car.DefaultType
-		cc.mutation.SetType(v)
+	if _, ok := cc.mutation.OperationMode(); !ok {
+		v := car.DefaultOperationMode
+		cc.mutation.SetOperationMode(v)
 	}
 	if _, ok := cc.mutation.ReservedSeats(); !ok {
 		v := car.DefaultReservedSeats
@@ -828,8 +828,8 @@ func (cc *CarCreate) defaults() error {
 
 // check runs all checks and user-defined validators on the builder.
 func (cc *CarCreate) check() error {
-	if _, ok := cc.mutation.GetType(); !ok {
-		return &ValidationError{Name: "type", err: errors.New(`ent: missing required field "Car.type"`)}
+	if _, ok := cc.mutation.OperationMode(); !ok {
+		return &ValidationError{Name: "operation_mode", err: errors.New(`ent: missing required field "Car.operation_mode"`)}
 	}
 	if _, ok := cc.mutation.CarName(); !ok {
 		return &ValidationError{Name: "car_name", err: errors.New(`ent: missing required field "Car.car_name"`)}
@@ -984,9 +984,9 @@ func (cc *CarCreate) createSpec() (*Car, *sqlgraph.CreateSpec) {
 		_spec.SetField(car.FieldDeleteTime, field.TypeTime, value)
 		_node.DeleteTime = value
 	}
-	if value, ok := cc.mutation.GetType(); ok {
-		_spec.SetField(car.FieldType, field.TypeInt, value)
-		_node.Type = value
+	if value, ok := cc.mutation.OperationMode(); ok {
+		_spec.SetField(car.FieldOperationMode, field.TypeInt, value)
+		_node.OperationMode = value
 	}
 	if value, ok := cc.mutation.CarName(); ok {
 		_spec.SetField(car.FieldCarName, field.TypeString, value)

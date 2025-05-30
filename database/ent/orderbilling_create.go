@@ -21,6 +21,20 @@ type OrderBillingCreate struct {
 	hooks    []Hook
 }
 
+// SetType sets the "type" field.
+func (obc *OrderBillingCreate) SetType(i int) *OrderBillingCreate {
+	obc.mutation.SetType(i)
+	return obc
+}
+
+// SetNillableType sets the "type" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableType(i *int) *OrderBillingCreate {
+	if i != nil {
+		obc.SetType(*i)
+	}
+	return obc
+}
+
 // SetOrderID sets the "order_id" field.
 func (obc *OrderBillingCreate) SetOrderID(i int) *OrderBillingCreate {
 	obc.mutation.SetOrderID(i)
@@ -30,6 +44,14 @@ func (obc *OrderBillingCreate) SetOrderID(i int) *OrderBillingCreate {
 // SetStartTimePrice sets the "start_time_price" field.
 func (obc *OrderBillingCreate) SetStartTimePrice(i int) *OrderBillingCreate {
 	obc.mutation.SetStartTimePrice(i)
+	return obc
+}
+
+// SetNillableStartTimePrice sets the "start_time_price" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableStartTimePrice(i *int) *OrderBillingCreate {
+	if i != nil {
+		obc.SetStartTimePrice(*i)
+	}
 	return obc
 }
 
@@ -53,6 +75,14 @@ func (obc *OrderBillingCreate) SetNormalTimePrice(i int) *OrderBillingCreate {
 	return obc
 }
 
+// SetNillableNormalTimePrice sets the "normal_time_price" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableNormalTimePrice(i *int) *OrderBillingCreate {
+	if i != nil {
+		obc.SetNormalTimePrice(*i)
+	}
+	return obc
+}
+
 // SetNormalTimeUnit sets the "normal_time_unit" field.
 func (obc *OrderBillingCreate) SetNormalTimeUnit(i int) *OrderBillingCreate {
 	obc.mutation.SetNormalTimeUnit(i)
@@ -63,20 +93,6 @@ func (obc *OrderBillingCreate) SetNormalTimeUnit(i int) *OrderBillingCreate {
 func (obc *OrderBillingCreate) SetNillableNormalTimeUnit(i *int) *OrderBillingCreate {
 	if i != nil {
 		obc.SetNormalTimeUnit(*i)
-	}
-	return obc
-}
-
-// SetCappedAmount sets the "capped_amount" field.
-func (obc *OrderBillingCreate) SetCappedAmount(i int) *OrderBillingCreate {
-	obc.mutation.SetCappedAmount(i)
-	return obc
-}
-
-// SetNillableCappedAmount sets the "capped_amount" field if the given value is not nil.
-func (obc *OrderBillingCreate) SetNillableCappedAmount(i *int) *OrderBillingCreate {
-	if i != nil {
-		obc.SetCappedAmount(*i)
 	}
 	return obc
 }
@@ -105,6 +121,132 @@ func (obc *OrderBillingCreate) SetCumulativeMeter(f float64) *OrderBillingCreate
 func (obc *OrderBillingCreate) SetNillableCumulativeMeter(f *float64) *OrderBillingCreate {
 	if f != nil {
 		obc.SetCumulativeMeter(*f)
+	}
+	return obc
+}
+
+// SetCumulativeStop sets the "cumulative_stop" field.
+func (obc *OrderBillingCreate) SetCumulativeStop(i int) *OrderBillingCreate {
+	obc.mutation.SetCumulativeStop(i)
+	return obc
+}
+
+// SetNillableCumulativeStop sets the "cumulative_stop" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableCumulativeStop(i *int) *OrderBillingCreate {
+	if i != nil {
+		obc.SetCumulativeStop(*i)
+	}
+	return obc
+}
+
+// SetStartStopPrice sets the "start_stop_price" field.
+func (obc *OrderBillingCreate) SetStartStopPrice(i int) *OrderBillingCreate {
+	obc.mutation.SetStartStopPrice(i)
+	return obc
+}
+
+// SetNillableStartStopPrice sets the "start_stop_price" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableStartStopPrice(i *int) *OrderBillingCreate {
+	if i != nil {
+		obc.SetStartStopPrice(*i)
+	}
+	return obc
+}
+
+// SetStartStopUnit sets the "start_stop_unit" field.
+func (obc *OrderBillingCreate) SetStartStopUnit(i int) *OrderBillingCreate {
+	obc.mutation.SetStartStopUnit(i)
+	return obc
+}
+
+// SetNillableStartStopUnit sets the "start_stop_unit" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableStartStopUnit(i *int) *OrderBillingCreate {
+	if i != nil {
+		obc.SetStartStopUnit(*i)
+	}
+	return obc
+}
+
+// SetNormalStopPrice sets the "normal_stop_price" field.
+func (obc *OrderBillingCreate) SetNormalStopPrice(i int) *OrderBillingCreate {
+	obc.mutation.SetNormalStopPrice(i)
+	return obc
+}
+
+// SetNillableNormalStopPrice sets the "normal_stop_price" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableNormalStopPrice(i *int) *OrderBillingCreate {
+	if i != nil {
+		obc.SetNormalStopPrice(*i)
+	}
+	return obc
+}
+
+// SetNormalStopUnit sets the "normal_stop_unit" field.
+func (obc *OrderBillingCreate) SetNormalStopUnit(i int) *OrderBillingCreate {
+	obc.mutation.SetNormalStopUnit(i)
+	return obc
+}
+
+// SetNillableNormalStopUnit sets the "normal_stop_unit" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableNormalStopUnit(i *int) *OrderBillingCreate {
+	if i != nil {
+		obc.SetNormalStopUnit(*i)
+	}
+	return obc
+}
+
+// SetCouponID sets the "coupon_id" field.
+func (obc *OrderBillingCreate) SetCouponID(i int) *OrderBillingCreate {
+	obc.mutation.SetCouponID(i)
+	return obc
+}
+
+// SetNillableCouponID sets the "coupon_id" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableCouponID(i *int) *OrderBillingCreate {
+	if i != nil {
+		obc.SetCouponID(*i)
+	}
+	return obc
+}
+
+// SetCouponLimitAmount sets the "coupon_limit_amount" field.
+func (obc *OrderBillingCreate) SetCouponLimitAmount(i int) *OrderBillingCreate {
+	obc.mutation.SetCouponLimitAmount(i)
+	return obc
+}
+
+// SetNillableCouponLimitAmount sets the "coupon_limit_amount" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableCouponLimitAmount(i *int) *OrderBillingCreate {
+	if i != nil {
+		obc.SetCouponLimitAmount(*i)
+	}
+	return obc
+}
+
+// SetCouponDeductionAmount sets the "coupon_deduction_amount" field.
+func (obc *OrderBillingCreate) SetCouponDeductionAmount(i int) *OrderBillingCreate {
+	obc.mutation.SetCouponDeductionAmount(i)
+	return obc
+}
+
+// SetNillableCouponDeductionAmount sets the "coupon_deduction_amount" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableCouponDeductionAmount(i *int) *OrderBillingCreate {
+	if i != nil {
+		obc.SetCouponDeductionAmount(*i)
+	}
+	return obc
+}
+
+// SetCappedAmount sets the "capped_amount" field.
+func (obc *OrderBillingCreate) SetCappedAmount(i int) *OrderBillingCreate {
+	obc.mutation.SetCappedAmount(i)
+	return obc
+}
+
+// SetNillableCappedAmount sets the "capped_amount" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableCappedAmount(i *int) *OrderBillingCreate {
+	if i != nil {
+		obc.SetCappedAmount(*i)
 	}
 	return obc
 }
@@ -225,17 +367,25 @@ func (obc *OrderBillingCreate) ExecX(ctx context.Context) {
 
 // defaults sets the default values of the builder before save.
 func (obc *OrderBillingCreate) defaults() {
+	if _, ok := obc.mutation.GetType(); !ok {
+		v := orderbilling.DefaultType
+		obc.mutation.SetType(v)
+	}
+	if _, ok := obc.mutation.StartTimePrice(); !ok {
+		v := orderbilling.DefaultStartTimePrice
+		obc.mutation.SetStartTimePrice(v)
+	}
 	if _, ok := obc.mutation.StartTimeUnit(); !ok {
 		v := orderbilling.DefaultStartTimeUnit
 		obc.mutation.SetStartTimeUnit(v)
 	}
+	if _, ok := obc.mutation.NormalTimePrice(); !ok {
+		v := orderbilling.DefaultNormalTimePrice
+		obc.mutation.SetNormalTimePrice(v)
+	}
 	if _, ok := obc.mutation.NormalTimeUnit(); !ok {
 		v := orderbilling.DefaultNormalTimeUnit
 		obc.mutation.SetNormalTimeUnit(v)
-	}
-	if _, ok := obc.mutation.CappedAmount(); !ok {
-		v := orderbilling.DefaultCappedAmount
-		obc.mutation.SetCappedAmount(v)
 	}
 	if _, ok := obc.mutation.CumulativeSecond(); !ok {
 		v := orderbilling.DefaultCumulativeSecond
@@ -244,6 +394,42 @@ func (obc *OrderBillingCreate) defaults() {
 	if _, ok := obc.mutation.CumulativeMeter(); !ok {
 		v := orderbilling.DefaultCumulativeMeter
 		obc.mutation.SetCumulativeMeter(v)
+	}
+	if _, ok := obc.mutation.CumulativeStop(); !ok {
+		v := orderbilling.DefaultCumulativeStop
+		obc.mutation.SetCumulativeStop(v)
+	}
+	if _, ok := obc.mutation.StartStopPrice(); !ok {
+		v := orderbilling.DefaultStartStopPrice
+		obc.mutation.SetStartStopPrice(v)
+	}
+	if _, ok := obc.mutation.StartStopUnit(); !ok {
+		v := orderbilling.DefaultStartStopUnit
+		obc.mutation.SetStartStopUnit(v)
+	}
+	if _, ok := obc.mutation.NormalStopPrice(); !ok {
+		v := orderbilling.DefaultNormalStopPrice
+		obc.mutation.SetNormalStopPrice(v)
+	}
+	if _, ok := obc.mutation.NormalStopUnit(); !ok {
+		v := orderbilling.DefaultNormalStopUnit
+		obc.mutation.SetNormalStopUnit(v)
+	}
+	if _, ok := obc.mutation.CouponID(); !ok {
+		v := orderbilling.DefaultCouponID
+		obc.mutation.SetCouponID(v)
+	}
+	if _, ok := obc.mutation.CouponLimitAmount(); !ok {
+		v := orderbilling.DefaultCouponLimitAmount
+		obc.mutation.SetCouponLimitAmount(v)
+	}
+	if _, ok := obc.mutation.CouponDeductionAmount(); !ok {
+		v := orderbilling.DefaultCouponDeductionAmount
+		obc.mutation.SetCouponDeductionAmount(v)
+	}
+	if _, ok := obc.mutation.CappedAmount(); !ok {
+		v := orderbilling.DefaultCappedAmount
+		obc.mutation.SetCappedAmount(v)
 	}
 	if _, ok := obc.mutation.State(); !ok {
 		v := orderbilling.DefaultState
@@ -261,6 +447,9 @@ func (obc *OrderBillingCreate) defaults() {
 
 // check runs all checks and user-defined validators on the builder.
 func (obc *OrderBillingCreate) check() error {
+	if _, ok := obc.mutation.GetType(); !ok {
+		return &ValidationError{Name: "type", err: errors.New(`ent: missing required field "OrderBilling.type"`)}
+	}
 	if _, ok := obc.mutation.OrderID(); !ok {
 		return &ValidationError{Name: "order_id", err: errors.New(`ent: missing required field "OrderBilling.order_id"`)}
 	}
@@ -276,14 +465,38 @@ func (obc *OrderBillingCreate) check() error {
 	if _, ok := obc.mutation.NormalTimeUnit(); !ok {
 		return &ValidationError{Name: "normal_time_unit", err: errors.New(`ent: missing required field "OrderBilling.normal_time_unit"`)}
 	}
-	if _, ok := obc.mutation.CappedAmount(); !ok {
-		return &ValidationError{Name: "capped_amount", err: errors.New(`ent: missing required field "OrderBilling.capped_amount"`)}
-	}
 	if _, ok := obc.mutation.CumulativeSecond(); !ok {
 		return &ValidationError{Name: "cumulative_second", err: errors.New(`ent: missing required field "OrderBilling.cumulative_second"`)}
 	}
 	if _, ok := obc.mutation.CumulativeMeter(); !ok {
 		return &ValidationError{Name: "cumulative_meter", err: errors.New(`ent: missing required field "OrderBilling.cumulative_meter"`)}
+	}
+	if _, ok := obc.mutation.CumulativeStop(); !ok {
+		return &ValidationError{Name: "cumulative_stop", err: errors.New(`ent: missing required field "OrderBilling.cumulative_stop"`)}
+	}
+	if _, ok := obc.mutation.StartStopPrice(); !ok {
+		return &ValidationError{Name: "start_stop_price", err: errors.New(`ent: missing required field "OrderBilling.start_stop_price"`)}
+	}
+	if _, ok := obc.mutation.StartStopUnit(); !ok {
+		return &ValidationError{Name: "start_stop_unit", err: errors.New(`ent: missing required field "OrderBilling.start_stop_unit"`)}
+	}
+	if _, ok := obc.mutation.NormalStopPrice(); !ok {
+		return &ValidationError{Name: "normal_stop_price", err: errors.New(`ent: missing required field "OrderBilling.normal_stop_price"`)}
+	}
+	if _, ok := obc.mutation.NormalStopUnit(); !ok {
+		return &ValidationError{Name: "normal_stop_unit", err: errors.New(`ent: missing required field "OrderBilling.normal_stop_unit"`)}
+	}
+	if _, ok := obc.mutation.CouponID(); !ok {
+		return &ValidationError{Name: "coupon_id", err: errors.New(`ent: missing required field "OrderBilling.coupon_id"`)}
+	}
+	if _, ok := obc.mutation.CouponLimitAmount(); !ok {
+		return &ValidationError{Name: "coupon_limit_amount", err: errors.New(`ent: missing required field "OrderBilling.coupon_limit_amount"`)}
+	}
+	if _, ok := obc.mutation.CouponDeductionAmount(); !ok {
+		return &ValidationError{Name: "coupon_deduction_amount", err: errors.New(`ent: missing required field "OrderBilling.coupon_deduction_amount"`)}
+	}
+	if _, ok := obc.mutation.CappedAmount(); !ok {
+		return &ValidationError{Name: "capped_amount", err: errors.New(`ent: missing required field "OrderBilling.capped_amount"`)}
 	}
 	if _, ok := obc.mutation.State(); !ok {
 		return &ValidationError{Name: "state", err: errors.New(`ent: missing required field "OrderBilling.state"`)}
@@ -329,6 +542,10 @@ func (obc *OrderBillingCreate) createSpec() (*OrderBilling, *sqlgraph.CreateSpec
 		_node.ID = id
 		_spec.ID.Value = id
 	}
+	if value, ok := obc.mutation.GetType(); ok {
+		_spec.SetField(orderbilling.FieldType, field.TypeInt, value)
+		_node.Type = value
+	}
 	if value, ok := obc.mutation.StartTimePrice(); ok {
 		_spec.SetField(orderbilling.FieldStartTimePrice, field.TypeInt, value)
 		_node.StartTimePrice = value
@@ -345,10 +562,6 @@ func (obc *OrderBillingCreate) createSpec() (*OrderBilling, *sqlgraph.CreateSpec
 		_spec.SetField(orderbilling.FieldNormalTimeUnit, field.TypeInt, value)
 		_node.NormalTimeUnit = value
 	}
-	if value, ok := obc.mutation.CappedAmount(); ok {
-		_spec.SetField(orderbilling.FieldCappedAmount, field.TypeInt, value)
-		_node.CappedAmount = value
-	}
 	if value, ok := obc.mutation.CumulativeSecond(); ok {
 		_spec.SetField(orderbilling.FieldCumulativeSecond, field.TypeFloat64, value)
 		_node.CumulativeSecond = value
@@ -356,6 +569,42 @@ func (obc *OrderBillingCreate) createSpec() (*OrderBilling, *sqlgraph.CreateSpec
 	if value, ok := obc.mutation.CumulativeMeter(); ok {
 		_spec.SetField(orderbilling.FieldCumulativeMeter, field.TypeFloat64, value)
 		_node.CumulativeMeter = value
+	}
+	if value, ok := obc.mutation.CumulativeStop(); ok {
+		_spec.SetField(orderbilling.FieldCumulativeStop, field.TypeInt, value)
+		_node.CumulativeStop = value
+	}
+	if value, ok := obc.mutation.StartStopPrice(); ok {
+		_spec.SetField(orderbilling.FieldStartStopPrice, field.TypeInt, value)
+		_node.StartStopPrice = value
+	}
+	if value, ok := obc.mutation.StartStopUnit(); ok {
+		_spec.SetField(orderbilling.FieldStartStopUnit, field.TypeInt, value)
+		_node.StartStopUnit = value
+	}
+	if value, ok := obc.mutation.NormalStopPrice(); ok {
+		_spec.SetField(orderbilling.FieldNormalStopPrice, field.TypeInt, value)
+		_node.NormalStopPrice = value
+	}
+	if value, ok := obc.mutation.NormalStopUnit(); ok {
+		_spec.SetField(orderbilling.FieldNormalStopUnit, field.TypeInt, value)
+		_node.NormalStopUnit = value
+	}
+	if value, ok := obc.mutation.CouponID(); ok {
+		_spec.SetField(orderbilling.FieldCouponID, field.TypeInt, value)
+		_node.CouponID = value
+	}
+	if value, ok := obc.mutation.CouponLimitAmount(); ok {
+		_spec.SetField(orderbilling.FieldCouponLimitAmount, field.TypeInt, value)
+		_node.CouponLimitAmount = value
+	}
+	if value, ok := obc.mutation.CouponDeductionAmount(); ok {
+		_spec.SetField(orderbilling.FieldCouponDeductionAmount, field.TypeInt, value)
+		_node.CouponDeductionAmount = value
+	}
+	if value, ok := obc.mutation.CappedAmount(); ok {
+		_spec.SetField(orderbilling.FieldCappedAmount, field.TypeInt, value)
+		_node.CappedAmount = value
 	}
 	if value, ok := obc.mutation.State(); ok {
 		_spec.SetField(orderbilling.FieldState, field.TypeInt, value)

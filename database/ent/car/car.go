@@ -17,8 +17,8 @@ const (
 	FieldID = "id"
 	// FieldDeleteTime holds the string denoting the delete_time field in the database.
 	FieldDeleteTime = "delete_time"
-	// FieldType holds the string denoting the type field in the database.
-	FieldType = "type"
+	// FieldOperationMode holds the string denoting the operation_mode field in the database.
+	FieldOperationMode = "operation_mode"
 	// FieldCarName holds the string denoting the car_name field in the database.
 	FieldCarName = "car_name"
 	// FieldScenicAreaID holds the string denoting the scenic_area_id field in the database.
@@ -181,7 +181,7 @@ const (
 var Columns = []string{
 	FieldID,
 	FieldDeleteTime,
-	FieldType,
+	FieldOperationMode,
 	FieldCarName,
 	FieldScenicAreaID,
 	FieldDeviceID,
@@ -243,8 +243,8 @@ func ValidColumn(column string) bool {
 var (
 	Hooks        [1]ent.Hook
 	Interceptors [1]ent.Interceptor
-	// DefaultType holds the default value on creation for the "type" field.
-	DefaultType int
+	// DefaultOperationMode holds the default value on creation for the "operation_mode" field.
+	DefaultOperationMode int
 	// DefaultReservedSeats holds the default value on creation for the "reserved_seats" field.
 	DefaultReservedSeats int
 	// DefaultState holds the default value on creation for the "state" field.
@@ -316,9 +316,9 @@ func ByDeleteTime(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldDeleteTime, opts...).ToFunc()
 }
 
-// ByType orders the results by the type field.
-func ByType(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldType, opts...).ToFunc()
+// ByOperationMode orders the results by the operation_mode field.
+func ByOperationMode(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldOperationMode, opts...).ToFunc()
 }
 
 // ByCarName orders the results by the car_name field.
