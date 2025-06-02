@@ -8,11 +8,10 @@ require (
 	github.com/go-redis/redis/extra/redisotel v0.3.0
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/go-sql-driver/mysql v1.9.2
-	github.com/google/uuid v1.6.0
 	github.com/google/wire v0.6.0
 	github.com/influxdata/influxdb-client-go/v2 v2.14.0
-	github.com/jianbo-zh/jylib v0.1.52
-	github.com/jianbo-zh/jypb v0.1.33
+	github.com/jianbo-zh/jylib v0.1.54
+	github.com/jianbo-zh/jypb v0.1.34
 	github.com/lib/pq v1.10.9
 	go.uber.org/automaxprocs v1.6.0
 )
@@ -49,6 +48,7 @@ require (
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/pprof v0.0.0-20210720184732-4bb14d4b1be1 // indirect
+	github.com/google/uuid v1.6.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3 // indirect
 	github.com/hashicorp/consul/api v1.32.1 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect

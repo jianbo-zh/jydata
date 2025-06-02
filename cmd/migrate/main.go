@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/go-kratos/kratos/v2/encoding/json"
-	"github.com/google/uuid"
 
 	_ "go.uber.org/automaxprocs"
 
@@ -19,7 +18,6 @@ var (
 
 func init() {
 	bootstrap.RegisterServiceInfo(
-		uuid.NewString(),
 		"jydata.migrate",
 		Version,
 		map[string]string{},
