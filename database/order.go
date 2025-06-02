@@ -11,6 +11,7 @@ import (
 
 func (db *Database) CreateOrder(ctx context.Context, req *ent.Order) (*ent.Order, error) {
 	return db.MainDB().Order.Create().
+		SetType(req.Type).
 		SetOrderNo(req.OrderNo).
 		SetMchID(req.MchID).
 		SetScenicAreaID(req.ScenicAreaID).
@@ -29,6 +30,9 @@ func (db *Database) CreateOrder(ctx context.Context, req *ent.Order) (*ent.Order
 		SetOrderAmount(req.OrderAmount).
 		SetOrderState(req.OrderState).
 		SetDepositState(req.DepositState).
+		SetCouponID(req.CouponID).
+		SetCouponName(req.CouponName).
+		SetCouponAmount(req.CouponAmount).
 		SetEmergencyState(req.EmergencyState).
 		SetIsProfitSharing(req.IsProfitSharing).
 		SetIsTestOrder(req.IsTestOrder).

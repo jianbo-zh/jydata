@@ -34,8 +34,10 @@ type CarsFlight struct {
 	RouteName string `json:"route_name,omitempty"`
 	// 可售卖座位数
 	SeatsNum int `json:"seats_num,omitempty"`
-	// 班次状态(1-待发车 2-行驶中 2-已结束 3-已取消)
+	// 班次状态(1-待发车 2-路线规划中 3-行驶中 4-到停靠点 5-到目的地 6-已取消)
 	State int `json:"state,omitempty"`
+	// 当前或下一个停靠点
+	CurrStopID int `json:"curr_stop_id,omitempty"`
 	// 站点列表
 	StopIds []int `json:"stop_ids,omitempty"`
 	// 过站列表
@@ -64,7 +66,7 @@ func (*CarsFlight) scanValues(columns []string) ([]any, error) {
 		switch columns[i] {
 		case carsflight.FieldStopIds, carsflight.FieldPassIds, carsflight.FieldStopStock:
 			values[i] = new([]byte)
-		case carsflight.FieldID, carsflight.FieldScenicAreaID, carsflight.FieldCarID, carsflight.FieldRouteID, carsflight.FieldSeatsNum, carsflight.FieldState, carsflight.FieldExtendYokeeID:
+		case carsflight.FieldID, carsflight.FieldScenicAreaID, carsflight.FieldCarID, carsflight.FieldRouteID, carsflight.FieldSeatsNum, carsflight.FieldState, carsflight.FieldCurrStopID, carsflight.FieldExtendYokeeID:
 			values[i] = new(sql.NullInt64)
 		case carsflight.FieldFlightNo, carsflight.FieldCarName, carsflight.FieldRouteName, carsflight.FieldRemark:
 			values[i] = new(sql.NullString)
@@ -138,6 +140,12 @@ func (cf *CarsFlight) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field state", values[i])
 			} else if value.Valid {
 				cf.State = int(value.Int64)
+			}
+		case carsflight.FieldCurrStopID:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field curr_stop_id", values[i])
+			} else if value.Valid {
+				cf.CurrStopID = int(value.Int64)
 			}
 		case carsflight.FieldStopIds:
 			if value, ok := values[i].(*[]byte); !ok {
@@ -261,6 +269,9 @@ func (cf *CarsFlight) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("state=")
 	builder.WriteString(fmt.Sprintf("%v", cf.State))
+	builder.WriteString(", ")
+	builder.WriteString("curr_stop_id=")
+	builder.WriteString(fmt.Sprintf("%v", cf.CurrStopID))
 	builder.WriteString(", ")
 	builder.WriteString("stop_ids=")
 	builder.WriteString(fmt.Sprintf("%v", cf.StopIds))

@@ -33,8 +33,8 @@ func (cfeyc *CarsFlightExtendYokeeCreate) SetYokeeDispatchID(i int) *CarsFlightE
 }
 
 // SetYokeeSpeedLimit sets the "yokee_speed_limit" field.
-func (cfeyc *CarsFlightExtendYokeeCreate) SetYokeeSpeedLimit(i int) *CarsFlightExtendYokeeCreate {
-	cfeyc.mutation.SetYokeeSpeedLimit(i)
+func (cfeyc *CarsFlightExtendYokeeCreate) SetYokeeSpeedLimit(f float32) *CarsFlightExtendYokeeCreate {
+	cfeyc.mutation.SetYokeeSpeedLimit(f)
 	return cfeyc
 }
 
@@ -175,7 +175,7 @@ func (cfeyc *CarsFlightExtendYokeeCreate) createSpec() (*CarsFlightExtendYokee, 
 		_node.YokeeDispatchID = value
 	}
 	if value, ok := cfeyc.mutation.YokeeSpeedLimit(); ok {
-		_spec.SetField(carsflightextendyokee.FieldYokeeSpeedLimit, field.TypeInt, value)
+		_spec.SetField(carsflightextendyokee.FieldYokeeSpeedLimit, field.TypeFloat32, value)
 		_node.YokeeSpeedLimit = value
 	}
 	if value, ok := cfeyc.mutation.CreateTime(); ok {

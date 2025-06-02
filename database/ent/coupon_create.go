@@ -78,6 +78,20 @@ func (cc *CouponCreate) SetCouponAmount(i int) *CouponCreate {
 	return cc
 }
 
+// SetBindOrderID sets the "bind_order_id" field.
+func (cc *CouponCreate) SetBindOrderID(i int) *CouponCreate {
+	cc.mutation.SetBindOrderID(i)
+	return cc
+}
+
+// SetNillableBindOrderID sets the "bind_order_id" field if the given value is not nil.
+func (cc *CouponCreate) SetNillableBindOrderID(i *int) *CouponCreate {
+	if i != nil {
+		cc.SetBindOrderID(*i)
+	}
+	return cc
+}
+
 // SetState sets the "state" field.
 func (cc *CouponCreate) SetState(i int) *CouponCreate {
 	cc.mutation.SetState(i)
@@ -297,6 +311,10 @@ func (cc *CouponCreate) createSpec() (*Coupon, *sqlgraph.CreateSpec) {
 	if value, ok := cc.mutation.CouponAmount(); ok {
 		_spec.SetField(coupon.FieldCouponAmount, field.TypeInt, value)
 		_node.CouponAmount = value
+	}
+	if value, ok := cc.mutation.BindOrderID(); ok {
+		_spec.SetField(coupon.FieldBindOrderID, field.TypeInt, value)
+		_node.BindOrderID = &value
 	}
 	if value, ok := cc.mutation.State(); ok {
 		_spec.SetField(coupon.FieldState, field.TypeInt, value)

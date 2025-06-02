@@ -11,13 +11,20 @@ import (
 
 func (db *Database) CreateOrderBilling(ctx context.Context, billing *ent.OrderBilling) (*ent.OrderBilling, error) {
 	return db.MainDB().OrderBilling.Create().
+		SetType(billing.Type).
 		SetOrderID(billing.OrderID).
 		SetState(int(fieldstate.OrderBillingState_Init)).
 		SetStartTimePrice(billing.StartTimePrice).
 		SetStartTimeUnit(billing.StartTimeUnit).
 		SetNormalTimePrice(billing.NormalTimePrice).
 		SetNormalTimeUnit(billing.NormalTimeUnit).
+		SetStartStopPrice(billing.StartStopPrice).
+		SetStartStopUnit(billing.StartStopUnit).
+		SetNormalStopPrice(billing.NormalStopPrice).
+		SetNormalStopUnit(billing.NormalStopUnit).
+		SetCumulativeStop(billing.CumulativeStop).
 		SetCappedAmount(billing.CappedAmount).
+		SetState(billing.State).
 		SetNillableStartTime(nil).
 		SetNillableFinishTime(nil).
 		Save(ctx)

@@ -28,6 +28,8 @@ const (
 	FieldLimitAmount = "limit_amount"
 	// FieldCouponAmount holds the string denoting the coupon_amount field in the database.
 	FieldCouponAmount = "coupon_amount"
+	// FieldBindOrderID holds the string denoting the bind_order_id field in the database.
+	FieldBindOrderID = "bind_order_id"
 	// FieldState holds the string denoting the state field in the database.
 	FieldState = "state"
 	// FieldValidStartTime holds the string denoting the valid_start_time field in the database.
@@ -52,6 +54,7 @@ var Columns = []string{
 	FieldUserID,
 	FieldLimitAmount,
 	FieldCouponAmount,
+	FieldBindOrderID,
 	FieldState,
 	FieldValidStartTime,
 	FieldValidEndTime,
@@ -128,6 +131,11 @@ func ByLimitAmount(opts ...sql.OrderTermOption) OrderOption {
 // ByCouponAmount orders the results by the coupon_amount field.
 func ByCouponAmount(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldCouponAmount, opts...).ToFunc()
+}
+
+// ByBindOrderID orders the results by the bind_order_id field.
+func ByBindOrderID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldBindOrderID, opts...).ToFunc()
 }
 
 // ByState orders the results by the state field.

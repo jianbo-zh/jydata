@@ -641,16 +641,28 @@ func init() {
 	carsflightDescState := carsflightFields[8].Descriptor()
 	// carsflight.DefaultState holds the default value on creation for the state field.
 	carsflight.DefaultState = carsflightDescState.Default.(int)
+	// carsflightDescCurrStopID is the schema descriptor for curr_stop_id field.
+	carsflightDescCurrStopID := carsflightFields[9].Descriptor()
+	// carsflight.DefaultCurrStopID holds the default value on creation for the curr_stop_id field.
+	carsflight.DefaultCurrStopID = carsflightDescCurrStopID.Default.(int)
+	// carsflightDescStopIds is the schema descriptor for stop_ids field.
+	carsflightDescStopIds := carsflightFields[10].Descriptor()
+	// carsflight.DefaultStopIds holds the default value on creation for the stop_ids field.
+	carsflight.DefaultStopIds = carsflightDescStopIds.Default.([]int)
+	// carsflightDescPassIds is the schema descriptor for pass_ids field.
+	carsflightDescPassIds := carsflightFields[11].Descriptor()
+	// carsflight.DefaultPassIds holds the default value on creation for the pass_ids field.
+	carsflight.DefaultPassIds = carsflightDescPassIds.Default.([]int)
 	// carsflightDescRemark is the schema descriptor for remark field.
-	carsflightDescRemark := carsflightFields[11].Descriptor()
+	carsflightDescRemark := carsflightFields[12].Descriptor()
 	// carsflight.DefaultRemark holds the default value on creation for the remark field.
 	carsflight.DefaultRemark = carsflightDescRemark.Default.(string)
 	// carsflightDescCreateTime is the schema descriptor for create_time field.
-	carsflightDescCreateTime := carsflightFields[16].Descriptor()
+	carsflightDescCreateTime := carsflightFields[17].Descriptor()
 	// carsflight.DefaultCreateTime holds the default value on creation for the create_time field.
 	carsflight.DefaultCreateTime = carsflightDescCreateTime.Default.(func() time.Time)
 	// carsflightDescUpdateTime is the schema descriptor for update_time field.
-	carsflightDescUpdateTime := carsflightFields[17].Descriptor()
+	carsflightDescUpdateTime := carsflightFields[18].Descriptor()
 	// carsflight.DefaultUpdateTime holds the default value on creation for the update_time field.
 	carsflight.DefaultUpdateTime = carsflightDescUpdateTime.Default.(func() time.Time)
 	// carsflight.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
@@ -787,15 +799,15 @@ func init() {
 	couponFields := schema.Coupon{}.Fields()
 	_ = couponFields
 	// couponDescState is the schema descriptor for state field.
-	couponDescState := couponFields[7].Descriptor()
+	couponDescState := couponFields[8].Descriptor()
 	// coupon.DefaultState holds the default value on creation for the state field.
 	coupon.DefaultState = couponDescState.Default.(int)
 	// couponDescCreateTime is the schema descriptor for create_time field.
-	couponDescCreateTime := couponFields[10].Descriptor()
+	couponDescCreateTime := couponFields[11].Descriptor()
 	// coupon.DefaultCreateTime holds the default value on creation for the create_time field.
 	coupon.DefaultCreateTime = couponDescCreateTime.Default.(func() time.Time)
 	// couponDescUpdateTime is the schema descriptor for update_time field.
-	couponDescUpdateTime := couponFields[11].Descriptor()
+	couponDescUpdateTime := couponFields[12].Descriptor()
 	// coupon.DefaultUpdateTime holds the default value on creation for the update_time field.
 	coupon.DefaultUpdateTime = couponDescUpdateTime.Default.(func() time.Time)
 	// coupon.UpdateDefaultUpdateTime holds the default value on update for the update_time field.

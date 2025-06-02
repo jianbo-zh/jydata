@@ -31,6 +31,8 @@ type Coupon struct {
 	LimitAmount int `json:"limit_amount,omitempty"`
 	// 优惠金额（单位：分）
 	CouponAmount int `json:"coupon_amount,omitempty"`
+	// 绑定订单ID
+	BindOrderID *int `json:"bind_order_id,omitempty"`
 	// 使用状态（1-未使用、2-已使用、3-已过期）
 	State int `json:"state,omitempty"`
 	// 有效期开始时间
@@ -49,7 +51,7 @@ func (*Coupon) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case coupon.FieldID, coupon.FieldScenicAreaID, coupon.FieldUserID, coupon.FieldLimitAmount, coupon.FieldCouponAmount, coupon.FieldState:
+		case coupon.FieldID, coupon.FieldScenicAreaID, coupon.FieldUserID, coupon.FieldLimitAmount, coupon.FieldCouponAmount, coupon.FieldBindOrderID, coupon.FieldState:
 			values[i] = new(sql.NullInt64)
 		case coupon.FieldName, coupon.FieldCouponNo:
 			values[i] = new(sql.NullString)
@@ -118,6 +120,13 @@ func (c *Coupon) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field coupon_amount", values[i])
 			} else if value.Valid {
 				c.CouponAmount = int(value.Int64)
+			}
+		case coupon.FieldBindOrderID:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field bind_order_id", values[i])
+			} else if value.Valid {
+				c.BindOrderID = new(int)
+				*c.BindOrderID = int(value.Int64)
 			}
 		case coupon.FieldState:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -207,6 +216,11 @@ func (c *Coupon) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("coupon_amount=")
 	builder.WriteString(fmt.Sprintf("%v", c.CouponAmount))
+	builder.WriteString(", ")
+	if v := c.BindOrderID; v != nil {
+		builder.WriteString("bind_order_id=")
+		builder.WriteString(fmt.Sprintf("%v", *v))
+	}
 	builder.WriteString(", ")
 	builder.WriteString("state=")
 	builder.WriteString(fmt.Sprintf("%v", c.State))

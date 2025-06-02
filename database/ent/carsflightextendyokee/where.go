@@ -65,7 +65,7 @@ func YokeeDispatchID(v int) predicate.CarsFlightExtendYokee {
 }
 
 // YokeeSpeedLimit applies equality check predicate on the "yokee_speed_limit" field. It's identical to YokeeSpeedLimitEQ.
-func YokeeSpeedLimit(v int) predicate.CarsFlightExtendYokee {
+func YokeeSpeedLimit(v float32) predicate.CarsFlightExtendYokee {
 	return predicate.CarsFlightExtendYokee(sql.FieldEQ(FieldYokeeSpeedLimit, v))
 }
 
@@ -160,42 +160,42 @@ func YokeeDispatchIDLTE(v int) predicate.CarsFlightExtendYokee {
 }
 
 // YokeeSpeedLimitEQ applies the EQ predicate on the "yokee_speed_limit" field.
-func YokeeSpeedLimitEQ(v int) predicate.CarsFlightExtendYokee {
+func YokeeSpeedLimitEQ(v float32) predicate.CarsFlightExtendYokee {
 	return predicate.CarsFlightExtendYokee(sql.FieldEQ(FieldYokeeSpeedLimit, v))
 }
 
 // YokeeSpeedLimitNEQ applies the NEQ predicate on the "yokee_speed_limit" field.
-func YokeeSpeedLimitNEQ(v int) predicate.CarsFlightExtendYokee {
+func YokeeSpeedLimitNEQ(v float32) predicate.CarsFlightExtendYokee {
 	return predicate.CarsFlightExtendYokee(sql.FieldNEQ(FieldYokeeSpeedLimit, v))
 }
 
 // YokeeSpeedLimitIn applies the In predicate on the "yokee_speed_limit" field.
-func YokeeSpeedLimitIn(vs ...int) predicate.CarsFlightExtendYokee {
+func YokeeSpeedLimitIn(vs ...float32) predicate.CarsFlightExtendYokee {
 	return predicate.CarsFlightExtendYokee(sql.FieldIn(FieldYokeeSpeedLimit, vs...))
 }
 
 // YokeeSpeedLimitNotIn applies the NotIn predicate on the "yokee_speed_limit" field.
-func YokeeSpeedLimitNotIn(vs ...int) predicate.CarsFlightExtendYokee {
+func YokeeSpeedLimitNotIn(vs ...float32) predicate.CarsFlightExtendYokee {
 	return predicate.CarsFlightExtendYokee(sql.FieldNotIn(FieldYokeeSpeedLimit, vs...))
 }
 
 // YokeeSpeedLimitGT applies the GT predicate on the "yokee_speed_limit" field.
-func YokeeSpeedLimitGT(v int) predicate.CarsFlightExtendYokee {
+func YokeeSpeedLimitGT(v float32) predicate.CarsFlightExtendYokee {
 	return predicate.CarsFlightExtendYokee(sql.FieldGT(FieldYokeeSpeedLimit, v))
 }
 
 // YokeeSpeedLimitGTE applies the GTE predicate on the "yokee_speed_limit" field.
-func YokeeSpeedLimitGTE(v int) predicate.CarsFlightExtendYokee {
+func YokeeSpeedLimitGTE(v float32) predicate.CarsFlightExtendYokee {
 	return predicate.CarsFlightExtendYokee(sql.FieldGTE(FieldYokeeSpeedLimit, v))
 }
 
 // YokeeSpeedLimitLT applies the LT predicate on the "yokee_speed_limit" field.
-func YokeeSpeedLimitLT(v int) predicate.CarsFlightExtendYokee {
+func YokeeSpeedLimitLT(v float32) predicate.CarsFlightExtendYokee {
 	return predicate.CarsFlightExtendYokee(sql.FieldLT(FieldYokeeSpeedLimit, v))
 }
 
 // YokeeSpeedLimitLTE applies the LTE predicate on the "yokee_speed_limit" field.
-func YokeeSpeedLimitLTE(v int) predicate.CarsFlightExtendYokee {
+func YokeeSpeedLimitLTE(v float32) predicate.CarsFlightExtendYokee {
 	return predicate.CarsFlightExtendYokee(sql.FieldLTE(FieldYokeeSpeedLimit, v))
 }
 

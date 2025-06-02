@@ -77,6 +77,20 @@ func (cfc *CarsFlightCreate) SetNillableState(i *int) *CarsFlightCreate {
 	return cfc
 }
 
+// SetCurrStopID sets the "curr_stop_id" field.
+func (cfc *CarsFlightCreate) SetCurrStopID(i int) *CarsFlightCreate {
+	cfc.mutation.SetCurrStopID(i)
+	return cfc
+}
+
+// SetNillableCurrStopID sets the "curr_stop_id" field if the given value is not nil.
+func (cfc *CarsFlightCreate) SetNillableCurrStopID(i *int) *CarsFlightCreate {
+	if i != nil {
+		cfc.SetCurrStopID(*i)
+	}
+	return cfc
+}
+
 // SetStopIds sets the "stop_ids" field.
 func (cfc *CarsFlightCreate) SetStopIds(i []int) *CarsFlightCreate {
 	cfc.mutation.SetStopIds(i)
@@ -224,6 +238,18 @@ func (cfc *CarsFlightCreate) defaults() {
 		v := carsflight.DefaultState
 		cfc.mutation.SetState(v)
 	}
+	if _, ok := cfc.mutation.CurrStopID(); !ok {
+		v := carsflight.DefaultCurrStopID
+		cfc.mutation.SetCurrStopID(v)
+	}
+	if _, ok := cfc.mutation.StopIds(); !ok {
+		v := carsflight.DefaultStopIds
+		cfc.mutation.SetStopIds(v)
+	}
+	if _, ok := cfc.mutation.PassIds(); !ok {
+		v := carsflight.DefaultPassIds
+		cfc.mutation.SetPassIds(v)
+	}
 	if _, ok := cfc.mutation.Remark(); !ok {
 		v := carsflight.DefaultRemark
 		cfc.mutation.SetRemark(v)
@@ -339,6 +365,10 @@ func (cfc *CarsFlightCreate) createSpec() (*CarsFlight, *sqlgraph.CreateSpec) {
 	if value, ok := cfc.mutation.State(); ok {
 		_spec.SetField(carsflight.FieldState, field.TypeInt, value)
 		_node.State = value
+	}
+	if value, ok := cfc.mutation.CurrStopID(); ok {
+		_spec.SetField(carsflight.FieldCurrStopID, field.TypeInt, value)
+		_node.CurrStopID = value
 	}
 	if value, ok := cfc.mutation.StopIds(); ok {
 		_spec.SetField(carsflight.FieldStopIds, field.TypeJSON, value)

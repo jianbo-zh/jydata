@@ -19910,6 +19910,8 @@ type CarsFlightMutation struct {
 	addseats_num       *int
 	state              *int
 	addstate           *int
+	curr_stop_id       *int
+	addcurr_stop_id    *int
 	stop_ids           *[]int
 	appendstop_ids     []int
 	pass_ids           *[]int
@@ -20421,6 +20423,76 @@ func (m *CarsFlightMutation) ResetState() {
 	m.addstate = nil
 }
 
+// SetCurrStopID sets the "curr_stop_id" field.
+func (m *CarsFlightMutation) SetCurrStopID(i int) {
+	m.curr_stop_id = &i
+	m.addcurr_stop_id = nil
+}
+
+// CurrStopID returns the value of the "curr_stop_id" field in the mutation.
+func (m *CarsFlightMutation) CurrStopID() (r int, exists bool) {
+	v := m.curr_stop_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCurrStopID returns the old "curr_stop_id" field's value of the CarsFlight entity.
+// If the CarsFlight object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *CarsFlightMutation) OldCurrStopID(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCurrStopID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCurrStopID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCurrStopID: %w", err)
+	}
+	return oldValue.CurrStopID, nil
+}
+
+// AddCurrStopID adds i to the "curr_stop_id" field.
+func (m *CarsFlightMutation) AddCurrStopID(i int) {
+	if m.addcurr_stop_id != nil {
+		*m.addcurr_stop_id += i
+	} else {
+		m.addcurr_stop_id = &i
+	}
+}
+
+// AddedCurrStopID returns the value that was added to the "curr_stop_id" field in this mutation.
+func (m *CarsFlightMutation) AddedCurrStopID() (r int, exists bool) {
+	v := m.addcurr_stop_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearCurrStopID clears the value of the "curr_stop_id" field.
+func (m *CarsFlightMutation) ClearCurrStopID() {
+	m.curr_stop_id = nil
+	m.addcurr_stop_id = nil
+	m.clearedFields[carsflight.FieldCurrStopID] = struct{}{}
+}
+
+// CurrStopIDCleared returns if the "curr_stop_id" field was cleared in this mutation.
+func (m *CarsFlightMutation) CurrStopIDCleared() bool {
+	_, ok := m.clearedFields[carsflight.FieldCurrStopID]
+	return ok
+}
+
+// ResetCurrStopID resets all changes to the "curr_stop_id" field.
+func (m *CarsFlightMutation) ResetCurrStopID() {
+	m.curr_stop_id = nil
+	m.addcurr_stop_id = nil
+	delete(m.clearedFields, carsflight.FieldCurrStopID)
+}
+
 // SetStopIds sets the "stop_ids" field.
 func (m *CarsFlightMutation) SetStopIds(i []int) {
 	m.stop_ids = &i
@@ -20912,7 +20984,7 @@ func (m *CarsFlightMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *CarsFlightMutation) Fields() []string {
-	fields := make([]string, 0, 17)
+	fields := make([]string, 0, 18)
 	if m.scenic_area_id != nil {
 		fields = append(fields, carsflight.FieldScenicAreaID)
 	}
@@ -20936,6 +21008,9 @@ func (m *CarsFlightMutation) Fields() []string {
 	}
 	if m.state != nil {
 		fields = append(fields, carsflight.FieldState)
+	}
+	if m.curr_stop_id != nil {
+		fields = append(fields, carsflight.FieldCurrStopID)
 	}
 	if m.stop_ids != nil {
 		fields = append(fields, carsflight.FieldStopIds)
@@ -20988,6 +21063,8 @@ func (m *CarsFlightMutation) Field(name string) (ent.Value, bool) {
 		return m.SeatsNum()
 	case carsflight.FieldState:
 		return m.State()
+	case carsflight.FieldCurrStopID:
+		return m.CurrStopID()
 	case carsflight.FieldStopIds:
 		return m.StopIds()
 	case carsflight.FieldPassIds:
@@ -21031,6 +21108,8 @@ func (m *CarsFlightMutation) OldField(ctx context.Context, name string) (ent.Val
 		return m.OldSeatsNum(ctx)
 	case carsflight.FieldState:
 		return m.OldState(ctx)
+	case carsflight.FieldCurrStopID:
+		return m.OldCurrStopID(ctx)
 	case carsflight.FieldStopIds:
 		return m.OldStopIds(ctx)
 	case carsflight.FieldPassIds:
@@ -21113,6 +21192,13 @@ func (m *CarsFlightMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetState(v)
+		return nil
+	case carsflight.FieldCurrStopID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCurrStopID(v)
 		return nil
 	case carsflight.FieldStopIds:
 		v, ok := value.([]int)
@@ -21200,6 +21286,9 @@ func (m *CarsFlightMutation) AddedFields() []string {
 	if m.addstate != nil {
 		fields = append(fields, carsflight.FieldState)
 	}
+	if m.addcurr_stop_id != nil {
+		fields = append(fields, carsflight.FieldCurrStopID)
+	}
 	if m.addextend_yokee_id != nil {
 		fields = append(fields, carsflight.FieldExtendYokeeID)
 	}
@@ -21221,6 +21310,8 @@ func (m *CarsFlightMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedSeatsNum()
 	case carsflight.FieldState:
 		return m.AddedState()
+	case carsflight.FieldCurrStopID:
+		return m.AddedCurrStopID()
 	case carsflight.FieldExtendYokeeID:
 		return m.AddedExtendYokeeID()
 	}
@@ -21267,6 +21358,13 @@ func (m *CarsFlightMutation) AddField(name string, value ent.Value) error {
 		}
 		m.AddState(v)
 		return nil
+	case carsflight.FieldCurrStopID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddCurrStopID(v)
+		return nil
 	case carsflight.FieldExtendYokeeID:
 		v, ok := value.(int)
 		if !ok {
@@ -21282,6 +21380,9 @@ func (m *CarsFlightMutation) AddField(name string, value ent.Value) error {
 // mutation.
 func (m *CarsFlightMutation) ClearedFields() []string {
 	var fields []string
+	if m.FieldCleared(carsflight.FieldCurrStopID) {
+		fields = append(fields, carsflight.FieldCurrStopID)
+	}
 	if m.FieldCleared(carsflight.FieldStopIds) {
 		fields = append(fields, carsflight.FieldStopIds)
 	}
@@ -21311,6 +21412,9 @@ func (m *CarsFlightMutation) FieldCleared(name string) bool {
 // error if the field is not defined in the schema.
 func (m *CarsFlightMutation) ClearField(name string) error {
 	switch name {
+	case carsflight.FieldCurrStopID:
+		m.ClearCurrStopID()
+		return nil
 	case carsflight.FieldStopIds:
 		m.ClearStopIds()
 		return nil
@@ -21357,6 +21461,9 @@ func (m *CarsFlightMutation) ResetField(name string) error {
 		return nil
 	case carsflight.FieldState:
 		m.ResetState()
+		return nil
+	case carsflight.FieldCurrStopID:
+		m.ResetCurrStopID()
 		return nil
 	case carsflight.FieldStopIds:
 		m.ResetStopIds()
@@ -21447,8 +21554,8 @@ type CarsFlightExtendYokeeMutation struct {
 	addflight_id         *int
 	yokee_dispatch_id    *int
 	addyokee_dispatch_id *int
-	yokee_speed_limit    *int
-	addyokee_speed_limit *int
+	yokee_speed_limit    *float32
+	addyokee_speed_limit *float32
 	create_time          *time.Time
 	update_time          *time.Time
 	clearedFields        map[string]struct{}
@@ -21674,13 +21781,13 @@ func (m *CarsFlightExtendYokeeMutation) ResetYokeeDispatchID() {
 }
 
 // SetYokeeSpeedLimit sets the "yokee_speed_limit" field.
-func (m *CarsFlightExtendYokeeMutation) SetYokeeSpeedLimit(i int) {
-	m.yokee_speed_limit = &i
+func (m *CarsFlightExtendYokeeMutation) SetYokeeSpeedLimit(f float32) {
+	m.yokee_speed_limit = &f
 	m.addyokee_speed_limit = nil
 }
 
 // YokeeSpeedLimit returns the value of the "yokee_speed_limit" field in the mutation.
-func (m *CarsFlightExtendYokeeMutation) YokeeSpeedLimit() (r int, exists bool) {
+func (m *CarsFlightExtendYokeeMutation) YokeeSpeedLimit() (r float32, exists bool) {
 	v := m.yokee_speed_limit
 	if v == nil {
 		return
@@ -21691,7 +21798,7 @@ func (m *CarsFlightExtendYokeeMutation) YokeeSpeedLimit() (r int, exists bool) {
 // OldYokeeSpeedLimit returns the old "yokee_speed_limit" field's value of the CarsFlightExtendYokee entity.
 // If the CarsFlightExtendYokee object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *CarsFlightExtendYokeeMutation) OldYokeeSpeedLimit(ctx context.Context) (v int, err error) {
+func (m *CarsFlightExtendYokeeMutation) OldYokeeSpeedLimit(ctx context.Context) (v float32, err error) {
 	if !m.op.Is(OpUpdateOne) {
 		return v, errors.New("OldYokeeSpeedLimit is only allowed on UpdateOne operations")
 	}
@@ -21705,17 +21812,17 @@ func (m *CarsFlightExtendYokeeMutation) OldYokeeSpeedLimit(ctx context.Context) 
 	return oldValue.YokeeSpeedLimit, nil
 }
 
-// AddYokeeSpeedLimit adds i to the "yokee_speed_limit" field.
-func (m *CarsFlightExtendYokeeMutation) AddYokeeSpeedLimit(i int) {
+// AddYokeeSpeedLimit adds f to the "yokee_speed_limit" field.
+func (m *CarsFlightExtendYokeeMutation) AddYokeeSpeedLimit(f float32) {
 	if m.addyokee_speed_limit != nil {
-		*m.addyokee_speed_limit += i
+		*m.addyokee_speed_limit += f
 	} else {
-		m.addyokee_speed_limit = &i
+		m.addyokee_speed_limit = &f
 	}
 }
 
 // AddedYokeeSpeedLimit returns the value that was added to the "yokee_speed_limit" field in this mutation.
-func (m *CarsFlightExtendYokeeMutation) AddedYokeeSpeedLimit() (r int, exists bool) {
+func (m *CarsFlightExtendYokeeMutation) AddedYokeeSpeedLimit() (r float32, exists bool) {
 	v := m.addyokee_speed_limit
 	if v == nil {
 		return
@@ -21912,7 +22019,7 @@ func (m *CarsFlightExtendYokeeMutation) SetField(name string, value ent.Value) e
 		m.SetYokeeDispatchID(v)
 		return nil
 	case carsflightextendyokee.FieldYokeeSpeedLimit:
-		v, ok := value.(int)
+		v, ok := value.(float32)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
@@ -21987,7 +22094,7 @@ func (m *CarsFlightExtendYokeeMutation) AddField(name string, value ent.Value) e
 		m.AddYokeeDispatchID(v)
 		return nil
 	case carsflightextendyokee.FieldYokeeSpeedLimit:
-		v, ok := value.(int)
+		v, ok := value.(float32)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
@@ -26807,6 +26914,8 @@ type CouponMutation struct {
 	addlimit_amount   *int
 	coupon_amount     *int
 	addcoupon_amount  *int
+	bind_order_id     *int
+	addbind_order_id  *int
 	state             *int
 	addstate          *int
 	valid_start_time  *time.Time
@@ -27282,6 +27391,76 @@ func (m *CouponMutation) ResetCouponAmount() {
 	m.addcoupon_amount = nil
 }
 
+// SetBindOrderID sets the "bind_order_id" field.
+func (m *CouponMutation) SetBindOrderID(i int) {
+	m.bind_order_id = &i
+	m.addbind_order_id = nil
+}
+
+// BindOrderID returns the value of the "bind_order_id" field in the mutation.
+func (m *CouponMutation) BindOrderID() (r int, exists bool) {
+	v := m.bind_order_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldBindOrderID returns the old "bind_order_id" field's value of the Coupon entity.
+// If the Coupon object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *CouponMutation) OldBindOrderID(ctx context.Context) (v *int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldBindOrderID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldBindOrderID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldBindOrderID: %w", err)
+	}
+	return oldValue.BindOrderID, nil
+}
+
+// AddBindOrderID adds i to the "bind_order_id" field.
+func (m *CouponMutation) AddBindOrderID(i int) {
+	if m.addbind_order_id != nil {
+		*m.addbind_order_id += i
+	} else {
+		m.addbind_order_id = &i
+	}
+}
+
+// AddedBindOrderID returns the value that was added to the "bind_order_id" field in this mutation.
+func (m *CouponMutation) AddedBindOrderID() (r int, exists bool) {
+	v := m.addbind_order_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearBindOrderID clears the value of the "bind_order_id" field.
+func (m *CouponMutation) ClearBindOrderID() {
+	m.bind_order_id = nil
+	m.addbind_order_id = nil
+	m.clearedFields[coupon.FieldBindOrderID] = struct{}{}
+}
+
+// BindOrderIDCleared returns if the "bind_order_id" field was cleared in this mutation.
+func (m *CouponMutation) BindOrderIDCleared() bool {
+	_, ok := m.clearedFields[coupon.FieldBindOrderID]
+	return ok
+}
+
+// ResetBindOrderID resets all changes to the "bind_order_id" field.
+func (m *CouponMutation) ResetBindOrderID() {
+	m.bind_order_id = nil
+	m.addbind_order_id = nil
+	delete(m.clearedFields, coupon.FieldBindOrderID)
+}
+
 // SetState sets the "state" field.
 func (m *CouponMutation) SetState(i int) {
 	m.state = &i
@@ -27542,7 +27721,7 @@ func (m *CouponMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *CouponMutation) Fields() []string {
-	fields := make([]string, 0, 12)
+	fields := make([]string, 0, 13)
 	if m.delete_time != nil {
 		fields = append(fields, coupon.FieldDeleteTime)
 	}
@@ -27563,6 +27742,9 @@ func (m *CouponMutation) Fields() []string {
 	}
 	if m.coupon_amount != nil {
 		fields = append(fields, coupon.FieldCouponAmount)
+	}
+	if m.bind_order_id != nil {
+		fields = append(fields, coupon.FieldBindOrderID)
 	}
 	if m.state != nil {
 		fields = append(fields, coupon.FieldState)
@@ -27601,6 +27783,8 @@ func (m *CouponMutation) Field(name string) (ent.Value, bool) {
 		return m.LimitAmount()
 	case coupon.FieldCouponAmount:
 		return m.CouponAmount()
+	case coupon.FieldBindOrderID:
+		return m.BindOrderID()
 	case coupon.FieldState:
 		return m.State()
 	case coupon.FieldValidStartTime:
@@ -27634,6 +27818,8 @@ func (m *CouponMutation) OldField(ctx context.Context, name string) (ent.Value, 
 		return m.OldLimitAmount(ctx)
 	case coupon.FieldCouponAmount:
 		return m.OldCouponAmount(ctx)
+	case coupon.FieldBindOrderID:
+		return m.OldBindOrderID(ctx)
 	case coupon.FieldState:
 		return m.OldState(ctx)
 	case coupon.FieldValidStartTime:
@@ -27702,6 +27888,13 @@ func (m *CouponMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetCouponAmount(v)
 		return nil
+	case coupon.FieldBindOrderID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetBindOrderID(v)
+		return nil
 	case coupon.FieldState:
 		v, ok := value.(int)
 		if !ok {
@@ -27757,6 +27950,9 @@ func (m *CouponMutation) AddedFields() []string {
 	if m.addcoupon_amount != nil {
 		fields = append(fields, coupon.FieldCouponAmount)
 	}
+	if m.addbind_order_id != nil {
+		fields = append(fields, coupon.FieldBindOrderID)
+	}
 	if m.addstate != nil {
 		fields = append(fields, coupon.FieldState)
 	}
@@ -27776,6 +27972,8 @@ func (m *CouponMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedLimitAmount()
 	case coupon.FieldCouponAmount:
 		return m.AddedCouponAmount()
+	case coupon.FieldBindOrderID:
+		return m.AddedBindOrderID()
 	case coupon.FieldState:
 		return m.AddedState()
 	}
@@ -27815,6 +28013,13 @@ func (m *CouponMutation) AddField(name string, value ent.Value) error {
 		}
 		m.AddCouponAmount(v)
 		return nil
+	case coupon.FieldBindOrderID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddBindOrderID(v)
+		return nil
 	case coupon.FieldState:
 		v, ok := value.(int)
 		if !ok {
@@ -27835,6 +28040,9 @@ func (m *CouponMutation) ClearedFields() []string {
 	}
 	if m.FieldCleared(coupon.FieldScenicAreaID) {
 		fields = append(fields, coupon.FieldScenicAreaID)
+	}
+	if m.FieldCleared(coupon.FieldBindOrderID) {
+		fields = append(fields, coupon.FieldBindOrderID)
 	}
 	if m.FieldCleared(coupon.FieldValidStartTime) {
 		fields = append(fields, coupon.FieldValidStartTime)
@@ -27861,6 +28069,9 @@ func (m *CouponMutation) ClearField(name string) error {
 		return nil
 	case coupon.FieldScenicAreaID:
 		m.ClearScenicAreaID()
+		return nil
+	case coupon.FieldBindOrderID:
+		m.ClearBindOrderID()
 		return nil
 	case coupon.FieldValidStartTime:
 		m.ClearValidStartTime()
@@ -27896,6 +28107,9 @@ func (m *CouponMutation) ResetField(name string) error {
 		return nil
 	case coupon.FieldCouponAmount:
 		m.ResetCouponAmount()
+		return nil
+	case coupon.FieldBindOrderID:
+		m.ResetBindOrderID()
 		return nil
 	case coupon.FieldState:
 		m.ResetState()

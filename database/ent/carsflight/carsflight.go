@@ -29,6 +29,8 @@ const (
 	FieldSeatsNum = "seats_num"
 	// FieldState holds the string denoting the state field in the database.
 	FieldState = "state"
+	// FieldCurrStopID holds the string denoting the curr_stop_id field in the database.
+	FieldCurrStopID = "curr_stop_id"
 	// FieldStopIds holds the string denoting the stop_ids field in the database.
 	FieldStopIds = "stop_ids"
 	// FieldPassIds holds the string denoting the pass_ids field in the database.
@@ -62,6 +64,7 @@ var Columns = []string{
 	FieldRouteName,
 	FieldSeatsNum,
 	FieldState,
+	FieldCurrStopID,
 	FieldStopIds,
 	FieldPassIds,
 	FieldRemark,
@@ -86,6 +89,12 @@ func ValidColumn(column string) bool {
 var (
 	// DefaultState holds the default value on creation for the "state" field.
 	DefaultState int
+	// DefaultCurrStopID holds the default value on creation for the "curr_stop_id" field.
+	DefaultCurrStopID int
+	// DefaultStopIds holds the default value on creation for the "stop_ids" field.
+	DefaultStopIds []int
+	// DefaultPassIds holds the default value on creation for the "pass_ids" field.
+	DefaultPassIds []int
 	// DefaultRemark holds the default value on creation for the "remark" field.
 	DefaultRemark string
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.
@@ -142,6 +151,11 @@ func BySeatsNum(opts ...sql.OrderTermOption) OrderOption {
 // ByState orders the results by the state field.
 func ByState(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldState, opts...).ToFunc()
+}
+
+// ByCurrStopID orders the results by the curr_stop_id field.
+func ByCurrStopID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldCurrStopID, opts...).ToFunc()
 }
 
 // ByRemark orders the results by the remark field.

@@ -177,6 +177,33 @@ func (cfu *CarsFlightUpdate) AddState(i int) *CarsFlightUpdate {
 	return cfu
 }
 
+// SetCurrStopID sets the "curr_stop_id" field.
+func (cfu *CarsFlightUpdate) SetCurrStopID(i int) *CarsFlightUpdate {
+	cfu.mutation.ResetCurrStopID()
+	cfu.mutation.SetCurrStopID(i)
+	return cfu
+}
+
+// SetNillableCurrStopID sets the "curr_stop_id" field if the given value is not nil.
+func (cfu *CarsFlightUpdate) SetNillableCurrStopID(i *int) *CarsFlightUpdate {
+	if i != nil {
+		cfu.SetCurrStopID(*i)
+	}
+	return cfu
+}
+
+// AddCurrStopID adds i to the "curr_stop_id" field.
+func (cfu *CarsFlightUpdate) AddCurrStopID(i int) *CarsFlightUpdate {
+	cfu.mutation.AddCurrStopID(i)
+	return cfu
+}
+
+// ClearCurrStopID clears the value of the "curr_stop_id" field.
+func (cfu *CarsFlightUpdate) ClearCurrStopID() *CarsFlightUpdate {
+	cfu.mutation.ClearCurrStopID()
+	return cfu
+}
+
 // SetStopIds sets the "stop_ids" field.
 func (cfu *CarsFlightUpdate) SetStopIds(i []int) *CarsFlightUpdate {
 	cfu.mutation.SetStopIds(i)
@@ -401,6 +428,15 @@ func (cfu *CarsFlightUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := cfu.mutation.AddedState(); ok {
 		_spec.AddField(carsflight.FieldState, field.TypeInt, value)
 	}
+	if value, ok := cfu.mutation.CurrStopID(); ok {
+		_spec.SetField(carsflight.FieldCurrStopID, field.TypeInt, value)
+	}
+	if value, ok := cfu.mutation.AddedCurrStopID(); ok {
+		_spec.AddField(carsflight.FieldCurrStopID, field.TypeInt, value)
+	}
+	if cfu.mutation.CurrStopIDCleared() {
+		_spec.ClearField(carsflight.FieldCurrStopID, field.TypeInt)
+	}
 	if value, ok := cfu.mutation.StopIds(); ok {
 		_spec.SetField(carsflight.FieldStopIds, field.TypeJSON, value)
 	}
@@ -622,6 +658,33 @@ func (cfuo *CarsFlightUpdateOne) SetNillableState(i *int) *CarsFlightUpdateOne {
 // AddState adds i to the "state" field.
 func (cfuo *CarsFlightUpdateOne) AddState(i int) *CarsFlightUpdateOne {
 	cfuo.mutation.AddState(i)
+	return cfuo
+}
+
+// SetCurrStopID sets the "curr_stop_id" field.
+func (cfuo *CarsFlightUpdateOne) SetCurrStopID(i int) *CarsFlightUpdateOne {
+	cfuo.mutation.ResetCurrStopID()
+	cfuo.mutation.SetCurrStopID(i)
+	return cfuo
+}
+
+// SetNillableCurrStopID sets the "curr_stop_id" field if the given value is not nil.
+func (cfuo *CarsFlightUpdateOne) SetNillableCurrStopID(i *int) *CarsFlightUpdateOne {
+	if i != nil {
+		cfuo.SetCurrStopID(*i)
+	}
+	return cfuo
+}
+
+// AddCurrStopID adds i to the "curr_stop_id" field.
+func (cfuo *CarsFlightUpdateOne) AddCurrStopID(i int) *CarsFlightUpdateOne {
+	cfuo.mutation.AddCurrStopID(i)
+	return cfuo
+}
+
+// ClearCurrStopID clears the value of the "curr_stop_id" field.
+func (cfuo *CarsFlightUpdateOne) ClearCurrStopID() *CarsFlightUpdateOne {
+	cfuo.mutation.ClearCurrStopID()
 	return cfuo
 }
 
@@ -878,6 +941,15 @@ func (cfuo *CarsFlightUpdateOne) sqlSave(ctx context.Context) (_node *CarsFlight
 	}
 	if value, ok := cfuo.mutation.AddedState(); ok {
 		_spec.AddField(carsflight.FieldState, field.TypeInt, value)
+	}
+	if value, ok := cfuo.mutation.CurrStopID(); ok {
+		_spec.SetField(carsflight.FieldCurrStopID, field.TypeInt, value)
+	}
+	if value, ok := cfuo.mutation.AddedCurrStopID(); ok {
+		_spec.AddField(carsflight.FieldCurrStopID, field.TypeInt, value)
+	}
+	if cfuo.mutation.CurrStopIDCleared() {
+		_spec.ClearField(carsflight.FieldCurrStopID, field.TypeInt)
 	}
 	if value, ok := cfuo.mutation.StopIds(); ok {
 		_spec.SetField(carsflight.FieldStopIds, field.TypeJSON, value)

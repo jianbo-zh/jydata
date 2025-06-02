@@ -89,6 +89,11 @@ func CouponAmount(v int) predicate.Coupon {
 	return predicate.Coupon(sql.FieldEQ(FieldCouponAmount, v))
 }
 
+// BindOrderID applies equality check predicate on the "bind_order_id" field. It's identical to BindOrderIDEQ.
+func BindOrderID(v int) predicate.Coupon {
+	return predicate.Coupon(sql.FieldEQ(FieldBindOrderID, v))
+}
+
 // State applies equality check predicate on the "state" field. It's identical to StateEQ.
 func State(v int) predicate.Coupon {
 	return predicate.Coupon(sql.FieldEQ(FieldState, v))
@@ -462,6 +467,56 @@ func CouponAmountLT(v int) predicate.Coupon {
 // CouponAmountLTE applies the LTE predicate on the "coupon_amount" field.
 func CouponAmountLTE(v int) predicate.Coupon {
 	return predicate.Coupon(sql.FieldLTE(FieldCouponAmount, v))
+}
+
+// BindOrderIDEQ applies the EQ predicate on the "bind_order_id" field.
+func BindOrderIDEQ(v int) predicate.Coupon {
+	return predicate.Coupon(sql.FieldEQ(FieldBindOrderID, v))
+}
+
+// BindOrderIDNEQ applies the NEQ predicate on the "bind_order_id" field.
+func BindOrderIDNEQ(v int) predicate.Coupon {
+	return predicate.Coupon(sql.FieldNEQ(FieldBindOrderID, v))
+}
+
+// BindOrderIDIn applies the In predicate on the "bind_order_id" field.
+func BindOrderIDIn(vs ...int) predicate.Coupon {
+	return predicate.Coupon(sql.FieldIn(FieldBindOrderID, vs...))
+}
+
+// BindOrderIDNotIn applies the NotIn predicate on the "bind_order_id" field.
+func BindOrderIDNotIn(vs ...int) predicate.Coupon {
+	return predicate.Coupon(sql.FieldNotIn(FieldBindOrderID, vs...))
+}
+
+// BindOrderIDGT applies the GT predicate on the "bind_order_id" field.
+func BindOrderIDGT(v int) predicate.Coupon {
+	return predicate.Coupon(sql.FieldGT(FieldBindOrderID, v))
+}
+
+// BindOrderIDGTE applies the GTE predicate on the "bind_order_id" field.
+func BindOrderIDGTE(v int) predicate.Coupon {
+	return predicate.Coupon(sql.FieldGTE(FieldBindOrderID, v))
+}
+
+// BindOrderIDLT applies the LT predicate on the "bind_order_id" field.
+func BindOrderIDLT(v int) predicate.Coupon {
+	return predicate.Coupon(sql.FieldLT(FieldBindOrderID, v))
+}
+
+// BindOrderIDLTE applies the LTE predicate on the "bind_order_id" field.
+func BindOrderIDLTE(v int) predicate.Coupon {
+	return predicate.Coupon(sql.FieldLTE(FieldBindOrderID, v))
+}
+
+// BindOrderIDIsNil applies the IsNil predicate on the "bind_order_id" field.
+func BindOrderIDIsNil() predicate.Coupon {
+	return predicate.Coupon(sql.FieldIsNull(FieldBindOrderID))
+}
+
+// BindOrderIDNotNil applies the NotNil predicate on the "bind_order_id" field.
+func BindOrderIDNotNil() predicate.Coupon {
+	return predicate.Coupon(sql.FieldNotNull(FieldBindOrderID))
 }
 
 // StateEQ applies the EQ predicate on the "state" field.

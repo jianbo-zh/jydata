@@ -94,6 +94,11 @@ func State(v int) predicate.CarsFlight {
 	return predicate.CarsFlight(sql.FieldEQ(FieldState, v))
 }
 
+// CurrStopID applies equality check predicate on the "curr_stop_id" field. It's identical to CurrStopIDEQ.
+func CurrStopID(v int) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldEQ(FieldCurrStopID, v))
+}
+
 // Remark applies equality check predicate on the "remark" field. It's identical to RemarkEQ.
 func Remark(v string) predicate.CarsFlight {
 	return predicate.CarsFlight(sql.FieldEQ(FieldRemark, v))
@@ -517,6 +522,56 @@ func StateLT(v int) predicate.CarsFlight {
 // StateLTE applies the LTE predicate on the "state" field.
 func StateLTE(v int) predicate.CarsFlight {
 	return predicate.CarsFlight(sql.FieldLTE(FieldState, v))
+}
+
+// CurrStopIDEQ applies the EQ predicate on the "curr_stop_id" field.
+func CurrStopIDEQ(v int) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldEQ(FieldCurrStopID, v))
+}
+
+// CurrStopIDNEQ applies the NEQ predicate on the "curr_stop_id" field.
+func CurrStopIDNEQ(v int) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldNEQ(FieldCurrStopID, v))
+}
+
+// CurrStopIDIn applies the In predicate on the "curr_stop_id" field.
+func CurrStopIDIn(vs ...int) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldIn(FieldCurrStopID, vs...))
+}
+
+// CurrStopIDNotIn applies the NotIn predicate on the "curr_stop_id" field.
+func CurrStopIDNotIn(vs ...int) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldNotIn(FieldCurrStopID, vs...))
+}
+
+// CurrStopIDGT applies the GT predicate on the "curr_stop_id" field.
+func CurrStopIDGT(v int) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldGT(FieldCurrStopID, v))
+}
+
+// CurrStopIDGTE applies the GTE predicate on the "curr_stop_id" field.
+func CurrStopIDGTE(v int) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldGTE(FieldCurrStopID, v))
+}
+
+// CurrStopIDLT applies the LT predicate on the "curr_stop_id" field.
+func CurrStopIDLT(v int) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldLT(FieldCurrStopID, v))
+}
+
+// CurrStopIDLTE applies the LTE predicate on the "curr_stop_id" field.
+func CurrStopIDLTE(v int) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldLTE(FieldCurrStopID, v))
+}
+
+// CurrStopIDIsNil applies the IsNil predicate on the "curr_stop_id" field.
+func CurrStopIDIsNil() predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldIsNull(FieldCurrStopID))
+}
+
+// CurrStopIDNotNil applies the NotNil predicate on the "curr_stop_id" field.
+func CurrStopIDNotNil() predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldNotNull(FieldCurrStopID))
 }
 
 // StopIdsIsNil applies the IsNil predicate on the "stop_ids" field.

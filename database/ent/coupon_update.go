@@ -166,6 +166,33 @@ func (cu *CouponUpdate) AddCouponAmount(i int) *CouponUpdate {
 	return cu
 }
 
+// SetBindOrderID sets the "bind_order_id" field.
+func (cu *CouponUpdate) SetBindOrderID(i int) *CouponUpdate {
+	cu.mutation.ResetBindOrderID()
+	cu.mutation.SetBindOrderID(i)
+	return cu
+}
+
+// SetNillableBindOrderID sets the "bind_order_id" field if the given value is not nil.
+func (cu *CouponUpdate) SetNillableBindOrderID(i *int) *CouponUpdate {
+	if i != nil {
+		cu.SetBindOrderID(*i)
+	}
+	return cu
+}
+
+// AddBindOrderID adds i to the "bind_order_id" field.
+func (cu *CouponUpdate) AddBindOrderID(i int) *CouponUpdate {
+	cu.mutation.AddBindOrderID(i)
+	return cu
+}
+
+// ClearBindOrderID clears the value of the "bind_order_id" field.
+func (cu *CouponUpdate) ClearBindOrderID() *CouponUpdate {
+	cu.mutation.ClearBindOrderID()
+	return cu
+}
+
 // SetState sets the "state" field.
 func (cu *CouponUpdate) SetState(i int) *CouponUpdate {
 	cu.mutation.ResetState()
@@ -327,6 +354,15 @@ func (cu *CouponUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := cu.mutation.AddedCouponAmount(); ok {
 		_spec.AddField(coupon.FieldCouponAmount, field.TypeInt, value)
+	}
+	if value, ok := cu.mutation.BindOrderID(); ok {
+		_spec.SetField(coupon.FieldBindOrderID, field.TypeInt, value)
+	}
+	if value, ok := cu.mutation.AddedBindOrderID(); ok {
+		_spec.AddField(coupon.FieldBindOrderID, field.TypeInt, value)
+	}
+	if cu.mutation.BindOrderIDCleared() {
+		_spec.ClearField(coupon.FieldBindOrderID, field.TypeInt)
 	}
 	if value, ok := cu.mutation.State(); ok {
 		_spec.SetField(coupon.FieldState, field.TypeInt, value)
@@ -504,6 +540,33 @@ func (cuo *CouponUpdateOne) SetNillableCouponAmount(i *int) *CouponUpdateOne {
 // AddCouponAmount adds i to the "coupon_amount" field.
 func (cuo *CouponUpdateOne) AddCouponAmount(i int) *CouponUpdateOne {
 	cuo.mutation.AddCouponAmount(i)
+	return cuo
+}
+
+// SetBindOrderID sets the "bind_order_id" field.
+func (cuo *CouponUpdateOne) SetBindOrderID(i int) *CouponUpdateOne {
+	cuo.mutation.ResetBindOrderID()
+	cuo.mutation.SetBindOrderID(i)
+	return cuo
+}
+
+// SetNillableBindOrderID sets the "bind_order_id" field if the given value is not nil.
+func (cuo *CouponUpdateOne) SetNillableBindOrderID(i *int) *CouponUpdateOne {
+	if i != nil {
+		cuo.SetBindOrderID(*i)
+	}
+	return cuo
+}
+
+// AddBindOrderID adds i to the "bind_order_id" field.
+func (cuo *CouponUpdateOne) AddBindOrderID(i int) *CouponUpdateOne {
+	cuo.mutation.AddBindOrderID(i)
+	return cuo
+}
+
+// ClearBindOrderID clears the value of the "bind_order_id" field.
+func (cuo *CouponUpdateOne) ClearBindOrderID() *CouponUpdateOne {
+	cuo.mutation.ClearBindOrderID()
 	return cuo
 }
 
@@ -698,6 +761,15 @@ func (cuo *CouponUpdateOne) sqlSave(ctx context.Context) (_node *Coupon, err err
 	}
 	if value, ok := cuo.mutation.AddedCouponAmount(); ok {
 		_spec.AddField(coupon.FieldCouponAmount, field.TypeInt, value)
+	}
+	if value, ok := cuo.mutation.BindOrderID(); ok {
+		_spec.SetField(coupon.FieldBindOrderID, field.TypeInt, value)
+	}
+	if value, ok := cuo.mutation.AddedBindOrderID(); ok {
+		_spec.AddField(coupon.FieldBindOrderID, field.TypeInt, value)
+	}
+	if cuo.mutation.BindOrderIDCleared() {
+		_spec.ClearField(coupon.FieldBindOrderID, field.TypeInt)
 	}
 	if value, ok := cuo.mutation.State(); ok {
 		_spec.SetField(coupon.FieldState, field.TypeInt, value)

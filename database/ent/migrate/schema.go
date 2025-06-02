@@ -439,6 +439,7 @@ var (
 		{Name: "route_name", Type: field.TypeString},
 		{Name: "seats_num", Type: field.TypeInt},
 		{Name: "state", Type: field.TypeInt, Default: 1},
+		{Name: "curr_stop_id", Type: field.TypeInt, Nullable: true, Default: 0},
 		{Name: "stop_ids", Type: field.TypeJSON, Nullable: true},
 		{Name: "pass_ids", Type: field.TypeJSON, Nullable: true},
 		{Name: "remark", Type: field.TypeString, Default: ""},
@@ -458,9 +459,9 @@ var (
 	// CarsFlightExtendYokeesColumns holds the columns for the "cars_flight_extend_yokees" table.
 	CarsFlightExtendYokeesColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "flight_id", Type: field.TypeInt},
+		{Name: "flight_id", Type: field.TypeInt, Unique: true},
 		{Name: "yokee_dispatch_id", Type: field.TypeInt},
-		{Name: "yokee_speed_limit", Type: field.TypeInt},
+		{Name: "yokee_speed_limit", Type: field.TypeFloat32},
 		{Name: "create_time", Type: field.TypeTime},
 		{Name: "update_time", Type: field.TypeTime},
 	}
@@ -598,6 +599,7 @@ var (
 		{Name: "user_id", Type: field.TypeInt},
 		{Name: "limit_amount", Type: field.TypeInt},
 		{Name: "coupon_amount", Type: field.TypeInt},
+		{Name: "bind_order_id", Type: field.TypeInt, Nullable: true},
 		{Name: "state", Type: field.TypeInt, Default: 1},
 		{Name: "valid_start_time", Type: field.TypeTime, Nullable: true},
 		{Name: "valid_end_time", Type: field.TypeTime, Nullable: true},
@@ -1469,7 +1471,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1748517041},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1748752246},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},
