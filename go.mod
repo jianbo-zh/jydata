@@ -10,8 +10,8 @@ require (
 	github.com/go-sql-driver/mysql v1.9.2
 	github.com/google/wire v0.6.0
 	github.com/influxdata/influxdb-client-go/v2 v2.14.0
-	github.com/jianbo-zh/jylib v0.1.55
-	github.com/jianbo-zh/jypb v0.1.35
+	github.com/jianbo-zh/jylib v0.1.56
+	github.com/jianbo-zh/jypb v0.1.36
 	github.com/lib/pq v1.10.9
 	go.uber.org/automaxprocs v1.6.0
 )
