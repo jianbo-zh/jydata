@@ -89,6 +89,8 @@ const (
 	FieldGrAutoVersion = "gr_auto_version"
 	// FieldGrUIVersion holds the string denoting the gr_ui_version field in the database.
 	FieldGrUIVersion = "gr_ui_version"
+	// FieldCarproxyID holds the string denoting the carproxy_id field in the database.
+	FieldCarproxyID = "carproxy_id"
 	// FieldExtendYokeeID holds the string denoting the extend_yokee_id field in the database.
 	FieldExtendYokeeID = "extend_yokee_id"
 	// FieldAliveTime holds the string denoting the alive_time field in the database.
@@ -217,6 +219,7 @@ var Columns = []string{
 	FieldNextMapVersionProcess,
 	FieldGrAutoVersion,
 	FieldGrUIVersion,
+	FieldCarproxyID,
 	FieldExtendYokeeID,
 	FieldAliveTime,
 	FieldRegisterTime,
@@ -295,6 +298,8 @@ var (
 	DefaultGrAutoVersion string
 	// DefaultGrUIVersion holds the default value on creation for the "gr_ui_version" field.
 	DefaultGrUIVersion string
+	// DefaultCarproxyID holds the default value on creation for the "carproxy_id" field.
+	DefaultCarproxyID string
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.
 	DefaultCreateTime func() time.Time
 	// DefaultUpdateTime holds the default value on creation for the "update_time" field.
@@ -489,6 +494,11 @@ func ByGrAutoVersion(opts ...sql.OrderTermOption) OrderOption {
 // ByGrUIVersion orders the results by the gr_ui_version field.
 func ByGrUIVersion(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldGrUIVersion, opts...).ToFunc()
+}
+
+// ByCarproxyID orders the results by the carproxy_id field.
+func ByCarproxyID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldCarproxyID, opts...).ToFunc()
 }
 
 // ByExtendYokeeID orders the results by the extend_yokee_id field.

@@ -94,6 +94,8 @@ type Car struct {
 	GrAutoVersion string `json:"gr_auto_version,omitempty"`
 	// CarUI版本
 	GrUIVersion string `json:"gr_ui_version,omitempty"`
+	// 车辆代理服务ID
+	CarproxyID string `json:"carproxy_id,omitempty"`
 	// Yokee扩展ID
 	ExtendYokeeID *int `json:"extend_yokee_id,omitempty"`
 	// 心跳时间
@@ -220,7 +222,7 @@ func (*Car) scanValues(columns []string) ([]any, error) {
 			values[i] = new([]byte)
 		case car.FieldID, car.FieldOperationMode, car.FieldScenicAreaID, car.FieldModelID, car.FieldPassengers, car.FieldReservedSeats, car.FieldPowerThreshold, car.FieldState, car.FieldUseState, car.FieldDrivingState, car.FieldEmergencyState, car.FieldUseOrderID, car.FieldDispatchTaskID, car.FieldUseFlightID, car.FieldBindOrderCount, car.FieldTotalOrderMileage, car.FieldTotalOrderTime, car.FieldTotalOrderCount, car.FieldTotalOrderAmount, car.FieldPowerRemaining, car.FieldErrorCount, car.FieldIsDeleted, car.FieldIsCommercialCar, car.FieldIsDrivingStateValid, car.FieldNextMapVersionProcess, car.FieldExtendYokeeID:
 			values[i] = new(sql.NullInt64)
-		case car.FieldCarName, car.FieldDeviceID, car.FieldLicensePlate, car.FieldActivateCode, car.FieldErrorMessage, car.FieldMapVersion, car.FieldNextMapVersion, car.FieldNextMapVersionState, car.FieldGrAutoVersion, car.FieldGrUIVersion:
+		case car.FieldCarName, car.FieldDeviceID, car.FieldLicensePlate, car.FieldActivateCode, car.FieldErrorMessage, car.FieldMapVersion, car.FieldNextMapVersion, car.FieldNextMapVersionState, car.FieldGrAutoVersion, car.FieldGrUIVersion, car.FieldCarproxyID:
 			values[i] = new(sql.NullString)
 		case car.FieldDeleteTime, car.FieldProduceTime, car.FieldAliveTime, car.FieldRegisterTime, car.FieldDrivingStateTime, car.FieldCreateTime, car.FieldUpdateTime:
 			values[i] = new(sql.NullTime)
@@ -469,6 +471,12 @@ func (c *Car) assignValues(columns []string, values []any) error {
 			} else if value.Valid {
 				c.GrUIVersion = value.String
 			}
+		case car.FieldCarproxyID:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field carproxy_id", values[i])
+			} else if value.Valid {
+				c.CarproxyID = value.String
+			}
 		case car.FieldExtendYokeeID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field extend_yokee_id", values[i])
@@ -692,6 +700,9 @@ func (c *Car) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("gr_ui_version=")
 	builder.WriteString(c.GrUIVersion)
+	builder.WriteString(", ")
+	builder.WriteString("carproxy_id=")
+	builder.WriteString(c.CarproxyID)
 	builder.WriteString(", ")
 	if v := c.ExtendYokeeID; v != nil {
 		builder.WriteString("extend_yokee_id=")

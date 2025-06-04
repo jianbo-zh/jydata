@@ -404,12 +404,16 @@ func init() {
 	carDescGrUIVersion := carFields[36].Descriptor()
 	// car.DefaultGrUIVersion holds the default value on creation for the gr_ui_version field.
 	car.DefaultGrUIVersion = carDescGrUIVersion.Default.(string)
+	// carDescCarproxyID is the schema descriptor for carproxy_id field.
+	carDescCarproxyID := carFields[37].Descriptor()
+	// car.DefaultCarproxyID holds the default value on creation for the carproxy_id field.
+	car.DefaultCarproxyID = carDescCarproxyID.Default.(string)
 	// carDescCreateTime is the schema descriptor for create_time field.
-	carDescCreateTime := carFields[41].Descriptor()
+	carDescCreateTime := carFields[42].Descriptor()
 	// car.DefaultCreateTime holds the default value on creation for the create_time field.
 	car.DefaultCreateTime = carDescCreateTime.Default.(func() time.Time)
 	// carDescUpdateTime is the schema descriptor for update_time field.
-	carDescUpdateTime := carFields[42].Descriptor()
+	carDescUpdateTime := carFields[43].Descriptor()
 	// car.DefaultUpdateTime holds the default value on creation for the update_time field.
 	car.DefaultUpdateTime = carDescUpdateTime.Default.(func() time.Time)
 	// car.UpdateDefaultUpdateTime holds the default value on update for the update_time field.

@@ -713,6 +713,20 @@ func (cu *CarUpdate) SetNillableGrUIVersion(s *string) *CarUpdate {
 	return cu
 }
 
+// SetCarproxyID sets the "carproxy_id" field.
+func (cu *CarUpdate) SetCarproxyID(s string) *CarUpdate {
+	cu.mutation.SetCarproxyID(s)
+	return cu
+}
+
+// SetNillableCarproxyID sets the "carproxy_id" field if the given value is not nil.
+func (cu *CarUpdate) SetNillableCarproxyID(s *string) *CarUpdate {
+	if s != nil {
+		cu.SetCarproxyID(*s)
+	}
+	return cu
+}
+
 // SetExtendYokeeID sets the "extend_yokee_id" field.
 func (cu *CarUpdate) SetExtendYokeeID(i int) *CarUpdate {
 	cu.mutation.ResetExtendYokeeID()
@@ -1304,6 +1318,9 @@ func (cu *CarUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := cu.mutation.GrUIVersion(); ok {
 		_spec.SetField(car.FieldGrUIVersion, field.TypeString, value)
+	}
+	if value, ok := cu.mutation.CarproxyID(); ok {
+		_spec.SetField(car.FieldCarproxyID, field.TypeString, value)
 	}
 	if value, ok := cu.mutation.ExtendYokeeID(); ok {
 		_spec.SetField(car.FieldExtendYokeeID, field.TypeInt, value)
@@ -2359,6 +2376,20 @@ func (cuo *CarUpdateOne) SetNillableGrUIVersion(s *string) *CarUpdateOne {
 	return cuo
 }
 
+// SetCarproxyID sets the "carproxy_id" field.
+func (cuo *CarUpdateOne) SetCarproxyID(s string) *CarUpdateOne {
+	cuo.mutation.SetCarproxyID(s)
+	return cuo
+}
+
+// SetNillableCarproxyID sets the "carproxy_id" field if the given value is not nil.
+func (cuo *CarUpdateOne) SetNillableCarproxyID(s *string) *CarUpdateOne {
+	if s != nil {
+		cuo.SetCarproxyID(*s)
+	}
+	return cuo
+}
+
 // SetExtendYokeeID sets the "extend_yokee_id" field.
 func (cuo *CarUpdateOne) SetExtendYokeeID(i int) *CarUpdateOne {
 	cuo.mutation.ResetExtendYokeeID()
@@ -2980,6 +3011,9 @@ func (cuo *CarUpdateOne) sqlSave(ctx context.Context) (_node *Car, err error) {
 	}
 	if value, ok := cuo.mutation.GrUIVersion(); ok {
 		_spec.SetField(car.FieldGrUIVersion, field.TypeString, value)
+	}
+	if value, ok := cuo.mutation.CarproxyID(); ok {
+		_spec.SetField(car.FieldCarproxyID, field.TypeString, value)
 	}
 	if value, ok := cuo.mutation.ExtendYokeeID(); ok {
 		_spec.SetField(car.FieldExtendYokeeID, field.TypeInt, value)

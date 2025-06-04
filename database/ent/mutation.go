@@ -6569,6 +6569,7 @@ type CarMutation struct {
 	addnext_map_version_process   *int
 	gr_auto_version               *string
 	gr_ui_version                 *string
+	carproxy_id                   *string
 	extend_yokee_id               *int
 	addextend_yokee_id            *int
 	alive_time                    *time.Time
@@ -8508,6 +8509,42 @@ func (m *CarMutation) ResetGrUIVersion() {
 	m.gr_ui_version = nil
 }
 
+// SetCarproxyID sets the "carproxy_id" field.
+func (m *CarMutation) SetCarproxyID(s string) {
+	m.carproxy_id = &s
+}
+
+// CarproxyID returns the value of the "carproxy_id" field in the mutation.
+func (m *CarMutation) CarproxyID() (r string, exists bool) {
+	v := m.carproxy_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCarproxyID returns the old "carproxy_id" field's value of the Car entity.
+// If the Car object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *CarMutation) OldCarproxyID(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCarproxyID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCarproxyID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCarproxyID: %w", err)
+	}
+	return oldValue.CarproxyID, nil
+}
+
+// ResetCarproxyID resets all changes to the "carproxy_id" field.
+func (m *CarMutation) ResetCarproxyID() {
+	m.carproxy_id = nil
+}
+
 // SetExtendYokeeID sets the "extend_yokee_id" field.
 func (m *CarMutation) SetExtendYokeeID(i int) {
 	m.extend_yokee_id = &i
@@ -9235,7 +9272,7 @@ func (m *CarMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *CarMutation) Fields() []string {
-	fields := make([]string, 0, 43)
+	fields := make([]string, 0, 44)
 	if m.delete_time != nil {
 		fields = append(fields, car.FieldDeleteTime)
 	}
@@ -9347,6 +9384,9 @@ func (m *CarMutation) Fields() []string {
 	if m.gr_ui_version != nil {
 		fields = append(fields, car.FieldGrUIVersion)
 	}
+	if m.carproxy_id != nil {
+		fields = append(fields, car.FieldCarproxyID)
+	}
 	if m.extend_yokee_id != nil {
 		fields = append(fields, car.FieldExtendYokeeID)
 	}
@@ -9447,6 +9487,8 @@ func (m *CarMutation) Field(name string) (ent.Value, bool) {
 		return m.GrAutoVersion()
 	case car.FieldGrUIVersion:
 		return m.GrUIVersion()
+	case car.FieldCarproxyID:
+		return m.CarproxyID()
 	case car.FieldExtendYokeeID:
 		return m.ExtendYokeeID()
 	case car.FieldAliveTime:
@@ -9542,6 +9584,8 @@ func (m *CarMutation) OldField(ctx context.Context, name string) (ent.Value, err
 		return m.OldGrAutoVersion(ctx)
 	case car.FieldGrUIVersion:
 		return m.OldGrUIVersion(ctx)
+	case car.FieldCarproxyID:
+		return m.OldCarproxyID(ctx)
 	case car.FieldExtendYokeeID:
 		return m.OldExtendYokeeID(ctx)
 	case car.FieldAliveTime:
@@ -9821,6 +9865,13 @@ func (m *CarMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetGrUIVersion(v)
+		return nil
+	case car.FieldCarproxyID:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCarproxyID(v)
 		return nil
 	case car.FieldExtendYokeeID:
 		v, ok := value.(int)
@@ -10335,6 +10386,9 @@ func (m *CarMutation) ResetField(name string) error {
 		return nil
 	case car.FieldGrUIVersion:
 		m.ResetGrUIVersion()
+		return nil
+	case car.FieldCarproxyID:
+		m.ResetCarproxyID()
 		return nil
 	case car.FieldExtendYokeeID:
 		m.ResetExtendYokeeID()

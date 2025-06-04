@@ -466,6 +466,20 @@ func (cc *CarCreate) SetNillableGrUIVersion(s *string) *CarCreate {
 	return cc
 }
 
+// SetCarproxyID sets the "carproxy_id" field.
+func (cc *CarCreate) SetCarproxyID(s string) *CarCreate {
+	cc.mutation.SetCarproxyID(s)
+	return cc
+}
+
+// SetNillableCarproxyID sets the "carproxy_id" field if the given value is not nil.
+func (cc *CarCreate) SetNillableCarproxyID(s *string) *CarCreate {
+	if s != nil {
+		cc.SetCarproxyID(*s)
+	}
+	return cc
+}
+
 // SetExtendYokeeID sets the "extend_yokee_id" field.
 func (cc *CarCreate) SetExtendYokeeID(i int) *CarCreate {
 	cc.mutation.SetExtendYokeeID(i)
@@ -809,6 +823,10 @@ func (cc *CarCreate) defaults() error {
 		v := car.DefaultGrUIVersion
 		cc.mutation.SetGrUIVersion(v)
 	}
+	if _, ok := cc.mutation.CarproxyID(); !ok {
+		v := car.DefaultCarproxyID
+		cc.mutation.SetCarproxyID(v)
+	}
 	if _, ok := cc.mutation.CreateTime(); !ok {
 		if car.DefaultCreateTime == nil {
 			return fmt.Errorf("ent: uninitialized car.DefaultCreateTime (forgotten import ent/runtime?)")
@@ -935,6 +953,9 @@ func (cc *CarCreate) check() error {
 	}
 	if _, ok := cc.mutation.GrUIVersion(); !ok {
 		return &ValidationError{Name: "gr_ui_version", err: errors.New(`ent: missing required field "Car.gr_ui_version"`)}
+	}
+	if _, ok := cc.mutation.CarproxyID(); !ok {
+		return &ValidationError{Name: "carproxy_id", err: errors.New(`ent: missing required field "Car.carproxy_id"`)}
 	}
 	if _, ok := cc.mutation.CreateTime(); !ok {
 		return &ValidationError{Name: "create_time", err: errors.New(`ent: missing required field "Car.create_time"`)}
@@ -1119,6 +1140,10 @@ func (cc *CarCreate) createSpec() (*Car, *sqlgraph.CreateSpec) {
 	if value, ok := cc.mutation.GrUIVersion(); ok {
 		_spec.SetField(car.FieldGrUIVersion, field.TypeString, value)
 		_node.GrUIVersion = value
+	}
+	if value, ok := cc.mutation.CarproxyID(); ok {
+		_spec.SetField(car.FieldCarproxyID, field.TypeString, value)
+		_node.CarproxyID = value
 	}
 	if value, ok := cc.mutation.ExtendYokeeID(); ok {
 		_spec.SetField(car.FieldExtendYokeeID, field.TypeInt, value)

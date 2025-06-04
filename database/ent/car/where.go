@@ -235,6 +235,11 @@ func GrUIVersion(v string) predicate.Car {
 	return predicate.Car(sql.FieldEQ(FieldGrUIVersion, v))
 }
 
+// CarproxyID applies equality check predicate on the "carproxy_id" field. It's identical to CarproxyIDEQ.
+func CarproxyID(v string) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldCarproxyID, v))
+}
+
 // ExtendYokeeID applies equality check predicate on the "extend_yokee_id" field. It's identical to ExtendYokeeIDEQ.
 func ExtendYokeeID(v int) predicate.Car {
 	return predicate.Car(sql.FieldEQ(FieldExtendYokeeID, v))
@@ -1923,6 +1928,71 @@ func GrUIVersionEqualFold(v string) predicate.Car {
 // GrUIVersionContainsFold applies the ContainsFold predicate on the "gr_ui_version" field.
 func GrUIVersionContainsFold(v string) predicate.Car {
 	return predicate.Car(sql.FieldContainsFold(FieldGrUIVersion, v))
+}
+
+// CarproxyIDEQ applies the EQ predicate on the "carproxy_id" field.
+func CarproxyIDEQ(v string) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldCarproxyID, v))
+}
+
+// CarproxyIDNEQ applies the NEQ predicate on the "carproxy_id" field.
+func CarproxyIDNEQ(v string) predicate.Car {
+	return predicate.Car(sql.FieldNEQ(FieldCarproxyID, v))
+}
+
+// CarproxyIDIn applies the In predicate on the "carproxy_id" field.
+func CarproxyIDIn(vs ...string) predicate.Car {
+	return predicate.Car(sql.FieldIn(FieldCarproxyID, vs...))
+}
+
+// CarproxyIDNotIn applies the NotIn predicate on the "carproxy_id" field.
+func CarproxyIDNotIn(vs ...string) predicate.Car {
+	return predicate.Car(sql.FieldNotIn(FieldCarproxyID, vs...))
+}
+
+// CarproxyIDGT applies the GT predicate on the "carproxy_id" field.
+func CarproxyIDGT(v string) predicate.Car {
+	return predicate.Car(sql.FieldGT(FieldCarproxyID, v))
+}
+
+// CarproxyIDGTE applies the GTE predicate on the "carproxy_id" field.
+func CarproxyIDGTE(v string) predicate.Car {
+	return predicate.Car(sql.FieldGTE(FieldCarproxyID, v))
+}
+
+// CarproxyIDLT applies the LT predicate on the "carproxy_id" field.
+func CarproxyIDLT(v string) predicate.Car {
+	return predicate.Car(sql.FieldLT(FieldCarproxyID, v))
+}
+
+// CarproxyIDLTE applies the LTE predicate on the "carproxy_id" field.
+func CarproxyIDLTE(v string) predicate.Car {
+	return predicate.Car(sql.FieldLTE(FieldCarproxyID, v))
+}
+
+// CarproxyIDContains applies the Contains predicate on the "carproxy_id" field.
+func CarproxyIDContains(v string) predicate.Car {
+	return predicate.Car(sql.FieldContains(FieldCarproxyID, v))
+}
+
+// CarproxyIDHasPrefix applies the HasPrefix predicate on the "carproxy_id" field.
+func CarproxyIDHasPrefix(v string) predicate.Car {
+	return predicate.Car(sql.FieldHasPrefix(FieldCarproxyID, v))
+}
+
+// CarproxyIDHasSuffix applies the HasSuffix predicate on the "carproxy_id" field.
+func CarproxyIDHasSuffix(v string) predicate.Car {
+	return predicate.Car(sql.FieldHasSuffix(FieldCarproxyID, v))
+}
+
+// CarproxyIDEqualFold applies the EqualFold predicate on the "carproxy_id" field.
+func CarproxyIDEqualFold(v string) predicate.Car {
+	return predicate.Car(sql.FieldEqualFold(FieldCarproxyID, v))
+}
+
+// CarproxyIDContainsFold applies the ContainsFold predicate on the "carproxy_id" field.
+func CarproxyIDContainsFold(v string) predicate.Car {
+	return predicate.Car(sql.FieldContainsFold(FieldCarproxyID, v))
 }
 
 // ExtendYokeeIDEQ applies the EQ predicate on the "extend_yokee_id" field.

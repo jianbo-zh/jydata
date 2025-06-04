@@ -68,7 +68,7 @@ func NewDatabase(conf *configV1.Infra, logger log.Logger) (*Database, func(), er
 		conf.Database.Source,
 	)
 	sqlDrv := dialect.DebugWithContext(drv, func(ctx context.Context, i ...interface{}) {
-		// log.WithContext(ctx).Debug(i...)
+		log.WithContext(ctx).Debug(i...)
 	})
 	client := ent.NewClient(ent.Driver(sqlDrv))
 	if err != nil {

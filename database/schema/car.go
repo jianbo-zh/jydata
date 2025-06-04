@@ -67,6 +67,8 @@ func (Car) Fields() []ent.Field {
 		field.String("gr_auto_version").Default("").Comment("车机版本"),
 		field.String("gr_ui_version").Default("").Comment("CarUI版本"),
 
+		field.String("carproxy_id").Default("").Comment("车辆代理服务ID"),
+
 		field.Int("extend_yokee_id").Optional().Nillable().Comment("Yokee扩展ID"),
 
 		field.Time("alive_time").Optional().Comment("心跳时间"),
