@@ -2,7 +2,7 @@ package cache
 
 import (
 	"github.com/go-kratos/kratos/v2/log"
-	"github.com/go-redis/redis/extra/redisotel"
+	// "github.com/go-redis/redis/extra/redisotel"
 	"github.com/go-redis/redis/v8"
 
 	configV1 "github.com/jianbo-zh/jypb/config/v1"
@@ -30,7 +30,7 @@ func NewRedis(conf *configV1.Infra, logger log.Logger) (*Cache, func(), error) {
 		WriteTimeout: conf.Redis.WriteTimeout.AsDuration(),
 		ReadTimeout:  conf.Redis.ReadTimeout.AsDuration(),
 	})
-	client.AddHook(redisotel.TracingHook{})
+	// client.AddHook(redisotel.TracingHook{})
 
 	return &Cache{
 			client: client,

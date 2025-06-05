@@ -5,13 +5,12 @@ go 1.23.9
 require (
 	entgo.io/ent v0.14.4
 	github.com/go-kratos/kratos/v2 v2.8.4
-	github.com/go-redis/redis/extra/redisotel v0.3.0
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/go-sql-driver/mysql v1.9.2
 	github.com/google/wire v0.6.0
 	github.com/influxdata/influxdb-client-go/v2 v2.14.0
-	github.com/jianbo-zh/jylib v0.1.57
-	github.com/jianbo-zh/jypb v0.1.37
+	github.com/jianbo-zh/jylib v0.1.58
+	github.com/jianbo-zh/jypb v0.1.38
 	github.com/lib/pq v1.10.9
 	go.uber.org/automaxprocs v1.6.0
 )
@@ -38,11 +37,8 @@ require (
 	github.com/go-kratos/kratos/contrib/config/consul/v2 v2.0.0-20250429074618-c82f7957223f // indirect
 	github.com/go-kratos/kratos/contrib/config/etcd/v2 v2.0.0-20250429074618-c82f7957223f // indirect
 	github.com/go-kratos/kratos/contrib/config/nacos/v2 v2.0.0-20250429074618-c82f7957223f // indirect
-	github.com/go-logr/logr v1.4.2 // indirect
-	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-openapi/inflect v0.19.0 // indirect
 	github.com/go-playground/form/v4 v4.2.1 // indirect
-	github.com/go-redis/redis/extra/rediscmd v0.2.0 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/go-test/deep v1.0.8 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
@@ -83,10 +79,6 @@ require (
 	go.etcd.io/etcd/api/v3 v3.6.0 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.6.0 // indirect
 	go.etcd.io/etcd/client/v3 v3.6.0 // indirect
-	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
-	go.opentelemetry.io/otel v1.35.0 // indirect
-	go.opentelemetry.io/otel/metric v1.35.0 // indirect
-	go.opentelemetry.io/otel/trace v1.35.0 // indirect
 	go.uber.org/mock v0.5.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
