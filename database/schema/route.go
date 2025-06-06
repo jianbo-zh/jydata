@@ -23,7 +23,7 @@ func (Route) Fields() []ent.Field {
 		field.Int("type").Comment("线路类型（1-接驳线路）"),
 		field.String("name").Comment("线路名称"),
 		field.Ints("poi_ids").Comment("poi点列表"),
-		field.JSON("path", []types.Coord{}).Optional().Comment("行驶线路"),
+		field.JSON("routing_path", &types.RoutingPath{}).Optional().Comment("行驶线路"),
 		field.String("remark").Comment("线路备注"),
 		field.Time("create_time").Immutable().Default(time.Now).Comment("创建时间"),
 		field.Time("update_time").Default(time.Now).UpdateDefault(time.Now).Comment("更新时间"),

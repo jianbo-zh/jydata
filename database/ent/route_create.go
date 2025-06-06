@@ -59,9 +59,9 @@ func (rc *RouteCreate) SetPoiIds(i []int) *RouteCreate {
 	return rc
 }
 
-// SetPath sets the "path" field.
-func (rc *RouteCreate) SetPath(t []types.Coord) *RouteCreate {
-	rc.mutation.SetPath(t)
+// SetRoutingPath sets the "routing_path" field.
+func (rc *RouteCreate) SetRoutingPath(tp *types.RoutingPath) *RouteCreate {
+	rc.mutation.SetRoutingPath(tp)
 	return rc
 }
 
@@ -234,9 +234,9 @@ func (rc *RouteCreate) createSpec() (*Route, *sqlgraph.CreateSpec) {
 		_spec.SetField(route.FieldPoiIds, field.TypeJSON, value)
 		_node.PoiIds = value
 	}
-	if value, ok := rc.mutation.Path(); ok {
-		_spec.SetField(route.FieldPath, field.TypeJSON, value)
-		_node.Path = value
+	if value, ok := rc.mutation.RoutingPath(); ok {
+		_spec.SetField(route.FieldRoutingPath, field.TypeJSON, value)
+		_node.RoutingPath = value
 	}
 	if value, ok := rc.mutation.Remark(); ok {
 		_spec.SetField(route.FieldRemark, field.TypeString, value)

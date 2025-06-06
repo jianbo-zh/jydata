@@ -47662,8 +47662,7 @@ type RouteMutation struct {
 	name              *string
 	poi_ids           *[]int
 	appendpoi_ids     []int
-	_path             *[]types.Coord
-	append_path       []types.Coord
+	routing_path      **types.RoutingPath
 	remark            *string
 	create_time       *time.Time
 	update_time       *time.Time
@@ -48025,69 +48024,53 @@ func (m *RouteMutation) ResetPoiIds() {
 	m.appendpoi_ids = nil
 }
 
-// SetPath sets the "path" field.
-func (m *RouteMutation) SetPath(t []types.Coord) {
-	m._path = &t
-	m.append_path = nil
+// SetRoutingPath sets the "routing_path" field.
+func (m *RouteMutation) SetRoutingPath(tp *types.RoutingPath) {
+	m.routing_path = &tp
 }
 
-// Path returns the value of the "path" field in the mutation.
-func (m *RouteMutation) Path() (r []types.Coord, exists bool) {
-	v := m._path
+// RoutingPath returns the value of the "routing_path" field in the mutation.
+func (m *RouteMutation) RoutingPath() (r *types.RoutingPath, exists bool) {
+	v := m.routing_path
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldPath returns the old "path" field's value of the Route entity.
+// OldRoutingPath returns the old "routing_path" field's value of the Route entity.
 // If the Route object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *RouteMutation) OldPath(ctx context.Context) (v []types.Coord, err error) {
+func (m *RouteMutation) OldRoutingPath(ctx context.Context) (v *types.RoutingPath, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldPath is only allowed on UpdateOne operations")
+		return v, errors.New("OldRoutingPath is only allowed on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldPath requires an ID field in the mutation")
+		return v, errors.New("OldRoutingPath requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldPath: %w", err)
+		return v, fmt.Errorf("querying old value for OldRoutingPath: %w", err)
 	}
-	return oldValue.Path, nil
+	return oldValue.RoutingPath, nil
 }
 
-// AppendPath adds t to the "path" field.
-func (m *RouteMutation) AppendPath(t []types.Coord) {
-	m.append_path = append(m.append_path, t...)
+// ClearRoutingPath clears the value of the "routing_path" field.
+func (m *RouteMutation) ClearRoutingPath() {
+	m.routing_path = nil
+	m.clearedFields[route.FieldRoutingPath] = struct{}{}
 }
 
-// AppendedPath returns the list of values that were appended to the "path" field in this mutation.
-func (m *RouteMutation) AppendedPath() ([]types.Coord, bool) {
-	if len(m.append_path) == 0 {
-		return nil, false
-	}
-	return m.append_path, true
-}
-
-// ClearPath clears the value of the "path" field.
-func (m *RouteMutation) ClearPath() {
-	m._path = nil
-	m.append_path = nil
-	m.clearedFields[route.FieldPath] = struct{}{}
-}
-
-// PathCleared returns if the "path" field was cleared in this mutation.
-func (m *RouteMutation) PathCleared() bool {
-	_, ok := m.clearedFields[route.FieldPath]
+// RoutingPathCleared returns if the "routing_path" field was cleared in this mutation.
+func (m *RouteMutation) RoutingPathCleared() bool {
+	_, ok := m.clearedFields[route.FieldRoutingPath]
 	return ok
 }
 
-// ResetPath resets all changes to the "path" field.
-func (m *RouteMutation) ResetPath() {
-	m._path = nil
-	m.append_path = nil
-	delete(m.clearedFields, route.FieldPath)
+// ResetRoutingPath resets all changes to the "routing_path" field.
+func (m *RouteMutation) ResetRoutingPath() {
+	m.routing_path = nil
+	delete(m.clearedFields, route.FieldRoutingPath)
 }
 
 // SetRemark sets the "remark" field.
@@ -48248,8 +48231,8 @@ func (m *RouteMutation) Fields() []string {
 	if m.poi_ids != nil {
 		fields = append(fields, route.FieldPoiIds)
 	}
-	if m._path != nil {
-		fields = append(fields, route.FieldPath)
+	if m.routing_path != nil {
+		fields = append(fields, route.FieldRoutingPath)
 	}
 	if m.remark != nil {
 		fields = append(fields, route.FieldRemark)
@@ -48278,8 +48261,8 @@ func (m *RouteMutation) Field(name string) (ent.Value, bool) {
 		return m.Name()
 	case route.FieldPoiIds:
 		return m.PoiIds()
-	case route.FieldPath:
-		return m.Path()
+	case route.FieldRoutingPath:
+		return m.RoutingPath()
 	case route.FieldRemark:
 		return m.Remark()
 	case route.FieldCreateTime:
@@ -48305,8 +48288,8 @@ func (m *RouteMutation) OldField(ctx context.Context, name string) (ent.Value, e
 		return m.OldName(ctx)
 	case route.FieldPoiIds:
 		return m.OldPoiIds(ctx)
-	case route.FieldPath:
-		return m.OldPath(ctx)
+	case route.FieldRoutingPath:
+		return m.OldRoutingPath(ctx)
 	case route.FieldRemark:
 		return m.OldRemark(ctx)
 	case route.FieldCreateTime:
@@ -48357,12 +48340,12 @@ func (m *RouteMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetPoiIds(v)
 		return nil
-	case route.FieldPath:
-		v, ok := value.([]types.Coord)
+	case route.FieldRoutingPath:
+		v, ok := value.(*types.RoutingPath)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetPath(v)
+		m.SetRoutingPath(v)
 		return nil
 	case route.FieldRemark:
 		v, ok := value.(string)
@@ -48445,8 +48428,8 @@ func (m *RouteMutation) ClearedFields() []string {
 	if m.FieldCleared(route.FieldDeleteTime) {
 		fields = append(fields, route.FieldDeleteTime)
 	}
-	if m.FieldCleared(route.FieldPath) {
-		fields = append(fields, route.FieldPath)
+	if m.FieldCleared(route.FieldRoutingPath) {
+		fields = append(fields, route.FieldRoutingPath)
 	}
 	return fields
 }
@@ -48465,8 +48448,8 @@ func (m *RouteMutation) ClearField(name string) error {
 	case route.FieldDeleteTime:
 		m.ClearDeleteTime()
 		return nil
-	case route.FieldPath:
-		m.ClearPath()
+	case route.FieldRoutingPath:
+		m.ClearRoutingPath()
 		return nil
 	}
 	return fmt.Errorf("unknown Route nullable field %s", name)
@@ -48491,8 +48474,8 @@ func (m *RouteMutation) ResetField(name string) error {
 	case route.FieldPoiIds:
 		m.ResetPoiIds()
 		return nil
-	case route.FieldPath:
-		m.ResetPath()
+	case route.FieldRoutingPath:
+		m.ResetRoutingPath()
 		return nil
 	case route.FieldRemark:
 		m.ResetRemark()

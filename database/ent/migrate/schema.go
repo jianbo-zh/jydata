@@ -1056,7 +1056,7 @@ var (
 		{Name: "type", Type: field.TypeInt},
 		{Name: "name", Type: field.TypeString},
 		{Name: "poi_ids", Type: field.TypeJSON},
-		{Name: "path", Type: field.TypeJSON, Nullable: true},
+		{Name: "routing_path", Type: field.TypeJSON, Nullable: true},
 		{Name: "remark", Type: field.TypeString},
 		{Name: "create_time", Type: field.TypeTime},
 		{Name: "update_time", Type: field.TypeTime},
@@ -1472,7 +1472,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1748997153},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1749129150},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},

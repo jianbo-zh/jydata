@@ -118,21 +118,15 @@ func (ru *RouteUpdate) AppendPoiIds(i []int) *RouteUpdate {
 	return ru
 }
 
-// SetPath sets the "path" field.
-func (ru *RouteUpdate) SetPath(t []types.Coord) *RouteUpdate {
-	ru.mutation.SetPath(t)
+// SetRoutingPath sets the "routing_path" field.
+func (ru *RouteUpdate) SetRoutingPath(tp *types.RoutingPath) *RouteUpdate {
+	ru.mutation.SetRoutingPath(tp)
 	return ru
 }
 
-// AppendPath appends t to the "path" field.
-func (ru *RouteUpdate) AppendPath(t []types.Coord) *RouteUpdate {
-	ru.mutation.AppendPath(t)
-	return ru
-}
-
-// ClearPath clears the value of the "path" field.
-func (ru *RouteUpdate) ClearPath() *RouteUpdate {
-	ru.mutation.ClearPath()
+// ClearRoutingPath clears the value of the "routing_path" field.
+func (ru *RouteUpdate) ClearRoutingPath() *RouteUpdate {
+	ru.mutation.ClearRoutingPath()
 	return ru
 }
 
@@ -241,16 +235,11 @@ func (ru *RouteUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			sqljson.Append(u, route.FieldPoiIds, value)
 		})
 	}
-	if value, ok := ru.mutation.Path(); ok {
-		_spec.SetField(route.FieldPath, field.TypeJSON, value)
+	if value, ok := ru.mutation.RoutingPath(); ok {
+		_spec.SetField(route.FieldRoutingPath, field.TypeJSON, value)
 	}
-	if value, ok := ru.mutation.AppendedPath(); ok {
-		_spec.AddModifier(func(u *sql.UpdateBuilder) {
-			sqljson.Append(u, route.FieldPath, value)
-		})
-	}
-	if ru.mutation.PathCleared() {
-		_spec.ClearField(route.FieldPath, field.TypeJSON)
+	if ru.mutation.RoutingPathCleared() {
+		_spec.ClearField(route.FieldRoutingPath, field.TypeJSON)
 	}
 	if value, ok := ru.mutation.Remark(); ok {
 		_spec.SetField(route.FieldRemark, field.TypeString, value)
@@ -366,21 +355,15 @@ func (ruo *RouteUpdateOne) AppendPoiIds(i []int) *RouteUpdateOne {
 	return ruo
 }
 
-// SetPath sets the "path" field.
-func (ruo *RouteUpdateOne) SetPath(t []types.Coord) *RouteUpdateOne {
-	ruo.mutation.SetPath(t)
+// SetRoutingPath sets the "routing_path" field.
+func (ruo *RouteUpdateOne) SetRoutingPath(tp *types.RoutingPath) *RouteUpdateOne {
+	ruo.mutation.SetRoutingPath(tp)
 	return ruo
 }
 
-// AppendPath appends t to the "path" field.
-func (ruo *RouteUpdateOne) AppendPath(t []types.Coord) *RouteUpdateOne {
-	ruo.mutation.AppendPath(t)
-	return ruo
-}
-
-// ClearPath clears the value of the "path" field.
-func (ruo *RouteUpdateOne) ClearPath() *RouteUpdateOne {
-	ruo.mutation.ClearPath()
+// ClearRoutingPath clears the value of the "routing_path" field.
+func (ruo *RouteUpdateOne) ClearRoutingPath() *RouteUpdateOne {
+	ruo.mutation.ClearRoutingPath()
 	return ruo
 }
 
@@ -519,16 +502,11 @@ func (ruo *RouteUpdateOne) sqlSave(ctx context.Context) (_node *Route, err error
 			sqljson.Append(u, route.FieldPoiIds, value)
 		})
 	}
-	if value, ok := ruo.mutation.Path(); ok {
-		_spec.SetField(route.FieldPath, field.TypeJSON, value)
+	if value, ok := ruo.mutation.RoutingPath(); ok {
+		_spec.SetField(route.FieldRoutingPath, field.TypeJSON, value)
 	}
-	if value, ok := ruo.mutation.AppendedPath(); ok {
-		_spec.AddModifier(func(u *sql.UpdateBuilder) {
-			sqljson.Append(u, route.FieldPath, value)
-		})
-	}
-	if ruo.mutation.PathCleared() {
-		_spec.ClearField(route.FieldPath, field.TypeJSON)
+	if ruo.mutation.RoutingPathCleared() {
+		_spec.ClearField(route.FieldRoutingPath, field.TypeJSON)
 	}
 	if value, ok := ruo.mutation.Remark(); ok {
 		_spec.SetField(route.FieldRemark, field.TypeString, value)

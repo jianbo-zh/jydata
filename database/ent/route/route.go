@@ -24,8 +24,8 @@ const (
 	FieldName = "name"
 	// FieldPoiIds holds the string denoting the poi_ids field in the database.
 	FieldPoiIds = "poi_ids"
-	// FieldPath holds the string denoting the path field in the database.
-	FieldPath = "path"
+	// FieldRoutingPath holds the string denoting the routing_path field in the database.
+	FieldRoutingPath = "routing_path"
 	// FieldRemark holds the string denoting the remark field in the database.
 	FieldRemark = "remark"
 	// FieldCreateTime holds the string denoting the create_time field in the database.
@@ -44,7 +44,7 @@ var Columns = []string{
 	FieldType,
 	FieldName,
 	FieldPoiIds,
-	FieldPath,
+	FieldRoutingPath,
 	FieldRemark,
 	FieldCreateTime,
 	FieldUpdateTime,

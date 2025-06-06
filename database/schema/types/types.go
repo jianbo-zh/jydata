@@ -15,10 +15,12 @@ type Coord struct {
 
 type Segement struct {
 	Points []Coord
+	Length float64
 }
 
 type RoutingPath struct {
 	Segements []Segement
+	Length    float64
 }
 
 type StopStock struct {

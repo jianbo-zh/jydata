@@ -284,14 +284,14 @@ func NameContainsFold(v string) predicate.Route {
 	return predicate.Route(sql.FieldContainsFold(FieldName, v))
 }
 
-// PathIsNil applies the IsNil predicate on the "path" field.
-func PathIsNil() predicate.Route {
-	return predicate.Route(sql.FieldIsNull(FieldPath))
+// RoutingPathIsNil applies the IsNil predicate on the "routing_path" field.
+func RoutingPathIsNil() predicate.Route {
+	return predicate.Route(sql.FieldIsNull(FieldRoutingPath))
 }
 
-// PathNotNil applies the NotNil predicate on the "path" field.
-func PathNotNil() predicate.Route {
-	return predicate.Route(sql.FieldNotNull(FieldPath))
+// RoutingPathNotNil applies the NotNil predicate on the "routing_path" field.
+func RoutingPathNotNil() predicate.Route {
+	return predicate.Route(sql.FieldNotNull(FieldRoutingPath))
 }
 
 // RemarkEQ applies the EQ predicate on the "remark" field.

@@ -30,7 +30,7 @@ type Route struct {
 	// poi点列表
 	PoiIds []int `json:"poi_ids,omitempty"`
 	// 行驶线路
-	Path []types.Coord `json:"path,omitempty"`
+	RoutingPath *types.RoutingPath `json:"routing_path,omitempty"`
 	// 线路备注
 	Remark string `json:"remark,omitempty"`
 	// 创建时间
@@ -45,7 +45,7 @@ func (*Route) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case route.FieldPoiIds, route.FieldPath:
+		case route.FieldPoiIds, route.FieldRoutingPath:
 			values[i] = new([]byte)
 		case route.FieldID, route.FieldScenicAreaID, route.FieldType:
 			values[i] = new(sql.NullInt64)
@@ -106,12 +106,12 @@ func (r *Route) assignValues(columns []string, values []any) error {
 					return fmt.Errorf("unmarshal field poi_ids: %w", err)
 				}
 			}
-		case route.FieldPath:
+		case route.FieldRoutingPath:
 			if value, ok := values[i].(*[]byte); !ok {
-				return fmt.Errorf("unexpected type %T for field path", values[i])
+				return fmt.Errorf("unexpected type %T for field routing_path", values[i])
 			} else if value != nil && len(*value) > 0 {
-				if err := json.Unmarshal(*value, &r.Path); err != nil {
-					return fmt.Errorf("unmarshal field path: %w", err)
+				if err := json.Unmarshal(*value, &r.RoutingPath); err != nil {
+					return fmt.Errorf("unmarshal field routing_path: %w", err)
 				}
 			}
 		case route.FieldRemark:
@@ -183,8 +183,8 @@ func (r *Route) String() string {
 	builder.WriteString("poi_ids=")
 	builder.WriteString(fmt.Sprintf("%v", r.PoiIds))
 	builder.WriteString(", ")
-	builder.WriteString("path=")
-	builder.WriteString(fmt.Sprintf("%v", r.Path))
+	builder.WriteString("routing_path=")
+	builder.WriteString(fmt.Sprintf("%v", r.RoutingPath))
 	builder.WriteString(", ")
 	builder.WriteString("remark=")
 	builder.WriteString(r.Remark)
