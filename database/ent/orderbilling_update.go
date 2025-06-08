@@ -190,6 +190,27 @@ func (obu *OrderBillingUpdate) AddCumulativeMeter(f float64) *OrderBillingUpdate
 	return obu
 }
 
+// SetTicketCount sets the "ticket_count" field.
+func (obu *OrderBillingUpdate) SetTicketCount(i int) *OrderBillingUpdate {
+	obu.mutation.ResetTicketCount()
+	obu.mutation.SetTicketCount(i)
+	return obu
+}
+
+// SetNillableTicketCount sets the "ticket_count" field if the given value is not nil.
+func (obu *OrderBillingUpdate) SetNillableTicketCount(i *int) *OrderBillingUpdate {
+	if i != nil {
+		obu.SetTicketCount(*i)
+	}
+	return obu
+}
+
+// AddTicketCount adds i to the "ticket_count" field.
+func (obu *OrderBillingUpdate) AddTicketCount(i int) *OrderBillingUpdate {
+	obu.mutation.AddTicketCount(i)
+	return obu
+}
+
 // SetCumulativeStop sets the "cumulative_stop" field.
 func (obu *OrderBillingUpdate) SetCumulativeStop(i int) *OrderBillingUpdate {
 	obu.mutation.ResetCumulativeStop()
@@ -355,6 +376,46 @@ func (obu *OrderBillingUpdate) SetNillableCouponDeductionAmount(i *int) *OrderBi
 // AddCouponDeductionAmount adds i to the "coupon_deduction_amount" field.
 func (obu *OrderBillingUpdate) AddCouponDeductionAmount(i int) *OrderBillingUpdate {
 	obu.mutation.AddCouponDeductionAmount(i)
+	return obu
+}
+
+// SetCouponStartTime sets the "coupon_start_time" field.
+func (obu *OrderBillingUpdate) SetCouponStartTime(t time.Time) *OrderBillingUpdate {
+	obu.mutation.SetCouponStartTime(t)
+	return obu
+}
+
+// SetNillableCouponStartTime sets the "coupon_start_time" field if the given value is not nil.
+func (obu *OrderBillingUpdate) SetNillableCouponStartTime(t *time.Time) *OrderBillingUpdate {
+	if t != nil {
+		obu.SetCouponStartTime(*t)
+	}
+	return obu
+}
+
+// ClearCouponStartTime clears the value of the "coupon_start_time" field.
+func (obu *OrderBillingUpdate) ClearCouponStartTime() *OrderBillingUpdate {
+	obu.mutation.ClearCouponStartTime()
+	return obu
+}
+
+// SetCouponEndTime sets the "coupon_end_time" field.
+func (obu *OrderBillingUpdate) SetCouponEndTime(t time.Time) *OrderBillingUpdate {
+	obu.mutation.SetCouponEndTime(t)
+	return obu
+}
+
+// SetNillableCouponEndTime sets the "coupon_end_time" field if the given value is not nil.
+func (obu *OrderBillingUpdate) SetNillableCouponEndTime(t *time.Time) *OrderBillingUpdate {
+	if t != nil {
+		obu.SetCouponEndTime(*t)
+	}
+	return obu
+}
+
+// ClearCouponEndTime clears the value of the "coupon_end_time" field.
+func (obu *OrderBillingUpdate) ClearCouponEndTime() *OrderBillingUpdate {
+	obu.mutation.ClearCouponEndTime()
 	return obu
 }
 
@@ -560,6 +621,12 @@ func (obu *OrderBillingUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := obu.mutation.AddedCumulativeMeter(); ok {
 		_spec.AddField(orderbilling.FieldCumulativeMeter, field.TypeFloat64, value)
 	}
+	if value, ok := obu.mutation.TicketCount(); ok {
+		_spec.SetField(orderbilling.FieldTicketCount, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.AddedTicketCount(); ok {
+		_spec.AddField(orderbilling.FieldTicketCount, field.TypeInt, value)
+	}
 	if value, ok := obu.mutation.CumulativeStop(); ok {
 		_spec.SetField(orderbilling.FieldCumulativeStop, field.TypeInt, value)
 	}
@@ -607,6 +674,18 @@ func (obu *OrderBillingUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := obu.mutation.AddedCouponDeductionAmount(); ok {
 		_spec.AddField(orderbilling.FieldCouponDeductionAmount, field.TypeInt, value)
+	}
+	if value, ok := obu.mutation.CouponStartTime(); ok {
+		_spec.SetField(orderbilling.FieldCouponStartTime, field.TypeTime, value)
+	}
+	if obu.mutation.CouponStartTimeCleared() {
+		_spec.ClearField(orderbilling.FieldCouponStartTime, field.TypeTime)
+	}
+	if value, ok := obu.mutation.CouponEndTime(); ok {
+		_spec.SetField(orderbilling.FieldCouponEndTime, field.TypeTime, value)
+	}
+	if obu.mutation.CouponEndTimeCleared() {
+		_spec.ClearField(orderbilling.FieldCouponEndTime, field.TypeTime)
 	}
 	if value, ok := obu.mutation.CappedAmount(); ok {
 		_spec.SetField(orderbilling.FieldCappedAmount, field.TypeInt, value)
@@ -845,6 +924,27 @@ func (obuo *OrderBillingUpdateOne) AddCumulativeMeter(f float64) *OrderBillingUp
 	return obuo
 }
 
+// SetTicketCount sets the "ticket_count" field.
+func (obuo *OrderBillingUpdateOne) SetTicketCount(i int) *OrderBillingUpdateOne {
+	obuo.mutation.ResetTicketCount()
+	obuo.mutation.SetTicketCount(i)
+	return obuo
+}
+
+// SetNillableTicketCount sets the "ticket_count" field if the given value is not nil.
+func (obuo *OrderBillingUpdateOne) SetNillableTicketCount(i *int) *OrderBillingUpdateOne {
+	if i != nil {
+		obuo.SetTicketCount(*i)
+	}
+	return obuo
+}
+
+// AddTicketCount adds i to the "ticket_count" field.
+func (obuo *OrderBillingUpdateOne) AddTicketCount(i int) *OrderBillingUpdateOne {
+	obuo.mutation.AddTicketCount(i)
+	return obuo
+}
+
 // SetCumulativeStop sets the "cumulative_stop" field.
 func (obuo *OrderBillingUpdateOne) SetCumulativeStop(i int) *OrderBillingUpdateOne {
 	obuo.mutation.ResetCumulativeStop()
@@ -1010,6 +1110,46 @@ func (obuo *OrderBillingUpdateOne) SetNillableCouponDeductionAmount(i *int) *Ord
 // AddCouponDeductionAmount adds i to the "coupon_deduction_amount" field.
 func (obuo *OrderBillingUpdateOne) AddCouponDeductionAmount(i int) *OrderBillingUpdateOne {
 	obuo.mutation.AddCouponDeductionAmount(i)
+	return obuo
+}
+
+// SetCouponStartTime sets the "coupon_start_time" field.
+func (obuo *OrderBillingUpdateOne) SetCouponStartTime(t time.Time) *OrderBillingUpdateOne {
+	obuo.mutation.SetCouponStartTime(t)
+	return obuo
+}
+
+// SetNillableCouponStartTime sets the "coupon_start_time" field if the given value is not nil.
+func (obuo *OrderBillingUpdateOne) SetNillableCouponStartTime(t *time.Time) *OrderBillingUpdateOne {
+	if t != nil {
+		obuo.SetCouponStartTime(*t)
+	}
+	return obuo
+}
+
+// ClearCouponStartTime clears the value of the "coupon_start_time" field.
+func (obuo *OrderBillingUpdateOne) ClearCouponStartTime() *OrderBillingUpdateOne {
+	obuo.mutation.ClearCouponStartTime()
+	return obuo
+}
+
+// SetCouponEndTime sets the "coupon_end_time" field.
+func (obuo *OrderBillingUpdateOne) SetCouponEndTime(t time.Time) *OrderBillingUpdateOne {
+	obuo.mutation.SetCouponEndTime(t)
+	return obuo
+}
+
+// SetNillableCouponEndTime sets the "coupon_end_time" field if the given value is not nil.
+func (obuo *OrderBillingUpdateOne) SetNillableCouponEndTime(t *time.Time) *OrderBillingUpdateOne {
+	if t != nil {
+		obuo.SetCouponEndTime(*t)
+	}
+	return obuo
+}
+
+// ClearCouponEndTime clears the value of the "coupon_end_time" field.
+func (obuo *OrderBillingUpdateOne) ClearCouponEndTime() *OrderBillingUpdateOne {
+	obuo.mutation.ClearCouponEndTime()
 	return obuo
 }
 
@@ -1245,6 +1385,12 @@ func (obuo *OrderBillingUpdateOne) sqlSave(ctx context.Context) (_node *OrderBil
 	if value, ok := obuo.mutation.AddedCumulativeMeter(); ok {
 		_spec.AddField(orderbilling.FieldCumulativeMeter, field.TypeFloat64, value)
 	}
+	if value, ok := obuo.mutation.TicketCount(); ok {
+		_spec.SetField(orderbilling.FieldTicketCount, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.AddedTicketCount(); ok {
+		_spec.AddField(orderbilling.FieldTicketCount, field.TypeInt, value)
+	}
 	if value, ok := obuo.mutation.CumulativeStop(); ok {
 		_spec.SetField(orderbilling.FieldCumulativeStop, field.TypeInt, value)
 	}
@@ -1292,6 +1438,18 @@ func (obuo *OrderBillingUpdateOne) sqlSave(ctx context.Context) (_node *OrderBil
 	}
 	if value, ok := obuo.mutation.AddedCouponDeductionAmount(); ok {
 		_spec.AddField(orderbilling.FieldCouponDeductionAmount, field.TypeInt, value)
+	}
+	if value, ok := obuo.mutation.CouponStartTime(); ok {
+		_spec.SetField(orderbilling.FieldCouponStartTime, field.TypeTime, value)
+	}
+	if obuo.mutation.CouponStartTimeCleared() {
+		_spec.ClearField(orderbilling.FieldCouponStartTime, field.TypeTime)
+	}
+	if value, ok := obuo.mutation.CouponEndTime(); ok {
+		_spec.SetField(orderbilling.FieldCouponEndTime, field.TypeTime, value)
+	}
+	if obuo.mutation.CouponEndTimeCleared() {
+		_spec.ClearField(orderbilling.FieldCouponEndTime, field.TypeTime)
 	}
 	if value, ok := obuo.mutation.CappedAmount(); ok {
 		_spec.SetField(orderbilling.FieldCappedAmount, field.TypeInt, value)

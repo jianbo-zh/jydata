@@ -26,6 +26,8 @@ type CarsFlight struct {
 	FlightNo string `json:"flight_no,omitempty"`
 	// 车辆ID
 	CarID int `json:"car_id,omitempty"`
+	// 车辆编号
+	DeviceID string `json:"device_id,omitempty"`
 	// 车辆名称
 	CarName string `json:"car_name,omitempty"`
 	// 路线ID
@@ -68,7 +70,7 @@ func (*CarsFlight) scanValues(columns []string) ([]any, error) {
 			values[i] = new([]byte)
 		case carsflight.FieldID, carsflight.FieldScenicAreaID, carsflight.FieldCarID, carsflight.FieldRouteID, carsflight.FieldSeatsNum, carsflight.FieldState, carsflight.FieldCurrStopID, carsflight.FieldExtendYokeeID:
 			values[i] = new(sql.NullInt64)
-		case carsflight.FieldFlightNo, carsflight.FieldCarName, carsflight.FieldRouteName, carsflight.FieldRemark:
+		case carsflight.FieldFlightNo, carsflight.FieldDeviceID, carsflight.FieldCarName, carsflight.FieldRouteName, carsflight.FieldRemark:
 			values[i] = new(sql.NullString)
 		case carsflight.FieldDepartureTime, carsflight.FieldFinishTime, carsflight.FieldCreateTime, carsflight.FieldUpdateTime:
 			values[i] = new(sql.NullTime)
@@ -110,6 +112,12 @@ func (cf *CarsFlight) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field car_id", values[i])
 			} else if value.Valid {
 				cf.CarID = int(value.Int64)
+			}
+		case carsflight.FieldDeviceID:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field device_id", values[i])
+			} else if value.Valid {
+				cf.DeviceID = value.String
 			}
 		case carsflight.FieldCarName:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -254,6 +262,9 @@ func (cf *CarsFlight) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("car_id=")
 	builder.WriteString(fmt.Sprintf("%v", cf.CarID))
+	builder.WriteString(", ")
+	builder.WriteString("device_id=")
+	builder.WriteString(cf.DeviceID)
 	builder.WriteString(", ")
 	builder.WriteString("car_name=")
 	builder.WriteString(cf.CarName)

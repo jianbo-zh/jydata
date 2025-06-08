@@ -125,6 +125,20 @@ func (obc *OrderBillingCreate) SetNillableCumulativeMeter(f *float64) *OrderBill
 	return obc
 }
 
+// SetTicketCount sets the "ticket_count" field.
+func (obc *OrderBillingCreate) SetTicketCount(i int) *OrderBillingCreate {
+	obc.mutation.SetTicketCount(i)
+	return obc
+}
+
+// SetNillableTicketCount sets the "ticket_count" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableTicketCount(i *int) *OrderBillingCreate {
+	if i != nil {
+		obc.SetTicketCount(*i)
+	}
+	return obc
+}
+
 // SetCumulativeStop sets the "cumulative_stop" field.
 func (obc *OrderBillingCreate) SetCumulativeStop(i int) *OrderBillingCreate {
 	obc.mutation.SetCumulativeStop(i)
@@ -233,6 +247,34 @@ func (obc *OrderBillingCreate) SetCouponDeductionAmount(i int) *OrderBillingCrea
 func (obc *OrderBillingCreate) SetNillableCouponDeductionAmount(i *int) *OrderBillingCreate {
 	if i != nil {
 		obc.SetCouponDeductionAmount(*i)
+	}
+	return obc
+}
+
+// SetCouponStartTime sets the "coupon_start_time" field.
+func (obc *OrderBillingCreate) SetCouponStartTime(t time.Time) *OrderBillingCreate {
+	obc.mutation.SetCouponStartTime(t)
+	return obc
+}
+
+// SetNillableCouponStartTime sets the "coupon_start_time" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableCouponStartTime(t *time.Time) *OrderBillingCreate {
+	if t != nil {
+		obc.SetCouponStartTime(*t)
+	}
+	return obc
+}
+
+// SetCouponEndTime sets the "coupon_end_time" field.
+func (obc *OrderBillingCreate) SetCouponEndTime(t time.Time) *OrderBillingCreate {
+	obc.mutation.SetCouponEndTime(t)
+	return obc
+}
+
+// SetNillableCouponEndTime sets the "coupon_end_time" field if the given value is not nil.
+func (obc *OrderBillingCreate) SetNillableCouponEndTime(t *time.Time) *OrderBillingCreate {
+	if t != nil {
+		obc.SetCouponEndTime(*t)
 	}
 	return obc
 }
@@ -395,6 +437,10 @@ func (obc *OrderBillingCreate) defaults() {
 		v := orderbilling.DefaultCumulativeMeter
 		obc.mutation.SetCumulativeMeter(v)
 	}
+	if _, ok := obc.mutation.TicketCount(); !ok {
+		v := orderbilling.DefaultTicketCount
+		obc.mutation.SetTicketCount(v)
+	}
 	if _, ok := obc.mutation.CumulativeStop(); !ok {
 		v := orderbilling.DefaultCumulativeStop
 		obc.mutation.SetCumulativeStop(v)
@@ -470,6 +516,9 @@ func (obc *OrderBillingCreate) check() error {
 	}
 	if _, ok := obc.mutation.CumulativeMeter(); !ok {
 		return &ValidationError{Name: "cumulative_meter", err: errors.New(`ent: missing required field "OrderBilling.cumulative_meter"`)}
+	}
+	if _, ok := obc.mutation.TicketCount(); !ok {
+		return &ValidationError{Name: "ticket_count", err: errors.New(`ent: missing required field "OrderBilling.ticket_count"`)}
 	}
 	if _, ok := obc.mutation.CumulativeStop(); !ok {
 		return &ValidationError{Name: "cumulative_stop", err: errors.New(`ent: missing required field "OrderBilling.cumulative_stop"`)}
@@ -570,6 +619,10 @@ func (obc *OrderBillingCreate) createSpec() (*OrderBilling, *sqlgraph.CreateSpec
 		_spec.SetField(orderbilling.FieldCumulativeMeter, field.TypeFloat64, value)
 		_node.CumulativeMeter = value
 	}
+	if value, ok := obc.mutation.TicketCount(); ok {
+		_spec.SetField(orderbilling.FieldTicketCount, field.TypeInt, value)
+		_node.TicketCount = value
+	}
 	if value, ok := obc.mutation.CumulativeStop(); ok {
 		_spec.SetField(orderbilling.FieldCumulativeStop, field.TypeInt, value)
 		_node.CumulativeStop = value
@@ -601,6 +654,14 @@ func (obc *OrderBillingCreate) createSpec() (*OrderBilling, *sqlgraph.CreateSpec
 	if value, ok := obc.mutation.CouponDeductionAmount(); ok {
 		_spec.SetField(orderbilling.FieldCouponDeductionAmount, field.TypeInt, value)
 		_node.CouponDeductionAmount = value
+	}
+	if value, ok := obc.mutation.CouponStartTime(); ok {
+		_spec.SetField(orderbilling.FieldCouponStartTime, field.TypeTime, value)
+		_node.CouponStartTime = value
+	}
+	if value, ok := obc.mutation.CouponEndTime(); ok {
+		_spec.SetField(orderbilling.FieldCouponEndTime, field.TypeTime, value)
+		_node.CouponEndTime = value
 	}
 	if value, ok := obc.mutation.CappedAmount(); ok {
 		_spec.SetField(orderbilling.FieldCappedAmount, field.TypeInt, value)

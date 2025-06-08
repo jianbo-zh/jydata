@@ -21,6 +21,7 @@ func (CarsFlight) Fields() []ent.Field {
 		field.Int("scenic_area_id").Comment("景区ID"),
 		field.String("flight_no").Comment("班次编号"),
 		field.Int("car_id").Comment("车辆ID"),
+		field.String("device_id").Default("").Comment("车辆编号"),
 		field.String("car_name").Comment("车辆名称"),
 		field.Int("route_id").Comment("路线ID"),
 		field.String("route_name").Comment("路线名称"),

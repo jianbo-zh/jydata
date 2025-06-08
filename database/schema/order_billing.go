@@ -29,6 +29,8 @@ func (OrderBilling) Fields() []ent.Field {
 
 		field.Float("cumulative_second").Default(0).Comment("累积时长(秒)"),
 		field.Float("cumulative_meter").Default(0).Comment("累积里程(米)"),
+
+		field.Int("ticket_count").Default(1).Comment("购票数量"),
 		field.Int("cumulative_stop").Default(0).Comment("累积站点(站)"),
 
 		field.Int("start_stop_price").Default(0).Comment("起步价(按站)收费价格(单位：分)"),
@@ -39,6 +41,8 @@ func (OrderBilling) Fields() []ent.Field {
 		field.Int("coupon_id").Default(0).Comment("优惠卷ID"),
 		field.Int("coupon_limit_amount").Default(0).Comment("优惠限制金额（单位：分）"),
 		field.Int("coupon_deduction_amount").Default(0).Comment("优惠卷抵扣金额（单位：分）"),
+		field.Time("coupon_start_time").Optional().Comment("优惠卷开始时间"),
+		field.Time("coupon_end_time").Optional().Comment("优惠卷结束时间"),
 
 		field.Int("capped_amount").Default(0).Comment("封顶价格（单位：分）"),
 

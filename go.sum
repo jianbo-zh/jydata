@@ -185,10 +185,10 @@ github.com/influxdata/influxdb-client-go/v2 v2.14.0 h1:AjbBfJuq+QoaXNcrova8smSjw
 github.com/influxdata/influxdb-client-go/v2 v2.14.0/go.mod h1:Ahpm3QXKMJslpXl3IftVLVezreAUtBOTZssDrjZEFHI=
 github.com/influxdata/line-protocol v0.0.0-20200327222509-2487e7298839 h1:W9WBk7wlPfJLvMCdtV4zPulc4uCPrlywQOmbFOhgQNU=
 github.com/influxdata/line-protocol v0.0.0-20200327222509-2487e7298839/go.mod h1:xaLFMmpvUxqXtVkUJfg9QmT88cDaCJ3ZKgdZ78oO8Qo=
-github.com/jianbo-zh/jylib v0.1.59 h1:bo5obdsGh0FuaJ/PxHTlSauZmX7p/bjaIYCg7pctQE0=
-github.com/jianbo-zh/jylib v0.1.59/go.mod h1:9H9IB/MB7waLPqwethnxu0Xb8J+LALo0sUi5LQmq5q0=
-github.com/jianbo-zh/jypb v0.1.39 h1:HyX3XOf7zNslY79LiZ4LywCVryBzKrDyvCQFbmd/6/0=
-github.com/jianbo-zh/jypb v0.1.39/go.mod h1:R5C4R2N/R6EpMjEU4iCfAajZ/SAE7Oc159qD+JrIbSM=
+github.com/jianbo-zh/jylib v0.1.60 h1:olh9NjifLt806JG135kVkBVgTHpsA+l8Pn/N15gj4ZI=
+github.com/jianbo-zh/jylib v0.1.60/go.mod h1:7foHzF6+aYCPsAoquR/bJdY6yDx75XIM1aC2YVDT+TE=
+github.com/jianbo-zh/jypb v0.1.40 h1:u5WzLrm7qNIMxV/KzmBHs9xv7VAMToX+pVgebrTzC14=
+github.com/jianbo-zh/jypb v0.1.40/go.mod h1:R5C4R2N/R6EpMjEU4iCfAajZ/SAE7Oc159qD+JrIbSM=
 github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af h1:pmfjZENx5imkbgOkpRUYLnmbU7UEFbjtDA2hxJ1ichM=
 github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af/go.mod h1:Nht3zPeWKUH0NzdCt2Blrr5ys8VGpn0CEB0cQHVjt7k=
 github.com/json-iterator/go v1.1.5/go.mod h1:+SdeFBvtyEkXs7REEP0seUULqWtbJapLOCVDaaPEHmU=

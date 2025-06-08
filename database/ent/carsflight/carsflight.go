@@ -19,6 +19,8 @@ const (
 	FieldFlightNo = "flight_no"
 	// FieldCarID holds the string denoting the car_id field in the database.
 	FieldCarID = "car_id"
+	// FieldDeviceID holds the string denoting the device_id field in the database.
+	FieldDeviceID = "device_id"
 	// FieldCarName holds the string denoting the car_name field in the database.
 	FieldCarName = "car_name"
 	// FieldRouteID holds the string denoting the route_id field in the database.
@@ -59,6 +61,7 @@ var Columns = []string{
 	FieldScenicAreaID,
 	FieldFlightNo,
 	FieldCarID,
+	FieldDeviceID,
 	FieldCarName,
 	FieldRouteID,
 	FieldRouteName,
@@ -87,6 +90,8 @@ func ValidColumn(column string) bool {
 }
 
 var (
+	// DefaultDeviceID holds the default value on creation for the "device_id" field.
+	DefaultDeviceID string
 	// DefaultState holds the default value on creation for the "state" field.
 	DefaultState int
 	// DefaultCurrStopID holds the default value on creation for the "curr_stop_id" field.
@@ -126,6 +131,11 @@ func ByFlightNo(opts ...sql.OrderTermOption) OrderOption {
 // ByCarID orders the results by the car_id field.
 func ByCarID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldCarID, opts...).ToFunc()
+}
+
+// ByDeviceID orders the results by the device_id field.
+func ByDeviceID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldDeviceID, opts...).ToFunc()
 }
 
 // ByCarName orders the results by the car_name field.

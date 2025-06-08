@@ -19956,6 +19956,7 @@ type CarsFlightMutation struct {
 	flight_no          *string
 	car_id             *int
 	addcar_id          *int
+	device_id          *string
 	car_name           *string
 	route_id           *int
 	addroute_id        *int
@@ -20235,6 +20236,42 @@ func (m *CarsFlightMutation) AddedCarID() (r int, exists bool) {
 func (m *CarsFlightMutation) ResetCarID() {
 	m.car_id = nil
 	m.addcar_id = nil
+}
+
+// SetDeviceID sets the "device_id" field.
+func (m *CarsFlightMutation) SetDeviceID(s string) {
+	m.device_id = &s
+}
+
+// DeviceID returns the value of the "device_id" field in the mutation.
+func (m *CarsFlightMutation) DeviceID() (r string, exists bool) {
+	v := m.device_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldDeviceID returns the old "device_id" field's value of the CarsFlight entity.
+// If the CarsFlight object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *CarsFlightMutation) OldDeviceID(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldDeviceID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldDeviceID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldDeviceID: %w", err)
+	}
+	return oldValue.DeviceID, nil
+}
+
+// ResetDeviceID resets all changes to the "device_id" field.
+func (m *CarsFlightMutation) ResetDeviceID() {
+	m.device_id = nil
 }
 
 // SetCarName sets the "car_name" field.
@@ -21038,7 +21075,7 @@ func (m *CarsFlightMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *CarsFlightMutation) Fields() []string {
-	fields := make([]string, 0, 18)
+	fields := make([]string, 0, 19)
 	if m.scenic_area_id != nil {
 		fields = append(fields, carsflight.FieldScenicAreaID)
 	}
@@ -21047,6 +21084,9 @@ func (m *CarsFlightMutation) Fields() []string {
 	}
 	if m.car_id != nil {
 		fields = append(fields, carsflight.FieldCarID)
+	}
+	if m.device_id != nil {
+		fields = append(fields, carsflight.FieldDeviceID)
 	}
 	if m.car_name != nil {
 		fields = append(fields, carsflight.FieldCarName)
@@ -21107,6 +21147,8 @@ func (m *CarsFlightMutation) Field(name string) (ent.Value, bool) {
 		return m.FlightNo()
 	case carsflight.FieldCarID:
 		return m.CarID()
+	case carsflight.FieldDeviceID:
+		return m.DeviceID()
 	case carsflight.FieldCarName:
 		return m.CarName()
 	case carsflight.FieldRouteID:
@@ -21152,6 +21194,8 @@ func (m *CarsFlightMutation) OldField(ctx context.Context, name string) (ent.Val
 		return m.OldFlightNo(ctx)
 	case carsflight.FieldCarID:
 		return m.OldCarID(ctx)
+	case carsflight.FieldDeviceID:
+		return m.OldDeviceID(ctx)
 	case carsflight.FieldCarName:
 		return m.OldCarName(ctx)
 	case carsflight.FieldRouteID:
@@ -21211,6 +21255,13 @@ func (m *CarsFlightMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetCarID(v)
+		return nil
+	case carsflight.FieldDeviceID:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetDeviceID(v)
 		return nil
 	case carsflight.FieldCarName:
 		v, ok := value.(string)
@@ -21500,6 +21551,9 @@ func (m *CarsFlightMutation) ResetField(name string) error {
 		return nil
 	case carsflight.FieldCarID:
 		m.ResetCarID()
+		return nil
+	case carsflight.FieldDeviceID:
+		m.ResetDeviceID()
 		return nil
 	case carsflight.FieldCarName:
 		m.ResetCarName()
@@ -36190,6 +36244,8 @@ type OrderBillingMutation struct {
 	addcumulative_second       *float64
 	cumulative_meter           *float64
 	addcumulative_meter        *float64
+	ticket_count               *int
+	addticket_count            *int
 	cumulative_stop            *int
 	addcumulative_stop         *int
 	start_stop_price           *int
@@ -36206,6 +36262,8 @@ type OrderBillingMutation struct {
 	addcoupon_limit_amount     *int
 	coupon_deduction_amount    *int
 	addcoupon_deduction_amount *int
+	coupon_start_time          *time.Time
+	coupon_end_time            *time.Time
 	capped_amount              *int
 	addcapped_amount           *int
 	state                      *int
@@ -36754,6 +36812,62 @@ func (m *OrderBillingMutation) ResetCumulativeMeter() {
 	m.addcumulative_meter = nil
 }
 
+// SetTicketCount sets the "ticket_count" field.
+func (m *OrderBillingMutation) SetTicketCount(i int) {
+	m.ticket_count = &i
+	m.addticket_count = nil
+}
+
+// TicketCount returns the value of the "ticket_count" field in the mutation.
+func (m *OrderBillingMutation) TicketCount() (r int, exists bool) {
+	v := m.ticket_count
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldTicketCount returns the old "ticket_count" field's value of the OrderBilling entity.
+// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderBillingMutation) OldTicketCount(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldTicketCount is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldTicketCount requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldTicketCount: %w", err)
+	}
+	return oldValue.TicketCount, nil
+}
+
+// AddTicketCount adds i to the "ticket_count" field.
+func (m *OrderBillingMutation) AddTicketCount(i int) {
+	if m.addticket_count != nil {
+		*m.addticket_count += i
+	} else {
+		m.addticket_count = &i
+	}
+}
+
+// AddedTicketCount returns the value that was added to the "ticket_count" field in this mutation.
+func (m *OrderBillingMutation) AddedTicketCount() (r int, exists bool) {
+	v := m.addticket_count
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetTicketCount resets all changes to the "ticket_count" field.
+func (m *OrderBillingMutation) ResetTicketCount() {
+	m.ticket_count = nil
+	m.addticket_count = nil
+}
+
 // SetCumulativeStop sets the "cumulative_stop" field.
 func (m *OrderBillingMutation) SetCumulativeStop(i int) {
 	m.cumulative_stop = &i
@@ -37202,6 +37316,104 @@ func (m *OrderBillingMutation) ResetCouponDeductionAmount() {
 	m.addcoupon_deduction_amount = nil
 }
 
+// SetCouponStartTime sets the "coupon_start_time" field.
+func (m *OrderBillingMutation) SetCouponStartTime(t time.Time) {
+	m.coupon_start_time = &t
+}
+
+// CouponStartTime returns the value of the "coupon_start_time" field in the mutation.
+func (m *OrderBillingMutation) CouponStartTime() (r time.Time, exists bool) {
+	v := m.coupon_start_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCouponStartTime returns the old "coupon_start_time" field's value of the OrderBilling entity.
+// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderBillingMutation) OldCouponStartTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCouponStartTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCouponStartTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCouponStartTime: %w", err)
+	}
+	return oldValue.CouponStartTime, nil
+}
+
+// ClearCouponStartTime clears the value of the "coupon_start_time" field.
+func (m *OrderBillingMutation) ClearCouponStartTime() {
+	m.coupon_start_time = nil
+	m.clearedFields[orderbilling.FieldCouponStartTime] = struct{}{}
+}
+
+// CouponStartTimeCleared returns if the "coupon_start_time" field was cleared in this mutation.
+func (m *OrderBillingMutation) CouponStartTimeCleared() bool {
+	_, ok := m.clearedFields[orderbilling.FieldCouponStartTime]
+	return ok
+}
+
+// ResetCouponStartTime resets all changes to the "coupon_start_time" field.
+func (m *OrderBillingMutation) ResetCouponStartTime() {
+	m.coupon_start_time = nil
+	delete(m.clearedFields, orderbilling.FieldCouponStartTime)
+}
+
+// SetCouponEndTime sets the "coupon_end_time" field.
+func (m *OrderBillingMutation) SetCouponEndTime(t time.Time) {
+	m.coupon_end_time = &t
+}
+
+// CouponEndTime returns the value of the "coupon_end_time" field in the mutation.
+func (m *OrderBillingMutation) CouponEndTime() (r time.Time, exists bool) {
+	v := m.coupon_end_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCouponEndTime returns the old "coupon_end_time" field's value of the OrderBilling entity.
+// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderBillingMutation) OldCouponEndTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCouponEndTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCouponEndTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCouponEndTime: %w", err)
+	}
+	return oldValue.CouponEndTime, nil
+}
+
+// ClearCouponEndTime clears the value of the "coupon_end_time" field.
+func (m *OrderBillingMutation) ClearCouponEndTime() {
+	m.coupon_end_time = nil
+	m.clearedFields[orderbilling.FieldCouponEndTime] = struct{}{}
+}
+
+// CouponEndTimeCleared returns if the "coupon_end_time" field was cleared in this mutation.
+func (m *OrderBillingMutation) CouponEndTimeCleared() bool {
+	_, ok := m.clearedFields[orderbilling.FieldCouponEndTime]
+	return ok
+}
+
+// ResetCouponEndTime resets all changes to the "coupon_end_time" field.
+func (m *OrderBillingMutation) ResetCouponEndTime() {
+	m.coupon_end_time = nil
+	delete(m.clearedFields, orderbilling.FieldCouponEndTime)
+}
+
 // SetCappedAmount sets the "capped_amount" field.
 func (m *OrderBillingMutation) SetCappedAmount(i int) {
 	m.capped_amount = &i
@@ -37545,7 +37757,7 @@ func (m *OrderBillingMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *OrderBillingMutation) Fields() []string {
-	fields := make([]string, 0, 22)
+	fields := make([]string, 0, 25)
 	if m._type != nil {
 		fields = append(fields, orderbilling.FieldType)
 	}
@@ -37570,6 +37782,9 @@ func (m *OrderBillingMutation) Fields() []string {
 	if m.cumulative_meter != nil {
 		fields = append(fields, orderbilling.FieldCumulativeMeter)
 	}
+	if m.ticket_count != nil {
+		fields = append(fields, orderbilling.FieldTicketCount)
+	}
 	if m.cumulative_stop != nil {
 		fields = append(fields, orderbilling.FieldCumulativeStop)
 	}
@@ -37593,6 +37808,12 @@ func (m *OrderBillingMutation) Fields() []string {
 	}
 	if m.coupon_deduction_amount != nil {
 		fields = append(fields, orderbilling.FieldCouponDeductionAmount)
+	}
+	if m.coupon_start_time != nil {
+		fields = append(fields, orderbilling.FieldCouponStartTime)
+	}
+	if m.coupon_end_time != nil {
+		fields = append(fields, orderbilling.FieldCouponEndTime)
 	}
 	if m.capped_amount != nil {
 		fields = append(fields, orderbilling.FieldCappedAmount)
@@ -37636,6 +37857,8 @@ func (m *OrderBillingMutation) Field(name string) (ent.Value, bool) {
 		return m.CumulativeSecond()
 	case orderbilling.FieldCumulativeMeter:
 		return m.CumulativeMeter()
+	case orderbilling.FieldTicketCount:
+		return m.TicketCount()
 	case orderbilling.FieldCumulativeStop:
 		return m.CumulativeStop()
 	case orderbilling.FieldStartStopPrice:
@@ -37652,6 +37875,10 @@ func (m *OrderBillingMutation) Field(name string) (ent.Value, bool) {
 		return m.CouponLimitAmount()
 	case orderbilling.FieldCouponDeductionAmount:
 		return m.CouponDeductionAmount()
+	case orderbilling.FieldCouponStartTime:
+		return m.CouponStartTime()
+	case orderbilling.FieldCouponEndTime:
+		return m.CouponEndTime()
 	case orderbilling.FieldCappedAmount:
 		return m.CappedAmount()
 	case orderbilling.FieldState:
@@ -37689,6 +37916,8 @@ func (m *OrderBillingMutation) OldField(ctx context.Context, name string) (ent.V
 		return m.OldCumulativeSecond(ctx)
 	case orderbilling.FieldCumulativeMeter:
 		return m.OldCumulativeMeter(ctx)
+	case orderbilling.FieldTicketCount:
+		return m.OldTicketCount(ctx)
 	case orderbilling.FieldCumulativeStop:
 		return m.OldCumulativeStop(ctx)
 	case orderbilling.FieldStartStopPrice:
@@ -37705,6 +37934,10 @@ func (m *OrderBillingMutation) OldField(ctx context.Context, name string) (ent.V
 		return m.OldCouponLimitAmount(ctx)
 	case orderbilling.FieldCouponDeductionAmount:
 		return m.OldCouponDeductionAmount(ctx)
+	case orderbilling.FieldCouponStartTime:
+		return m.OldCouponStartTime(ctx)
+	case orderbilling.FieldCouponEndTime:
+		return m.OldCouponEndTime(ctx)
 	case orderbilling.FieldCappedAmount:
 		return m.OldCappedAmount(ctx)
 	case orderbilling.FieldState:
@@ -37782,6 +38015,13 @@ func (m *OrderBillingMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetCumulativeMeter(v)
 		return nil
+	case orderbilling.FieldTicketCount:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetTicketCount(v)
+		return nil
 	case orderbilling.FieldCumulativeStop:
 		v, ok := value.(int)
 		if !ok {
@@ -37837,6 +38077,20 @@ func (m *OrderBillingMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetCouponDeductionAmount(v)
+		return nil
+	case orderbilling.FieldCouponStartTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCouponStartTime(v)
+		return nil
+	case orderbilling.FieldCouponEndTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCouponEndTime(v)
 		return nil
 	case orderbilling.FieldCappedAmount:
 		v, ok := value.(int)
@@ -37909,6 +38163,9 @@ func (m *OrderBillingMutation) AddedFields() []string {
 	if m.addcumulative_meter != nil {
 		fields = append(fields, orderbilling.FieldCumulativeMeter)
 	}
+	if m.addticket_count != nil {
+		fields = append(fields, orderbilling.FieldTicketCount)
+	}
 	if m.addcumulative_stop != nil {
 		fields = append(fields, orderbilling.FieldCumulativeStop)
 	}
@@ -37961,6 +38218,8 @@ func (m *OrderBillingMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedCumulativeSecond()
 	case orderbilling.FieldCumulativeMeter:
 		return m.AddedCumulativeMeter()
+	case orderbilling.FieldTicketCount:
+		return m.AddedTicketCount()
 	case orderbilling.FieldCumulativeStop:
 		return m.AddedCumulativeStop()
 	case orderbilling.FieldStartStopPrice:
@@ -38038,6 +38297,13 @@ func (m *OrderBillingMutation) AddField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddCumulativeMeter(v)
+		return nil
+	case orderbilling.FieldTicketCount:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddTicketCount(v)
 		return nil
 	case orderbilling.FieldCumulativeStop:
 		v, ok := value.(int)
@@ -38117,6 +38383,12 @@ func (m *OrderBillingMutation) AddField(name string, value ent.Value) error {
 // mutation.
 func (m *OrderBillingMutation) ClearedFields() []string {
 	var fields []string
+	if m.FieldCleared(orderbilling.FieldCouponStartTime) {
+		fields = append(fields, orderbilling.FieldCouponStartTime)
+	}
+	if m.FieldCleared(orderbilling.FieldCouponEndTime) {
+		fields = append(fields, orderbilling.FieldCouponEndTime)
+	}
 	if m.FieldCleared(orderbilling.FieldStartTime) {
 		fields = append(fields, orderbilling.FieldStartTime)
 	}
@@ -38137,6 +38409,12 @@ func (m *OrderBillingMutation) FieldCleared(name string) bool {
 // error if the field is not defined in the schema.
 func (m *OrderBillingMutation) ClearField(name string) error {
 	switch name {
+	case orderbilling.FieldCouponStartTime:
+		m.ClearCouponStartTime()
+		return nil
+	case orderbilling.FieldCouponEndTime:
+		m.ClearCouponEndTime()
+		return nil
 	case orderbilling.FieldStartTime:
 		m.ClearStartTime()
 		return nil
@@ -38175,6 +38453,9 @@ func (m *OrderBillingMutation) ResetField(name string) error {
 	case orderbilling.FieldCumulativeMeter:
 		m.ResetCumulativeMeter()
 		return nil
+	case orderbilling.FieldTicketCount:
+		m.ResetTicketCount()
+		return nil
 	case orderbilling.FieldCumulativeStop:
 		m.ResetCumulativeStop()
 		return nil
@@ -38198,6 +38479,12 @@ func (m *OrderBillingMutation) ResetField(name string) error {
 		return nil
 	case orderbilling.FieldCouponDeductionAmount:
 		m.ResetCouponDeductionAmount()
+		return nil
+	case orderbilling.FieldCouponStartTime:
+		m.ResetCouponStartTime()
+		return nil
+	case orderbilling.FieldCouponEndTime:
+		m.ResetCouponEndTime()
 		return nil
 	case orderbilling.FieldCappedAmount:
 		m.ResetCappedAmount()

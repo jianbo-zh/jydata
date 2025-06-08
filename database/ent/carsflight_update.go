@@ -86,6 +86,20 @@ func (cfu *CarsFlightUpdate) AddCarID(i int) *CarsFlightUpdate {
 	return cfu
 }
 
+// SetDeviceID sets the "device_id" field.
+func (cfu *CarsFlightUpdate) SetDeviceID(s string) *CarsFlightUpdate {
+	cfu.mutation.SetDeviceID(s)
+	return cfu
+}
+
+// SetNillableDeviceID sets the "device_id" field if the given value is not nil.
+func (cfu *CarsFlightUpdate) SetNillableDeviceID(s *string) *CarsFlightUpdate {
+	if s != nil {
+		cfu.SetDeviceID(*s)
+	}
+	return cfu
+}
+
 // SetCarName sets the "car_name" field.
 func (cfu *CarsFlightUpdate) SetCarName(s string) *CarsFlightUpdate {
 	cfu.mutation.SetCarName(s)
@@ -404,6 +418,9 @@ func (cfu *CarsFlightUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := cfu.mutation.AddedCarID(); ok {
 		_spec.AddField(carsflight.FieldCarID, field.TypeInt, value)
 	}
+	if value, ok := cfu.mutation.DeviceID(); ok {
+		_spec.SetField(carsflight.FieldDeviceID, field.TypeString, value)
+	}
 	if value, ok := cfu.mutation.CarName(); ok {
 		_spec.SetField(carsflight.FieldCarName, field.TypeString, value)
 	}
@@ -567,6 +584,20 @@ func (cfuo *CarsFlightUpdateOne) SetNillableCarID(i *int) *CarsFlightUpdateOne {
 // AddCarID adds i to the "car_id" field.
 func (cfuo *CarsFlightUpdateOne) AddCarID(i int) *CarsFlightUpdateOne {
 	cfuo.mutation.AddCarID(i)
+	return cfuo
+}
+
+// SetDeviceID sets the "device_id" field.
+func (cfuo *CarsFlightUpdateOne) SetDeviceID(s string) *CarsFlightUpdateOne {
+	cfuo.mutation.SetDeviceID(s)
+	return cfuo
+}
+
+// SetNillableDeviceID sets the "device_id" field if the given value is not nil.
+func (cfuo *CarsFlightUpdateOne) SetNillableDeviceID(s *string) *CarsFlightUpdateOne {
+	if s != nil {
+		cfuo.SetDeviceID(*s)
+	}
 	return cfuo
 }
 
@@ -917,6 +948,9 @@ func (cfuo *CarsFlightUpdateOne) sqlSave(ctx context.Context) (_node *CarsFlight
 	}
 	if value, ok := cfuo.mutation.AddedCarID(); ok {
 		_spec.AddField(carsflight.FieldCarID, field.TypeInt, value)
+	}
+	if value, ok := cfuo.mutation.DeviceID(); ok {
+		_spec.SetField(carsflight.FieldDeviceID, field.TypeString, value)
 	}
 	if value, ok := cfuo.mutation.CarName(); ok {
 		_spec.SetField(carsflight.FieldCarName, field.TypeString, value)

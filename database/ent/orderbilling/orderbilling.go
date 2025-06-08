@@ -30,6 +30,8 @@ const (
 	FieldCumulativeSecond = "cumulative_second"
 	// FieldCumulativeMeter holds the string denoting the cumulative_meter field in the database.
 	FieldCumulativeMeter = "cumulative_meter"
+	// FieldTicketCount holds the string denoting the ticket_count field in the database.
+	FieldTicketCount = "ticket_count"
 	// FieldCumulativeStop holds the string denoting the cumulative_stop field in the database.
 	FieldCumulativeStop = "cumulative_stop"
 	// FieldStartStopPrice holds the string denoting the start_stop_price field in the database.
@@ -46,6 +48,10 @@ const (
 	FieldCouponLimitAmount = "coupon_limit_amount"
 	// FieldCouponDeductionAmount holds the string denoting the coupon_deduction_amount field in the database.
 	FieldCouponDeductionAmount = "coupon_deduction_amount"
+	// FieldCouponStartTime holds the string denoting the coupon_start_time field in the database.
+	FieldCouponStartTime = "coupon_start_time"
+	// FieldCouponEndTime holds the string denoting the coupon_end_time field in the database.
+	FieldCouponEndTime = "coupon_end_time"
 	// FieldCappedAmount holds the string denoting the capped_amount field in the database.
 	FieldCappedAmount = "capped_amount"
 	// FieldState holds the string denoting the state field in the database.
@@ -82,6 +88,7 @@ var Columns = []string{
 	FieldNormalTimeUnit,
 	FieldCumulativeSecond,
 	FieldCumulativeMeter,
+	FieldTicketCount,
 	FieldCumulativeStop,
 	FieldStartStopPrice,
 	FieldStartStopUnit,
@@ -90,6 +97,8 @@ var Columns = []string{
 	FieldCouponID,
 	FieldCouponLimitAmount,
 	FieldCouponDeductionAmount,
+	FieldCouponStartTime,
+	FieldCouponEndTime,
 	FieldCappedAmount,
 	FieldState,
 	FieldStartTime,
@@ -123,6 +132,8 @@ var (
 	DefaultCumulativeSecond float64
 	// DefaultCumulativeMeter holds the default value on creation for the "cumulative_meter" field.
 	DefaultCumulativeMeter float64
+	// DefaultTicketCount holds the default value on creation for the "ticket_count" field.
+	DefaultTicketCount int
 	// DefaultCumulativeStop holds the default value on creation for the "cumulative_stop" field.
 	DefaultCumulativeStop int
 	// DefaultStartStopPrice holds the default value on creation for the "start_stop_price" field.
@@ -199,6 +210,11 @@ func ByCumulativeMeter(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldCumulativeMeter, opts...).ToFunc()
 }
 
+// ByTicketCount orders the results by the ticket_count field.
+func ByTicketCount(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldTicketCount, opts...).ToFunc()
+}
+
 // ByCumulativeStop orders the results by the cumulative_stop field.
 func ByCumulativeStop(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldCumulativeStop, opts...).ToFunc()
@@ -237,6 +253,16 @@ func ByCouponLimitAmount(opts ...sql.OrderTermOption) OrderOption {
 // ByCouponDeductionAmount orders the results by the coupon_deduction_amount field.
 func ByCouponDeductionAmount(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldCouponDeductionAmount, opts...).ToFunc()
+}
+
+// ByCouponStartTime orders the results by the coupon_start_time field.
+func ByCouponStartTime(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldCouponStartTime, opts...).ToFunc()
+}
+
+// ByCouponEndTime orders the results by the coupon_end_time field.
+func ByCouponEndTime(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldCouponEndTime, opts...).ToFunc()
 }
 
 // ByCappedAmount orders the results by the capped_amount field.

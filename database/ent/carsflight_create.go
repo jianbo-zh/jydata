@@ -39,6 +39,20 @@ func (cfc *CarsFlightCreate) SetCarID(i int) *CarsFlightCreate {
 	return cfc
 }
 
+// SetDeviceID sets the "device_id" field.
+func (cfc *CarsFlightCreate) SetDeviceID(s string) *CarsFlightCreate {
+	cfc.mutation.SetDeviceID(s)
+	return cfc
+}
+
+// SetNillableDeviceID sets the "device_id" field if the given value is not nil.
+func (cfc *CarsFlightCreate) SetNillableDeviceID(s *string) *CarsFlightCreate {
+	if s != nil {
+		cfc.SetDeviceID(*s)
+	}
+	return cfc
+}
+
 // SetCarName sets the "car_name" field.
 func (cfc *CarsFlightCreate) SetCarName(s string) *CarsFlightCreate {
 	cfc.mutation.SetCarName(s)
@@ -234,6 +248,10 @@ func (cfc *CarsFlightCreate) ExecX(ctx context.Context) {
 
 // defaults sets the default values of the builder before save.
 func (cfc *CarsFlightCreate) defaults() {
+	if _, ok := cfc.mutation.DeviceID(); !ok {
+		v := carsflight.DefaultDeviceID
+		cfc.mutation.SetDeviceID(v)
+	}
 	if _, ok := cfc.mutation.State(); !ok {
 		v := carsflight.DefaultState
 		cfc.mutation.SetState(v)
@@ -274,6 +292,9 @@ func (cfc *CarsFlightCreate) check() error {
 	}
 	if _, ok := cfc.mutation.CarID(); !ok {
 		return &ValidationError{Name: "car_id", err: errors.New(`ent: missing required field "CarsFlight.car_id"`)}
+	}
+	if _, ok := cfc.mutation.DeviceID(); !ok {
+		return &ValidationError{Name: "device_id", err: errors.New(`ent: missing required field "CarsFlight.device_id"`)}
 	}
 	if _, ok := cfc.mutation.CarName(); !ok {
 		return &ValidationError{Name: "car_name", err: errors.New(`ent: missing required field "CarsFlight.car_name"`)}
@@ -345,6 +366,10 @@ func (cfc *CarsFlightCreate) createSpec() (*CarsFlight, *sqlgraph.CreateSpec) {
 	if value, ok := cfc.mutation.CarID(); ok {
 		_spec.SetField(carsflight.FieldCarID, field.TypeInt, value)
 		_node.CarID = value
+	}
+	if value, ok := cfc.mutation.DeviceID(); ok {
+		_spec.SetField(carsflight.FieldDeviceID, field.TypeString, value)
+		_node.DeviceID = value
 	}
 	if value, ok := cfc.mutation.CarName(); ok {
 		_spec.SetField(carsflight.FieldCarName, field.TypeString, value)

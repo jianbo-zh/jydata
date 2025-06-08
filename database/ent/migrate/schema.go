@@ -435,6 +435,7 @@ var (
 		{Name: "scenic_area_id", Type: field.TypeInt},
 		{Name: "flight_no", Type: field.TypeString},
 		{Name: "car_id", Type: field.TypeInt},
+		{Name: "device_id", Type: field.TypeString, Default: ""},
 		{Name: "car_name", Type: field.TypeString},
 		{Name: "route_id", Type: field.TypeInt},
 		{Name: "route_name", Type: field.TypeString},
@@ -792,6 +793,7 @@ var (
 		{Name: "normal_time_unit", Type: field.TypeInt, Default: 1},
 		{Name: "cumulative_second", Type: field.TypeFloat64, Default: 0},
 		{Name: "cumulative_meter", Type: field.TypeFloat64, Default: 0},
+		{Name: "ticket_count", Type: field.TypeInt, Default: 1},
 		{Name: "cumulative_stop", Type: field.TypeInt, Default: 0},
 		{Name: "start_stop_price", Type: field.TypeInt, Default: 0},
 		{Name: "start_stop_unit", Type: field.TypeInt, Default: 1},
@@ -800,6 +802,8 @@ var (
 		{Name: "coupon_id", Type: field.TypeInt, Default: 0},
 		{Name: "coupon_limit_amount", Type: field.TypeInt, Default: 0},
 		{Name: "coupon_deduction_amount", Type: field.TypeInt, Default: 0},
+		{Name: "coupon_start_time", Type: field.TypeTime, Nullable: true},
+		{Name: "coupon_end_time", Type: field.TypeTime, Nullable: true},
 		{Name: "capped_amount", Type: field.TypeInt, Default: 0},
 		{Name: "state", Type: field.TypeInt, Default: 0},
 		{Name: "start_time", Type: field.TypeTime, Nullable: true},
@@ -816,7 +820,7 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "order_billings_orders_billing",
-				Columns:    []*schema.Column{OrderBillingsColumns[22]},
+				Columns:    []*schema.Column{OrderBillingsColumns[25]},
 				RefColumns: []*schema.Column{OrdersColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
@@ -1472,7 +1476,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1749129150},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1749310141},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},
