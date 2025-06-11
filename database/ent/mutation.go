@@ -31677,6 +31677,8 @@ type OrderMutation struct {
 	adduse_time_second            *int
 	deposit_amount                *int
 	adddeposit_amount             *int
+	original_amount               *int
+	addoriginal_amount            *int
 	order_amount                  *int
 	addorder_amount               *int
 	refunded_amount               *int
@@ -32773,6 +32775,62 @@ func (m *OrderMutation) ResetDepositAmount() {
 	m.adddeposit_amount = nil
 }
 
+// SetOriginalAmount sets the "original_amount" field.
+func (m *OrderMutation) SetOriginalAmount(i int) {
+	m.original_amount = &i
+	m.addoriginal_amount = nil
+}
+
+// OriginalAmount returns the value of the "original_amount" field in the mutation.
+func (m *OrderMutation) OriginalAmount() (r int, exists bool) {
+	v := m.original_amount
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldOriginalAmount returns the old "original_amount" field's value of the Order entity.
+// If the Order object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderMutation) OldOriginalAmount(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldOriginalAmount is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldOriginalAmount requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldOriginalAmount: %w", err)
+	}
+	return oldValue.OriginalAmount, nil
+}
+
+// AddOriginalAmount adds i to the "original_amount" field.
+func (m *OrderMutation) AddOriginalAmount(i int) {
+	if m.addoriginal_amount != nil {
+		*m.addoriginal_amount += i
+	} else {
+		m.addoriginal_amount = &i
+	}
+}
+
+// AddedOriginalAmount returns the value that was added to the "original_amount" field in this mutation.
+func (m *OrderMutation) AddedOriginalAmount() (r int, exists bool) {
+	v := m.addoriginal_amount
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetOriginalAmount resets all changes to the "original_amount" field.
+func (m *OrderMutation) ResetOriginalAmount() {
+	m.original_amount = nil
+	m.addoriginal_amount = nil
+}
+
 // SetOrderAmount sets the "order_amount" field.
 func (m *OrderMutation) SetOrderAmount(i int) {
 	m.order_amount = &i
@@ -33748,7 +33806,7 @@ func (m *OrderMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *OrderMutation) Fields() []string {
-	fields := make([]string, 0, 38)
+	fields := make([]string, 0, 39)
 	if m._type != nil {
 		fields = append(fields, order.FieldType)
 	}
@@ -33814,6 +33872,9 @@ func (m *OrderMutation) Fields() []string {
 	}
 	if m.deposit_amount != nil {
 		fields = append(fields, order.FieldDepositAmount)
+	}
+	if m.original_amount != nil {
+		fields = append(fields, order.FieldOriginalAmount)
 	}
 	if m.order_amount != nil {
 		fields = append(fields, order.FieldOrderAmount)
@@ -33915,6 +33976,8 @@ func (m *OrderMutation) Field(name string) (ent.Value, bool) {
 		return m.UseTimeSecond()
 	case order.FieldDepositAmount:
 		return m.DepositAmount()
+	case order.FieldOriginalAmount:
+		return m.OriginalAmount()
 	case order.FieldOrderAmount:
 		return m.OrderAmount()
 	case order.FieldRefundedAmount:
@@ -34000,6 +34063,8 @@ func (m *OrderMutation) OldField(ctx context.Context, name string) (ent.Value, e
 		return m.OldUseTimeSecond(ctx)
 	case order.FieldDepositAmount:
 		return m.OldDepositAmount(ctx)
+	case order.FieldOriginalAmount:
+		return m.OldOriginalAmount(ctx)
 	case order.FieldOrderAmount:
 		return m.OldOrderAmount(ctx)
 	case order.FieldRefundedAmount:
@@ -34195,6 +34260,13 @@ func (m *OrderMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetDepositAmount(v)
 		return nil
+	case order.FieldOriginalAmount:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetOriginalAmount(v)
+		return nil
 	case order.FieldOrderAmount:
 		v, ok := value.(int)
 		if !ok {
@@ -34339,6 +34411,9 @@ func (m *OrderMutation) AddedFields() []string {
 	if m.adddeposit_amount != nil {
 		fields = append(fields, order.FieldDepositAmount)
 	}
+	if m.addoriginal_amount != nil {
+		fields = append(fields, order.FieldOriginalAmount)
+	}
 	if m.addorder_amount != nil {
 		fields = append(fields, order.FieldOrderAmount)
 	}
@@ -34384,6 +34459,8 @@ func (m *OrderMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedUseTimeSecond()
 	case order.FieldDepositAmount:
 		return m.AddedDepositAmount()
+	case order.FieldOriginalAmount:
+		return m.AddedOriginalAmount()
 	case order.FieldOrderAmount:
 		return m.AddedOrderAmount()
 	case order.FieldRefundedAmount:
@@ -34462,6 +34539,13 @@ func (m *OrderMutation) AddField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddDepositAmount(v)
+		return nil
+	case order.FieldOriginalAmount:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddOriginalAmount(v)
 		return nil
 	case order.FieldOrderAmount:
 		v, ok := value.(int)
@@ -34619,6 +34703,9 @@ func (m *OrderMutation) ResetField(name string) error {
 		return nil
 	case order.FieldDepositAmount:
 		m.ResetDepositAmount()
+		return nil
+	case order.FieldOriginalAmount:
+		m.ResetOriginalAmount()
 		return nil
 	case order.FieldOrderAmount:
 		m.ResetOrderAmount()
@@ -36262,8 +36349,6 @@ type OrderBillingMutation struct {
 	addcoupon_limit_amount     *int
 	coupon_deduction_amount    *int
 	addcoupon_deduction_amount *int
-	coupon_start_time          *time.Time
-	coupon_end_time            *time.Time
 	capped_amount              *int
 	addcapped_amount           *int
 	state                      *int
@@ -37316,104 +37401,6 @@ func (m *OrderBillingMutation) ResetCouponDeductionAmount() {
 	m.addcoupon_deduction_amount = nil
 }
 
-// SetCouponStartTime sets the "coupon_start_time" field.
-func (m *OrderBillingMutation) SetCouponStartTime(t time.Time) {
-	m.coupon_start_time = &t
-}
-
-// CouponStartTime returns the value of the "coupon_start_time" field in the mutation.
-func (m *OrderBillingMutation) CouponStartTime() (r time.Time, exists bool) {
-	v := m.coupon_start_time
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldCouponStartTime returns the old "coupon_start_time" field's value of the OrderBilling entity.
-// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *OrderBillingMutation) OldCouponStartTime(ctx context.Context) (v time.Time, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldCouponStartTime is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldCouponStartTime requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldCouponStartTime: %w", err)
-	}
-	return oldValue.CouponStartTime, nil
-}
-
-// ClearCouponStartTime clears the value of the "coupon_start_time" field.
-func (m *OrderBillingMutation) ClearCouponStartTime() {
-	m.coupon_start_time = nil
-	m.clearedFields[orderbilling.FieldCouponStartTime] = struct{}{}
-}
-
-// CouponStartTimeCleared returns if the "coupon_start_time" field was cleared in this mutation.
-func (m *OrderBillingMutation) CouponStartTimeCleared() bool {
-	_, ok := m.clearedFields[orderbilling.FieldCouponStartTime]
-	return ok
-}
-
-// ResetCouponStartTime resets all changes to the "coupon_start_time" field.
-func (m *OrderBillingMutation) ResetCouponStartTime() {
-	m.coupon_start_time = nil
-	delete(m.clearedFields, orderbilling.FieldCouponStartTime)
-}
-
-// SetCouponEndTime sets the "coupon_end_time" field.
-func (m *OrderBillingMutation) SetCouponEndTime(t time.Time) {
-	m.coupon_end_time = &t
-}
-
-// CouponEndTime returns the value of the "coupon_end_time" field in the mutation.
-func (m *OrderBillingMutation) CouponEndTime() (r time.Time, exists bool) {
-	v := m.coupon_end_time
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldCouponEndTime returns the old "coupon_end_time" field's value of the OrderBilling entity.
-// If the OrderBilling object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *OrderBillingMutation) OldCouponEndTime(ctx context.Context) (v time.Time, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldCouponEndTime is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldCouponEndTime requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldCouponEndTime: %w", err)
-	}
-	return oldValue.CouponEndTime, nil
-}
-
-// ClearCouponEndTime clears the value of the "coupon_end_time" field.
-func (m *OrderBillingMutation) ClearCouponEndTime() {
-	m.coupon_end_time = nil
-	m.clearedFields[orderbilling.FieldCouponEndTime] = struct{}{}
-}
-
-// CouponEndTimeCleared returns if the "coupon_end_time" field was cleared in this mutation.
-func (m *OrderBillingMutation) CouponEndTimeCleared() bool {
-	_, ok := m.clearedFields[orderbilling.FieldCouponEndTime]
-	return ok
-}
-
-// ResetCouponEndTime resets all changes to the "coupon_end_time" field.
-func (m *OrderBillingMutation) ResetCouponEndTime() {
-	m.coupon_end_time = nil
-	delete(m.clearedFields, orderbilling.FieldCouponEndTime)
-}
-
 // SetCappedAmount sets the "capped_amount" field.
 func (m *OrderBillingMutation) SetCappedAmount(i int) {
 	m.capped_amount = &i
@@ -37757,7 +37744,7 @@ func (m *OrderBillingMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *OrderBillingMutation) Fields() []string {
-	fields := make([]string, 0, 25)
+	fields := make([]string, 0, 23)
 	if m._type != nil {
 		fields = append(fields, orderbilling.FieldType)
 	}
@@ -37808,12 +37795,6 @@ func (m *OrderBillingMutation) Fields() []string {
 	}
 	if m.coupon_deduction_amount != nil {
 		fields = append(fields, orderbilling.FieldCouponDeductionAmount)
-	}
-	if m.coupon_start_time != nil {
-		fields = append(fields, orderbilling.FieldCouponStartTime)
-	}
-	if m.coupon_end_time != nil {
-		fields = append(fields, orderbilling.FieldCouponEndTime)
 	}
 	if m.capped_amount != nil {
 		fields = append(fields, orderbilling.FieldCappedAmount)
@@ -37875,10 +37856,6 @@ func (m *OrderBillingMutation) Field(name string) (ent.Value, bool) {
 		return m.CouponLimitAmount()
 	case orderbilling.FieldCouponDeductionAmount:
 		return m.CouponDeductionAmount()
-	case orderbilling.FieldCouponStartTime:
-		return m.CouponStartTime()
-	case orderbilling.FieldCouponEndTime:
-		return m.CouponEndTime()
 	case orderbilling.FieldCappedAmount:
 		return m.CappedAmount()
 	case orderbilling.FieldState:
@@ -37934,10 +37911,6 @@ func (m *OrderBillingMutation) OldField(ctx context.Context, name string) (ent.V
 		return m.OldCouponLimitAmount(ctx)
 	case orderbilling.FieldCouponDeductionAmount:
 		return m.OldCouponDeductionAmount(ctx)
-	case orderbilling.FieldCouponStartTime:
-		return m.OldCouponStartTime(ctx)
-	case orderbilling.FieldCouponEndTime:
-		return m.OldCouponEndTime(ctx)
 	case orderbilling.FieldCappedAmount:
 		return m.OldCappedAmount(ctx)
 	case orderbilling.FieldState:
@@ -38077,20 +38050,6 @@ func (m *OrderBillingMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetCouponDeductionAmount(v)
-		return nil
-	case orderbilling.FieldCouponStartTime:
-		v, ok := value.(time.Time)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetCouponStartTime(v)
-		return nil
-	case orderbilling.FieldCouponEndTime:
-		v, ok := value.(time.Time)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetCouponEndTime(v)
 		return nil
 	case orderbilling.FieldCappedAmount:
 		v, ok := value.(int)
@@ -38383,12 +38342,6 @@ func (m *OrderBillingMutation) AddField(name string, value ent.Value) error {
 // mutation.
 func (m *OrderBillingMutation) ClearedFields() []string {
 	var fields []string
-	if m.FieldCleared(orderbilling.FieldCouponStartTime) {
-		fields = append(fields, orderbilling.FieldCouponStartTime)
-	}
-	if m.FieldCleared(orderbilling.FieldCouponEndTime) {
-		fields = append(fields, orderbilling.FieldCouponEndTime)
-	}
 	if m.FieldCleared(orderbilling.FieldStartTime) {
 		fields = append(fields, orderbilling.FieldStartTime)
 	}
@@ -38409,12 +38362,6 @@ func (m *OrderBillingMutation) FieldCleared(name string) bool {
 // error if the field is not defined in the schema.
 func (m *OrderBillingMutation) ClearField(name string) error {
 	switch name {
-	case orderbilling.FieldCouponStartTime:
-		m.ClearCouponStartTime()
-		return nil
-	case orderbilling.FieldCouponEndTime:
-		m.ClearCouponEndTime()
-		return nil
 	case orderbilling.FieldStartTime:
 		m.ClearStartTime()
 		return nil
@@ -38479,12 +38426,6 @@ func (m *OrderBillingMutation) ResetField(name string) error {
 		return nil
 	case orderbilling.FieldCouponDeductionAmount:
 		m.ResetCouponDeductionAmount()
-		return nil
-	case orderbilling.FieldCouponStartTime:
-		m.ResetCouponStartTime()
-		return nil
-	case orderbilling.FieldCouponEndTime:
-		m.ResetCouponEndTime()
 		return nil
 	case orderbilling.FieldCappedAmount:
 		m.ResetCappedAmount()
@@ -39604,33 +39545,35 @@ func (m *OrderExtendFlightMutation) ResetEdge(name string) error {
 // OrderRefundMutation represents an operation that mutates the OrderRefund nodes in the graph.
 type OrderRefundMutation struct {
 	config
-	op                Op
-	typ               string
-	id                *int
-	_type             *int
-	add_type          *int
-	initiator_id      *int
-	addinitiator_id   *int
-	scenic_area_id    *int
-	addscenic_area_id *int
-	order_no          *string
-	refund_no         *string
-	wx_refund_id      *string
-	refund_amount     *int
-	addrefund_amount  *int
-	state             *int
-	addstate          *int
-	remark            *string
-	errmsg            *string
-	finish_time       *time.Time
-	create_time       *time.Time
-	update_time       *time.Time
-	clearedFields     map[string]struct{}
-	_order            *int
-	cleared_order     bool
-	done              bool
-	oldValue          func(context.Context) (*OrderRefund, error)
-	predicates        []predicate.OrderRefund
+	op                 Op
+	typ                string
+	id                 *int
+	_type              *int
+	add_type           *int
+	initiator_id       *int
+	addinitiator_id    *int
+	scenic_area_id     *int
+	addscenic_area_id  *int
+	order_appeal_id    *int
+	addorder_appeal_id *int
+	order_no           *string
+	refund_no          *string
+	wx_refund_id       *string
+	refund_amount      *int
+	addrefund_amount   *int
+	state              *int
+	addstate           *int
+	remark             *string
+	errmsg             *string
+	finish_time        *time.Time
+	create_time        *time.Time
+	update_time        *time.Time
+	clearedFields      map[string]struct{}
+	_order             *int
+	cleared_order      bool
+	done               bool
+	oldValue           func(context.Context) (*OrderRefund, error)
+	predicates         []predicate.OrderRefund
 }
 
 var _ ent.Mutation = (*OrderRefundMutation)(nil)
@@ -39939,6 +39882,76 @@ func (m *OrderRefundMutation) OldOrderID(ctx context.Context) (v int, err error)
 // ResetOrderID resets all changes to the "order_id" field.
 func (m *OrderRefundMutation) ResetOrderID() {
 	m._order = nil
+}
+
+// SetOrderAppealID sets the "order_appeal_id" field.
+func (m *OrderRefundMutation) SetOrderAppealID(i int) {
+	m.order_appeal_id = &i
+	m.addorder_appeal_id = nil
+}
+
+// OrderAppealID returns the value of the "order_appeal_id" field in the mutation.
+func (m *OrderRefundMutation) OrderAppealID() (r int, exists bool) {
+	v := m.order_appeal_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldOrderAppealID returns the old "order_appeal_id" field's value of the OrderRefund entity.
+// If the OrderRefund object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderRefundMutation) OldOrderAppealID(ctx context.Context) (v *int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldOrderAppealID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldOrderAppealID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldOrderAppealID: %w", err)
+	}
+	return oldValue.OrderAppealID, nil
+}
+
+// AddOrderAppealID adds i to the "order_appeal_id" field.
+func (m *OrderRefundMutation) AddOrderAppealID(i int) {
+	if m.addorder_appeal_id != nil {
+		*m.addorder_appeal_id += i
+	} else {
+		m.addorder_appeal_id = &i
+	}
+}
+
+// AddedOrderAppealID returns the value that was added to the "order_appeal_id" field in this mutation.
+func (m *OrderRefundMutation) AddedOrderAppealID() (r int, exists bool) {
+	v := m.addorder_appeal_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearOrderAppealID clears the value of the "order_appeal_id" field.
+func (m *OrderRefundMutation) ClearOrderAppealID() {
+	m.order_appeal_id = nil
+	m.addorder_appeal_id = nil
+	m.clearedFields[orderrefund.FieldOrderAppealID] = struct{}{}
+}
+
+// OrderAppealIDCleared returns if the "order_appeal_id" field was cleared in this mutation.
+func (m *OrderRefundMutation) OrderAppealIDCleared() bool {
+	_, ok := m.clearedFields[orderrefund.FieldOrderAppealID]
+	return ok
+}
+
+// ResetOrderAppealID resets all changes to the "order_appeal_id" field.
+func (m *OrderRefundMutation) ResetOrderAppealID() {
+	m.order_appeal_id = nil
+	m.addorder_appeal_id = nil
+	delete(m.clearedFields, orderrefund.FieldOrderAppealID)
 }
 
 // SetOrderNo sets the "order_no" field.
@@ -40415,7 +40428,7 @@ func (m *OrderRefundMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *OrderRefundMutation) Fields() []string {
-	fields := make([]string, 0, 14)
+	fields := make([]string, 0, 15)
 	if m._type != nil {
 		fields = append(fields, orderrefund.FieldType)
 	}
@@ -40427,6 +40440,9 @@ func (m *OrderRefundMutation) Fields() []string {
 	}
 	if m._order != nil {
 		fields = append(fields, orderrefund.FieldOrderID)
+	}
+	if m.order_appeal_id != nil {
+		fields = append(fields, orderrefund.FieldOrderAppealID)
 	}
 	if m.order_no != nil {
 		fields = append(fields, orderrefund.FieldOrderNo)
@@ -40474,6 +40490,8 @@ func (m *OrderRefundMutation) Field(name string) (ent.Value, bool) {
 		return m.ScenicAreaID()
 	case orderrefund.FieldOrderID:
 		return m.OrderID()
+	case orderrefund.FieldOrderAppealID:
+		return m.OrderAppealID()
 	case orderrefund.FieldOrderNo:
 		return m.OrderNo()
 	case orderrefund.FieldRefundNo:
@@ -40511,6 +40529,8 @@ func (m *OrderRefundMutation) OldField(ctx context.Context, name string) (ent.Va
 		return m.OldScenicAreaID(ctx)
 	case orderrefund.FieldOrderID:
 		return m.OldOrderID(ctx)
+	case orderrefund.FieldOrderAppealID:
+		return m.OldOrderAppealID(ctx)
 	case orderrefund.FieldOrderNo:
 		return m.OldOrderNo(ctx)
 	case orderrefund.FieldRefundNo:
@@ -40567,6 +40587,13 @@ func (m *OrderRefundMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetOrderID(v)
+		return nil
+	case orderrefund.FieldOrderAppealID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetOrderAppealID(v)
 		return nil
 	case orderrefund.FieldOrderNo:
 		v, ok := value.(string)
@@ -40655,6 +40682,9 @@ func (m *OrderRefundMutation) AddedFields() []string {
 	if m.addscenic_area_id != nil {
 		fields = append(fields, orderrefund.FieldScenicAreaID)
 	}
+	if m.addorder_appeal_id != nil {
+		fields = append(fields, orderrefund.FieldOrderAppealID)
+	}
 	if m.addrefund_amount != nil {
 		fields = append(fields, orderrefund.FieldRefundAmount)
 	}
@@ -40675,6 +40705,8 @@ func (m *OrderRefundMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedInitiatorID()
 	case orderrefund.FieldScenicAreaID:
 		return m.AddedScenicAreaID()
+	case orderrefund.FieldOrderAppealID:
+		return m.AddedOrderAppealID()
 	case orderrefund.FieldRefundAmount:
 		return m.AddedRefundAmount()
 	case orderrefund.FieldState:
@@ -40709,6 +40741,13 @@ func (m *OrderRefundMutation) AddField(name string, value ent.Value) error {
 		}
 		m.AddScenicAreaID(v)
 		return nil
+	case orderrefund.FieldOrderAppealID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddOrderAppealID(v)
+		return nil
 	case orderrefund.FieldRefundAmount:
 		v, ok := value.(int)
 		if !ok {
@@ -40731,6 +40770,9 @@ func (m *OrderRefundMutation) AddField(name string, value ent.Value) error {
 // mutation.
 func (m *OrderRefundMutation) ClearedFields() []string {
 	var fields []string
+	if m.FieldCleared(orderrefund.FieldOrderAppealID) {
+		fields = append(fields, orderrefund.FieldOrderAppealID)
+	}
 	if m.FieldCleared(orderrefund.FieldFinishTime) {
 		fields = append(fields, orderrefund.FieldFinishTime)
 	}
@@ -40748,6 +40790,9 @@ func (m *OrderRefundMutation) FieldCleared(name string) bool {
 // error if the field is not defined in the schema.
 func (m *OrderRefundMutation) ClearField(name string) error {
 	switch name {
+	case orderrefund.FieldOrderAppealID:
+		m.ClearOrderAppealID()
+		return nil
 	case orderrefund.FieldFinishTime:
 		m.ClearFinishTime()
 		return nil
@@ -40770,6 +40815,9 @@ func (m *OrderRefundMutation) ResetField(name string) error {
 		return nil
 	case orderrefund.FieldOrderID:
 		m.ResetOrderID()
+		return nil
+	case orderrefund.FieldOrderAppealID:
+		m.ResetOrderAppealID()
 		return nil
 	case orderrefund.FieldOrderNo:
 		m.ResetOrderNo()

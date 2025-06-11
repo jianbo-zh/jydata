@@ -58,6 +58,8 @@ const (
 	FieldUseTimeSecond = "use_time_second"
 	// FieldDepositAmount holds the string denoting the deposit_amount field in the database.
 	FieldDepositAmount = "deposit_amount"
+	// FieldOriginalAmount holds the string denoting the original_amount field in the database.
+	FieldOriginalAmount = "original_amount"
 	// FieldOrderAmount holds the string denoting the order_amount field in the database.
 	FieldOrderAmount = "order_amount"
 	// FieldRefundedAmount holds the string denoting the refunded_amount field in the database.
@@ -164,6 +166,7 @@ var Columns = []string{
 	FieldUseMileageMeter,
 	FieldUseTimeSecond,
 	FieldDepositAmount,
+	FieldOriginalAmount,
 	FieldOrderAmount,
 	FieldRefundedAmount,
 	FieldCouponAmount,
@@ -211,6 +214,8 @@ var (
 	DefaultUseTimeSecond int
 	// DefaultDepositAmount holds the default value on creation for the "deposit_amount" field.
 	DefaultDepositAmount int
+	// DefaultOriginalAmount holds the default value on creation for the "original_amount" field.
+	DefaultOriginalAmount int
 	// DefaultOrderAmount holds the default value on creation for the "order_amount" field.
 	DefaultOrderAmount int
 	// DefaultRefundedAmount holds the default value on creation for the "refunded_amount" field.
@@ -359,6 +364,11 @@ func ByUseTimeSecond(opts ...sql.OrderTermOption) OrderOption {
 // ByDepositAmount orders the results by the deposit_amount field.
 func ByDepositAmount(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldDepositAmount, opts...).ToFunc()
+}
+
+// ByOriginalAmount orders the results by the original_amount field.
+func ByOriginalAmount(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldOriginalAmount, opts...).ToFunc()
 }
 
 // ByOrderAmount orders the results by the order_amount field.

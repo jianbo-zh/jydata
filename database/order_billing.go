@@ -23,7 +23,11 @@ func (db *Database) CreateOrderBilling(ctx context.Context, billing *ent.OrderBi
 		SetNormalStopPrice(billing.NormalStopPrice).
 		SetNormalStopUnit(billing.NormalStopUnit).
 		SetCumulativeStop(billing.CumulativeStop).
+		SetTicketCount(billing.TicketCount).
 		SetCappedAmount(billing.CappedAmount).
+		SetCouponID(billing.CouponID).
+		SetCouponLimitAmount(billing.CouponLimitAmount).
+		SetCouponDeductionAmount(billing.CouponDeductionAmount).
 		SetState(billing.State).
 		SetNillableStartTime(nil).
 		SetNillableFinishTime(nil).

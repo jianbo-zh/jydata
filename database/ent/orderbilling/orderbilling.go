@@ -48,10 +48,6 @@ const (
 	FieldCouponLimitAmount = "coupon_limit_amount"
 	// FieldCouponDeductionAmount holds the string denoting the coupon_deduction_amount field in the database.
 	FieldCouponDeductionAmount = "coupon_deduction_amount"
-	// FieldCouponStartTime holds the string denoting the coupon_start_time field in the database.
-	FieldCouponStartTime = "coupon_start_time"
-	// FieldCouponEndTime holds the string denoting the coupon_end_time field in the database.
-	FieldCouponEndTime = "coupon_end_time"
 	// FieldCappedAmount holds the string denoting the capped_amount field in the database.
 	FieldCappedAmount = "capped_amount"
 	// FieldState holds the string denoting the state field in the database.
@@ -97,8 +93,6 @@ var Columns = []string{
 	FieldCouponID,
 	FieldCouponLimitAmount,
 	FieldCouponDeductionAmount,
-	FieldCouponStartTime,
-	FieldCouponEndTime,
 	FieldCappedAmount,
 	FieldState,
 	FieldStartTime,
@@ -253,16 +247,6 @@ func ByCouponLimitAmount(opts ...sql.OrderTermOption) OrderOption {
 // ByCouponDeductionAmount orders the results by the coupon_deduction_amount field.
 func ByCouponDeductionAmount(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldCouponDeductionAmount, opts...).ToFunc()
-}
-
-// ByCouponStartTime orders the results by the coupon_start_time field.
-func ByCouponStartTime(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldCouponStartTime, opts...).ToFunc()
-}
-
-// ByCouponEndTime orders the results by the coupon_end_time field.
-func ByCouponEndTime(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldCouponEndTime, opts...).ToFunc()
 }
 
 // ByCappedAmount orders the results by the capped_amount field.

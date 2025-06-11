@@ -75,6 +75,11 @@ func OrderID(v int) predicate.OrderRefund {
 	return predicate.OrderRefund(sql.FieldEQ(FieldOrderID, v))
 }
 
+// OrderAppealID applies equality check predicate on the "order_appeal_id" field. It's identical to OrderAppealIDEQ.
+func OrderAppealID(v int) predicate.OrderRefund {
+	return predicate.OrderRefund(sql.FieldEQ(FieldOrderAppealID, v))
+}
+
 // OrderNo applies equality check predicate on the "order_no" field. It's identical to OrderNoEQ.
 func OrderNo(v string) predicate.OrderRefund {
 	return predicate.OrderRefund(sql.FieldEQ(FieldOrderNo, v))
@@ -263,6 +268,56 @@ func OrderIDIn(vs ...int) predicate.OrderRefund {
 // OrderIDNotIn applies the NotIn predicate on the "order_id" field.
 func OrderIDNotIn(vs ...int) predicate.OrderRefund {
 	return predicate.OrderRefund(sql.FieldNotIn(FieldOrderID, vs...))
+}
+
+// OrderAppealIDEQ applies the EQ predicate on the "order_appeal_id" field.
+func OrderAppealIDEQ(v int) predicate.OrderRefund {
+	return predicate.OrderRefund(sql.FieldEQ(FieldOrderAppealID, v))
+}
+
+// OrderAppealIDNEQ applies the NEQ predicate on the "order_appeal_id" field.
+func OrderAppealIDNEQ(v int) predicate.OrderRefund {
+	return predicate.OrderRefund(sql.FieldNEQ(FieldOrderAppealID, v))
+}
+
+// OrderAppealIDIn applies the In predicate on the "order_appeal_id" field.
+func OrderAppealIDIn(vs ...int) predicate.OrderRefund {
+	return predicate.OrderRefund(sql.FieldIn(FieldOrderAppealID, vs...))
+}
+
+// OrderAppealIDNotIn applies the NotIn predicate on the "order_appeal_id" field.
+func OrderAppealIDNotIn(vs ...int) predicate.OrderRefund {
+	return predicate.OrderRefund(sql.FieldNotIn(FieldOrderAppealID, vs...))
+}
+
+// OrderAppealIDGT applies the GT predicate on the "order_appeal_id" field.
+func OrderAppealIDGT(v int) predicate.OrderRefund {
+	return predicate.OrderRefund(sql.FieldGT(FieldOrderAppealID, v))
+}
+
+// OrderAppealIDGTE applies the GTE predicate on the "order_appeal_id" field.
+func OrderAppealIDGTE(v int) predicate.OrderRefund {
+	return predicate.OrderRefund(sql.FieldGTE(FieldOrderAppealID, v))
+}
+
+// OrderAppealIDLT applies the LT predicate on the "order_appeal_id" field.
+func OrderAppealIDLT(v int) predicate.OrderRefund {
+	return predicate.OrderRefund(sql.FieldLT(FieldOrderAppealID, v))
+}
+
+// OrderAppealIDLTE applies the LTE predicate on the "order_appeal_id" field.
+func OrderAppealIDLTE(v int) predicate.OrderRefund {
+	return predicate.OrderRefund(sql.FieldLTE(FieldOrderAppealID, v))
+}
+
+// OrderAppealIDIsNil applies the IsNil predicate on the "order_appeal_id" field.
+func OrderAppealIDIsNil() predicate.OrderRefund {
+	return predicate.OrderRefund(sql.FieldIsNull(FieldOrderAppealID))
+}
+
+// OrderAppealIDNotNil applies the NotNil predicate on the "order_appeal_id" field.
+func OrderAppealIDNotNil() predicate.OrderRefund {
+	return predicate.OrderRefund(sql.FieldNotNull(FieldOrderAppealID))
 }
 
 // OrderNoEQ applies the EQ predicate on the "order_no" field.

@@ -140,16 +140,6 @@ func CouponDeductionAmount(v int) predicate.OrderBilling {
 	return predicate.OrderBilling(sql.FieldEQ(FieldCouponDeductionAmount, v))
 }
 
-// CouponStartTime applies equality check predicate on the "coupon_start_time" field. It's identical to CouponStartTimeEQ.
-func CouponStartTime(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldEQ(FieldCouponStartTime, v))
-}
-
-// CouponEndTime applies equality check predicate on the "coupon_end_time" field. It's identical to CouponEndTimeEQ.
-func CouponEndTime(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldEQ(FieldCouponEndTime, v))
-}
-
 // CappedAmount applies equality check predicate on the "capped_amount" field. It's identical to CappedAmountEQ.
 func CappedAmount(v int) predicate.OrderBilling {
 	return predicate.OrderBilling(sql.FieldEQ(FieldCappedAmount, v))
@@ -838,106 +828,6 @@ func CouponDeductionAmountLT(v int) predicate.OrderBilling {
 // CouponDeductionAmountLTE applies the LTE predicate on the "coupon_deduction_amount" field.
 func CouponDeductionAmountLTE(v int) predicate.OrderBilling {
 	return predicate.OrderBilling(sql.FieldLTE(FieldCouponDeductionAmount, v))
-}
-
-// CouponStartTimeEQ applies the EQ predicate on the "coupon_start_time" field.
-func CouponStartTimeEQ(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldEQ(FieldCouponStartTime, v))
-}
-
-// CouponStartTimeNEQ applies the NEQ predicate on the "coupon_start_time" field.
-func CouponStartTimeNEQ(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldNEQ(FieldCouponStartTime, v))
-}
-
-// CouponStartTimeIn applies the In predicate on the "coupon_start_time" field.
-func CouponStartTimeIn(vs ...time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldIn(FieldCouponStartTime, vs...))
-}
-
-// CouponStartTimeNotIn applies the NotIn predicate on the "coupon_start_time" field.
-func CouponStartTimeNotIn(vs ...time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldNotIn(FieldCouponStartTime, vs...))
-}
-
-// CouponStartTimeGT applies the GT predicate on the "coupon_start_time" field.
-func CouponStartTimeGT(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldGT(FieldCouponStartTime, v))
-}
-
-// CouponStartTimeGTE applies the GTE predicate on the "coupon_start_time" field.
-func CouponStartTimeGTE(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldGTE(FieldCouponStartTime, v))
-}
-
-// CouponStartTimeLT applies the LT predicate on the "coupon_start_time" field.
-func CouponStartTimeLT(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldLT(FieldCouponStartTime, v))
-}
-
-// CouponStartTimeLTE applies the LTE predicate on the "coupon_start_time" field.
-func CouponStartTimeLTE(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldLTE(FieldCouponStartTime, v))
-}
-
-// CouponStartTimeIsNil applies the IsNil predicate on the "coupon_start_time" field.
-func CouponStartTimeIsNil() predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldIsNull(FieldCouponStartTime))
-}
-
-// CouponStartTimeNotNil applies the NotNil predicate on the "coupon_start_time" field.
-func CouponStartTimeNotNil() predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldNotNull(FieldCouponStartTime))
-}
-
-// CouponEndTimeEQ applies the EQ predicate on the "coupon_end_time" field.
-func CouponEndTimeEQ(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldEQ(FieldCouponEndTime, v))
-}
-
-// CouponEndTimeNEQ applies the NEQ predicate on the "coupon_end_time" field.
-func CouponEndTimeNEQ(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldNEQ(FieldCouponEndTime, v))
-}
-
-// CouponEndTimeIn applies the In predicate on the "coupon_end_time" field.
-func CouponEndTimeIn(vs ...time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldIn(FieldCouponEndTime, vs...))
-}
-
-// CouponEndTimeNotIn applies the NotIn predicate on the "coupon_end_time" field.
-func CouponEndTimeNotIn(vs ...time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldNotIn(FieldCouponEndTime, vs...))
-}
-
-// CouponEndTimeGT applies the GT predicate on the "coupon_end_time" field.
-func CouponEndTimeGT(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldGT(FieldCouponEndTime, v))
-}
-
-// CouponEndTimeGTE applies the GTE predicate on the "coupon_end_time" field.
-func CouponEndTimeGTE(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldGTE(FieldCouponEndTime, v))
-}
-
-// CouponEndTimeLT applies the LT predicate on the "coupon_end_time" field.
-func CouponEndTimeLT(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldLT(FieldCouponEndTime, v))
-}
-
-// CouponEndTimeLTE applies the LTE predicate on the "coupon_end_time" field.
-func CouponEndTimeLTE(v time.Time) predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldLTE(FieldCouponEndTime, v))
-}
-
-// CouponEndTimeIsNil applies the IsNil predicate on the "coupon_end_time" field.
-func CouponEndTimeIsNil() predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldIsNull(FieldCouponEndTime))
-}
-
-// CouponEndTimeNotNil applies the NotNil predicate on the "coupon_end_time" field.
-func CouponEndTimeNotNil() predicate.OrderBilling {
-	return predicate.OrderBilling(sql.FieldNotNull(FieldCouponEndTime))
 }
 
 // CappedAmountEQ applies the EQ predicate on the "capped_amount" field.

@@ -32,7 +32,7 @@ type OrderAppeal struct {
 	EndStopID int `json:"end_stop_id,omitempty"`
 	// 停车点图片
 	EndStopImageID int `json:"end_stop_image_id,omitempty"`
-	// 申述状态(1-待审核、2-申诉成功、3-申诉失败、4-已取消)
+	// 申述状态(1-待审核、2-申诉成功、3-申诉失败、4-已取消、5-待退款)
 	State int `json:"state,omitempty"`
 	// 退款金额
 	RefundAmount int `json:"refund_amount,omitempty"`

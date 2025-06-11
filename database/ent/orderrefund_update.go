@@ -106,6 +106,33 @@ func (oru *OrderRefundUpdate) SetNillableOrderID(i *int) *OrderRefundUpdate {
 	return oru
 }
 
+// SetOrderAppealID sets the "order_appeal_id" field.
+func (oru *OrderRefundUpdate) SetOrderAppealID(i int) *OrderRefundUpdate {
+	oru.mutation.ResetOrderAppealID()
+	oru.mutation.SetOrderAppealID(i)
+	return oru
+}
+
+// SetNillableOrderAppealID sets the "order_appeal_id" field if the given value is not nil.
+func (oru *OrderRefundUpdate) SetNillableOrderAppealID(i *int) *OrderRefundUpdate {
+	if i != nil {
+		oru.SetOrderAppealID(*i)
+	}
+	return oru
+}
+
+// AddOrderAppealID adds i to the "order_appeal_id" field.
+func (oru *OrderRefundUpdate) AddOrderAppealID(i int) *OrderRefundUpdate {
+	oru.mutation.AddOrderAppealID(i)
+	return oru
+}
+
+// ClearOrderAppealID clears the value of the "order_appeal_id" field.
+func (oru *OrderRefundUpdate) ClearOrderAppealID() *OrderRefundUpdate {
+	oru.mutation.ClearOrderAppealID()
+	return oru
+}
+
 // SetOrderNo sets the "order_no" field.
 func (oru *OrderRefundUpdate) SetOrderNo(s string) *OrderRefundUpdate {
 	oru.mutation.SetOrderNo(s)
@@ -334,6 +361,15 @@ func (oru *OrderRefundUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := oru.mutation.AddedScenicAreaID(); ok {
 		_spec.AddField(orderrefund.FieldScenicAreaID, field.TypeInt, value)
 	}
+	if value, ok := oru.mutation.OrderAppealID(); ok {
+		_spec.SetField(orderrefund.FieldOrderAppealID, field.TypeInt, value)
+	}
+	if value, ok := oru.mutation.AddedOrderAppealID(); ok {
+		_spec.AddField(orderrefund.FieldOrderAppealID, field.TypeInt, value)
+	}
+	if oru.mutation.OrderAppealIDCleared() {
+		_spec.ClearField(orderrefund.FieldOrderAppealID, field.TypeInt)
+	}
 	if value, ok := oru.mutation.OrderNo(); ok {
 		_spec.SetField(orderrefund.FieldOrderNo, field.TypeString, value)
 	}
@@ -493,6 +529,33 @@ func (oruo *OrderRefundUpdateOne) SetNillableOrderID(i *int) *OrderRefundUpdateO
 	if i != nil {
 		oruo.SetOrderID(*i)
 	}
+	return oruo
+}
+
+// SetOrderAppealID sets the "order_appeal_id" field.
+func (oruo *OrderRefundUpdateOne) SetOrderAppealID(i int) *OrderRefundUpdateOne {
+	oruo.mutation.ResetOrderAppealID()
+	oruo.mutation.SetOrderAppealID(i)
+	return oruo
+}
+
+// SetNillableOrderAppealID sets the "order_appeal_id" field if the given value is not nil.
+func (oruo *OrderRefundUpdateOne) SetNillableOrderAppealID(i *int) *OrderRefundUpdateOne {
+	if i != nil {
+		oruo.SetOrderAppealID(*i)
+	}
+	return oruo
+}
+
+// AddOrderAppealID adds i to the "order_appeal_id" field.
+func (oruo *OrderRefundUpdateOne) AddOrderAppealID(i int) *OrderRefundUpdateOne {
+	oruo.mutation.AddOrderAppealID(i)
+	return oruo
+}
+
+// ClearOrderAppealID clears the value of the "order_appeal_id" field.
+func (oruo *OrderRefundUpdateOne) ClearOrderAppealID() *OrderRefundUpdateOne {
+	oruo.mutation.ClearOrderAppealID()
 	return oruo
 }
 
@@ -753,6 +816,15 @@ func (oruo *OrderRefundUpdateOne) sqlSave(ctx context.Context) (_node *OrderRefu
 	}
 	if value, ok := oruo.mutation.AddedScenicAreaID(); ok {
 		_spec.AddField(orderrefund.FieldScenicAreaID, field.TypeInt, value)
+	}
+	if value, ok := oruo.mutation.OrderAppealID(); ok {
+		_spec.SetField(orderrefund.FieldOrderAppealID, field.TypeInt, value)
+	}
+	if value, ok := oruo.mutation.AddedOrderAppealID(); ok {
+		_spec.AddField(orderrefund.FieldOrderAppealID, field.TypeInt, value)
+	}
+	if oruo.mutation.OrderAppealIDCleared() {
+		_spec.ClearField(orderrefund.FieldOrderAppealID, field.TypeInt)
 	}
 	if value, ok := oruo.mutation.OrderNo(); ok {
 		_spec.SetField(orderrefund.FieldOrderNo, field.TypeString, value)

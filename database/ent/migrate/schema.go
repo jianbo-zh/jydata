@@ -719,6 +719,7 @@ var (
 		{Name: "use_mileage_meter", Type: field.TypeInt, Default: 0},
 		{Name: "use_time_second", Type: field.TypeInt, Default: 0},
 		{Name: "deposit_amount", Type: field.TypeInt, Default: 0},
+		{Name: "original_amount", Type: field.TypeInt, Default: 0},
 		{Name: "order_amount", Type: field.TypeInt, Default: 0},
 		{Name: "refunded_amount", Type: field.TypeInt, Default: 0},
 		{Name: "coupon_amount", Type: field.TypeInt, Default: 0},
@@ -746,13 +747,13 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "orders_cars_orders",
-				Columns:    []*schema.Column{OrdersColumns[37]},
+				Columns:    []*schema.Column{OrdersColumns[38]},
 				RefColumns: []*schema.Column{CarsColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
 			{
 				Symbol:     "orders_scenic_areas_orders",
-				Columns:    []*schema.Column{OrdersColumns[38]},
+				Columns:    []*schema.Column{OrdersColumns[39]},
 				RefColumns: []*schema.Column{ScenicAreasColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
@@ -802,8 +803,6 @@ var (
 		{Name: "coupon_id", Type: field.TypeInt, Default: 0},
 		{Name: "coupon_limit_amount", Type: field.TypeInt, Default: 0},
 		{Name: "coupon_deduction_amount", Type: field.TypeInt, Default: 0},
-		{Name: "coupon_start_time", Type: field.TypeTime, Nullable: true},
-		{Name: "coupon_end_time", Type: field.TypeTime, Nullable: true},
 		{Name: "capped_amount", Type: field.TypeInt, Default: 0},
 		{Name: "state", Type: field.TypeInt, Default: 0},
 		{Name: "start_time", Type: field.TypeTime, Nullable: true},
@@ -820,7 +819,7 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "order_billings_orders_billing",
-				Columns:    []*schema.Column{OrderBillingsColumns[25]},
+				Columns:    []*schema.Column{OrderBillingsColumns[23]},
 				RefColumns: []*schema.Column{OrdersColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
@@ -852,6 +851,7 @@ var (
 		{Name: "type", Type: field.TypeInt, Default: 0},
 		{Name: "initiator_id", Type: field.TypeInt, Default: 0},
 		{Name: "scenic_area_id", Type: field.TypeInt, Default: 0},
+		{Name: "order_appeal_id", Type: field.TypeInt, Nullable: true},
 		{Name: "order_no", Type: field.TypeString, Default: ""},
 		{Name: "refund_no", Type: field.TypeString, Unique: true},
 		{Name: "wx_refund_id", Type: field.TypeString, Default: ""},
@@ -872,7 +872,7 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "order_refunds_orders_refund",
-				Columns:    []*schema.Column{OrderRefundsColumns[14]},
+				Columns:    []*schema.Column{OrderRefundsColumns[15]},
 				RefColumns: []*schema.Column{OrdersColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
@@ -1476,7 +1476,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1749310141},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1749549423},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},

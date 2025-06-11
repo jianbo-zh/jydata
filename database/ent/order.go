@@ -66,7 +66,9 @@ type Order struct {
 	UseTimeSecond int `json:"use_time_second,omitempty"`
 	// 押金金额
 	DepositAmount int `json:"deposit_amount,omitempty"`
-	// 订单金额
+	// 订单原价(折扣前价格)
+	OriginalAmount int `json:"original_amount,omitempty"`
+	// 实付金额
 	OrderAmount int `json:"order_amount,omitempty"`
 	// 已退款金额
 	RefundedAmount int `json:"refunded_amount,omitempty"`
@@ -181,7 +183,7 @@ func (*Order) scanValues(columns []string) ([]any, error) {
 		switch columns[i] {
 		case order.FieldIsTestOrder, order.FieldIsCancel, order.FieldIsProfitSharing:
 			values[i] = new(sql.NullBool)
-		case order.FieldID, order.FieldType, order.FieldPeriod, order.FieldScenicAreaID, order.FieldUserID, order.FieldCarID, order.FieldModelID, order.FieldCouponID, order.FieldUseMileageMeter, order.FieldUseTimeSecond, order.FieldDepositAmount, order.FieldOrderAmount, order.FieldRefundedAmount, order.FieldCouponAmount, order.FieldOrderState, order.FieldDepositState, order.FieldEmergencyState, order.FieldUserScore:
+		case order.FieldID, order.FieldType, order.FieldPeriod, order.FieldScenicAreaID, order.FieldUserID, order.FieldCarID, order.FieldModelID, order.FieldCouponID, order.FieldUseMileageMeter, order.FieldUseTimeSecond, order.FieldDepositAmount, order.FieldOriginalAmount, order.FieldOrderAmount, order.FieldRefundedAmount, order.FieldCouponAmount, order.FieldOrderState, order.FieldDepositState, order.FieldEmergencyState, order.FieldUserScore:
 			values[i] = new(sql.NullInt64)
 		case order.FieldOrderNo, order.FieldWxTxID, order.FieldMchID, order.FieldScenicAreaName, order.FieldOpenID, order.FieldNickname, order.FieldPhone, order.FieldDeviceID, order.FieldCarName, order.FieldCarLicensePlate, order.FieldModelName, order.FieldCouponName, order.FieldRemark, order.FieldUserComment:
 			values[i] = new(sql.NullString)
@@ -339,6 +341,12 @@ func (o *Order) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field deposit_amount", values[i])
 			} else if value.Valid {
 				o.DepositAmount = int(value.Int64)
+			}
+		case order.FieldOriginalAmount:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field original_amount", values[i])
+			} else if value.Valid {
+				o.OriginalAmount = int(value.Int64)
 			}
 		case order.FieldOrderAmount:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -562,6 +570,9 @@ func (o *Order) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("deposit_amount=")
 	builder.WriteString(fmt.Sprintf("%v", o.DepositAmount))
+	builder.WriteString(", ")
+	builder.WriteString("original_amount=")
+	builder.WriteString(fmt.Sprintf("%v", o.OriginalAmount))
 	builder.WriteString(", ")
 	builder.WriteString("order_amount=")
 	builder.WriteString(fmt.Sprintf("%v", o.OrderAmount))

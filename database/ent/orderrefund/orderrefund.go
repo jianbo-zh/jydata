@@ -22,6 +22,8 @@ const (
 	FieldScenicAreaID = "scenic_area_id"
 	// FieldOrderID holds the string denoting the order_id field in the database.
 	FieldOrderID = "order_id"
+	// FieldOrderAppealID holds the string denoting the order_appeal_id field in the database.
+	FieldOrderAppealID = "order_appeal_id"
 	// FieldOrderNo holds the string denoting the order_no field in the database.
 	FieldOrderNo = "order_no"
 	// FieldRefundNo holds the string denoting the refund_no field in the database.
@@ -62,6 +64,7 @@ var Columns = []string{
 	FieldInitiatorID,
 	FieldScenicAreaID,
 	FieldOrderID,
+	FieldOrderAppealID,
 	FieldOrderNo,
 	FieldRefundNo,
 	FieldWxRefundID,
@@ -137,6 +140,11 @@ func ByScenicAreaID(opts ...sql.OrderTermOption) OrderOption {
 // ByOrderID orders the results by the order_id field.
 func ByOrderID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldOrderID, opts...).ToFunc()
+}
+
+// ByOrderAppealID orders the results by the order_appeal_id field.
+func ByOrderAppealID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldOrderAppealID, opts...).ToFunc()
 }
 
 // ByOrderNo orders the results by the order_no field.

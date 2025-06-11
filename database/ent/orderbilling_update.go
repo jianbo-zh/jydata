@@ -379,46 +379,6 @@ func (obu *OrderBillingUpdate) AddCouponDeductionAmount(i int) *OrderBillingUpda
 	return obu
 }
 
-// SetCouponStartTime sets the "coupon_start_time" field.
-func (obu *OrderBillingUpdate) SetCouponStartTime(t time.Time) *OrderBillingUpdate {
-	obu.mutation.SetCouponStartTime(t)
-	return obu
-}
-
-// SetNillableCouponStartTime sets the "coupon_start_time" field if the given value is not nil.
-func (obu *OrderBillingUpdate) SetNillableCouponStartTime(t *time.Time) *OrderBillingUpdate {
-	if t != nil {
-		obu.SetCouponStartTime(*t)
-	}
-	return obu
-}
-
-// ClearCouponStartTime clears the value of the "coupon_start_time" field.
-func (obu *OrderBillingUpdate) ClearCouponStartTime() *OrderBillingUpdate {
-	obu.mutation.ClearCouponStartTime()
-	return obu
-}
-
-// SetCouponEndTime sets the "coupon_end_time" field.
-func (obu *OrderBillingUpdate) SetCouponEndTime(t time.Time) *OrderBillingUpdate {
-	obu.mutation.SetCouponEndTime(t)
-	return obu
-}
-
-// SetNillableCouponEndTime sets the "coupon_end_time" field if the given value is not nil.
-func (obu *OrderBillingUpdate) SetNillableCouponEndTime(t *time.Time) *OrderBillingUpdate {
-	if t != nil {
-		obu.SetCouponEndTime(*t)
-	}
-	return obu
-}
-
-// ClearCouponEndTime clears the value of the "coupon_end_time" field.
-func (obu *OrderBillingUpdate) ClearCouponEndTime() *OrderBillingUpdate {
-	obu.mutation.ClearCouponEndTime()
-	return obu
-}
-
 // SetCappedAmount sets the "capped_amount" field.
 func (obu *OrderBillingUpdate) SetCappedAmount(i int) *OrderBillingUpdate {
 	obu.mutation.ResetCappedAmount()
@@ -674,18 +634,6 @@ func (obu *OrderBillingUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := obu.mutation.AddedCouponDeductionAmount(); ok {
 		_spec.AddField(orderbilling.FieldCouponDeductionAmount, field.TypeInt, value)
-	}
-	if value, ok := obu.mutation.CouponStartTime(); ok {
-		_spec.SetField(orderbilling.FieldCouponStartTime, field.TypeTime, value)
-	}
-	if obu.mutation.CouponStartTimeCleared() {
-		_spec.ClearField(orderbilling.FieldCouponStartTime, field.TypeTime)
-	}
-	if value, ok := obu.mutation.CouponEndTime(); ok {
-		_spec.SetField(orderbilling.FieldCouponEndTime, field.TypeTime, value)
-	}
-	if obu.mutation.CouponEndTimeCleared() {
-		_spec.ClearField(orderbilling.FieldCouponEndTime, field.TypeTime)
 	}
 	if value, ok := obu.mutation.CappedAmount(); ok {
 		_spec.SetField(orderbilling.FieldCappedAmount, field.TypeInt, value)
@@ -1113,46 +1061,6 @@ func (obuo *OrderBillingUpdateOne) AddCouponDeductionAmount(i int) *OrderBilling
 	return obuo
 }
 
-// SetCouponStartTime sets the "coupon_start_time" field.
-func (obuo *OrderBillingUpdateOne) SetCouponStartTime(t time.Time) *OrderBillingUpdateOne {
-	obuo.mutation.SetCouponStartTime(t)
-	return obuo
-}
-
-// SetNillableCouponStartTime sets the "coupon_start_time" field if the given value is not nil.
-func (obuo *OrderBillingUpdateOne) SetNillableCouponStartTime(t *time.Time) *OrderBillingUpdateOne {
-	if t != nil {
-		obuo.SetCouponStartTime(*t)
-	}
-	return obuo
-}
-
-// ClearCouponStartTime clears the value of the "coupon_start_time" field.
-func (obuo *OrderBillingUpdateOne) ClearCouponStartTime() *OrderBillingUpdateOne {
-	obuo.mutation.ClearCouponStartTime()
-	return obuo
-}
-
-// SetCouponEndTime sets the "coupon_end_time" field.
-func (obuo *OrderBillingUpdateOne) SetCouponEndTime(t time.Time) *OrderBillingUpdateOne {
-	obuo.mutation.SetCouponEndTime(t)
-	return obuo
-}
-
-// SetNillableCouponEndTime sets the "coupon_end_time" field if the given value is not nil.
-func (obuo *OrderBillingUpdateOne) SetNillableCouponEndTime(t *time.Time) *OrderBillingUpdateOne {
-	if t != nil {
-		obuo.SetCouponEndTime(*t)
-	}
-	return obuo
-}
-
-// ClearCouponEndTime clears the value of the "coupon_end_time" field.
-func (obuo *OrderBillingUpdateOne) ClearCouponEndTime() *OrderBillingUpdateOne {
-	obuo.mutation.ClearCouponEndTime()
-	return obuo
-}
-
 // SetCappedAmount sets the "capped_amount" field.
 func (obuo *OrderBillingUpdateOne) SetCappedAmount(i int) *OrderBillingUpdateOne {
 	obuo.mutation.ResetCappedAmount()
@@ -1438,18 +1346,6 @@ func (obuo *OrderBillingUpdateOne) sqlSave(ctx context.Context) (_node *OrderBil
 	}
 	if value, ok := obuo.mutation.AddedCouponDeductionAmount(); ok {
 		_spec.AddField(orderbilling.FieldCouponDeductionAmount, field.TypeInt, value)
-	}
-	if value, ok := obuo.mutation.CouponStartTime(); ok {
-		_spec.SetField(orderbilling.FieldCouponStartTime, field.TypeTime, value)
-	}
-	if obuo.mutation.CouponStartTimeCleared() {
-		_spec.ClearField(orderbilling.FieldCouponStartTime, field.TypeTime)
-	}
-	if value, ok := obuo.mutation.CouponEndTime(); ok {
-		_spec.SetField(orderbilling.FieldCouponEndTime, field.TypeTime, value)
-	}
-	if obuo.mutation.CouponEndTimeCleared() {
-		_spec.ClearField(orderbilling.FieldCouponEndTime, field.TypeTime)
 	}
 	if value, ok := obuo.mutation.CappedAmount(); ok {
 		_spec.SetField(orderbilling.FieldCappedAmount, field.TypeInt, value)

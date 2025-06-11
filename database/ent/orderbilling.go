@@ -53,10 +53,6 @@ type OrderBilling struct {
 	CouponLimitAmount int `json:"coupon_limit_amount,omitempty"`
 	// 优惠卷抵扣金额（单位：分）
 	CouponDeductionAmount int `json:"coupon_deduction_amount,omitempty"`
-	// 优惠卷开始时间
-	CouponStartTime time.Time `json:"coupon_start_time,omitempty"`
-	// 优惠卷结束时间
-	CouponEndTime time.Time `json:"coupon_end_time,omitempty"`
 	// 封顶价格（单位：分）
 	CappedAmount int `json:"capped_amount,omitempty"`
 	// 计时状态(0-未开始 1-计时中 2-暂停中 4-已结束)
@@ -104,7 +100,7 @@ func (*OrderBilling) scanValues(columns []string) ([]any, error) {
 			values[i] = new(sql.NullFloat64)
 		case orderbilling.FieldID, orderbilling.FieldType, orderbilling.FieldOrderID, orderbilling.FieldStartTimePrice, orderbilling.FieldStartTimeUnit, orderbilling.FieldNormalTimePrice, orderbilling.FieldNormalTimeUnit, orderbilling.FieldTicketCount, orderbilling.FieldCumulativeStop, orderbilling.FieldStartStopPrice, orderbilling.FieldStartStopUnit, orderbilling.FieldNormalStopPrice, orderbilling.FieldNormalStopUnit, orderbilling.FieldCouponID, orderbilling.FieldCouponLimitAmount, orderbilling.FieldCouponDeductionAmount, orderbilling.FieldCappedAmount, orderbilling.FieldState:
 			values[i] = new(sql.NullInt64)
-		case orderbilling.FieldCouponStartTime, orderbilling.FieldCouponEndTime, orderbilling.FieldStartTime, orderbilling.FieldFinishTime, orderbilling.FieldCreateTime, orderbilling.FieldUpdateTime:
+		case orderbilling.FieldStartTime, orderbilling.FieldFinishTime, orderbilling.FieldCreateTime, orderbilling.FieldUpdateTime:
 			values[i] = new(sql.NullTime)
 		default:
 			values[i] = new(sql.UnknownType)
@@ -228,18 +224,6 @@ func (ob *OrderBilling) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field coupon_deduction_amount", values[i])
 			} else if value.Valid {
 				ob.CouponDeductionAmount = int(value.Int64)
-			}
-		case orderbilling.FieldCouponStartTime:
-			if value, ok := values[i].(*sql.NullTime); !ok {
-				return fmt.Errorf("unexpected type %T for field coupon_start_time", values[i])
-			} else if value.Valid {
-				ob.CouponStartTime = value.Time
-			}
-		case orderbilling.FieldCouponEndTime:
-			if value, ok := values[i].(*sql.NullTime); !ok {
-				return fmt.Errorf("unexpected type %T for field coupon_end_time", values[i])
-			} else if value.Valid {
-				ob.CouponEndTime = value.Time
 			}
 		case orderbilling.FieldCappedAmount:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -368,12 +352,6 @@ func (ob *OrderBilling) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("coupon_deduction_amount=")
 	builder.WriteString(fmt.Sprintf("%v", ob.CouponDeductionAmount))
-	builder.WriteString(", ")
-	builder.WriteString("coupon_start_time=")
-	builder.WriteString(ob.CouponStartTime.Format(time.ANSIC))
-	builder.WriteString(", ")
-	builder.WriteString("coupon_end_time=")
-	builder.WriteString(ob.CouponEndTime.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("capped_amount=")
 	builder.WriteString(fmt.Sprintf("%v", ob.CappedAmount))

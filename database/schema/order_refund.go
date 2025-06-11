@@ -18,10 +18,11 @@ type OrderRefund struct {
 func (OrderRefund) Fields() []ent.Field {
 	return []ent.Field{
 		field.Int("id").Unique().Comment("ID"),
-		field.Int("type").Default(0).Comment("退款类型（0-结算退款 1-运管退款）"),
+		field.Int("type").Default(0).Comment("退款类型（0-结算退款 1-运管退款 2-申诉退款）"),
 		field.Int("initiator_id").Default(0).Comment("退款发起人ID"),
 		field.Int("scenic_area_id").Default(0).Comment("景区ID"),
 		field.Int("order_id").Comment("订单ID"),
+		field.Int("order_appeal_id").Optional().Nillable().Comment("订单申诉ID"),
 		field.String("order_no").Default("").Comment("订单编号"),
 		field.String("refund_no").Unique().Comment("退款单号"),
 		field.String("wx_refund_id").Default("").Comment("微信退款ID"),

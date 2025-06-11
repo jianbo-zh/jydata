@@ -942,60 +942,64 @@ func init() {
 	orderDescDepositAmount := orderFields[22].Descriptor()
 	// order.DefaultDepositAmount holds the default value on creation for the deposit_amount field.
 	order.DefaultDepositAmount = orderDescDepositAmount.Default.(int)
+	// orderDescOriginalAmount is the schema descriptor for original_amount field.
+	orderDescOriginalAmount := orderFields[23].Descriptor()
+	// order.DefaultOriginalAmount holds the default value on creation for the original_amount field.
+	order.DefaultOriginalAmount = orderDescOriginalAmount.Default.(int)
 	// orderDescOrderAmount is the schema descriptor for order_amount field.
-	orderDescOrderAmount := orderFields[23].Descriptor()
+	orderDescOrderAmount := orderFields[24].Descriptor()
 	// order.DefaultOrderAmount holds the default value on creation for the order_amount field.
 	order.DefaultOrderAmount = orderDescOrderAmount.Default.(int)
 	// orderDescRefundedAmount is the schema descriptor for refunded_amount field.
-	orderDescRefundedAmount := orderFields[24].Descriptor()
+	orderDescRefundedAmount := orderFields[25].Descriptor()
 	// order.DefaultRefundedAmount holds the default value on creation for the refunded_amount field.
 	order.DefaultRefundedAmount = orderDescRefundedAmount.Default.(int)
 	// orderDescCouponAmount is the schema descriptor for coupon_amount field.
-	orderDescCouponAmount := orderFields[25].Descriptor()
+	orderDescCouponAmount := orderFields[26].Descriptor()
 	// order.DefaultCouponAmount holds the default value on creation for the coupon_amount field.
 	order.DefaultCouponAmount = orderDescCouponAmount.Default.(int)
 	// orderDescOrderState is the schema descriptor for order_state field.
-	orderDescOrderState := orderFields[26].Descriptor()
+	orderDescOrderState := orderFields[27].Descriptor()
 	// order.DefaultOrderState holds the default value on creation for the order_state field.
 	order.DefaultOrderState = orderDescOrderState.Default.(int)
 	// orderDescDepositState is the schema descriptor for deposit_state field.
-	orderDescDepositState := orderFields[27].Descriptor()
+	orderDescDepositState := orderFields[28].Descriptor()
 	// order.DefaultDepositState holds the default value on creation for the deposit_state field.
 	order.DefaultDepositState = orderDescDepositState.Default.(int)
 	// orderDescEmergencyState is the schema descriptor for emergency_state field.
-	orderDescEmergencyState := orderFields[28].Descriptor()
+	orderDescEmergencyState := orderFields[29].Descriptor()
 	// order.DefaultEmergencyState holds the default value on creation for the emergency_state field.
 	order.DefaultEmergencyState = orderDescEmergencyState.Default.(int)
 	// orderDescIsTestOrder is the schema descriptor for is_test_order field.
-	orderDescIsTestOrder := orderFields[29].Descriptor()
+	orderDescIsTestOrder := orderFields[30].Descriptor()
 	// order.DefaultIsTestOrder holds the default value on creation for the is_test_order field.
 	order.DefaultIsTestOrder = orderDescIsTestOrder.Default.(bool)
 	// orderDescIsCancel is the schema descriptor for is_cancel field.
-	orderDescIsCancel := orderFields[30].Descriptor()
+	orderDescIsCancel := orderFields[31].Descriptor()
 	// order.DefaultIsCancel holds the default value on creation for the is_cancel field.
 	order.DefaultIsCancel = orderDescIsCancel.Default.(bool)
 	// orderDescIsProfitSharing is the schema descriptor for is_profit_sharing field.
-	orderDescIsProfitSharing := orderFields[31].Descriptor()
+	orderDescIsProfitSharing := orderFields[32].Descriptor()
 	// order.DefaultIsProfitSharing holds the default value on creation for the is_profit_sharing field.
 	order.DefaultIsProfitSharing = orderDescIsProfitSharing.Default.(bool)
 	// orderDescRemark is the schema descriptor for remark field.
-	orderDescRemark := orderFields[32].Descriptor()
+	orderDescRemark := orderFields[33].Descriptor()
 	// order.DefaultRemark holds the default value on creation for the remark field.
 	order.DefaultRemark = orderDescRemark.Default.(string)
 	// orderDescUserScore is the schema descriptor for user_score field.
-	orderDescUserScore := orderFields[33].Descriptor()
+	orderDescUserScore := orderFields[34].Descriptor()
 	// order.DefaultUserScore holds the default value on creation for the user_score field.
 	order.DefaultUserScore = orderDescUserScore.Default.(int)
 	// orderDescUserComment is the schema descriptor for user_comment field.
-	orderDescUserComment := orderFields[34].Descriptor()
+	orderDescUserComment := orderFields[35].Descriptor()
 	// order.DefaultUserComment holds the default value on creation for the user_comment field.
 	order.DefaultUserComment = orderDescUserComment.Default.(string)
 	// orderDescCreateTime is the schema descriptor for create_time field.
-	orderDescCreateTime := orderFields[37].Descriptor()
+	orderDescCreateTime := orderFields[38].Descriptor()
 	// order.DefaultCreateTime holds the default value on creation for the create_time field.
 	order.DefaultCreateTime = orderDescCreateTime.Default.(func() time.Time)
 	// orderDescUpdateTime is the schema descriptor for update_time field.
-	orderDescUpdateTime := orderFields[38].Descriptor()
+	orderDescUpdateTime := orderFields[39].Descriptor()
 	// order.DefaultUpdateTime holds the default value on creation for the update_time field.
 	order.DefaultUpdateTime = orderDescUpdateTime.Default.(func() time.Time)
 	// order.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
@@ -1107,19 +1111,19 @@ func init() {
 	// orderbilling.DefaultCouponDeductionAmount holds the default value on creation for the coupon_deduction_amount field.
 	orderbilling.DefaultCouponDeductionAmount = orderbillingDescCouponDeductionAmount.Default.(int)
 	// orderbillingDescCappedAmount is the schema descriptor for capped_amount field.
-	orderbillingDescCappedAmount := orderbillingFields[20].Descriptor()
+	orderbillingDescCappedAmount := orderbillingFields[18].Descriptor()
 	// orderbilling.DefaultCappedAmount holds the default value on creation for the capped_amount field.
 	orderbilling.DefaultCappedAmount = orderbillingDescCappedAmount.Default.(int)
 	// orderbillingDescState is the schema descriptor for state field.
-	orderbillingDescState := orderbillingFields[21].Descriptor()
+	orderbillingDescState := orderbillingFields[19].Descriptor()
 	// orderbilling.DefaultState holds the default value on creation for the state field.
 	orderbilling.DefaultState = orderbillingDescState.Default.(int)
 	// orderbillingDescCreateTime is the schema descriptor for create_time field.
-	orderbillingDescCreateTime := orderbillingFields[24].Descriptor()
+	orderbillingDescCreateTime := orderbillingFields[22].Descriptor()
 	// orderbilling.DefaultCreateTime holds the default value on creation for the create_time field.
 	orderbilling.DefaultCreateTime = orderbillingDescCreateTime.Default.(func() time.Time)
 	// orderbillingDescUpdateTime is the schema descriptor for update_time field.
-	orderbillingDescUpdateTime := orderbillingFields[25].Descriptor()
+	orderbillingDescUpdateTime := orderbillingFields[23].Descriptor()
 	// orderbilling.DefaultUpdateTime holds the default value on creation for the update_time field.
 	orderbilling.DefaultUpdateTime = orderbillingDescUpdateTime.Default.(func() time.Time)
 	// orderbilling.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
@@ -1171,35 +1175,35 @@ func init() {
 	// orderrefund.DefaultScenicAreaID holds the default value on creation for the scenic_area_id field.
 	orderrefund.DefaultScenicAreaID = orderrefundDescScenicAreaID.Default.(int)
 	// orderrefundDescOrderNo is the schema descriptor for order_no field.
-	orderrefundDescOrderNo := orderrefundFields[5].Descriptor()
+	orderrefundDescOrderNo := orderrefundFields[6].Descriptor()
 	// orderrefund.DefaultOrderNo holds the default value on creation for the order_no field.
 	orderrefund.DefaultOrderNo = orderrefundDescOrderNo.Default.(string)
 	// orderrefundDescWxRefundID is the schema descriptor for wx_refund_id field.
-	orderrefundDescWxRefundID := orderrefundFields[7].Descriptor()
+	orderrefundDescWxRefundID := orderrefundFields[8].Descriptor()
 	// orderrefund.DefaultWxRefundID holds the default value on creation for the wx_refund_id field.
 	orderrefund.DefaultWxRefundID = orderrefundDescWxRefundID.Default.(string)
 	// orderrefundDescRefundAmount is the schema descriptor for refund_amount field.
-	orderrefundDescRefundAmount := orderrefundFields[8].Descriptor()
+	orderrefundDescRefundAmount := orderrefundFields[9].Descriptor()
 	// orderrefund.DefaultRefundAmount holds the default value on creation for the refund_amount field.
 	orderrefund.DefaultRefundAmount = orderrefundDescRefundAmount.Default.(int)
 	// orderrefundDescState is the schema descriptor for state field.
-	orderrefundDescState := orderrefundFields[9].Descriptor()
+	orderrefundDescState := orderrefundFields[10].Descriptor()
 	// orderrefund.DefaultState holds the default value on creation for the state field.
 	orderrefund.DefaultState = orderrefundDescState.Default.(int)
 	// orderrefundDescRemark is the schema descriptor for remark field.
-	orderrefundDescRemark := orderrefundFields[10].Descriptor()
+	orderrefundDescRemark := orderrefundFields[11].Descriptor()
 	// orderrefund.DefaultRemark holds the default value on creation for the remark field.
 	orderrefund.DefaultRemark = orderrefundDescRemark.Default.(string)
 	// orderrefundDescErrmsg is the schema descriptor for errmsg field.
-	orderrefundDescErrmsg := orderrefundFields[11].Descriptor()
+	orderrefundDescErrmsg := orderrefundFields[12].Descriptor()
 	// orderrefund.DefaultErrmsg holds the default value on creation for the errmsg field.
 	orderrefund.DefaultErrmsg = orderrefundDescErrmsg.Default.(string)
 	// orderrefundDescCreateTime is the schema descriptor for create_time field.
-	orderrefundDescCreateTime := orderrefundFields[13].Descriptor()
+	orderrefundDescCreateTime := orderrefundFields[14].Descriptor()
 	// orderrefund.DefaultCreateTime holds the default value on creation for the create_time field.
 	orderrefund.DefaultCreateTime = orderrefundDescCreateTime.Default.(func() time.Time)
 	// orderrefundDescUpdateTime is the schema descriptor for update_time field.
-	orderrefundDescUpdateTime := orderrefundFields[14].Descriptor()
+	orderrefundDescUpdateTime := orderrefundFields[15].Descriptor()
 	// orderrefund.DefaultUpdateTime holds the default value on creation for the update_time field.
 	orderrefund.DefaultUpdateTime = orderrefundDescUpdateTime.Default.(func() time.Time)
 	// orderrefund.UpdateDefaultUpdateTime holds the default value on update for the update_time field.

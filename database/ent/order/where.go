@@ -165,6 +165,11 @@ func DepositAmount(v int) predicate.Order {
 	return predicate.Order(sql.FieldEQ(FieldDepositAmount, v))
 }
 
+// OriginalAmount applies equality check predicate on the "original_amount" field. It's identical to OriginalAmountEQ.
+func OriginalAmount(v int) predicate.Order {
+	return predicate.Order(sql.FieldEQ(FieldOriginalAmount, v))
+}
+
 // OrderAmount applies equality check predicate on the "order_amount" field. It's identical to OrderAmountEQ.
 func OrderAmount(v int) predicate.Order {
 	return predicate.Order(sql.FieldEQ(FieldOrderAmount, v))
@@ -1383,6 +1388,46 @@ func DepositAmountLT(v int) predicate.Order {
 // DepositAmountLTE applies the LTE predicate on the "deposit_amount" field.
 func DepositAmountLTE(v int) predicate.Order {
 	return predicate.Order(sql.FieldLTE(FieldDepositAmount, v))
+}
+
+// OriginalAmountEQ applies the EQ predicate on the "original_amount" field.
+func OriginalAmountEQ(v int) predicate.Order {
+	return predicate.Order(sql.FieldEQ(FieldOriginalAmount, v))
+}
+
+// OriginalAmountNEQ applies the NEQ predicate on the "original_amount" field.
+func OriginalAmountNEQ(v int) predicate.Order {
+	return predicate.Order(sql.FieldNEQ(FieldOriginalAmount, v))
+}
+
+// OriginalAmountIn applies the In predicate on the "original_amount" field.
+func OriginalAmountIn(vs ...int) predicate.Order {
+	return predicate.Order(sql.FieldIn(FieldOriginalAmount, vs...))
+}
+
+// OriginalAmountNotIn applies the NotIn predicate on the "original_amount" field.
+func OriginalAmountNotIn(vs ...int) predicate.Order {
+	return predicate.Order(sql.FieldNotIn(FieldOriginalAmount, vs...))
+}
+
+// OriginalAmountGT applies the GT predicate on the "original_amount" field.
+func OriginalAmountGT(v int) predicate.Order {
+	return predicate.Order(sql.FieldGT(FieldOriginalAmount, v))
+}
+
+// OriginalAmountGTE applies the GTE predicate on the "original_amount" field.
+func OriginalAmountGTE(v int) predicate.Order {
+	return predicate.Order(sql.FieldGTE(FieldOriginalAmount, v))
+}
+
+// OriginalAmountLT applies the LT predicate on the "original_amount" field.
+func OriginalAmountLT(v int) predicate.Order {
+	return predicate.Order(sql.FieldLT(FieldOriginalAmount, v))
+}
+
+// OriginalAmountLTE applies the LTE predicate on the "original_amount" field.
+func OriginalAmountLTE(v int) predicate.Order {
+	return predicate.Order(sql.FieldLTE(FieldOriginalAmount, v))
 }
 
 // OrderAmountEQ applies the EQ predicate on the "order_amount" field.

@@ -27,6 +27,7 @@ func (db *Database) CreateOrder(ctx context.Context, req *ent.Order) (*ent.Order
 		SetModelID(req.ModelID).
 		SetModelName(req.ModelName).
 		SetDepositAmount(req.DepositAmount).
+		SetOriginalAmount(req.OriginalAmount).
 		SetOrderAmount(req.OrderAmount).
 		SetOrderState(req.OrderState).
 		SetDepositState(req.DepositState).

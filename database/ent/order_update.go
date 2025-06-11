@@ -397,6 +397,27 @@ func (ou *OrderUpdate) AddDepositAmount(i int) *OrderUpdate {
 	return ou
 }
 
+// SetOriginalAmount sets the "original_amount" field.
+func (ou *OrderUpdate) SetOriginalAmount(i int) *OrderUpdate {
+	ou.mutation.ResetOriginalAmount()
+	ou.mutation.SetOriginalAmount(i)
+	return ou
+}
+
+// SetNillableOriginalAmount sets the "original_amount" field if the given value is not nil.
+func (ou *OrderUpdate) SetNillableOriginalAmount(i *int) *OrderUpdate {
+	if i != nil {
+		ou.SetOriginalAmount(*i)
+	}
+	return ou
+}
+
+// AddOriginalAmount adds i to the "original_amount" field.
+func (ou *OrderUpdate) AddOriginalAmount(i int) *OrderUpdate {
+	ou.mutation.AddOriginalAmount(i)
+	return ou
+}
+
 // SetOrderAmount sets the "order_amount" field.
 func (ou *OrderUpdate) SetOrderAmount(i int) *OrderUpdate {
 	ou.mutation.ResetOrderAmount()
@@ -921,6 +942,12 @@ func (ou *OrderUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := ou.mutation.AddedDepositAmount(); ok {
 		_spec.AddField(order.FieldDepositAmount, field.TypeInt, value)
+	}
+	if value, ok := ou.mutation.OriginalAmount(); ok {
+		_spec.SetField(order.FieldOriginalAmount, field.TypeInt, value)
+	}
+	if value, ok := ou.mutation.AddedOriginalAmount(); ok {
+		_spec.AddField(order.FieldOriginalAmount, field.TypeInt, value)
 	}
 	if value, ok := ou.mutation.OrderAmount(); ok {
 		_spec.SetField(order.FieldOrderAmount, field.TypeInt, value)
@@ -1539,6 +1566,27 @@ func (ouo *OrderUpdateOne) AddDepositAmount(i int) *OrderUpdateOne {
 	return ouo
 }
 
+// SetOriginalAmount sets the "original_amount" field.
+func (ouo *OrderUpdateOne) SetOriginalAmount(i int) *OrderUpdateOne {
+	ouo.mutation.ResetOriginalAmount()
+	ouo.mutation.SetOriginalAmount(i)
+	return ouo
+}
+
+// SetNillableOriginalAmount sets the "original_amount" field if the given value is not nil.
+func (ouo *OrderUpdateOne) SetNillableOriginalAmount(i *int) *OrderUpdateOne {
+	if i != nil {
+		ouo.SetOriginalAmount(*i)
+	}
+	return ouo
+}
+
+// AddOriginalAmount adds i to the "original_amount" field.
+func (ouo *OrderUpdateOne) AddOriginalAmount(i int) *OrderUpdateOne {
+	ouo.mutation.AddOriginalAmount(i)
+	return ouo
+}
+
 // SetOrderAmount sets the "order_amount" field.
 func (ouo *OrderUpdateOne) SetOrderAmount(i int) *OrderUpdateOne {
 	ouo.mutation.ResetOrderAmount()
@@ -2093,6 +2141,12 @@ func (ouo *OrderUpdateOne) sqlSave(ctx context.Context) (_node *Order, err error
 	}
 	if value, ok := ouo.mutation.AddedDepositAmount(); ok {
 		_spec.AddField(order.FieldDepositAmount, field.TypeInt, value)
+	}
+	if value, ok := ouo.mutation.OriginalAmount(); ok {
+		_spec.SetField(order.FieldOriginalAmount, field.TypeInt, value)
+	}
+	if value, ok := ouo.mutation.AddedOriginalAmount(); ok {
+		_spec.AddField(order.FieldOriginalAmount, field.TypeInt, value)
 	}
 	if value, ok := ouo.mutation.OrderAmount(); ok {
 		_spec.SetField(order.FieldOrderAmount, field.TypeInt, value)

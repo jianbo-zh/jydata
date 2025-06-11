@@ -48,7 +48,8 @@ func (Order) Fields() []ent.Field {
 		field.Int("use_time_second").Default(0).Comment("使用时长"),
 
 		field.Int("deposit_amount").Default(0).Comment("押金金额"),
-		field.Int("order_amount").Default(0).Comment("订单金额"),
+		field.Int("original_amount").Default(0).Comment("订单原价(折扣前价格)"),
+		field.Int("order_amount").Default(0).Comment("实付金额"),
 		field.Int("refunded_amount").Default(0).Comment("已退款金额"),
 		field.Int("coupon_amount").Default(0).Comment("优惠金额"),
 

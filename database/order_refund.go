@@ -21,6 +21,7 @@ func (db *Database) CreateOrderRefund(ctx context.Context, refund *ent.OrderRefu
 		SetRefundAmount(refund.RefundAmount).
 		SetState(refund.State).
 		SetRemark(refund.Remark).
+		SetNillableOrderAppealID(refund.OrderAppealID).
 		Save(ctx)
 }
 

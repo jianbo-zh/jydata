@@ -41,8 +41,6 @@ func (OrderBilling) Fields() []ent.Field {
 		field.Int("coupon_id").Default(0).Comment("优惠卷ID"),
 		field.Int("coupon_limit_amount").Default(0).Comment("优惠限制金额（单位：分）"),
 		field.Int("coupon_deduction_amount").Default(0).Comment("优惠卷抵扣金额（单位：分）"),
-		field.Time("coupon_start_time").Optional().Comment("优惠卷开始时间"),
-		field.Time("coupon_end_time").Optional().Comment("优惠卷结束时间"),
 
 		field.Int("capped_amount").Default(0).Comment("封顶价格（单位：分）"),
 

@@ -251,34 +251,6 @@ func (obc *OrderBillingCreate) SetNillableCouponDeductionAmount(i *int) *OrderBi
 	return obc
 }
 
-// SetCouponStartTime sets the "coupon_start_time" field.
-func (obc *OrderBillingCreate) SetCouponStartTime(t time.Time) *OrderBillingCreate {
-	obc.mutation.SetCouponStartTime(t)
-	return obc
-}
-
-// SetNillableCouponStartTime sets the "coupon_start_time" field if the given value is not nil.
-func (obc *OrderBillingCreate) SetNillableCouponStartTime(t *time.Time) *OrderBillingCreate {
-	if t != nil {
-		obc.SetCouponStartTime(*t)
-	}
-	return obc
-}
-
-// SetCouponEndTime sets the "coupon_end_time" field.
-func (obc *OrderBillingCreate) SetCouponEndTime(t time.Time) *OrderBillingCreate {
-	obc.mutation.SetCouponEndTime(t)
-	return obc
-}
-
-// SetNillableCouponEndTime sets the "coupon_end_time" field if the given value is not nil.
-func (obc *OrderBillingCreate) SetNillableCouponEndTime(t *time.Time) *OrderBillingCreate {
-	if t != nil {
-		obc.SetCouponEndTime(*t)
-	}
-	return obc
-}
-
 // SetCappedAmount sets the "capped_amount" field.
 func (obc *OrderBillingCreate) SetCappedAmount(i int) *OrderBillingCreate {
 	obc.mutation.SetCappedAmount(i)
@@ -654,14 +626,6 @@ func (obc *OrderBillingCreate) createSpec() (*OrderBilling, *sqlgraph.CreateSpec
 	if value, ok := obc.mutation.CouponDeductionAmount(); ok {
 		_spec.SetField(orderbilling.FieldCouponDeductionAmount, field.TypeInt, value)
 		_node.CouponDeductionAmount = value
-	}
-	if value, ok := obc.mutation.CouponStartTime(); ok {
-		_spec.SetField(orderbilling.FieldCouponStartTime, field.TypeTime, value)
-		_node.CouponStartTime = value
-	}
-	if value, ok := obc.mutation.CouponEndTime(); ok {
-		_spec.SetField(orderbilling.FieldCouponEndTime, field.TypeTime, value)
-		_node.CouponEndTime = value
 	}
 	if value, ok := obc.mutation.CappedAmount(); ok {
 		_spec.SetField(orderbilling.FieldCappedAmount, field.TypeInt, value)

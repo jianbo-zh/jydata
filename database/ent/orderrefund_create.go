@@ -69,6 +69,20 @@ func (orc *OrderRefundCreate) SetOrderID(i int) *OrderRefundCreate {
 	return orc
 }
 
+// SetOrderAppealID sets the "order_appeal_id" field.
+func (orc *OrderRefundCreate) SetOrderAppealID(i int) *OrderRefundCreate {
+	orc.mutation.SetOrderAppealID(i)
+	return orc
+}
+
+// SetNillableOrderAppealID sets the "order_appeal_id" field if the given value is not nil.
+func (orc *OrderRefundCreate) SetNillableOrderAppealID(i *int) *OrderRefundCreate {
+	if i != nil {
+		orc.SetOrderAppealID(*i)
+	}
+	return orc
+}
+
 // SetOrderNo sets the "order_no" field.
 func (orc *OrderRefundCreate) SetOrderNo(s string) *OrderRefundCreate {
 	orc.mutation.SetOrderNo(s)
@@ -380,6 +394,10 @@ func (orc *OrderRefundCreate) createSpec() (*OrderRefund, *sqlgraph.CreateSpec) 
 	if value, ok := orc.mutation.ScenicAreaID(); ok {
 		_spec.SetField(orderrefund.FieldScenicAreaID, field.TypeInt, value)
 		_node.ScenicAreaID = value
+	}
+	if value, ok := orc.mutation.OrderAppealID(); ok {
+		_spec.SetField(orderrefund.FieldOrderAppealID, field.TypeInt, value)
+		_node.OrderAppealID = &value
 	}
 	if value, ok := orc.mutation.OrderNo(); ok {
 		_spec.SetField(orderrefund.FieldOrderNo, field.TypeString, value)

@@ -19,7 +19,7 @@ type OrderRefund struct {
 	// ID of the ent.
 	// ID
 	ID int `json:"id,omitempty"`
-	// 退款类型（0-结算退款 1-运管退款）
+	// 退款类型（0-结算退款 1-运管退款 2-申诉退款）
 	Type int `json:"type,omitempty"`
 	// 退款发起人ID
 	InitiatorID int `json:"initiator_id,omitempty"`
@@ -27,6 +27,8 @@ type OrderRefund struct {
 	ScenicAreaID int `json:"scenic_area_id,omitempty"`
 	// 订单ID
 	OrderID int `json:"order_id,omitempty"`
+	// 订单申诉ID
+	OrderAppealID *int `json:"order_appeal_id,omitempty"`
 	// 订单编号
 	OrderNo string `json:"order_no,omitempty"`
 	// 退款单号
@@ -78,7 +80,7 @@ func (*OrderRefund) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case orderrefund.FieldID, orderrefund.FieldType, orderrefund.FieldInitiatorID, orderrefund.FieldScenicAreaID, orderrefund.FieldOrderID, orderrefund.FieldRefundAmount, orderrefund.FieldState:
+		case orderrefund.FieldID, orderrefund.FieldType, orderrefund.FieldInitiatorID, orderrefund.FieldScenicAreaID, orderrefund.FieldOrderID, orderrefund.FieldOrderAppealID, orderrefund.FieldRefundAmount, orderrefund.FieldState:
 			values[i] = new(sql.NullInt64)
 		case orderrefund.FieldOrderNo, orderrefund.FieldRefundNo, orderrefund.FieldWxRefundID, orderrefund.FieldRemark, orderrefund.FieldErrmsg:
 			values[i] = new(sql.NullString)
@@ -128,6 +130,13 @@ func (or *OrderRefund) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field order_id", values[i])
 			} else if value.Valid {
 				or.OrderID = int(value.Int64)
+			}
+		case orderrefund.FieldOrderAppealID:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field order_appeal_id", values[i])
+			} else if value.Valid {
+				or.OrderAppealID = new(int)
+				*or.OrderAppealID = int(value.Int64)
 			}
 		case orderrefund.FieldOrderNo:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -242,6 +251,11 @@ func (or *OrderRefund) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("order_id=")
 	builder.WriteString(fmt.Sprintf("%v", or.OrderID))
+	builder.WriteString(", ")
+	if v := or.OrderAppealID; v != nil {
+		builder.WriteString("order_appeal_id=")
+		builder.WriteString(fmt.Sprintf("%v", *v))
+	}
 	builder.WriteString(", ")
 	builder.WriteString("order_no=")
 	builder.WriteString(or.OrderNo)

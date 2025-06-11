@@ -229,6 +229,20 @@ func (oc *OrderCreate) SetNillableDepositAmount(i *int) *OrderCreate {
 	return oc
 }
 
+// SetOriginalAmount sets the "original_amount" field.
+func (oc *OrderCreate) SetOriginalAmount(i int) *OrderCreate {
+	oc.mutation.SetOriginalAmount(i)
+	return oc
+}
+
+// SetNillableOriginalAmount sets the "original_amount" field if the given value is not nil.
+func (oc *OrderCreate) SetNillableOriginalAmount(i *int) *OrderCreate {
+	if i != nil {
+		oc.SetOriginalAmount(*i)
+	}
+	return oc
+}
+
 // SetOrderAmount sets the "order_amount" field.
 func (oc *OrderCreate) SetOrderAmount(i int) *OrderCreate {
 	oc.mutation.SetOrderAmount(i)
@@ -599,6 +613,10 @@ func (oc *OrderCreate) defaults() {
 		v := order.DefaultDepositAmount
 		oc.mutation.SetDepositAmount(v)
 	}
+	if _, ok := oc.mutation.OriginalAmount(); !ok {
+		v := order.DefaultOriginalAmount
+		oc.mutation.SetOriginalAmount(v)
+	}
 	if _, ok := oc.mutation.OrderAmount(); !ok {
 		v := order.DefaultOrderAmount
 		oc.mutation.SetOrderAmount(v)
@@ -724,6 +742,9 @@ func (oc *OrderCreate) check() error {
 	}
 	if _, ok := oc.mutation.DepositAmount(); !ok {
 		return &ValidationError{Name: "deposit_amount", err: errors.New(`ent: missing required field "Order.deposit_amount"`)}
+	}
+	if _, ok := oc.mutation.OriginalAmount(); !ok {
+		return &ValidationError{Name: "original_amount", err: errors.New(`ent: missing required field "Order.original_amount"`)}
 	}
 	if _, ok := oc.mutation.OrderAmount(); !ok {
 		return &ValidationError{Name: "order_amount", err: errors.New(`ent: missing required field "Order.order_amount"`)}
@@ -884,6 +905,10 @@ func (oc *OrderCreate) createSpec() (*Order, *sqlgraph.CreateSpec) {
 	if value, ok := oc.mutation.DepositAmount(); ok {
 		_spec.SetField(order.FieldDepositAmount, field.TypeInt, value)
 		_node.DepositAmount = value
+	}
+	if value, ok := oc.mutation.OriginalAmount(); ok {
+		_spec.SetField(order.FieldOriginalAmount, field.TypeInt, value)
+		_node.OriginalAmount = value
 	}
 	if value, ok := oc.mutation.OrderAmount(); ok {
 		_spec.SetField(order.FieldOrderAmount, field.TypeInt, value)
