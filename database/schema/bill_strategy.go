@@ -54,6 +54,6 @@ func (BillingStrategy) Edges() []ent.Edge {
 
 func (BillingStrategy) Indexes() []ent.Index {
 	return []ent.Index{
-		index.Fields("scenic_area_id", "model_id").Unique(),
+		index.Fields("scenic_area_id", "model_id", "main_mode").Unique(),
 	}
 }

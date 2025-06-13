@@ -152,9 +152,9 @@ var (
 		},
 		Indexes: []*schema.Index{
 			{
-				Name:    "billingstrategy_scenic_area_id_model_id",
+				Name:    "billingstrategy_scenic_area_id_model_id_main_mode",
 				Unique:  true,
-				Columns: []*schema.Column{BillingStrategiesColumns[20], BillingStrategiesColumns[2]},
+				Columns: []*schema.Column{BillingStrategiesColumns[20], BillingStrategiesColumns[2], BillingStrategiesColumns[3]},
 			},
 		},
 	}
@@ -1476,7 +1476,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1749549423},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1749716713},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},
