@@ -1205,6 +1205,26 @@ var (
 			},
 		},
 	}
+	// SSHAccountsColumns holds the columns for the "ssh_accounts" table.
+	SSHAccountsColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeInt, Increment: true},
+		{Name: "delete_time", Type: field.TypeTime, Nullable: true},
+		{Name: "type", Type: field.TypeString},
+		{Name: "username", Type: field.TypeString},
+		{Name: "password", Type: field.TypeString},
+		{Name: "scenic_area_id", Type: field.TypeInt, Nullable: true},
+		{Name: "car_id", Type: field.TypeInt, Nullable: true},
+		{Name: "state", Type: field.TypeInt, Default: 1},
+		{Name: "use_time", Type: field.TypeTime, Nullable: true},
+		{Name: "create_time", Type: field.TypeTime},
+		{Name: "update_time", Type: field.TypeTime},
+	}
+	// SSHAccountsTable holds the schema information for the "ssh_accounts" table.
+	SSHAccountsTable = &schema.Table{
+		Name:       "ssh_accounts",
+		Columns:    SSHAccountsColumns,
+		PrimaryKey: []*schema.Column{SSHAccountsColumns[0]},
+	}
 	// StatsDailiesColumns holds the columns for the "stats_dailies" table.
 	StatsDailiesColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
@@ -1476,7 +1496,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1749716713},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1750212397},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},
@@ -1598,6 +1618,7 @@ var (
 		ScenicAreaMapsTable,
 		ScheTasksTable,
 		ScheTaskEventsTable,
+		SSHAccountsTable,
 		StatsDailiesTable,
 		StatsDailyCarsTable,
 		StatsDailyScenicAreasTable,

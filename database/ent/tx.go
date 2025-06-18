@@ -100,6 +100,8 @@ type Tx struct {
 	ScheTask *ScheTaskClient
 	// ScheTaskEvent is the client for interacting with the ScheTaskEvent builders.
 	ScheTaskEvent *ScheTaskEventClient
+	// SshAccount is the client for interacting with the SshAccount builders.
+	SshAccount *SshAccountClient
 	// StatsDaily is the client for interacting with the StatsDaily builders.
 	StatsDaily *StatsDailyClient
 	// StatsDailyCar is the client for interacting with the StatsDailyCar builders.
@@ -293,6 +295,7 @@ func (tx *Tx) init() {
 	tx.ScenicAreaMap = NewScenicAreaMapClient(tx.config)
 	tx.ScheTask = NewScheTaskClient(tx.config)
 	tx.ScheTaskEvent = NewScheTaskEventClient(tx.config)
+	tx.SshAccount = NewSshAccountClient(tx.config)
 	tx.StatsDaily = NewStatsDailyClient(tx.config)
 	tx.StatsDailyCar = NewStatsDailyCarClient(tx.config)
 	tx.StatsDailyScenicArea = NewStatsDailyScenicAreaClient(tx.config)

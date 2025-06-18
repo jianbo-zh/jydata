@@ -56,6 +56,7 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/scenicareamap"
 	"github.com/jianbo-zh/jydata/database/ent/schetask"
 	"github.com/jianbo-zh/jydata/database/ent/schetaskevent"
+	"github.com/jianbo-zh/jydata/database/ent/sshaccount"
 	"github.com/jianbo-zh/jydata/database/ent/statsdaily"
 	"github.com/jianbo-zh/jydata/database/ent/statsdailycar"
 	"github.com/jianbo-zh/jydata/database/ent/statsdailyscenicarea"
@@ -169,6 +170,7 @@ func checkColumn(table, column string) error {
 			scenicareamap.Table:          scenicareamap.ValidColumn,
 			schetask.Table:               schetask.ValidColumn,
 			schetaskevent.Table:          schetaskevent.ValidColumn,
+			sshaccount.Table:             sshaccount.ValidColumn,
 			statsdaily.Table:             statsdaily.ValidColumn,
 			statsdailycar.Table:          statsdailycar.ValidColumn,
 			statsdailyscenicarea.Table:   statsdailyscenicarea.ValidColumn,

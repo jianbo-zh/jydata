@@ -59,6 +59,7 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/scenicareamap"
 	"github.com/jianbo-zh/jydata/database/ent/schetask"
 	"github.com/jianbo-zh/jydata/database/ent/schetaskevent"
+	"github.com/jianbo-zh/jydata/database/ent/sshaccount"
 	"github.com/jianbo-zh/jydata/database/ent/statsdaily"
 	"github.com/jianbo-zh/jydata/database/ent/statsdailycar"
 	"github.com/jianbo-zh/jydata/database/ent/statsdailyscenicarea"
@@ -163,6 +164,8 @@ type Client struct {
 	ScheTask *ScheTaskClient
 	// ScheTaskEvent is the client for interacting with the ScheTaskEvent builders.
 	ScheTaskEvent *ScheTaskEventClient
+	// SshAccount is the client for interacting with the SshAccount builders.
+	SshAccount *SshAccountClient
 	// StatsDaily is the client for interacting with the StatsDaily builders.
 	StatsDaily *StatsDailyClient
 	// StatsDailyCar is the client for interacting with the StatsDailyCar builders.
@@ -236,6 +239,7 @@ func (c *Client) init() {
 	c.ScenicAreaMap = NewScenicAreaMapClient(c.config)
 	c.ScheTask = NewScheTaskClient(c.config)
 	c.ScheTaskEvent = NewScheTaskEventClient(c.config)
+	c.SshAccount = NewSshAccountClient(c.config)
 	c.StatsDaily = NewStatsDailyClient(c.config)
 	c.StatsDailyCar = NewStatsDailyCarClient(c.config)
 	c.StatsDailyScenicArea = NewStatsDailyScenicAreaClient(c.config)
@@ -381,6 +385,7 @@ func (c *Client) Tx(ctx context.Context) (*Tx, error) {
 		ScenicAreaMap:          NewScenicAreaMapClient(cfg),
 		ScheTask:               NewScheTaskClient(cfg),
 		ScheTaskEvent:          NewScheTaskEventClient(cfg),
+		SshAccount:             NewSshAccountClient(cfg),
 		StatsDaily:             NewStatsDailyClient(cfg),
 		StatsDailyCar:          NewStatsDailyCarClient(cfg),
 		StatsDailyScenicArea:   NewStatsDailyScenicAreaClient(cfg),
@@ -453,6 +458,7 @@ func (c *Client) BeginTx(ctx context.Context, opts *sql.TxOptions) (*Tx, error) 
 		ScenicAreaMap:          NewScenicAreaMapClient(cfg),
 		ScheTask:               NewScheTaskClient(cfg),
 		ScheTaskEvent:          NewScheTaskEventClient(cfg),
+		SshAccount:             NewSshAccountClient(cfg),
 		StatsDaily:             NewStatsDailyClient(cfg),
 		StatsDailyCar:          NewStatsDailyCarClient(cfg),
 		StatsDailyScenicArea:   NewStatsDailyScenicAreaClient(cfg),
@@ -500,7 +506,7 @@ func (c *Client) Use(hooks ...Hook) {
 		c.OrderBilling, c.OrderExtendFlight, c.OrderRefund, c.OrderSharing,
 		c.PayTxBill, c.PaymentAccount, c.Poi, c.PoiExtendYokee, c.ProfitReceiver,
 		c.Role, c.Route, c.ScenicArea, c.ScenicAreaExtendYokee, c.ScenicAreaMap,
-		c.ScheTask, c.ScheTaskEvent, c.StatsDaily, c.StatsDailyCar,
+		c.ScheTask, c.ScheTaskEvent, c.SshAccount, c.StatsDaily, c.StatsDailyCar,
 		c.StatsDailyScenicArea, c.StatsHourlyCar, c.StatsHourlyScenicArea,
 		c.SystemConfig, c.SystemLog, c.Task, c.User,
 	} {
@@ -521,7 +527,7 @@ func (c *Client) Intercept(interceptors ...Interceptor) {
 		c.OrderBilling, c.OrderExtendFlight, c.OrderRefund, c.OrderSharing,
 		c.PayTxBill, c.PaymentAccount, c.Poi, c.PoiExtendYokee, c.ProfitReceiver,
 		c.Role, c.Route, c.ScenicArea, c.ScenicAreaExtendYokee, c.ScenicAreaMap,
-		c.ScheTask, c.ScheTaskEvent, c.StatsDaily, c.StatsDailyCar,
+		c.ScheTask, c.ScheTaskEvent, c.SshAccount, c.StatsDaily, c.StatsDailyCar,
 		c.StatsDailyScenicArea, c.StatsHourlyCar, c.StatsHourlyScenicArea,
 		c.SystemConfig, c.SystemLog, c.Task, c.User,
 	} {
@@ -620,6 +626,8 @@ func (c *Client) Mutate(ctx context.Context, m Mutation) (Value, error) {
 		return c.ScheTask.mutate(ctx, m)
 	case *ScheTaskEventMutation:
 		return c.ScheTaskEvent.mutate(ctx, m)
+	case *SshAccountMutation:
+		return c.SshAccount.mutate(ctx, m)
 	case *StatsDailyMutation:
 		return c.StatsDaily.mutate(ctx, m)
 	case *StatsDailyCarMutation:
@@ -7335,6 +7343,141 @@ func (c *ScheTaskEventClient) mutate(ctx context.Context, m *ScheTaskEventMutati
 	}
 }
 
+// SshAccountClient is a client for the SshAccount schema.
+type SshAccountClient struct {
+	config
+}
+
+// NewSshAccountClient returns a client for the SshAccount from the given config.
+func NewSshAccountClient(c config) *SshAccountClient {
+	return &SshAccountClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `sshaccount.Hooks(f(g(h())))`.
+func (c *SshAccountClient) Use(hooks ...Hook) {
+	c.hooks.SshAccount = append(c.hooks.SshAccount, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `sshaccount.Intercept(f(g(h())))`.
+func (c *SshAccountClient) Intercept(interceptors ...Interceptor) {
+	c.inters.SshAccount = append(c.inters.SshAccount, interceptors...)
+}
+
+// Create returns a builder for creating a SshAccount entity.
+func (c *SshAccountClient) Create() *SshAccountCreate {
+	mutation := newSshAccountMutation(c.config, OpCreate)
+	return &SshAccountCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of SshAccount entities.
+func (c *SshAccountClient) CreateBulk(builders ...*SshAccountCreate) *SshAccountCreateBulk {
+	return &SshAccountCreateBulk{config: c.config, builders: builders}
+}
+
+// MapCreateBulk creates a bulk creation builder from the given slice. For each item in the slice, the function creates
+// a builder and applies setFunc on it.
+func (c *SshAccountClient) MapCreateBulk(slice any, setFunc func(*SshAccountCreate, int)) *SshAccountCreateBulk {
+	rv := reflect.ValueOf(slice)
+	if rv.Kind() != reflect.Slice {
+		return &SshAccountCreateBulk{err: fmt.Errorf("calling to SshAccountClient.MapCreateBulk with wrong type %T, need slice", slice)}
+	}
+	builders := make([]*SshAccountCreate, rv.Len())
+	for i := 0; i < rv.Len(); i++ {
+		builders[i] = c.Create()
+		setFunc(builders[i], i)
+	}
+	return &SshAccountCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for SshAccount.
+func (c *SshAccountClient) Update() *SshAccountUpdate {
+	mutation := newSshAccountMutation(c.config, OpUpdate)
+	return &SshAccountUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *SshAccountClient) UpdateOne(sa *SshAccount) *SshAccountUpdateOne {
+	mutation := newSshAccountMutation(c.config, OpUpdateOne, withSshAccount(sa))
+	return &SshAccountUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *SshAccountClient) UpdateOneID(id int) *SshAccountUpdateOne {
+	mutation := newSshAccountMutation(c.config, OpUpdateOne, withSshAccountID(id))
+	return &SshAccountUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for SshAccount.
+func (c *SshAccountClient) Delete() *SshAccountDelete {
+	mutation := newSshAccountMutation(c.config, OpDelete)
+	return &SshAccountDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *SshAccountClient) DeleteOne(sa *SshAccount) *SshAccountDeleteOne {
+	return c.DeleteOneID(sa.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *SshAccountClient) DeleteOneID(id int) *SshAccountDeleteOne {
+	builder := c.Delete().Where(sshaccount.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &SshAccountDeleteOne{builder}
+}
+
+// Query returns a query builder for SshAccount.
+func (c *SshAccountClient) Query() *SshAccountQuery {
+	return &SshAccountQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeSshAccount},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a SshAccount entity by its id.
+func (c *SshAccountClient) Get(ctx context.Context, id int) (*SshAccount, error) {
+	return c.Query().Where(sshaccount.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *SshAccountClient) GetX(ctx context.Context, id int) *SshAccount {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// Hooks returns the client hooks.
+func (c *SshAccountClient) Hooks() []Hook {
+	hooks := c.hooks.SshAccount
+	return append(hooks[:len(hooks):len(hooks)], sshaccount.Hooks[:]...)
+}
+
+// Interceptors returns the client interceptors.
+func (c *SshAccountClient) Interceptors() []Interceptor {
+	inters := c.inters.SshAccount
+	return append(inters[:len(inters):len(inters)], sshaccount.Interceptors[:]...)
+}
+
+func (c *SshAccountClient) mutate(ctx context.Context, m *SshAccountMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&SshAccountCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&SshAccountUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&SshAccountUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&SshAccountDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown SshAccount mutation op: %q", m.Op())
+	}
+}
+
 // StatsDailyClient is a client for the StatsDaily schema.
 type StatsDailyClient struct {
 	config
@@ -8590,7 +8733,7 @@ type (
 		Feedback, File, MapVersion, OperationUser, Order, OrderAppeal, OrderBilling,
 		OrderExtendFlight, OrderRefund, OrderSharing, PayTxBill, PaymentAccount, Poi,
 		PoiExtendYokee, ProfitReceiver, Role, Route, ScenicArea, ScenicAreaExtendYokee,
-		ScenicAreaMap, ScheTask, ScheTaskEvent, StatsDaily, StatsDailyCar,
+		ScenicAreaMap, ScheTask, ScheTaskEvent, SshAccount, StatsDaily, StatsDailyCar,
 		StatsDailyScenicArea, StatsHourlyCar, StatsHourlyScenicArea, SystemConfig,
 		SystemLog, Task, User []ent.Hook
 	}
@@ -8602,7 +8745,7 @@ type (
 		Feedback, File, MapVersion, OperationUser, Order, OrderAppeal, OrderBilling,
 		OrderExtendFlight, OrderRefund, OrderSharing, PayTxBill, PaymentAccount, Poi,
 		PoiExtendYokee, ProfitReceiver, Role, Route, ScenicArea, ScenicAreaExtendYokee,
-		ScenicAreaMap, ScheTask, ScheTaskEvent, StatsDaily, StatsDailyCar,
+		ScenicAreaMap, ScheTask, ScheTaskEvent, SshAccount, StatsDaily, StatsDailyCar,
 		StatsDailyScenicArea, StatsHourlyCar, StatsHourlyScenicArea, SystemConfig,
 		SystemLog, Task, User []ent.Interceptor
 	}

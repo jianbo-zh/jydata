@@ -21,6 +21,7 @@ func init() {
 		"jydata.migrate",
 		Version,
 		map[string]string{},
+		"jydata",
 	)
 
 	// UseEnumNumbers 枚举类型返回数字

@@ -7,4 +7,9 @@
         // StaticField defined by template.
         DownloadUrl string `json:"download_url,omitempty"`
     {{- end }}
+    {{- if eq $.Name "SshAccount" }}
+        // StaticField defined by template.
+        ScenicAreaName string `json:"scenic_area_name,omitempty"`
+        CarName string `json:"car_name,omitempty"`
+    {{- end }}
 {{ end }}

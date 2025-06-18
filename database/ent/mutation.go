@@ -56,6 +56,7 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/scenicareamap"
 	"github.com/jianbo-zh/jydata/database/ent/schetask"
 	"github.com/jianbo-zh/jydata/database/ent/schetaskevent"
+	"github.com/jianbo-zh/jydata/database/ent/sshaccount"
 	"github.com/jianbo-zh/jydata/database/ent/statsdaily"
 	"github.com/jianbo-zh/jydata/database/ent/statsdailycar"
 	"github.com/jianbo-zh/jydata/database/ent/statsdailyscenicarea"
@@ -121,6 +122,7 @@ const (
 	TypeScenicAreaMap          = "ScenicAreaMap"
 	TypeScheTask               = "ScheTask"
 	TypeScheTaskEvent          = "ScheTaskEvent"
+	TypeSshAccount             = "SshAccount"
 	TypeStatsDaily             = "StatsDaily"
 	TypeStatsDailyCar          = "StatsDailyCar"
 	TypeStatsDailyScenicArea   = "StatsDailyScenicArea"
@@ -55843,6 +55845,1007 @@ func (m *ScheTaskEventMutation) ResetEdge(name string) error {
 		return nil
 	}
 	return fmt.Errorf("unknown ScheTaskEvent edge %s", name)
+}
+
+// SshAccountMutation represents an operation that mutates the SshAccount nodes in the graph.
+type SshAccountMutation struct {
+	config
+	op                Op
+	typ               string
+	id                *int
+	delete_time       *time.Time
+	_type             *string
+	username          *string
+	password          *string
+	scenic_area_id    *int
+	addscenic_area_id *int
+	car_id            *int
+	addcar_id         *int
+	state             *int
+	addstate          *int
+	use_time          *time.Time
+	create_time       *time.Time
+	update_time       *time.Time
+	clearedFields     map[string]struct{}
+	done              bool
+	oldValue          func(context.Context) (*SshAccount, error)
+	predicates        []predicate.SshAccount
+}
+
+var _ ent.Mutation = (*SshAccountMutation)(nil)
+
+// sshaccountOption allows management of the mutation configuration using functional options.
+type sshaccountOption func(*SshAccountMutation)
+
+// newSshAccountMutation creates new mutation for the SshAccount entity.
+func newSshAccountMutation(c config, op Op, opts ...sshaccountOption) *SshAccountMutation {
+	m := &SshAccountMutation{
+		config:        c,
+		op:            op,
+		typ:           TypeSshAccount,
+		clearedFields: make(map[string]struct{}),
+	}
+	for _, opt := range opts {
+		opt(m)
+	}
+	return m
+}
+
+// withSshAccountID sets the ID field of the mutation.
+func withSshAccountID(id int) sshaccountOption {
+	return func(m *SshAccountMutation) {
+		var (
+			err   error
+			once  sync.Once
+			value *SshAccount
+		)
+		m.oldValue = func(ctx context.Context) (*SshAccount, error) {
+			once.Do(func() {
+				if m.done {
+					err = errors.New("querying old values post mutation is not allowed")
+				} else {
+					value, err = m.Client().SshAccount.Get(ctx, id)
+				}
+			})
+			return value, err
+		}
+		m.id = &id
+	}
+}
+
+// withSshAccount sets the old SshAccount of the mutation.
+func withSshAccount(node *SshAccount) sshaccountOption {
+	return func(m *SshAccountMutation) {
+		m.oldValue = func(context.Context) (*SshAccount, error) {
+			return node, nil
+		}
+		m.id = &node.ID
+	}
+}
+
+// Client returns a new `ent.Client` from the mutation. If the mutation was
+// executed in a transaction (ent.Tx), a transactional client is returned.
+func (m SshAccountMutation) Client() *Client {
+	client := &Client{config: m.config}
+	client.init()
+	return client
+}
+
+// Tx returns an `ent.Tx` for mutations that were executed in transactions;
+// it returns an error otherwise.
+func (m SshAccountMutation) Tx() (*Tx, error) {
+	if _, ok := m.driver.(*txDriver); !ok {
+		return nil, errors.New("ent: mutation is not running in a transaction")
+	}
+	tx := &Tx{config: m.config}
+	tx.init()
+	return tx, nil
+}
+
+// SetID sets the value of the id field. Note that this
+// operation is only accepted on creation of SshAccount entities.
+func (m *SshAccountMutation) SetID(id int) {
+	m.id = &id
+}
+
+// ID returns the ID value in the mutation. Note that the ID is only available
+// if it was provided to the builder or after it was returned from the database.
+func (m *SshAccountMutation) ID() (id int, exists bool) {
+	if m.id == nil {
+		return
+	}
+	return *m.id, true
+}
+
+// IDs queries the database and returns the entity ids that match the mutation's predicate.
+// That means, if the mutation is applied within a transaction with an isolation level such
+// as sql.LevelSerializable, the returned ids match the ids of the rows that will be updated
+// or updated by the mutation.
+func (m *SshAccountMutation) IDs(ctx context.Context) ([]int, error) {
+	switch {
+	case m.op.Is(OpUpdateOne | OpDeleteOne):
+		id, exists := m.ID()
+		if exists {
+			return []int{id}, nil
+		}
+		fallthrough
+	case m.op.Is(OpUpdate | OpDelete):
+		return m.Client().SshAccount.Query().Where(m.predicates...).IDs(ctx)
+	default:
+		return nil, fmt.Errorf("IDs is not allowed on %s operations", m.op)
+	}
+}
+
+// SetDeleteTime sets the "delete_time" field.
+func (m *SshAccountMutation) SetDeleteTime(t time.Time) {
+	m.delete_time = &t
+}
+
+// DeleteTime returns the value of the "delete_time" field in the mutation.
+func (m *SshAccountMutation) DeleteTime() (r time.Time, exists bool) {
+	v := m.delete_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldDeleteTime returns the old "delete_time" field's value of the SshAccount entity.
+// If the SshAccount object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *SshAccountMutation) OldDeleteTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldDeleteTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldDeleteTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldDeleteTime: %w", err)
+	}
+	return oldValue.DeleteTime, nil
+}
+
+// ClearDeleteTime clears the value of the "delete_time" field.
+func (m *SshAccountMutation) ClearDeleteTime() {
+	m.delete_time = nil
+	m.clearedFields[sshaccount.FieldDeleteTime] = struct{}{}
+}
+
+// DeleteTimeCleared returns if the "delete_time" field was cleared in this mutation.
+func (m *SshAccountMutation) DeleteTimeCleared() bool {
+	_, ok := m.clearedFields[sshaccount.FieldDeleteTime]
+	return ok
+}
+
+// ResetDeleteTime resets all changes to the "delete_time" field.
+func (m *SshAccountMutation) ResetDeleteTime() {
+	m.delete_time = nil
+	delete(m.clearedFields, sshaccount.FieldDeleteTime)
+}
+
+// SetType sets the "type" field.
+func (m *SshAccountMutation) SetType(s string) {
+	m._type = &s
+}
+
+// GetType returns the value of the "type" field in the mutation.
+func (m *SshAccountMutation) GetType() (r string, exists bool) {
+	v := m._type
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldType returns the old "type" field's value of the SshAccount entity.
+// If the SshAccount object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *SshAccountMutation) OldType(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldType is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldType requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldType: %w", err)
+	}
+	return oldValue.Type, nil
+}
+
+// ResetType resets all changes to the "type" field.
+func (m *SshAccountMutation) ResetType() {
+	m._type = nil
+}
+
+// SetUsername sets the "username" field.
+func (m *SshAccountMutation) SetUsername(s string) {
+	m.username = &s
+}
+
+// Username returns the value of the "username" field in the mutation.
+func (m *SshAccountMutation) Username() (r string, exists bool) {
+	v := m.username
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldUsername returns the old "username" field's value of the SshAccount entity.
+// If the SshAccount object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *SshAccountMutation) OldUsername(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldUsername is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldUsername requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldUsername: %w", err)
+	}
+	return oldValue.Username, nil
+}
+
+// ResetUsername resets all changes to the "username" field.
+func (m *SshAccountMutation) ResetUsername() {
+	m.username = nil
+}
+
+// SetPassword sets the "password" field.
+func (m *SshAccountMutation) SetPassword(s string) {
+	m.password = &s
+}
+
+// Password returns the value of the "password" field in the mutation.
+func (m *SshAccountMutation) Password() (r string, exists bool) {
+	v := m.password
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldPassword returns the old "password" field's value of the SshAccount entity.
+// If the SshAccount object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *SshAccountMutation) OldPassword(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldPassword is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldPassword requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldPassword: %w", err)
+	}
+	return oldValue.Password, nil
+}
+
+// ResetPassword resets all changes to the "password" field.
+func (m *SshAccountMutation) ResetPassword() {
+	m.password = nil
+}
+
+// SetScenicAreaID sets the "scenic_area_id" field.
+func (m *SshAccountMutation) SetScenicAreaID(i int) {
+	m.scenic_area_id = &i
+	m.addscenic_area_id = nil
+}
+
+// ScenicAreaID returns the value of the "scenic_area_id" field in the mutation.
+func (m *SshAccountMutation) ScenicAreaID() (r int, exists bool) {
+	v := m.scenic_area_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldScenicAreaID returns the old "scenic_area_id" field's value of the SshAccount entity.
+// If the SshAccount object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *SshAccountMutation) OldScenicAreaID(ctx context.Context) (v *int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldScenicAreaID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldScenicAreaID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldScenicAreaID: %w", err)
+	}
+	return oldValue.ScenicAreaID, nil
+}
+
+// AddScenicAreaID adds i to the "scenic_area_id" field.
+func (m *SshAccountMutation) AddScenicAreaID(i int) {
+	if m.addscenic_area_id != nil {
+		*m.addscenic_area_id += i
+	} else {
+		m.addscenic_area_id = &i
+	}
+}
+
+// AddedScenicAreaID returns the value that was added to the "scenic_area_id" field in this mutation.
+func (m *SshAccountMutation) AddedScenicAreaID() (r int, exists bool) {
+	v := m.addscenic_area_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearScenicAreaID clears the value of the "scenic_area_id" field.
+func (m *SshAccountMutation) ClearScenicAreaID() {
+	m.scenic_area_id = nil
+	m.addscenic_area_id = nil
+	m.clearedFields[sshaccount.FieldScenicAreaID] = struct{}{}
+}
+
+// ScenicAreaIDCleared returns if the "scenic_area_id" field was cleared in this mutation.
+func (m *SshAccountMutation) ScenicAreaIDCleared() bool {
+	_, ok := m.clearedFields[sshaccount.FieldScenicAreaID]
+	return ok
+}
+
+// ResetScenicAreaID resets all changes to the "scenic_area_id" field.
+func (m *SshAccountMutation) ResetScenicAreaID() {
+	m.scenic_area_id = nil
+	m.addscenic_area_id = nil
+	delete(m.clearedFields, sshaccount.FieldScenicAreaID)
+}
+
+// SetCarID sets the "car_id" field.
+func (m *SshAccountMutation) SetCarID(i int) {
+	m.car_id = &i
+	m.addcar_id = nil
+}
+
+// CarID returns the value of the "car_id" field in the mutation.
+func (m *SshAccountMutation) CarID() (r int, exists bool) {
+	v := m.car_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCarID returns the old "car_id" field's value of the SshAccount entity.
+// If the SshAccount object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *SshAccountMutation) OldCarID(ctx context.Context) (v *int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCarID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCarID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCarID: %w", err)
+	}
+	return oldValue.CarID, nil
+}
+
+// AddCarID adds i to the "car_id" field.
+func (m *SshAccountMutation) AddCarID(i int) {
+	if m.addcar_id != nil {
+		*m.addcar_id += i
+	} else {
+		m.addcar_id = &i
+	}
+}
+
+// AddedCarID returns the value that was added to the "car_id" field in this mutation.
+func (m *SshAccountMutation) AddedCarID() (r int, exists bool) {
+	v := m.addcar_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearCarID clears the value of the "car_id" field.
+func (m *SshAccountMutation) ClearCarID() {
+	m.car_id = nil
+	m.addcar_id = nil
+	m.clearedFields[sshaccount.FieldCarID] = struct{}{}
+}
+
+// CarIDCleared returns if the "car_id" field was cleared in this mutation.
+func (m *SshAccountMutation) CarIDCleared() bool {
+	_, ok := m.clearedFields[sshaccount.FieldCarID]
+	return ok
+}
+
+// ResetCarID resets all changes to the "car_id" field.
+func (m *SshAccountMutation) ResetCarID() {
+	m.car_id = nil
+	m.addcar_id = nil
+	delete(m.clearedFields, sshaccount.FieldCarID)
+}
+
+// SetState sets the "state" field.
+func (m *SshAccountMutation) SetState(i int) {
+	m.state = &i
+	m.addstate = nil
+}
+
+// State returns the value of the "state" field in the mutation.
+func (m *SshAccountMutation) State() (r int, exists bool) {
+	v := m.state
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldState returns the old "state" field's value of the SshAccount entity.
+// If the SshAccount object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *SshAccountMutation) OldState(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldState is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldState requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldState: %w", err)
+	}
+	return oldValue.State, nil
+}
+
+// AddState adds i to the "state" field.
+func (m *SshAccountMutation) AddState(i int) {
+	if m.addstate != nil {
+		*m.addstate += i
+	} else {
+		m.addstate = &i
+	}
+}
+
+// AddedState returns the value that was added to the "state" field in this mutation.
+func (m *SshAccountMutation) AddedState() (r int, exists bool) {
+	v := m.addstate
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetState resets all changes to the "state" field.
+func (m *SshAccountMutation) ResetState() {
+	m.state = nil
+	m.addstate = nil
+}
+
+// SetUseTime sets the "use_time" field.
+func (m *SshAccountMutation) SetUseTime(t time.Time) {
+	m.use_time = &t
+}
+
+// UseTime returns the value of the "use_time" field in the mutation.
+func (m *SshAccountMutation) UseTime() (r time.Time, exists bool) {
+	v := m.use_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldUseTime returns the old "use_time" field's value of the SshAccount entity.
+// If the SshAccount object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *SshAccountMutation) OldUseTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldUseTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldUseTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldUseTime: %w", err)
+	}
+	return oldValue.UseTime, nil
+}
+
+// ClearUseTime clears the value of the "use_time" field.
+func (m *SshAccountMutation) ClearUseTime() {
+	m.use_time = nil
+	m.clearedFields[sshaccount.FieldUseTime] = struct{}{}
+}
+
+// UseTimeCleared returns if the "use_time" field was cleared in this mutation.
+func (m *SshAccountMutation) UseTimeCleared() bool {
+	_, ok := m.clearedFields[sshaccount.FieldUseTime]
+	return ok
+}
+
+// ResetUseTime resets all changes to the "use_time" field.
+func (m *SshAccountMutation) ResetUseTime() {
+	m.use_time = nil
+	delete(m.clearedFields, sshaccount.FieldUseTime)
+}
+
+// SetCreateTime sets the "create_time" field.
+func (m *SshAccountMutation) SetCreateTime(t time.Time) {
+	m.create_time = &t
+}
+
+// CreateTime returns the value of the "create_time" field in the mutation.
+func (m *SshAccountMutation) CreateTime() (r time.Time, exists bool) {
+	v := m.create_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCreateTime returns the old "create_time" field's value of the SshAccount entity.
+// If the SshAccount object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *SshAccountMutation) OldCreateTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCreateTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCreateTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCreateTime: %w", err)
+	}
+	return oldValue.CreateTime, nil
+}
+
+// ResetCreateTime resets all changes to the "create_time" field.
+func (m *SshAccountMutation) ResetCreateTime() {
+	m.create_time = nil
+}
+
+// SetUpdateTime sets the "update_time" field.
+func (m *SshAccountMutation) SetUpdateTime(t time.Time) {
+	m.update_time = &t
+}
+
+// UpdateTime returns the value of the "update_time" field in the mutation.
+func (m *SshAccountMutation) UpdateTime() (r time.Time, exists bool) {
+	v := m.update_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldUpdateTime returns the old "update_time" field's value of the SshAccount entity.
+// If the SshAccount object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *SshAccountMutation) OldUpdateTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldUpdateTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldUpdateTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldUpdateTime: %w", err)
+	}
+	return oldValue.UpdateTime, nil
+}
+
+// ResetUpdateTime resets all changes to the "update_time" field.
+func (m *SshAccountMutation) ResetUpdateTime() {
+	m.update_time = nil
+}
+
+// Where appends a list predicates to the SshAccountMutation builder.
+func (m *SshAccountMutation) Where(ps ...predicate.SshAccount) {
+	m.predicates = append(m.predicates, ps...)
+}
+
+// WhereP appends storage-level predicates to the SshAccountMutation builder. Using this method,
+// users can use type-assertion to append predicates that do not depend on any generated package.
+func (m *SshAccountMutation) WhereP(ps ...func(*sql.Selector)) {
+	p := make([]predicate.SshAccount, len(ps))
+	for i := range ps {
+		p[i] = ps[i]
+	}
+	m.Where(p...)
+}
+
+// Op returns the operation name.
+func (m *SshAccountMutation) Op() Op {
+	return m.op
+}
+
+// SetOp allows setting the mutation operation.
+func (m *SshAccountMutation) SetOp(op Op) {
+	m.op = op
+}
+
+// Type returns the node type of this mutation (SshAccount).
+func (m *SshAccountMutation) Type() string {
+	return m.typ
+}
+
+// Fields returns all fields that were changed during this mutation. Note that in
+// order to get all numeric fields that were incremented/decremented, call
+// AddedFields().
+func (m *SshAccountMutation) Fields() []string {
+	fields := make([]string, 0, 10)
+	if m.delete_time != nil {
+		fields = append(fields, sshaccount.FieldDeleteTime)
+	}
+	if m._type != nil {
+		fields = append(fields, sshaccount.FieldType)
+	}
+	if m.username != nil {
+		fields = append(fields, sshaccount.FieldUsername)
+	}
+	if m.password != nil {
+		fields = append(fields, sshaccount.FieldPassword)
+	}
+	if m.scenic_area_id != nil {
+		fields = append(fields, sshaccount.FieldScenicAreaID)
+	}
+	if m.car_id != nil {
+		fields = append(fields, sshaccount.FieldCarID)
+	}
+	if m.state != nil {
+		fields = append(fields, sshaccount.FieldState)
+	}
+	if m.use_time != nil {
+		fields = append(fields, sshaccount.FieldUseTime)
+	}
+	if m.create_time != nil {
+		fields = append(fields, sshaccount.FieldCreateTime)
+	}
+	if m.update_time != nil {
+		fields = append(fields, sshaccount.FieldUpdateTime)
+	}
+	return fields
+}
+
+// Field returns the value of a field with the given name. The second boolean
+// return value indicates that this field was not set, or was not defined in the
+// schema.
+func (m *SshAccountMutation) Field(name string) (ent.Value, bool) {
+	switch name {
+	case sshaccount.FieldDeleteTime:
+		return m.DeleteTime()
+	case sshaccount.FieldType:
+		return m.GetType()
+	case sshaccount.FieldUsername:
+		return m.Username()
+	case sshaccount.FieldPassword:
+		return m.Password()
+	case sshaccount.FieldScenicAreaID:
+		return m.ScenicAreaID()
+	case sshaccount.FieldCarID:
+		return m.CarID()
+	case sshaccount.FieldState:
+		return m.State()
+	case sshaccount.FieldUseTime:
+		return m.UseTime()
+	case sshaccount.FieldCreateTime:
+		return m.CreateTime()
+	case sshaccount.FieldUpdateTime:
+		return m.UpdateTime()
+	}
+	return nil, false
+}
+
+// OldField returns the old value of the field from the database. An error is
+// returned if the mutation operation is not UpdateOne, or the query to the
+// database failed.
+func (m *SshAccountMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
+	switch name {
+	case sshaccount.FieldDeleteTime:
+		return m.OldDeleteTime(ctx)
+	case sshaccount.FieldType:
+		return m.OldType(ctx)
+	case sshaccount.FieldUsername:
+		return m.OldUsername(ctx)
+	case sshaccount.FieldPassword:
+		return m.OldPassword(ctx)
+	case sshaccount.FieldScenicAreaID:
+		return m.OldScenicAreaID(ctx)
+	case sshaccount.FieldCarID:
+		return m.OldCarID(ctx)
+	case sshaccount.FieldState:
+		return m.OldState(ctx)
+	case sshaccount.FieldUseTime:
+		return m.OldUseTime(ctx)
+	case sshaccount.FieldCreateTime:
+		return m.OldCreateTime(ctx)
+	case sshaccount.FieldUpdateTime:
+		return m.OldUpdateTime(ctx)
+	}
+	return nil, fmt.Errorf("unknown SshAccount field %s", name)
+}
+
+// SetField sets the value of a field with the given name. It returns an error if
+// the field is not defined in the schema, or if the type mismatched the field
+// type.
+func (m *SshAccountMutation) SetField(name string, value ent.Value) error {
+	switch name {
+	case sshaccount.FieldDeleteTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetDeleteTime(v)
+		return nil
+	case sshaccount.FieldType:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetType(v)
+		return nil
+	case sshaccount.FieldUsername:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetUsername(v)
+		return nil
+	case sshaccount.FieldPassword:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetPassword(v)
+		return nil
+	case sshaccount.FieldScenicAreaID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetScenicAreaID(v)
+		return nil
+	case sshaccount.FieldCarID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCarID(v)
+		return nil
+	case sshaccount.FieldState:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetState(v)
+		return nil
+	case sshaccount.FieldUseTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetUseTime(v)
+		return nil
+	case sshaccount.FieldCreateTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCreateTime(v)
+		return nil
+	case sshaccount.FieldUpdateTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetUpdateTime(v)
+		return nil
+	}
+	return fmt.Errorf("unknown SshAccount field %s", name)
+}
+
+// AddedFields returns all numeric fields that were incremented/decremented during
+// this mutation.
+func (m *SshAccountMutation) AddedFields() []string {
+	var fields []string
+	if m.addscenic_area_id != nil {
+		fields = append(fields, sshaccount.FieldScenicAreaID)
+	}
+	if m.addcar_id != nil {
+		fields = append(fields, sshaccount.FieldCarID)
+	}
+	if m.addstate != nil {
+		fields = append(fields, sshaccount.FieldState)
+	}
+	return fields
+}
+
+// AddedField returns the numeric value that was incremented/decremented on a field
+// with the given name. The second boolean return value indicates that this field
+// was not set, or was not defined in the schema.
+func (m *SshAccountMutation) AddedField(name string) (ent.Value, bool) {
+	switch name {
+	case sshaccount.FieldScenicAreaID:
+		return m.AddedScenicAreaID()
+	case sshaccount.FieldCarID:
+		return m.AddedCarID()
+	case sshaccount.FieldState:
+		return m.AddedState()
+	}
+	return nil, false
+}
+
+// AddField adds the value to the field with the given name. It returns an error if
+// the field is not defined in the schema, or if the type mismatched the field
+// type.
+func (m *SshAccountMutation) AddField(name string, value ent.Value) error {
+	switch name {
+	case sshaccount.FieldScenicAreaID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddScenicAreaID(v)
+		return nil
+	case sshaccount.FieldCarID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddCarID(v)
+		return nil
+	case sshaccount.FieldState:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddState(v)
+		return nil
+	}
+	return fmt.Errorf("unknown SshAccount numeric field %s", name)
+}
+
+// ClearedFields returns all nullable fields that were cleared during this
+// mutation.
+func (m *SshAccountMutation) ClearedFields() []string {
+	var fields []string
+	if m.FieldCleared(sshaccount.FieldDeleteTime) {
+		fields = append(fields, sshaccount.FieldDeleteTime)
+	}
+	if m.FieldCleared(sshaccount.FieldScenicAreaID) {
+		fields = append(fields, sshaccount.FieldScenicAreaID)
+	}
+	if m.FieldCleared(sshaccount.FieldCarID) {
+		fields = append(fields, sshaccount.FieldCarID)
+	}
+	if m.FieldCleared(sshaccount.FieldUseTime) {
+		fields = append(fields, sshaccount.FieldUseTime)
+	}
+	return fields
+}
+
+// FieldCleared returns a boolean indicating if a field with the given name was
+// cleared in this mutation.
+func (m *SshAccountMutation) FieldCleared(name string) bool {
+	_, ok := m.clearedFields[name]
+	return ok
+}
+
+// ClearField clears the value of the field with the given name. It returns an
+// error if the field is not defined in the schema.
+func (m *SshAccountMutation) ClearField(name string) error {
+	switch name {
+	case sshaccount.FieldDeleteTime:
+		m.ClearDeleteTime()
+		return nil
+	case sshaccount.FieldScenicAreaID:
+		m.ClearScenicAreaID()
+		return nil
+	case sshaccount.FieldCarID:
+		m.ClearCarID()
+		return nil
+	case sshaccount.FieldUseTime:
+		m.ClearUseTime()
+		return nil
+	}
+	return fmt.Errorf("unknown SshAccount nullable field %s", name)
+}
+
+// ResetField resets all changes in the mutation for the field with the given name.
+// It returns an error if the field is not defined in the schema.
+func (m *SshAccountMutation) ResetField(name string) error {
+	switch name {
+	case sshaccount.FieldDeleteTime:
+		m.ResetDeleteTime()
+		return nil
+	case sshaccount.FieldType:
+		m.ResetType()
+		return nil
+	case sshaccount.FieldUsername:
+		m.ResetUsername()
+		return nil
+	case sshaccount.FieldPassword:
+		m.ResetPassword()
+		return nil
+	case sshaccount.FieldScenicAreaID:
+		m.ResetScenicAreaID()
+		return nil
+	case sshaccount.FieldCarID:
+		m.ResetCarID()
+		return nil
+	case sshaccount.FieldState:
+		m.ResetState()
+		return nil
+	case sshaccount.FieldUseTime:
+		m.ResetUseTime()
+		return nil
+	case sshaccount.FieldCreateTime:
+		m.ResetCreateTime()
+		return nil
+	case sshaccount.FieldUpdateTime:
+		m.ResetUpdateTime()
+		return nil
+	}
+	return fmt.Errorf("unknown SshAccount field %s", name)
+}
+
+// AddedEdges returns all edge names that were set/added in this mutation.
+func (m *SshAccountMutation) AddedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// AddedIDs returns all IDs (to other nodes) that were added for the given edge
+// name in this mutation.
+func (m *SshAccountMutation) AddedIDs(name string) []ent.Value {
+	return nil
+}
+
+// RemovedEdges returns all edge names that were removed in this mutation.
+func (m *SshAccountMutation) RemovedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// RemovedIDs returns all IDs (to other nodes) that were removed for the edge with
+// the given name in this mutation.
+func (m *SshAccountMutation) RemovedIDs(name string) []ent.Value {
+	return nil
+}
+
+// ClearedEdges returns all edge names that were cleared in this mutation.
+func (m *SshAccountMutation) ClearedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// EdgeCleared returns a boolean which indicates if the edge with the given name
+// was cleared in this mutation.
+func (m *SshAccountMutation) EdgeCleared(name string) bool {
+	return false
+}
+
+// ClearEdge clears the value of the edge with the given name. It returns an error
+// if that edge is not defined in the schema.
+func (m *SshAccountMutation) ClearEdge(name string) error {
+	return fmt.Errorf("unknown SshAccount unique edge %s", name)
+}
+
+// ResetEdge resets all changes to the edge with the given name in this mutation.
+// It returns an error if the edge is not defined in the schema.
+func (m *SshAccountMutation) ResetEdge(name string) error {
+	return fmt.Errorf("unknown SshAccount edge %s", name)
 }
 
 // StatsDailyMutation represents an operation that mutates the StatsDaily nodes in the graph.

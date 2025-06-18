@@ -138,6 +138,9 @@ type ScheTask func(*sql.Selector)
 // ScheTaskEvent is the predicate function for schetaskevent builders.
 type ScheTaskEvent func(*sql.Selector)
 
+// SshAccount is the predicate function for sshaccount builders.
+type SshAccount func(*sql.Selector)
+
 // StatsDaily is the predicate function for statsdaily builders.
 type StatsDaily func(*sql.Selector)
 

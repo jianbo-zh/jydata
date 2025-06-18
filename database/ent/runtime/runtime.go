@@ -49,6 +49,7 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/scenicareamap"
 	"github.com/jianbo-zh/jydata/database/ent/schetask"
 	"github.com/jianbo-zh/jydata/database/ent/schetaskevent"
+	"github.com/jianbo-zh/jydata/database/ent/sshaccount"
 	"github.com/jianbo-zh/jydata/database/ent/statsdaily"
 	"github.com/jianbo-zh/jydata/database/ent/statsdailycar"
 	"github.com/jianbo-zh/jydata/database/ent/statsdailyscenicarea"
@@ -1535,6 +1536,27 @@ func init() {
 	schetaskeventDescCreateTime := schetaskeventFields[5].Descriptor()
 	// schetaskevent.DefaultCreateTime holds the default value on creation for the create_time field.
 	schetaskevent.DefaultCreateTime = schetaskeventDescCreateTime.Default.(func() time.Time)
+	sshaccountMixin := schema.SshAccount{}.Mixin()
+	sshaccountMixinHooks0 := sshaccountMixin[0].Hooks()
+	sshaccount.Hooks[0] = sshaccountMixinHooks0[0]
+	sshaccountMixinInters0 := sshaccountMixin[0].Interceptors()
+	sshaccount.Interceptors[0] = sshaccountMixinInters0[0]
+	sshaccountFields := schema.SshAccount{}.Fields()
+	_ = sshaccountFields
+	// sshaccountDescState is the schema descriptor for state field.
+	sshaccountDescState := sshaccountFields[6].Descriptor()
+	// sshaccount.DefaultState holds the default value on creation for the state field.
+	sshaccount.DefaultState = sshaccountDescState.Default.(int)
+	// sshaccountDescCreateTime is the schema descriptor for create_time field.
+	sshaccountDescCreateTime := sshaccountFields[8].Descriptor()
+	// sshaccount.DefaultCreateTime holds the default value on creation for the create_time field.
+	sshaccount.DefaultCreateTime = sshaccountDescCreateTime.Default.(func() time.Time)
+	// sshaccountDescUpdateTime is the schema descriptor for update_time field.
+	sshaccountDescUpdateTime := sshaccountFields[9].Descriptor()
+	// sshaccount.DefaultUpdateTime holds the default value on creation for the update_time field.
+	sshaccount.DefaultUpdateTime = sshaccountDescUpdateTime.Default.(func() time.Time)
+	// sshaccount.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
+	sshaccount.UpdateDefaultUpdateTime = sshaccountDescUpdateTime.UpdateDefault.(func() time.Time)
 	statsdailyFields := schema.StatsDaily{}.Fields()
 	_ = statsdailyFields
 	// statsdailyDescOperationCarDuration is the schema descriptor for operation_car_duration field.

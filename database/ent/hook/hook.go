@@ -537,6 +537,18 @@ func (f ScheTaskEventFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Valu
 	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.ScheTaskEventMutation", m)
 }
 
+// The SshAccountFunc type is an adapter to allow the use of ordinary
+// function as SshAccount mutator.
+type SshAccountFunc func(context.Context, *ent.SshAccountMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f SshAccountFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.SshAccountMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.SshAccountMutation", m)
+}
+
 // The StatsDailyFunc type is an adapter to allow the use of ordinary
 // function as StatsDaily mutator.
 type StatsDailyFunc func(context.Context, *ent.StatsDailyMutation) (ent.Value, error)

@@ -53,6 +53,7 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/scenicareamap"
 	"github.com/jianbo-zh/jydata/database/ent/schetask"
 	"github.com/jianbo-zh/jydata/database/ent/schetaskevent"
+	"github.com/jianbo-zh/jydata/database/ent/sshaccount"
 	"github.com/jianbo-zh/jydata/database/ent/statsdaily"
 	"github.com/jianbo-zh/jydata/database/ent/statsdailycar"
 	"github.com/jianbo-zh/jydata/database/ent/statsdailyscenicarea"
@@ -1308,6 +1309,33 @@ func (f TraverseScheTaskEvent) Traverse(ctx context.Context, q ent.Query) error 
 	return fmt.Errorf("unexpected query type %T. expect *ent.ScheTaskEventQuery", q)
 }
 
+// The SshAccountFunc type is an adapter to allow the use of ordinary function as a Querier.
+type SshAccountFunc func(context.Context, *ent.SshAccountQuery) (ent.Value, error)
+
+// Query calls f(ctx, q).
+func (f SshAccountFunc) Query(ctx context.Context, q ent.Query) (ent.Value, error) {
+	if q, ok := q.(*ent.SshAccountQuery); ok {
+		return f(ctx, q)
+	}
+	return nil, fmt.Errorf("unexpected query type %T. expect *ent.SshAccountQuery", q)
+}
+
+// The TraverseSshAccount type is an adapter to allow the use of ordinary function as Traverser.
+type TraverseSshAccount func(context.Context, *ent.SshAccountQuery) error
+
+// Intercept is a dummy implementation of Intercept that returns the next Querier in the pipeline.
+func (f TraverseSshAccount) Intercept(next ent.Querier) ent.Querier {
+	return next
+}
+
+// Traverse calls f(ctx, q).
+func (f TraverseSshAccount) Traverse(ctx context.Context, q ent.Query) error {
+	if q, ok := q.(*ent.SshAccountQuery); ok {
+		return f(ctx, q)
+	}
+	return fmt.Errorf("unexpected query type %T. expect *ent.SshAccountQuery", q)
+}
+
 // The StatsDailyFunc type is an adapter to allow the use of ordinary function as a Querier.
 type StatsDailyFunc func(context.Context, *ent.StatsDailyQuery) (ent.Value, error)
 
@@ -1642,6 +1670,8 @@ func NewQuery(q ent.Query) (Query, error) {
 		return &query[*ent.ScheTaskQuery, predicate.ScheTask, schetask.OrderOption]{typ: ent.TypeScheTask, tq: q}, nil
 	case *ent.ScheTaskEventQuery:
 		return &query[*ent.ScheTaskEventQuery, predicate.ScheTaskEvent, schetaskevent.OrderOption]{typ: ent.TypeScheTaskEvent, tq: q}, nil
+	case *ent.SshAccountQuery:
+		return &query[*ent.SshAccountQuery, predicate.SshAccount, sshaccount.OrderOption]{typ: ent.TypeSshAccount, tq: q}, nil
 	case *ent.StatsDailyQuery:
 		return &query[*ent.StatsDailyQuery, predicate.StatsDaily, statsdaily.OrderOption]{typ: ent.TypeStatsDaily, tq: q}, nil
 	case *ent.StatsDailyCarQuery:
