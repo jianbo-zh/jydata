@@ -29,3 +29,21 @@ type StopStock struct {
 	Ups    int `json:"u,omitempty"` // 上车数量
 	Downs  int `json:"d,omitempty"` // 下车数量
 }
+
+type OtaContent struct {
+	BtContent           string `json:"bc,omitempty"`
+	BtContentSignature  string `json:"bcs,omitempty"`
+	OtaContent          string `json:"oc,omitempty"`
+	OtaContentSignature string `json:"ocs,omitempty"`
+}
+
+type OtaProcess struct {
+	Progress  []*PkgProgress
+	Completed bool
+}
+
+type PkgProgress struct {
+	Name     string
+	Stage    string
+	Progress float32
+}

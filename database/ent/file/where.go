@@ -54,6 +54,11 @@ func IDLTE(id int) predicate.File {
 	return predicate.File(sql.FieldLTE(FieldID, id))
 }
 
+// StorageType applies equality check predicate on the "storage_type" field. It's identical to StorageTypeEQ.
+func StorageType(v int) predicate.File {
+	return predicate.File(sql.FieldEQ(FieldStorageType, v))
+}
+
 // CreatorID applies equality check predicate on the "creator_id" field. It's identical to CreatorIDEQ.
 func CreatorID(v int) predicate.File {
 	return predicate.File(sql.FieldEQ(FieldCreatorID, v))
@@ -102,6 +107,46 @@ func CreateTime(v time.Time) predicate.File {
 // UpdateTime applies equality check predicate on the "update_time" field. It's identical to UpdateTimeEQ.
 func UpdateTime(v time.Time) predicate.File {
 	return predicate.File(sql.FieldEQ(FieldUpdateTime, v))
+}
+
+// StorageTypeEQ applies the EQ predicate on the "storage_type" field.
+func StorageTypeEQ(v int) predicate.File {
+	return predicate.File(sql.FieldEQ(FieldStorageType, v))
+}
+
+// StorageTypeNEQ applies the NEQ predicate on the "storage_type" field.
+func StorageTypeNEQ(v int) predicate.File {
+	return predicate.File(sql.FieldNEQ(FieldStorageType, v))
+}
+
+// StorageTypeIn applies the In predicate on the "storage_type" field.
+func StorageTypeIn(vs ...int) predicate.File {
+	return predicate.File(sql.FieldIn(FieldStorageType, vs...))
+}
+
+// StorageTypeNotIn applies the NotIn predicate on the "storage_type" field.
+func StorageTypeNotIn(vs ...int) predicate.File {
+	return predicate.File(sql.FieldNotIn(FieldStorageType, vs...))
+}
+
+// StorageTypeGT applies the GT predicate on the "storage_type" field.
+func StorageTypeGT(v int) predicate.File {
+	return predicate.File(sql.FieldGT(FieldStorageType, v))
+}
+
+// StorageTypeGTE applies the GTE predicate on the "storage_type" field.
+func StorageTypeGTE(v int) predicate.File {
+	return predicate.File(sql.FieldGTE(FieldStorageType, v))
+}
+
+// StorageTypeLT applies the LT predicate on the "storage_type" field.
+func StorageTypeLT(v int) predicate.File {
+	return predicate.File(sql.FieldLT(FieldStorageType, v))
+}
+
+// StorageTypeLTE applies the LTE predicate on the "storage_type" field.
+func StorageTypeLTE(v int) predicate.File {
+	return predicate.File(sql.FieldLTE(FieldStorageType, v))
 }
 
 // CreatorIDEQ applies the EQ predicate on the "creator_id" field.

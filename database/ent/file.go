@@ -18,6 +18,8 @@ type File struct {
 	// ID of the ent.
 	// ID
 	ID int `json:"id,omitempty"`
+	// 存储类型（1-Local、2-OSS）
+	StorageType int `json:"storage_type,omitempty"`
 	// 用户ID
 	CreatorID int `json:"creator_id,omitempty"`
 	// 景区ID
@@ -49,7 +51,7 @@ func (*File) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case file.FieldID, file.FieldCreatorID, file.FieldScenicAreaID, file.FieldFileCategory, file.FieldFileType:
+		case file.FieldID, file.FieldStorageType, file.FieldCreatorID, file.FieldScenicAreaID, file.FieldFileCategory, file.FieldFileType:
 			values[i] = new(sql.NullInt64)
 		case file.FieldFileSha1, file.FieldFilePath, file.FieldMimeType, file.FieldFileSuffix:
 			values[i] = new(sql.NullString)
@@ -76,6 +78,12 @@ func (f *File) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
 			f.ID = int(value.Int64)
+		case file.FieldStorageType:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field storage_type", values[i])
+			} else if value.Valid {
+				f.StorageType = int(value.Int64)
+			}
 		case file.FieldCreatorID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field creator_id", values[i])
@@ -172,6 +180,9 @@ func (f *File) String() string {
 	var builder strings.Builder
 	builder.WriteString("File(")
 	builder.WriteString(fmt.Sprintf("id=%v, ", f.ID))
+	builder.WriteString("storage_type=")
+	builder.WriteString(fmt.Sprintf("%v", f.StorageType))
+	builder.WriteString(", ")
 	builder.WriteString("creator_id=")
 	builder.WriteString(fmt.Sprintf("%v", f.CreatorID))
 	builder.WriteString(", ")

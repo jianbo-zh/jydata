@@ -102,6 +102,15 @@ type OrderRefund func(*sql.Selector)
 // OrderSharing is the predicate function for ordersharing builders.
 type OrderSharing func(*sql.Selector)
 
+// OtaBtree is the predicate function for otabtree builders.
+type OtaBtree func(*sql.Selector)
+
+// OtaDeploy is the predicate function for otadeploy builders.
+type OtaDeploy func(*sql.Selector)
+
+// OtaVersion is the predicate function for otaversion builders.
+type OtaVersion func(*sql.Selector)
+
 // PayTxBill is the predicate function for paytxbill builders.
 type PayTxBill func(*sql.Selector)
 

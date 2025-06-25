@@ -28,6 +28,27 @@ func (fu *FileUpdate) Where(ps ...predicate.File) *FileUpdate {
 	return fu
 }
 
+// SetStorageType sets the "storage_type" field.
+func (fu *FileUpdate) SetStorageType(i int) *FileUpdate {
+	fu.mutation.ResetStorageType()
+	fu.mutation.SetStorageType(i)
+	return fu
+}
+
+// SetNillableStorageType sets the "storage_type" field if the given value is not nil.
+func (fu *FileUpdate) SetNillableStorageType(i *int) *FileUpdate {
+	if i != nil {
+		fu.SetStorageType(*i)
+	}
+	return fu
+}
+
+// AddStorageType adds i to the "storage_type" field.
+func (fu *FileUpdate) AddStorageType(i int) *FileUpdate {
+	fu.mutation.AddStorageType(i)
+	return fu
+}
+
 // SetCreatorID sets the "creator_id" field.
 func (fu *FileUpdate) SetCreatorID(i int) *FileUpdate {
 	fu.mutation.ResetCreatorID()
@@ -224,6 +245,12 @@ func (fu *FileUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			}
 		}
 	}
+	if value, ok := fu.mutation.StorageType(); ok {
+		_spec.SetField(file.FieldStorageType, field.TypeInt, value)
+	}
+	if value, ok := fu.mutation.AddedStorageType(); ok {
+		_spec.AddField(file.FieldStorageType, field.TypeInt, value)
+	}
 	if value, ok := fu.mutation.CreatorID(); ok {
 		_spec.SetField(file.FieldCreatorID, field.TypeInt, value)
 	}
@@ -281,6 +308,27 @@ type FileUpdateOne struct {
 	fields   []string
 	hooks    []Hook
 	mutation *FileMutation
+}
+
+// SetStorageType sets the "storage_type" field.
+func (fuo *FileUpdateOne) SetStorageType(i int) *FileUpdateOne {
+	fuo.mutation.ResetStorageType()
+	fuo.mutation.SetStorageType(i)
+	return fuo
+}
+
+// SetNillableStorageType sets the "storage_type" field if the given value is not nil.
+func (fuo *FileUpdateOne) SetNillableStorageType(i *int) *FileUpdateOne {
+	if i != nil {
+		fuo.SetStorageType(*i)
+	}
+	return fuo
+}
+
+// AddStorageType adds i to the "storage_type" field.
+func (fuo *FileUpdateOne) AddStorageType(i int) *FileUpdateOne {
+	fuo.mutation.AddStorageType(i)
+	return fuo
 }
 
 // SetCreatorID sets the "creator_id" field.
@@ -508,6 +556,12 @@ func (fuo *FileUpdateOne) sqlSave(ctx context.Context) (_node *File, err error) 
 				ps[i](selector)
 			}
 		}
+	}
+	if value, ok := fuo.mutation.StorageType(); ok {
+		_spec.SetField(file.FieldStorageType, field.TypeInt, value)
+	}
+	if value, ok := fuo.mutation.AddedStorageType(); ok {
+		_spec.AddField(file.FieldStorageType, field.TypeInt, value)
 	}
 	if value, ok := fuo.mutation.CreatorID(); ok {
 		_spec.SetField(file.FieldCreatorID, field.TypeInt, value)

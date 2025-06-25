@@ -37,6 +37,9 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/orderextendflight"
 	"github.com/jianbo-zh/jydata/database/ent/orderrefund"
 	"github.com/jianbo-zh/jydata/database/ent/ordersharing"
+	"github.com/jianbo-zh/jydata/database/ent/otabtree"
+	"github.com/jianbo-zh/jydata/database/ent/otadeploy"
+	"github.com/jianbo-zh/jydata/database/ent/otaversion"
 	"github.com/jianbo-zh/jydata/database/ent/paymentaccount"
 	"github.com/jianbo-zh/jydata/database/ent/paytxbill"
 	"github.com/jianbo-zh/jydata/database/ent/poi"
@@ -843,12 +846,16 @@ func init() {
 	feedback.UpdateDefaultUpdateTime = feedbackDescUpdateTime.UpdateDefault.(func() time.Time)
 	fileFields := schema.File{}.Fields()
 	_ = fileFields
+	// fileDescStorageType is the schema descriptor for storage_type field.
+	fileDescStorageType := fileFields[1].Descriptor()
+	// file.DefaultStorageType holds the default value on creation for the storage_type field.
+	file.DefaultStorageType = fileDescStorageType.Default.(int)
 	// fileDescCreateTime is the schema descriptor for create_time field.
-	fileDescCreateTime := fileFields[9].Descriptor()
+	fileDescCreateTime := fileFields[10].Descriptor()
 	// file.DefaultCreateTime holds the default value on creation for the create_time field.
 	file.DefaultCreateTime = fileDescCreateTime.Default.(func() time.Time)
 	// fileDescUpdateTime is the schema descriptor for update_time field.
-	fileDescUpdateTime := fileFields[10].Descriptor()
+	fileDescUpdateTime := fileFields[11].Descriptor()
 	// file.DefaultUpdateTime holds the default value on creation for the update_time field.
 	file.DefaultUpdateTime = fileDescUpdateTime.Default.(func() time.Time)
 	// file.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
@@ -1237,6 +1244,69 @@ func init() {
 	ordersharing.DefaultUpdateTime = ordersharingDescUpdateTime.Default.(func() time.Time)
 	// ordersharing.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
 	ordersharing.UpdateDefaultUpdateTime = ordersharingDescUpdateTime.UpdateDefault.(func() time.Time)
+	otabtreeMixin := schema.OtaBtree{}.Mixin()
+	otabtreeMixinHooks0 := otabtreeMixin[0].Hooks()
+	otabtree.Hooks[0] = otabtreeMixinHooks0[0]
+	otabtreeMixinInters0 := otabtreeMixin[0].Interceptors()
+	otabtree.Interceptors[0] = otabtreeMixinInters0[0]
+	otabtreeFields := schema.OtaBtree{}.Fields()
+	_ = otabtreeFields
+	// otabtreeDescRemark is the schema descriptor for remark field.
+	otabtreeDescRemark := otabtreeFields[3].Descriptor()
+	// otabtree.DefaultRemark holds the default value on creation for the remark field.
+	otabtree.DefaultRemark = otabtreeDescRemark.Default.(string)
+	// otabtreeDescCreateTime is the schema descriptor for create_time field.
+	otabtreeDescCreateTime := otabtreeFields[4].Descriptor()
+	// otabtree.DefaultCreateTime holds the default value on creation for the create_time field.
+	otabtree.DefaultCreateTime = otabtreeDescCreateTime.Default.(func() time.Time)
+	// otabtreeDescUpdateTime is the schema descriptor for update_time field.
+	otabtreeDescUpdateTime := otabtreeFields[5].Descriptor()
+	// otabtree.DefaultUpdateTime holds the default value on creation for the update_time field.
+	otabtree.DefaultUpdateTime = otabtreeDescUpdateTime.Default.(func() time.Time)
+	// otabtree.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
+	otabtree.UpdateDefaultUpdateTime = otabtreeDescUpdateTime.UpdateDefault.(func() time.Time)
+	otadeployMixin := schema.OtaDeploy{}.Mixin()
+	otadeployMixinHooks0 := otadeployMixin[0].Hooks()
+	otadeploy.Hooks[0] = otadeployMixinHooks0[0]
+	otadeployMixinInters0 := otadeployMixin[0].Interceptors()
+	otadeploy.Interceptors[0] = otadeployMixinInters0[0]
+	otadeployFields := schema.OtaDeploy{}.Fields()
+	_ = otadeployFields
+	// otadeployDescState is the schema descriptor for state field.
+	otadeployDescState := otadeployFields[8].Descriptor()
+	// otadeploy.DefaultState holds the default value on creation for the state field.
+	otadeploy.DefaultState = otadeployDescState.Default.(int)
+	// otadeployDescErrmsg is the schema descriptor for errmsg field.
+	otadeployDescErrmsg := otadeployFields[9].Descriptor()
+	// otadeploy.DefaultErrmsg holds the default value on creation for the errmsg field.
+	otadeploy.DefaultErrmsg = otadeployDescErrmsg.Default.(string)
+	// otadeployDescCreateTime is the schema descriptor for create_time field.
+	otadeployDescCreateTime := otadeployFields[11].Descriptor()
+	// otadeploy.DefaultCreateTime holds the default value on creation for the create_time field.
+	otadeploy.DefaultCreateTime = otadeployDescCreateTime.Default.(func() time.Time)
+	// otadeployDescUpdateTime is the schema descriptor for update_time field.
+	otadeployDescUpdateTime := otadeployFields[12].Descriptor()
+	// otadeploy.DefaultUpdateTime holds the default value on creation for the update_time field.
+	otadeploy.DefaultUpdateTime = otadeployDescUpdateTime.Default.(func() time.Time)
+	// otadeploy.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
+	otadeploy.UpdateDefaultUpdateTime = otadeployDescUpdateTime.UpdateDefault.(func() time.Time)
+	otaversionMixin := schema.OtaVersion{}.Mixin()
+	otaversionMixinHooks0 := otaversionMixin[0].Hooks()
+	otaversion.Hooks[0] = otaversionMixinHooks0[0]
+	otaversionMixinInters0 := otaversionMixin[0].Interceptors()
+	otaversion.Interceptors[0] = otaversionMixinInters0[0]
+	otaversionFields := schema.OtaVersion{}.Fields()
+	_ = otaversionFields
+	// otaversionDescCreateTime is the schema descriptor for create_time field.
+	otaversionDescCreateTime := otaversionFields[7].Descriptor()
+	// otaversion.DefaultCreateTime holds the default value on creation for the create_time field.
+	otaversion.DefaultCreateTime = otaversionDescCreateTime.Default.(func() time.Time)
+	// otaversionDescUpdateTime is the schema descriptor for update_time field.
+	otaversionDescUpdateTime := otaversionFields[8].Descriptor()
+	// otaversion.DefaultUpdateTime holds the default value on creation for the update_time field.
+	otaversion.DefaultUpdateTime = otaversionDescUpdateTime.Default.(func() time.Time)
+	// otaversion.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
+	otaversion.UpdateDefaultUpdateTime = otaversionDescUpdateTime.UpdateDefault.(func() time.Time)
 	paytxbillFields := schema.PayTxBill{}.Fields()
 	_ = paytxbillFields
 	// paytxbillDescCreateTime is the schema descriptor for create_time field.

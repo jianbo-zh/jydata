@@ -43,6 +43,9 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/orderextendflight"
 	"github.com/jianbo-zh/jydata/database/ent/orderrefund"
 	"github.com/jianbo-zh/jydata/database/ent/ordersharing"
+	"github.com/jianbo-zh/jydata/database/ent/otabtree"
+	"github.com/jianbo-zh/jydata/database/ent/otadeploy"
+	"github.com/jianbo-zh/jydata/database/ent/otaversion"
 	"github.com/jianbo-zh/jydata/database/ent/paymentaccount"
 	"github.com/jianbo-zh/jydata/database/ent/paytxbill"
 	"github.com/jianbo-zh/jydata/database/ent/poi"
@@ -110,6 +113,9 @@ const (
 	TypeOrderExtendFlight      = "OrderExtendFlight"
 	TypeOrderRefund            = "OrderRefund"
 	TypeOrderSharing           = "OrderSharing"
+	TypeOtaBtree               = "OtaBtree"
+	TypeOtaDeploy              = "OtaDeploy"
+	TypeOtaVersion             = "OtaVersion"
 	TypePayTxBill              = "PayTxBill"
 	TypePaymentAccount         = "PaymentAccount"
 	TypePoi                    = "Poi"
@@ -28998,6 +29004,8 @@ type FileMutation struct {
 	op                Op
 	typ               string
 	id                *int
+	storage_type      *int
+	addstorage_type   *int
 	creator_id        *int
 	addcreator_id     *int
 	scenic_area_id    *int
@@ -29120,6 +29128,62 @@ func (m *FileMutation) IDs(ctx context.Context) ([]int, error) {
 	default:
 		return nil, fmt.Errorf("IDs is not allowed on %s operations", m.op)
 	}
+}
+
+// SetStorageType sets the "storage_type" field.
+func (m *FileMutation) SetStorageType(i int) {
+	m.storage_type = &i
+	m.addstorage_type = nil
+}
+
+// StorageType returns the value of the "storage_type" field in the mutation.
+func (m *FileMutation) StorageType() (r int, exists bool) {
+	v := m.storage_type
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldStorageType returns the old "storage_type" field's value of the File entity.
+// If the File object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *FileMutation) OldStorageType(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldStorageType is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldStorageType requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldStorageType: %w", err)
+	}
+	return oldValue.StorageType, nil
+}
+
+// AddStorageType adds i to the "storage_type" field.
+func (m *FileMutation) AddStorageType(i int) {
+	if m.addstorage_type != nil {
+		*m.addstorage_type += i
+	} else {
+		m.addstorage_type = &i
+	}
+}
+
+// AddedStorageType returns the value that was added to the "storage_type" field in this mutation.
+func (m *FileMutation) AddedStorageType() (r int, exists bool) {
+	v := m.addstorage_type
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetStorageType resets all changes to the "storage_type" field.
+func (m *FileMutation) ResetStorageType() {
+	m.storage_type = nil
+	m.addstorage_type = nil
 }
 
 // SetCreatorID sets the "creator_id" field.
@@ -29596,7 +29660,10 @@ func (m *FileMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *FileMutation) Fields() []string {
-	fields := make([]string, 0, 10)
+	fields := make([]string, 0, 11)
+	if m.storage_type != nil {
+		fields = append(fields, file.FieldStorageType)
+	}
 	if m.creator_id != nil {
 		fields = append(fields, file.FieldCreatorID)
 	}
@@ -29635,6 +29702,8 @@ func (m *FileMutation) Fields() []string {
 // schema.
 func (m *FileMutation) Field(name string) (ent.Value, bool) {
 	switch name {
+	case file.FieldStorageType:
+		return m.StorageType()
 	case file.FieldCreatorID:
 		return m.CreatorID()
 	case file.FieldScenicAreaID:
@@ -29664,6 +29733,8 @@ func (m *FileMutation) Field(name string) (ent.Value, bool) {
 // database failed.
 func (m *FileMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
 	switch name {
+	case file.FieldStorageType:
+		return m.OldStorageType(ctx)
 	case file.FieldCreatorID:
 		return m.OldCreatorID(ctx)
 	case file.FieldScenicAreaID:
@@ -29693,6 +29764,13 @@ func (m *FileMutation) OldField(ctx context.Context, name string) (ent.Value, er
 // type.
 func (m *FileMutation) SetField(name string, value ent.Value) error {
 	switch name {
+	case file.FieldStorageType:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetStorageType(v)
+		return nil
 	case file.FieldCreatorID:
 		v, ok := value.(int)
 		if !ok {
@@ -29771,6 +29849,9 @@ func (m *FileMutation) SetField(name string, value ent.Value) error {
 // this mutation.
 func (m *FileMutation) AddedFields() []string {
 	var fields []string
+	if m.addstorage_type != nil {
+		fields = append(fields, file.FieldStorageType)
+	}
 	if m.addcreator_id != nil {
 		fields = append(fields, file.FieldCreatorID)
 	}
@@ -29791,6 +29872,8 @@ func (m *FileMutation) AddedFields() []string {
 // was not set, or was not defined in the schema.
 func (m *FileMutation) AddedField(name string) (ent.Value, bool) {
 	switch name {
+	case file.FieldStorageType:
+		return m.AddedStorageType()
 	case file.FieldCreatorID:
 		return m.AddedCreatorID()
 	case file.FieldScenicAreaID:
@@ -29808,6 +29891,13 @@ func (m *FileMutation) AddedField(name string) (ent.Value, bool) {
 // type.
 func (m *FileMutation) AddField(name string, value ent.Value) error {
 	switch name {
+	case file.FieldStorageType:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddStorageType(v)
+		return nil
 	case file.FieldCreatorID:
 		v, ok := value.(int)
 		if !ok {
@@ -29863,6 +29953,9 @@ func (m *FileMutation) ClearField(name string) error {
 // It returns an error if the field is not defined in the schema.
 func (m *FileMutation) ResetField(name string) error {
 	switch name {
+	case file.FieldStorageType:
+		m.ResetStorageType()
+		return nil
 	case file.FieldCreatorID:
 		m.ResetCreatorID()
 		return nil
@@ -41853,6 +41946,2750 @@ func (m *OrderSharingMutation) ResetEdge(name string) error {
 		return nil
 	}
 	return fmt.Errorf("unknown OrderSharing edge %s", name)
+}
+
+// OtaBtreeMutation represents an operation that mutates the OtaBtree nodes in the graph.
+type OtaBtreeMutation struct {
+	config
+	op            Op
+	typ           string
+	id            *int
+	delete_time   *time.Time
+	file_id       *int
+	addfile_id    *int
+	name          *string
+	remark        *string
+	create_time   *time.Time
+	update_time   *time.Time
+	clearedFields map[string]struct{}
+	done          bool
+	oldValue      func(context.Context) (*OtaBtree, error)
+	predicates    []predicate.OtaBtree
+}
+
+var _ ent.Mutation = (*OtaBtreeMutation)(nil)
+
+// otabtreeOption allows management of the mutation configuration using functional options.
+type otabtreeOption func(*OtaBtreeMutation)
+
+// newOtaBtreeMutation creates new mutation for the OtaBtree entity.
+func newOtaBtreeMutation(c config, op Op, opts ...otabtreeOption) *OtaBtreeMutation {
+	m := &OtaBtreeMutation{
+		config:        c,
+		op:            op,
+		typ:           TypeOtaBtree,
+		clearedFields: make(map[string]struct{}),
+	}
+	for _, opt := range opts {
+		opt(m)
+	}
+	return m
+}
+
+// withOtaBtreeID sets the ID field of the mutation.
+func withOtaBtreeID(id int) otabtreeOption {
+	return func(m *OtaBtreeMutation) {
+		var (
+			err   error
+			once  sync.Once
+			value *OtaBtree
+		)
+		m.oldValue = func(ctx context.Context) (*OtaBtree, error) {
+			once.Do(func() {
+				if m.done {
+					err = errors.New("querying old values post mutation is not allowed")
+				} else {
+					value, err = m.Client().OtaBtree.Get(ctx, id)
+				}
+			})
+			return value, err
+		}
+		m.id = &id
+	}
+}
+
+// withOtaBtree sets the old OtaBtree of the mutation.
+func withOtaBtree(node *OtaBtree) otabtreeOption {
+	return func(m *OtaBtreeMutation) {
+		m.oldValue = func(context.Context) (*OtaBtree, error) {
+			return node, nil
+		}
+		m.id = &node.ID
+	}
+}
+
+// Client returns a new `ent.Client` from the mutation. If the mutation was
+// executed in a transaction (ent.Tx), a transactional client is returned.
+func (m OtaBtreeMutation) Client() *Client {
+	client := &Client{config: m.config}
+	client.init()
+	return client
+}
+
+// Tx returns an `ent.Tx` for mutations that were executed in transactions;
+// it returns an error otherwise.
+func (m OtaBtreeMutation) Tx() (*Tx, error) {
+	if _, ok := m.driver.(*txDriver); !ok {
+		return nil, errors.New("ent: mutation is not running in a transaction")
+	}
+	tx := &Tx{config: m.config}
+	tx.init()
+	return tx, nil
+}
+
+// SetID sets the value of the id field. Note that this
+// operation is only accepted on creation of OtaBtree entities.
+func (m *OtaBtreeMutation) SetID(id int) {
+	m.id = &id
+}
+
+// ID returns the ID value in the mutation. Note that the ID is only available
+// if it was provided to the builder or after it was returned from the database.
+func (m *OtaBtreeMutation) ID() (id int, exists bool) {
+	if m.id == nil {
+		return
+	}
+	return *m.id, true
+}
+
+// IDs queries the database and returns the entity ids that match the mutation's predicate.
+// That means, if the mutation is applied within a transaction with an isolation level such
+// as sql.LevelSerializable, the returned ids match the ids of the rows that will be updated
+// or updated by the mutation.
+func (m *OtaBtreeMutation) IDs(ctx context.Context) ([]int, error) {
+	switch {
+	case m.op.Is(OpUpdateOne | OpDeleteOne):
+		id, exists := m.ID()
+		if exists {
+			return []int{id}, nil
+		}
+		fallthrough
+	case m.op.Is(OpUpdate | OpDelete):
+		return m.Client().OtaBtree.Query().Where(m.predicates...).IDs(ctx)
+	default:
+		return nil, fmt.Errorf("IDs is not allowed on %s operations", m.op)
+	}
+}
+
+// SetDeleteTime sets the "delete_time" field.
+func (m *OtaBtreeMutation) SetDeleteTime(t time.Time) {
+	m.delete_time = &t
+}
+
+// DeleteTime returns the value of the "delete_time" field in the mutation.
+func (m *OtaBtreeMutation) DeleteTime() (r time.Time, exists bool) {
+	v := m.delete_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldDeleteTime returns the old "delete_time" field's value of the OtaBtree entity.
+// If the OtaBtree object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaBtreeMutation) OldDeleteTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldDeleteTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldDeleteTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldDeleteTime: %w", err)
+	}
+	return oldValue.DeleteTime, nil
+}
+
+// ClearDeleteTime clears the value of the "delete_time" field.
+func (m *OtaBtreeMutation) ClearDeleteTime() {
+	m.delete_time = nil
+	m.clearedFields[otabtree.FieldDeleteTime] = struct{}{}
+}
+
+// DeleteTimeCleared returns if the "delete_time" field was cleared in this mutation.
+func (m *OtaBtreeMutation) DeleteTimeCleared() bool {
+	_, ok := m.clearedFields[otabtree.FieldDeleteTime]
+	return ok
+}
+
+// ResetDeleteTime resets all changes to the "delete_time" field.
+func (m *OtaBtreeMutation) ResetDeleteTime() {
+	m.delete_time = nil
+	delete(m.clearedFields, otabtree.FieldDeleteTime)
+}
+
+// SetFileID sets the "file_id" field.
+func (m *OtaBtreeMutation) SetFileID(i int) {
+	m.file_id = &i
+	m.addfile_id = nil
+}
+
+// FileID returns the value of the "file_id" field in the mutation.
+func (m *OtaBtreeMutation) FileID() (r int, exists bool) {
+	v := m.file_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldFileID returns the old "file_id" field's value of the OtaBtree entity.
+// If the OtaBtree object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaBtreeMutation) OldFileID(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldFileID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldFileID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldFileID: %w", err)
+	}
+	return oldValue.FileID, nil
+}
+
+// AddFileID adds i to the "file_id" field.
+func (m *OtaBtreeMutation) AddFileID(i int) {
+	if m.addfile_id != nil {
+		*m.addfile_id += i
+	} else {
+		m.addfile_id = &i
+	}
+}
+
+// AddedFileID returns the value that was added to the "file_id" field in this mutation.
+func (m *OtaBtreeMutation) AddedFileID() (r int, exists bool) {
+	v := m.addfile_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetFileID resets all changes to the "file_id" field.
+func (m *OtaBtreeMutation) ResetFileID() {
+	m.file_id = nil
+	m.addfile_id = nil
+}
+
+// SetName sets the "name" field.
+func (m *OtaBtreeMutation) SetName(s string) {
+	m.name = &s
+}
+
+// Name returns the value of the "name" field in the mutation.
+func (m *OtaBtreeMutation) Name() (r string, exists bool) {
+	v := m.name
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldName returns the old "name" field's value of the OtaBtree entity.
+// If the OtaBtree object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaBtreeMutation) OldName(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldName is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldName requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldName: %w", err)
+	}
+	return oldValue.Name, nil
+}
+
+// ResetName resets all changes to the "name" field.
+func (m *OtaBtreeMutation) ResetName() {
+	m.name = nil
+}
+
+// SetRemark sets the "remark" field.
+func (m *OtaBtreeMutation) SetRemark(s string) {
+	m.remark = &s
+}
+
+// Remark returns the value of the "remark" field in the mutation.
+func (m *OtaBtreeMutation) Remark() (r string, exists bool) {
+	v := m.remark
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldRemark returns the old "remark" field's value of the OtaBtree entity.
+// If the OtaBtree object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaBtreeMutation) OldRemark(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldRemark is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldRemark requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldRemark: %w", err)
+	}
+	return oldValue.Remark, nil
+}
+
+// ResetRemark resets all changes to the "remark" field.
+func (m *OtaBtreeMutation) ResetRemark() {
+	m.remark = nil
+}
+
+// SetCreateTime sets the "create_time" field.
+func (m *OtaBtreeMutation) SetCreateTime(t time.Time) {
+	m.create_time = &t
+}
+
+// CreateTime returns the value of the "create_time" field in the mutation.
+func (m *OtaBtreeMutation) CreateTime() (r time.Time, exists bool) {
+	v := m.create_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCreateTime returns the old "create_time" field's value of the OtaBtree entity.
+// If the OtaBtree object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaBtreeMutation) OldCreateTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCreateTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCreateTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCreateTime: %w", err)
+	}
+	return oldValue.CreateTime, nil
+}
+
+// ResetCreateTime resets all changes to the "create_time" field.
+func (m *OtaBtreeMutation) ResetCreateTime() {
+	m.create_time = nil
+}
+
+// SetUpdateTime sets the "update_time" field.
+func (m *OtaBtreeMutation) SetUpdateTime(t time.Time) {
+	m.update_time = &t
+}
+
+// UpdateTime returns the value of the "update_time" field in the mutation.
+func (m *OtaBtreeMutation) UpdateTime() (r time.Time, exists bool) {
+	v := m.update_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldUpdateTime returns the old "update_time" field's value of the OtaBtree entity.
+// If the OtaBtree object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaBtreeMutation) OldUpdateTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldUpdateTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldUpdateTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldUpdateTime: %w", err)
+	}
+	return oldValue.UpdateTime, nil
+}
+
+// ResetUpdateTime resets all changes to the "update_time" field.
+func (m *OtaBtreeMutation) ResetUpdateTime() {
+	m.update_time = nil
+}
+
+// Where appends a list predicates to the OtaBtreeMutation builder.
+func (m *OtaBtreeMutation) Where(ps ...predicate.OtaBtree) {
+	m.predicates = append(m.predicates, ps...)
+}
+
+// WhereP appends storage-level predicates to the OtaBtreeMutation builder. Using this method,
+// users can use type-assertion to append predicates that do not depend on any generated package.
+func (m *OtaBtreeMutation) WhereP(ps ...func(*sql.Selector)) {
+	p := make([]predicate.OtaBtree, len(ps))
+	for i := range ps {
+		p[i] = ps[i]
+	}
+	m.Where(p...)
+}
+
+// Op returns the operation name.
+func (m *OtaBtreeMutation) Op() Op {
+	return m.op
+}
+
+// SetOp allows setting the mutation operation.
+func (m *OtaBtreeMutation) SetOp(op Op) {
+	m.op = op
+}
+
+// Type returns the node type of this mutation (OtaBtree).
+func (m *OtaBtreeMutation) Type() string {
+	return m.typ
+}
+
+// Fields returns all fields that were changed during this mutation. Note that in
+// order to get all numeric fields that were incremented/decremented, call
+// AddedFields().
+func (m *OtaBtreeMutation) Fields() []string {
+	fields := make([]string, 0, 6)
+	if m.delete_time != nil {
+		fields = append(fields, otabtree.FieldDeleteTime)
+	}
+	if m.file_id != nil {
+		fields = append(fields, otabtree.FieldFileID)
+	}
+	if m.name != nil {
+		fields = append(fields, otabtree.FieldName)
+	}
+	if m.remark != nil {
+		fields = append(fields, otabtree.FieldRemark)
+	}
+	if m.create_time != nil {
+		fields = append(fields, otabtree.FieldCreateTime)
+	}
+	if m.update_time != nil {
+		fields = append(fields, otabtree.FieldUpdateTime)
+	}
+	return fields
+}
+
+// Field returns the value of a field with the given name. The second boolean
+// return value indicates that this field was not set, or was not defined in the
+// schema.
+func (m *OtaBtreeMutation) Field(name string) (ent.Value, bool) {
+	switch name {
+	case otabtree.FieldDeleteTime:
+		return m.DeleteTime()
+	case otabtree.FieldFileID:
+		return m.FileID()
+	case otabtree.FieldName:
+		return m.Name()
+	case otabtree.FieldRemark:
+		return m.Remark()
+	case otabtree.FieldCreateTime:
+		return m.CreateTime()
+	case otabtree.FieldUpdateTime:
+		return m.UpdateTime()
+	}
+	return nil, false
+}
+
+// OldField returns the old value of the field from the database. An error is
+// returned if the mutation operation is not UpdateOne, or the query to the
+// database failed.
+func (m *OtaBtreeMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
+	switch name {
+	case otabtree.FieldDeleteTime:
+		return m.OldDeleteTime(ctx)
+	case otabtree.FieldFileID:
+		return m.OldFileID(ctx)
+	case otabtree.FieldName:
+		return m.OldName(ctx)
+	case otabtree.FieldRemark:
+		return m.OldRemark(ctx)
+	case otabtree.FieldCreateTime:
+		return m.OldCreateTime(ctx)
+	case otabtree.FieldUpdateTime:
+		return m.OldUpdateTime(ctx)
+	}
+	return nil, fmt.Errorf("unknown OtaBtree field %s", name)
+}
+
+// SetField sets the value of a field with the given name. It returns an error if
+// the field is not defined in the schema, or if the type mismatched the field
+// type.
+func (m *OtaBtreeMutation) SetField(name string, value ent.Value) error {
+	switch name {
+	case otabtree.FieldDeleteTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetDeleteTime(v)
+		return nil
+	case otabtree.FieldFileID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetFileID(v)
+		return nil
+	case otabtree.FieldName:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetName(v)
+		return nil
+	case otabtree.FieldRemark:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetRemark(v)
+		return nil
+	case otabtree.FieldCreateTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCreateTime(v)
+		return nil
+	case otabtree.FieldUpdateTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetUpdateTime(v)
+		return nil
+	}
+	return fmt.Errorf("unknown OtaBtree field %s", name)
+}
+
+// AddedFields returns all numeric fields that were incremented/decremented during
+// this mutation.
+func (m *OtaBtreeMutation) AddedFields() []string {
+	var fields []string
+	if m.addfile_id != nil {
+		fields = append(fields, otabtree.FieldFileID)
+	}
+	return fields
+}
+
+// AddedField returns the numeric value that was incremented/decremented on a field
+// with the given name. The second boolean return value indicates that this field
+// was not set, or was not defined in the schema.
+func (m *OtaBtreeMutation) AddedField(name string) (ent.Value, bool) {
+	switch name {
+	case otabtree.FieldFileID:
+		return m.AddedFileID()
+	}
+	return nil, false
+}
+
+// AddField adds the value to the field with the given name. It returns an error if
+// the field is not defined in the schema, or if the type mismatched the field
+// type.
+func (m *OtaBtreeMutation) AddField(name string, value ent.Value) error {
+	switch name {
+	case otabtree.FieldFileID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddFileID(v)
+		return nil
+	}
+	return fmt.Errorf("unknown OtaBtree numeric field %s", name)
+}
+
+// ClearedFields returns all nullable fields that were cleared during this
+// mutation.
+func (m *OtaBtreeMutation) ClearedFields() []string {
+	var fields []string
+	if m.FieldCleared(otabtree.FieldDeleteTime) {
+		fields = append(fields, otabtree.FieldDeleteTime)
+	}
+	return fields
+}
+
+// FieldCleared returns a boolean indicating if a field with the given name was
+// cleared in this mutation.
+func (m *OtaBtreeMutation) FieldCleared(name string) bool {
+	_, ok := m.clearedFields[name]
+	return ok
+}
+
+// ClearField clears the value of the field with the given name. It returns an
+// error if the field is not defined in the schema.
+func (m *OtaBtreeMutation) ClearField(name string) error {
+	switch name {
+	case otabtree.FieldDeleteTime:
+		m.ClearDeleteTime()
+		return nil
+	}
+	return fmt.Errorf("unknown OtaBtree nullable field %s", name)
+}
+
+// ResetField resets all changes in the mutation for the field with the given name.
+// It returns an error if the field is not defined in the schema.
+func (m *OtaBtreeMutation) ResetField(name string) error {
+	switch name {
+	case otabtree.FieldDeleteTime:
+		m.ResetDeleteTime()
+		return nil
+	case otabtree.FieldFileID:
+		m.ResetFileID()
+		return nil
+	case otabtree.FieldName:
+		m.ResetName()
+		return nil
+	case otabtree.FieldRemark:
+		m.ResetRemark()
+		return nil
+	case otabtree.FieldCreateTime:
+		m.ResetCreateTime()
+		return nil
+	case otabtree.FieldUpdateTime:
+		m.ResetUpdateTime()
+		return nil
+	}
+	return fmt.Errorf("unknown OtaBtree field %s", name)
+}
+
+// AddedEdges returns all edge names that were set/added in this mutation.
+func (m *OtaBtreeMutation) AddedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// AddedIDs returns all IDs (to other nodes) that were added for the given edge
+// name in this mutation.
+func (m *OtaBtreeMutation) AddedIDs(name string) []ent.Value {
+	return nil
+}
+
+// RemovedEdges returns all edge names that were removed in this mutation.
+func (m *OtaBtreeMutation) RemovedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// RemovedIDs returns all IDs (to other nodes) that were removed for the edge with
+// the given name in this mutation.
+func (m *OtaBtreeMutation) RemovedIDs(name string) []ent.Value {
+	return nil
+}
+
+// ClearedEdges returns all edge names that were cleared in this mutation.
+func (m *OtaBtreeMutation) ClearedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// EdgeCleared returns a boolean which indicates if the edge with the given name
+// was cleared in this mutation.
+func (m *OtaBtreeMutation) EdgeCleared(name string) bool {
+	return false
+}
+
+// ClearEdge clears the value of the edge with the given name. It returns an error
+// if that edge is not defined in the schema.
+func (m *OtaBtreeMutation) ClearEdge(name string) error {
+	return fmt.Errorf("unknown OtaBtree unique edge %s", name)
+}
+
+// ResetEdge resets all changes to the edge with the given name in this mutation.
+// It returns an error if the edge is not defined in the schema.
+func (m *OtaBtreeMutation) ResetEdge(name string) error {
+	return fmt.Errorf("unknown OtaBtree edge %s", name)
+}
+
+// OtaDeployMutation represents an operation that mutates the OtaDeploy nodes in the graph.
+type OtaDeployMutation struct {
+	config
+	op                 Op
+	typ                string
+	id                 *int
+	delete_time        *time.Time
+	uuid               *int
+	adduuid            *int
+	car_id             *int
+	addcar_id          *int
+	car_name           *string
+	device_id          *string
+	ota_version_id     *int
+	addota_version_id  *int
+	ota_version_name   *string
+	ota_version_number *string
+	state              *int
+	addstate           *int
+	errmsg             *string
+	process            *types.OtaProcess
+	create_time        *time.Time
+	update_time        *time.Time
+	clearedFields      map[string]struct{}
+	done               bool
+	oldValue           func(context.Context) (*OtaDeploy, error)
+	predicates         []predicate.OtaDeploy
+}
+
+var _ ent.Mutation = (*OtaDeployMutation)(nil)
+
+// otadeployOption allows management of the mutation configuration using functional options.
+type otadeployOption func(*OtaDeployMutation)
+
+// newOtaDeployMutation creates new mutation for the OtaDeploy entity.
+func newOtaDeployMutation(c config, op Op, opts ...otadeployOption) *OtaDeployMutation {
+	m := &OtaDeployMutation{
+		config:        c,
+		op:            op,
+		typ:           TypeOtaDeploy,
+		clearedFields: make(map[string]struct{}),
+	}
+	for _, opt := range opts {
+		opt(m)
+	}
+	return m
+}
+
+// withOtaDeployID sets the ID field of the mutation.
+func withOtaDeployID(id int) otadeployOption {
+	return func(m *OtaDeployMutation) {
+		var (
+			err   error
+			once  sync.Once
+			value *OtaDeploy
+		)
+		m.oldValue = func(ctx context.Context) (*OtaDeploy, error) {
+			once.Do(func() {
+				if m.done {
+					err = errors.New("querying old values post mutation is not allowed")
+				} else {
+					value, err = m.Client().OtaDeploy.Get(ctx, id)
+				}
+			})
+			return value, err
+		}
+		m.id = &id
+	}
+}
+
+// withOtaDeploy sets the old OtaDeploy of the mutation.
+func withOtaDeploy(node *OtaDeploy) otadeployOption {
+	return func(m *OtaDeployMutation) {
+		m.oldValue = func(context.Context) (*OtaDeploy, error) {
+			return node, nil
+		}
+		m.id = &node.ID
+	}
+}
+
+// Client returns a new `ent.Client` from the mutation. If the mutation was
+// executed in a transaction (ent.Tx), a transactional client is returned.
+func (m OtaDeployMutation) Client() *Client {
+	client := &Client{config: m.config}
+	client.init()
+	return client
+}
+
+// Tx returns an `ent.Tx` for mutations that were executed in transactions;
+// it returns an error otherwise.
+func (m OtaDeployMutation) Tx() (*Tx, error) {
+	if _, ok := m.driver.(*txDriver); !ok {
+		return nil, errors.New("ent: mutation is not running in a transaction")
+	}
+	tx := &Tx{config: m.config}
+	tx.init()
+	return tx, nil
+}
+
+// SetID sets the value of the id field. Note that this
+// operation is only accepted on creation of OtaDeploy entities.
+func (m *OtaDeployMutation) SetID(id int) {
+	m.id = &id
+}
+
+// ID returns the ID value in the mutation. Note that the ID is only available
+// if it was provided to the builder or after it was returned from the database.
+func (m *OtaDeployMutation) ID() (id int, exists bool) {
+	if m.id == nil {
+		return
+	}
+	return *m.id, true
+}
+
+// IDs queries the database and returns the entity ids that match the mutation's predicate.
+// That means, if the mutation is applied within a transaction with an isolation level such
+// as sql.LevelSerializable, the returned ids match the ids of the rows that will be updated
+// or updated by the mutation.
+func (m *OtaDeployMutation) IDs(ctx context.Context) ([]int, error) {
+	switch {
+	case m.op.Is(OpUpdateOne | OpDeleteOne):
+		id, exists := m.ID()
+		if exists {
+			return []int{id}, nil
+		}
+		fallthrough
+	case m.op.Is(OpUpdate | OpDelete):
+		return m.Client().OtaDeploy.Query().Where(m.predicates...).IDs(ctx)
+	default:
+		return nil, fmt.Errorf("IDs is not allowed on %s operations", m.op)
+	}
+}
+
+// SetDeleteTime sets the "delete_time" field.
+func (m *OtaDeployMutation) SetDeleteTime(t time.Time) {
+	m.delete_time = &t
+}
+
+// DeleteTime returns the value of the "delete_time" field in the mutation.
+func (m *OtaDeployMutation) DeleteTime() (r time.Time, exists bool) {
+	v := m.delete_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldDeleteTime returns the old "delete_time" field's value of the OtaDeploy entity.
+// If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaDeployMutation) OldDeleteTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldDeleteTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldDeleteTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldDeleteTime: %w", err)
+	}
+	return oldValue.DeleteTime, nil
+}
+
+// ClearDeleteTime clears the value of the "delete_time" field.
+func (m *OtaDeployMutation) ClearDeleteTime() {
+	m.delete_time = nil
+	m.clearedFields[otadeploy.FieldDeleteTime] = struct{}{}
+}
+
+// DeleteTimeCleared returns if the "delete_time" field was cleared in this mutation.
+func (m *OtaDeployMutation) DeleteTimeCleared() bool {
+	_, ok := m.clearedFields[otadeploy.FieldDeleteTime]
+	return ok
+}
+
+// ResetDeleteTime resets all changes to the "delete_time" field.
+func (m *OtaDeployMutation) ResetDeleteTime() {
+	m.delete_time = nil
+	delete(m.clearedFields, otadeploy.FieldDeleteTime)
+}
+
+// SetUUID sets the "uuid" field.
+func (m *OtaDeployMutation) SetUUID(i int) {
+	m.uuid = &i
+	m.adduuid = nil
+}
+
+// UUID returns the value of the "uuid" field in the mutation.
+func (m *OtaDeployMutation) UUID() (r int, exists bool) {
+	v := m.uuid
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldUUID returns the old "uuid" field's value of the OtaDeploy entity.
+// If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaDeployMutation) OldUUID(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldUUID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldUUID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldUUID: %w", err)
+	}
+	return oldValue.UUID, nil
+}
+
+// AddUUID adds i to the "uuid" field.
+func (m *OtaDeployMutation) AddUUID(i int) {
+	if m.adduuid != nil {
+		*m.adduuid += i
+	} else {
+		m.adduuid = &i
+	}
+}
+
+// AddedUUID returns the value that was added to the "uuid" field in this mutation.
+func (m *OtaDeployMutation) AddedUUID() (r int, exists bool) {
+	v := m.adduuid
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetUUID resets all changes to the "uuid" field.
+func (m *OtaDeployMutation) ResetUUID() {
+	m.uuid = nil
+	m.adduuid = nil
+}
+
+// SetCarID sets the "car_id" field.
+func (m *OtaDeployMutation) SetCarID(i int) {
+	m.car_id = &i
+	m.addcar_id = nil
+}
+
+// CarID returns the value of the "car_id" field in the mutation.
+func (m *OtaDeployMutation) CarID() (r int, exists bool) {
+	v := m.car_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCarID returns the old "car_id" field's value of the OtaDeploy entity.
+// If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaDeployMutation) OldCarID(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCarID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCarID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCarID: %w", err)
+	}
+	return oldValue.CarID, nil
+}
+
+// AddCarID adds i to the "car_id" field.
+func (m *OtaDeployMutation) AddCarID(i int) {
+	if m.addcar_id != nil {
+		*m.addcar_id += i
+	} else {
+		m.addcar_id = &i
+	}
+}
+
+// AddedCarID returns the value that was added to the "car_id" field in this mutation.
+func (m *OtaDeployMutation) AddedCarID() (r int, exists bool) {
+	v := m.addcar_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetCarID resets all changes to the "car_id" field.
+func (m *OtaDeployMutation) ResetCarID() {
+	m.car_id = nil
+	m.addcar_id = nil
+}
+
+// SetCarName sets the "car_name" field.
+func (m *OtaDeployMutation) SetCarName(s string) {
+	m.car_name = &s
+}
+
+// CarName returns the value of the "car_name" field in the mutation.
+func (m *OtaDeployMutation) CarName() (r string, exists bool) {
+	v := m.car_name
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCarName returns the old "car_name" field's value of the OtaDeploy entity.
+// If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaDeployMutation) OldCarName(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCarName is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCarName requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCarName: %w", err)
+	}
+	return oldValue.CarName, nil
+}
+
+// ResetCarName resets all changes to the "car_name" field.
+func (m *OtaDeployMutation) ResetCarName() {
+	m.car_name = nil
+}
+
+// SetDeviceID sets the "device_id" field.
+func (m *OtaDeployMutation) SetDeviceID(s string) {
+	m.device_id = &s
+}
+
+// DeviceID returns the value of the "device_id" field in the mutation.
+func (m *OtaDeployMutation) DeviceID() (r string, exists bool) {
+	v := m.device_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldDeviceID returns the old "device_id" field's value of the OtaDeploy entity.
+// If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaDeployMutation) OldDeviceID(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldDeviceID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldDeviceID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldDeviceID: %w", err)
+	}
+	return oldValue.DeviceID, nil
+}
+
+// ResetDeviceID resets all changes to the "device_id" field.
+func (m *OtaDeployMutation) ResetDeviceID() {
+	m.device_id = nil
+}
+
+// SetOtaVersionID sets the "ota_version_id" field.
+func (m *OtaDeployMutation) SetOtaVersionID(i int) {
+	m.ota_version_id = &i
+	m.addota_version_id = nil
+}
+
+// OtaVersionID returns the value of the "ota_version_id" field in the mutation.
+func (m *OtaDeployMutation) OtaVersionID() (r int, exists bool) {
+	v := m.ota_version_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldOtaVersionID returns the old "ota_version_id" field's value of the OtaDeploy entity.
+// If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaDeployMutation) OldOtaVersionID(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldOtaVersionID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldOtaVersionID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldOtaVersionID: %w", err)
+	}
+	return oldValue.OtaVersionID, nil
+}
+
+// AddOtaVersionID adds i to the "ota_version_id" field.
+func (m *OtaDeployMutation) AddOtaVersionID(i int) {
+	if m.addota_version_id != nil {
+		*m.addota_version_id += i
+	} else {
+		m.addota_version_id = &i
+	}
+}
+
+// AddedOtaVersionID returns the value that was added to the "ota_version_id" field in this mutation.
+func (m *OtaDeployMutation) AddedOtaVersionID() (r int, exists bool) {
+	v := m.addota_version_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetOtaVersionID resets all changes to the "ota_version_id" field.
+func (m *OtaDeployMutation) ResetOtaVersionID() {
+	m.ota_version_id = nil
+	m.addota_version_id = nil
+}
+
+// SetOtaVersionName sets the "ota_version_name" field.
+func (m *OtaDeployMutation) SetOtaVersionName(s string) {
+	m.ota_version_name = &s
+}
+
+// OtaVersionName returns the value of the "ota_version_name" field in the mutation.
+func (m *OtaDeployMutation) OtaVersionName() (r string, exists bool) {
+	v := m.ota_version_name
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldOtaVersionName returns the old "ota_version_name" field's value of the OtaDeploy entity.
+// If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaDeployMutation) OldOtaVersionName(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldOtaVersionName is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldOtaVersionName requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldOtaVersionName: %w", err)
+	}
+	return oldValue.OtaVersionName, nil
+}
+
+// ResetOtaVersionName resets all changes to the "ota_version_name" field.
+func (m *OtaDeployMutation) ResetOtaVersionName() {
+	m.ota_version_name = nil
+}
+
+// SetOtaVersionNumber sets the "ota_version_number" field.
+func (m *OtaDeployMutation) SetOtaVersionNumber(s string) {
+	m.ota_version_number = &s
+}
+
+// OtaVersionNumber returns the value of the "ota_version_number" field in the mutation.
+func (m *OtaDeployMutation) OtaVersionNumber() (r string, exists bool) {
+	v := m.ota_version_number
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldOtaVersionNumber returns the old "ota_version_number" field's value of the OtaDeploy entity.
+// If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaDeployMutation) OldOtaVersionNumber(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldOtaVersionNumber is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldOtaVersionNumber requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldOtaVersionNumber: %w", err)
+	}
+	return oldValue.OtaVersionNumber, nil
+}
+
+// ResetOtaVersionNumber resets all changes to the "ota_version_number" field.
+func (m *OtaDeployMutation) ResetOtaVersionNumber() {
+	m.ota_version_number = nil
+}
+
+// SetState sets the "state" field.
+func (m *OtaDeployMutation) SetState(i int) {
+	m.state = &i
+	m.addstate = nil
+}
+
+// State returns the value of the "state" field in the mutation.
+func (m *OtaDeployMutation) State() (r int, exists bool) {
+	v := m.state
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldState returns the old "state" field's value of the OtaDeploy entity.
+// If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaDeployMutation) OldState(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldState is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldState requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldState: %w", err)
+	}
+	return oldValue.State, nil
+}
+
+// AddState adds i to the "state" field.
+func (m *OtaDeployMutation) AddState(i int) {
+	if m.addstate != nil {
+		*m.addstate += i
+	} else {
+		m.addstate = &i
+	}
+}
+
+// AddedState returns the value that was added to the "state" field in this mutation.
+func (m *OtaDeployMutation) AddedState() (r int, exists bool) {
+	v := m.addstate
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetState resets all changes to the "state" field.
+func (m *OtaDeployMutation) ResetState() {
+	m.state = nil
+	m.addstate = nil
+}
+
+// SetErrmsg sets the "errmsg" field.
+func (m *OtaDeployMutation) SetErrmsg(s string) {
+	m.errmsg = &s
+}
+
+// Errmsg returns the value of the "errmsg" field in the mutation.
+func (m *OtaDeployMutation) Errmsg() (r string, exists bool) {
+	v := m.errmsg
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldErrmsg returns the old "errmsg" field's value of the OtaDeploy entity.
+// If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaDeployMutation) OldErrmsg(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldErrmsg is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldErrmsg requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldErrmsg: %w", err)
+	}
+	return oldValue.Errmsg, nil
+}
+
+// ResetErrmsg resets all changes to the "errmsg" field.
+func (m *OtaDeployMutation) ResetErrmsg() {
+	m.errmsg = nil
+}
+
+// SetProcess sets the "process" field.
+func (m *OtaDeployMutation) SetProcess(tp types.OtaProcess) {
+	m.process = &tp
+}
+
+// Process returns the value of the "process" field in the mutation.
+func (m *OtaDeployMutation) Process() (r types.OtaProcess, exists bool) {
+	v := m.process
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldProcess returns the old "process" field's value of the OtaDeploy entity.
+// If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaDeployMutation) OldProcess(ctx context.Context) (v types.OtaProcess, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldProcess is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldProcess requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldProcess: %w", err)
+	}
+	return oldValue.Process, nil
+}
+
+// ClearProcess clears the value of the "process" field.
+func (m *OtaDeployMutation) ClearProcess() {
+	m.process = nil
+	m.clearedFields[otadeploy.FieldProcess] = struct{}{}
+}
+
+// ProcessCleared returns if the "process" field was cleared in this mutation.
+func (m *OtaDeployMutation) ProcessCleared() bool {
+	_, ok := m.clearedFields[otadeploy.FieldProcess]
+	return ok
+}
+
+// ResetProcess resets all changes to the "process" field.
+func (m *OtaDeployMutation) ResetProcess() {
+	m.process = nil
+	delete(m.clearedFields, otadeploy.FieldProcess)
+}
+
+// SetCreateTime sets the "create_time" field.
+func (m *OtaDeployMutation) SetCreateTime(t time.Time) {
+	m.create_time = &t
+}
+
+// CreateTime returns the value of the "create_time" field in the mutation.
+func (m *OtaDeployMutation) CreateTime() (r time.Time, exists bool) {
+	v := m.create_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCreateTime returns the old "create_time" field's value of the OtaDeploy entity.
+// If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaDeployMutation) OldCreateTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCreateTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCreateTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCreateTime: %w", err)
+	}
+	return oldValue.CreateTime, nil
+}
+
+// ResetCreateTime resets all changes to the "create_time" field.
+func (m *OtaDeployMutation) ResetCreateTime() {
+	m.create_time = nil
+}
+
+// SetUpdateTime sets the "update_time" field.
+func (m *OtaDeployMutation) SetUpdateTime(t time.Time) {
+	m.update_time = &t
+}
+
+// UpdateTime returns the value of the "update_time" field in the mutation.
+func (m *OtaDeployMutation) UpdateTime() (r time.Time, exists bool) {
+	v := m.update_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldUpdateTime returns the old "update_time" field's value of the OtaDeploy entity.
+// If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaDeployMutation) OldUpdateTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldUpdateTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldUpdateTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldUpdateTime: %w", err)
+	}
+	return oldValue.UpdateTime, nil
+}
+
+// ResetUpdateTime resets all changes to the "update_time" field.
+func (m *OtaDeployMutation) ResetUpdateTime() {
+	m.update_time = nil
+}
+
+// Where appends a list predicates to the OtaDeployMutation builder.
+func (m *OtaDeployMutation) Where(ps ...predicate.OtaDeploy) {
+	m.predicates = append(m.predicates, ps...)
+}
+
+// WhereP appends storage-level predicates to the OtaDeployMutation builder. Using this method,
+// users can use type-assertion to append predicates that do not depend on any generated package.
+func (m *OtaDeployMutation) WhereP(ps ...func(*sql.Selector)) {
+	p := make([]predicate.OtaDeploy, len(ps))
+	for i := range ps {
+		p[i] = ps[i]
+	}
+	m.Where(p...)
+}
+
+// Op returns the operation name.
+func (m *OtaDeployMutation) Op() Op {
+	return m.op
+}
+
+// SetOp allows setting the mutation operation.
+func (m *OtaDeployMutation) SetOp(op Op) {
+	m.op = op
+}
+
+// Type returns the node type of this mutation (OtaDeploy).
+func (m *OtaDeployMutation) Type() string {
+	return m.typ
+}
+
+// Fields returns all fields that were changed during this mutation. Note that in
+// order to get all numeric fields that were incremented/decremented, call
+// AddedFields().
+func (m *OtaDeployMutation) Fields() []string {
+	fields := make([]string, 0, 13)
+	if m.delete_time != nil {
+		fields = append(fields, otadeploy.FieldDeleteTime)
+	}
+	if m.uuid != nil {
+		fields = append(fields, otadeploy.FieldUUID)
+	}
+	if m.car_id != nil {
+		fields = append(fields, otadeploy.FieldCarID)
+	}
+	if m.car_name != nil {
+		fields = append(fields, otadeploy.FieldCarName)
+	}
+	if m.device_id != nil {
+		fields = append(fields, otadeploy.FieldDeviceID)
+	}
+	if m.ota_version_id != nil {
+		fields = append(fields, otadeploy.FieldOtaVersionID)
+	}
+	if m.ota_version_name != nil {
+		fields = append(fields, otadeploy.FieldOtaVersionName)
+	}
+	if m.ota_version_number != nil {
+		fields = append(fields, otadeploy.FieldOtaVersionNumber)
+	}
+	if m.state != nil {
+		fields = append(fields, otadeploy.FieldState)
+	}
+	if m.errmsg != nil {
+		fields = append(fields, otadeploy.FieldErrmsg)
+	}
+	if m.process != nil {
+		fields = append(fields, otadeploy.FieldProcess)
+	}
+	if m.create_time != nil {
+		fields = append(fields, otadeploy.FieldCreateTime)
+	}
+	if m.update_time != nil {
+		fields = append(fields, otadeploy.FieldUpdateTime)
+	}
+	return fields
+}
+
+// Field returns the value of a field with the given name. The second boolean
+// return value indicates that this field was not set, or was not defined in the
+// schema.
+func (m *OtaDeployMutation) Field(name string) (ent.Value, bool) {
+	switch name {
+	case otadeploy.FieldDeleteTime:
+		return m.DeleteTime()
+	case otadeploy.FieldUUID:
+		return m.UUID()
+	case otadeploy.FieldCarID:
+		return m.CarID()
+	case otadeploy.FieldCarName:
+		return m.CarName()
+	case otadeploy.FieldDeviceID:
+		return m.DeviceID()
+	case otadeploy.FieldOtaVersionID:
+		return m.OtaVersionID()
+	case otadeploy.FieldOtaVersionName:
+		return m.OtaVersionName()
+	case otadeploy.FieldOtaVersionNumber:
+		return m.OtaVersionNumber()
+	case otadeploy.FieldState:
+		return m.State()
+	case otadeploy.FieldErrmsg:
+		return m.Errmsg()
+	case otadeploy.FieldProcess:
+		return m.Process()
+	case otadeploy.FieldCreateTime:
+		return m.CreateTime()
+	case otadeploy.FieldUpdateTime:
+		return m.UpdateTime()
+	}
+	return nil, false
+}
+
+// OldField returns the old value of the field from the database. An error is
+// returned if the mutation operation is not UpdateOne, or the query to the
+// database failed.
+func (m *OtaDeployMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
+	switch name {
+	case otadeploy.FieldDeleteTime:
+		return m.OldDeleteTime(ctx)
+	case otadeploy.FieldUUID:
+		return m.OldUUID(ctx)
+	case otadeploy.FieldCarID:
+		return m.OldCarID(ctx)
+	case otadeploy.FieldCarName:
+		return m.OldCarName(ctx)
+	case otadeploy.FieldDeviceID:
+		return m.OldDeviceID(ctx)
+	case otadeploy.FieldOtaVersionID:
+		return m.OldOtaVersionID(ctx)
+	case otadeploy.FieldOtaVersionName:
+		return m.OldOtaVersionName(ctx)
+	case otadeploy.FieldOtaVersionNumber:
+		return m.OldOtaVersionNumber(ctx)
+	case otadeploy.FieldState:
+		return m.OldState(ctx)
+	case otadeploy.FieldErrmsg:
+		return m.OldErrmsg(ctx)
+	case otadeploy.FieldProcess:
+		return m.OldProcess(ctx)
+	case otadeploy.FieldCreateTime:
+		return m.OldCreateTime(ctx)
+	case otadeploy.FieldUpdateTime:
+		return m.OldUpdateTime(ctx)
+	}
+	return nil, fmt.Errorf("unknown OtaDeploy field %s", name)
+}
+
+// SetField sets the value of a field with the given name. It returns an error if
+// the field is not defined in the schema, or if the type mismatched the field
+// type.
+func (m *OtaDeployMutation) SetField(name string, value ent.Value) error {
+	switch name {
+	case otadeploy.FieldDeleteTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetDeleteTime(v)
+		return nil
+	case otadeploy.FieldUUID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetUUID(v)
+		return nil
+	case otadeploy.FieldCarID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCarID(v)
+		return nil
+	case otadeploy.FieldCarName:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCarName(v)
+		return nil
+	case otadeploy.FieldDeviceID:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetDeviceID(v)
+		return nil
+	case otadeploy.FieldOtaVersionID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetOtaVersionID(v)
+		return nil
+	case otadeploy.FieldOtaVersionName:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetOtaVersionName(v)
+		return nil
+	case otadeploy.FieldOtaVersionNumber:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetOtaVersionNumber(v)
+		return nil
+	case otadeploy.FieldState:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetState(v)
+		return nil
+	case otadeploy.FieldErrmsg:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetErrmsg(v)
+		return nil
+	case otadeploy.FieldProcess:
+		v, ok := value.(types.OtaProcess)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetProcess(v)
+		return nil
+	case otadeploy.FieldCreateTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCreateTime(v)
+		return nil
+	case otadeploy.FieldUpdateTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetUpdateTime(v)
+		return nil
+	}
+	return fmt.Errorf("unknown OtaDeploy field %s", name)
+}
+
+// AddedFields returns all numeric fields that were incremented/decremented during
+// this mutation.
+func (m *OtaDeployMutation) AddedFields() []string {
+	var fields []string
+	if m.adduuid != nil {
+		fields = append(fields, otadeploy.FieldUUID)
+	}
+	if m.addcar_id != nil {
+		fields = append(fields, otadeploy.FieldCarID)
+	}
+	if m.addota_version_id != nil {
+		fields = append(fields, otadeploy.FieldOtaVersionID)
+	}
+	if m.addstate != nil {
+		fields = append(fields, otadeploy.FieldState)
+	}
+	return fields
+}
+
+// AddedField returns the numeric value that was incremented/decremented on a field
+// with the given name. The second boolean return value indicates that this field
+// was not set, or was not defined in the schema.
+func (m *OtaDeployMutation) AddedField(name string) (ent.Value, bool) {
+	switch name {
+	case otadeploy.FieldUUID:
+		return m.AddedUUID()
+	case otadeploy.FieldCarID:
+		return m.AddedCarID()
+	case otadeploy.FieldOtaVersionID:
+		return m.AddedOtaVersionID()
+	case otadeploy.FieldState:
+		return m.AddedState()
+	}
+	return nil, false
+}
+
+// AddField adds the value to the field with the given name. It returns an error if
+// the field is not defined in the schema, or if the type mismatched the field
+// type.
+func (m *OtaDeployMutation) AddField(name string, value ent.Value) error {
+	switch name {
+	case otadeploy.FieldUUID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddUUID(v)
+		return nil
+	case otadeploy.FieldCarID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddCarID(v)
+		return nil
+	case otadeploy.FieldOtaVersionID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddOtaVersionID(v)
+		return nil
+	case otadeploy.FieldState:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddState(v)
+		return nil
+	}
+	return fmt.Errorf("unknown OtaDeploy numeric field %s", name)
+}
+
+// ClearedFields returns all nullable fields that were cleared during this
+// mutation.
+func (m *OtaDeployMutation) ClearedFields() []string {
+	var fields []string
+	if m.FieldCleared(otadeploy.FieldDeleteTime) {
+		fields = append(fields, otadeploy.FieldDeleteTime)
+	}
+	if m.FieldCleared(otadeploy.FieldProcess) {
+		fields = append(fields, otadeploy.FieldProcess)
+	}
+	return fields
+}
+
+// FieldCleared returns a boolean indicating if a field with the given name was
+// cleared in this mutation.
+func (m *OtaDeployMutation) FieldCleared(name string) bool {
+	_, ok := m.clearedFields[name]
+	return ok
+}
+
+// ClearField clears the value of the field with the given name. It returns an
+// error if the field is not defined in the schema.
+func (m *OtaDeployMutation) ClearField(name string) error {
+	switch name {
+	case otadeploy.FieldDeleteTime:
+		m.ClearDeleteTime()
+		return nil
+	case otadeploy.FieldProcess:
+		m.ClearProcess()
+		return nil
+	}
+	return fmt.Errorf("unknown OtaDeploy nullable field %s", name)
+}
+
+// ResetField resets all changes in the mutation for the field with the given name.
+// It returns an error if the field is not defined in the schema.
+func (m *OtaDeployMutation) ResetField(name string) error {
+	switch name {
+	case otadeploy.FieldDeleteTime:
+		m.ResetDeleteTime()
+		return nil
+	case otadeploy.FieldUUID:
+		m.ResetUUID()
+		return nil
+	case otadeploy.FieldCarID:
+		m.ResetCarID()
+		return nil
+	case otadeploy.FieldCarName:
+		m.ResetCarName()
+		return nil
+	case otadeploy.FieldDeviceID:
+		m.ResetDeviceID()
+		return nil
+	case otadeploy.FieldOtaVersionID:
+		m.ResetOtaVersionID()
+		return nil
+	case otadeploy.FieldOtaVersionName:
+		m.ResetOtaVersionName()
+		return nil
+	case otadeploy.FieldOtaVersionNumber:
+		m.ResetOtaVersionNumber()
+		return nil
+	case otadeploy.FieldState:
+		m.ResetState()
+		return nil
+	case otadeploy.FieldErrmsg:
+		m.ResetErrmsg()
+		return nil
+	case otadeploy.FieldProcess:
+		m.ResetProcess()
+		return nil
+	case otadeploy.FieldCreateTime:
+		m.ResetCreateTime()
+		return nil
+	case otadeploy.FieldUpdateTime:
+		m.ResetUpdateTime()
+		return nil
+	}
+	return fmt.Errorf("unknown OtaDeploy field %s", name)
+}
+
+// AddedEdges returns all edge names that were set/added in this mutation.
+func (m *OtaDeployMutation) AddedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// AddedIDs returns all IDs (to other nodes) that were added for the given edge
+// name in this mutation.
+func (m *OtaDeployMutation) AddedIDs(name string) []ent.Value {
+	return nil
+}
+
+// RemovedEdges returns all edge names that were removed in this mutation.
+func (m *OtaDeployMutation) RemovedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// RemovedIDs returns all IDs (to other nodes) that were removed for the edge with
+// the given name in this mutation.
+func (m *OtaDeployMutation) RemovedIDs(name string) []ent.Value {
+	return nil
+}
+
+// ClearedEdges returns all edge names that were cleared in this mutation.
+func (m *OtaDeployMutation) ClearedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// EdgeCleared returns a boolean which indicates if the edge with the given name
+// was cleared in this mutation.
+func (m *OtaDeployMutation) EdgeCleared(name string) bool {
+	return false
+}
+
+// ClearEdge clears the value of the edge with the given name. It returns an error
+// if that edge is not defined in the schema.
+func (m *OtaDeployMutation) ClearEdge(name string) error {
+	return fmt.Errorf("unknown OtaDeploy unique edge %s", name)
+}
+
+// ResetEdge resets all changes to the edge with the given name in this mutation.
+// It returns an error if the edge is not defined in the schema.
+func (m *OtaDeployMutation) ResetEdge(name string) error {
+	return fmt.Errorf("unknown OtaDeploy edge %s", name)
+}
+
+// OtaVersionMutation represents an operation that mutates the OtaVersion nodes in the graph.
+type OtaVersionMutation struct {
+	config
+	op                Op
+	typ               string
+	id                *int
+	delete_time       *time.Time
+	scenic_area_id    *int
+	addscenic_area_id *int
+	model_id          *int
+	addmodel_id       *int
+	name              *string
+	version           *string
+	content           *types.OtaContent
+	state             *int
+	addstate          *int
+	create_time       *time.Time
+	update_time       *time.Time
+	clearedFields     map[string]struct{}
+	done              bool
+	oldValue          func(context.Context) (*OtaVersion, error)
+	predicates        []predicate.OtaVersion
+}
+
+var _ ent.Mutation = (*OtaVersionMutation)(nil)
+
+// otaversionOption allows management of the mutation configuration using functional options.
+type otaversionOption func(*OtaVersionMutation)
+
+// newOtaVersionMutation creates new mutation for the OtaVersion entity.
+func newOtaVersionMutation(c config, op Op, opts ...otaversionOption) *OtaVersionMutation {
+	m := &OtaVersionMutation{
+		config:        c,
+		op:            op,
+		typ:           TypeOtaVersion,
+		clearedFields: make(map[string]struct{}),
+	}
+	for _, opt := range opts {
+		opt(m)
+	}
+	return m
+}
+
+// withOtaVersionID sets the ID field of the mutation.
+func withOtaVersionID(id int) otaversionOption {
+	return func(m *OtaVersionMutation) {
+		var (
+			err   error
+			once  sync.Once
+			value *OtaVersion
+		)
+		m.oldValue = func(ctx context.Context) (*OtaVersion, error) {
+			once.Do(func() {
+				if m.done {
+					err = errors.New("querying old values post mutation is not allowed")
+				} else {
+					value, err = m.Client().OtaVersion.Get(ctx, id)
+				}
+			})
+			return value, err
+		}
+		m.id = &id
+	}
+}
+
+// withOtaVersion sets the old OtaVersion of the mutation.
+func withOtaVersion(node *OtaVersion) otaversionOption {
+	return func(m *OtaVersionMutation) {
+		m.oldValue = func(context.Context) (*OtaVersion, error) {
+			return node, nil
+		}
+		m.id = &node.ID
+	}
+}
+
+// Client returns a new `ent.Client` from the mutation. If the mutation was
+// executed in a transaction (ent.Tx), a transactional client is returned.
+func (m OtaVersionMutation) Client() *Client {
+	client := &Client{config: m.config}
+	client.init()
+	return client
+}
+
+// Tx returns an `ent.Tx` for mutations that were executed in transactions;
+// it returns an error otherwise.
+func (m OtaVersionMutation) Tx() (*Tx, error) {
+	if _, ok := m.driver.(*txDriver); !ok {
+		return nil, errors.New("ent: mutation is not running in a transaction")
+	}
+	tx := &Tx{config: m.config}
+	tx.init()
+	return tx, nil
+}
+
+// SetID sets the value of the id field. Note that this
+// operation is only accepted on creation of OtaVersion entities.
+func (m *OtaVersionMutation) SetID(id int) {
+	m.id = &id
+}
+
+// ID returns the ID value in the mutation. Note that the ID is only available
+// if it was provided to the builder or after it was returned from the database.
+func (m *OtaVersionMutation) ID() (id int, exists bool) {
+	if m.id == nil {
+		return
+	}
+	return *m.id, true
+}
+
+// IDs queries the database and returns the entity ids that match the mutation's predicate.
+// That means, if the mutation is applied within a transaction with an isolation level such
+// as sql.LevelSerializable, the returned ids match the ids of the rows that will be updated
+// or updated by the mutation.
+func (m *OtaVersionMutation) IDs(ctx context.Context) ([]int, error) {
+	switch {
+	case m.op.Is(OpUpdateOne | OpDeleteOne):
+		id, exists := m.ID()
+		if exists {
+			return []int{id}, nil
+		}
+		fallthrough
+	case m.op.Is(OpUpdate | OpDelete):
+		return m.Client().OtaVersion.Query().Where(m.predicates...).IDs(ctx)
+	default:
+		return nil, fmt.Errorf("IDs is not allowed on %s operations", m.op)
+	}
+}
+
+// SetDeleteTime sets the "delete_time" field.
+func (m *OtaVersionMutation) SetDeleteTime(t time.Time) {
+	m.delete_time = &t
+}
+
+// DeleteTime returns the value of the "delete_time" field in the mutation.
+func (m *OtaVersionMutation) DeleteTime() (r time.Time, exists bool) {
+	v := m.delete_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldDeleteTime returns the old "delete_time" field's value of the OtaVersion entity.
+// If the OtaVersion object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaVersionMutation) OldDeleteTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldDeleteTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldDeleteTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldDeleteTime: %w", err)
+	}
+	return oldValue.DeleteTime, nil
+}
+
+// ClearDeleteTime clears the value of the "delete_time" field.
+func (m *OtaVersionMutation) ClearDeleteTime() {
+	m.delete_time = nil
+	m.clearedFields[otaversion.FieldDeleteTime] = struct{}{}
+}
+
+// DeleteTimeCleared returns if the "delete_time" field was cleared in this mutation.
+func (m *OtaVersionMutation) DeleteTimeCleared() bool {
+	_, ok := m.clearedFields[otaversion.FieldDeleteTime]
+	return ok
+}
+
+// ResetDeleteTime resets all changes to the "delete_time" field.
+func (m *OtaVersionMutation) ResetDeleteTime() {
+	m.delete_time = nil
+	delete(m.clearedFields, otaversion.FieldDeleteTime)
+}
+
+// SetScenicAreaID sets the "scenic_area_id" field.
+func (m *OtaVersionMutation) SetScenicAreaID(i int) {
+	m.scenic_area_id = &i
+	m.addscenic_area_id = nil
+}
+
+// ScenicAreaID returns the value of the "scenic_area_id" field in the mutation.
+func (m *OtaVersionMutation) ScenicAreaID() (r int, exists bool) {
+	v := m.scenic_area_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldScenicAreaID returns the old "scenic_area_id" field's value of the OtaVersion entity.
+// If the OtaVersion object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaVersionMutation) OldScenicAreaID(ctx context.Context) (v *int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldScenicAreaID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldScenicAreaID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldScenicAreaID: %w", err)
+	}
+	return oldValue.ScenicAreaID, nil
+}
+
+// AddScenicAreaID adds i to the "scenic_area_id" field.
+func (m *OtaVersionMutation) AddScenicAreaID(i int) {
+	if m.addscenic_area_id != nil {
+		*m.addscenic_area_id += i
+	} else {
+		m.addscenic_area_id = &i
+	}
+}
+
+// AddedScenicAreaID returns the value that was added to the "scenic_area_id" field in this mutation.
+func (m *OtaVersionMutation) AddedScenicAreaID() (r int, exists bool) {
+	v := m.addscenic_area_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearScenicAreaID clears the value of the "scenic_area_id" field.
+func (m *OtaVersionMutation) ClearScenicAreaID() {
+	m.scenic_area_id = nil
+	m.addscenic_area_id = nil
+	m.clearedFields[otaversion.FieldScenicAreaID] = struct{}{}
+}
+
+// ScenicAreaIDCleared returns if the "scenic_area_id" field was cleared in this mutation.
+func (m *OtaVersionMutation) ScenicAreaIDCleared() bool {
+	_, ok := m.clearedFields[otaversion.FieldScenicAreaID]
+	return ok
+}
+
+// ResetScenicAreaID resets all changes to the "scenic_area_id" field.
+func (m *OtaVersionMutation) ResetScenicAreaID() {
+	m.scenic_area_id = nil
+	m.addscenic_area_id = nil
+	delete(m.clearedFields, otaversion.FieldScenicAreaID)
+}
+
+// SetModelID sets the "model_id" field.
+func (m *OtaVersionMutation) SetModelID(i int) {
+	m.model_id = &i
+	m.addmodel_id = nil
+}
+
+// ModelID returns the value of the "model_id" field in the mutation.
+func (m *OtaVersionMutation) ModelID() (r int, exists bool) {
+	v := m.model_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldModelID returns the old "model_id" field's value of the OtaVersion entity.
+// If the OtaVersion object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaVersionMutation) OldModelID(ctx context.Context) (v *int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldModelID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldModelID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldModelID: %w", err)
+	}
+	return oldValue.ModelID, nil
+}
+
+// AddModelID adds i to the "model_id" field.
+func (m *OtaVersionMutation) AddModelID(i int) {
+	if m.addmodel_id != nil {
+		*m.addmodel_id += i
+	} else {
+		m.addmodel_id = &i
+	}
+}
+
+// AddedModelID returns the value that was added to the "model_id" field in this mutation.
+func (m *OtaVersionMutation) AddedModelID() (r int, exists bool) {
+	v := m.addmodel_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearModelID clears the value of the "model_id" field.
+func (m *OtaVersionMutation) ClearModelID() {
+	m.model_id = nil
+	m.addmodel_id = nil
+	m.clearedFields[otaversion.FieldModelID] = struct{}{}
+}
+
+// ModelIDCleared returns if the "model_id" field was cleared in this mutation.
+func (m *OtaVersionMutation) ModelIDCleared() bool {
+	_, ok := m.clearedFields[otaversion.FieldModelID]
+	return ok
+}
+
+// ResetModelID resets all changes to the "model_id" field.
+func (m *OtaVersionMutation) ResetModelID() {
+	m.model_id = nil
+	m.addmodel_id = nil
+	delete(m.clearedFields, otaversion.FieldModelID)
+}
+
+// SetName sets the "name" field.
+func (m *OtaVersionMutation) SetName(s string) {
+	m.name = &s
+}
+
+// Name returns the value of the "name" field in the mutation.
+func (m *OtaVersionMutation) Name() (r string, exists bool) {
+	v := m.name
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldName returns the old "name" field's value of the OtaVersion entity.
+// If the OtaVersion object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaVersionMutation) OldName(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldName is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldName requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldName: %w", err)
+	}
+	return oldValue.Name, nil
+}
+
+// ResetName resets all changes to the "name" field.
+func (m *OtaVersionMutation) ResetName() {
+	m.name = nil
+}
+
+// SetVersion sets the "version" field.
+func (m *OtaVersionMutation) SetVersion(s string) {
+	m.version = &s
+}
+
+// Version returns the value of the "version" field in the mutation.
+func (m *OtaVersionMutation) Version() (r string, exists bool) {
+	v := m.version
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldVersion returns the old "version" field's value of the OtaVersion entity.
+// If the OtaVersion object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaVersionMutation) OldVersion(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldVersion is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldVersion requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldVersion: %w", err)
+	}
+	return oldValue.Version, nil
+}
+
+// ResetVersion resets all changes to the "version" field.
+func (m *OtaVersionMutation) ResetVersion() {
+	m.version = nil
+}
+
+// SetContent sets the "content" field.
+func (m *OtaVersionMutation) SetContent(tc types.OtaContent) {
+	m.content = &tc
+}
+
+// Content returns the value of the "content" field in the mutation.
+func (m *OtaVersionMutation) Content() (r types.OtaContent, exists bool) {
+	v := m.content
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldContent returns the old "content" field's value of the OtaVersion entity.
+// If the OtaVersion object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaVersionMutation) OldContent(ctx context.Context) (v types.OtaContent, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldContent is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldContent requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldContent: %w", err)
+	}
+	return oldValue.Content, nil
+}
+
+// ResetContent resets all changes to the "content" field.
+func (m *OtaVersionMutation) ResetContent() {
+	m.content = nil
+}
+
+// SetState sets the "state" field.
+func (m *OtaVersionMutation) SetState(i int) {
+	m.state = &i
+	m.addstate = nil
+}
+
+// State returns the value of the "state" field in the mutation.
+func (m *OtaVersionMutation) State() (r int, exists bool) {
+	v := m.state
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldState returns the old "state" field's value of the OtaVersion entity.
+// If the OtaVersion object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaVersionMutation) OldState(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldState is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldState requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldState: %w", err)
+	}
+	return oldValue.State, nil
+}
+
+// AddState adds i to the "state" field.
+func (m *OtaVersionMutation) AddState(i int) {
+	if m.addstate != nil {
+		*m.addstate += i
+	} else {
+		m.addstate = &i
+	}
+}
+
+// AddedState returns the value that was added to the "state" field in this mutation.
+func (m *OtaVersionMutation) AddedState() (r int, exists bool) {
+	v := m.addstate
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetState resets all changes to the "state" field.
+func (m *OtaVersionMutation) ResetState() {
+	m.state = nil
+	m.addstate = nil
+}
+
+// SetCreateTime sets the "create_time" field.
+func (m *OtaVersionMutation) SetCreateTime(t time.Time) {
+	m.create_time = &t
+}
+
+// CreateTime returns the value of the "create_time" field in the mutation.
+func (m *OtaVersionMutation) CreateTime() (r time.Time, exists bool) {
+	v := m.create_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCreateTime returns the old "create_time" field's value of the OtaVersion entity.
+// If the OtaVersion object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaVersionMutation) OldCreateTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCreateTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCreateTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCreateTime: %w", err)
+	}
+	return oldValue.CreateTime, nil
+}
+
+// ResetCreateTime resets all changes to the "create_time" field.
+func (m *OtaVersionMutation) ResetCreateTime() {
+	m.create_time = nil
+}
+
+// SetUpdateTime sets the "update_time" field.
+func (m *OtaVersionMutation) SetUpdateTime(t time.Time) {
+	m.update_time = &t
+}
+
+// UpdateTime returns the value of the "update_time" field in the mutation.
+func (m *OtaVersionMutation) UpdateTime() (r time.Time, exists bool) {
+	v := m.update_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldUpdateTime returns the old "update_time" field's value of the OtaVersion entity.
+// If the OtaVersion object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OtaVersionMutation) OldUpdateTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldUpdateTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldUpdateTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldUpdateTime: %w", err)
+	}
+	return oldValue.UpdateTime, nil
+}
+
+// ResetUpdateTime resets all changes to the "update_time" field.
+func (m *OtaVersionMutation) ResetUpdateTime() {
+	m.update_time = nil
+}
+
+// Where appends a list predicates to the OtaVersionMutation builder.
+func (m *OtaVersionMutation) Where(ps ...predicate.OtaVersion) {
+	m.predicates = append(m.predicates, ps...)
+}
+
+// WhereP appends storage-level predicates to the OtaVersionMutation builder. Using this method,
+// users can use type-assertion to append predicates that do not depend on any generated package.
+func (m *OtaVersionMutation) WhereP(ps ...func(*sql.Selector)) {
+	p := make([]predicate.OtaVersion, len(ps))
+	for i := range ps {
+		p[i] = ps[i]
+	}
+	m.Where(p...)
+}
+
+// Op returns the operation name.
+func (m *OtaVersionMutation) Op() Op {
+	return m.op
+}
+
+// SetOp allows setting the mutation operation.
+func (m *OtaVersionMutation) SetOp(op Op) {
+	m.op = op
+}
+
+// Type returns the node type of this mutation (OtaVersion).
+func (m *OtaVersionMutation) Type() string {
+	return m.typ
+}
+
+// Fields returns all fields that were changed during this mutation. Note that in
+// order to get all numeric fields that were incremented/decremented, call
+// AddedFields().
+func (m *OtaVersionMutation) Fields() []string {
+	fields := make([]string, 0, 9)
+	if m.delete_time != nil {
+		fields = append(fields, otaversion.FieldDeleteTime)
+	}
+	if m.scenic_area_id != nil {
+		fields = append(fields, otaversion.FieldScenicAreaID)
+	}
+	if m.model_id != nil {
+		fields = append(fields, otaversion.FieldModelID)
+	}
+	if m.name != nil {
+		fields = append(fields, otaversion.FieldName)
+	}
+	if m.version != nil {
+		fields = append(fields, otaversion.FieldVersion)
+	}
+	if m.content != nil {
+		fields = append(fields, otaversion.FieldContent)
+	}
+	if m.state != nil {
+		fields = append(fields, otaversion.FieldState)
+	}
+	if m.create_time != nil {
+		fields = append(fields, otaversion.FieldCreateTime)
+	}
+	if m.update_time != nil {
+		fields = append(fields, otaversion.FieldUpdateTime)
+	}
+	return fields
+}
+
+// Field returns the value of a field with the given name. The second boolean
+// return value indicates that this field was not set, or was not defined in the
+// schema.
+func (m *OtaVersionMutation) Field(name string) (ent.Value, bool) {
+	switch name {
+	case otaversion.FieldDeleteTime:
+		return m.DeleteTime()
+	case otaversion.FieldScenicAreaID:
+		return m.ScenicAreaID()
+	case otaversion.FieldModelID:
+		return m.ModelID()
+	case otaversion.FieldName:
+		return m.Name()
+	case otaversion.FieldVersion:
+		return m.Version()
+	case otaversion.FieldContent:
+		return m.Content()
+	case otaversion.FieldState:
+		return m.State()
+	case otaversion.FieldCreateTime:
+		return m.CreateTime()
+	case otaversion.FieldUpdateTime:
+		return m.UpdateTime()
+	}
+	return nil, false
+}
+
+// OldField returns the old value of the field from the database. An error is
+// returned if the mutation operation is not UpdateOne, or the query to the
+// database failed.
+func (m *OtaVersionMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
+	switch name {
+	case otaversion.FieldDeleteTime:
+		return m.OldDeleteTime(ctx)
+	case otaversion.FieldScenicAreaID:
+		return m.OldScenicAreaID(ctx)
+	case otaversion.FieldModelID:
+		return m.OldModelID(ctx)
+	case otaversion.FieldName:
+		return m.OldName(ctx)
+	case otaversion.FieldVersion:
+		return m.OldVersion(ctx)
+	case otaversion.FieldContent:
+		return m.OldContent(ctx)
+	case otaversion.FieldState:
+		return m.OldState(ctx)
+	case otaversion.FieldCreateTime:
+		return m.OldCreateTime(ctx)
+	case otaversion.FieldUpdateTime:
+		return m.OldUpdateTime(ctx)
+	}
+	return nil, fmt.Errorf("unknown OtaVersion field %s", name)
+}
+
+// SetField sets the value of a field with the given name. It returns an error if
+// the field is not defined in the schema, or if the type mismatched the field
+// type.
+func (m *OtaVersionMutation) SetField(name string, value ent.Value) error {
+	switch name {
+	case otaversion.FieldDeleteTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetDeleteTime(v)
+		return nil
+	case otaversion.FieldScenicAreaID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetScenicAreaID(v)
+		return nil
+	case otaversion.FieldModelID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetModelID(v)
+		return nil
+	case otaversion.FieldName:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetName(v)
+		return nil
+	case otaversion.FieldVersion:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetVersion(v)
+		return nil
+	case otaversion.FieldContent:
+		v, ok := value.(types.OtaContent)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetContent(v)
+		return nil
+	case otaversion.FieldState:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetState(v)
+		return nil
+	case otaversion.FieldCreateTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCreateTime(v)
+		return nil
+	case otaversion.FieldUpdateTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetUpdateTime(v)
+		return nil
+	}
+	return fmt.Errorf("unknown OtaVersion field %s", name)
+}
+
+// AddedFields returns all numeric fields that were incremented/decremented during
+// this mutation.
+func (m *OtaVersionMutation) AddedFields() []string {
+	var fields []string
+	if m.addscenic_area_id != nil {
+		fields = append(fields, otaversion.FieldScenicAreaID)
+	}
+	if m.addmodel_id != nil {
+		fields = append(fields, otaversion.FieldModelID)
+	}
+	if m.addstate != nil {
+		fields = append(fields, otaversion.FieldState)
+	}
+	return fields
+}
+
+// AddedField returns the numeric value that was incremented/decremented on a field
+// with the given name. The second boolean return value indicates that this field
+// was not set, or was not defined in the schema.
+func (m *OtaVersionMutation) AddedField(name string) (ent.Value, bool) {
+	switch name {
+	case otaversion.FieldScenicAreaID:
+		return m.AddedScenicAreaID()
+	case otaversion.FieldModelID:
+		return m.AddedModelID()
+	case otaversion.FieldState:
+		return m.AddedState()
+	}
+	return nil, false
+}
+
+// AddField adds the value to the field with the given name. It returns an error if
+// the field is not defined in the schema, or if the type mismatched the field
+// type.
+func (m *OtaVersionMutation) AddField(name string, value ent.Value) error {
+	switch name {
+	case otaversion.FieldScenicAreaID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddScenicAreaID(v)
+		return nil
+	case otaversion.FieldModelID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddModelID(v)
+		return nil
+	case otaversion.FieldState:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddState(v)
+		return nil
+	}
+	return fmt.Errorf("unknown OtaVersion numeric field %s", name)
+}
+
+// ClearedFields returns all nullable fields that were cleared during this
+// mutation.
+func (m *OtaVersionMutation) ClearedFields() []string {
+	var fields []string
+	if m.FieldCleared(otaversion.FieldDeleteTime) {
+		fields = append(fields, otaversion.FieldDeleteTime)
+	}
+	if m.FieldCleared(otaversion.FieldScenicAreaID) {
+		fields = append(fields, otaversion.FieldScenicAreaID)
+	}
+	if m.FieldCleared(otaversion.FieldModelID) {
+		fields = append(fields, otaversion.FieldModelID)
+	}
+	return fields
+}
+
+// FieldCleared returns a boolean indicating if a field with the given name was
+// cleared in this mutation.
+func (m *OtaVersionMutation) FieldCleared(name string) bool {
+	_, ok := m.clearedFields[name]
+	return ok
+}
+
+// ClearField clears the value of the field with the given name. It returns an
+// error if the field is not defined in the schema.
+func (m *OtaVersionMutation) ClearField(name string) error {
+	switch name {
+	case otaversion.FieldDeleteTime:
+		m.ClearDeleteTime()
+		return nil
+	case otaversion.FieldScenicAreaID:
+		m.ClearScenicAreaID()
+		return nil
+	case otaversion.FieldModelID:
+		m.ClearModelID()
+		return nil
+	}
+	return fmt.Errorf("unknown OtaVersion nullable field %s", name)
+}
+
+// ResetField resets all changes in the mutation for the field with the given name.
+// It returns an error if the field is not defined in the schema.
+func (m *OtaVersionMutation) ResetField(name string) error {
+	switch name {
+	case otaversion.FieldDeleteTime:
+		m.ResetDeleteTime()
+		return nil
+	case otaversion.FieldScenicAreaID:
+		m.ResetScenicAreaID()
+		return nil
+	case otaversion.FieldModelID:
+		m.ResetModelID()
+		return nil
+	case otaversion.FieldName:
+		m.ResetName()
+		return nil
+	case otaversion.FieldVersion:
+		m.ResetVersion()
+		return nil
+	case otaversion.FieldContent:
+		m.ResetContent()
+		return nil
+	case otaversion.FieldState:
+		m.ResetState()
+		return nil
+	case otaversion.FieldCreateTime:
+		m.ResetCreateTime()
+		return nil
+	case otaversion.FieldUpdateTime:
+		m.ResetUpdateTime()
+		return nil
+	}
+	return fmt.Errorf("unknown OtaVersion field %s", name)
+}
+
+// AddedEdges returns all edge names that were set/added in this mutation.
+func (m *OtaVersionMutation) AddedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// AddedIDs returns all IDs (to other nodes) that were added for the given edge
+// name in this mutation.
+func (m *OtaVersionMutation) AddedIDs(name string) []ent.Value {
+	return nil
+}
+
+// RemovedEdges returns all edge names that were removed in this mutation.
+func (m *OtaVersionMutation) RemovedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// RemovedIDs returns all IDs (to other nodes) that were removed for the edge with
+// the given name in this mutation.
+func (m *OtaVersionMutation) RemovedIDs(name string) []ent.Value {
+	return nil
+}
+
+// ClearedEdges returns all edge names that were cleared in this mutation.
+func (m *OtaVersionMutation) ClearedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// EdgeCleared returns a boolean which indicates if the edge with the given name
+// was cleared in this mutation.
+func (m *OtaVersionMutation) EdgeCleared(name string) bool {
+	return false
+}
+
+// ClearEdge clears the value of the edge with the given name. It returns an error
+// if that edge is not defined in the schema.
+func (m *OtaVersionMutation) ClearEdge(name string) error {
+	return fmt.Errorf("unknown OtaVersion unique edge %s", name)
+}
+
+// ResetEdge resets all changes to the edge with the given name in this mutation.
+// It returns an error if the edge is not defined in the schema.
+func (m *OtaVersionMutation) ResetEdge(name string) error {
+	return fmt.Errorf("unknown OtaVersion edge %s", name)
 }
 
 // PayTxBillMutation represents an operation that mutates the PayTxBill nodes in the graph.

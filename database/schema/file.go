@@ -18,6 +18,7 @@ type File struct {
 func (File) Fields() []ent.Field {
 	return []ent.Field{
 		field.Int("id").Unique().Comment("ID"),
+		field.Int("storage_type").Default(1).Comment("存储类型（1-Local、2-OSS）"),
 		field.Int("creator_id").Comment("用户ID"),
 		field.Int("scenic_area_id").Comment("景区ID"),
 		field.Int("file_category").Comment("文件分类(0-其他,1-POI,2-停车点)"),

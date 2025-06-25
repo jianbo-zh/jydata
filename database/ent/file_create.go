@@ -20,6 +20,20 @@ type FileCreate struct {
 	hooks    []Hook
 }
 
+// SetStorageType sets the "storage_type" field.
+func (fc *FileCreate) SetStorageType(i int) *FileCreate {
+	fc.mutation.SetStorageType(i)
+	return fc
+}
+
+// SetNillableStorageType sets the "storage_type" field if the given value is not nil.
+func (fc *FileCreate) SetNillableStorageType(i *int) *FileCreate {
+	if i != nil {
+		fc.SetStorageType(*i)
+	}
+	return fc
+}
+
 // SetCreatorID sets the "creator_id" field.
 func (fc *FileCreate) SetCreatorID(i int) *FileCreate {
 	fc.mutation.SetCreatorID(i)
@@ -137,6 +151,10 @@ func (fc *FileCreate) ExecX(ctx context.Context) {
 
 // defaults sets the default values of the builder before save.
 func (fc *FileCreate) defaults() {
+	if _, ok := fc.mutation.StorageType(); !ok {
+		v := file.DefaultStorageType
+		fc.mutation.SetStorageType(v)
+	}
 	if _, ok := fc.mutation.CreateTime(); !ok {
 		v := file.DefaultCreateTime()
 		fc.mutation.SetCreateTime(v)
@@ -149,6 +167,9 @@ func (fc *FileCreate) defaults() {
 
 // check runs all checks and user-defined validators on the builder.
 func (fc *FileCreate) check() error {
+	if _, ok := fc.mutation.StorageType(); !ok {
+		return &ValidationError{Name: "storage_type", err: errors.New(`ent: missing required field "File.storage_type"`)}
+	}
 	if _, ok := fc.mutation.CreatorID(); !ok {
 		return &ValidationError{Name: "creator_id", err: errors.New(`ent: missing required field "File.creator_id"`)}
 	}
@@ -210,6 +231,10 @@ func (fc *FileCreate) createSpec() (*File, *sqlgraph.CreateSpec) {
 	if id, ok := fc.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
+	}
+	if value, ok := fc.mutation.StorageType(); ok {
+		_spec.SetField(file.FieldStorageType, field.TypeInt, value)
+		_node.StorageType = value
 	}
 	if value, ok := fc.mutation.CreatorID(); ok {
 		_spec.SetField(file.FieldCreatorID, field.TypeInt, value)

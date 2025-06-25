@@ -393,6 +393,42 @@ func (f OrderSharingFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value
 	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.OrderSharingMutation", m)
 }
 
+// The OtaBtreeFunc type is an adapter to allow the use of ordinary
+// function as OtaBtree mutator.
+type OtaBtreeFunc func(context.Context, *ent.OtaBtreeMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f OtaBtreeFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.OtaBtreeMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.OtaBtreeMutation", m)
+}
+
+// The OtaDeployFunc type is an adapter to allow the use of ordinary
+// function as OtaDeploy mutator.
+type OtaDeployFunc func(context.Context, *ent.OtaDeployMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f OtaDeployFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.OtaDeployMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.OtaDeployMutation", m)
+}
+
+// The OtaVersionFunc type is an adapter to allow the use of ordinary
+// function as OtaVersion mutator.
+type OtaVersionFunc func(context.Context, *ent.OtaVersionMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f OtaVersionFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.OtaVersionMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.OtaVersionMutation", m)
+}
+
 // The PayTxBillFunc type is an adapter to allow the use of ordinary
 // function as PayTxBill mutator.
 type PayTxBillFunc func(context.Context, *ent.PayTxBillMutation) (ent.Value, error)

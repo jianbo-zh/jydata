@@ -633,6 +633,7 @@ var (
 	// FilesColumns holds the columns for the "files" table.
 	FilesColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
+		{Name: "storage_type", Type: field.TypeInt, Default: 1},
 		{Name: "creator_id", Type: field.TypeInt},
 		{Name: "scenic_area_id", Type: field.TypeInt},
 		{Name: "file_category", Type: field.TypeInt},
@@ -904,6 +905,64 @@ var (
 				OnDelete:   schema.NoAction,
 			},
 		},
+	}
+	// OtaBtreesColumns holds the columns for the "ota_btrees" table.
+	OtaBtreesColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeInt, Increment: true},
+		{Name: "delete_time", Type: field.TypeTime, Nullable: true},
+		{Name: "file_id", Type: field.TypeInt},
+		{Name: "name", Type: field.TypeString},
+		{Name: "remark", Type: field.TypeString, Default: ""},
+		{Name: "create_time", Type: field.TypeTime},
+		{Name: "update_time", Type: field.TypeTime},
+	}
+	// OtaBtreesTable holds the schema information for the "ota_btrees" table.
+	OtaBtreesTable = &schema.Table{
+		Name:       "ota_btrees",
+		Columns:    OtaBtreesColumns,
+		PrimaryKey: []*schema.Column{OtaBtreesColumns[0]},
+	}
+	// OtaDeploysColumns holds the columns for the "ota_deploys" table.
+	OtaDeploysColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeInt, Increment: true},
+		{Name: "delete_time", Type: field.TypeTime, Nullable: true},
+		{Name: "uuid", Type: field.TypeInt},
+		{Name: "car_id", Type: field.TypeInt},
+		{Name: "car_name", Type: field.TypeString},
+		{Name: "device_id", Type: field.TypeString},
+		{Name: "ota_version_id", Type: field.TypeInt},
+		{Name: "ota_version_name", Type: field.TypeString},
+		{Name: "ota_version_number", Type: field.TypeString},
+		{Name: "state", Type: field.TypeInt, Default: 1},
+		{Name: "errmsg", Type: field.TypeString, Default: ""},
+		{Name: "process", Type: field.TypeJSON, Nullable: true},
+		{Name: "create_time", Type: field.TypeTime},
+		{Name: "update_time", Type: field.TypeTime},
+	}
+	// OtaDeploysTable holds the schema information for the "ota_deploys" table.
+	OtaDeploysTable = &schema.Table{
+		Name:       "ota_deploys",
+		Columns:    OtaDeploysColumns,
+		PrimaryKey: []*schema.Column{OtaDeploysColumns[0]},
+	}
+	// OtaVersionsColumns holds the columns for the "ota_versions" table.
+	OtaVersionsColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeInt, Increment: true},
+		{Name: "delete_time", Type: field.TypeTime, Nullable: true},
+		{Name: "scenic_area_id", Type: field.TypeInt, Nullable: true},
+		{Name: "model_id", Type: field.TypeInt, Nullable: true},
+		{Name: "name", Type: field.TypeString},
+		{Name: "version", Type: field.TypeString},
+		{Name: "content", Type: field.TypeJSON},
+		{Name: "state", Type: field.TypeInt},
+		{Name: "create_time", Type: field.TypeTime},
+		{Name: "update_time", Type: field.TypeTime},
+	}
+	// OtaVersionsTable holds the schema information for the "ota_versions" table.
+	OtaVersionsTable = &schema.Table{
+		Name:       "ota_versions",
+		Columns:    OtaVersionsColumns,
+		PrimaryKey: []*schema.Column{OtaVersionsColumns[0]},
 	}
 	// PayTxBillsColumns holds the columns for the "pay_tx_bills" table.
 	PayTxBillsColumns = []*schema.Column{
@@ -1496,7 +1555,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1750212397},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1750816570},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},
@@ -1606,6 +1665,9 @@ var (
 		OrderExtendFlightsTable,
 		OrderRefundsTable,
 		OrderSharingsTable,
+		OtaBtreesTable,
+		OtaDeploysTable,
+		OtaVersionsTable,
 		PayTxBillsTable,
 		PaymentAccountsTable,
 		PoisTable,

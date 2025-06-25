@@ -76,6 +76,12 @@ type Tx struct {
 	OrderRefund *OrderRefundClient
 	// OrderSharing is the client for interacting with the OrderSharing builders.
 	OrderSharing *OrderSharingClient
+	// OtaBtree is the client for interacting with the OtaBtree builders.
+	OtaBtree *OtaBtreeClient
+	// OtaDeploy is the client for interacting with the OtaDeploy builders.
+	OtaDeploy *OtaDeployClient
+	// OtaVersion is the client for interacting with the OtaVersion builders.
+	OtaVersion *OtaVersionClient
 	// PayTxBill is the client for interacting with the PayTxBill builders.
 	PayTxBill *PayTxBillClient
 	// PaymentAccount is the client for interacting with the PaymentAccount builders.
@@ -283,6 +289,9 @@ func (tx *Tx) init() {
 	tx.OrderExtendFlight = NewOrderExtendFlightClient(tx.config)
 	tx.OrderRefund = NewOrderRefundClient(tx.config)
 	tx.OrderSharing = NewOrderSharingClient(tx.config)
+	tx.OtaBtree = NewOtaBtreeClient(tx.config)
+	tx.OtaDeploy = NewOtaDeployClient(tx.config)
+	tx.OtaVersion = NewOtaVersionClient(tx.config)
 	tx.PayTxBill = NewPayTxBillClient(tx.config)
 	tx.PaymentAccount = NewPaymentAccountClient(tx.config)
 	tx.Poi = NewPoiClient(tx.config)

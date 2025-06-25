@@ -13,6 +13,8 @@ const (
 	Label = "file"
 	// FieldID holds the string denoting the id field in the database.
 	FieldID = "id"
+	// FieldStorageType holds the string denoting the storage_type field in the database.
+	FieldStorageType = "storage_type"
 	// FieldCreatorID holds the string denoting the creator_id field in the database.
 	FieldCreatorID = "creator_id"
 	// FieldScenicAreaID holds the string denoting the scenic_area_id field in the database.
@@ -40,6 +42,7 @@ const (
 // Columns holds all SQL columns for file fields.
 var Columns = []string{
 	FieldID,
+	FieldStorageType,
 	FieldCreatorID,
 	FieldScenicAreaID,
 	FieldFileCategory,
@@ -63,6 +66,8 @@ func ValidColumn(column string) bool {
 }
 
 var (
+	// DefaultStorageType holds the default value on creation for the "storage_type" field.
+	DefaultStorageType int
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.
 	DefaultCreateTime func() time.Time
 	// DefaultUpdateTime holds the default value on creation for the "update_time" field.
@@ -77,6 +82,11 @@ type OrderOption func(*sql.Selector)
 // ByID orders the results by the id field.
 func ByID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldID, opts...).ToFunc()
+}
+
+// ByStorageType orders the results by the storage_type field.
+func ByStorageType(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldStorageType, opts...).ToFunc()
 }
 
 // ByCreatorID orders the results by the creator_id field.

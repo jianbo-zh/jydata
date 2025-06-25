@@ -44,6 +44,9 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/orderextendflight"
 	"github.com/jianbo-zh/jydata/database/ent/orderrefund"
 	"github.com/jianbo-zh/jydata/database/ent/ordersharing"
+	"github.com/jianbo-zh/jydata/database/ent/otabtree"
+	"github.com/jianbo-zh/jydata/database/ent/otadeploy"
+	"github.com/jianbo-zh/jydata/database/ent/otaversion"
 	"github.com/jianbo-zh/jydata/database/ent/paymentaccount"
 	"github.com/jianbo-zh/jydata/database/ent/paytxbill"
 	"github.com/jianbo-zh/jydata/database/ent/poi"
@@ -158,6 +161,9 @@ func checkColumn(table, column string) error {
 			orderextendflight.Table:      orderextendflight.ValidColumn,
 			orderrefund.Table:            orderrefund.ValidColumn,
 			ordersharing.Table:           ordersharing.ValidColumn,
+			otabtree.Table:               otabtree.ValidColumn,
+			otadeploy.Table:              otadeploy.ValidColumn,
+			otaversion.Table:             otaversion.ValidColumn,
 			paytxbill.Table:              paytxbill.ValidColumn,
 			paymentaccount.Table:         paymentaccount.ValidColumn,
 			poi.Table:                    poi.ValidColumn,

@@ -40,6 +40,9 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/orderextendflight"
 	"github.com/jianbo-zh/jydata/database/ent/orderrefund"
 	"github.com/jianbo-zh/jydata/database/ent/ordersharing"
+	"github.com/jianbo-zh/jydata/database/ent/otabtree"
+	"github.com/jianbo-zh/jydata/database/ent/otadeploy"
+	"github.com/jianbo-zh/jydata/database/ent/otaversion"
 	"github.com/jianbo-zh/jydata/database/ent/paymentaccount"
 	"github.com/jianbo-zh/jydata/database/ent/paytxbill"
 	"github.com/jianbo-zh/jydata/database/ent/poi"
@@ -985,6 +988,87 @@ func (f TraverseOrderSharing) Traverse(ctx context.Context, q ent.Query) error {
 	return fmt.Errorf("unexpected query type %T. expect *ent.OrderSharingQuery", q)
 }
 
+// The OtaBtreeFunc type is an adapter to allow the use of ordinary function as a Querier.
+type OtaBtreeFunc func(context.Context, *ent.OtaBtreeQuery) (ent.Value, error)
+
+// Query calls f(ctx, q).
+func (f OtaBtreeFunc) Query(ctx context.Context, q ent.Query) (ent.Value, error) {
+	if q, ok := q.(*ent.OtaBtreeQuery); ok {
+		return f(ctx, q)
+	}
+	return nil, fmt.Errorf("unexpected query type %T. expect *ent.OtaBtreeQuery", q)
+}
+
+// The TraverseOtaBtree type is an adapter to allow the use of ordinary function as Traverser.
+type TraverseOtaBtree func(context.Context, *ent.OtaBtreeQuery) error
+
+// Intercept is a dummy implementation of Intercept that returns the next Querier in the pipeline.
+func (f TraverseOtaBtree) Intercept(next ent.Querier) ent.Querier {
+	return next
+}
+
+// Traverse calls f(ctx, q).
+func (f TraverseOtaBtree) Traverse(ctx context.Context, q ent.Query) error {
+	if q, ok := q.(*ent.OtaBtreeQuery); ok {
+		return f(ctx, q)
+	}
+	return fmt.Errorf("unexpected query type %T. expect *ent.OtaBtreeQuery", q)
+}
+
+// The OtaDeployFunc type is an adapter to allow the use of ordinary function as a Querier.
+type OtaDeployFunc func(context.Context, *ent.OtaDeployQuery) (ent.Value, error)
+
+// Query calls f(ctx, q).
+func (f OtaDeployFunc) Query(ctx context.Context, q ent.Query) (ent.Value, error) {
+	if q, ok := q.(*ent.OtaDeployQuery); ok {
+		return f(ctx, q)
+	}
+	return nil, fmt.Errorf("unexpected query type %T. expect *ent.OtaDeployQuery", q)
+}
+
+// The TraverseOtaDeploy type is an adapter to allow the use of ordinary function as Traverser.
+type TraverseOtaDeploy func(context.Context, *ent.OtaDeployQuery) error
+
+// Intercept is a dummy implementation of Intercept that returns the next Querier in the pipeline.
+func (f TraverseOtaDeploy) Intercept(next ent.Querier) ent.Querier {
+	return next
+}
+
+// Traverse calls f(ctx, q).
+func (f TraverseOtaDeploy) Traverse(ctx context.Context, q ent.Query) error {
+	if q, ok := q.(*ent.OtaDeployQuery); ok {
+		return f(ctx, q)
+	}
+	return fmt.Errorf("unexpected query type %T. expect *ent.OtaDeployQuery", q)
+}
+
+// The OtaVersionFunc type is an adapter to allow the use of ordinary function as a Querier.
+type OtaVersionFunc func(context.Context, *ent.OtaVersionQuery) (ent.Value, error)
+
+// Query calls f(ctx, q).
+func (f OtaVersionFunc) Query(ctx context.Context, q ent.Query) (ent.Value, error) {
+	if q, ok := q.(*ent.OtaVersionQuery); ok {
+		return f(ctx, q)
+	}
+	return nil, fmt.Errorf("unexpected query type %T. expect *ent.OtaVersionQuery", q)
+}
+
+// The TraverseOtaVersion type is an adapter to allow the use of ordinary function as Traverser.
+type TraverseOtaVersion func(context.Context, *ent.OtaVersionQuery) error
+
+// Intercept is a dummy implementation of Intercept that returns the next Querier in the pipeline.
+func (f TraverseOtaVersion) Intercept(next ent.Querier) ent.Querier {
+	return next
+}
+
+// Traverse calls f(ctx, q).
+func (f TraverseOtaVersion) Traverse(ctx context.Context, q ent.Query) error {
+	if q, ok := q.(*ent.OtaVersionQuery); ok {
+		return f(ctx, q)
+	}
+	return fmt.Errorf("unexpected query type %T. expect *ent.OtaVersionQuery", q)
+}
+
 // The PayTxBillFunc type is an adapter to allow the use of ordinary function as a Querier.
 type PayTxBillFunc func(context.Context, *ent.PayTxBillQuery) (ent.Value, error)
 
@@ -1646,6 +1730,12 @@ func NewQuery(q ent.Query) (Query, error) {
 		return &query[*ent.OrderRefundQuery, predicate.OrderRefund, orderrefund.OrderOption]{typ: ent.TypeOrderRefund, tq: q}, nil
 	case *ent.OrderSharingQuery:
 		return &query[*ent.OrderSharingQuery, predicate.OrderSharing, ordersharing.OrderOption]{typ: ent.TypeOrderSharing, tq: q}, nil
+	case *ent.OtaBtreeQuery:
+		return &query[*ent.OtaBtreeQuery, predicate.OtaBtree, otabtree.OrderOption]{typ: ent.TypeOtaBtree, tq: q}, nil
+	case *ent.OtaDeployQuery:
+		return &query[*ent.OtaDeployQuery, predicate.OtaDeploy, otadeploy.OrderOption]{typ: ent.TypeOtaDeploy, tq: q}, nil
+	case *ent.OtaVersionQuery:
+		return &query[*ent.OtaVersionQuery, predicate.OtaVersion, otaversion.OrderOption]{typ: ent.TypeOtaVersion, tq: q}, nil
 	case *ent.PayTxBillQuery:
 		return &query[*ent.PayTxBillQuery, predicate.PayTxBill, paytxbill.OrderOption]{typ: ent.TypePayTxBill, tq: q}, nil
 	case *ent.PaymentAccountQuery:

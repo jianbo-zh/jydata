@@ -47,6 +47,9 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/orderextendflight"
 	"github.com/jianbo-zh/jydata/database/ent/orderrefund"
 	"github.com/jianbo-zh/jydata/database/ent/ordersharing"
+	"github.com/jianbo-zh/jydata/database/ent/otabtree"
+	"github.com/jianbo-zh/jydata/database/ent/otadeploy"
+	"github.com/jianbo-zh/jydata/database/ent/otaversion"
 	"github.com/jianbo-zh/jydata/database/ent/paymentaccount"
 	"github.com/jianbo-zh/jydata/database/ent/paytxbill"
 	"github.com/jianbo-zh/jydata/database/ent/poi"
@@ -140,6 +143,12 @@ type Client struct {
 	OrderRefund *OrderRefundClient
 	// OrderSharing is the client for interacting with the OrderSharing builders.
 	OrderSharing *OrderSharingClient
+	// OtaBtree is the client for interacting with the OtaBtree builders.
+	OtaBtree *OtaBtreeClient
+	// OtaDeploy is the client for interacting with the OtaDeploy builders.
+	OtaDeploy *OtaDeployClient
+	// OtaVersion is the client for interacting with the OtaVersion builders.
+	OtaVersion *OtaVersionClient
 	// PayTxBill is the client for interacting with the PayTxBill builders.
 	PayTxBill *PayTxBillClient
 	// PaymentAccount is the client for interacting with the PaymentAccount builders.
@@ -227,6 +236,9 @@ func (c *Client) init() {
 	c.OrderExtendFlight = NewOrderExtendFlightClient(c.config)
 	c.OrderRefund = NewOrderRefundClient(c.config)
 	c.OrderSharing = NewOrderSharingClient(c.config)
+	c.OtaBtree = NewOtaBtreeClient(c.config)
+	c.OtaDeploy = NewOtaDeployClient(c.config)
+	c.OtaVersion = NewOtaVersionClient(c.config)
 	c.PayTxBill = NewPayTxBillClient(c.config)
 	c.PaymentAccount = NewPaymentAccountClient(c.config)
 	c.Poi = NewPoiClient(c.config)
@@ -373,6 +385,9 @@ func (c *Client) Tx(ctx context.Context) (*Tx, error) {
 		OrderExtendFlight:      NewOrderExtendFlightClient(cfg),
 		OrderRefund:            NewOrderRefundClient(cfg),
 		OrderSharing:           NewOrderSharingClient(cfg),
+		OtaBtree:               NewOtaBtreeClient(cfg),
+		OtaDeploy:              NewOtaDeployClient(cfg),
+		OtaVersion:             NewOtaVersionClient(cfg),
 		PayTxBill:              NewPayTxBillClient(cfg),
 		PaymentAccount:         NewPaymentAccountClient(cfg),
 		Poi:                    NewPoiClient(cfg),
@@ -446,6 +461,9 @@ func (c *Client) BeginTx(ctx context.Context, opts *sql.TxOptions) (*Tx, error) 
 		OrderExtendFlight:      NewOrderExtendFlightClient(cfg),
 		OrderRefund:            NewOrderRefundClient(cfg),
 		OrderSharing:           NewOrderSharingClient(cfg),
+		OtaBtree:               NewOtaBtreeClient(cfg),
+		OtaDeploy:              NewOtaDeployClient(cfg),
+		OtaVersion:             NewOtaVersionClient(cfg),
 		PayTxBill:              NewPayTxBillClient(cfg),
 		PaymentAccount:         NewPaymentAccountClient(cfg),
 		Poi:                    NewPoiClient(cfg),
@@ -503,12 +521,13 @@ func (c *Client) Use(hooks ...Hook) {
 		c.CarLogUpload, c.CarsFlight, c.CarsFlightExtendYokee, c.CarsModels,
 		c.CarsModelsGroups, c.CarsModelsGroupsParams, c.CarsOperateLog, c.Coupon,
 		c.Feedback, c.File, c.MapVersion, c.OperationUser, c.Order, c.OrderAppeal,
-		c.OrderBilling, c.OrderExtendFlight, c.OrderRefund, c.OrderSharing,
-		c.PayTxBill, c.PaymentAccount, c.Poi, c.PoiExtendYokee, c.ProfitReceiver,
-		c.Role, c.Route, c.ScenicArea, c.ScenicAreaExtendYokee, c.ScenicAreaMap,
-		c.ScheTask, c.ScheTaskEvent, c.SshAccount, c.StatsDaily, c.StatsDailyCar,
-		c.StatsDailyScenicArea, c.StatsHourlyCar, c.StatsHourlyScenicArea,
-		c.SystemConfig, c.SystemLog, c.Task, c.User,
+		c.OrderBilling, c.OrderExtendFlight, c.OrderRefund, c.OrderSharing, c.OtaBtree,
+		c.OtaDeploy, c.OtaVersion, c.PayTxBill, c.PaymentAccount, c.Poi,
+		c.PoiExtendYokee, c.ProfitReceiver, c.Role, c.Route, c.ScenicArea,
+		c.ScenicAreaExtendYokee, c.ScenicAreaMap, c.ScheTask, c.ScheTaskEvent,
+		c.SshAccount, c.StatsDaily, c.StatsDailyCar, c.StatsDailyScenicArea,
+		c.StatsHourlyCar, c.StatsHourlyScenicArea, c.SystemConfig, c.SystemLog, c.Task,
+		c.User,
 	} {
 		n.Use(hooks...)
 	}
@@ -524,12 +543,13 @@ func (c *Client) Intercept(interceptors ...Interceptor) {
 		c.CarLogUpload, c.CarsFlight, c.CarsFlightExtendYokee, c.CarsModels,
 		c.CarsModelsGroups, c.CarsModelsGroupsParams, c.CarsOperateLog, c.Coupon,
 		c.Feedback, c.File, c.MapVersion, c.OperationUser, c.Order, c.OrderAppeal,
-		c.OrderBilling, c.OrderExtendFlight, c.OrderRefund, c.OrderSharing,
-		c.PayTxBill, c.PaymentAccount, c.Poi, c.PoiExtendYokee, c.ProfitReceiver,
-		c.Role, c.Route, c.ScenicArea, c.ScenicAreaExtendYokee, c.ScenicAreaMap,
-		c.ScheTask, c.ScheTaskEvent, c.SshAccount, c.StatsDaily, c.StatsDailyCar,
-		c.StatsDailyScenicArea, c.StatsHourlyCar, c.StatsHourlyScenicArea,
-		c.SystemConfig, c.SystemLog, c.Task, c.User,
+		c.OrderBilling, c.OrderExtendFlight, c.OrderRefund, c.OrderSharing, c.OtaBtree,
+		c.OtaDeploy, c.OtaVersion, c.PayTxBill, c.PaymentAccount, c.Poi,
+		c.PoiExtendYokee, c.ProfitReceiver, c.Role, c.Route, c.ScenicArea,
+		c.ScenicAreaExtendYokee, c.ScenicAreaMap, c.ScheTask, c.ScheTaskEvent,
+		c.SshAccount, c.StatsDaily, c.StatsDailyCar, c.StatsDailyScenicArea,
+		c.StatsHourlyCar, c.StatsHourlyScenicArea, c.SystemConfig, c.SystemLog, c.Task,
+		c.User,
 	} {
 		n.Intercept(interceptors...)
 	}
@@ -602,6 +622,12 @@ func (c *Client) Mutate(ctx context.Context, m Mutation) (Value, error) {
 		return c.OrderRefund.mutate(ctx, m)
 	case *OrderSharingMutation:
 		return c.OrderSharing.mutate(ctx, m)
+	case *OtaBtreeMutation:
+		return c.OtaBtree.mutate(ctx, m)
+	case *OtaDeployMutation:
+		return c.OtaDeploy.mutate(ctx, m)
+	case *OtaVersionMutation:
+		return c.OtaVersion.mutate(ctx, m)
 	case *PayTxBillMutation:
 		return c.PayTxBill.mutate(ctx, m)
 	case *PaymentAccountMutation:
@@ -5425,6 +5451,411 @@ func (c *OrderSharingClient) mutate(ctx context.Context, m *OrderSharingMutation
 	}
 }
 
+// OtaBtreeClient is a client for the OtaBtree schema.
+type OtaBtreeClient struct {
+	config
+}
+
+// NewOtaBtreeClient returns a client for the OtaBtree from the given config.
+func NewOtaBtreeClient(c config) *OtaBtreeClient {
+	return &OtaBtreeClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `otabtree.Hooks(f(g(h())))`.
+func (c *OtaBtreeClient) Use(hooks ...Hook) {
+	c.hooks.OtaBtree = append(c.hooks.OtaBtree, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `otabtree.Intercept(f(g(h())))`.
+func (c *OtaBtreeClient) Intercept(interceptors ...Interceptor) {
+	c.inters.OtaBtree = append(c.inters.OtaBtree, interceptors...)
+}
+
+// Create returns a builder for creating a OtaBtree entity.
+func (c *OtaBtreeClient) Create() *OtaBtreeCreate {
+	mutation := newOtaBtreeMutation(c.config, OpCreate)
+	return &OtaBtreeCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of OtaBtree entities.
+func (c *OtaBtreeClient) CreateBulk(builders ...*OtaBtreeCreate) *OtaBtreeCreateBulk {
+	return &OtaBtreeCreateBulk{config: c.config, builders: builders}
+}
+
+// MapCreateBulk creates a bulk creation builder from the given slice. For each item in the slice, the function creates
+// a builder and applies setFunc on it.
+func (c *OtaBtreeClient) MapCreateBulk(slice any, setFunc func(*OtaBtreeCreate, int)) *OtaBtreeCreateBulk {
+	rv := reflect.ValueOf(slice)
+	if rv.Kind() != reflect.Slice {
+		return &OtaBtreeCreateBulk{err: fmt.Errorf("calling to OtaBtreeClient.MapCreateBulk with wrong type %T, need slice", slice)}
+	}
+	builders := make([]*OtaBtreeCreate, rv.Len())
+	for i := 0; i < rv.Len(); i++ {
+		builders[i] = c.Create()
+		setFunc(builders[i], i)
+	}
+	return &OtaBtreeCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for OtaBtree.
+func (c *OtaBtreeClient) Update() *OtaBtreeUpdate {
+	mutation := newOtaBtreeMutation(c.config, OpUpdate)
+	return &OtaBtreeUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *OtaBtreeClient) UpdateOne(ob *OtaBtree) *OtaBtreeUpdateOne {
+	mutation := newOtaBtreeMutation(c.config, OpUpdateOne, withOtaBtree(ob))
+	return &OtaBtreeUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *OtaBtreeClient) UpdateOneID(id int) *OtaBtreeUpdateOne {
+	mutation := newOtaBtreeMutation(c.config, OpUpdateOne, withOtaBtreeID(id))
+	return &OtaBtreeUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for OtaBtree.
+func (c *OtaBtreeClient) Delete() *OtaBtreeDelete {
+	mutation := newOtaBtreeMutation(c.config, OpDelete)
+	return &OtaBtreeDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *OtaBtreeClient) DeleteOne(ob *OtaBtree) *OtaBtreeDeleteOne {
+	return c.DeleteOneID(ob.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *OtaBtreeClient) DeleteOneID(id int) *OtaBtreeDeleteOne {
+	builder := c.Delete().Where(otabtree.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &OtaBtreeDeleteOne{builder}
+}
+
+// Query returns a query builder for OtaBtree.
+func (c *OtaBtreeClient) Query() *OtaBtreeQuery {
+	return &OtaBtreeQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeOtaBtree},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a OtaBtree entity by its id.
+func (c *OtaBtreeClient) Get(ctx context.Context, id int) (*OtaBtree, error) {
+	return c.Query().Where(otabtree.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *OtaBtreeClient) GetX(ctx context.Context, id int) *OtaBtree {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// Hooks returns the client hooks.
+func (c *OtaBtreeClient) Hooks() []Hook {
+	hooks := c.hooks.OtaBtree
+	return append(hooks[:len(hooks):len(hooks)], otabtree.Hooks[:]...)
+}
+
+// Interceptors returns the client interceptors.
+func (c *OtaBtreeClient) Interceptors() []Interceptor {
+	inters := c.inters.OtaBtree
+	return append(inters[:len(inters):len(inters)], otabtree.Interceptors[:]...)
+}
+
+func (c *OtaBtreeClient) mutate(ctx context.Context, m *OtaBtreeMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&OtaBtreeCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&OtaBtreeUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&OtaBtreeUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&OtaBtreeDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown OtaBtree mutation op: %q", m.Op())
+	}
+}
+
+// OtaDeployClient is a client for the OtaDeploy schema.
+type OtaDeployClient struct {
+	config
+}
+
+// NewOtaDeployClient returns a client for the OtaDeploy from the given config.
+func NewOtaDeployClient(c config) *OtaDeployClient {
+	return &OtaDeployClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `otadeploy.Hooks(f(g(h())))`.
+func (c *OtaDeployClient) Use(hooks ...Hook) {
+	c.hooks.OtaDeploy = append(c.hooks.OtaDeploy, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `otadeploy.Intercept(f(g(h())))`.
+func (c *OtaDeployClient) Intercept(interceptors ...Interceptor) {
+	c.inters.OtaDeploy = append(c.inters.OtaDeploy, interceptors...)
+}
+
+// Create returns a builder for creating a OtaDeploy entity.
+func (c *OtaDeployClient) Create() *OtaDeployCreate {
+	mutation := newOtaDeployMutation(c.config, OpCreate)
+	return &OtaDeployCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of OtaDeploy entities.
+func (c *OtaDeployClient) CreateBulk(builders ...*OtaDeployCreate) *OtaDeployCreateBulk {
+	return &OtaDeployCreateBulk{config: c.config, builders: builders}
+}
+
+// MapCreateBulk creates a bulk creation builder from the given slice. For each item in the slice, the function creates
+// a builder and applies setFunc on it.
+func (c *OtaDeployClient) MapCreateBulk(slice any, setFunc func(*OtaDeployCreate, int)) *OtaDeployCreateBulk {
+	rv := reflect.ValueOf(slice)
+	if rv.Kind() != reflect.Slice {
+		return &OtaDeployCreateBulk{err: fmt.Errorf("calling to OtaDeployClient.MapCreateBulk with wrong type %T, need slice", slice)}
+	}
+	builders := make([]*OtaDeployCreate, rv.Len())
+	for i := 0; i < rv.Len(); i++ {
+		builders[i] = c.Create()
+		setFunc(builders[i], i)
+	}
+	return &OtaDeployCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for OtaDeploy.
+func (c *OtaDeployClient) Update() *OtaDeployUpdate {
+	mutation := newOtaDeployMutation(c.config, OpUpdate)
+	return &OtaDeployUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *OtaDeployClient) UpdateOne(od *OtaDeploy) *OtaDeployUpdateOne {
+	mutation := newOtaDeployMutation(c.config, OpUpdateOne, withOtaDeploy(od))
+	return &OtaDeployUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *OtaDeployClient) UpdateOneID(id int) *OtaDeployUpdateOne {
+	mutation := newOtaDeployMutation(c.config, OpUpdateOne, withOtaDeployID(id))
+	return &OtaDeployUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for OtaDeploy.
+func (c *OtaDeployClient) Delete() *OtaDeployDelete {
+	mutation := newOtaDeployMutation(c.config, OpDelete)
+	return &OtaDeployDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *OtaDeployClient) DeleteOne(od *OtaDeploy) *OtaDeployDeleteOne {
+	return c.DeleteOneID(od.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *OtaDeployClient) DeleteOneID(id int) *OtaDeployDeleteOne {
+	builder := c.Delete().Where(otadeploy.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &OtaDeployDeleteOne{builder}
+}
+
+// Query returns a query builder for OtaDeploy.
+func (c *OtaDeployClient) Query() *OtaDeployQuery {
+	return &OtaDeployQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeOtaDeploy},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a OtaDeploy entity by its id.
+func (c *OtaDeployClient) Get(ctx context.Context, id int) (*OtaDeploy, error) {
+	return c.Query().Where(otadeploy.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *OtaDeployClient) GetX(ctx context.Context, id int) *OtaDeploy {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// Hooks returns the client hooks.
+func (c *OtaDeployClient) Hooks() []Hook {
+	hooks := c.hooks.OtaDeploy
+	return append(hooks[:len(hooks):len(hooks)], otadeploy.Hooks[:]...)
+}
+
+// Interceptors returns the client interceptors.
+func (c *OtaDeployClient) Interceptors() []Interceptor {
+	inters := c.inters.OtaDeploy
+	return append(inters[:len(inters):len(inters)], otadeploy.Interceptors[:]...)
+}
+
+func (c *OtaDeployClient) mutate(ctx context.Context, m *OtaDeployMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&OtaDeployCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&OtaDeployUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&OtaDeployUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&OtaDeployDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown OtaDeploy mutation op: %q", m.Op())
+	}
+}
+
+// OtaVersionClient is a client for the OtaVersion schema.
+type OtaVersionClient struct {
+	config
+}
+
+// NewOtaVersionClient returns a client for the OtaVersion from the given config.
+func NewOtaVersionClient(c config) *OtaVersionClient {
+	return &OtaVersionClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `otaversion.Hooks(f(g(h())))`.
+func (c *OtaVersionClient) Use(hooks ...Hook) {
+	c.hooks.OtaVersion = append(c.hooks.OtaVersion, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `otaversion.Intercept(f(g(h())))`.
+func (c *OtaVersionClient) Intercept(interceptors ...Interceptor) {
+	c.inters.OtaVersion = append(c.inters.OtaVersion, interceptors...)
+}
+
+// Create returns a builder for creating a OtaVersion entity.
+func (c *OtaVersionClient) Create() *OtaVersionCreate {
+	mutation := newOtaVersionMutation(c.config, OpCreate)
+	return &OtaVersionCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of OtaVersion entities.
+func (c *OtaVersionClient) CreateBulk(builders ...*OtaVersionCreate) *OtaVersionCreateBulk {
+	return &OtaVersionCreateBulk{config: c.config, builders: builders}
+}
+
+// MapCreateBulk creates a bulk creation builder from the given slice. For each item in the slice, the function creates
+// a builder and applies setFunc on it.
+func (c *OtaVersionClient) MapCreateBulk(slice any, setFunc func(*OtaVersionCreate, int)) *OtaVersionCreateBulk {
+	rv := reflect.ValueOf(slice)
+	if rv.Kind() != reflect.Slice {
+		return &OtaVersionCreateBulk{err: fmt.Errorf("calling to OtaVersionClient.MapCreateBulk with wrong type %T, need slice", slice)}
+	}
+	builders := make([]*OtaVersionCreate, rv.Len())
+	for i := 0; i < rv.Len(); i++ {
+		builders[i] = c.Create()
+		setFunc(builders[i], i)
+	}
+	return &OtaVersionCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for OtaVersion.
+func (c *OtaVersionClient) Update() *OtaVersionUpdate {
+	mutation := newOtaVersionMutation(c.config, OpUpdate)
+	return &OtaVersionUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *OtaVersionClient) UpdateOne(ov *OtaVersion) *OtaVersionUpdateOne {
+	mutation := newOtaVersionMutation(c.config, OpUpdateOne, withOtaVersion(ov))
+	return &OtaVersionUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *OtaVersionClient) UpdateOneID(id int) *OtaVersionUpdateOne {
+	mutation := newOtaVersionMutation(c.config, OpUpdateOne, withOtaVersionID(id))
+	return &OtaVersionUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for OtaVersion.
+func (c *OtaVersionClient) Delete() *OtaVersionDelete {
+	mutation := newOtaVersionMutation(c.config, OpDelete)
+	return &OtaVersionDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *OtaVersionClient) DeleteOne(ov *OtaVersion) *OtaVersionDeleteOne {
+	return c.DeleteOneID(ov.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *OtaVersionClient) DeleteOneID(id int) *OtaVersionDeleteOne {
+	builder := c.Delete().Where(otaversion.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &OtaVersionDeleteOne{builder}
+}
+
+// Query returns a query builder for OtaVersion.
+func (c *OtaVersionClient) Query() *OtaVersionQuery {
+	return &OtaVersionQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeOtaVersion},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a OtaVersion entity by its id.
+func (c *OtaVersionClient) Get(ctx context.Context, id int) (*OtaVersion, error) {
+	return c.Query().Where(otaversion.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *OtaVersionClient) GetX(ctx context.Context, id int) *OtaVersion {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// Hooks returns the client hooks.
+func (c *OtaVersionClient) Hooks() []Hook {
+	hooks := c.hooks.OtaVersion
+	return append(hooks[:len(hooks):len(hooks)], otaversion.Hooks[:]...)
+}
+
+// Interceptors returns the client interceptors.
+func (c *OtaVersionClient) Interceptors() []Interceptor {
+	inters := c.inters.OtaVersion
+	return append(inters[:len(inters):len(inters)], otaversion.Interceptors[:]...)
+}
+
+func (c *OtaVersionClient) mutate(ctx context.Context, m *OtaVersionMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&OtaVersionCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&OtaVersionUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&OtaVersionUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&OtaVersionDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown OtaVersion mutation op: %q", m.Op())
+	}
+}
+
 // PayTxBillClient is a client for the PayTxBill schema.
 type PayTxBillClient struct {
 	config
@@ -8731,11 +9162,11 @@ type (
 		CarCumulative, CarExtendYokee, CarLogUpload, CarsFlight, CarsFlightExtendYokee,
 		CarsModels, CarsModelsGroups, CarsModelsGroupsParams, CarsOperateLog, Coupon,
 		Feedback, File, MapVersion, OperationUser, Order, OrderAppeal, OrderBilling,
-		OrderExtendFlight, OrderRefund, OrderSharing, PayTxBill, PaymentAccount, Poi,
-		PoiExtendYokee, ProfitReceiver, Role, Route, ScenicArea, ScenicAreaExtendYokee,
-		ScenicAreaMap, ScheTask, ScheTaskEvent, SshAccount, StatsDaily, StatsDailyCar,
-		StatsDailyScenicArea, StatsHourlyCar, StatsHourlyScenicArea, SystemConfig,
-		SystemLog, Task, User []ent.Hook
+		OrderExtendFlight, OrderRefund, OrderSharing, OtaBtree, OtaDeploy, OtaVersion,
+		PayTxBill, PaymentAccount, Poi, PoiExtendYokee, ProfitReceiver, Role, Route,
+		ScenicArea, ScenicAreaExtendYokee, ScenicAreaMap, ScheTask, ScheTaskEvent,
+		SshAccount, StatsDaily, StatsDailyCar, StatsDailyScenicArea, StatsHourlyCar,
+		StatsHourlyScenicArea, SystemConfig, SystemLog, Task, User []ent.Hook
 	}
 	inters struct {
 		Access, Account, ActivityOrder, AppPush, AppVersion, BillingStrategy, Car,
@@ -8743,10 +9174,10 @@ type (
 		CarCumulative, CarExtendYokee, CarLogUpload, CarsFlight, CarsFlightExtendYokee,
 		CarsModels, CarsModelsGroups, CarsModelsGroupsParams, CarsOperateLog, Coupon,
 		Feedback, File, MapVersion, OperationUser, Order, OrderAppeal, OrderBilling,
-		OrderExtendFlight, OrderRefund, OrderSharing, PayTxBill, PaymentAccount, Poi,
-		PoiExtendYokee, ProfitReceiver, Role, Route, ScenicArea, ScenicAreaExtendYokee,
-		ScenicAreaMap, ScheTask, ScheTaskEvent, SshAccount, StatsDaily, StatsDailyCar,
-		StatsDailyScenicArea, StatsHourlyCar, StatsHourlyScenicArea, SystemConfig,
-		SystemLog, Task, User []ent.Interceptor
+		OrderExtendFlight, OrderRefund, OrderSharing, OtaBtree, OtaDeploy, OtaVersion,
+		PayTxBill, PaymentAccount, Poi, PoiExtendYokee, ProfitReceiver, Role, Route,
+		ScenicArea, ScenicAreaExtendYokee, ScenicAreaMap, ScheTask, ScheTaskEvent,
+		SshAccount, StatsDaily, StatsDailyCar, StatsDailyScenicArea, StatsHourlyCar,
+		StatsHourlyScenicArea, SystemConfig, SystemLog, Task, User []ent.Interceptor
 	}
 )

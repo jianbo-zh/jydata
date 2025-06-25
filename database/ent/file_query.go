@@ -262,12 +262,12 @@ func (fq *FileQuery) Clone() *FileQuery {
 // Example:
 //
 //	var v []struct {
-//		CreatorID int `json:"creator_id,omitempty"`
+//		StorageType int `json:"storage_type,omitempty"`
 //		Count int `json:"count,omitempty"`
 //	}
 //
 //	client.File.Query().
-//		GroupBy(file.FieldCreatorID).
+//		GroupBy(file.FieldStorageType).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
 func (fq *FileQuery) GroupBy(field string, fields ...string) *FileGroupBy {
@@ -285,11 +285,11 @@ func (fq *FileQuery) GroupBy(field string, fields ...string) *FileGroupBy {
 // Example:
 //
 //	var v []struct {
-//		CreatorID int `json:"creator_id,omitempty"`
+//		StorageType int `json:"storage_type,omitempty"`
 //	}
 //
 //	client.File.Query().
-//		Select(file.FieldCreatorID).
+//		Select(file.FieldStorageType).
 //		Scan(ctx, &v)
 func (fq *FileQuery) Select(fields ...string) *FileSelect {
 	fq.ctx.Fields = append(fq.ctx.Fields, fields...)
