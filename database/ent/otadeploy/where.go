@@ -60,7 +60,7 @@ func DeleteTime(v time.Time) predicate.OtaDeploy {
 }
 
 // UUID applies equality check predicate on the "uuid" field. It's identical to UUIDEQ.
-func UUID(v int) predicate.OtaDeploy {
+func UUID(v int64) predicate.OtaDeploy {
 	return predicate.OtaDeploy(sql.FieldEQ(FieldUUID, v))
 }
 
@@ -165,42 +165,42 @@ func DeleteTimeNotNil() predicate.OtaDeploy {
 }
 
 // UUIDEQ applies the EQ predicate on the "uuid" field.
-func UUIDEQ(v int) predicate.OtaDeploy {
+func UUIDEQ(v int64) predicate.OtaDeploy {
 	return predicate.OtaDeploy(sql.FieldEQ(FieldUUID, v))
 }
 
 // UUIDNEQ applies the NEQ predicate on the "uuid" field.
-func UUIDNEQ(v int) predicate.OtaDeploy {
+func UUIDNEQ(v int64) predicate.OtaDeploy {
 	return predicate.OtaDeploy(sql.FieldNEQ(FieldUUID, v))
 }
 
 // UUIDIn applies the In predicate on the "uuid" field.
-func UUIDIn(vs ...int) predicate.OtaDeploy {
+func UUIDIn(vs ...int64) predicate.OtaDeploy {
 	return predicate.OtaDeploy(sql.FieldIn(FieldUUID, vs...))
 }
 
 // UUIDNotIn applies the NotIn predicate on the "uuid" field.
-func UUIDNotIn(vs ...int) predicate.OtaDeploy {
+func UUIDNotIn(vs ...int64) predicate.OtaDeploy {
 	return predicate.OtaDeploy(sql.FieldNotIn(FieldUUID, vs...))
 }
 
 // UUIDGT applies the GT predicate on the "uuid" field.
-func UUIDGT(v int) predicate.OtaDeploy {
+func UUIDGT(v int64) predicate.OtaDeploy {
 	return predicate.OtaDeploy(sql.FieldGT(FieldUUID, v))
 }
 
 // UUIDGTE applies the GTE predicate on the "uuid" field.
-func UUIDGTE(v int) predicate.OtaDeploy {
+func UUIDGTE(v int64) predicate.OtaDeploy {
 	return predicate.OtaDeploy(sql.FieldGTE(FieldUUID, v))
 }
 
 // UUIDLT applies the LT predicate on the "uuid" field.
-func UUIDLT(v int) predicate.OtaDeploy {
+func UUIDLT(v int64) predicate.OtaDeploy {
 	return predicate.OtaDeploy(sql.FieldLT(FieldUUID, v))
 }
 
 // UUIDLTE applies the LTE predicate on the "uuid" field.
-func UUIDLTE(v int) predicate.OtaDeploy {
+func UUIDLTE(v int64) predicate.OtaDeploy {
 	return predicate.OtaDeploy(sql.FieldLTE(FieldUUID, v))
 }
 

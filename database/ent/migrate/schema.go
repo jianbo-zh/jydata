@@ -926,7 +926,7 @@ var (
 	OtaDeploysColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "delete_time", Type: field.TypeTime, Nullable: true},
-		{Name: "uuid", Type: field.TypeInt},
+		{Name: "uuid", Type: field.TypeInt64, Unique: true},
 		{Name: "car_id", Type: field.TypeInt},
 		{Name: "car_name", Type: field.TypeString},
 		{Name: "device_id", Type: field.TypeString},
@@ -944,6 +944,13 @@ var (
 		Name:       "ota_deploys",
 		Columns:    OtaDeploysColumns,
 		PrimaryKey: []*schema.Column{OtaDeploysColumns[0]},
+		Indexes: []*schema.Index{
+			{
+				Name:    "otadeploy_car_id_ota_version_id",
+				Unique:  true,
+				Columns: []*schema.Column{OtaDeploysColumns[3], OtaDeploysColumns[6]},
+			},
+		},
 	}
 	// OtaVersionsColumns holds the columns for the "ota_versions" table.
 	OtaVersionsColumns = []*schema.Column{
@@ -1555,7 +1562,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1750816570},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1750908122},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},

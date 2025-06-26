@@ -23,7 +23,7 @@ type OtaDeploy struct {
 	// DeleteTime holds the value of the "delete_time" field.
 	DeleteTime time.Time `json:"delete_time,omitempty"`
 	// UUID
-	UUID int `json:"uuid,omitempty"`
+	UUID int64 `json:"uuid,omitempty"`
 	// 车辆ID
 	CarID int `json:"car_id,omitempty"`
 	// 车辆名称
@@ -93,7 +93,7 @@ func (od *OtaDeploy) assignValues(columns []string, values []any) error {
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field uuid", values[i])
 			} else if value.Valid {
-				od.UUID = int(value.Int64)
+				od.UUID = value.Int64
 			}
 		case otadeploy.FieldCarID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {

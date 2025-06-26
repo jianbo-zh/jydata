@@ -50,14 +50,14 @@ func (odu *OtaDeployUpdate) ClearDeleteTime() *OtaDeployUpdate {
 }
 
 // SetUUID sets the "uuid" field.
-func (odu *OtaDeployUpdate) SetUUID(i int) *OtaDeployUpdate {
+func (odu *OtaDeployUpdate) SetUUID(i int64) *OtaDeployUpdate {
 	odu.mutation.ResetUUID()
 	odu.mutation.SetUUID(i)
 	return odu
 }
 
 // SetNillableUUID sets the "uuid" field if the given value is not nil.
-func (odu *OtaDeployUpdate) SetNillableUUID(i *int) *OtaDeployUpdate {
+func (odu *OtaDeployUpdate) SetNillableUUID(i *int64) *OtaDeployUpdate {
 	if i != nil {
 		odu.SetUUID(*i)
 	}
@@ -65,7 +65,7 @@ func (odu *OtaDeployUpdate) SetNillableUUID(i *int) *OtaDeployUpdate {
 }
 
 // AddUUID adds i to the "uuid" field.
-func (odu *OtaDeployUpdate) AddUUID(i int) *OtaDeployUpdate {
+func (odu *OtaDeployUpdate) AddUUID(i int64) *OtaDeployUpdate {
 	odu.mutation.AddUUID(i)
 	return odu
 }
@@ -292,10 +292,10 @@ func (odu *OtaDeployUpdate) sqlSave(ctx context.Context) (n int, err error) {
 		_spec.ClearField(otadeploy.FieldDeleteTime, field.TypeTime)
 	}
 	if value, ok := odu.mutation.UUID(); ok {
-		_spec.SetField(otadeploy.FieldUUID, field.TypeInt, value)
+		_spec.SetField(otadeploy.FieldUUID, field.TypeInt64, value)
 	}
 	if value, ok := odu.mutation.AddedUUID(); ok {
-		_spec.AddField(otadeploy.FieldUUID, field.TypeInt, value)
+		_spec.AddField(otadeploy.FieldUUID, field.TypeInt64, value)
 	}
 	if value, ok := odu.mutation.CarID(); ok {
 		_spec.SetField(otadeploy.FieldCarID, field.TypeInt, value)
@@ -380,14 +380,14 @@ func (oduo *OtaDeployUpdateOne) ClearDeleteTime() *OtaDeployUpdateOne {
 }
 
 // SetUUID sets the "uuid" field.
-func (oduo *OtaDeployUpdateOne) SetUUID(i int) *OtaDeployUpdateOne {
+func (oduo *OtaDeployUpdateOne) SetUUID(i int64) *OtaDeployUpdateOne {
 	oduo.mutation.ResetUUID()
 	oduo.mutation.SetUUID(i)
 	return oduo
 }
 
 // SetNillableUUID sets the "uuid" field if the given value is not nil.
-func (oduo *OtaDeployUpdateOne) SetNillableUUID(i *int) *OtaDeployUpdateOne {
+func (oduo *OtaDeployUpdateOne) SetNillableUUID(i *int64) *OtaDeployUpdateOne {
 	if i != nil {
 		oduo.SetUUID(*i)
 	}
@@ -395,7 +395,7 @@ func (oduo *OtaDeployUpdateOne) SetNillableUUID(i *int) *OtaDeployUpdateOne {
 }
 
 // AddUUID adds i to the "uuid" field.
-func (oduo *OtaDeployUpdateOne) AddUUID(i int) *OtaDeployUpdateOne {
+func (oduo *OtaDeployUpdateOne) AddUUID(i int64) *OtaDeployUpdateOne {
 	oduo.mutation.AddUUID(i)
 	return oduo
 }
@@ -652,10 +652,10 @@ func (oduo *OtaDeployUpdateOne) sqlSave(ctx context.Context) (_node *OtaDeploy, 
 		_spec.ClearField(otadeploy.FieldDeleteTime, field.TypeTime)
 	}
 	if value, ok := oduo.mutation.UUID(); ok {
-		_spec.SetField(otadeploy.FieldUUID, field.TypeInt, value)
+		_spec.SetField(otadeploy.FieldUUID, field.TypeInt64, value)
 	}
 	if value, ok := oduo.mutation.AddedUUID(); ok {
-		_spec.AddField(otadeploy.FieldUUID, field.TypeInt, value)
+		_spec.AddField(otadeploy.FieldUUID, field.TypeInt64, value)
 	}
 	if value, ok := oduo.mutation.CarID(); ok {
 		_spec.SetField(otadeploy.FieldCarID, field.TypeInt, value)

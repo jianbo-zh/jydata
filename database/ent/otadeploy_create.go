@@ -36,7 +36,7 @@ func (odc *OtaDeployCreate) SetNillableDeleteTime(t *time.Time) *OtaDeployCreate
 }
 
 // SetUUID sets the "uuid" field.
-func (odc *OtaDeployCreate) SetUUID(i int) *OtaDeployCreate {
+func (odc *OtaDeployCreate) SetUUID(i int64) *OtaDeployCreate {
 	odc.mutation.SetUUID(i)
 	return odc
 }
@@ -287,7 +287,7 @@ func (odc *OtaDeployCreate) createSpec() (*OtaDeploy, *sqlgraph.CreateSpec) {
 		_node.DeleteTime = value
 	}
 	if value, ok := odc.mutation.UUID(); ok {
-		_spec.SetField(otadeploy.FieldUUID, field.TypeInt, value)
+		_spec.SetField(otadeploy.FieldUUID, field.TypeInt64, value)
 		_node.UUID = value
 	}
 	if value, ok := odc.mutation.CarID(); ok {

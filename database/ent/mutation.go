@@ -42615,8 +42615,8 @@ type OtaDeployMutation struct {
 	typ                string
 	id                 *int
 	delete_time        *time.Time
-	uuid               *int
-	adduuid            *int
+	uuid               *int64
+	adduuid            *int64
 	car_id             *int
 	addcar_id          *int
 	car_name           *string
@@ -42791,13 +42791,13 @@ func (m *OtaDeployMutation) ResetDeleteTime() {
 }
 
 // SetUUID sets the "uuid" field.
-func (m *OtaDeployMutation) SetUUID(i int) {
+func (m *OtaDeployMutation) SetUUID(i int64) {
 	m.uuid = &i
 	m.adduuid = nil
 }
 
 // UUID returns the value of the "uuid" field in the mutation.
-func (m *OtaDeployMutation) UUID() (r int, exists bool) {
+func (m *OtaDeployMutation) UUID() (r int64, exists bool) {
 	v := m.uuid
 	if v == nil {
 		return
@@ -42808,7 +42808,7 @@ func (m *OtaDeployMutation) UUID() (r int, exists bool) {
 // OldUUID returns the old "uuid" field's value of the OtaDeploy entity.
 // If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *OtaDeployMutation) OldUUID(ctx context.Context) (v int, err error) {
+func (m *OtaDeployMutation) OldUUID(ctx context.Context) (v int64, err error) {
 	if !m.op.Is(OpUpdateOne) {
 		return v, errors.New("OldUUID is only allowed on UpdateOne operations")
 	}
@@ -42823,7 +42823,7 @@ func (m *OtaDeployMutation) OldUUID(ctx context.Context) (v int, err error) {
 }
 
 // AddUUID adds i to the "uuid" field.
-func (m *OtaDeployMutation) AddUUID(i int) {
+func (m *OtaDeployMutation) AddUUID(i int64) {
 	if m.adduuid != nil {
 		*m.adduuid += i
 	} else {
@@ -42832,7 +42832,7 @@ func (m *OtaDeployMutation) AddUUID(i int) {
 }
 
 // AddedUUID returns the value that was added to the "uuid" field in this mutation.
-func (m *OtaDeployMutation) AddedUUID() (r int, exists bool) {
+func (m *OtaDeployMutation) AddedUUID() (r int64, exists bool) {
 	v := m.adduuid
 	if v == nil {
 		return
@@ -43475,7 +43475,7 @@ func (m *OtaDeployMutation) SetField(name string, value ent.Value) error {
 		m.SetDeleteTime(v)
 		return nil
 	case otadeploy.FieldUUID:
-		v, ok := value.(int)
+		v, ok := value.(int64)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
@@ -43604,7 +43604,7 @@ func (m *OtaDeployMutation) AddedField(name string) (ent.Value, bool) {
 func (m *OtaDeployMutation) AddField(name string, value ent.Value) error {
 	switch name {
 	case otadeploy.FieldUUID:
-		v, ok := value.(int)
+		v, ok := value.(int64)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
