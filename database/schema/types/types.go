@@ -37,7 +37,7 @@ type OtaContent struct {
 	OtaContentSignature string `json:"ocs,omitempty"`
 }
 
-type OtaProcess struct {
+type OtaProgress struct {
 	Progress  []*PkgProgress
 	Completed bool
 }
@@ -45,5 +45,6 @@ type OtaProcess struct {
 type PkgProgress struct {
 	Name     string
 	Stage    string
-	Progress float32
+	Progress float64
+	Result   int
 }

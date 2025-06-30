@@ -649,14 +649,14 @@ func ErrmsgContainsFold(v string) predicate.OtaDeploy {
 	return predicate.OtaDeploy(sql.FieldContainsFold(FieldErrmsg, v))
 }
 
-// ProcessIsNil applies the IsNil predicate on the "process" field.
-func ProcessIsNil() predicate.OtaDeploy {
-	return predicate.OtaDeploy(sql.FieldIsNull(FieldProcess))
+// ProgressIsNil applies the IsNil predicate on the "progress" field.
+func ProgressIsNil() predicate.OtaDeploy {
+	return predicate.OtaDeploy(sql.FieldIsNull(FieldProgress))
 }
 
-// ProcessNotNil applies the NotNil predicate on the "process" field.
-func ProcessNotNil() predicate.OtaDeploy {
-	return predicate.OtaDeploy(sql.FieldNotNull(FieldProcess))
+// ProgressNotNil applies the NotNil predicate on the "progress" field.
+func ProgressNotNil() predicate.OtaDeploy {
+	return predicate.OtaDeploy(sql.FieldNotNull(FieldProgress))
 }
 
 // CreateTimeEQ applies the EQ predicate on the "create_time" field.

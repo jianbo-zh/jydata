@@ -15,8 +15,9 @@ const (
 type OtaDeployState int
 
 const (
-	OtaDeployState_Pending    OtaDeployState = 1 // 待升级
-	OtaDeployState_InProgress OtaDeployState = 2 // 升级中
-	OtaDeployState_Success    OtaDeployState = 3 // 升级成功
-	OtaDeployState_Failure    OtaDeployState = 4 // 升级失败
+	OtaDeployState_Pending        OtaDeployState = 1 // 待升级
+	OtaDeployState_InProgress     OtaDeployState = 2 // 升级中
+	OtaDeployState_Success        OtaDeployState = 3 // 升级成功
+	OtaDeployState_Failure        OtaDeployState = 4 // 升级失败
+	OtaDeployState_PartialFailure OtaDeployState = 5 // 部分升级失败
 )

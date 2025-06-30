@@ -42628,7 +42628,7 @@ type OtaDeployMutation struct {
 	state              *int
 	addstate           *int
 	errmsg             *string
-	process            *types.OtaProcess
+	progress           *types.OtaProgress
 	create_time        *time.Time
 	update_time        *time.Time
 	clearedFields      map[string]struct{}
@@ -43194,53 +43194,53 @@ func (m *OtaDeployMutation) ResetErrmsg() {
 	m.errmsg = nil
 }
 
-// SetProcess sets the "process" field.
-func (m *OtaDeployMutation) SetProcess(tp types.OtaProcess) {
-	m.process = &tp
+// SetProgress sets the "progress" field.
+func (m *OtaDeployMutation) SetProgress(tp types.OtaProgress) {
+	m.progress = &tp
 }
 
-// Process returns the value of the "process" field in the mutation.
-func (m *OtaDeployMutation) Process() (r types.OtaProcess, exists bool) {
-	v := m.process
+// Progress returns the value of the "progress" field in the mutation.
+func (m *OtaDeployMutation) Progress() (r types.OtaProgress, exists bool) {
+	v := m.progress
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldProcess returns the old "process" field's value of the OtaDeploy entity.
+// OldProgress returns the old "progress" field's value of the OtaDeploy entity.
 // If the OtaDeploy object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *OtaDeployMutation) OldProcess(ctx context.Context) (v types.OtaProcess, err error) {
+func (m *OtaDeployMutation) OldProgress(ctx context.Context) (v types.OtaProgress, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldProcess is only allowed on UpdateOne operations")
+		return v, errors.New("OldProgress is only allowed on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldProcess requires an ID field in the mutation")
+		return v, errors.New("OldProgress requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldProcess: %w", err)
+		return v, fmt.Errorf("querying old value for OldProgress: %w", err)
 	}
-	return oldValue.Process, nil
+	return oldValue.Progress, nil
 }
 
-// ClearProcess clears the value of the "process" field.
-func (m *OtaDeployMutation) ClearProcess() {
-	m.process = nil
-	m.clearedFields[otadeploy.FieldProcess] = struct{}{}
+// ClearProgress clears the value of the "progress" field.
+func (m *OtaDeployMutation) ClearProgress() {
+	m.progress = nil
+	m.clearedFields[otadeploy.FieldProgress] = struct{}{}
 }
 
-// ProcessCleared returns if the "process" field was cleared in this mutation.
-func (m *OtaDeployMutation) ProcessCleared() bool {
-	_, ok := m.clearedFields[otadeploy.FieldProcess]
+// ProgressCleared returns if the "progress" field was cleared in this mutation.
+func (m *OtaDeployMutation) ProgressCleared() bool {
+	_, ok := m.clearedFields[otadeploy.FieldProgress]
 	return ok
 }
 
-// ResetProcess resets all changes to the "process" field.
-func (m *OtaDeployMutation) ResetProcess() {
-	m.process = nil
-	delete(m.clearedFields, otadeploy.FieldProcess)
+// ResetProgress resets all changes to the "progress" field.
+func (m *OtaDeployMutation) ResetProgress() {
+	m.progress = nil
+	delete(m.clearedFields, otadeploy.FieldProgress)
 }
 
 // SetCreateTime sets the "create_time" field.
@@ -43380,8 +43380,8 @@ func (m *OtaDeployMutation) Fields() []string {
 	if m.errmsg != nil {
 		fields = append(fields, otadeploy.FieldErrmsg)
 	}
-	if m.process != nil {
-		fields = append(fields, otadeploy.FieldProcess)
+	if m.progress != nil {
+		fields = append(fields, otadeploy.FieldProgress)
 	}
 	if m.create_time != nil {
 		fields = append(fields, otadeploy.FieldCreateTime)
@@ -43417,8 +43417,8 @@ func (m *OtaDeployMutation) Field(name string) (ent.Value, bool) {
 		return m.State()
 	case otadeploy.FieldErrmsg:
 		return m.Errmsg()
-	case otadeploy.FieldProcess:
-		return m.Process()
+	case otadeploy.FieldProgress:
+		return m.Progress()
 	case otadeploy.FieldCreateTime:
 		return m.CreateTime()
 	case otadeploy.FieldUpdateTime:
@@ -43452,8 +43452,8 @@ func (m *OtaDeployMutation) OldField(ctx context.Context, name string) (ent.Valu
 		return m.OldState(ctx)
 	case otadeploy.FieldErrmsg:
 		return m.OldErrmsg(ctx)
-	case otadeploy.FieldProcess:
-		return m.OldProcess(ctx)
+	case otadeploy.FieldProgress:
+		return m.OldProgress(ctx)
 	case otadeploy.FieldCreateTime:
 		return m.OldCreateTime(ctx)
 	case otadeploy.FieldUpdateTime:
@@ -43537,12 +43537,12 @@ func (m *OtaDeployMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetErrmsg(v)
 		return nil
-	case otadeploy.FieldProcess:
-		v, ok := value.(types.OtaProcess)
+	case otadeploy.FieldProgress:
+		v, ok := value.(types.OtaProgress)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetProcess(v)
+		m.SetProgress(v)
 		return nil
 	case otadeploy.FieldCreateTime:
 		v, ok := value.(time.Time)
@@ -43642,8 +43642,8 @@ func (m *OtaDeployMutation) ClearedFields() []string {
 	if m.FieldCleared(otadeploy.FieldDeleteTime) {
 		fields = append(fields, otadeploy.FieldDeleteTime)
 	}
-	if m.FieldCleared(otadeploy.FieldProcess) {
-		fields = append(fields, otadeploy.FieldProcess)
+	if m.FieldCleared(otadeploy.FieldProgress) {
+		fields = append(fields, otadeploy.FieldProgress)
 	}
 	return fields
 }
@@ -43662,8 +43662,8 @@ func (m *OtaDeployMutation) ClearField(name string) error {
 	case otadeploy.FieldDeleteTime:
 		m.ClearDeleteTime()
 		return nil
-	case otadeploy.FieldProcess:
-		m.ClearProcess()
+	case otadeploy.FieldProgress:
+		m.ClearProgress()
 		return nil
 	}
 	return fmt.Errorf("unknown OtaDeploy nullable field %s", name)
@@ -43703,8 +43703,8 @@ func (m *OtaDeployMutation) ResetField(name string) error {
 	case otadeploy.FieldErrmsg:
 		m.ResetErrmsg()
 		return nil
-	case otadeploy.FieldProcess:
-		m.ResetProcess()
+	case otadeploy.FieldProgress:
+		m.ResetProgress()
 		return nil
 	case otadeploy.FieldCreateTime:
 		m.ResetCreateTime()

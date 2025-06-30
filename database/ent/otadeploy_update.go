@@ -203,23 +203,23 @@ func (odu *OtaDeployUpdate) SetNillableErrmsg(s *string) *OtaDeployUpdate {
 	return odu
 }
 
-// SetProcess sets the "process" field.
-func (odu *OtaDeployUpdate) SetProcess(tp types.OtaProcess) *OtaDeployUpdate {
-	odu.mutation.SetProcess(tp)
+// SetProgress sets the "progress" field.
+func (odu *OtaDeployUpdate) SetProgress(tp types.OtaProgress) *OtaDeployUpdate {
+	odu.mutation.SetProgress(tp)
 	return odu
 }
 
-// SetNillableProcess sets the "process" field if the given value is not nil.
-func (odu *OtaDeployUpdate) SetNillableProcess(tp *types.OtaProcess) *OtaDeployUpdate {
+// SetNillableProgress sets the "progress" field if the given value is not nil.
+func (odu *OtaDeployUpdate) SetNillableProgress(tp *types.OtaProgress) *OtaDeployUpdate {
 	if tp != nil {
-		odu.SetProcess(*tp)
+		odu.SetProgress(*tp)
 	}
 	return odu
 }
 
-// ClearProcess clears the value of the "process" field.
-func (odu *OtaDeployUpdate) ClearProcess() *OtaDeployUpdate {
-	odu.mutation.ClearProcess()
+// ClearProgress clears the value of the "progress" field.
+func (odu *OtaDeployUpdate) ClearProgress() *OtaDeployUpdate {
+	odu.mutation.ClearProgress()
 	return odu
 }
 
@@ -330,11 +330,11 @@ func (odu *OtaDeployUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := odu.mutation.Errmsg(); ok {
 		_spec.SetField(otadeploy.FieldErrmsg, field.TypeString, value)
 	}
-	if value, ok := odu.mutation.Process(); ok {
-		_spec.SetField(otadeploy.FieldProcess, field.TypeJSON, value)
+	if value, ok := odu.mutation.Progress(); ok {
+		_spec.SetField(otadeploy.FieldProgress, field.TypeJSON, value)
 	}
-	if odu.mutation.ProcessCleared() {
-		_spec.ClearField(otadeploy.FieldProcess, field.TypeJSON)
+	if odu.mutation.ProgressCleared() {
+		_spec.ClearField(otadeploy.FieldProgress, field.TypeJSON)
 	}
 	if value, ok := odu.mutation.UpdateTime(); ok {
 		_spec.SetField(otadeploy.FieldUpdateTime, field.TypeTime, value)
@@ -533,23 +533,23 @@ func (oduo *OtaDeployUpdateOne) SetNillableErrmsg(s *string) *OtaDeployUpdateOne
 	return oduo
 }
 
-// SetProcess sets the "process" field.
-func (oduo *OtaDeployUpdateOne) SetProcess(tp types.OtaProcess) *OtaDeployUpdateOne {
-	oduo.mutation.SetProcess(tp)
+// SetProgress sets the "progress" field.
+func (oduo *OtaDeployUpdateOne) SetProgress(tp types.OtaProgress) *OtaDeployUpdateOne {
+	oduo.mutation.SetProgress(tp)
 	return oduo
 }
 
-// SetNillableProcess sets the "process" field if the given value is not nil.
-func (oduo *OtaDeployUpdateOne) SetNillableProcess(tp *types.OtaProcess) *OtaDeployUpdateOne {
+// SetNillableProgress sets the "progress" field if the given value is not nil.
+func (oduo *OtaDeployUpdateOne) SetNillableProgress(tp *types.OtaProgress) *OtaDeployUpdateOne {
 	if tp != nil {
-		oduo.SetProcess(*tp)
+		oduo.SetProgress(*tp)
 	}
 	return oduo
 }
 
-// ClearProcess clears the value of the "process" field.
-func (oduo *OtaDeployUpdateOne) ClearProcess() *OtaDeployUpdateOne {
-	oduo.mutation.ClearProcess()
+// ClearProgress clears the value of the "progress" field.
+func (oduo *OtaDeployUpdateOne) ClearProgress() *OtaDeployUpdateOne {
+	oduo.mutation.ClearProgress()
 	return oduo
 }
 
@@ -690,11 +690,11 @@ func (oduo *OtaDeployUpdateOne) sqlSave(ctx context.Context) (_node *OtaDeploy, 
 	if value, ok := oduo.mutation.Errmsg(); ok {
 		_spec.SetField(otadeploy.FieldErrmsg, field.TypeString, value)
 	}
-	if value, ok := oduo.mutation.Process(); ok {
-		_spec.SetField(otadeploy.FieldProcess, field.TypeJSON, value)
+	if value, ok := oduo.mutation.Progress(); ok {
+		_spec.SetField(otadeploy.FieldProgress, field.TypeJSON, value)
 	}
-	if oduo.mutation.ProcessCleared() {
-		_spec.ClearField(otadeploy.FieldProcess, field.TypeJSON)
+	if oduo.mutation.ProgressCleared() {
+		_spec.ClearField(otadeploy.FieldProgress, field.TypeJSON)
 	}
 	if value, ok := oduo.mutation.UpdateTime(); ok {
 		_spec.SetField(otadeploy.FieldUpdateTime, field.TypeTime, value)

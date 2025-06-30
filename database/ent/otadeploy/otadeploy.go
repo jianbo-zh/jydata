@@ -34,8 +34,8 @@ const (
 	FieldState = "state"
 	// FieldErrmsg holds the string denoting the errmsg field in the database.
 	FieldErrmsg = "errmsg"
-	// FieldProcess holds the string denoting the process field in the database.
-	FieldProcess = "process"
+	// FieldProgress holds the string denoting the progress field in the database.
+	FieldProgress = "progress"
 	// FieldCreateTime holds the string denoting the create_time field in the database.
 	FieldCreateTime = "create_time"
 	// FieldUpdateTime holds the string denoting the update_time field in the database.
@@ -57,7 +57,7 @@ var Columns = []string{
 	FieldOtaVersionNumber,
 	FieldState,
 	FieldErrmsg,
-	FieldProcess,
+	FieldProgress,
 	FieldCreateTime,
 	FieldUpdateTime,
 }

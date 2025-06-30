@@ -105,16 +105,16 @@ func (odc *OtaDeployCreate) SetNillableErrmsg(s *string) *OtaDeployCreate {
 	return odc
 }
 
-// SetProcess sets the "process" field.
-func (odc *OtaDeployCreate) SetProcess(tp types.OtaProcess) *OtaDeployCreate {
-	odc.mutation.SetProcess(tp)
+// SetProgress sets the "progress" field.
+func (odc *OtaDeployCreate) SetProgress(tp types.OtaProgress) *OtaDeployCreate {
+	odc.mutation.SetProgress(tp)
 	return odc
 }
 
-// SetNillableProcess sets the "process" field if the given value is not nil.
-func (odc *OtaDeployCreate) SetNillableProcess(tp *types.OtaProcess) *OtaDeployCreate {
+// SetNillableProgress sets the "progress" field if the given value is not nil.
+func (odc *OtaDeployCreate) SetNillableProgress(tp *types.OtaProgress) *OtaDeployCreate {
 	if tp != nil {
-		odc.SetProcess(*tp)
+		odc.SetProgress(*tp)
 	}
 	return odc
 }
@@ -322,9 +322,9 @@ func (odc *OtaDeployCreate) createSpec() (*OtaDeploy, *sqlgraph.CreateSpec) {
 		_spec.SetField(otadeploy.FieldErrmsg, field.TypeString, value)
 		_node.Errmsg = value
 	}
-	if value, ok := odc.mutation.Process(); ok {
-		_spec.SetField(otadeploy.FieldProcess, field.TypeJSON, value)
-		_node.Process = value
+	if value, ok := odc.mutation.Progress(); ok {
+		_spec.SetField(otadeploy.FieldProgress, field.TypeJSON, value)
+		_node.Progress = value
 	}
 	if value, ok := odc.mutation.CreateTime(); ok {
 		_spec.SetField(otadeploy.FieldCreateTime, field.TypeTime, value)

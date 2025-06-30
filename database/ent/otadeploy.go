@@ -41,7 +41,7 @@ type OtaDeploy struct {
 	// 升级失败描述
 	Errmsg string `json:"errmsg,omitempty"`
 	// OTA升级进度
-	Process types.OtaProcess `json:"process,omitempty"`
+	Progress types.OtaProgress `json:"progress,omitempty"`
 	// 创建时间
 	CreateTime time.Time `json:"create_time,omitempty"`
 	// 更新时间
@@ -54,7 +54,7 @@ func (*OtaDeploy) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case otadeploy.FieldProcess:
+		case otadeploy.FieldProgress:
 			values[i] = new([]byte)
 		case otadeploy.FieldID, otadeploy.FieldUUID, otadeploy.FieldCarID, otadeploy.FieldOtaVersionID, otadeploy.FieldState:
 			values[i] = new(sql.NullInt64)
@@ -143,12 +143,12 @@ func (od *OtaDeploy) assignValues(columns []string, values []any) error {
 			} else if value.Valid {
 				od.Errmsg = value.String
 			}
-		case otadeploy.FieldProcess:
+		case otadeploy.FieldProgress:
 			if value, ok := values[i].(*[]byte); !ok {
-				return fmt.Errorf("unexpected type %T for field process", values[i])
+				return fmt.Errorf("unexpected type %T for field progress", values[i])
 			} else if value != nil && len(*value) > 0 {
-				if err := json.Unmarshal(*value, &od.Process); err != nil {
-					return fmt.Errorf("unmarshal field process: %w", err)
+				if err := json.Unmarshal(*value, &od.Progress); err != nil {
+					return fmt.Errorf("unmarshal field progress: %w", err)
 				}
 			}
 		case otadeploy.FieldCreateTime:
@@ -229,8 +229,8 @@ func (od *OtaDeploy) String() string {
 	builder.WriteString("errmsg=")
 	builder.WriteString(od.Errmsg)
 	builder.WriteString(", ")
-	builder.WriteString("process=")
-	builder.WriteString(fmt.Sprintf("%v", od.Process))
+	builder.WriteString("progress=")
+	builder.WriteString(fmt.Sprintf("%v", od.Progress))
 	builder.WriteString(", ")
 	builder.WriteString("create_time=")
 	builder.WriteString(od.CreateTime.Format(time.ANSIC))

@@ -28,7 +28,7 @@ func (OtaDeploy) Fields() []ent.Field {
 		field.String("ota_version_number").Comment("OTA版本号"),
 		field.Int("state").Default(1).Comment("升级状态(1-升级中 2-升级成功 3-升级失败)"),
 		field.String("errmsg").Default("").Comment("升级失败描述"),
-		field.JSON("process", types.OtaProcess{}).Optional().Comment("OTA升级进度"),
+		field.JSON("progress", types.OtaProgress{}).Optional().Comment("OTA升级进度"),
 		field.Time("create_time").Immutable().Default(time.Now).Comment("创建时间"),
 		field.Time("update_time").Default(time.Now).UpdateDefault(time.Now).Comment("更新时间"),
 	}

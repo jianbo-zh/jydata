@@ -935,7 +935,7 @@ var (
 		{Name: "ota_version_number", Type: field.TypeString},
 		{Name: "state", Type: field.TypeInt, Default: 1},
 		{Name: "errmsg", Type: field.TypeString, Default: ""},
-		{Name: "process", Type: field.TypeJSON, Nullable: true},
+		{Name: "progress", Type: field.TypeJSON, Nullable: true},
 		{Name: "create_time", Type: field.TypeTime},
 		{Name: "update_time", Type: field.TypeTime},
 	}
@@ -1562,7 +1562,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1750908122},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1751252085},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},
