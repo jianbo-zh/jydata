@@ -25,8 +25,12 @@ const (
 	FieldRouteName = "route_name"
 	// FieldStartStopID holds the string denoting the start_stop_id field in the database.
 	FieldStartStopID = "start_stop_id"
+	// FieldStartStopIndex holds the string denoting the start_stop_index field in the database.
+	FieldStartStopIndex = "start_stop_index"
 	// FieldEndStopID holds the string denoting the end_stop_id field in the database.
 	FieldEndStopID = "end_stop_id"
+	// FieldEndStopIndex holds the string denoting the end_stop_index field in the database.
+	FieldEndStopIndex = "end_stop_index"
 	// FieldTicketCount holds the string denoting the ticket_count field in the database.
 	FieldTicketCount = "ticket_count"
 	// FieldCreateTime holds the string denoting the create_time field in the database.
@@ -46,7 +50,9 @@ var Columns = []string{
 	FieldRouteID,
 	FieldRouteName,
 	FieldStartStopID,
+	FieldStartStopIndex,
 	FieldEndStopID,
+	FieldEndStopIndex,
 	FieldTicketCount,
 	FieldCreateTime,
 	FieldUpdateTime,
@@ -119,9 +125,19 @@ func ByStartStopID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldStartStopID, opts...).ToFunc()
 }
 
+// ByStartStopIndex orders the results by the start_stop_index field.
+func ByStartStopIndex(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldStartStopIndex, opts...).ToFunc()
+}
+
 // ByEndStopID orders the results by the end_stop_id field.
 func ByEndStopID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldEndStopID, opts...).ToFunc()
+}
+
+// ByEndStopIndex orders the results by the end_stop_index field.
+func ByEndStopIndex(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldEndStopIndex, opts...).ToFunc()
 }
 
 // ByTicketCount orders the results by the ticket_count field.

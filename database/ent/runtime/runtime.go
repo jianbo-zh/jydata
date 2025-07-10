@@ -657,24 +657,28 @@ func init() {
 	carsflightDescCurrStopID := carsflightFields[10].Descriptor()
 	// carsflight.DefaultCurrStopID holds the default value on creation for the curr_stop_id field.
 	carsflight.DefaultCurrStopID = carsflightDescCurrStopID.Default.(int)
+	// carsflightDescCurrStopIndex is the schema descriptor for curr_stop_index field.
+	carsflightDescCurrStopIndex := carsflightFields[11].Descriptor()
+	// carsflight.DefaultCurrStopIndex holds the default value on creation for the curr_stop_index field.
+	carsflight.DefaultCurrStopIndex = carsflightDescCurrStopIndex.Default.(int)
 	// carsflightDescStopIds is the schema descriptor for stop_ids field.
-	carsflightDescStopIds := carsflightFields[11].Descriptor()
+	carsflightDescStopIds := carsflightFields[12].Descriptor()
 	// carsflight.DefaultStopIds holds the default value on creation for the stop_ids field.
 	carsflight.DefaultStopIds = carsflightDescStopIds.Default.([]int)
 	// carsflightDescPassIds is the schema descriptor for pass_ids field.
-	carsflightDescPassIds := carsflightFields[12].Descriptor()
+	carsflightDescPassIds := carsflightFields[13].Descriptor()
 	// carsflight.DefaultPassIds holds the default value on creation for the pass_ids field.
 	carsflight.DefaultPassIds = carsflightDescPassIds.Default.([]int)
 	// carsflightDescRemark is the schema descriptor for remark field.
-	carsflightDescRemark := carsflightFields[13].Descriptor()
+	carsflightDescRemark := carsflightFields[14].Descriptor()
 	// carsflight.DefaultRemark holds the default value on creation for the remark field.
 	carsflight.DefaultRemark = carsflightDescRemark.Default.(string)
 	// carsflightDescCreateTime is the schema descriptor for create_time field.
-	carsflightDescCreateTime := carsflightFields[18].Descriptor()
+	carsflightDescCreateTime := carsflightFields[19].Descriptor()
 	// carsflight.DefaultCreateTime holds the default value on creation for the create_time field.
 	carsflight.DefaultCreateTime = carsflightDescCreateTime.Default.(func() time.Time)
 	// carsflightDescUpdateTime is the schema descriptor for update_time field.
-	carsflightDescUpdateTime := carsflightFields[19].Descriptor()
+	carsflightDescUpdateTime := carsflightFields[20].Descriptor()
 	// carsflight.DefaultUpdateTime holds the default value on creation for the update_time field.
 	carsflight.DefaultUpdateTime = carsflightDescUpdateTime.Default.(func() time.Time)
 	// carsflight.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
@@ -1022,32 +1026,36 @@ func init() {
 	orderappealDescEndStopID := orderappealFields[6].Descriptor()
 	// orderappeal.DefaultEndStopID holds the default value on creation for the end_stop_id field.
 	orderappeal.DefaultEndStopID = orderappealDescEndStopID.Default.(int)
+	// orderappealDescEndStopIndex is the schema descriptor for end_stop_index field.
+	orderappealDescEndStopIndex := orderappealFields[7].Descriptor()
+	// orderappeal.DefaultEndStopIndex holds the default value on creation for the end_stop_index field.
+	orderappeal.DefaultEndStopIndex = orderappealDescEndStopIndex.Default.(int)
 	// orderappealDescEndStopImageID is the schema descriptor for end_stop_image_id field.
-	orderappealDescEndStopImageID := orderappealFields[7].Descriptor()
+	orderappealDescEndStopImageID := orderappealFields[8].Descriptor()
 	// orderappeal.DefaultEndStopImageID holds the default value on creation for the end_stop_image_id field.
 	orderappeal.DefaultEndStopImageID = orderappealDescEndStopImageID.Default.(int)
 	// orderappealDescState is the schema descriptor for state field.
-	orderappealDescState := orderappealFields[8].Descriptor()
+	orderappealDescState := orderappealFields[9].Descriptor()
 	// orderappeal.DefaultState holds the default value on creation for the state field.
 	orderappeal.DefaultState = orderappealDescState.Default.(int)
 	// orderappealDescRefundAmount is the schema descriptor for refund_amount field.
-	orderappealDescRefundAmount := orderappealFields[9].Descriptor()
+	orderappealDescRefundAmount := orderappealFields[10].Descriptor()
 	// orderappeal.DefaultRefundAmount holds the default value on creation for the refund_amount field.
 	orderappeal.DefaultRefundAmount = orderappealDescRefundAmount.Default.(int)
 	// orderappealDescUserComment is the schema descriptor for user_comment field.
-	orderappealDescUserComment := orderappealFields[10].Descriptor()
+	orderappealDescUserComment := orderappealFields[11].Descriptor()
 	// orderappeal.DefaultUserComment holds the default value on creation for the user_comment field.
 	orderappeal.DefaultUserComment = orderappealDescUserComment.Default.(string)
 	// orderappealDescReviewComment is the schema descriptor for review_comment field.
-	orderappealDescReviewComment := orderappealFields[11].Descriptor()
+	orderappealDescReviewComment := orderappealFields[12].Descriptor()
 	// orderappeal.DefaultReviewComment holds the default value on creation for the review_comment field.
 	orderappeal.DefaultReviewComment = orderappealDescReviewComment.Default.(string)
 	// orderappealDescCreateTime is the schema descriptor for create_time field.
-	orderappealDescCreateTime := orderappealFields[14].Descriptor()
+	orderappealDescCreateTime := orderappealFields[15].Descriptor()
 	// orderappeal.DefaultCreateTime holds the default value on creation for the create_time field.
 	orderappeal.DefaultCreateTime = orderappealDescCreateTime.Default.(func() time.Time)
 	// orderappealDescUpdateTime is the schema descriptor for update_time field.
-	orderappealDescUpdateTime := orderappealFields[15].Descriptor()
+	orderappealDescUpdateTime := orderappealFields[16].Descriptor()
 	// orderappeal.DefaultUpdateTime holds the default value on creation for the update_time field.
 	orderappeal.DefaultUpdateTime = orderappealDescUpdateTime.Default.(func() time.Time)
 	// orderappeal.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
@@ -1155,15 +1163,15 @@ func init() {
 	// orderextendflight.DefaultRouteName holds the default value on creation for the route_name field.
 	orderextendflight.DefaultRouteName = orderextendflightDescRouteName.Default.(string)
 	// orderextendflightDescTicketCount is the schema descriptor for ticket_count field.
-	orderextendflightDescTicketCount := orderextendflightFields[8].Descriptor()
+	orderextendflightDescTicketCount := orderextendflightFields[10].Descriptor()
 	// orderextendflight.DefaultTicketCount holds the default value on creation for the ticket_count field.
 	orderextendflight.DefaultTicketCount = orderextendflightDescTicketCount.Default.(int)
 	// orderextendflightDescCreateTime is the schema descriptor for create_time field.
-	orderextendflightDescCreateTime := orderextendflightFields[9].Descriptor()
+	orderextendflightDescCreateTime := orderextendflightFields[11].Descriptor()
 	// orderextendflight.DefaultCreateTime holds the default value on creation for the create_time field.
 	orderextendflight.DefaultCreateTime = orderextendflightDescCreateTime.Default.(func() time.Time)
 	// orderextendflightDescUpdateTime is the schema descriptor for update_time field.
-	orderextendflightDescUpdateTime := orderextendflightFields[10].Descriptor()
+	orderextendflightDescUpdateTime := orderextendflightFields[12].Descriptor()
 	// orderextendflight.DefaultUpdateTime holds the default value on creation for the update_time field.
 	orderextendflight.DefaultUpdateTime = orderextendflightDescUpdateTime.Default.(func() time.Time)
 	// orderextendflight.UpdateDefaultUpdateTime holds the default value on update for the update_time field.

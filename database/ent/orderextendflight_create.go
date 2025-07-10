@@ -88,9 +88,21 @@ func (oefc *OrderExtendFlightCreate) SetStartStopID(i int) *OrderExtendFlightCre
 	return oefc
 }
 
+// SetStartStopIndex sets the "start_stop_index" field.
+func (oefc *OrderExtendFlightCreate) SetStartStopIndex(i int) *OrderExtendFlightCreate {
+	oefc.mutation.SetStartStopIndex(i)
+	return oefc
+}
+
 // SetEndStopID sets the "end_stop_id" field.
 func (oefc *OrderExtendFlightCreate) SetEndStopID(i int) *OrderExtendFlightCreate {
 	oefc.mutation.SetEndStopID(i)
+	return oefc
+}
+
+// SetEndStopIndex sets the "end_stop_index" field.
+func (oefc *OrderExtendFlightCreate) SetEndStopIndex(i int) *OrderExtendFlightCreate {
+	oefc.mutation.SetEndStopIndex(i)
 	return oefc
 }
 
@@ -227,8 +239,14 @@ func (oefc *OrderExtendFlightCreate) check() error {
 	if _, ok := oefc.mutation.StartStopID(); !ok {
 		return &ValidationError{Name: "start_stop_id", err: errors.New(`ent: missing required field "OrderExtendFlight.start_stop_id"`)}
 	}
+	if _, ok := oefc.mutation.StartStopIndex(); !ok {
+		return &ValidationError{Name: "start_stop_index", err: errors.New(`ent: missing required field "OrderExtendFlight.start_stop_index"`)}
+	}
 	if _, ok := oefc.mutation.EndStopID(); !ok {
 		return &ValidationError{Name: "end_stop_id", err: errors.New(`ent: missing required field "OrderExtendFlight.end_stop_id"`)}
+	}
+	if _, ok := oefc.mutation.EndStopIndex(); !ok {
+		return &ValidationError{Name: "end_stop_index", err: errors.New(`ent: missing required field "OrderExtendFlight.end_stop_index"`)}
 	}
 	if _, ok := oefc.mutation.TicketCount(); !ok {
 		return &ValidationError{Name: "ticket_count", err: errors.New(`ent: missing required field "OrderExtendFlight.ticket_count"`)}
@@ -295,9 +313,17 @@ func (oefc *OrderExtendFlightCreate) createSpec() (*OrderExtendFlight, *sqlgraph
 		_spec.SetField(orderextendflight.FieldStartStopID, field.TypeInt, value)
 		_node.StartStopID = value
 	}
+	if value, ok := oefc.mutation.StartStopIndex(); ok {
+		_spec.SetField(orderextendflight.FieldStartStopIndex, field.TypeInt, value)
+		_node.StartStopIndex = value
+	}
 	if value, ok := oefc.mutation.EndStopID(); ok {
 		_spec.SetField(orderextendflight.FieldEndStopID, field.TypeInt, value)
 		_node.EndStopID = value
+	}
+	if value, ok := oefc.mutation.EndStopIndex(); ok {
+		_spec.SetField(orderextendflight.FieldEndStopIndex, field.TypeInt, value)
+		_node.EndStopIndex = value
 	}
 	if value, ok := oefc.mutation.TicketCount(); ok {
 		_spec.SetField(orderextendflight.FieldTicketCount, field.TypeInt, value)

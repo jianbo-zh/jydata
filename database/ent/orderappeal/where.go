@@ -84,6 +84,11 @@ func EndStopID(v int) predicate.OrderAppeal {
 	return predicate.OrderAppeal(sql.FieldEQ(FieldEndStopID, v))
 }
 
+// EndStopIndex applies equality check predicate on the "end_stop_index" field. It's identical to EndStopIndexEQ.
+func EndStopIndex(v int) predicate.OrderAppeal {
+	return predicate.OrderAppeal(sql.FieldEQ(FieldEndStopIndex, v))
+}
+
 // EndStopImageID applies equality check predicate on the "end_stop_image_id" field. It's identical to EndStopImageIDEQ.
 func EndStopImageID(v int) predicate.OrderAppeal {
 	return predicate.OrderAppeal(sql.FieldEQ(FieldEndStopImageID, v))
@@ -392,6 +397,46 @@ func EndStopIDLT(v int) predicate.OrderAppeal {
 // EndStopIDLTE applies the LTE predicate on the "end_stop_id" field.
 func EndStopIDLTE(v int) predicate.OrderAppeal {
 	return predicate.OrderAppeal(sql.FieldLTE(FieldEndStopID, v))
+}
+
+// EndStopIndexEQ applies the EQ predicate on the "end_stop_index" field.
+func EndStopIndexEQ(v int) predicate.OrderAppeal {
+	return predicate.OrderAppeal(sql.FieldEQ(FieldEndStopIndex, v))
+}
+
+// EndStopIndexNEQ applies the NEQ predicate on the "end_stop_index" field.
+func EndStopIndexNEQ(v int) predicate.OrderAppeal {
+	return predicate.OrderAppeal(sql.FieldNEQ(FieldEndStopIndex, v))
+}
+
+// EndStopIndexIn applies the In predicate on the "end_stop_index" field.
+func EndStopIndexIn(vs ...int) predicate.OrderAppeal {
+	return predicate.OrderAppeal(sql.FieldIn(FieldEndStopIndex, vs...))
+}
+
+// EndStopIndexNotIn applies the NotIn predicate on the "end_stop_index" field.
+func EndStopIndexNotIn(vs ...int) predicate.OrderAppeal {
+	return predicate.OrderAppeal(sql.FieldNotIn(FieldEndStopIndex, vs...))
+}
+
+// EndStopIndexGT applies the GT predicate on the "end_stop_index" field.
+func EndStopIndexGT(v int) predicate.OrderAppeal {
+	return predicate.OrderAppeal(sql.FieldGT(FieldEndStopIndex, v))
+}
+
+// EndStopIndexGTE applies the GTE predicate on the "end_stop_index" field.
+func EndStopIndexGTE(v int) predicate.OrderAppeal {
+	return predicate.OrderAppeal(sql.FieldGTE(FieldEndStopIndex, v))
+}
+
+// EndStopIndexLT applies the LT predicate on the "end_stop_index" field.
+func EndStopIndexLT(v int) predicate.OrderAppeal {
+	return predicate.OrderAppeal(sql.FieldLT(FieldEndStopIndex, v))
+}
+
+// EndStopIndexLTE applies the LTE predicate on the "end_stop_index" field.
+func EndStopIndexLTE(v int) predicate.OrderAppeal {
+	return predicate.OrderAppeal(sql.FieldLTE(FieldEndStopIndex, v))
 }
 
 // EndStopImageIDEQ applies the EQ predicate on the "end_stop_image_id" field.

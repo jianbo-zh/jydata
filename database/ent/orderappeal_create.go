@@ -72,6 +72,20 @@ func (oac *OrderAppealCreate) SetNillableEndStopID(i *int) *OrderAppealCreate {
 	return oac
 }
 
+// SetEndStopIndex sets the "end_stop_index" field.
+func (oac *OrderAppealCreate) SetEndStopIndex(i int) *OrderAppealCreate {
+	oac.mutation.SetEndStopIndex(i)
+	return oac
+}
+
+// SetNillableEndStopIndex sets the "end_stop_index" field if the given value is not nil.
+func (oac *OrderAppealCreate) SetNillableEndStopIndex(i *int) *OrderAppealCreate {
+	if i != nil {
+		oac.SetEndStopIndex(*i)
+	}
+	return oac
+}
+
 // SetEndStopImageID sets the "end_stop_image_id" field.
 func (oac *OrderAppealCreate) SetEndStopImageID(i int) *OrderAppealCreate {
 	oac.mutation.SetEndStopImageID(i)
@@ -247,6 +261,10 @@ func (oac *OrderAppealCreate) defaults() {
 		v := orderappeal.DefaultEndStopID
 		oac.mutation.SetEndStopID(v)
 	}
+	if _, ok := oac.mutation.EndStopIndex(); !ok {
+		v := orderappeal.DefaultEndStopIndex
+		oac.mutation.SetEndStopIndex(v)
+	}
 	if _, ok := oac.mutation.EndStopImageID(); !ok {
 		v := orderappeal.DefaultEndStopImageID
 		oac.mutation.SetEndStopImageID(v)
@@ -296,6 +314,9 @@ func (oac *OrderAppealCreate) check() error {
 	}
 	if _, ok := oac.mutation.EndStopID(); !ok {
 		return &ValidationError{Name: "end_stop_id", err: errors.New(`ent: missing required field "OrderAppeal.end_stop_id"`)}
+	}
+	if _, ok := oac.mutation.EndStopIndex(); !ok {
+		return &ValidationError{Name: "end_stop_index", err: errors.New(`ent: missing required field "OrderAppeal.end_stop_index"`)}
 	}
 	if _, ok := oac.mutation.EndStopImageID(); !ok {
 		return &ValidationError{Name: "end_stop_image_id", err: errors.New(`ent: missing required field "OrderAppeal.end_stop_image_id"`)}
@@ -373,6 +394,10 @@ func (oac *OrderAppealCreate) createSpec() (*OrderAppeal, *sqlgraph.CreateSpec) 
 	if value, ok := oac.mutation.EndStopID(); ok {
 		_spec.SetField(orderappeal.FieldEndStopID, field.TypeInt, value)
 		_node.EndStopID = value
+	}
+	if value, ok := oac.mutation.EndStopIndex(); ok {
+		_spec.SetField(orderappeal.FieldEndStopIndex, field.TypeInt, value)
+		_node.EndStopIndex = value
 	}
 	if value, ok := oac.mutation.EndStopImageID(); ok {
 		_spec.SetField(orderappeal.FieldEndStopImageID, field.TypeInt, value)

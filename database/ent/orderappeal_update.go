@@ -147,6 +147,27 @@ func (oau *OrderAppealUpdate) AddEndStopID(i int) *OrderAppealUpdate {
 	return oau
 }
 
+// SetEndStopIndex sets the "end_stop_index" field.
+func (oau *OrderAppealUpdate) SetEndStopIndex(i int) *OrderAppealUpdate {
+	oau.mutation.ResetEndStopIndex()
+	oau.mutation.SetEndStopIndex(i)
+	return oau
+}
+
+// SetNillableEndStopIndex sets the "end_stop_index" field if the given value is not nil.
+func (oau *OrderAppealUpdate) SetNillableEndStopIndex(i *int) *OrderAppealUpdate {
+	if i != nil {
+		oau.SetEndStopIndex(*i)
+	}
+	return oau
+}
+
+// AddEndStopIndex adds i to the "end_stop_index" field.
+func (oau *OrderAppealUpdate) AddEndStopIndex(i int) *OrderAppealUpdate {
+	oau.mutation.AddEndStopIndex(i)
+	return oau
+}
+
 // SetEndStopImageID sets the "end_stop_image_id" field.
 func (oau *OrderAppealUpdate) SetEndStopImageID(i int) *OrderAppealUpdate {
 	oau.mutation.ResetEndStopImageID()
@@ -367,6 +388,12 @@ func (oau *OrderAppealUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := oau.mutation.AddedEndStopID(); ok {
 		_spec.AddField(orderappeal.FieldEndStopID, field.TypeInt, value)
 	}
+	if value, ok := oau.mutation.EndStopIndex(); ok {
+		_spec.SetField(orderappeal.FieldEndStopIndex, field.TypeInt, value)
+	}
+	if value, ok := oau.mutation.AddedEndStopIndex(); ok {
+		_spec.AddField(orderappeal.FieldEndStopIndex, field.TypeInt, value)
+	}
 	if value, ok := oau.mutation.EndStopImageID(); ok {
 		_spec.SetField(orderappeal.FieldEndStopImageID, field.TypeInt, value)
 	}
@@ -542,6 +569,27 @@ func (oauo *OrderAppealUpdateOne) SetNillableEndStopID(i *int) *OrderAppealUpdat
 // AddEndStopID adds i to the "end_stop_id" field.
 func (oauo *OrderAppealUpdateOne) AddEndStopID(i int) *OrderAppealUpdateOne {
 	oauo.mutation.AddEndStopID(i)
+	return oauo
+}
+
+// SetEndStopIndex sets the "end_stop_index" field.
+func (oauo *OrderAppealUpdateOne) SetEndStopIndex(i int) *OrderAppealUpdateOne {
+	oauo.mutation.ResetEndStopIndex()
+	oauo.mutation.SetEndStopIndex(i)
+	return oauo
+}
+
+// SetNillableEndStopIndex sets the "end_stop_index" field if the given value is not nil.
+func (oauo *OrderAppealUpdateOne) SetNillableEndStopIndex(i *int) *OrderAppealUpdateOne {
+	if i != nil {
+		oauo.SetEndStopIndex(*i)
+	}
+	return oauo
+}
+
+// AddEndStopIndex adds i to the "end_stop_index" field.
+func (oauo *OrderAppealUpdateOne) AddEndStopIndex(i int) *OrderAppealUpdateOne {
+	oauo.mutation.AddEndStopIndex(i)
 	return oauo
 }
 
@@ -794,6 +842,12 @@ func (oauo *OrderAppealUpdateOne) sqlSave(ctx context.Context) (_node *OrderAppe
 	}
 	if value, ok := oauo.mutation.AddedEndStopID(); ok {
 		_spec.AddField(orderappeal.FieldEndStopID, field.TypeInt, value)
+	}
+	if value, ok := oauo.mutation.EndStopIndex(); ok {
+		_spec.SetField(orderappeal.FieldEndStopIndex, field.TypeInt, value)
+	}
+	if value, ok := oauo.mutation.AddedEndStopIndex(); ok {
+		_spec.AddField(orderappeal.FieldEndStopIndex, field.TypeInt, value)
 	}
 	if value, ok := oauo.mutation.EndStopImageID(); ok {
 		_spec.SetField(orderappeal.FieldEndStopImageID, field.TypeInt, value)

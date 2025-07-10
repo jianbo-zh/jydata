@@ -140,6 +140,27 @@ func (oefu *OrderExtendFlightUpdate) AddStartStopID(i int) *OrderExtendFlightUpd
 	return oefu
 }
 
+// SetStartStopIndex sets the "start_stop_index" field.
+func (oefu *OrderExtendFlightUpdate) SetStartStopIndex(i int) *OrderExtendFlightUpdate {
+	oefu.mutation.ResetStartStopIndex()
+	oefu.mutation.SetStartStopIndex(i)
+	return oefu
+}
+
+// SetNillableStartStopIndex sets the "start_stop_index" field if the given value is not nil.
+func (oefu *OrderExtendFlightUpdate) SetNillableStartStopIndex(i *int) *OrderExtendFlightUpdate {
+	if i != nil {
+		oefu.SetStartStopIndex(*i)
+	}
+	return oefu
+}
+
+// AddStartStopIndex adds i to the "start_stop_index" field.
+func (oefu *OrderExtendFlightUpdate) AddStartStopIndex(i int) *OrderExtendFlightUpdate {
+	oefu.mutation.AddStartStopIndex(i)
+	return oefu
+}
+
 // SetEndStopID sets the "end_stop_id" field.
 func (oefu *OrderExtendFlightUpdate) SetEndStopID(i int) *OrderExtendFlightUpdate {
 	oefu.mutation.ResetEndStopID()
@@ -158,6 +179,27 @@ func (oefu *OrderExtendFlightUpdate) SetNillableEndStopID(i *int) *OrderExtendFl
 // AddEndStopID adds i to the "end_stop_id" field.
 func (oefu *OrderExtendFlightUpdate) AddEndStopID(i int) *OrderExtendFlightUpdate {
 	oefu.mutation.AddEndStopID(i)
+	return oefu
+}
+
+// SetEndStopIndex sets the "end_stop_index" field.
+func (oefu *OrderExtendFlightUpdate) SetEndStopIndex(i int) *OrderExtendFlightUpdate {
+	oefu.mutation.ResetEndStopIndex()
+	oefu.mutation.SetEndStopIndex(i)
+	return oefu
+}
+
+// SetNillableEndStopIndex sets the "end_stop_index" field if the given value is not nil.
+func (oefu *OrderExtendFlightUpdate) SetNillableEndStopIndex(i *int) *OrderExtendFlightUpdate {
+	if i != nil {
+		oefu.SetEndStopIndex(*i)
+	}
+	return oefu
+}
+
+// AddEndStopIndex adds i to the "end_stop_index" field.
+func (oefu *OrderExtendFlightUpdate) AddEndStopIndex(i int) *OrderExtendFlightUpdate {
+	oefu.mutation.AddEndStopIndex(i)
 	return oefu
 }
 
@@ -268,11 +310,23 @@ func (oefu *OrderExtendFlightUpdate) sqlSave(ctx context.Context) (n int, err er
 	if value, ok := oefu.mutation.AddedStartStopID(); ok {
 		_spec.AddField(orderextendflight.FieldStartStopID, field.TypeInt, value)
 	}
+	if value, ok := oefu.mutation.StartStopIndex(); ok {
+		_spec.SetField(orderextendflight.FieldStartStopIndex, field.TypeInt, value)
+	}
+	if value, ok := oefu.mutation.AddedStartStopIndex(); ok {
+		_spec.AddField(orderextendflight.FieldStartStopIndex, field.TypeInt, value)
+	}
 	if value, ok := oefu.mutation.EndStopID(); ok {
 		_spec.SetField(orderextendflight.FieldEndStopID, field.TypeInt, value)
 	}
 	if value, ok := oefu.mutation.AddedEndStopID(); ok {
 		_spec.AddField(orderextendflight.FieldEndStopID, field.TypeInt, value)
+	}
+	if value, ok := oefu.mutation.EndStopIndex(); ok {
+		_spec.SetField(orderextendflight.FieldEndStopIndex, field.TypeInt, value)
+	}
+	if value, ok := oefu.mutation.AddedEndStopIndex(); ok {
+		_spec.AddField(orderextendflight.FieldEndStopIndex, field.TypeInt, value)
 	}
 	if value, ok := oefu.mutation.TicketCount(); ok {
 		_spec.SetField(orderextendflight.FieldTicketCount, field.TypeInt, value)
@@ -415,6 +469,27 @@ func (oefuo *OrderExtendFlightUpdateOne) AddStartStopID(i int) *OrderExtendFligh
 	return oefuo
 }
 
+// SetStartStopIndex sets the "start_stop_index" field.
+func (oefuo *OrderExtendFlightUpdateOne) SetStartStopIndex(i int) *OrderExtendFlightUpdateOne {
+	oefuo.mutation.ResetStartStopIndex()
+	oefuo.mutation.SetStartStopIndex(i)
+	return oefuo
+}
+
+// SetNillableStartStopIndex sets the "start_stop_index" field if the given value is not nil.
+func (oefuo *OrderExtendFlightUpdateOne) SetNillableStartStopIndex(i *int) *OrderExtendFlightUpdateOne {
+	if i != nil {
+		oefuo.SetStartStopIndex(*i)
+	}
+	return oefuo
+}
+
+// AddStartStopIndex adds i to the "start_stop_index" field.
+func (oefuo *OrderExtendFlightUpdateOne) AddStartStopIndex(i int) *OrderExtendFlightUpdateOne {
+	oefuo.mutation.AddStartStopIndex(i)
+	return oefuo
+}
+
 // SetEndStopID sets the "end_stop_id" field.
 func (oefuo *OrderExtendFlightUpdateOne) SetEndStopID(i int) *OrderExtendFlightUpdateOne {
 	oefuo.mutation.ResetEndStopID()
@@ -433,6 +508,27 @@ func (oefuo *OrderExtendFlightUpdateOne) SetNillableEndStopID(i *int) *OrderExte
 // AddEndStopID adds i to the "end_stop_id" field.
 func (oefuo *OrderExtendFlightUpdateOne) AddEndStopID(i int) *OrderExtendFlightUpdateOne {
 	oefuo.mutation.AddEndStopID(i)
+	return oefuo
+}
+
+// SetEndStopIndex sets the "end_stop_index" field.
+func (oefuo *OrderExtendFlightUpdateOne) SetEndStopIndex(i int) *OrderExtendFlightUpdateOne {
+	oefuo.mutation.ResetEndStopIndex()
+	oefuo.mutation.SetEndStopIndex(i)
+	return oefuo
+}
+
+// SetNillableEndStopIndex sets the "end_stop_index" field if the given value is not nil.
+func (oefuo *OrderExtendFlightUpdateOne) SetNillableEndStopIndex(i *int) *OrderExtendFlightUpdateOne {
+	if i != nil {
+		oefuo.SetEndStopIndex(*i)
+	}
+	return oefuo
+}
+
+// AddEndStopIndex adds i to the "end_stop_index" field.
+func (oefuo *OrderExtendFlightUpdateOne) AddEndStopIndex(i int) *OrderExtendFlightUpdateOne {
+	oefuo.mutation.AddEndStopIndex(i)
 	return oefuo
 }
 
@@ -573,11 +669,23 @@ func (oefuo *OrderExtendFlightUpdateOne) sqlSave(ctx context.Context) (_node *Or
 	if value, ok := oefuo.mutation.AddedStartStopID(); ok {
 		_spec.AddField(orderextendflight.FieldStartStopID, field.TypeInt, value)
 	}
+	if value, ok := oefuo.mutation.StartStopIndex(); ok {
+		_spec.SetField(orderextendflight.FieldStartStopIndex, field.TypeInt, value)
+	}
+	if value, ok := oefuo.mutation.AddedStartStopIndex(); ok {
+		_spec.AddField(orderextendflight.FieldStartStopIndex, field.TypeInt, value)
+	}
 	if value, ok := oefuo.mutation.EndStopID(); ok {
 		_spec.SetField(orderextendflight.FieldEndStopID, field.TypeInt, value)
 	}
 	if value, ok := oefuo.mutation.AddedEndStopID(); ok {
 		_spec.AddField(orderextendflight.FieldEndStopID, field.TypeInt, value)
+	}
+	if value, ok := oefuo.mutation.EndStopIndex(); ok {
+		_spec.SetField(orderextendflight.FieldEndStopIndex, field.TypeInt, value)
+	}
+	if value, ok := oefuo.mutation.AddedEndStopIndex(); ok {
+		_spec.AddField(orderextendflight.FieldEndStopIndex, field.TypeInt, value)
 	}
 	if value, ok := oefuo.mutation.TicketCount(); ok {
 		_spec.SetField(orderextendflight.FieldTicketCount, field.TypeInt, value)

@@ -25,6 +25,8 @@ const (
 	FieldType = "type"
 	// FieldEndStopID holds the string denoting the end_stop_id field in the database.
 	FieldEndStopID = "end_stop_id"
+	// FieldEndStopIndex holds the string denoting the end_stop_index field in the database.
+	FieldEndStopIndex = "end_stop_index"
 	// FieldEndStopImageID holds the string denoting the end_stop_image_id field in the database.
 	FieldEndStopImageID = "end_stop_image_id"
 	// FieldState holds the string denoting the state field in the database.
@@ -56,6 +58,7 @@ var Columns = []string{
 	FieldOrderNo,
 	FieldType,
 	FieldEndStopID,
+	FieldEndStopIndex,
 	FieldEndStopImageID,
 	FieldState,
 	FieldRefundAmount,
@@ -82,6 +85,8 @@ var (
 	DefaultType int
 	// DefaultEndStopID holds the default value on creation for the "end_stop_id" field.
 	DefaultEndStopID int
+	// DefaultEndStopIndex holds the default value on creation for the "end_stop_index" field.
+	DefaultEndStopIndex int
 	// DefaultEndStopImageID holds the default value on creation for the "end_stop_image_id" field.
 	DefaultEndStopImageID int
 	// DefaultState holds the default value on creation for the "state" field.
@@ -136,6 +141,11 @@ func ByType(opts ...sql.OrderTermOption) OrderOption {
 // ByEndStopID orders the results by the end_stop_id field.
 func ByEndStopID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldEndStopID, opts...).ToFunc()
+}
+
+// ByEndStopIndex orders the results by the end_stop_index field.
+func ByEndStopIndex(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldEndStopIndex, opts...).ToFunc()
 }
 
 // ByEndStopImageID orders the results by the end_stop_image_id field.

@@ -19975,6 +19975,8 @@ type CarsFlightMutation struct {
 	addstate           *int
 	curr_stop_id       *int
 	addcurr_stop_id    *int
+	curr_stop_index    *int
+	addcurr_stop_index *int
 	stop_ids           *[]int
 	appendstop_ids     []int
 	pass_ids           *[]int
@@ -20592,6 +20594,76 @@ func (m *CarsFlightMutation) ResetCurrStopID() {
 	delete(m.clearedFields, carsflight.FieldCurrStopID)
 }
 
+// SetCurrStopIndex sets the "curr_stop_index" field.
+func (m *CarsFlightMutation) SetCurrStopIndex(i int) {
+	m.curr_stop_index = &i
+	m.addcurr_stop_index = nil
+}
+
+// CurrStopIndex returns the value of the "curr_stop_index" field in the mutation.
+func (m *CarsFlightMutation) CurrStopIndex() (r int, exists bool) {
+	v := m.curr_stop_index
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCurrStopIndex returns the old "curr_stop_index" field's value of the CarsFlight entity.
+// If the CarsFlight object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *CarsFlightMutation) OldCurrStopIndex(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCurrStopIndex is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCurrStopIndex requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCurrStopIndex: %w", err)
+	}
+	return oldValue.CurrStopIndex, nil
+}
+
+// AddCurrStopIndex adds i to the "curr_stop_index" field.
+func (m *CarsFlightMutation) AddCurrStopIndex(i int) {
+	if m.addcurr_stop_index != nil {
+		*m.addcurr_stop_index += i
+	} else {
+		m.addcurr_stop_index = &i
+	}
+}
+
+// AddedCurrStopIndex returns the value that was added to the "curr_stop_index" field in this mutation.
+func (m *CarsFlightMutation) AddedCurrStopIndex() (r int, exists bool) {
+	v := m.addcurr_stop_index
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearCurrStopIndex clears the value of the "curr_stop_index" field.
+func (m *CarsFlightMutation) ClearCurrStopIndex() {
+	m.curr_stop_index = nil
+	m.addcurr_stop_index = nil
+	m.clearedFields[carsflight.FieldCurrStopIndex] = struct{}{}
+}
+
+// CurrStopIndexCleared returns if the "curr_stop_index" field was cleared in this mutation.
+func (m *CarsFlightMutation) CurrStopIndexCleared() bool {
+	_, ok := m.clearedFields[carsflight.FieldCurrStopIndex]
+	return ok
+}
+
+// ResetCurrStopIndex resets all changes to the "curr_stop_index" field.
+func (m *CarsFlightMutation) ResetCurrStopIndex() {
+	m.curr_stop_index = nil
+	m.addcurr_stop_index = nil
+	delete(m.clearedFields, carsflight.FieldCurrStopIndex)
+}
+
 // SetStopIds sets the "stop_ids" field.
 func (m *CarsFlightMutation) SetStopIds(i []int) {
 	m.stop_ids = &i
@@ -21083,7 +21155,7 @@ func (m *CarsFlightMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *CarsFlightMutation) Fields() []string {
-	fields := make([]string, 0, 19)
+	fields := make([]string, 0, 20)
 	if m.scenic_area_id != nil {
 		fields = append(fields, carsflight.FieldScenicAreaID)
 	}
@@ -21113,6 +21185,9 @@ func (m *CarsFlightMutation) Fields() []string {
 	}
 	if m.curr_stop_id != nil {
 		fields = append(fields, carsflight.FieldCurrStopID)
+	}
+	if m.curr_stop_index != nil {
+		fields = append(fields, carsflight.FieldCurrStopIndex)
 	}
 	if m.stop_ids != nil {
 		fields = append(fields, carsflight.FieldStopIds)
@@ -21169,6 +21244,8 @@ func (m *CarsFlightMutation) Field(name string) (ent.Value, bool) {
 		return m.State()
 	case carsflight.FieldCurrStopID:
 		return m.CurrStopID()
+	case carsflight.FieldCurrStopIndex:
+		return m.CurrStopIndex()
 	case carsflight.FieldStopIds:
 		return m.StopIds()
 	case carsflight.FieldPassIds:
@@ -21216,6 +21293,8 @@ func (m *CarsFlightMutation) OldField(ctx context.Context, name string) (ent.Val
 		return m.OldState(ctx)
 	case carsflight.FieldCurrStopID:
 		return m.OldCurrStopID(ctx)
+	case carsflight.FieldCurrStopIndex:
+		return m.OldCurrStopIndex(ctx)
 	case carsflight.FieldStopIds:
 		return m.OldStopIds(ctx)
 	case carsflight.FieldPassIds:
@@ -21313,6 +21392,13 @@ func (m *CarsFlightMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetCurrStopID(v)
 		return nil
+	case carsflight.FieldCurrStopIndex:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCurrStopIndex(v)
+		return nil
 	case carsflight.FieldStopIds:
 		v, ok := value.([]int)
 		if !ok {
@@ -21402,6 +21488,9 @@ func (m *CarsFlightMutation) AddedFields() []string {
 	if m.addcurr_stop_id != nil {
 		fields = append(fields, carsflight.FieldCurrStopID)
 	}
+	if m.addcurr_stop_index != nil {
+		fields = append(fields, carsflight.FieldCurrStopIndex)
+	}
 	if m.addextend_yokee_id != nil {
 		fields = append(fields, carsflight.FieldExtendYokeeID)
 	}
@@ -21425,6 +21514,8 @@ func (m *CarsFlightMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedState()
 	case carsflight.FieldCurrStopID:
 		return m.AddedCurrStopID()
+	case carsflight.FieldCurrStopIndex:
+		return m.AddedCurrStopIndex()
 	case carsflight.FieldExtendYokeeID:
 		return m.AddedExtendYokeeID()
 	}
@@ -21478,6 +21569,13 @@ func (m *CarsFlightMutation) AddField(name string, value ent.Value) error {
 		}
 		m.AddCurrStopID(v)
 		return nil
+	case carsflight.FieldCurrStopIndex:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddCurrStopIndex(v)
+		return nil
 	case carsflight.FieldExtendYokeeID:
 		v, ok := value.(int)
 		if !ok {
@@ -21495,6 +21593,9 @@ func (m *CarsFlightMutation) ClearedFields() []string {
 	var fields []string
 	if m.FieldCleared(carsflight.FieldCurrStopID) {
 		fields = append(fields, carsflight.FieldCurrStopID)
+	}
+	if m.FieldCleared(carsflight.FieldCurrStopIndex) {
+		fields = append(fields, carsflight.FieldCurrStopIndex)
 	}
 	if m.FieldCleared(carsflight.FieldStopIds) {
 		fields = append(fields, carsflight.FieldStopIds)
@@ -21527,6 +21628,9 @@ func (m *CarsFlightMutation) ClearField(name string) error {
 	switch name {
 	case carsflight.FieldCurrStopID:
 		m.ClearCurrStopID()
+		return nil
+	case carsflight.FieldCurrStopIndex:
+		m.ClearCurrStopIndex()
 		return nil
 	case carsflight.FieldStopIds:
 		m.ClearStopIds()
@@ -21580,6 +21684,9 @@ func (m *CarsFlightMutation) ResetField(name string) error {
 		return nil
 	case carsflight.FieldCurrStopID:
 		m.ResetCurrStopID()
+		return nil
+	case carsflight.FieldCurrStopIndex:
+		m.ResetCurrStopIndex()
 		return nil
 	case carsflight.FieldStopIds:
 		m.ResetStopIds()
@@ -35027,6 +35134,8 @@ type OrderAppealMutation struct {
 	add_type             *int
 	end_stop_id          *int
 	addend_stop_id       *int
+	end_stop_index       *int
+	addend_stop_index    *int
 	end_stop_image_id    *int
 	addend_stop_image_id *int
 	state                *int
@@ -35463,6 +35572,62 @@ func (m *OrderAppealMutation) AddedEndStopID() (r int, exists bool) {
 func (m *OrderAppealMutation) ResetEndStopID() {
 	m.end_stop_id = nil
 	m.addend_stop_id = nil
+}
+
+// SetEndStopIndex sets the "end_stop_index" field.
+func (m *OrderAppealMutation) SetEndStopIndex(i int) {
+	m.end_stop_index = &i
+	m.addend_stop_index = nil
+}
+
+// EndStopIndex returns the value of the "end_stop_index" field in the mutation.
+func (m *OrderAppealMutation) EndStopIndex() (r int, exists bool) {
+	v := m.end_stop_index
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldEndStopIndex returns the old "end_stop_index" field's value of the OrderAppeal entity.
+// If the OrderAppeal object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderAppealMutation) OldEndStopIndex(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldEndStopIndex is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldEndStopIndex requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldEndStopIndex: %w", err)
+	}
+	return oldValue.EndStopIndex, nil
+}
+
+// AddEndStopIndex adds i to the "end_stop_index" field.
+func (m *OrderAppealMutation) AddEndStopIndex(i int) {
+	if m.addend_stop_index != nil {
+		*m.addend_stop_index += i
+	} else {
+		m.addend_stop_index = &i
+	}
+}
+
+// AddedEndStopIndex returns the value that was added to the "end_stop_index" field in this mutation.
+func (m *OrderAppealMutation) AddedEndStopIndex() (r int, exists bool) {
+	v := m.addend_stop_index
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetEndStopIndex resets all changes to the "end_stop_index" field.
+func (m *OrderAppealMutation) ResetEndStopIndex() {
+	m.end_stop_index = nil
+	m.addend_stop_index = nil
 }
 
 // SetEndStopImageID sets the "end_stop_image_id" field.
@@ -35909,7 +36074,7 @@ func (m *OrderAppealMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *OrderAppealMutation) Fields() []string {
-	fields := make([]string, 0, 15)
+	fields := make([]string, 0, 16)
 	if m.scenic_area_id != nil {
 		fields = append(fields, orderappeal.FieldScenicAreaID)
 	}
@@ -35927,6 +36092,9 @@ func (m *OrderAppealMutation) Fields() []string {
 	}
 	if m.end_stop_id != nil {
 		fields = append(fields, orderappeal.FieldEndStopID)
+	}
+	if m.end_stop_index != nil {
+		fields = append(fields, orderappeal.FieldEndStopIndex)
 	}
 	if m.end_stop_image_id != nil {
 		fields = append(fields, orderappeal.FieldEndStopImageID)
@@ -35975,6 +36143,8 @@ func (m *OrderAppealMutation) Field(name string) (ent.Value, bool) {
 		return m.GetType()
 	case orderappeal.FieldEndStopID:
 		return m.EndStopID()
+	case orderappeal.FieldEndStopIndex:
+		return m.EndStopIndex()
 	case orderappeal.FieldEndStopImageID:
 		return m.EndStopImageID()
 	case orderappeal.FieldState:
@@ -36014,6 +36184,8 @@ func (m *OrderAppealMutation) OldField(ctx context.Context, name string) (ent.Va
 		return m.OldType(ctx)
 	case orderappeal.FieldEndStopID:
 		return m.OldEndStopID(ctx)
+	case orderappeal.FieldEndStopIndex:
+		return m.OldEndStopIndex(ctx)
 	case orderappeal.FieldEndStopImageID:
 		return m.OldEndStopImageID(ctx)
 	case orderappeal.FieldState:
@@ -36082,6 +36254,13 @@ func (m *OrderAppealMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetEndStopID(v)
+		return nil
+	case orderappeal.FieldEndStopIndex:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetEndStopIndex(v)
 		return nil
 	case orderappeal.FieldEndStopImageID:
 		v, ok := value.(int)
@@ -36169,6 +36348,9 @@ func (m *OrderAppealMutation) AddedFields() []string {
 	if m.addend_stop_id != nil {
 		fields = append(fields, orderappeal.FieldEndStopID)
 	}
+	if m.addend_stop_index != nil {
+		fields = append(fields, orderappeal.FieldEndStopIndex)
+	}
 	if m.addend_stop_image_id != nil {
 		fields = append(fields, orderappeal.FieldEndStopImageID)
 	}
@@ -36196,6 +36378,8 @@ func (m *OrderAppealMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedType()
 	case orderappeal.FieldEndStopID:
 		return m.AddedEndStopID()
+	case orderappeal.FieldEndStopIndex:
+		return m.AddedEndStopIndex()
 	case orderappeal.FieldEndStopImageID:
 		return m.AddedEndStopImageID()
 	case orderappeal.FieldState:
@@ -36245,6 +36429,13 @@ func (m *OrderAppealMutation) AddField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddEndStopID(v)
+		return nil
+	case orderappeal.FieldEndStopIndex:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddEndStopIndex(v)
 		return nil
 	case orderappeal.FieldEndStopImageID:
 		v, ok := value.(int)
@@ -36326,6 +36517,9 @@ func (m *OrderAppealMutation) ResetField(name string) error {
 		return nil
 	case orderappeal.FieldEndStopID:
 		m.ResetEndStopID()
+		return nil
+	case orderappeal.FieldEndStopIndex:
+		m.ResetEndStopIndex()
 		return nil
 	case orderappeal.FieldEndStopImageID:
 		m.ResetEndStopImageID()
@@ -38621,29 +38815,33 @@ func (m *OrderBillingMutation) ResetEdge(name string) error {
 // OrderExtendFlightMutation represents an operation that mutates the OrderExtendFlight nodes in the graph.
 type OrderExtendFlightMutation struct {
 	config
-	op               Op
-	typ              string
-	id               *int
-	order_id         *int
-	addorder_id      *int
-	flight_id        *int
-	addflight_id     *int
-	flight_no        *string
-	route_id         *int
-	addroute_id      *int
-	route_name       *string
-	start_stop_id    *int
-	addstart_stop_id *int
-	end_stop_id      *int
-	addend_stop_id   *int
-	ticket_count     *int
-	addticket_count  *int
-	create_time      *time.Time
-	update_time      *time.Time
-	clearedFields    map[string]struct{}
-	done             bool
-	oldValue         func(context.Context) (*OrderExtendFlight, error)
-	predicates       []predicate.OrderExtendFlight
+	op                  Op
+	typ                 string
+	id                  *int
+	order_id            *int
+	addorder_id         *int
+	flight_id           *int
+	addflight_id        *int
+	flight_no           *string
+	route_id            *int
+	addroute_id         *int
+	route_name          *string
+	start_stop_id       *int
+	addstart_stop_id    *int
+	start_stop_index    *int
+	addstart_stop_index *int
+	end_stop_id         *int
+	addend_stop_id      *int
+	end_stop_index      *int
+	addend_stop_index   *int
+	ticket_count        *int
+	addticket_count     *int
+	create_time         *time.Time
+	update_time         *time.Time
+	clearedFields       map[string]struct{}
+	done                bool
+	oldValue            func(context.Context) (*OrderExtendFlight, error)
+	predicates          []predicate.OrderExtendFlight
 }
 
 var _ ent.Mutation = (*OrderExtendFlightMutation)(nil)
@@ -39046,6 +39244,62 @@ func (m *OrderExtendFlightMutation) ResetStartStopID() {
 	m.addstart_stop_id = nil
 }
 
+// SetStartStopIndex sets the "start_stop_index" field.
+func (m *OrderExtendFlightMutation) SetStartStopIndex(i int) {
+	m.start_stop_index = &i
+	m.addstart_stop_index = nil
+}
+
+// StartStopIndex returns the value of the "start_stop_index" field in the mutation.
+func (m *OrderExtendFlightMutation) StartStopIndex() (r int, exists bool) {
+	v := m.start_stop_index
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldStartStopIndex returns the old "start_stop_index" field's value of the OrderExtendFlight entity.
+// If the OrderExtendFlight object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderExtendFlightMutation) OldStartStopIndex(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldStartStopIndex is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldStartStopIndex requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldStartStopIndex: %w", err)
+	}
+	return oldValue.StartStopIndex, nil
+}
+
+// AddStartStopIndex adds i to the "start_stop_index" field.
+func (m *OrderExtendFlightMutation) AddStartStopIndex(i int) {
+	if m.addstart_stop_index != nil {
+		*m.addstart_stop_index += i
+	} else {
+		m.addstart_stop_index = &i
+	}
+}
+
+// AddedStartStopIndex returns the value that was added to the "start_stop_index" field in this mutation.
+func (m *OrderExtendFlightMutation) AddedStartStopIndex() (r int, exists bool) {
+	v := m.addstart_stop_index
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetStartStopIndex resets all changes to the "start_stop_index" field.
+func (m *OrderExtendFlightMutation) ResetStartStopIndex() {
+	m.start_stop_index = nil
+	m.addstart_stop_index = nil
+}
+
 // SetEndStopID sets the "end_stop_id" field.
 func (m *OrderExtendFlightMutation) SetEndStopID(i int) {
 	m.end_stop_id = &i
@@ -39100,6 +39354,62 @@ func (m *OrderExtendFlightMutation) AddedEndStopID() (r int, exists bool) {
 func (m *OrderExtendFlightMutation) ResetEndStopID() {
 	m.end_stop_id = nil
 	m.addend_stop_id = nil
+}
+
+// SetEndStopIndex sets the "end_stop_index" field.
+func (m *OrderExtendFlightMutation) SetEndStopIndex(i int) {
+	m.end_stop_index = &i
+	m.addend_stop_index = nil
+}
+
+// EndStopIndex returns the value of the "end_stop_index" field in the mutation.
+func (m *OrderExtendFlightMutation) EndStopIndex() (r int, exists bool) {
+	v := m.end_stop_index
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldEndStopIndex returns the old "end_stop_index" field's value of the OrderExtendFlight entity.
+// If the OrderExtendFlight object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *OrderExtendFlightMutation) OldEndStopIndex(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldEndStopIndex is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldEndStopIndex requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldEndStopIndex: %w", err)
+	}
+	return oldValue.EndStopIndex, nil
+}
+
+// AddEndStopIndex adds i to the "end_stop_index" field.
+func (m *OrderExtendFlightMutation) AddEndStopIndex(i int) {
+	if m.addend_stop_index != nil {
+		*m.addend_stop_index += i
+	} else {
+		m.addend_stop_index = &i
+	}
+}
+
+// AddedEndStopIndex returns the value that was added to the "end_stop_index" field in this mutation.
+func (m *OrderExtendFlightMutation) AddedEndStopIndex() (r int, exists bool) {
+	v := m.addend_stop_index
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetEndStopIndex resets all changes to the "end_stop_index" field.
+func (m *OrderExtendFlightMutation) ResetEndStopIndex() {
+	m.end_stop_index = nil
+	m.addend_stop_index = nil
 }
 
 // SetTicketCount sets the "ticket_count" field.
@@ -39264,7 +39574,7 @@ func (m *OrderExtendFlightMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *OrderExtendFlightMutation) Fields() []string {
-	fields := make([]string, 0, 10)
+	fields := make([]string, 0, 12)
 	if m.order_id != nil {
 		fields = append(fields, orderextendflight.FieldOrderID)
 	}
@@ -39283,8 +39593,14 @@ func (m *OrderExtendFlightMutation) Fields() []string {
 	if m.start_stop_id != nil {
 		fields = append(fields, orderextendflight.FieldStartStopID)
 	}
+	if m.start_stop_index != nil {
+		fields = append(fields, orderextendflight.FieldStartStopIndex)
+	}
 	if m.end_stop_id != nil {
 		fields = append(fields, orderextendflight.FieldEndStopID)
+	}
+	if m.end_stop_index != nil {
+		fields = append(fields, orderextendflight.FieldEndStopIndex)
 	}
 	if m.ticket_count != nil {
 		fields = append(fields, orderextendflight.FieldTicketCount)
@@ -39315,8 +39631,12 @@ func (m *OrderExtendFlightMutation) Field(name string) (ent.Value, bool) {
 		return m.RouteName()
 	case orderextendflight.FieldStartStopID:
 		return m.StartStopID()
+	case orderextendflight.FieldStartStopIndex:
+		return m.StartStopIndex()
 	case orderextendflight.FieldEndStopID:
 		return m.EndStopID()
+	case orderextendflight.FieldEndStopIndex:
+		return m.EndStopIndex()
 	case orderextendflight.FieldTicketCount:
 		return m.TicketCount()
 	case orderextendflight.FieldCreateTime:
@@ -39344,8 +39664,12 @@ func (m *OrderExtendFlightMutation) OldField(ctx context.Context, name string) (
 		return m.OldRouteName(ctx)
 	case orderextendflight.FieldStartStopID:
 		return m.OldStartStopID(ctx)
+	case orderextendflight.FieldStartStopIndex:
+		return m.OldStartStopIndex(ctx)
 	case orderextendflight.FieldEndStopID:
 		return m.OldEndStopID(ctx)
+	case orderextendflight.FieldEndStopIndex:
+		return m.OldEndStopIndex(ctx)
 	case orderextendflight.FieldTicketCount:
 		return m.OldTicketCount(ctx)
 	case orderextendflight.FieldCreateTime:
@@ -39403,12 +39727,26 @@ func (m *OrderExtendFlightMutation) SetField(name string, value ent.Value) error
 		}
 		m.SetStartStopID(v)
 		return nil
+	case orderextendflight.FieldStartStopIndex:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetStartStopIndex(v)
+		return nil
 	case orderextendflight.FieldEndStopID:
 		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetEndStopID(v)
+		return nil
+	case orderextendflight.FieldEndStopIndex:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetEndStopIndex(v)
 		return nil
 	case orderextendflight.FieldTicketCount:
 		v, ok := value.(int)
@@ -39451,8 +39789,14 @@ func (m *OrderExtendFlightMutation) AddedFields() []string {
 	if m.addstart_stop_id != nil {
 		fields = append(fields, orderextendflight.FieldStartStopID)
 	}
+	if m.addstart_stop_index != nil {
+		fields = append(fields, orderextendflight.FieldStartStopIndex)
+	}
 	if m.addend_stop_id != nil {
 		fields = append(fields, orderextendflight.FieldEndStopID)
+	}
+	if m.addend_stop_index != nil {
+		fields = append(fields, orderextendflight.FieldEndStopIndex)
 	}
 	if m.addticket_count != nil {
 		fields = append(fields, orderextendflight.FieldTicketCount)
@@ -39473,8 +39817,12 @@ func (m *OrderExtendFlightMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedRouteID()
 	case orderextendflight.FieldStartStopID:
 		return m.AddedStartStopID()
+	case orderextendflight.FieldStartStopIndex:
+		return m.AddedStartStopIndex()
 	case orderextendflight.FieldEndStopID:
 		return m.AddedEndStopID()
+	case orderextendflight.FieldEndStopIndex:
+		return m.AddedEndStopIndex()
 	case orderextendflight.FieldTicketCount:
 		return m.AddedTicketCount()
 	}
@@ -39514,12 +39862,26 @@ func (m *OrderExtendFlightMutation) AddField(name string, value ent.Value) error
 		}
 		m.AddStartStopID(v)
 		return nil
+	case orderextendflight.FieldStartStopIndex:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddStartStopIndex(v)
+		return nil
 	case orderextendflight.FieldEndStopID:
 		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddEndStopID(v)
+		return nil
+	case orderextendflight.FieldEndStopIndex:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddEndStopIndex(v)
 		return nil
 	case orderextendflight.FieldTicketCount:
 		v, ok := value.(int)
@@ -39573,8 +39935,14 @@ func (m *OrderExtendFlightMutation) ResetField(name string) error {
 	case orderextendflight.FieldStartStopID:
 		m.ResetStartStopID()
 		return nil
+	case orderextendflight.FieldStartStopIndex:
+		m.ResetStartStopIndex()
+		return nil
 	case orderextendflight.FieldEndStopID:
 		m.ResetEndStopID()
+		return nil
+	case orderextendflight.FieldEndStopIndex:
+		m.ResetEndStopIndex()
 		return nil
 	case orderextendflight.FieldTicketCount:
 		m.ResetTicketCount()

@@ -30,8 +30,12 @@ type OrderExtendFlight struct {
 	RouteName string `json:"route_name,omitempty"`
 	// 上车点
 	StartStopID int `json:"start_stop_id,omitempty"`
+	// 上车点序号
+	StartStopIndex int `json:"start_stop_index,omitempty"`
 	// 下车点
 	EndStopID int `json:"end_stop_id,omitempty"`
+	// 下车点序号
+	EndStopIndex int `json:"end_stop_index,omitempty"`
 	// 购票数量
 	TicketCount int `json:"ticket_count,omitempty"`
 	// 创建时间
@@ -46,7 +50,7 @@ func (*OrderExtendFlight) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case orderextendflight.FieldID, orderextendflight.FieldOrderID, orderextendflight.FieldFlightID, orderextendflight.FieldRouteID, orderextendflight.FieldStartStopID, orderextendflight.FieldEndStopID, orderextendflight.FieldTicketCount:
+		case orderextendflight.FieldID, orderextendflight.FieldOrderID, orderextendflight.FieldFlightID, orderextendflight.FieldRouteID, orderextendflight.FieldStartStopID, orderextendflight.FieldStartStopIndex, orderextendflight.FieldEndStopID, orderextendflight.FieldEndStopIndex, orderextendflight.FieldTicketCount:
 			values[i] = new(sql.NullInt64)
 		case orderextendflight.FieldFlightNo, orderextendflight.FieldRouteName:
 			values[i] = new(sql.NullString)
@@ -109,11 +113,23 @@ func (oef *OrderExtendFlight) assignValues(columns []string, values []any) error
 			} else if value.Valid {
 				oef.StartStopID = int(value.Int64)
 			}
+		case orderextendflight.FieldStartStopIndex:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field start_stop_index", values[i])
+			} else if value.Valid {
+				oef.StartStopIndex = int(value.Int64)
+			}
 		case orderextendflight.FieldEndStopID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field end_stop_id", values[i])
 			} else if value.Valid {
 				oef.EndStopID = int(value.Int64)
+			}
+		case orderextendflight.FieldEndStopIndex:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field end_stop_index", values[i])
+			} else if value.Valid {
+				oef.EndStopIndex = int(value.Int64)
 			}
 		case orderextendflight.FieldTicketCount:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -187,8 +203,14 @@ func (oef *OrderExtendFlight) String() string {
 	builder.WriteString("start_stop_id=")
 	builder.WriteString(fmt.Sprintf("%v", oef.StartStopID))
 	builder.WriteString(", ")
+	builder.WriteString("start_stop_index=")
+	builder.WriteString(fmt.Sprintf("%v", oef.StartStopIndex))
+	builder.WriteString(", ")
 	builder.WriteString("end_stop_id=")
 	builder.WriteString(fmt.Sprintf("%v", oef.EndStopID))
+	builder.WriteString(", ")
+	builder.WriteString("end_stop_index=")
+	builder.WriteString(fmt.Sprintf("%v", oef.EndStopIndex))
 	builder.WriteString(", ")
 	builder.WriteString("ticket_count=")
 	builder.WriteString(fmt.Sprintf("%v", oef.TicketCount))

@@ -84,9 +84,19 @@ func StartStopID(v int) predicate.OrderExtendFlight {
 	return predicate.OrderExtendFlight(sql.FieldEQ(FieldStartStopID, v))
 }
 
+// StartStopIndex applies equality check predicate on the "start_stop_index" field. It's identical to StartStopIndexEQ.
+func StartStopIndex(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldEQ(FieldStartStopIndex, v))
+}
+
 // EndStopID applies equality check predicate on the "end_stop_id" field. It's identical to EndStopIDEQ.
 func EndStopID(v int) predicate.OrderExtendFlight {
 	return predicate.OrderExtendFlight(sql.FieldEQ(FieldEndStopID, v))
+}
+
+// EndStopIndex applies equality check predicate on the "end_stop_index" field. It's identical to EndStopIndexEQ.
+func EndStopIndex(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldEQ(FieldEndStopIndex, v))
 }
 
 // TicketCount applies equality check predicate on the "ticket_count" field. It's identical to TicketCountEQ.
@@ -394,6 +404,46 @@ func StartStopIDLTE(v int) predicate.OrderExtendFlight {
 	return predicate.OrderExtendFlight(sql.FieldLTE(FieldStartStopID, v))
 }
 
+// StartStopIndexEQ applies the EQ predicate on the "start_stop_index" field.
+func StartStopIndexEQ(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldEQ(FieldStartStopIndex, v))
+}
+
+// StartStopIndexNEQ applies the NEQ predicate on the "start_stop_index" field.
+func StartStopIndexNEQ(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldNEQ(FieldStartStopIndex, v))
+}
+
+// StartStopIndexIn applies the In predicate on the "start_stop_index" field.
+func StartStopIndexIn(vs ...int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldIn(FieldStartStopIndex, vs...))
+}
+
+// StartStopIndexNotIn applies the NotIn predicate on the "start_stop_index" field.
+func StartStopIndexNotIn(vs ...int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldNotIn(FieldStartStopIndex, vs...))
+}
+
+// StartStopIndexGT applies the GT predicate on the "start_stop_index" field.
+func StartStopIndexGT(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldGT(FieldStartStopIndex, v))
+}
+
+// StartStopIndexGTE applies the GTE predicate on the "start_stop_index" field.
+func StartStopIndexGTE(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldGTE(FieldStartStopIndex, v))
+}
+
+// StartStopIndexLT applies the LT predicate on the "start_stop_index" field.
+func StartStopIndexLT(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldLT(FieldStartStopIndex, v))
+}
+
+// StartStopIndexLTE applies the LTE predicate on the "start_stop_index" field.
+func StartStopIndexLTE(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldLTE(FieldStartStopIndex, v))
+}
+
 // EndStopIDEQ applies the EQ predicate on the "end_stop_id" field.
 func EndStopIDEQ(v int) predicate.OrderExtendFlight {
 	return predicate.OrderExtendFlight(sql.FieldEQ(FieldEndStopID, v))
@@ -432,6 +482,46 @@ func EndStopIDLT(v int) predicate.OrderExtendFlight {
 // EndStopIDLTE applies the LTE predicate on the "end_stop_id" field.
 func EndStopIDLTE(v int) predicate.OrderExtendFlight {
 	return predicate.OrderExtendFlight(sql.FieldLTE(FieldEndStopID, v))
+}
+
+// EndStopIndexEQ applies the EQ predicate on the "end_stop_index" field.
+func EndStopIndexEQ(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldEQ(FieldEndStopIndex, v))
+}
+
+// EndStopIndexNEQ applies the NEQ predicate on the "end_stop_index" field.
+func EndStopIndexNEQ(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldNEQ(FieldEndStopIndex, v))
+}
+
+// EndStopIndexIn applies the In predicate on the "end_stop_index" field.
+func EndStopIndexIn(vs ...int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldIn(FieldEndStopIndex, vs...))
+}
+
+// EndStopIndexNotIn applies the NotIn predicate on the "end_stop_index" field.
+func EndStopIndexNotIn(vs ...int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldNotIn(FieldEndStopIndex, vs...))
+}
+
+// EndStopIndexGT applies the GT predicate on the "end_stop_index" field.
+func EndStopIndexGT(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldGT(FieldEndStopIndex, v))
+}
+
+// EndStopIndexGTE applies the GTE predicate on the "end_stop_index" field.
+func EndStopIndexGTE(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldGTE(FieldEndStopIndex, v))
+}
+
+// EndStopIndexLT applies the LT predicate on the "end_stop_index" field.
+func EndStopIndexLT(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldLT(FieldEndStopIndex, v))
+}
+
+// EndStopIndexLTE applies the LTE predicate on the "end_stop_index" field.
+func EndStopIndexLTE(v int) predicate.OrderExtendFlight {
+	return predicate.OrderExtendFlight(sql.FieldLTE(FieldEndStopIndex, v))
 }
 
 // TicketCountEQ applies the EQ predicate on the "ticket_count" field.

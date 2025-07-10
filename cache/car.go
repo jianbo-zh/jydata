@@ -182,3 +182,21 @@ func (cache *Cache) SubscribeRoutePath(ctx context.Context, deviceID string, tim
 
 	return msg.Payload, nil
 }
+
+/******************* 车辆座位表 *******************/
+
+func (cache *Cache) UpdateCarSeatTable(ctx context.Context, deviceID string, seatTable []bool) error {
+	return cache.Client().Set(ctx, "car_seat_table:"+deviceID, seatTable, 0).Err()
+}
+
+func (cache *Cache) GetCarSeatTable(ctx context.Context, deviceID string) ([]bool, error) {
+	var seatTable []bool
+	err := cache.Client().Get(ctx, "car_seat_table:"+deviceID).Scan(&seatTable)
+	if err != nil {
+		if errors.Is(err, redis.Nil) {
+			return nil, nil
+		}
+		return nil, fmt.Errorf("client.HGet error: %w", err)
+	}
+	return seatTable, nil
+}

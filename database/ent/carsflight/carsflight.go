@@ -33,6 +33,8 @@ const (
 	FieldState = "state"
 	// FieldCurrStopID holds the string denoting the curr_stop_id field in the database.
 	FieldCurrStopID = "curr_stop_id"
+	// FieldCurrStopIndex holds the string denoting the curr_stop_index field in the database.
+	FieldCurrStopIndex = "curr_stop_index"
 	// FieldStopIds holds the string denoting the stop_ids field in the database.
 	FieldStopIds = "stop_ids"
 	// FieldPassIds holds the string denoting the pass_ids field in the database.
@@ -68,6 +70,7 @@ var Columns = []string{
 	FieldSeatsNum,
 	FieldState,
 	FieldCurrStopID,
+	FieldCurrStopIndex,
 	FieldStopIds,
 	FieldPassIds,
 	FieldRemark,
@@ -96,6 +99,8 @@ var (
 	DefaultState int
 	// DefaultCurrStopID holds the default value on creation for the "curr_stop_id" field.
 	DefaultCurrStopID int
+	// DefaultCurrStopIndex holds the default value on creation for the "curr_stop_index" field.
+	DefaultCurrStopIndex int
 	// DefaultStopIds holds the default value on creation for the "stop_ids" field.
 	DefaultStopIds []int
 	// DefaultPassIds holds the default value on creation for the "pass_ids" field.
@@ -166,6 +171,11 @@ func ByState(opts ...sql.OrderTermOption) OrderOption {
 // ByCurrStopID orders the results by the curr_stop_id field.
 func ByCurrStopID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldCurrStopID, opts...).ToFunc()
+}
+
+// ByCurrStopIndex orders the results by the curr_stop_index field.
+func ByCurrStopIndex(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldCurrStopIndex, opts...).ToFunc()
 }
 
 // ByRemark orders the results by the remark field.

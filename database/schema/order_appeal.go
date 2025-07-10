@@ -23,6 +23,7 @@ func (OrderAppeal) Fields() []ent.Field {
 		field.String("order_no").Comment("订单编号"),
 		field.Int("type").Default(1).Comment("1-多付款 2-其他"),
 		field.Int("end_stop_id").Default(0).Comment("停车点ID"),
+		field.Int("end_stop_index").Default(0).Comment("停车点序号"),
 		field.Int("end_stop_image_id").Default(0).Comment("停车点图片"),
 		field.Int("state").Default(1).Comment("申述状态(1-待审核、2-申诉成功、3-申诉失败、4-已取消、5-待退款)"),
 		field.Int("refund_amount").Default(0).Comment("退款金额"),

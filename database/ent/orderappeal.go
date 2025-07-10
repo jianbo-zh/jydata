@@ -30,6 +30,8 @@ type OrderAppeal struct {
 	Type int `json:"type,omitempty"`
 	// 停车点ID
 	EndStopID int `json:"end_stop_id,omitempty"`
+	// 停车点序号
+	EndStopIndex int `json:"end_stop_index,omitempty"`
 	// 停车点图片
 	EndStopImageID int `json:"end_stop_image_id,omitempty"`
 	// 申述状态(1-待审核、2-申诉成功、3-申诉失败、4-已取消、5-待退款)
@@ -56,7 +58,7 @@ func (*OrderAppeal) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case orderappeal.FieldID, orderappeal.FieldScenicAreaID, orderappeal.FieldUserID, orderappeal.FieldOrderID, orderappeal.FieldType, orderappeal.FieldEndStopID, orderappeal.FieldEndStopImageID, orderappeal.FieldState, orderappeal.FieldRefundAmount:
+		case orderappeal.FieldID, orderappeal.FieldScenicAreaID, orderappeal.FieldUserID, orderappeal.FieldOrderID, orderappeal.FieldType, orderappeal.FieldEndStopID, orderappeal.FieldEndStopIndex, orderappeal.FieldEndStopImageID, orderappeal.FieldState, orderappeal.FieldRefundAmount:
 			values[i] = new(sql.NullInt64)
 		case orderappeal.FieldOrderNo, orderappeal.FieldUserComment, orderappeal.FieldReviewComment:
 			values[i] = new(sql.NullString)
@@ -118,6 +120,12 @@ func (oa *OrderAppeal) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field end_stop_id", values[i])
 			} else if value.Valid {
 				oa.EndStopID = int(value.Int64)
+			}
+		case orderappeal.FieldEndStopIndex:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field end_stop_index", values[i])
+			} else if value.Valid {
+				oa.EndStopIndex = int(value.Int64)
 			}
 		case orderappeal.FieldEndStopImageID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -228,6 +236,9 @@ func (oa *OrderAppeal) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("end_stop_id=")
 	builder.WriteString(fmt.Sprintf("%v", oa.EndStopID))
+	builder.WriteString(", ")
+	builder.WriteString("end_stop_index=")
+	builder.WriteString(fmt.Sprintf("%v", oa.EndStopIndex))
 	builder.WriteString(", ")
 	builder.WriteString("end_stop_image_id=")
 	builder.WriteString(fmt.Sprintf("%v", oa.EndStopImageID))
