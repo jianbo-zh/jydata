@@ -69,6 +69,7 @@ func (Car) Fields() []ent.Field {
 		field.String("carproxy_id").Default("").Comment("车辆代理服务ID"),
 
 		field.Int("extend_yokee_id").Optional().Nillable().Comment("Yokee扩展ID"),
+		field.Float32("max_speed_limit").Default(2).Comment("最大行驶速度(单位：m/s)"),
 
 		field.Time("alive_time").Optional().Comment("心跳时间"),
 		field.Time("register_time").Optional().Comment("激活时间"),

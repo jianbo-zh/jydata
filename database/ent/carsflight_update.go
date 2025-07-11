@@ -334,6 +334,27 @@ func (cfu *CarsFlightUpdate) ClearExtendYokeeID() *CarsFlightUpdate {
 	return cfu
 }
 
+// SetMaxSpeedLimit sets the "max_speed_limit" field.
+func (cfu *CarsFlightUpdate) SetMaxSpeedLimit(f float32) *CarsFlightUpdate {
+	cfu.mutation.ResetMaxSpeedLimit()
+	cfu.mutation.SetMaxSpeedLimit(f)
+	return cfu
+}
+
+// SetNillableMaxSpeedLimit sets the "max_speed_limit" field if the given value is not nil.
+func (cfu *CarsFlightUpdate) SetNillableMaxSpeedLimit(f *float32) *CarsFlightUpdate {
+	if f != nil {
+		cfu.SetMaxSpeedLimit(*f)
+	}
+	return cfu
+}
+
+// AddMaxSpeedLimit adds f to the "max_speed_limit" field.
+func (cfu *CarsFlightUpdate) AddMaxSpeedLimit(f float32) *CarsFlightUpdate {
+	cfu.mutation.AddMaxSpeedLimit(f)
+	return cfu
+}
+
 // SetDepartureTime sets the "departure_time" field.
 func (cfu *CarsFlightUpdate) SetDepartureTime(t time.Time) *CarsFlightUpdate {
 	cfu.mutation.SetDepartureTime(t)
@@ -531,6 +552,12 @@ func (cfu *CarsFlightUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if cfu.mutation.ExtendYokeeIDCleared() {
 		_spec.ClearField(carsflight.FieldExtendYokeeID, field.TypeInt)
+	}
+	if value, ok := cfu.mutation.MaxSpeedLimit(); ok {
+		_spec.SetField(carsflight.FieldMaxSpeedLimit, field.TypeFloat32, value)
+	}
+	if value, ok := cfu.mutation.AddedMaxSpeedLimit(); ok {
+		_spec.AddField(carsflight.FieldMaxSpeedLimit, field.TypeFloat32, value)
 	}
 	if value, ok := cfu.mutation.DepartureTime(); ok {
 		_spec.SetField(carsflight.FieldDepartureTime, field.TypeTime, value)
@@ -871,6 +898,27 @@ func (cfuo *CarsFlightUpdateOne) ClearExtendYokeeID() *CarsFlightUpdateOne {
 	return cfuo
 }
 
+// SetMaxSpeedLimit sets the "max_speed_limit" field.
+func (cfuo *CarsFlightUpdateOne) SetMaxSpeedLimit(f float32) *CarsFlightUpdateOne {
+	cfuo.mutation.ResetMaxSpeedLimit()
+	cfuo.mutation.SetMaxSpeedLimit(f)
+	return cfuo
+}
+
+// SetNillableMaxSpeedLimit sets the "max_speed_limit" field if the given value is not nil.
+func (cfuo *CarsFlightUpdateOne) SetNillableMaxSpeedLimit(f *float32) *CarsFlightUpdateOne {
+	if f != nil {
+		cfuo.SetMaxSpeedLimit(*f)
+	}
+	return cfuo
+}
+
+// AddMaxSpeedLimit adds f to the "max_speed_limit" field.
+func (cfuo *CarsFlightUpdateOne) AddMaxSpeedLimit(f float32) *CarsFlightUpdateOne {
+	cfuo.mutation.AddMaxSpeedLimit(f)
+	return cfuo
+}
+
 // SetDepartureTime sets the "departure_time" field.
 func (cfuo *CarsFlightUpdateOne) SetDepartureTime(t time.Time) *CarsFlightUpdateOne {
 	cfuo.mutation.SetDepartureTime(t)
@@ -1098,6 +1146,12 @@ func (cfuo *CarsFlightUpdateOne) sqlSave(ctx context.Context) (_node *CarsFlight
 	}
 	if cfuo.mutation.ExtendYokeeIDCleared() {
 		_spec.ClearField(carsflight.FieldExtendYokeeID, field.TypeInt)
+	}
+	if value, ok := cfuo.mutation.MaxSpeedLimit(); ok {
+		_spec.SetField(carsflight.FieldMaxSpeedLimit, field.TypeFloat32, value)
+	}
+	if value, ok := cfuo.mutation.AddedMaxSpeedLimit(); ok {
+		_spec.AddField(carsflight.FieldMaxSpeedLimit, field.TypeFloat32, value)
 	}
 	if value, ok := cfuo.mutation.DepartureTime(); ok {
 		_spec.SetField(carsflight.FieldDepartureTime, field.TypeTime, value)

@@ -754,6 +754,27 @@ func (cu *CarUpdate) ClearExtendYokeeID() *CarUpdate {
 	return cu
 }
 
+// SetMaxSpeedLimit sets the "max_speed_limit" field.
+func (cu *CarUpdate) SetMaxSpeedLimit(f float32) *CarUpdate {
+	cu.mutation.ResetMaxSpeedLimit()
+	cu.mutation.SetMaxSpeedLimit(f)
+	return cu
+}
+
+// SetNillableMaxSpeedLimit sets the "max_speed_limit" field if the given value is not nil.
+func (cu *CarUpdate) SetNillableMaxSpeedLimit(f *float32) *CarUpdate {
+	if f != nil {
+		cu.SetMaxSpeedLimit(*f)
+	}
+	return cu
+}
+
+// AddMaxSpeedLimit adds f to the "max_speed_limit" field.
+func (cu *CarUpdate) AddMaxSpeedLimit(f float32) *CarUpdate {
+	cu.mutation.AddMaxSpeedLimit(f)
+	return cu
+}
+
 // SetAliveTime sets the "alive_time" field.
 func (cu *CarUpdate) SetAliveTime(t time.Time) *CarUpdate {
 	cu.mutation.SetAliveTime(t)
@@ -1330,6 +1351,12 @@ func (cu *CarUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if cu.mutation.ExtendYokeeIDCleared() {
 		_spec.ClearField(car.FieldExtendYokeeID, field.TypeInt)
+	}
+	if value, ok := cu.mutation.MaxSpeedLimit(); ok {
+		_spec.SetField(car.FieldMaxSpeedLimit, field.TypeFloat32, value)
+	}
+	if value, ok := cu.mutation.AddedMaxSpeedLimit(); ok {
+		_spec.AddField(car.FieldMaxSpeedLimit, field.TypeFloat32, value)
 	}
 	if value, ok := cu.mutation.AliveTime(); ok {
 		_spec.SetField(car.FieldAliveTime, field.TypeTime, value)
@@ -2417,6 +2444,27 @@ func (cuo *CarUpdateOne) ClearExtendYokeeID() *CarUpdateOne {
 	return cuo
 }
 
+// SetMaxSpeedLimit sets the "max_speed_limit" field.
+func (cuo *CarUpdateOne) SetMaxSpeedLimit(f float32) *CarUpdateOne {
+	cuo.mutation.ResetMaxSpeedLimit()
+	cuo.mutation.SetMaxSpeedLimit(f)
+	return cuo
+}
+
+// SetNillableMaxSpeedLimit sets the "max_speed_limit" field if the given value is not nil.
+func (cuo *CarUpdateOne) SetNillableMaxSpeedLimit(f *float32) *CarUpdateOne {
+	if f != nil {
+		cuo.SetMaxSpeedLimit(*f)
+	}
+	return cuo
+}
+
+// AddMaxSpeedLimit adds f to the "max_speed_limit" field.
+func (cuo *CarUpdateOne) AddMaxSpeedLimit(f float32) *CarUpdateOne {
+	cuo.mutation.AddMaxSpeedLimit(f)
+	return cuo
+}
+
 // SetAliveTime sets the "alive_time" field.
 func (cuo *CarUpdateOne) SetAliveTime(t time.Time) *CarUpdateOne {
 	cuo.mutation.SetAliveTime(t)
@@ -3023,6 +3071,12 @@ func (cuo *CarUpdateOne) sqlSave(ctx context.Context) (_node *Car, err error) {
 	}
 	if cuo.mutation.ExtendYokeeIDCleared() {
 		_spec.ClearField(car.FieldExtendYokeeID, field.TypeInt)
+	}
+	if value, ok := cuo.mutation.MaxSpeedLimit(); ok {
+		_spec.SetField(car.FieldMaxSpeedLimit, field.TypeFloat32, value)
+	}
+	if value, ok := cuo.mutation.AddedMaxSpeedLimit(); ok {
+		_spec.AddField(car.FieldMaxSpeedLimit, field.TypeFloat32, value)
 	}
 	if value, ok := cuo.mutation.AliveTime(); ok {
 		_spec.SetField(car.FieldAliveTime, field.TypeTime, value)

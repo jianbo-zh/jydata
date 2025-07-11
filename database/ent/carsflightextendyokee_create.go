@@ -32,12 +32,6 @@ func (cfeyc *CarsFlightExtendYokeeCreate) SetYokeeDispatchID(i int) *CarsFlightE
 	return cfeyc
 }
 
-// SetYokeeSpeedLimit sets the "yokee_speed_limit" field.
-func (cfeyc *CarsFlightExtendYokeeCreate) SetYokeeSpeedLimit(f float32) *CarsFlightExtendYokeeCreate {
-	cfeyc.mutation.SetYokeeSpeedLimit(f)
-	return cfeyc
-}
-
 // SetCreateTime sets the "create_time" field.
 func (cfeyc *CarsFlightExtendYokeeCreate) SetCreateTime(t time.Time) *CarsFlightExtendYokeeCreate {
 	cfeyc.mutation.SetCreateTime(t)
@@ -125,9 +119,6 @@ func (cfeyc *CarsFlightExtendYokeeCreate) check() error {
 	if _, ok := cfeyc.mutation.YokeeDispatchID(); !ok {
 		return &ValidationError{Name: "yokee_dispatch_id", err: errors.New(`ent: missing required field "CarsFlightExtendYokee.yokee_dispatch_id"`)}
 	}
-	if _, ok := cfeyc.mutation.YokeeSpeedLimit(); !ok {
-		return &ValidationError{Name: "yokee_speed_limit", err: errors.New(`ent: missing required field "CarsFlightExtendYokee.yokee_speed_limit"`)}
-	}
 	if _, ok := cfeyc.mutation.CreateTime(); !ok {
 		return &ValidationError{Name: "create_time", err: errors.New(`ent: missing required field "CarsFlightExtendYokee.create_time"`)}
 	}
@@ -173,10 +164,6 @@ func (cfeyc *CarsFlightExtendYokeeCreate) createSpec() (*CarsFlightExtendYokee, 
 	if value, ok := cfeyc.mutation.YokeeDispatchID(); ok {
 		_spec.SetField(carsflightextendyokee.FieldYokeeDispatchID, field.TypeInt, value)
 		_node.YokeeDispatchID = value
-	}
-	if value, ok := cfeyc.mutation.YokeeSpeedLimit(); ok {
-		_spec.SetField(carsflightextendyokee.FieldYokeeSpeedLimit, field.TypeFloat32, value)
-		_node.YokeeSpeedLimit = value
 	}
 	if value, ok := cfeyc.mutation.CreateTime(); ok {
 		_spec.SetField(carsflightextendyokee.FieldCreateTime, field.TypeTime, value)

@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/go-redis/redis/v8"
@@ -94,6 +95,28 @@ func (cache *Cache) CheckCarConnect(ctx context.Context, deviceID string) (bool,
 // ClearCarConnected 设置车辆在线
 func (cache *Cache) ClearCarConnect(ctx context.Context) error {
 	return cache.Client().Del(ctx, "car_connects").Err()
+}
+
+// GetCarsConnected 获取所有在线车辆
+func (cache *Cache) GetCarsConnected(ctx context.Context) ([]string, error) {
+	cars, err := cache.Client().HGetAll(ctx, "car_connects").Result()
+	if err != nil {
+		return nil, fmt.Errorf("client.HGetAll error: %w", err)
+	}
+	bs, _ := json.Marshal(cars)
+	fmt.Println("GetCarsConnected:", string(bs))
+
+	var deviceIDs []string
+	for deviceID, connected := range cars {
+		isConn, err := strconv.ParseBool(connected)
+		if err != nil {
+			return nil, fmt.Errorf("strconv.ParseBool error: %w", err)
+		}
+		if isConn {
+			deviceIDs = append(deviceIDs, deviceID)
+		}
+	}
+	return deviceIDs, nil
 }
 
 /******************* 车辆数据 *******************/
@@ -186,17 +209,23 @@ func (cache *Cache) SubscribeRoutePath(ctx context.Context, deviceID string, tim
 /******************* 车辆座位表 *******************/
 
 func (cache *Cache) UpdateCarSeatTable(ctx context.Context, deviceID string, seatTable []bool) error {
-	return cache.Client().Set(ctx, "car_seat_table:"+deviceID, seatTable, 0).Err()
+	bs, _ := json.Marshal(seatTable)
+	return cache.Client().Set(ctx, "car_seat_table:"+deviceID, bs, 0).Err()
 }
 
 func (cache *Cache) GetCarSeatTable(ctx context.Context, deviceID string) ([]bool, error) {
-	var seatTable []bool
-	err := cache.Client().Get(ctx, "car_seat_table:"+deviceID).Scan(&seatTable)
+	var bs []byte
+	err := cache.Client().Get(ctx, "car_seat_table:"+deviceID).Scan(&bs)
 	if err != nil {
 		if errors.Is(err, redis.Nil) {
 			return nil, nil
 		}
 		return nil, fmt.Errorf("client.HGet error: %w", err)
+	}
+	var seatTable []bool
+	err = json.Unmarshal(bs, &seatTable)
+	if err != nil {
+		return nil, fmt.Errorf("json.Unmarshal error: %w", err)
 	}
 	return seatTable, nil
 }

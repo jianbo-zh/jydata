@@ -165,6 +165,20 @@ func (cfc *CarsFlightCreate) SetNillableExtendYokeeID(i *int) *CarsFlightCreate 
 	return cfc
 }
 
+// SetMaxSpeedLimit sets the "max_speed_limit" field.
+func (cfc *CarsFlightCreate) SetMaxSpeedLimit(f float32) *CarsFlightCreate {
+	cfc.mutation.SetMaxSpeedLimit(f)
+	return cfc
+}
+
+// SetNillableMaxSpeedLimit sets the "max_speed_limit" field if the given value is not nil.
+func (cfc *CarsFlightCreate) SetNillableMaxSpeedLimit(f *float32) *CarsFlightCreate {
+	if f != nil {
+		cfc.SetMaxSpeedLimit(*f)
+	}
+	return cfc
+}
+
 // SetDepartureTime sets the "departure_time" field.
 func (cfc *CarsFlightCreate) SetDepartureTime(t time.Time) *CarsFlightCreate {
 	cfc.mutation.SetDepartureTime(t)
@@ -290,6 +304,10 @@ func (cfc *CarsFlightCreate) defaults() {
 		v := carsflight.DefaultRemark
 		cfc.mutation.SetRemark(v)
 	}
+	if _, ok := cfc.mutation.MaxSpeedLimit(); !ok {
+		v := carsflight.DefaultMaxSpeedLimit
+		cfc.mutation.SetMaxSpeedLimit(v)
+	}
 	if _, ok := cfc.mutation.CreateTime(); !ok {
 		v := carsflight.DefaultCreateTime()
 		cfc.mutation.SetCreateTime(v)
@@ -334,6 +352,9 @@ func (cfc *CarsFlightCreate) check() error {
 	}
 	if _, ok := cfc.mutation.StopStock(); !ok {
 		return &ValidationError{Name: "stop_stock", err: errors.New(`ent: missing required field "CarsFlight.stop_stock"`)}
+	}
+	if _, ok := cfc.mutation.MaxSpeedLimit(); !ok {
+		return &ValidationError{Name: "max_speed_limit", err: errors.New(`ent: missing required field "CarsFlight.max_speed_limit"`)}
 	}
 	if _, ok := cfc.mutation.CreateTime(); !ok {
 		return &ValidationError{Name: "create_time", err: errors.New(`ent: missing required field "CarsFlight.create_time"`)}
@@ -436,6 +457,10 @@ func (cfc *CarsFlightCreate) createSpec() (*CarsFlight, *sqlgraph.CreateSpec) {
 	if value, ok := cfc.mutation.ExtendYokeeID(); ok {
 		_spec.SetField(carsflight.FieldExtendYokeeID, field.TypeInt, value)
 		_node.ExtendYokeeID = &value
+	}
+	if value, ok := cfc.mutation.MaxSpeedLimit(); ok {
+		_spec.SetField(carsflight.FieldMaxSpeedLimit, field.TypeFloat32, value)
+		_node.MaxSpeedLimit = value
 	}
 	if value, ok := cfc.mutation.DepartureTime(); ok {
 		_spec.SetField(carsflight.FieldDepartureTime, field.TypeTime, value)

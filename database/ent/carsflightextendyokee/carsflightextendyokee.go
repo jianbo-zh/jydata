@@ -17,8 +17,6 @@ const (
 	FieldFlightID = "flight_id"
 	// FieldYokeeDispatchID holds the string denoting the yokee_dispatch_id field in the database.
 	FieldYokeeDispatchID = "yokee_dispatch_id"
-	// FieldYokeeSpeedLimit holds the string denoting the yokee_speed_limit field in the database.
-	FieldYokeeSpeedLimit = "yokee_speed_limit"
 	// FieldCreateTime holds the string denoting the create_time field in the database.
 	FieldCreateTime = "create_time"
 	// FieldUpdateTime holds the string denoting the update_time field in the database.
@@ -32,7 +30,6 @@ var Columns = []string{
 	FieldID,
 	FieldFlightID,
 	FieldYokeeDispatchID,
-	FieldYokeeSpeedLimit,
 	FieldCreateTime,
 	FieldUpdateTime,
 }
@@ -72,11 +69,6 @@ func ByFlightID(opts ...sql.OrderTermOption) OrderOption {
 // ByYokeeDispatchID orders the results by the yokee_dispatch_id field.
 func ByYokeeDispatchID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldYokeeDispatchID, opts...).ToFunc()
-}
-
-// ByYokeeSpeedLimit orders the results by the yokee_speed_limit field.
-func ByYokeeSpeedLimit(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldYokeeSpeedLimit, opts...).ToFunc()
 }
 
 // ByCreateTime orders the results by the create_time field.

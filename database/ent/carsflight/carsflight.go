@@ -45,6 +45,8 @@ const (
 	FieldStopStock = "stop_stock"
 	// FieldExtendYokeeID holds the string denoting the extend_yokee_id field in the database.
 	FieldExtendYokeeID = "extend_yokee_id"
+	// FieldMaxSpeedLimit holds the string denoting the max_speed_limit field in the database.
+	FieldMaxSpeedLimit = "max_speed_limit"
 	// FieldDepartureTime holds the string denoting the departure_time field in the database.
 	FieldDepartureTime = "departure_time"
 	// FieldFinishTime holds the string denoting the finish_time field in the database.
@@ -76,6 +78,7 @@ var Columns = []string{
 	FieldRemark,
 	FieldStopStock,
 	FieldExtendYokeeID,
+	FieldMaxSpeedLimit,
 	FieldDepartureTime,
 	FieldFinishTime,
 	FieldCreateTime,
@@ -107,6 +110,8 @@ var (
 	DefaultPassIds []int
 	// DefaultRemark holds the default value on creation for the "remark" field.
 	DefaultRemark string
+	// DefaultMaxSpeedLimit holds the default value on creation for the "max_speed_limit" field.
+	DefaultMaxSpeedLimit float32
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.
 	DefaultCreateTime func() time.Time
 	// DefaultUpdateTime holds the default value on creation for the "update_time" field.
@@ -186,6 +191,11 @@ func ByRemark(opts ...sql.OrderTermOption) OrderOption {
 // ByExtendYokeeID orders the results by the extend_yokee_id field.
 func ByExtendYokeeID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldExtendYokeeID, opts...).ToFunc()
+}
+
+// ByMaxSpeedLimit orders the results by the max_speed_limit field.
+func ByMaxSpeedLimit(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldMaxSpeedLimit, opts...).ToFunc()
 }
 
 // ByDepartureTime orders the results by the departure_time field.

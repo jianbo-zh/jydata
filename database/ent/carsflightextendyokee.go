@@ -22,8 +22,6 @@ type CarsFlightExtendYokee struct {
 	FlightID int `json:"flight_id,omitempty"`
 	// 九识分配的任务ID
 	YokeeDispatchID int `json:"yokee_dispatch_id,omitempty"`
-	// 速度限制，单位m/s
-	YokeeSpeedLimit float32 `json:"yokee_speed_limit,omitempty"`
 	// 创建时间
 	CreateTime time.Time `json:"create_time,omitempty"`
 	// 更新时间
@@ -36,8 +34,6 @@ func (*CarsFlightExtendYokee) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case carsflightextendyokee.FieldYokeeSpeedLimit:
-			values[i] = new(sql.NullFloat64)
 		case carsflightextendyokee.FieldID, carsflightextendyokee.FieldFlightID, carsflightextendyokee.FieldYokeeDispatchID:
 			values[i] = new(sql.NullInt64)
 		case carsflightextendyokee.FieldCreateTime, carsflightextendyokee.FieldUpdateTime:
@@ -74,12 +70,6 @@ func (cfey *CarsFlightExtendYokee) assignValues(columns []string, values []any) 
 				return fmt.Errorf("unexpected type %T for field yokee_dispatch_id", values[i])
 			} else if value.Valid {
 				cfey.YokeeDispatchID = int(value.Int64)
-			}
-		case carsflightextendyokee.FieldYokeeSpeedLimit:
-			if value, ok := values[i].(*sql.NullFloat64); !ok {
-				return fmt.Errorf("unexpected type %T for field yokee_speed_limit", values[i])
-			} else if value.Valid {
-				cfey.YokeeSpeedLimit = float32(value.Float64)
 			}
 		case carsflightextendyokee.FieldCreateTime:
 			if value, ok := values[i].(*sql.NullTime); !ok {
@@ -134,9 +124,6 @@ func (cfey *CarsFlightExtendYokee) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("yokee_dispatch_id=")
 	builder.WriteString(fmt.Sprintf("%v", cfey.YokeeDispatchID))
-	builder.WriteString(", ")
-	builder.WriteString("yokee_speed_limit=")
-	builder.WriteString(fmt.Sprintf("%v", cfey.YokeeSpeedLimit))
 	builder.WriteString(", ")
 	builder.WriteString("create_time=")
 	builder.WriteString(cfey.CreateTime.Format(time.ANSIC))

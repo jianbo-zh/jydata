@@ -6580,6 +6580,8 @@ type CarMutation struct {
 	carproxy_id                   *string
 	extend_yokee_id               *int
 	addextend_yokee_id            *int
+	max_speed_limit               *float32
+	addmax_speed_limit            *float32
 	alive_time                    *time.Time
 	register_time                 *time.Time
 	driving_state_time            *time.Time
@@ -8623,6 +8625,62 @@ func (m *CarMutation) ResetExtendYokeeID() {
 	delete(m.clearedFields, car.FieldExtendYokeeID)
 }
 
+// SetMaxSpeedLimit sets the "max_speed_limit" field.
+func (m *CarMutation) SetMaxSpeedLimit(f float32) {
+	m.max_speed_limit = &f
+	m.addmax_speed_limit = nil
+}
+
+// MaxSpeedLimit returns the value of the "max_speed_limit" field in the mutation.
+func (m *CarMutation) MaxSpeedLimit() (r float32, exists bool) {
+	v := m.max_speed_limit
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldMaxSpeedLimit returns the old "max_speed_limit" field's value of the Car entity.
+// If the Car object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *CarMutation) OldMaxSpeedLimit(ctx context.Context) (v float32, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldMaxSpeedLimit is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldMaxSpeedLimit requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldMaxSpeedLimit: %w", err)
+	}
+	return oldValue.MaxSpeedLimit, nil
+}
+
+// AddMaxSpeedLimit adds f to the "max_speed_limit" field.
+func (m *CarMutation) AddMaxSpeedLimit(f float32) {
+	if m.addmax_speed_limit != nil {
+		*m.addmax_speed_limit += f
+	} else {
+		m.addmax_speed_limit = &f
+	}
+}
+
+// AddedMaxSpeedLimit returns the value that was added to the "max_speed_limit" field in this mutation.
+func (m *CarMutation) AddedMaxSpeedLimit() (r float32, exists bool) {
+	v := m.addmax_speed_limit
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetMaxSpeedLimit resets all changes to the "max_speed_limit" field.
+func (m *CarMutation) ResetMaxSpeedLimit() {
+	m.max_speed_limit = nil
+	m.addmax_speed_limit = nil
+}
+
 // SetAliveTime sets the "alive_time" field.
 func (m *CarMutation) SetAliveTime(t time.Time) {
 	m.alive_time = &t
@@ -9280,7 +9338,7 @@ func (m *CarMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *CarMutation) Fields() []string {
-	fields := make([]string, 0, 44)
+	fields := make([]string, 0, 45)
 	if m.delete_time != nil {
 		fields = append(fields, car.FieldDeleteTime)
 	}
@@ -9398,6 +9456,9 @@ func (m *CarMutation) Fields() []string {
 	if m.extend_yokee_id != nil {
 		fields = append(fields, car.FieldExtendYokeeID)
 	}
+	if m.max_speed_limit != nil {
+		fields = append(fields, car.FieldMaxSpeedLimit)
+	}
 	if m.alive_time != nil {
 		fields = append(fields, car.FieldAliveTime)
 	}
@@ -9499,6 +9560,8 @@ func (m *CarMutation) Field(name string) (ent.Value, bool) {
 		return m.CarproxyID()
 	case car.FieldExtendYokeeID:
 		return m.ExtendYokeeID()
+	case car.FieldMaxSpeedLimit:
+		return m.MaxSpeedLimit()
 	case car.FieldAliveTime:
 		return m.AliveTime()
 	case car.FieldRegisterTime:
@@ -9596,6 +9659,8 @@ func (m *CarMutation) OldField(ctx context.Context, name string) (ent.Value, err
 		return m.OldCarproxyID(ctx)
 	case car.FieldExtendYokeeID:
 		return m.OldExtendYokeeID(ctx)
+	case car.FieldMaxSpeedLimit:
+		return m.OldMaxSpeedLimit(ctx)
 	case car.FieldAliveTime:
 		return m.OldAliveTime(ctx)
 	case car.FieldRegisterTime:
@@ -9888,6 +9953,13 @@ func (m *CarMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetExtendYokeeID(v)
 		return nil
+	case car.FieldMaxSpeedLimit:
+		v, ok := value.(float32)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetMaxSpeedLimit(v)
+		return nil
 	case car.FieldAliveTime:
 		v, ok := value.(time.Time)
 		if !ok {
@@ -10000,6 +10072,9 @@ func (m *CarMutation) AddedFields() []string {
 	if m.addextend_yokee_id != nil {
 		fields = append(fields, car.FieldExtendYokeeID)
 	}
+	if m.addmax_speed_limit != nil {
+		fields = append(fields, car.FieldMaxSpeedLimit)
+	}
 	return fields
 }
 
@@ -10054,6 +10129,8 @@ func (m *CarMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedNextMapVersionProcess()
 	case car.FieldExtendYokeeID:
 		return m.AddedExtendYokeeID()
+	case car.FieldMaxSpeedLimit:
+		return m.AddedMaxSpeedLimit()
 	}
 	return nil, false
 }
@@ -10223,6 +10300,13 @@ func (m *CarMutation) AddField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddExtendYokeeID(v)
+		return nil
+	case car.FieldMaxSpeedLimit:
+		v, ok := value.(float32)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddMaxSpeedLimit(v)
 		return nil
 	}
 	return fmt.Errorf("unknown Car numeric field %s", name)
@@ -10400,6 +10484,9 @@ func (m *CarMutation) ResetField(name string) error {
 		return nil
 	case car.FieldExtendYokeeID:
 		m.ResetExtendYokeeID()
+		return nil
+	case car.FieldMaxSpeedLimit:
+		m.ResetMaxSpeedLimit()
 		return nil
 	case car.FieldAliveTime:
 		m.ResetAliveTime()
@@ -19986,6 +20073,8 @@ type CarsFlightMutation struct {
 	appendstop_stock   []types.StopStock
 	extend_yokee_id    *int
 	addextend_yokee_id *int
+	max_speed_limit    *float32
+	addmax_speed_limit *float32
 	departure_time     *time.Time
 	finish_time        *time.Time
 	create_time        *time.Time
@@ -20951,6 +21040,62 @@ func (m *CarsFlightMutation) ResetExtendYokeeID() {
 	delete(m.clearedFields, carsflight.FieldExtendYokeeID)
 }
 
+// SetMaxSpeedLimit sets the "max_speed_limit" field.
+func (m *CarsFlightMutation) SetMaxSpeedLimit(f float32) {
+	m.max_speed_limit = &f
+	m.addmax_speed_limit = nil
+}
+
+// MaxSpeedLimit returns the value of the "max_speed_limit" field in the mutation.
+func (m *CarsFlightMutation) MaxSpeedLimit() (r float32, exists bool) {
+	v := m.max_speed_limit
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldMaxSpeedLimit returns the old "max_speed_limit" field's value of the CarsFlight entity.
+// If the CarsFlight object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *CarsFlightMutation) OldMaxSpeedLimit(ctx context.Context) (v float32, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldMaxSpeedLimit is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldMaxSpeedLimit requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldMaxSpeedLimit: %w", err)
+	}
+	return oldValue.MaxSpeedLimit, nil
+}
+
+// AddMaxSpeedLimit adds f to the "max_speed_limit" field.
+func (m *CarsFlightMutation) AddMaxSpeedLimit(f float32) {
+	if m.addmax_speed_limit != nil {
+		*m.addmax_speed_limit += f
+	} else {
+		m.addmax_speed_limit = &f
+	}
+}
+
+// AddedMaxSpeedLimit returns the value that was added to the "max_speed_limit" field in this mutation.
+func (m *CarsFlightMutation) AddedMaxSpeedLimit() (r float32, exists bool) {
+	v := m.addmax_speed_limit
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetMaxSpeedLimit resets all changes to the "max_speed_limit" field.
+func (m *CarsFlightMutation) ResetMaxSpeedLimit() {
+	m.max_speed_limit = nil
+	m.addmax_speed_limit = nil
+}
+
 // SetDepartureTime sets the "departure_time" field.
 func (m *CarsFlightMutation) SetDepartureTime(t time.Time) {
 	m.departure_time = &t
@@ -21155,7 +21300,7 @@ func (m *CarsFlightMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *CarsFlightMutation) Fields() []string {
-	fields := make([]string, 0, 20)
+	fields := make([]string, 0, 21)
 	if m.scenic_area_id != nil {
 		fields = append(fields, carsflight.FieldScenicAreaID)
 	}
@@ -21203,6 +21348,9 @@ func (m *CarsFlightMutation) Fields() []string {
 	}
 	if m.extend_yokee_id != nil {
 		fields = append(fields, carsflight.FieldExtendYokeeID)
+	}
+	if m.max_speed_limit != nil {
+		fields = append(fields, carsflight.FieldMaxSpeedLimit)
 	}
 	if m.departure_time != nil {
 		fields = append(fields, carsflight.FieldDepartureTime)
@@ -21256,6 +21404,8 @@ func (m *CarsFlightMutation) Field(name string) (ent.Value, bool) {
 		return m.StopStock()
 	case carsflight.FieldExtendYokeeID:
 		return m.ExtendYokeeID()
+	case carsflight.FieldMaxSpeedLimit:
+		return m.MaxSpeedLimit()
 	case carsflight.FieldDepartureTime:
 		return m.DepartureTime()
 	case carsflight.FieldFinishTime:
@@ -21305,6 +21455,8 @@ func (m *CarsFlightMutation) OldField(ctx context.Context, name string) (ent.Val
 		return m.OldStopStock(ctx)
 	case carsflight.FieldExtendYokeeID:
 		return m.OldExtendYokeeID(ctx)
+	case carsflight.FieldMaxSpeedLimit:
+		return m.OldMaxSpeedLimit(ctx)
 	case carsflight.FieldDepartureTime:
 		return m.OldDepartureTime(ctx)
 	case carsflight.FieldFinishTime:
@@ -21434,6 +21586,13 @@ func (m *CarsFlightMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetExtendYokeeID(v)
 		return nil
+	case carsflight.FieldMaxSpeedLimit:
+		v, ok := value.(float32)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetMaxSpeedLimit(v)
+		return nil
 	case carsflight.FieldDepartureTime:
 		v, ok := value.(time.Time)
 		if !ok {
@@ -21494,6 +21653,9 @@ func (m *CarsFlightMutation) AddedFields() []string {
 	if m.addextend_yokee_id != nil {
 		fields = append(fields, carsflight.FieldExtendYokeeID)
 	}
+	if m.addmax_speed_limit != nil {
+		fields = append(fields, carsflight.FieldMaxSpeedLimit)
+	}
 	return fields
 }
 
@@ -21518,6 +21680,8 @@ func (m *CarsFlightMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedCurrStopIndex()
 	case carsflight.FieldExtendYokeeID:
 		return m.AddedExtendYokeeID()
+	case carsflight.FieldMaxSpeedLimit:
+		return m.AddedMaxSpeedLimit()
 	}
 	return nil, false
 }
@@ -21582,6 +21746,13 @@ func (m *CarsFlightMutation) AddField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddExtendYokeeID(v)
+		return nil
+	case carsflight.FieldMaxSpeedLimit:
+		v, ok := value.(float32)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddMaxSpeedLimit(v)
 		return nil
 	}
 	return fmt.Errorf("unknown CarsFlight numeric field %s", name)
@@ -21703,6 +21874,9 @@ func (m *CarsFlightMutation) ResetField(name string) error {
 	case carsflight.FieldExtendYokeeID:
 		m.ResetExtendYokeeID()
 		return nil
+	case carsflight.FieldMaxSpeedLimit:
+		m.ResetMaxSpeedLimit()
+		return nil
 	case carsflight.FieldDepartureTime:
 		m.ResetDepartureTime()
 		return nil
@@ -21777,8 +21951,6 @@ type CarsFlightExtendYokeeMutation struct {
 	addflight_id         *int
 	yokee_dispatch_id    *int
 	addyokee_dispatch_id *int
-	yokee_speed_limit    *float32
-	addyokee_speed_limit *float32
 	create_time          *time.Time
 	update_time          *time.Time
 	clearedFields        map[string]struct{}
@@ -22003,62 +22175,6 @@ func (m *CarsFlightExtendYokeeMutation) ResetYokeeDispatchID() {
 	m.addyokee_dispatch_id = nil
 }
 
-// SetYokeeSpeedLimit sets the "yokee_speed_limit" field.
-func (m *CarsFlightExtendYokeeMutation) SetYokeeSpeedLimit(f float32) {
-	m.yokee_speed_limit = &f
-	m.addyokee_speed_limit = nil
-}
-
-// YokeeSpeedLimit returns the value of the "yokee_speed_limit" field in the mutation.
-func (m *CarsFlightExtendYokeeMutation) YokeeSpeedLimit() (r float32, exists bool) {
-	v := m.yokee_speed_limit
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldYokeeSpeedLimit returns the old "yokee_speed_limit" field's value of the CarsFlightExtendYokee entity.
-// If the CarsFlightExtendYokee object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *CarsFlightExtendYokeeMutation) OldYokeeSpeedLimit(ctx context.Context) (v float32, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldYokeeSpeedLimit is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldYokeeSpeedLimit requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldYokeeSpeedLimit: %w", err)
-	}
-	return oldValue.YokeeSpeedLimit, nil
-}
-
-// AddYokeeSpeedLimit adds f to the "yokee_speed_limit" field.
-func (m *CarsFlightExtendYokeeMutation) AddYokeeSpeedLimit(f float32) {
-	if m.addyokee_speed_limit != nil {
-		*m.addyokee_speed_limit += f
-	} else {
-		m.addyokee_speed_limit = &f
-	}
-}
-
-// AddedYokeeSpeedLimit returns the value that was added to the "yokee_speed_limit" field in this mutation.
-func (m *CarsFlightExtendYokeeMutation) AddedYokeeSpeedLimit() (r float32, exists bool) {
-	v := m.addyokee_speed_limit
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// ResetYokeeSpeedLimit resets all changes to the "yokee_speed_limit" field.
-func (m *CarsFlightExtendYokeeMutation) ResetYokeeSpeedLimit() {
-	m.yokee_speed_limit = nil
-	m.addyokee_speed_limit = nil
-}
-
 // SetCreateTime sets the "create_time" field.
 func (m *CarsFlightExtendYokeeMutation) SetCreateTime(t time.Time) {
 	m.create_time = &t
@@ -22165,15 +22281,12 @@ func (m *CarsFlightExtendYokeeMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *CarsFlightExtendYokeeMutation) Fields() []string {
-	fields := make([]string, 0, 5)
+	fields := make([]string, 0, 4)
 	if m.flight_id != nil {
 		fields = append(fields, carsflightextendyokee.FieldFlightID)
 	}
 	if m.yokee_dispatch_id != nil {
 		fields = append(fields, carsflightextendyokee.FieldYokeeDispatchID)
-	}
-	if m.yokee_speed_limit != nil {
-		fields = append(fields, carsflightextendyokee.FieldYokeeSpeedLimit)
 	}
 	if m.create_time != nil {
 		fields = append(fields, carsflightextendyokee.FieldCreateTime)
@@ -22193,8 +22306,6 @@ func (m *CarsFlightExtendYokeeMutation) Field(name string) (ent.Value, bool) {
 		return m.FlightID()
 	case carsflightextendyokee.FieldYokeeDispatchID:
 		return m.YokeeDispatchID()
-	case carsflightextendyokee.FieldYokeeSpeedLimit:
-		return m.YokeeSpeedLimit()
 	case carsflightextendyokee.FieldCreateTime:
 		return m.CreateTime()
 	case carsflightextendyokee.FieldUpdateTime:
@@ -22212,8 +22323,6 @@ func (m *CarsFlightExtendYokeeMutation) OldField(ctx context.Context, name strin
 		return m.OldFlightID(ctx)
 	case carsflightextendyokee.FieldYokeeDispatchID:
 		return m.OldYokeeDispatchID(ctx)
-	case carsflightextendyokee.FieldYokeeSpeedLimit:
-		return m.OldYokeeSpeedLimit(ctx)
 	case carsflightextendyokee.FieldCreateTime:
 		return m.OldCreateTime(ctx)
 	case carsflightextendyokee.FieldUpdateTime:
@@ -22240,13 +22349,6 @@ func (m *CarsFlightExtendYokeeMutation) SetField(name string, value ent.Value) e
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetYokeeDispatchID(v)
-		return nil
-	case carsflightextendyokee.FieldYokeeSpeedLimit:
-		v, ok := value.(float32)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetYokeeSpeedLimit(v)
 		return nil
 	case carsflightextendyokee.FieldCreateTime:
 		v, ok := value.(time.Time)
@@ -22276,9 +22378,6 @@ func (m *CarsFlightExtendYokeeMutation) AddedFields() []string {
 	if m.addyokee_dispatch_id != nil {
 		fields = append(fields, carsflightextendyokee.FieldYokeeDispatchID)
 	}
-	if m.addyokee_speed_limit != nil {
-		fields = append(fields, carsflightextendyokee.FieldYokeeSpeedLimit)
-	}
 	return fields
 }
 
@@ -22291,8 +22390,6 @@ func (m *CarsFlightExtendYokeeMutation) AddedField(name string) (ent.Value, bool
 		return m.AddedFlightID()
 	case carsflightextendyokee.FieldYokeeDispatchID:
 		return m.AddedYokeeDispatchID()
-	case carsflightextendyokee.FieldYokeeSpeedLimit:
-		return m.AddedYokeeSpeedLimit()
 	}
 	return nil, false
 }
@@ -22315,13 +22412,6 @@ func (m *CarsFlightExtendYokeeMutation) AddField(name string, value ent.Value) e
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddYokeeDispatchID(v)
-		return nil
-	case carsflightextendyokee.FieldYokeeSpeedLimit:
-		v, ok := value.(float32)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.AddYokeeSpeedLimit(v)
 		return nil
 	}
 	return fmt.Errorf("unknown CarsFlightExtendYokee numeric field %s", name)
@@ -22355,9 +22445,6 @@ func (m *CarsFlightExtendYokeeMutation) ResetField(name string) error {
 		return nil
 	case carsflightextendyokee.FieldYokeeDispatchID:
 		m.ResetYokeeDispatchID()
-		return nil
-	case carsflightextendyokee.FieldYokeeSpeedLimit:
-		m.ResetYokeeSpeedLimit()
 		return nil
 	case carsflightextendyokee.FieldCreateTime:
 		m.ResetCreateTime()

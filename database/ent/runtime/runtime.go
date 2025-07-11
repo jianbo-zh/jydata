@@ -412,12 +412,16 @@ func init() {
 	carDescCarproxyID := carFields[37].Descriptor()
 	// car.DefaultCarproxyID holds the default value on creation for the carproxy_id field.
 	car.DefaultCarproxyID = carDescCarproxyID.Default.(string)
+	// carDescMaxSpeedLimit is the schema descriptor for max_speed_limit field.
+	carDescMaxSpeedLimit := carFields[39].Descriptor()
+	// car.DefaultMaxSpeedLimit holds the default value on creation for the max_speed_limit field.
+	car.DefaultMaxSpeedLimit = carDescMaxSpeedLimit.Default.(float32)
 	// carDescCreateTime is the schema descriptor for create_time field.
-	carDescCreateTime := carFields[42].Descriptor()
+	carDescCreateTime := carFields[43].Descriptor()
 	// car.DefaultCreateTime holds the default value on creation for the create_time field.
 	car.DefaultCreateTime = carDescCreateTime.Default.(func() time.Time)
 	// carDescUpdateTime is the schema descriptor for update_time field.
-	carDescUpdateTime := carFields[43].Descriptor()
+	carDescUpdateTime := carFields[44].Descriptor()
 	// car.DefaultUpdateTime holds the default value on creation for the update_time field.
 	car.DefaultUpdateTime = carDescUpdateTime.Default.(func() time.Time)
 	// car.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
@@ -673,12 +677,16 @@ func init() {
 	carsflightDescRemark := carsflightFields[14].Descriptor()
 	// carsflight.DefaultRemark holds the default value on creation for the remark field.
 	carsflight.DefaultRemark = carsflightDescRemark.Default.(string)
+	// carsflightDescMaxSpeedLimit is the schema descriptor for max_speed_limit field.
+	carsflightDescMaxSpeedLimit := carsflightFields[17].Descriptor()
+	// carsflight.DefaultMaxSpeedLimit holds the default value on creation for the max_speed_limit field.
+	carsflight.DefaultMaxSpeedLimit = carsflightDescMaxSpeedLimit.Default.(float32)
 	// carsflightDescCreateTime is the schema descriptor for create_time field.
-	carsflightDescCreateTime := carsflightFields[19].Descriptor()
+	carsflightDescCreateTime := carsflightFields[20].Descriptor()
 	// carsflight.DefaultCreateTime holds the default value on creation for the create_time field.
 	carsflight.DefaultCreateTime = carsflightDescCreateTime.Default.(func() time.Time)
 	// carsflightDescUpdateTime is the schema descriptor for update_time field.
-	carsflightDescUpdateTime := carsflightFields[20].Descriptor()
+	carsflightDescUpdateTime := carsflightFields[21].Descriptor()
 	// carsflight.DefaultUpdateTime holds the default value on creation for the update_time field.
 	carsflight.DefaultUpdateTime = carsflightDescUpdateTime.Default.(func() time.Time)
 	// carsflight.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
@@ -686,11 +694,11 @@ func init() {
 	carsflightextendyokeeFields := schema.CarsFlightExtendYokee{}.Fields()
 	_ = carsflightextendyokeeFields
 	// carsflightextendyokeeDescCreateTime is the schema descriptor for create_time field.
-	carsflightextendyokeeDescCreateTime := carsflightextendyokeeFields[4].Descriptor()
+	carsflightextendyokeeDescCreateTime := carsflightextendyokeeFields[3].Descriptor()
 	// carsflightextendyokee.DefaultCreateTime holds the default value on creation for the create_time field.
 	carsflightextendyokee.DefaultCreateTime = carsflightextendyokeeDescCreateTime.Default.(func() time.Time)
 	// carsflightextendyokeeDescUpdateTime is the schema descriptor for update_time field.
-	carsflightextendyokeeDescUpdateTime := carsflightextendyokeeFields[5].Descriptor()
+	carsflightextendyokeeDescUpdateTime := carsflightextendyokeeFields[4].Descriptor()
 	// carsflightextendyokee.DefaultUpdateTime holds the default value on creation for the update_time field.
 	carsflightextendyokee.DefaultUpdateTime = carsflightextendyokeeDescUpdateTime.Default.(func() time.Time)
 	// carsflightextendyokee.UpdateDefaultUpdateTime holds the default value on update for the update_time field.

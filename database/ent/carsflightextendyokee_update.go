@@ -70,27 +70,6 @@ func (cfeyu *CarsFlightExtendYokeeUpdate) AddYokeeDispatchID(i int) *CarsFlightE
 	return cfeyu
 }
 
-// SetYokeeSpeedLimit sets the "yokee_speed_limit" field.
-func (cfeyu *CarsFlightExtendYokeeUpdate) SetYokeeSpeedLimit(f float32) *CarsFlightExtendYokeeUpdate {
-	cfeyu.mutation.ResetYokeeSpeedLimit()
-	cfeyu.mutation.SetYokeeSpeedLimit(f)
-	return cfeyu
-}
-
-// SetNillableYokeeSpeedLimit sets the "yokee_speed_limit" field if the given value is not nil.
-func (cfeyu *CarsFlightExtendYokeeUpdate) SetNillableYokeeSpeedLimit(f *float32) *CarsFlightExtendYokeeUpdate {
-	if f != nil {
-		cfeyu.SetYokeeSpeedLimit(*f)
-	}
-	return cfeyu
-}
-
-// AddYokeeSpeedLimit adds f to the "yokee_speed_limit" field.
-func (cfeyu *CarsFlightExtendYokeeUpdate) AddYokeeSpeedLimit(f float32) *CarsFlightExtendYokeeUpdate {
-	cfeyu.mutation.AddYokeeSpeedLimit(f)
-	return cfeyu
-}
-
 // SetUpdateTime sets the "update_time" field.
 func (cfeyu *CarsFlightExtendYokeeUpdate) SetUpdateTime(t time.Time) *CarsFlightExtendYokeeUpdate {
 	cfeyu.mutation.SetUpdateTime(t)
@@ -159,12 +138,6 @@ func (cfeyu *CarsFlightExtendYokeeUpdate) sqlSave(ctx context.Context) (n int, e
 	if value, ok := cfeyu.mutation.AddedYokeeDispatchID(); ok {
 		_spec.AddField(carsflightextendyokee.FieldYokeeDispatchID, field.TypeInt, value)
 	}
-	if value, ok := cfeyu.mutation.YokeeSpeedLimit(); ok {
-		_spec.SetField(carsflightextendyokee.FieldYokeeSpeedLimit, field.TypeFloat32, value)
-	}
-	if value, ok := cfeyu.mutation.AddedYokeeSpeedLimit(); ok {
-		_spec.AddField(carsflightextendyokee.FieldYokeeSpeedLimit, field.TypeFloat32, value)
-	}
 	if value, ok := cfeyu.mutation.UpdateTime(); ok {
 		_spec.SetField(carsflightextendyokee.FieldUpdateTime, field.TypeTime, value)
 	}
@@ -227,27 +200,6 @@ func (cfeyuo *CarsFlightExtendYokeeUpdateOne) SetNillableYokeeDispatchID(i *int)
 // AddYokeeDispatchID adds i to the "yokee_dispatch_id" field.
 func (cfeyuo *CarsFlightExtendYokeeUpdateOne) AddYokeeDispatchID(i int) *CarsFlightExtendYokeeUpdateOne {
 	cfeyuo.mutation.AddYokeeDispatchID(i)
-	return cfeyuo
-}
-
-// SetYokeeSpeedLimit sets the "yokee_speed_limit" field.
-func (cfeyuo *CarsFlightExtendYokeeUpdateOne) SetYokeeSpeedLimit(f float32) *CarsFlightExtendYokeeUpdateOne {
-	cfeyuo.mutation.ResetYokeeSpeedLimit()
-	cfeyuo.mutation.SetYokeeSpeedLimit(f)
-	return cfeyuo
-}
-
-// SetNillableYokeeSpeedLimit sets the "yokee_speed_limit" field if the given value is not nil.
-func (cfeyuo *CarsFlightExtendYokeeUpdateOne) SetNillableYokeeSpeedLimit(f *float32) *CarsFlightExtendYokeeUpdateOne {
-	if f != nil {
-		cfeyuo.SetYokeeSpeedLimit(*f)
-	}
-	return cfeyuo
-}
-
-// AddYokeeSpeedLimit adds f to the "yokee_speed_limit" field.
-func (cfeyuo *CarsFlightExtendYokeeUpdateOne) AddYokeeSpeedLimit(f float32) *CarsFlightExtendYokeeUpdateOne {
-	cfeyuo.mutation.AddYokeeSpeedLimit(f)
 	return cfeyuo
 }
 
@@ -348,12 +300,6 @@ func (cfeyuo *CarsFlightExtendYokeeUpdateOne) sqlSave(ctx context.Context) (_nod
 	}
 	if value, ok := cfeyuo.mutation.AddedYokeeDispatchID(); ok {
 		_spec.AddField(carsflightextendyokee.FieldYokeeDispatchID, field.TypeInt, value)
-	}
-	if value, ok := cfeyuo.mutation.YokeeSpeedLimit(); ok {
-		_spec.SetField(carsflightextendyokee.FieldYokeeSpeedLimit, field.TypeFloat32, value)
-	}
-	if value, ok := cfeyuo.mutation.AddedYokeeSpeedLimit(); ok {
-		_spec.AddField(carsflightextendyokee.FieldYokeeSpeedLimit, field.TypeFloat32, value)
 	}
 	if value, ok := cfeyuo.mutation.UpdateTime(); ok {
 		_spec.SetField(carsflightextendyokee.FieldUpdateTime, field.TypeTime, value)

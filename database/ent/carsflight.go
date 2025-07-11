@@ -52,6 +52,8 @@ type CarsFlight struct {
 	StopStock []types.StopStock `json:"stop_stock,omitempty"`
 	// Yokee扩展ID
 	ExtendYokeeID *int `json:"extend_yokee_id,omitempty"`
+	// 最大行驶速度(单位：m/s)
+	MaxSpeedLimit float32 `json:"max_speed_limit,omitempty"`
 	// 发车时间
 	DepartureTime *time.Time `json:"departure_time,omitempty"`
 	// 完成时间
@@ -70,6 +72,8 @@ func (*CarsFlight) scanValues(columns []string) ([]any, error) {
 		switch columns[i] {
 		case carsflight.FieldStopIds, carsflight.FieldPassIds, carsflight.FieldStopStock:
 			values[i] = new([]byte)
+		case carsflight.FieldMaxSpeedLimit:
+			values[i] = new(sql.NullFloat64)
 		case carsflight.FieldID, carsflight.FieldScenicAreaID, carsflight.FieldCarID, carsflight.FieldRouteID, carsflight.FieldSeatsNum, carsflight.FieldState, carsflight.FieldCurrStopID, carsflight.FieldCurrStopIndex, carsflight.FieldExtendYokeeID:
 			values[i] = new(sql.NullInt64)
 		case carsflight.FieldFlightNo, carsflight.FieldDeviceID, carsflight.FieldCarName, carsflight.FieldRouteName, carsflight.FieldRemark:
@@ -200,6 +204,12 @@ func (cf *CarsFlight) assignValues(columns []string, values []any) error {
 				cf.ExtendYokeeID = new(int)
 				*cf.ExtendYokeeID = int(value.Int64)
 			}
+		case carsflight.FieldMaxSpeedLimit:
+			if value, ok := values[i].(*sql.NullFloat64); !ok {
+				return fmt.Errorf("unexpected type %T for field max_speed_limit", values[i])
+			} else if value.Valid {
+				cf.MaxSpeedLimit = float32(value.Float64)
+			}
 		case carsflight.FieldDepartureTime:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field departure_time", values[i])
@@ -311,6 +321,9 @@ func (cf *CarsFlight) String() string {
 		builder.WriteString("extend_yokee_id=")
 		builder.WriteString(fmt.Sprintf("%v", *v))
 	}
+	builder.WriteString(", ")
+	builder.WriteString("max_speed_limit=")
+	builder.WriteString(fmt.Sprintf("%v", cf.MaxSpeedLimit))
 	builder.WriteString(", ")
 	if v := cf.DepartureTime; v != nil {
 		builder.WriteString("departure_time=")

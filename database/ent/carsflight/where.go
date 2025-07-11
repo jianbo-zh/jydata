@@ -119,6 +119,11 @@ func ExtendYokeeID(v int) predicate.CarsFlight {
 	return predicate.CarsFlight(sql.FieldEQ(FieldExtendYokeeID, v))
 }
 
+// MaxSpeedLimit applies equality check predicate on the "max_speed_limit" field. It's identical to MaxSpeedLimitEQ.
+func MaxSpeedLimit(v float32) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldEQ(FieldMaxSpeedLimit, v))
+}
+
 // DepartureTime applies equality check predicate on the "departure_time" field. It's identical to DepartureTimeEQ.
 func DepartureTime(v time.Time) predicate.CarsFlight {
 	return predicate.CarsFlight(sql.FieldEQ(FieldDepartureTime, v))
@@ -832,6 +837,46 @@ func ExtendYokeeIDIsNil() predicate.CarsFlight {
 // ExtendYokeeIDNotNil applies the NotNil predicate on the "extend_yokee_id" field.
 func ExtendYokeeIDNotNil() predicate.CarsFlight {
 	return predicate.CarsFlight(sql.FieldNotNull(FieldExtendYokeeID))
+}
+
+// MaxSpeedLimitEQ applies the EQ predicate on the "max_speed_limit" field.
+func MaxSpeedLimitEQ(v float32) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldEQ(FieldMaxSpeedLimit, v))
+}
+
+// MaxSpeedLimitNEQ applies the NEQ predicate on the "max_speed_limit" field.
+func MaxSpeedLimitNEQ(v float32) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldNEQ(FieldMaxSpeedLimit, v))
+}
+
+// MaxSpeedLimitIn applies the In predicate on the "max_speed_limit" field.
+func MaxSpeedLimitIn(vs ...float32) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldIn(FieldMaxSpeedLimit, vs...))
+}
+
+// MaxSpeedLimitNotIn applies the NotIn predicate on the "max_speed_limit" field.
+func MaxSpeedLimitNotIn(vs ...float32) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldNotIn(FieldMaxSpeedLimit, vs...))
+}
+
+// MaxSpeedLimitGT applies the GT predicate on the "max_speed_limit" field.
+func MaxSpeedLimitGT(v float32) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldGT(FieldMaxSpeedLimit, v))
+}
+
+// MaxSpeedLimitGTE applies the GTE predicate on the "max_speed_limit" field.
+func MaxSpeedLimitGTE(v float32) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldGTE(FieldMaxSpeedLimit, v))
+}
+
+// MaxSpeedLimitLT applies the LT predicate on the "max_speed_limit" field.
+func MaxSpeedLimitLT(v float32) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldLT(FieldMaxSpeedLimit, v))
+}
+
+// MaxSpeedLimitLTE applies the LTE predicate on the "max_speed_limit" field.
+func MaxSpeedLimitLTE(v float32) predicate.CarsFlight {
+	return predicate.CarsFlight(sql.FieldLTE(FieldMaxSpeedLimit, v))
 }
 
 // DepartureTimeEQ applies the EQ predicate on the "departure_time" field.

@@ -34,6 +34,7 @@ func (CarsFlight) Fields() []ent.Field {
 		field.String("remark").Default("").Comment("备注"),
 		field.JSON("stop_stock", []types.StopStock{}).Comment("座位库存数量"),
 		field.Int("extend_yokee_id").Optional().Nillable().Comment("Yokee扩展ID"),
+		field.Float32("max_speed_limit").Default(2).Comment("最大行驶速度(单位：m/s)"),
 		field.Time("departure_time").Optional().Nillable().Comment("发车时间"),
 		field.Time("finish_time").Optional().Nillable().Comment("完成时间"),
 		field.Time("create_time").Immutable().Default(time.Now).Comment("创建时间"),
