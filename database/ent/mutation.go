@@ -10769,6 +10769,10 @@ type CarAlarmMutation struct {
 	module_name          *string
 	_type                *uint32
 	add_type             *int32
+	duration_ms          *uint32
+	addduration_ms       *int32
+	interval_ms          *uint32
+	addinterval_ms       *int32
 	level                *uint32
 	addlevel             *int32
 	can_ignore           *uint32
@@ -11074,6 +11078,118 @@ func (m *CarAlarmMutation) AddedType() (r int32, exists bool) {
 func (m *CarAlarmMutation) ResetType() {
 	m._type = nil
 	m.add_type = nil
+}
+
+// SetDurationMs sets the "duration_ms" field.
+func (m *CarAlarmMutation) SetDurationMs(u uint32) {
+	m.duration_ms = &u
+	m.addduration_ms = nil
+}
+
+// DurationMs returns the value of the "duration_ms" field in the mutation.
+func (m *CarAlarmMutation) DurationMs() (r uint32, exists bool) {
+	v := m.duration_ms
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldDurationMs returns the old "duration_ms" field's value of the CarAlarm entity.
+// If the CarAlarm object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *CarAlarmMutation) OldDurationMs(ctx context.Context) (v uint32, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldDurationMs is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldDurationMs requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldDurationMs: %w", err)
+	}
+	return oldValue.DurationMs, nil
+}
+
+// AddDurationMs adds u to the "duration_ms" field.
+func (m *CarAlarmMutation) AddDurationMs(u int32) {
+	if m.addduration_ms != nil {
+		*m.addduration_ms += u
+	} else {
+		m.addduration_ms = &u
+	}
+}
+
+// AddedDurationMs returns the value that was added to the "duration_ms" field in this mutation.
+func (m *CarAlarmMutation) AddedDurationMs() (r int32, exists bool) {
+	v := m.addduration_ms
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetDurationMs resets all changes to the "duration_ms" field.
+func (m *CarAlarmMutation) ResetDurationMs() {
+	m.duration_ms = nil
+	m.addduration_ms = nil
+}
+
+// SetIntervalMs sets the "interval_ms" field.
+func (m *CarAlarmMutation) SetIntervalMs(u uint32) {
+	m.interval_ms = &u
+	m.addinterval_ms = nil
+}
+
+// IntervalMs returns the value of the "interval_ms" field in the mutation.
+func (m *CarAlarmMutation) IntervalMs() (r uint32, exists bool) {
+	v := m.interval_ms
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldIntervalMs returns the old "interval_ms" field's value of the CarAlarm entity.
+// If the CarAlarm object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *CarAlarmMutation) OldIntervalMs(ctx context.Context) (v uint32, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldIntervalMs is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldIntervalMs requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldIntervalMs: %w", err)
+	}
+	return oldValue.IntervalMs, nil
+}
+
+// AddIntervalMs adds u to the "interval_ms" field.
+func (m *CarAlarmMutation) AddIntervalMs(u int32) {
+	if m.addinterval_ms != nil {
+		*m.addinterval_ms += u
+	} else {
+		m.addinterval_ms = &u
+	}
+}
+
+// AddedIntervalMs returns the value that was added to the "interval_ms" field in this mutation.
+func (m *CarAlarmMutation) AddedIntervalMs() (r int32, exists bool) {
+	v := m.addinterval_ms
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetIntervalMs resets all changes to the "interval_ms" field.
+func (m *CarAlarmMutation) ResetIntervalMs() {
+	m.interval_ms = nil
+	m.addinterval_ms = nil
 }
 
 // SetLevel sets the "level" field.
@@ -11493,7 +11609,7 @@ func (m *CarAlarmMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *CarAlarmMutation) Fields() []string {
-	fields := make([]string, 0, 12)
+	fields := make([]string, 0, 14)
 	if m.device_id != nil {
 		fields = append(fields, caralarm.FieldDeviceID)
 	}
@@ -11505,6 +11621,12 @@ func (m *CarAlarmMutation) Fields() []string {
 	}
 	if m._type != nil {
 		fields = append(fields, caralarm.FieldType)
+	}
+	if m.duration_ms != nil {
+		fields = append(fields, caralarm.FieldDurationMs)
+	}
+	if m.interval_ms != nil {
+		fields = append(fields, caralarm.FieldIntervalMs)
 	}
 	if m.level != nil {
 		fields = append(fields, caralarm.FieldLevel)
@@ -11546,6 +11668,10 @@ func (m *CarAlarmMutation) Field(name string) (ent.Value, bool) {
 		return m.ModuleName()
 	case caralarm.FieldType:
 		return m.GetType()
+	case caralarm.FieldDurationMs:
+		return m.DurationMs()
+	case caralarm.FieldIntervalMs:
+		return m.IntervalMs()
 	case caralarm.FieldLevel:
 		return m.Level()
 	case caralarm.FieldCanIgnore:
@@ -11579,6 +11705,10 @@ func (m *CarAlarmMutation) OldField(ctx context.Context, name string) (ent.Value
 		return m.OldModuleName(ctx)
 	case caralarm.FieldType:
 		return m.OldType(ctx)
+	case caralarm.FieldDurationMs:
+		return m.OldDurationMs(ctx)
+	case caralarm.FieldIntervalMs:
+		return m.OldIntervalMs(ctx)
 	case caralarm.FieldLevel:
 		return m.OldLevel(ctx)
 	case caralarm.FieldCanIgnore:
@@ -11631,6 +11761,20 @@ func (m *CarAlarmMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetType(v)
+		return nil
+	case caralarm.FieldDurationMs:
+		v, ok := value.(uint32)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetDurationMs(v)
+		return nil
+	case caralarm.FieldIntervalMs:
+		v, ok := value.(uint32)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetIntervalMs(v)
 		return nil
 	case caralarm.FieldLevel:
 		v, ok := value.(uint32)
@@ -11702,6 +11846,12 @@ func (m *CarAlarmMutation) AddedFields() []string {
 	if m.add_type != nil {
 		fields = append(fields, caralarm.FieldType)
 	}
+	if m.addduration_ms != nil {
+		fields = append(fields, caralarm.FieldDurationMs)
+	}
+	if m.addinterval_ms != nil {
+		fields = append(fields, caralarm.FieldIntervalMs)
+	}
 	if m.addlevel != nil {
 		fields = append(fields, caralarm.FieldLevel)
 	}
@@ -11726,6 +11876,10 @@ func (m *CarAlarmMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedAlarmID()
 	case caralarm.FieldType:
 		return m.AddedType()
+	case caralarm.FieldDurationMs:
+		return m.AddedDurationMs()
+	case caralarm.FieldIntervalMs:
+		return m.AddedIntervalMs()
 	case caralarm.FieldLevel:
 		return m.AddedLevel()
 	case caralarm.FieldCanIgnore:
@@ -11756,6 +11910,20 @@ func (m *CarAlarmMutation) AddField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddType(v)
+		return nil
+	case caralarm.FieldDurationMs:
+		v, ok := value.(int32)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddDurationMs(v)
+		return nil
+	case caralarm.FieldIntervalMs:
+		v, ok := value.(int32)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddIntervalMs(v)
 		return nil
 	case caralarm.FieldLevel:
 		v, ok := value.(int32)
@@ -11823,6 +11991,12 @@ func (m *CarAlarmMutation) ResetField(name string) error {
 		return nil
 	case caralarm.FieldType:
 		m.ResetType()
+		return nil
+	case caralarm.FieldDurationMs:
+		m.ResetDurationMs()
+		return nil
+	case caralarm.FieldIntervalMs:
+		m.ResetIntervalMs()
 		return nil
 	case caralarm.FieldLevel:
 		m.ResetLevel()

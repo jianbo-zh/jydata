@@ -77,6 +77,10 @@ var (
 	DefaultRouteID int
 	// DefaultRouteName holds the default value on creation for the "route_name" field.
 	DefaultRouteName string
+	// DefaultStartStopIndex holds the default value on creation for the "start_stop_index" field.
+	DefaultStartStopIndex int
+	// DefaultEndStopIndex holds the default value on creation for the "end_stop_index" field.
+	DefaultEndStopIndex int
 	// DefaultTicketCount holds the default value on creation for the "ticket_count" field.
 	DefaultTicketCount int
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.

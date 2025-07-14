@@ -74,6 +74,16 @@ func Type(v uint32) predicate.CarAlarm {
 	return predicate.CarAlarm(sql.FieldEQ(FieldType, v))
 }
 
+// DurationMs applies equality check predicate on the "duration_ms" field. It's identical to DurationMsEQ.
+func DurationMs(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldEQ(FieldDurationMs, v))
+}
+
+// IntervalMs applies equality check predicate on the "interval_ms" field. It's identical to IntervalMsEQ.
+func IntervalMs(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldEQ(FieldIntervalMs, v))
+}
+
 // Level applies equality check predicate on the "level" field. It's identical to LevelEQ.
 func Level(v uint32) predicate.CarAlarm {
 	return predicate.CarAlarm(sql.FieldEQ(FieldLevel, v))
@@ -317,6 +327,86 @@ func TypeLT(v uint32) predicate.CarAlarm {
 // TypeLTE applies the LTE predicate on the "type" field.
 func TypeLTE(v uint32) predicate.CarAlarm {
 	return predicate.CarAlarm(sql.FieldLTE(FieldType, v))
+}
+
+// DurationMsEQ applies the EQ predicate on the "duration_ms" field.
+func DurationMsEQ(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldEQ(FieldDurationMs, v))
+}
+
+// DurationMsNEQ applies the NEQ predicate on the "duration_ms" field.
+func DurationMsNEQ(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldNEQ(FieldDurationMs, v))
+}
+
+// DurationMsIn applies the In predicate on the "duration_ms" field.
+func DurationMsIn(vs ...uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldIn(FieldDurationMs, vs...))
+}
+
+// DurationMsNotIn applies the NotIn predicate on the "duration_ms" field.
+func DurationMsNotIn(vs ...uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldNotIn(FieldDurationMs, vs...))
+}
+
+// DurationMsGT applies the GT predicate on the "duration_ms" field.
+func DurationMsGT(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldGT(FieldDurationMs, v))
+}
+
+// DurationMsGTE applies the GTE predicate on the "duration_ms" field.
+func DurationMsGTE(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldGTE(FieldDurationMs, v))
+}
+
+// DurationMsLT applies the LT predicate on the "duration_ms" field.
+func DurationMsLT(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldLT(FieldDurationMs, v))
+}
+
+// DurationMsLTE applies the LTE predicate on the "duration_ms" field.
+func DurationMsLTE(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldLTE(FieldDurationMs, v))
+}
+
+// IntervalMsEQ applies the EQ predicate on the "interval_ms" field.
+func IntervalMsEQ(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldEQ(FieldIntervalMs, v))
+}
+
+// IntervalMsNEQ applies the NEQ predicate on the "interval_ms" field.
+func IntervalMsNEQ(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldNEQ(FieldIntervalMs, v))
+}
+
+// IntervalMsIn applies the In predicate on the "interval_ms" field.
+func IntervalMsIn(vs ...uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldIn(FieldIntervalMs, vs...))
+}
+
+// IntervalMsNotIn applies the NotIn predicate on the "interval_ms" field.
+func IntervalMsNotIn(vs ...uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldNotIn(FieldIntervalMs, vs...))
+}
+
+// IntervalMsGT applies the GT predicate on the "interval_ms" field.
+func IntervalMsGT(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldGT(FieldIntervalMs, v))
+}
+
+// IntervalMsGTE applies the GTE predicate on the "interval_ms" field.
+func IntervalMsGTE(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldGTE(FieldIntervalMs, v))
+}
+
+// IntervalMsLT applies the LT predicate on the "interval_ms" field.
+func IntervalMsLT(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldLT(FieldIntervalMs, v))
+}
+
+// IntervalMsLTE applies the LTE predicate on the "interval_ms" field.
+func IntervalMsLTE(v uint32) predicate.CarAlarm {
+	return predicate.CarAlarm(sql.FieldLTE(FieldIntervalMs, v))
 }
 
 // LevelEQ applies the EQ predicate on the "level" field.

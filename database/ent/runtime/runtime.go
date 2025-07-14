@@ -428,12 +428,20 @@ func init() {
 	car.UpdateDefaultUpdateTime = carDescUpdateTime.UpdateDefault.(func() time.Time)
 	caralarmFields := schema.CarAlarm{}.Fields()
 	_ = caralarmFields
+	// caralarmDescDurationMs is the schema descriptor for duration_ms field.
+	caralarmDescDurationMs := caralarmFields[5].Descriptor()
+	// caralarm.DefaultDurationMs holds the default value on creation for the duration_ms field.
+	caralarm.DefaultDurationMs = caralarmDescDurationMs.Default.(uint32)
+	// caralarmDescIntervalMs is the schema descriptor for interval_ms field.
+	caralarmDescIntervalMs := caralarmFields[6].Descriptor()
+	// caralarm.DefaultIntervalMs holds the default value on creation for the interval_ms field.
+	caralarm.DefaultIntervalMs = caralarmDescIntervalMs.Default.(uint32)
 	// caralarmDescCreateTime is the schema descriptor for create_time field.
-	caralarmDescCreateTime := caralarmFields[11].Descriptor()
+	caralarmDescCreateTime := caralarmFields[13].Descriptor()
 	// caralarm.DefaultCreateTime holds the default value on creation for the create_time field.
 	caralarm.DefaultCreateTime = caralarmDescCreateTime.Default.(func() time.Time)
 	// caralarmDescUpdateTime is the schema descriptor for update_time field.
-	caralarmDescUpdateTime := caralarmFields[12].Descriptor()
+	caralarmDescUpdateTime := caralarmFields[14].Descriptor()
 	// caralarm.DefaultUpdateTime holds the default value on creation for the update_time field.
 	caralarm.DefaultUpdateTime = caralarmDescUpdateTime.Default.(func() time.Time)
 	// caralarm.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
@@ -1170,6 +1178,14 @@ func init() {
 	orderextendflightDescRouteName := orderextendflightFields[5].Descriptor()
 	// orderextendflight.DefaultRouteName holds the default value on creation for the route_name field.
 	orderextendflight.DefaultRouteName = orderextendflightDescRouteName.Default.(string)
+	// orderextendflightDescStartStopIndex is the schema descriptor for start_stop_index field.
+	orderextendflightDescStartStopIndex := orderextendflightFields[7].Descriptor()
+	// orderextendflight.DefaultStartStopIndex holds the default value on creation for the start_stop_index field.
+	orderextendflight.DefaultStartStopIndex = orderextendflightDescStartStopIndex.Default.(int)
+	// orderextendflightDescEndStopIndex is the schema descriptor for end_stop_index field.
+	orderextendflightDescEndStopIndex := orderextendflightFields[9].Descriptor()
+	// orderextendflight.DefaultEndStopIndex holds the default value on creation for the end_stop_index field.
+	orderextendflight.DefaultEndStopIndex = orderextendflightDescEndStopIndex.Default.(int)
 	// orderextendflightDescTicketCount is the schema descriptor for ticket_count field.
 	orderextendflightDescTicketCount := orderextendflightFields[10].Descriptor()
 	// orderextendflight.DefaultTicketCount holds the default value on creation for the ticket_count field.

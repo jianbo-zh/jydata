@@ -26,6 +26,10 @@ type CarAlarm struct {
 	ModuleName string `json:"module_name,omitempty"`
 	// 告警类型（0-产生 1-恢复 2-事件）
 	Type uint32 `json:"type,omitempty"`
+	// 持续时间（毫秒）
+	DurationMs uint32 `json:"duration_ms,omitempty"`
+	// 间隔时间（毫秒）
+	IntervalMs uint32 `json:"interval_ms,omitempty"`
 	// 告警等级（0-信息 1-告警 2-错误 3-故障）
 	Level uint32 `json:"level,omitempty"`
 	// 忽略能力（0-不忽略 1-忽略一次 2-重复忽略）
@@ -52,7 +56,7 @@ func (*CarAlarm) scanValues(columns []string) ([]any, error) {
 		switch columns[i] {
 		case caralarm.FieldAssociatedIds:
 			values[i] = new([]byte)
-		case caralarm.FieldID, caralarm.FieldAlarmID, caralarm.FieldType, caralarm.FieldLevel, caralarm.FieldCanIgnore, caralarm.FieldEffectState, caralarm.FieldUUID:
+		case caralarm.FieldID, caralarm.FieldAlarmID, caralarm.FieldType, caralarm.FieldDurationMs, caralarm.FieldIntervalMs, caralarm.FieldLevel, caralarm.FieldCanIgnore, caralarm.FieldEffectState, caralarm.FieldUUID:
 			values[i] = new(sql.NullInt64)
 		case caralarm.FieldDeviceID, caralarm.FieldModuleName, caralarm.FieldDesc:
 			values[i] = new(sql.NullString)
@@ -102,6 +106,18 @@ func (ca *CarAlarm) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field type", values[i])
 			} else if value.Valid {
 				ca.Type = uint32(value.Int64)
+			}
+		case caralarm.FieldDurationMs:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field duration_ms", values[i])
+			} else if value.Valid {
+				ca.DurationMs = uint32(value.Int64)
+			}
+		case caralarm.FieldIntervalMs:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field interval_ms", values[i])
+			} else if value.Valid {
+				ca.IntervalMs = uint32(value.Int64)
 			}
 		case caralarm.FieldLevel:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -200,6 +216,12 @@ func (ca *CarAlarm) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("type=")
 	builder.WriteString(fmt.Sprintf("%v", ca.Type))
+	builder.WriteString(", ")
+	builder.WriteString("duration_ms=")
+	builder.WriteString(fmt.Sprintf("%v", ca.DurationMs))
+	builder.WriteString(", ")
+	builder.WriteString("interval_ms=")
+	builder.WriteString(fmt.Sprintf("%v", ca.IntervalMs))
 	builder.WriteString(", ")
 	builder.WriteString("level=")
 	builder.WriteString(fmt.Sprintf("%v", ca.Level))

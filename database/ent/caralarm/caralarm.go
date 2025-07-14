@@ -21,6 +21,10 @@ const (
 	FieldModuleName = "module_name"
 	// FieldType holds the string denoting the type field in the database.
 	FieldType = "type"
+	// FieldDurationMs holds the string denoting the duration_ms field in the database.
+	FieldDurationMs = "duration_ms"
+	// FieldIntervalMs holds the string denoting the interval_ms field in the database.
+	FieldIntervalMs = "interval_ms"
 	// FieldLevel holds the string denoting the level field in the database.
 	FieldLevel = "level"
 	// FieldCanIgnore holds the string denoting the can_ignore field in the database.
@@ -48,6 +52,8 @@ var Columns = []string{
 	FieldAlarmID,
 	FieldModuleName,
 	FieldType,
+	FieldDurationMs,
+	FieldIntervalMs,
 	FieldLevel,
 	FieldCanIgnore,
 	FieldEffectState,
@@ -69,6 +75,10 @@ func ValidColumn(column string) bool {
 }
 
 var (
+	// DefaultDurationMs holds the default value on creation for the "duration_ms" field.
+	DefaultDurationMs uint32
+	// DefaultIntervalMs holds the default value on creation for the "interval_ms" field.
+	DefaultIntervalMs uint32
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.
 	DefaultCreateTime func() time.Time
 	// DefaultUpdateTime holds the default value on creation for the "update_time" field.
@@ -103,6 +113,16 @@ func ByModuleName(opts ...sql.OrderTermOption) OrderOption {
 // ByType orders the results by the type field.
 func ByType(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldType, opts...).ToFunc()
+}
+
+// ByDurationMs orders the results by the duration_ms field.
+func ByDurationMs(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldDurationMs, opts...).ToFunc()
+}
+
+// ByIntervalMs orders the results by the interval_ms field.
+func ByIntervalMs(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldIntervalMs, opts...).ToFunc()
 }
 
 // ByLevel orders the results by the level field.

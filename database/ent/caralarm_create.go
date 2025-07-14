@@ -44,6 +44,34 @@ func (cac *CarAlarmCreate) SetType(u uint32) *CarAlarmCreate {
 	return cac
 }
 
+// SetDurationMs sets the "duration_ms" field.
+func (cac *CarAlarmCreate) SetDurationMs(u uint32) *CarAlarmCreate {
+	cac.mutation.SetDurationMs(u)
+	return cac
+}
+
+// SetNillableDurationMs sets the "duration_ms" field if the given value is not nil.
+func (cac *CarAlarmCreate) SetNillableDurationMs(u *uint32) *CarAlarmCreate {
+	if u != nil {
+		cac.SetDurationMs(*u)
+	}
+	return cac
+}
+
+// SetIntervalMs sets the "interval_ms" field.
+func (cac *CarAlarmCreate) SetIntervalMs(u uint32) *CarAlarmCreate {
+	cac.mutation.SetIntervalMs(u)
+	return cac
+}
+
+// SetNillableIntervalMs sets the "interval_ms" field if the given value is not nil.
+func (cac *CarAlarmCreate) SetNillableIntervalMs(u *uint32) *CarAlarmCreate {
+	if u != nil {
+		cac.SetIntervalMs(*u)
+	}
+	return cac
+}
+
 // SetLevel sets the "level" field.
 func (cac *CarAlarmCreate) SetLevel(u uint32) *CarAlarmCreate {
 	cac.mutation.SetLevel(u)
@@ -149,6 +177,14 @@ func (cac *CarAlarmCreate) ExecX(ctx context.Context) {
 
 // defaults sets the default values of the builder before save.
 func (cac *CarAlarmCreate) defaults() {
+	if _, ok := cac.mutation.DurationMs(); !ok {
+		v := caralarm.DefaultDurationMs
+		cac.mutation.SetDurationMs(v)
+	}
+	if _, ok := cac.mutation.IntervalMs(); !ok {
+		v := caralarm.DefaultIntervalMs
+		cac.mutation.SetIntervalMs(v)
+	}
 	if _, ok := cac.mutation.CreateTime(); !ok {
 		v := caralarm.DefaultCreateTime()
 		cac.mutation.SetCreateTime(v)
@@ -172,6 +208,12 @@ func (cac *CarAlarmCreate) check() error {
 	}
 	if _, ok := cac.mutation.GetType(); !ok {
 		return &ValidationError{Name: "type", err: errors.New(`ent: missing required field "CarAlarm.type"`)}
+	}
+	if _, ok := cac.mutation.DurationMs(); !ok {
+		return &ValidationError{Name: "duration_ms", err: errors.New(`ent: missing required field "CarAlarm.duration_ms"`)}
+	}
+	if _, ok := cac.mutation.IntervalMs(); !ok {
+		return &ValidationError{Name: "interval_ms", err: errors.New(`ent: missing required field "CarAlarm.interval_ms"`)}
 	}
 	if _, ok := cac.mutation.Level(); !ok {
 		return &ValidationError{Name: "level", err: errors.New(`ent: missing required field "CarAlarm.level"`)}
@@ -244,6 +286,14 @@ func (cac *CarAlarmCreate) createSpec() (*CarAlarm, *sqlgraph.CreateSpec) {
 	if value, ok := cac.mutation.GetType(); ok {
 		_spec.SetField(caralarm.FieldType, field.TypeUint32, value)
 		_node.Type = value
+	}
+	if value, ok := cac.mutation.DurationMs(); ok {
+		_spec.SetField(caralarm.FieldDurationMs, field.TypeUint32, value)
+		_node.DurationMs = value
+	}
+	if value, ok := cac.mutation.IntervalMs(); ok {
+		_spec.SetField(caralarm.FieldIntervalMs, field.TypeUint32, value)
+		_node.IntervalMs = value
 	}
 	if value, ok := cac.mutation.Level(); ok {
 		_spec.SetField(caralarm.FieldLevel, field.TypeUint32, value)

@@ -22,6 +22,8 @@ func (CarAlarm) Fields() []ent.Field {
 		field.Uint32("alarm_id").Comment("告警ID"),
 		field.String("module_name").Comment("模块名称"),
 		field.Uint32("type").Comment("告警类型（0-产生 1-恢复 2-事件）"),
+		field.Uint32("duration_ms").Default(0).Comment("持续时间（毫秒）"),
+		field.Uint32("interval_ms").Default(0).Comment("间隔时间（毫秒）"),
 		field.Uint32("level").Comment("告警等级（0-信息 1-告警 2-错误 3-故障）"),
 		field.Uint32("can_ignore").Comment("忽略能力（0-不忽略 1-忽略一次 2-重复忽略）"),
 		field.Uint32("effect_state").Comment("影响状态（0-无影响 1-手动 2-自动 3-手自动 4-远程 5-手远程 6-自远 7-手自远）"),

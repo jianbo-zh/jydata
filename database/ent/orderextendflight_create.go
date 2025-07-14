@@ -94,6 +94,14 @@ func (oefc *OrderExtendFlightCreate) SetStartStopIndex(i int) *OrderExtendFlight
 	return oefc
 }
 
+// SetNillableStartStopIndex sets the "start_stop_index" field if the given value is not nil.
+func (oefc *OrderExtendFlightCreate) SetNillableStartStopIndex(i *int) *OrderExtendFlightCreate {
+	if i != nil {
+		oefc.SetStartStopIndex(*i)
+	}
+	return oefc
+}
+
 // SetEndStopID sets the "end_stop_id" field.
 func (oefc *OrderExtendFlightCreate) SetEndStopID(i int) *OrderExtendFlightCreate {
 	oefc.mutation.SetEndStopID(i)
@@ -103,6 +111,14 @@ func (oefc *OrderExtendFlightCreate) SetEndStopID(i int) *OrderExtendFlightCreat
 // SetEndStopIndex sets the "end_stop_index" field.
 func (oefc *OrderExtendFlightCreate) SetEndStopIndex(i int) *OrderExtendFlightCreate {
 	oefc.mutation.SetEndStopIndex(i)
+	return oefc
+}
+
+// SetNillableEndStopIndex sets the "end_stop_index" field if the given value is not nil.
+func (oefc *OrderExtendFlightCreate) SetNillableEndStopIndex(i *int) *OrderExtendFlightCreate {
+	if i != nil {
+		oefc.SetEndStopIndex(*i)
+	}
 	return oefc
 }
 
@@ -204,6 +220,14 @@ func (oefc *OrderExtendFlightCreate) defaults() {
 	if _, ok := oefc.mutation.RouteName(); !ok {
 		v := orderextendflight.DefaultRouteName
 		oefc.mutation.SetRouteName(v)
+	}
+	if _, ok := oefc.mutation.StartStopIndex(); !ok {
+		v := orderextendflight.DefaultStartStopIndex
+		oefc.mutation.SetStartStopIndex(v)
+	}
+	if _, ok := oefc.mutation.EndStopIndex(); !ok {
+		v := orderextendflight.DefaultEndStopIndex
+		oefc.mutation.SetEndStopIndex(v)
 	}
 	if _, ok := oefc.mutation.TicketCount(); !ok {
 		v := orderextendflight.DefaultTicketCount

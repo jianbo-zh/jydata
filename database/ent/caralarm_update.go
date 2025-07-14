@@ -99,6 +99,48 @@ func (cau *CarAlarmUpdate) AddType(u int32) *CarAlarmUpdate {
 	return cau
 }
 
+// SetDurationMs sets the "duration_ms" field.
+func (cau *CarAlarmUpdate) SetDurationMs(u uint32) *CarAlarmUpdate {
+	cau.mutation.ResetDurationMs()
+	cau.mutation.SetDurationMs(u)
+	return cau
+}
+
+// SetNillableDurationMs sets the "duration_ms" field if the given value is not nil.
+func (cau *CarAlarmUpdate) SetNillableDurationMs(u *uint32) *CarAlarmUpdate {
+	if u != nil {
+		cau.SetDurationMs(*u)
+	}
+	return cau
+}
+
+// AddDurationMs adds u to the "duration_ms" field.
+func (cau *CarAlarmUpdate) AddDurationMs(u int32) *CarAlarmUpdate {
+	cau.mutation.AddDurationMs(u)
+	return cau
+}
+
+// SetIntervalMs sets the "interval_ms" field.
+func (cau *CarAlarmUpdate) SetIntervalMs(u uint32) *CarAlarmUpdate {
+	cau.mutation.ResetIntervalMs()
+	cau.mutation.SetIntervalMs(u)
+	return cau
+}
+
+// SetNillableIntervalMs sets the "interval_ms" field if the given value is not nil.
+func (cau *CarAlarmUpdate) SetNillableIntervalMs(u *uint32) *CarAlarmUpdate {
+	if u != nil {
+		cau.SetIntervalMs(*u)
+	}
+	return cau
+}
+
+// AddIntervalMs adds u to the "interval_ms" field.
+func (cau *CarAlarmUpdate) AddIntervalMs(u int32) *CarAlarmUpdate {
+	cau.mutation.AddIntervalMs(u)
+	return cau
+}
+
 // SetLevel sets the "level" field.
 func (cau *CarAlarmUpdate) SetLevel(u uint32) *CarAlarmUpdate {
 	cau.mutation.ResetLevel()
@@ -283,6 +325,18 @@ func (cau *CarAlarmUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := cau.mutation.AddedType(); ok {
 		_spec.AddField(caralarm.FieldType, field.TypeUint32, value)
 	}
+	if value, ok := cau.mutation.DurationMs(); ok {
+		_spec.SetField(caralarm.FieldDurationMs, field.TypeUint32, value)
+	}
+	if value, ok := cau.mutation.AddedDurationMs(); ok {
+		_spec.AddField(caralarm.FieldDurationMs, field.TypeUint32, value)
+	}
+	if value, ok := cau.mutation.IntervalMs(); ok {
+		_spec.SetField(caralarm.FieldIntervalMs, field.TypeUint32, value)
+	}
+	if value, ok := cau.mutation.AddedIntervalMs(); ok {
+		_spec.AddField(caralarm.FieldIntervalMs, field.TypeUint32, value)
+	}
 	if value, ok := cau.mutation.Level(); ok {
 		_spec.SetField(caralarm.FieldLevel, field.TypeUint32, value)
 	}
@@ -408,6 +462,48 @@ func (cauo *CarAlarmUpdateOne) SetNillableType(u *uint32) *CarAlarmUpdateOne {
 // AddType adds u to the "type" field.
 func (cauo *CarAlarmUpdateOne) AddType(u int32) *CarAlarmUpdateOne {
 	cauo.mutation.AddType(u)
+	return cauo
+}
+
+// SetDurationMs sets the "duration_ms" field.
+func (cauo *CarAlarmUpdateOne) SetDurationMs(u uint32) *CarAlarmUpdateOne {
+	cauo.mutation.ResetDurationMs()
+	cauo.mutation.SetDurationMs(u)
+	return cauo
+}
+
+// SetNillableDurationMs sets the "duration_ms" field if the given value is not nil.
+func (cauo *CarAlarmUpdateOne) SetNillableDurationMs(u *uint32) *CarAlarmUpdateOne {
+	if u != nil {
+		cauo.SetDurationMs(*u)
+	}
+	return cauo
+}
+
+// AddDurationMs adds u to the "duration_ms" field.
+func (cauo *CarAlarmUpdateOne) AddDurationMs(u int32) *CarAlarmUpdateOne {
+	cauo.mutation.AddDurationMs(u)
+	return cauo
+}
+
+// SetIntervalMs sets the "interval_ms" field.
+func (cauo *CarAlarmUpdateOne) SetIntervalMs(u uint32) *CarAlarmUpdateOne {
+	cauo.mutation.ResetIntervalMs()
+	cauo.mutation.SetIntervalMs(u)
+	return cauo
+}
+
+// SetNillableIntervalMs sets the "interval_ms" field if the given value is not nil.
+func (cauo *CarAlarmUpdateOne) SetNillableIntervalMs(u *uint32) *CarAlarmUpdateOne {
+	if u != nil {
+		cauo.SetIntervalMs(*u)
+	}
+	return cauo
+}
+
+// AddIntervalMs adds u to the "interval_ms" field.
+func (cauo *CarAlarmUpdateOne) AddIntervalMs(u int32) *CarAlarmUpdateOne {
+	cauo.mutation.AddIntervalMs(u)
 	return cauo
 }
 
@@ -624,6 +720,18 @@ func (cauo *CarAlarmUpdateOne) sqlSave(ctx context.Context) (_node *CarAlarm, er
 	}
 	if value, ok := cauo.mutation.AddedType(); ok {
 		_spec.AddField(caralarm.FieldType, field.TypeUint32, value)
+	}
+	if value, ok := cauo.mutation.DurationMs(); ok {
+		_spec.SetField(caralarm.FieldDurationMs, field.TypeUint32, value)
+	}
+	if value, ok := cauo.mutation.AddedDurationMs(); ok {
+		_spec.AddField(caralarm.FieldDurationMs, field.TypeUint32, value)
+	}
+	if value, ok := cauo.mutation.IntervalMs(); ok {
+		_spec.SetField(caralarm.FieldIntervalMs, field.TypeUint32, value)
+	}
+	if value, ok := cauo.mutation.AddedIntervalMs(); ok {
+		_spec.AddField(caralarm.FieldIntervalMs, field.TypeUint32, value)
 	}
 	if value, ok := cauo.mutation.Level(); ok {
 		_spec.SetField(caralarm.FieldLevel, field.TypeUint32, value)
