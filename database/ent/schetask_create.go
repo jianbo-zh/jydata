@@ -23,6 +23,20 @@ type ScheTaskCreate struct {
 	hooks    []Hook
 }
 
+// SetUserOrigin sets the "user_origin" field.
+func (stc *ScheTaskCreate) SetUserOrigin(i int) *ScheTaskCreate {
+	stc.mutation.SetUserOrigin(i)
+	return stc
+}
+
+// SetNillableUserOrigin sets the "user_origin" field if the given value is not nil.
+func (stc *ScheTaskCreate) SetNillableUserOrigin(i *int) *ScheTaskCreate {
+	if i != nil {
+		stc.SetUserOrigin(*i)
+	}
+	return stc
+}
+
 // SetUserType sets the "user_type" field.
 func (stc *ScheTaskCreate) SetUserType(i int) *ScheTaskCreate {
 	stc.mutation.SetUserType(i)
@@ -87,23 +101,23 @@ func (stc *ScheTaskCreate) SetDestLat(f float64) *ScheTaskCreate {
 	return stc
 }
 
-// SetType sets the "type" field.
-func (stc *ScheTaskCreate) SetType(i int) *ScheTaskCreate {
-	stc.mutation.SetType(i)
+// SetScheMode sets the "sche_mode" field.
+func (stc *ScheTaskCreate) SetScheMode(i int) *ScheTaskCreate {
+	stc.mutation.SetScheMode(i)
 	return stc
 }
 
-// SetLoadLimit sets the "load_limit" field.
-func (stc *ScheTaskCreate) SetLoadLimit(i int) *ScheTaskCreate {
-	stc.mutation.SetLoadLimit(i)
-	return stc
-}
-
-// SetNillableLoadLimit sets the "load_limit" field if the given value is not nil.
-func (stc *ScheTaskCreate) SetNillableLoadLimit(i *int) *ScheTaskCreate {
+// SetNillableScheMode sets the "sche_mode" field if the given value is not nil.
+func (stc *ScheTaskCreate) SetNillableScheMode(i *int) *ScheTaskCreate {
 	if i != nil {
-		stc.SetLoadLimit(*i)
+		stc.SetScheMode(*i)
 	}
+	return stc
+}
+
+// SetScheArgs sets the "sche_args" field.
+func (stc *ScheTaskCreate) SetScheArgs(ta types.ScheArgs) *ScheTaskCreate {
+	stc.mutation.SetScheArgs(ta)
 	return stc
 }
 
@@ -144,6 +158,20 @@ func (stc *ScheTaskCreate) SetNillableRemark(s *string) *ScheTaskCreate {
 // SetRoutingPath sets the "routing_path" field.
 func (stc *ScheTaskCreate) SetRoutingPath(tp types.RoutingPath) *ScheTaskCreate {
 	stc.mutation.SetRoutingPath(tp)
+	return stc
+}
+
+// SetRestartScheTime sets the "restart_sche_time" field.
+func (stc *ScheTaskCreate) SetRestartScheTime(t time.Time) *ScheTaskCreate {
+	stc.mutation.SetRestartScheTime(t)
+	return stc
+}
+
+// SetNillableRestartScheTime sets the "restart_sche_time" field if the given value is not nil.
+func (stc *ScheTaskCreate) SetNillableRestartScheTime(t *time.Time) *ScheTaskCreate {
+	if t != nil {
+		stc.SetRestartScheTime(*t)
+	}
 	return stc
 }
 
@@ -250,6 +278,10 @@ func (stc *ScheTaskCreate) ExecX(ctx context.Context) {
 
 // defaults sets the default values of the builder before save.
 func (stc *ScheTaskCreate) defaults() {
+	if _, ok := stc.mutation.UserOrigin(); !ok {
+		v := schetask.DefaultUserOrigin
+		stc.mutation.SetUserOrigin(v)
+	}
 	if _, ok := stc.mutation.UserType(); !ok {
 		v := schetask.DefaultUserType
 		stc.mutation.SetUserType(v)
@@ -258,9 +290,9 @@ func (stc *ScheTaskCreate) defaults() {
 		v := schetask.DefaultUserID
 		stc.mutation.SetUserID(v)
 	}
-	if _, ok := stc.mutation.LoadLimit(); !ok {
-		v := schetask.DefaultLoadLimit
-		stc.mutation.SetLoadLimit(v)
+	if _, ok := stc.mutation.ScheMode(); !ok {
+		v := schetask.DefaultScheMode
+		stc.mutation.SetScheMode(v)
 	}
 	if _, ok := stc.mutation.AbnormalState(); !ok {
 		v := schetask.DefaultAbnormalState
@@ -269,6 +301,10 @@ func (stc *ScheTaskCreate) defaults() {
 	if _, ok := stc.mutation.Remark(); !ok {
 		v := schetask.DefaultRemark
 		stc.mutation.SetRemark(v)
+	}
+	if _, ok := stc.mutation.RestartScheTime(); !ok {
+		v := schetask.DefaultRestartScheTime
+		stc.mutation.SetRestartScheTime(v)
 	}
 	if _, ok := stc.mutation.CreateTime(); !ok {
 		v := schetask.DefaultCreateTime()
@@ -282,6 +318,9 @@ func (stc *ScheTaskCreate) defaults() {
 
 // check runs all checks and user-defined validators on the builder.
 func (stc *ScheTaskCreate) check() error {
+	if _, ok := stc.mutation.UserOrigin(); !ok {
+		return &ValidationError{Name: "user_origin", err: errors.New(`ent: missing required field "ScheTask.user_origin"`)}
+	}
 	if _, ok := stc.mutation.UserType(); !ok {
 		return &ValidationError{Name: "user_type", err: errors.New(`ent: missing required field "ScheTask.user_type"`)}
 	}
@@ -306,11 +345,11 @@ func (stc *ScheTaskCreate) check() error {
 	if _, ok := stc.mutation.DestLat(); !ok {
 		return &ValidationError{Name: "dest_lat", err: errors.New(`ent: missing required field "ScheTask.dest_lat"`)}
 	}
-	if _, ok := stc.mutation.GetType(); !ok {
-		return &ValidationError{Name: "type", err: errors.New(`ent: missing required field "ScheTask.type"`)}
+	if _, ok := stc.mutation.ScheMode(); !ok {
+		return &ValidationError{Name: "sche_mode", err: errors.New(`ent: missing required field "ScheTask.sche_mode"`)}
 	}
-	if _, ok := stc.mutation.LoadLimit(); !ok {
-		return &ValidationError{Name: "load_limit", err: errors.New(`ent: missing required field "ScheTask.load_limit"`)}
+	if _, ok := stc.mutation.ScheArgs(); !ok {
+		return &ValidationError{Name: "sche_args", err: errors.New(`ent: missing required field "ScheTask.sche_args"`)}
 	}
 	if _, ok := stc.mutation.State(); !ok {
 		return &ValidationError{Name: "state", err: errors.New(`ent: missing required field "ScheTask.state"`)}
@@ -323,6 +362,9 @@ func (stc *ScheTaskCreate) check() error {
 	}
 	if _, ok := stc.mutation.RoutingPath(); !ok {
 		return &ValidationError{Name: "routing_path", err: errors.New(`ent: missing required field "ScheTask.routing_path"`)}
+	}
+	if _, ok := stc.mutation.RestartScheTime(); !ok {
+		return &ValidationError{Name: "restart_sche_time", err: errors.New(`ent: missing required field "ScheTask.restart_sche_time"`)}
 	}
 	if _, ok := stc.mutation.CreateTime(); !ok {
 		return &ValidationError{Name: "create_time", err: errors.New(`ent: missing required field "ScheTask.create_time"`)}
@@ -365,6 +407,10 @@ func (stc *ScheTaskCreate) createSpec() (*ScheTask, *sqlgraph.CreateSpec) {
 		_node.ID = id
 		_spec.ID.Value = id
 	}
+	if value, ok := stc.mutation.UserOrigin(); ok {
+		_spec.SetField(schetask.FieldUserOrigin, field.TypeInt, value)
+		_node.UserOrigin = value
+	}
 	if value, ok := stc.mutation.UserType(); ok {
 		_spec.SetField(schetask.FieldUserType, field.TypeInt, value)
 		_node.UserType = value
@@ -393,13 +439,13 @@ func (stc *ScheTaskCreate) createSpec() (*ScheTask, *sqlgraph.CreateSpec) {
 		_spec.SetField(schetask.FieldDestLat, field.TypeFloat64, value)
 		_node.DestLat = value
 	}
-	if value, ok := stc.mutation.GetType(); ok {
-		_spec.SetField(schetask.FieldType, field.TypeInt, value)
-		_node.Type = value
+	if value, ok := stc.mutation.ScheMode(); ok {
+		_spec.SetField(schetask.FieldScheMode, field.TypeInt, value)
+		_node.ScheMode = value
 	}
-	if value, ok := stc.mutation.LoadLimit(); ok {
-		_spec.SetField(schetask.FieldLoadLimit, field.TypeInt, value)
-		_node.LoadLimit = value
+	if value, ok := stc.mutation.ScheArgs(); ok {
+		_spec.SetField(schetask.FieldScheArgs, field.TypeJSON, value)
+		_node.ScheArgs = value
 	}
 	if value, ok := stc.mutation.State(); ok {
 		_spec.SetField(schetask.FieldState, field.TypeInt, value)
@@ -416,6 +462,10 @@ func (stc *ScheTaskCreate) createSpec() (*ScheTask, *sqlgraph.CreateSpec) {
 	if value, ok := stc.mutation.RoutingPath(); ok {
 		_spec.SetField(schetask.FieldRoutingPath, field.TypeJSON, value)
 		_node.RoutingPath = value
+	}
+	if value, ok := stc.mutation.RestartScheTime(); ok {
+		_spec.SetField(schetask.FieldRestartScheTime, field.TypeTime, value)
+		_node.RestartScheTime = value
 	}
 	if value, ok := stc.mutation.EndTime(); ok {
 		_spec.SetField(schetask.FieldEndTime, field.TypeTime, value)

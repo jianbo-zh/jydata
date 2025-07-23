@@ -16,7 +16,7 @@ type OperationUser struct {
 func (OperationUser) Fields() []ent.Field {
 	return []ent.Field{
 		field.Int("id").Unique().Comment("唯一标识"),
-		field.Int("scenic_area_id").Default(0).Comment("景区ID"),
+		field.JSON("scenic_area_ids", []int{}).Optional().Default([]int{}).Comment("景区IDs"),
 		field.String("username").Comment("性名"),
 		field.String("nickname").Default("").Comment("微信昵称"),
 		field.String("phone").Unique().Comment("手机号"),

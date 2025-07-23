@@ -356,6 +356,27 @@ func (cu *CarUpdate) AddUseOrderID(i int) *CarUpdate {
 	return cu
 }
 
+// SetUseFlightID sets the "use_flight_id" field.
+func (cu *CarUpdate) SetUseFlightID(i int) *CarUpdate {
+	cu.mutation.ResetUseFlightID()
+	cu.mutation.SetUseFlightID(i)
+	return cu
+}
+
+// SetNillableUseFlightID sets the "use_flight_id" field if the given value is not nil.
+func (cu *CarUpdate) SetNillableUseFlightID(i *int) *CarUpdate {
+	if i != nil {
+		cu.SetUseFlightID(*i)
+	}
+	return cu
+}
+
+// AddUseFlightID adds i to the "use_flight_id" field.
+func (cu *CarUpdate) AddUseFlightID(i int) *CarUpdate {
+	cu.mutation.AddUseFlightID(i)
+	return cu
+}
+
 // SetDispatchTaskID sets the "dispatch_task_id" field.
 func (cu *CarUpdate) SetDispatchTaskID(i int) *CarUpdate {
 	cu.mutation.ResetDispatchTaskID()
@@ -377,24 +398,24 @@ func (cu *CarUpdate) AddDispatchTaskID(i int) *CarUpdate {
 	return cu
 }
 
-// SetUseFlightID sets the "use_flight_id" field.
-func (cu *CarUpdate) SetUseFlightID(i int) *CarUpdate {
-	cu.mutation.ResetUseFlightID()
-	cu.mutation.SetUseFlightID(i)
+// SetDispatchScheMode sets the "dispatch_sche_mode" field.
+func (cu *CarUpdate) SetDispatchScheMode(i int) *CarUpdate {
+	cu.mutation.ResetDispatchScheMode()
+	cu.mutation.SetDispatchScheMode(i)
 	return cu
 }
 
-// SetNillableUseFlightID sets the "use_flight_id" field if the given value is not nil.
-func (cu *CarUpdate) SetNillableUseFlightID(i *int) *CarUpdate {
+// SetNillableDispatchScheMode sets the "dispatch_sche_mode" field if the given value is not nil.
+func (cu *CarUpdate) SetNillableDispatchScheMode(i *int) *CarUpdate {
 	if i != nil {
-		cu.SetUseFlightID(*i)
+		cu.SetDispatchScheMode(*i)
 	}
 	return cu
 }
 
-// AddUseFlightID adds i to the "use_flight_id" field.
-func (cu *CarUpdate) AddUseFlightID(i int) *CarUpdate {
-	cu.mutation.AddUseFlightID(i)
+// AddDispatchScheMode adds i to the "dispatch_sche_mode" field.
+func (cu *CarUpdate) AddDispatchScheMode(i int) *CarUpdate {
+	cu.mutation.AddDispatchScheMode(i)
 	return cu
 }
 
@@ -1244,17 +1265,23 @@ func (cu *CarUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := cu.mutation.AddedUseOrderID(); ok {
 		_spec.AddField(car.FieldUseOrderID, field.TypeInt, value)
 	}
+	if value, ok := cu.mutation.UseFlightID(); ok {
+		_spec.SetField(car.FieldUseFlightID, field.TypeInt, value)
+	}
+	if value, ok := cu.mutation.AddedUseFlightID(); ok {
+		_spec.AddField(car.FieldUseFlightID, field.TypeInt, value)
+	}
 	if value, ok := cu.mutation.DispatchTaskID(); ok {
 		_spec.SetField(car.FieldDispatchTaskID, field.TypeInt, value)
 	}
 	if value, ok := cu.mutation.AddedDispatchTaskID(); ok {
 		_spec.AddField(car.FieldDispatchTaskID, field.TypeInt, value)
 	}
-	if value, ok := cu.mutation.UseFlightID(); ok {
-		_spec.SetField(car.FieldUseFlightID, field.TypeInt, value)
+	if value, ok := cu.mutation.DispatchScheMode(); ok {
+		_spec.SetField(car.FieldDispatchScheMode, field.TypeInt, value)
 	}
-	if value, ok := cu.mutation.AddedUseFlightID(); ok {
-		_spec.AddField(car.FieldUseFlightID, field.TypeInt, value)
+	if value, ok := cu.mutation.AddedDispatchScheMode(); ok {
+		_spec.AddField(car.FieldDispatchScheMode, field.TypeInt, value)
 	}
 	if value, ok := cu.mutation.BindOrderCount(); ok {
 		_spec.SetField(car.FieldBindOrderCount, field.TypeInt, value)
@@ -2046,6 +2073,27 @@ func (cuo *CarUpdateOne) AddUseOrderID(i int) *CarUpdateOne {
 	return cuo
 }
 
+// SetUseFlightID sets the "use_flight_id" field.
+func (cuo *CarUpdateOne) SetUseFlightID(i int) *CarUpdateOne {
+	cuo.mutation.ResetUseFlightID()
+	cuo.mutation.SetUseFlightID(i)
+	return cuo
+}
+
+// SetNillableUseFlightID sets the "use_flight_id" field if the given value is not nil.
+func (cuo *CarUpdateOne) SetNillableUseFlightID(i *int) *CarUpdateOne {
+	if i != nil {
+		cuo.SetUseFlightID(*i)
+	}
+	return cuo
+}
+
+// AddUseFlightID adds i to the "use_flight_id" field.
+func (cuo *CarUpdateOne) AddUseFlightID(i int) *CarUpdateOne {
+	cuo.mutation.AddUseFlightID(i)
+	return cuo
+}
+
 // SetDispatchTaskID sets the "dispatch_task_id" field.
 func (cuo *CarUpdateOne) SetDispatchTaskID(i int) *CarUpdateOne {
 	cuo.mutation.ResetDispatchTaskID()
@@ -2067,24 +2115,24 @@ func (cuo *CarUpdateOne) AddDispatchTaskID(i int) *CarUpdateOne {
 	return cuo
 }
 
-// SetUseFlightID sets the "use_flight_id" field.
-func (cuo *CarUpdateOne) SetUseFlightID(i int) *CarUpdateOne {
-	cuo.mutation.ResetUseFlightID()
-	cuo.mutation.SetUseFlightID(i)
+// SetDispatchScheMode sets the "dispatch_sche_mode" field.
+func (cuo *CarUpdateOne) SetDispatchScheMode(i int) *CarUpdateOne {
+	cuo.mutation.ResetDispatchScheMode()
+	cuo.mutation.SetDispatchScheMode(i)
 	return cuo
 }
 
-// SetNillableUseFlightID sets the "use_flight_id" field if the given value is not nil.
-func (cuo *CarUpdateOne) SetNillableUseFlightID(i *int) *CarUpdateOne {
+// SetNillableDispatchScheMode sets the "dispatch_sche_mode" field if the given value is not nil.
+func (cuo *CarUpdateOne) SetNillableDispatchScheMode(i *int) *CarUpdateOne {
 	if i != nil {
-		cuo.SetUseFlightID(*i)
+		cuo.SetDispatchScheMode(*i)
 	}
 	return cuo
 }
 
-// AddUseFlightID adds i to the "use_flight_id" field.
-func (cuo *CarUpdateOne) AddUseFlightID(i int) *CarUpdateOne {
-	cuo.mutation.AddUseFlightID(i)
+// AddDispatchScheMode adds i to the "dispatch_sche_mode" field.
+func (cuo *CarUpdateOne) AddDispatchScheMode(i int) *CarUpdateOne {
+	cuo.mutation.AddDispatchScheMode(i)
 	return cuo
 }
 
@@ -2964,17 +3012,23 @@ func (cuo *CarUpdateOne) sqlSave(ctx context.Context) (_node *Car, err error) {
 	if value, ok := cuo.mutation.AddedUseOrderID(); ok {
 		_spec.AddField(car.FieldUseOrderID, field.TypeInt, value)
 	}
+	if value, ok := cuo.mutation.UseFlightID(); ok {
+		_spec.SetField(car.FieldUseFlightID, field.TypeInt, value)
+	}
+	if value, ok := cuo.mutation.AddedUseFlightID(); ok {
+		_spec.AddField(car.FieldUseFlightID, field.TypeInt, value)
+	}
 	if value, ok := cuo.mutation.DispatchTaskID(); ok {
 		_spec.SetField(car.FieldDispatchTaskID, field.TypeInt, value)
 	}
 	if value, ok := cuo.mutation.AddedDispatchTaskID(); ok {
 		_spec.AddField(car.FieldDispatchTaskID, field.TypeInt, value)
 	}
-	if value, ok := cuo.mutation.UseFlightID(); ok {
-		_spec.SetField(car.FieldUseFlightID, field.TypeInt, value)
+	if value, ok := cuo.mutation.DispatchScheMode(); ok {
+		_spec.SetField(car.FieldDispatchScheMode, field.TypeInt, value)
 	}
-	if value, ok := cuo.mutation.AddedUseFlightID(); ok {
-		_spec.AddField(car.FieldUseFlightID, field.TypeInt, value)
+	if value, ok := cuo.mutation.AddedDispatchScheMode(); ok {
+		_spec.AddField(car.FieldDispatchScheMode, field.TypeInt, value)
 	}
 	if value, ok := cuo.mutation.BindOrderCount(); ok {
 		_spec.SetField(car.FieldBindOrderCount, field.TypeInt, value)

@@ -3,6 +3,7 @@
 package ent
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 	"time"
@@ -18,8 +19,8 @@ type OperationUser struct {
 	// ID of the ent.
 	// 唯一标识
 	ID int `json:"id,omitempty"`
-	// 景区ID
-	ScenicAreaID int `json:"scenic_area_id,omitempty"`
+	// 景区IDs
+	ScenicAreaIds []int `json:"scenic_area_ids,omitempty"`
 	// 性名
 	Username string `json:"username,omitempty"`
 	// 微信昵称
@@ -46,7 +47,9 @@ func (*OperationUser) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case operationuser.FieldID, operationuser.FieldScenicAreaID, operationuser.FieldStatus:
+		case operationuser.FieldScenicAreaIds:
+			values[i] = new([]byte)
+		case operationuser.FieldID, operationuser.FieldStatus:
 			values[i] = new(sql.NullInt64)
 		case operationuser.FieldUsername, operationuser.FieldNickname, operationuser.FieldPhone, operationuser.FieldPassword, operationuser.FieldOpenID, operationuser.FieldAvatarURL:
 			values[i] = new(sql.NullString)
@@ -73,11 +76,13 @@ func (ou *OperationUser) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
 			ou.ID = int(value.Int64)
-		case operationuser.FieldScenicAreaID:
-			if value, ok := values[i].(*sql.NullInt64); !ok {
-				return fmt.Errorf("unexpected type %T for field scenic_area_id", values[i])
-			} else if value.Valid {
-				ou.ScenicAreaID = int(value.Int64)
+		case operationuser.FieldScenicAreaIds:
+			if value, ok := values[i].(*[]byte); !ok {
+				return fmt.Errorf("unexpected type %T for field scenic_area_ids", values[i])
+			} else if value != nil && len(*value) > 0 {
+				if err := json.Unmarshal(*value, &ou.ScenicAreaIds); err != nil {
+					return fmt.Errorf("unmarshal field scenic_area_ids: %w", err)
+				}
 			}
 		case operationuser.FieldUsername:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -169,8 +174,8 @@ func (ou *OperationUser) String() string {
 	var builder strings.Builder
 	builder.WriteString("OperationUser(")
 	builder.WriteString(fmt.Sprintf("id=%v, ", ou.ID))
-	builder.WriteString("scenic_area_id=")
-	builder.WriteString(fmt.Sprintf("%v", ou.ScenicAreaID))
+	builder.WriteString("scenic_area_ids=")
+	builder.WriteString(fmt.Sprintf("%v", ou.ScenicAreaIds))
 	builder.WriteString(", ")
 	builder.WriteString("username=")
 	builder.WriteString(ou.Username)

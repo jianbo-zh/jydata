@@ -51,10 +51,12 @@ const (
 	FieldEmergencyState = "emergency_state"
 	// FieldUseOrderID holds the string denoting the use_order_id field in the database.
 	FieldUseOrderID = "use_order_id"
-	// FieldDispatchTaskID holds the string denoting the dispatch_task_id field in the database.
-	FieldDispatchTaskID = "dispatch_task_id"
 	// FieldUseFlightID holds the string denoting the use_flight_id field in the database.
 	FieldUseFlightID = "use_flight_id"
+	// FieldDispatchTaskID holds the string denoting the dispatch_task_id field in the database.
+	FieldDispatchTaskID = "dispatch_task_id"
+	// FieldDispatchScheMode holds the string denoting the dispatch_sche_mode field in the database.
+	FieldDispatchScheMode = "dispatch_sche_mode"
 	// FieldBindOrderCount holds the string denoting the bind_order_count field in the database.
 	FieldBindOrderCount = "bind_order_count"
 	// FieldTotalOrderMileage holds the string denoting the total_order_mileage field in the database.
@@ -202,8 +204,9 @@ var Columns = []string{
 	FieldDrivingState,
 	FieldEmergencyState,
 	FieldUseOrderID,
-	FieldDispatchTaskID,
 	FieldUseFlightID,
+	FieldDispatchTaskID,
+	FieldDispatchScheMode,
 	FieldBindOrderCount,
 	FieldTotalOrderMileage,
 	FieldTotalOrderTime,
@@ -263,10 +266,12 @@ var (
 	DefaultEmergencyState int
 	// DefaultUseOrderID holds the default value on creation for the "use_order_id" field.
 	DefaultUseOrderID int
-	// DefaultDispatchTaskID holds the default value on creation for the "dispatch_task_id" field.
-	DefaultDispatchTaskID int
 	// DefaultUseFlightID holds the default value on creation for the "use_flight_id" field.
 	DefaultUseFlightID int
+	// DefaultDispatchTaskID holds the default value on creation for the "dispatch_task_id" field.
+	DefaultDispatchTaskID int
+	// DefaultDispatchScheMode holds the default value on creation for the "dispatch_sche_mode" field.
+	DefaultDispatchScheMode int
 	// DefaultBindOrderCount holds the default value on creation for the "bind_order_count" field.
 	DefaultBindOrderCount int
 	// DefaultTotalOrderMileage holds the default value on creation for the "total_order_mileage" field.
@@ -406,14 +411,19 @@ func ByUseOrderID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldUseOrderID, opts...).ToFunc()
 }
 
+// ByUseFlightID orders the results by the use_flight_id field.
+func ByUseFlightID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldUseFlightID, opts...).ToFunc()
+}
+
 // ByDispatchTaskID orders the results by the dispatch_task_id field.
 func ByDispatchTaskID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldDispatchTaskID, opts...).ToFunc()
 }
 
-// ByUseFlightID orders the results by the use_flight_id field.
-func ByUseFlightID(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldUseFlightID, opts...).ToFunc()
+// ByDispatchScheMode orders the results by the dispatch_sche_mode field.
+func ByDispatchScheMode(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldDispatchScheMode, opts...).ToFunc()
 }
 
 // ByBindOrderCount orders the results by the bind_order_count field.

@@ -16,10 +16,20 @@ const (
 	FieldID = "id"
 	// FieldScheTaskID holds the string denoting the sche_task_id field in the database.
 	FieldScheTaskID = "sche_task_id"
+	// FieldScenicAreaID holds the string denoting the scenic_area_id field in the database.
+	FieldScenicAreaID = "scenic_area_id"
+	// FieldCarID holds the string denoting the car_id field in the database.
+	FieldCarID = "car_id"
 	// FieldState holds the string denoting the state field in the database.
 	FieldState = "state"
 	// FieldAbnormalState holds the string denoting the abnormal_state field in the database.
 	FieldAbnormalState = "abnormal_state"
+	// FieldImageIds holds the string denoting the image_ids field in the database.
+	FieldImageIds = "image_ids"
+	// FieldLonWgs84 holds the string denoting the lon_wgs84 field in the database.
+	FieldLonWgs84 = "lon_wgs84"
+	// FieldLatWgs84 holds the string denoting the lat_wgs84 field in the database.
+	FieldLatWgs84 = "lat_wgs84"
 	// FieldRemark holds the string denoting the remark field in the database.
 	FieldRemark = "remark"
 	// FieldCreateTime holds the string denoting the create_time field in the database.
@@ -41,8 +51,13 @@ const (
 var Columns = []string{
 	FieldID,
 	FieldScheTaskID,
+	FieldScenicAreaID,
+	FieldCarID,
 	FieldState,
 	FieldAbnormalState,
+	FieldImageIds,
+	FieldLonWgs84,
+	FieldLatWgs84,
 	FieldRemark,
 	FieldCreateTime,
 }
@@ -58,8 +73,18 @@ func ValidColumn(column string) bool {
 }
 
 var (
+	// DefaultScenicAreaID holds the default value on creation for the "scenic_area_id" field.
+	DefaultScenicAreaID int
+	// DefaultCarID holds the default value on creation for the "car_id" field.
+	DefaultCarID int
 	// DefaultAbnormalState holds the default value on creation for the "abnormal_state" field.
 	DefaultAbnormalState int
+	// DefaultImageIds holds the default value on creation for the "image_ids" field.
+	DefaultImageIds []int
+	// DefaultLonWgs84 holds the default value on creation for the "lon_wgs84" field.
+	DefaultLonWgs84 float64
+	// DefaultLatWgs84 holds the default value on creation for the "lat_wgs84" field.
+	DefaultLatWgs84 float64
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.
 	DefaultCreateTime func() time.Time
 )
@@ -77,6 +102,16 @@ func ByScheTaskID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldScheTaskID, opts...).ToFunc()
 }
 
+// ByScenicAreaID orders the results by the scenic_area_id field.
+func ByScenicAreaID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldScenicAreaID, opts...).ToFunc()
+}
+
+// ByCarID orders the results by the car_id field.
+func ByCarID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldCarID, opts...).ToFunc()
+}
+
 // ByState orders the results by the state field.
 func ByState(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldState, opts...).ToFunc()
@@ -85,6 +120,16 @@ func ByState(opts ...sql.OrderTermOption) OrderOption {
 // ByAbnormalState orders the results by the abnormal_state field.
 func ByAbnormalState(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldAbnormalState, opts...).ToFunc()
+}
+
+// ByLonWgs84 orders the results by the lon_wgs84 field.
+func ByLonWgs84(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldLonWgs84, opts...).ToFunc()
+}
+
+// ByLatWgs84 orders the results by the lat_wgs84 field.
+func ByLatWgs84(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldLatWgs84, opts...).ToFunc()
 }
 
 // ByRemark orders the results by the remark field.

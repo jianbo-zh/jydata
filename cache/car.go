@@ -220,7 +220,7 @@ func (cache *Cache) GetCarSeatTable(ctx context.Context, deviceID string) ([]boo
 		if errors.Is(err, redis.Nil) {
 			return nil, nil
 		}
-		return nil, fmt.Errorf("client.HGet error: %w", err)
+		return nil, fmt.Errorf("client.Get error: %w", err)
 	}
 	var seatTable []bool
 	err = json.Unmarshal(bs, &seatTable)
@@ -228,4 +228,22 @@ func (cache *Cache) GetCarSeatTable(ctx context.Context, deviceID string) ([]boo
 		return nil, fmt.Errorf("json.Unmarshal error: %w", err)
 	}
 	return seatTable, nil
+}
+
+/******************* 车辆使用权 *******************/
+func (cache *Cache) SetCarUseRights(ctx context.Context, deviceID string, useRights []byte) error {
+	return cache.Client().Set(ctx, "car_use_rights:"+deviceID, useRights, 0).Err()
+}
+
+func (cache *Cache) GetCarUseRights(ctx context.Context, deviceID string) ([]byte, error) {
+	var bs []byte
+	err := cache.Client().Get(ctx, "car_use_rights:"+deviceID).Scan(&bs)
+	if err != nil {
+		if errors.Is(err, redis.Nil) {
+			return nil, nil
+		}
+		return nil, fmt.Errorf("client.Get error: %w", err)
+	}
+
+	return bs, nil
 }

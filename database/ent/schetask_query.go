@@ -335,12 +335,12 @@ func (stq *ScheTaskQuery) WithEvents(opts ...func(*ScheTaskEventQuery)) *ScheTas
 // Example:
 //
 //	var v []struct {
-//		UserType int `json:"user_type,omitempty"`
+//		UserOrigin int `json:"user_origin,omitempty"`
 //		Count int `json:"count,omitempty"`
 //	}
 //
 //	client.ScheTask.Query().
-//		GroupBy(schetask.FieldUserType).
+//		GroupBy(schetask.FieldUserOrigin).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
 func (stq *ScheTaskQuery) GroupBy(field string, fields ...string) *ScheTaskGroupBy {
@@ -358,11 +358,11 @@ func (stq *ScheTaskQuery) GroupBy(field string, fields ...string) *ScheTaskGroup
 // Example:
 //
 //	var v []struct {
-//		UserType int `json:"user_type,omitempty"`
+//		UserOrigin int `json:"user_origin,omitempty"`
 //	}
 //
 //	client.ScheTask.Query().
-//		Select(schetask.FieldUserType).
+//		Select(schetask.FieldUserOrigin).
 //		Scan(ctx, &v)
 func (stq *ScheTaskQuery) Select(fields ...string) *ScheTaskSelect {
 	stq.ctx.Fields = append(stq.ctx.Fields, fields...)

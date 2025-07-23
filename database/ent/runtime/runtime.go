@@ -332,96 +332,100 @@ func init() {
 	carDescUseOrderID := carFields[17].Descriptor()
 	// car.DefaultUseOrderID holds the default value on creation for the use_order_id field.
 	car.DefaultUseOrderID = carDescUseOrderID.Default.(int)
-	// carDescDispatchTaskID is the schema descriptor for dispatch_task_id field.
-	carDescDispatchTaskID := carFields[18].Descriptor()
-	// car.DefaultDispatchTaskID holds the default value on creation for the dispatch_task_id field.
-	car.DefaultDispatchTaskID = carDescDispatchTaskID.Default.(int)
 	// carDescUseFlightID is the schema descriptor for use_flight_id field.
-	carDescUseFlightID := carFields[19].Descriptor()
+	carDescUseFlightID := carFields[18].Descriptor()
 	// car.DefaultUseFlightID holds the default value on creation for the use_flight_id field.
 	car.DefaultUseFlightID = carDescUseFlightID.Default.(int)
+	// carDescDispatchTaskID is the schema descriptor for dispatch_task_id field.
+	carDescDispatchTaskID := carFields[19].Descriptor()
+	// car.DefaultDispatchTaskID holds the default value on creation for the dispatch_task_id field.
+	car.DefaultDispatchTaskID = carDescDispatchTaskID.Default.(int)
+	// carDescDispatchScheMode is the schema descriptor for dispatch_sche_mode field.
+	carDescDispatchScheMode := carFields[20].Descriptor()
+	// car.DefaultDispatchScheMode holds the default value on creation for the dispatch_sche_mode field.
+	car.DefaultDispatchScheMode = carDescDispatchScheMode.Default.(int)
 	// carDescBindOrderCount is the schema descriptor for bind_order_count field.
-	carDescBindOrderCount := carFields[20].Descriptor()
+	carDescBindOrderCount := carFields[21].Descriptor()
 	// car.DefaultBindOrderCount holds the default value on creation for the bind_order_count field.
 	car.DefaultBindOrderCount = carDescBindOrderCount.Default.(int)
 	// carDescTotalOrderMileage is the schema descriptor for total_order_mileage field.
-	carDescTotalOrderMileage := carFields[21].Descriptor()
+	carDescTotalOrderMileage := carFields[22].Descriptor()
 	// car.DefaultTotalOrderMileage holds the default value on creation for the total_order_mileage field.
 	car.DefaultTotalOrderMileage = carDescTotalOrderMileage.Default.(int)
 	// carDescTotalOrderTime is the schema descriptor for total_order_time field.
-	carDescTotalOrderTime := carFields[22].Descriptor()
+	carDescTotalOrderTime := carFields[23].Descriptor()
 	// car.DefaultTotalOrderTime holds the default value on creation for the total_order_time field.
 	car.DefaultTotalOrderTime = carDescTotalOrderTime.Default.(int)
 	// carDescTotalOrderCount is the schema descriptor for total_order_count field.
-	carDescTotalOrderCount := carFields[23].Descriptor()
+	carDescTotalOrderCount := carFields[24].Descriptor()
 	// car.DefaultTotalOrderCount holds the default value on creation for the total_order_count field.
 	car.DefaultTotalOrderCount = carDescTotalOrderCount.Default.(int)
 	// carDescTotalOrderAmount is the schema descriptor for total_order_amount field.
-	carDescTotalOrderAmount := carFields[24].Descriptor()
+	carDescTotalOrderAmount := carFields[25].Descriptor()
 	// car.DefaultTotalOrderAmount holds the default value on creation for the total_order_amount field.
 	car.DefaultTotalOrderAmount = carDescTotalOrderAmount.Default.(int)
 	// carDescPowerRemaining is the schema descriptor for power_remaining field.
-	carDescPowerRemaining := carFields[25].Descriptor()
+	carDescPowerRemaining := carFields[26].Descriptor()
 	// car.DefaultPowerRemaining holds the default value on creation for the power_remaining field.
 	car.DefaultPowerRemaining = carDescPowerRemaining.Default.(int)
 	// carDescErrorCount is the schema descriptor for error_count field.
-	carDescErrorCount := carFields[26].Descriptor()
+	carDescErrorCount := carFields[27].Descriptor()
 	// car.DefaultErrorCount holds the default value on creation for the error_count field.
 	car.DefaultErrorCount = carDescErrorCount.Default.(int)
 	// carDescErrorMessage is the schema descriptor for error_message field.
-	carDescErrorMessage := carFields[27].Descriptor()
+	carDescErrorMessage := carFields[28].Descriptor()
 	// car.DefaultErrorMessage holds the default value on creation for the error_message field.
 	car.DefaultErrorMessage = carDescErrorMessage.Default.(string)
 	// carDescIsDeleted is the schema descriptor for is_deleted field.
-	carDescIsDeleted := carFields[28].Descriptor()
+	carDescIsDeleted := carFields[29].Descriptor()
 	// car.DefaultIsDeleted holds the default value on creation for the is_deleted field.
 	car.DefaultIsDeleted = carDescIsDeleted.Default.(int)
 	// carDescIsCommercialCar is the schema descriptor for is_commercial_car field.
-	carDescIsCommercialCar := carFields[29].Descriptor()
+	carDescIsCommercialCar := carFields[30].Descriptor()
 	// car.DefaultIsCommercialCar holds the default value on creation for the is_commercial_car field.
 	car.DefaultIsCommercialCar = carDescIsCommercialCar.Default.(int)
 	// carDescIsDrivingStateValid is the schema descriptor for is_driving_state_valid field.
-	carDescIsDrivingStateValid := carFields[30].Descriptor()
+	carDescIsDrivingStateValid := carFields[31].Descriptor()
 	// car.DefaultIsDrivingStateValid holds the default value on creation for the is_driving_state_valid field.
 	car.DefaultIsDrivingStateValid = carDescIsDrivingStateValid.Default.(int)
 	// carDescMapVersion is the schema descriptor for map_version field.
-	carDescMapVersion := carFields[31].Descriptor()
+	carDescMapVersion := carFields[32].Descriptor()
 	// car.DefaultMapVersion holds the default value on creation for the map_version field.
 	car.DefaultMapVersion = carDescMapVersion.Default.(string)
 	// carDescNextMapVersion is the schema descriptor for next_map_version field.
-	carDescNextMapVersion := carFields[32].Descriptor()
+	carDescNextMapVersion := carFields[33].Descriptor()
 	// car.DefaultNextMapVersion holds the default value on creation for the next_map_version field.
 	car.DefaultNextMapVersion = carDescNextMapVersion.Default.(string)
 	// carDescNextMapVersionState is the schema descriptor for next_map_version_state field.
-	carDescNextMapVersionState := carFields[33].Descriptor()
+	carDescNextMapVersionState := carFields[34].Descriptor()
 	// car.DefaultNextMapVersionState holds the default value on creation for the next_map_version_state field.
 	car.DefaultNextMapVersionState = carDescNextMapVersionState.Default.(string)
 	// carDescNextMapVersionProcess is the schema descriptor for next_map_version_process field.
-	carDescNextMapVersionProcess := carFields[34].Descriptor()
+	carDescNextMapVersionProcess := carFields[35].Descriptor()
 	// car.DefaultNextMapVersionProcess holds the default value on creation for the next_map_version_process field.
 	car.DefaultNextMapVersionProcess = carDescNextMapVersionProcess.Default.(int)
 	// carDescGrAutoVersion is the schema descriptor for gr_auto_version field.
-	carDescGrAutoVersion := carFields[35].Descriptor()
+	carDescGrAutoVersion := carFields[36].Descriptor()
 	// car.DefaultGrAutoVersion holds the default value on creation for the gr_auto_version field.
 	car.DefaultGrAutoVersion = carDescGrAutoVersion.Default.(string)
 	// carDescGrUIVersion is the schema descriptor for gr_ui_version field.
-	carDescGrUIVersion := carFields[36].Descriptor()
+	carDescGrUIVersion := carFields[37].Descriptor()
 	// car.DefaultGrUIVersion holds the default value on creation for the gr_ui_version field.
 	car.DefaultGrUIVersion = carDescGrUIVersion.Default.(string)
 	// carDescCarproxyID is the schema descriptor for carproxy_id field.
-	carDescCarproxyID := carFields[37].Descriptor()
+	carDescCarproxyID := carFields[38].Descriptor()
 	// car.DefaultCarproxyID holds the default value on creation for the carproxy_id field.
 	car.DefaultCarproxyID = carDescCarproxyID.Default.(string)
 	// carDescMaxSpeedLimit is the schema descriptor for max_speed_limit field.
-	carDescMaxSpeedLimit := carFields[39].Descriptor()
+	carDescMaxSpeedLimit := carFields[40].Descriptor()
 	// car.DefaultMaxSpeedLimit holds the default value on creation for the max_speed_limit field.
 	car.DefaultMaxSpeedLimit = carDescMaxSpeedLimit.Default.(float32)
 	// carDescCreateTime is the schema descriptor for create_time field.
-	carDescCreateTime := carFields[43].Descriptor()
+	carDescCreateTime := carFields[44].Descriptor()
 	// car.DefaultCreateTime holds the default value on creation for the create_time field.
 	car.DefaultCreateTime = carDescCreateTime.Default.(func() time.Time)
 	// carDescUpdateTime is the schema descriptor for update_time field.
-	carDescUpdateTime := carFields[44].Descriptor()
+	carDescUpdateTime := carFields[45].Descriptor()
 	// car.DefaultUpdateTime holds the default value on creation for the update_time field.
 	car.DefaultUpdateTime = carDescUpdateTime.Default.(func() time.Time)
 	// car.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
@@ -902,10 +906,10 @@ func init() {
 	mapversion.UpdateDefaultUpdateTime = mapversionDescUpdateTime.UpdateDefault.(func() time.Time)
 	operationuserFields := schema.OperationUser{}.Fields()
 	_ = operationuserFields
-	// operationuserDescScenicAreaID is the schema descriptor for scenic_area_id field.
-	operationuserDescScenicAreaID := operationuserFields[1].Descriptor()
-	// operationuser.DefaultScenicAreaID holds the default value on creation for the scenic_area_id field.
-	operationuser.DefaultScenicAreaID = operationuserDescScenicAreaID.Default.(int)
+	// operationuserDescScenicAreaIds is the schema descriptor for scenic_area_ids field.
+	operationuserDescScenicAreaIds := operationuserFields[1].Descriptor()
+	// operationuser.DefaultScenicAreaIds holds the default value on creation for the scenic_area_ids field.
+	operationuser.DefaultScenicAreaIds = operationuserDescScenicAreaIds.Default.([]int)
 	// operationuserDescNickname is the schema descriptor for nickname field.
 	operationuserDescNickname := operationuserFields[3].Descriptor()
 	// operationuser.DefaultNickname holds the default value on creation for the nickname field.
@@ -1598,44 +1602,72 @@ func init() {
 	scenicareamap.UpdateDefaultUpdateTime = scenicareamapDescUpdateTime.UpdateDefault.(func() time.Time)
 	schetaskFields := schema.ScheTask{}.Fields()
 	_ = schetaskFields
+	// schetaskDescUserOrigin is the schema descriptor for user_origin field.
+	schetaskDescUserOrigin := schetaskFields[1].Descriptor()
+	// schetask.DefaultUserOrigin holds the default value on creation for the user_origin field.
+	schetask.DefaultUserOrigin = schetaskDescUserOrigin.Default.(int)
 	// schetaskDescUserType is the schema descriptor for user_type field.
-	schetaskDescUserType := schetaskFields[1].Descriptor()
+	schetaskDescUserType := schetaskFields[2].Descriptor()
 	// schetask.DefaultUserType holds the default value on creation for the user_type field.
 	schetask.DefaultUserType = schetaskDescUserType.Default.(int)
 	// schetaskDescUserID is the schema descriptor for user_id field.
-	schetaskDescUserID := schetaskFields[2].Descriptor()
+	schetaskDescUserID := schetaskFields[3].Descriptor()
 	// schetask.DefaultUserID holds the default value on creation for the user_id field.
 	schetask.DefaultUserID = schetaskDescUserID.Default.(int)
-	// schetaskDescLoadLimit is the schema descriptor for load_limit field.
-	schetaskDescLoadLimit := schetaskFields[10].Descriptor()
-	// schetask.DefaultLoadLimit holds the default value on creation for the load_limit field.
-	schetask.DefaultLoadLimit = schetaskDescLoadLimit.Default.(int)
+	// schetaskDescScheMode is the schema descriptor for sche_mode field.
+	schetaskDescScheMode := schetaskFields[10].Descriptor()
+	// schetask.DefaultScheMode holds the default value on creation for the sche_mode field.
+	schetask.DefaultScheMode = schetaskDescScheMode.Default.(int)
 	// schetaskDescAbnormalState is the schema descriptor for abnormal_state field.
-	schetaskDescAbnormalState := schetaskFields[12].Descriptor()
+	schetaskDescAbnormalState := schetaskFields[13].Descriptor()
 	// schetask.DefaultAbnormalState holds the default value on creation for the abnormal_state field.
 	schetask.DefaultAbnormalState = schetaskDescAbnormalState.Default.(int)
 	// schetaskDescRemark is the schema descriptor for remark field.
-	schetaskDescRemark := schetaskFields[13].Descriptor()
+	schetaskDescRemark := schetaskFields[14].Descriptor()
 	// schetask.DefaultRemark holds the default value on creation for the remark field.
 	schetask.DefaultRemark = schetaskDescRemark.Default.(string)
+	// schetaskDescRestartScheTime is the schema descriptor for restart_sche_time field.
+	schetaskDescRestartScheTime := schetaskFields[16].Descriptor()
+	// schetask.DefaultRestartScheTime holds the default value on creation for the restart_sche_time field.
+	schetask.DefaultRestartScheTime = schetaskDescRestartScheTime.Default.(time.Time)
 	// schetaskDescCreateTime is the schema descriptor for create_time field.
-	schetaskDescCreateTime := schetaskFields[16].Descriptor()
+	schetaskDescCreateTime := schetaskFields[18].Descriptor()
 	// schetask.DefaultCreateTime holds the default value on creation for the create_time field.
 	schetask.DefaultCreateTime = schetaskDescCreateTime.Default.(func() time.Time)
 	// schetaskDescUpdateTime is the schema descriptor for update_time field.
-	schetaskDescUpdateTime := schetaskFields[17].Descriptor()
+	schetaskDescUpdateTime := schetaskFields[19].Descriptor()
 	// schetask.DefaultUpdateTime holds the default value on creation for the update_time field.
 	schetask.DefaultUpdateTime = schetaskDescUpdateTime.Default.(func() time.Time)
 	// schetask.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
 	schetask.UpdateDefaultUpdateTime = schetaskDescUpdateTime.UpdateDefault.(func() time.Time)
 	schetaskeventFields := schema.ScheTaskEvent{}.Fields()
 	_ = schetaskeventFields
+	// schetaskeventDescScenicAreaID is the schema descriptor for scenic_area_id field.
+	schetaskeventDescScenicAreaID := schetaskeventFields[2].Descriptor()
+	// schetaskevent.DefaultScenicAreaID holds the default value on creation for the scenic_area_id field.
+	schetaskevent.DefaultScenicAreaID = schetaskeventDescScenicAreaID.Default.(int)
+	// schetaskeventDescCarID is the schema descriptor for car_id field.
+	schetaskeventDescCarID := schetaskeventFields[3].Descriptor()
+	// schetaskevent.DefaultCarID holds the default value on creation for the car_id field.
+	schetaskevent.DefaultCarID = schetaskeventDescCarID.Default.(int)
 	// schetaskeventDescAbnormalState is the schema descriptor for abnormal_state field.
-	schetaskeventDescAbnormalState := schetaskeventFields[3].Descriptor()
+	schetaskeventDescAbnormalState := schetaskeventFields[5].Descriptor()
 	// schetaskevent.DefaultAbnormalState holds the default value on creation for the abnormal_state field.
 	schetaskevent.DefaultAbnormalState = schetaskeventDescAbnormalState.Default.(int)
+	// schetaskeventDescImageIds is the schema descriptor for image_ids field.
+	schetaskeventDescImageIds := schetaskeventFields[6].Descriptor()
+	// schetaskevent.DefaultImageIds holds the default value on creation for the image_ids field.
+	schetaskevent.DefaultImageIds = schetaskeventDescImageIds.Default.([]int)
+	// schetaskeventDescLonWgs84 is the schema descriptor for lon_wgs84 field.
+	schetaskeventDescLonWgs84 := schetaskeventFields[7].Descriptor()
+	// schetaskevent.DefaultLonWgs84 holds the default value on creation for the lon_wgs84 field.
+	schetaskevent.DefaultLonWgs84 = schetaskeventDescLonWgs84.Default.(float64)
+	// schetaskeventDescLatWgs84 is the schema descriptor for lat_wgs84 field.
+	schetaskeventDescLatWgs84 := schetaskeventFields[8].Descriptor()
+	// schetaskevent.DefaultLatWgs84 holds the default value on creation for the lat_wgs84 field.
+	schetaskevent.DefaultLatWgs84 = schetaskeventDescLatWgs84.Default.(float64)
 	// schetaskeventDescCreateTime is the schema descriptor for create_time field.
-	schetaskeventDescCreateTime := schetaskeventFields[5].Descriptor()
+	schetaskeventDescCreateTime := schetaskeventFields[10].Descriptor()
 	// schetaskevent.DefaultCreateTime holds the default value on creation for the create_time field.
 	schetaskevent.DefaultCreateTime = schetaskeventDescCreateTime.Default.(func() time.Time)
 	sshaccountMixin := schema.SshAccount{}.Mixin()

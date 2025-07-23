@@ -31,6 +31,27 @@ func (stu *ScheTaskUpdate) Where(ps ...predicate.ScheTask) *ScheTaskUpdate {
 	return stu
 }
 
+// SetUserOrigin sets the "user_origin" field.
+func (stu *ScheTaskUpdate) SetUserOrigin(i int) *ScheTaskUpdate {
+	stu.mutation.ResetUserOrigin()
+	stu.mutation.SetUserOrigin(i)
+	return stu
+}
+
+// SetNillableUserOrigin sets the "user_origin" field if the given value is not nil.
+func (stu *ScheTaskUpdate) SetNillableUserOrigin(i *int) *ScheTaskUpdate {
+	if i != nil {
+		stu.SetUserOrigin(*i)
+	}
+	return stu
+}
+
+// AddUserOrigin adds i to the "user_origin" field.
+func (stu *ScheTaskUpdate) AddUserOrigin(i int) *ScheTaskUpdate {
+	stu.mutation.AddUserOrigin(i)
+	return stu
+}
+
 // SetUserType sets the "user_type" field.
 func (stu *ScheTaskUpdate) SetUserType(i int) *ScheTaskUpdate {
 	stu.mutation.ResetUserType()
@@ -185,45 +206,38 @@ func (stu *ScheTaskUpdate) AddDestLat(f float64) *ScheTaskUpdate {
 	return stu
 }
 
-// SetType sets the "type" field.
-func (stu *ScheTaskUpdate) SetType(i int) *ScheTaskUpdate {
-	stu.mutation.ResetType()
-	stu.mutation.SetType(i)
+// SetScheMode sets the "sche_mode" field.
+func (stu *ScheTaskUpdate) SetScheMode(i int) *ScheTaskUpdate {
+	stu.mutation.ResetScheMode()
+	stu.mutation.SetScheMode(i)
 	return stu
 }
 
-// SetNillableType sets the "type" field if the given value is not nil.
-func (stu *ScheTaskUpdate) SetNillableType(i *int) *ScheTaskUpdate {
+// SetNillableScheMode sets the "sche_mode" field if the given value is not nil.
+func (stu *ScheTaskUpdate) SetNillableScheMode(i *int) *ScheTaskUpdate {
 	if i != nil {
-		stu.SetType(*i)
+		stu.SetScheMode(*i)
 	}
 	return stu
 }
 
-// AddType adds i to the "type" field.
-func (stu *ScheTaskUpdate) AddType(i int) *ScheTaskUpdate {
-	stu.mutation.AddType(i)
+// AddScheMode adds i to the "sche_mode" field.
+func (stu *ScheTaskUpdate) AddScheMode(i int) *ScheTaskUpdate {
+	stu.mutation.AddScheMode(i)
 	return stu
 }
 
-// SetLoadLimit sets the "load_limit" field.
-func (stu *ScheTaskUpdate) SetLoadLimit(i int) *ScheTaskUpdate {
-	stu.mutation.ResetLoadLimit()
-	stu.mutation.SetLoadLimit(i)
+// SetScheArgs sets the "sche_args" field.
+func (stu *ScheTaskUpdate) SetScheArgs(ta types.ScheArgs) *ScheTaskUpdate {
+	stu.mutation.SetScheArgs(ta)
 	return stu
 }
 
-// SetNillableLoadLimit sets the "load_limit" field if the given value is not nil.
-func (stu *ScheTaskUpdate) SetNillableLoadLimit(i *int) *ScheTaskUpdate {
-	if i != nil {
-		stu.SetLoadLimit(*i)
+// SetNillableScheArgs sets the "sche_args" field if the given value is not nil.
+func (stu *ScheTaskUpdate) SetNillableScheArgs(ta *types.ScheArgs) *ScheTaskUpdate {
+	if ta != nil {
+		stu.SetScheArgs(*ta)
 	}
-	return stu
-}
-
-// AddLoadLimit adds i to the "load_limit" field.
-func (stu *ScheTaskUpdate) AddLoadLimit(i int) *ScheTaskUpdate {
-	stu.mutation.AddLoadLimit(i)
 	return stu
 }
 
@@ -293,6 +307,20 @@ func (stu *ScheTaskUpdate) SetRoutingPath(tp types.RoutingPath) *ScheTaskUpdate 
 func (stu *ScheTaskUpdate) SetNillableRoutingPath(tp *types.RoutingPath) *ScheTaskUpdate {
 	if tp != nil {
 		stu.SetRoutingPath(*tp)
+	}
+	return stu
+}
+
+// SetRestartScheTime sets the "restart_sche_time" field.
+func (stu *ScheTaskUpdate) SetRestartScheTime(t time.Time) *ScheTaskUpdate {
+	stu.mutation.SetRestartScheTime(t)
+	return stu
+}
+
+// SetNillableRestartScheTime sets the "restart_sche_time" field if the given value is not nil.
+func (stu *ScheTaskUpdate) SetNillableRestartScheTime(t *time.Time) *ScheTaskUpdate {
+	if t != nil {
+		stu.SetRestartScheTime(*t)
 	}
 	return stu
 }
@@ -431,6 +459,12 @@ func (stu *ScheTaskUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			}
 		}
 	}
+	if value, ok := stu.mutation.UserOrigin(); ok {
+		_spec.SetField(schetask.FieldUserOrigin, field.TypeInt, value)
+	}
+	if value, ok := stu.mutation.AddedUserOrigin(); ok {
+		_spec.AddField(schetask.FieldUserOrigin, field.TypeInt, value)
+	}
 	if value, ok := stu.mutation.UserType(); ok {
 		_spec.SetField(schetask.FieldUserType, field.TypeInt, value)
 	}
@@ -470,17 +504,14 @@ func (stu *ScheTaskUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := stu.mutation.AddedDestLat(); ok {
 		_spec.AddField(schetask.FieldDestLat, field.TypeFloat64, value)
 	}
-	if value, ok := stu.mutation.GetType(); ok {
-		_spec.SetField(schetask.FieldType, field.TypeInt, value)
+	if value, ok := stu.mutation.ScheMode(); ok {
+		_spec.SetField(schetask.FieldScheMode, field.TypeInt, value)
 	}
-	if value, ok := stu.mutation.AddedType(); ok {
-		_spec.AddField(schetask.FieldType, field.TypeInt, value)
+	if value, ok := stu.mutation.AddedScheMode(); ok {
+		_spec.AddField(schetask.FieldScheMode, field.TypeInt, value)
 	}
-	if value, ok := stu.mutation.LoadLimit(); ok {
-		_spec.SetField(schetask.FieldLoadLimit, field.TypeInt, value)
-	}
-	if value, ok := stu.mutation.AddedLoadLimit(); ok {
-		_spec.AddField(schetask.FieldLoadLimit, field.TypeInt, value)
+	if value, ok := stu.mutation.ScheArgs(); ok {
+		_spec.SetField(schetask.FieldScheArgs, field.TypeJSON, value)
 	}
 	if value, ok := stu.mutation.State(); ok {
 		_spec.SetField(schetask.FieldState, field.TypeInt, value)
@@ -499,6 +530,9 @@ func (stu *ScheTaskUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := stu.mutation.RoutingPath(); ok {
 		_spec.SetField(schetask.FieldRoutingPath, field.TypeJSON, value)
+	}
+	if value, ok := stu.mutation.RestartScheTime(); ok {
+		_spec.SetField(schetask.FieldRestartScheTime, field.TypeTime, value)
 	}
 	if value, ok := stu.mutation.EndTime(); ok {
 		_spec.SetField(schetask.FieldEndTime, field.TypeTime, value)
@@ -601,6 +635,27 @@ type ScheTaskUpdateOne struct {
 	fields   []string
 	hooks    []Hook
 	mutation *ScheTaskMutation
+}
+
+// SetUserOrigin sets the "user_origin" field.
+func (stuo *ScheTaskUpdateOne) SetUserOrigin(i int) *ScheTaskUpdateOne {
+	stuo.mutation.ResetUserOrigin()
+	stuo.mutation.SetUserOrigin(i)
+	return stuo
+}
+
+// SetNillableUserOrigin sets the "user_origin" field if the given value is not nil.
+func (stuo *ScheTaskUpdateOne) SetNillableUserOrigin(i *int) *ScheTaskUpdateOne {
+	if i != nil {
+		stuo.SetUserOrigin(*i)
+	}
+	return stuo
+}
+
+// AddUserOrigin adds i to the "user_origin" field.
+func (stuo *ScheTaskUpdateOne) AddUserOrigin(i int) *ScheTaskUpdateOne {
+	stuo.mutation.AddUserOrigin(i)
+	return stuo
 }
 
 // SetUserType sets the "user_type" field.
@@ -757,45 +812,38 @@ func (stuo *ScheTaskUpdateOne) AddDestLat(f float64) *ScheTaskUpdateOne {
 	return stuo
 }
 
-// SetType sets the "type" field.
-func (stuo *ScheTaskUpdateOne) SetType(i int) *ScheTaskUpdateOne {
-	stuo.mutation.ResetType()
-	stuo.mutation.SetType(i)
+// SetScheMode sets the "sche_mode" field.
+func (stuo *ScheTaskUpdateOne) SetScheMode(i int) *ScheTaskUpdateOne {
+	stuo.mutation.ResetScheMode()
+	stuo.mutation.SetScheMode(i)
 	return stuo
 }
 
-// SetNillableType sets the "type" field if the given value is not nil.
-func (stuo *ScheTaskUpdateOne) SetNillableType(i *int) *ScheTaskUpdateOne {
+// SetNillableScheMode sets the "sche_mode" field if the given value is not nil.
+func (stuo *ScheTaskUpdateOne) SetNillableScheMode(i *int) *ScheTaskUpdateOne {
 	if i != nil {
-		stuo.SetType(*i)
+		stuo.SetScheMode(*i)
 	}
 	return stuo
 }
 
-// AddType adds i to the "type" field.
-func (stuo *ScheTaskUpdateOne) AddType(i int) *ScheTaskUpdateOne {
-	stuo.mutation.AddType(i)
+// AddScheMode adds i to the "sche_mode" field.
+func (stuo *ScheTaskUpdateOne) AddScheMode(i int) *ScheTaskUpdateOne {
+	stuo.mutation.AddScheMode(i)
 	return stuo
 }
 
-// SetLoadLimit sets the "load_limit" field.
-func (stuo *ScheTaskUpdateOne) SetLoadLimit(i int) *ScheTaskUpdateOne {
-	stuo.mutation.ResetLoadLimit()
-	stuo.mutation.SetLoadLimit(i)
+// SetScheArgs sets the "sche_args" field.
+func (stuo *ScheTaskUpdateOne) SetScheArgs(ta types.ScheArgs) *ScheTaskUpdateOne {
+	stuo.mutation.SetScheArgs(ta)
 	return stuo
 }
 
-// SetNillableLoadLimit sets the "load_limit" field if the given value is not nil.
-func (stuo *ScheTaskUpdateOne) SetNillableLoadLimit(i *int) *ScheTaskUpdateOne {
-	if i != nil {
-		stuo.SetLoadLimit(*i)
+// SetNillableScheArgs sets the "sche_args" field if the given value is not nil.
+func (stuo *ScheTaskUpdateOne) SetNillableScheArgs(ta *types.ScheArgs) *ScheTaskUpdateOne {
+	if ta != nil {
+		stuo.SetScheArgs(*ta)
 	}
-	return stuo
-}
-
-// AddLoadLimit adds i to the "load_limit" field.
-func (stuo *ScheTaskUpdateOne) AddLoadLimit(i int) *ScheTaskUpdateOne {
-	stuo.mutation.AddLoadLimit(i)
 	return stuo
 }
 
@@ -865,6 +913,20 @@ func (stuo *ScheTaskUpdateOne) SetRoutingPath(tp types.RoutingPath) *ScheTaskUpd
 func (stuo *ScheTaskUpdateOne) SetNillableRoutingPath(tp *types.RoutingPath) *ScheTaskUpdateOne {
 	if tp != nil {
 		stuo.SetRoutingPath(*tp)
+	}
+	return stuo
+}
+
+// SetRestartScheTime sets the "restart_sche_time" field.
+func (stuo *ScheTaskUpdateOne) SetRestartScheTime(t time.Time) *ScheTaskUpdateOne {
+	stuo.mutation.SetRestartScheTime(t)
+	return stuo
+}
+
+// SetNillableRestartScheTime sets the "restart_sche_time" field if the given value is not nil.
+func (stuo *ScheTaskUpdateOne) SetNillableRestartScheTime(t *time.Time) *ScheTaskUpdateOne {
+	if t != nil {
+		stuo.SetRestartScheTime(*t)
 	}
 	return stuo
 }
@@ -1033,6 +1095,12 @@ func (stuo *ScheTaskUpdateOne) sqlSave(ctx context.Context) (_node *ScheTask, er
 			}
 		}
 	}
+	if value, ok := stuo.mutation.UserOrigin(); ok {
+		_spec.SetField(schetask.FieldUserOrigin, field.TypeInt, value)
+	}
+	if value, ok := stuo.mutation.AddedUserOrigin(); ok {
+		_spec.AddField(schetask.FieldUserOrigin, field.TypeInt, value)
+	}
 	if value, ok := stuo.mutation.UserType(); ok {
 		_spec.SetField(schetask.FieldUserType, field.TypeInt, value)
 	}
@@ -1072,17 +1140,14 @@ func (stuo *ScheTaskUpdateOne) sqlSave(ctx context.Context) (_node *ScheTask, er
 	if value, ok := stuo.mutation.AddedDestLat(); ok {
 		_spec.AddField(schetask.FieldDestLat, field.TypeFloat64, value)
 	}
-	if value, ok := stuo.mutation.GetType(); ok {
-		_spec.SetField(schetask.FieldType, field.TypeInt, value)
+	if value, ok := stuo.mutation.ScheMode(); ok {
+		_spec.SetField(schetask.FieldScheMode, field.TypeInt, value)
 	}
-	if value, ok := stuo.mutation.AddedType(); ok {
-		_spec.AddField(schetask.FieldType, field.TypeInt, value)
+	if value, ok := stuo.mutation.AddedScheMode(); ok {
+		_spec.AddField(schetask.FieldScheMode, field.TypeInt, value)
 	}
-	if value, ok := stuo.mutation.LoadLimit(); ok {
-		_spec.SetField(schetask.FieldLoadLimit, field.TypeInt, value)
-	}
-	if value, ok := stuo.mutation.AddedLoadLimit(); ok {
-		_spec.AddField(schetask.FieldLoadLimit, field.TypeInt, value)
+	if value, ok := stuo.mutation.ScheArgs(); ok {
+		_spec.SetField(schetask.FieldScheArgs, field.TypeJSON, value)
 	}
 	if value, ok := stuo.mutation.State(); ok {
 		_spec.SetField(schetask.FieldState, field.TypeInt, value)
@@ -1101,6 +1166,9 @@ func (stuo *ScheTaskUpdateOne) sqlSave(ctx context.Context) (_node *ScheTask, er
 	}
 	if value, ok := stuo.mutation.RoutingPath(); ok {
 		_spec.SetField(schetask.FieldRoutingPath, field.TypeJSON, value)
+	}
+	if value, ok := stuo.mutation.RestartScheTime(); ok {
+		_spec.SetField(schetask.FieldRestartScheTime, field.TypeTime, value)
 	}
 	if value, ok := stuo.mutation.EndTime(); ok {
 		_spec.SetField(schetask.FieldEndTime, field.TypeTime, value)

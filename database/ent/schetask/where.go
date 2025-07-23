@@ -55,6 +55,11 @@ func IDLTE(id int) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldLTE(FieldID, id))
 }
 
+// UserOrigin applies equality check predicate on the "user_origin" field. It's identical to UserOriginEQ.
+func UserOrigin(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldEQ(FieldUserOrigin, v))
+}
+
 // UserType applies equality check predicate on the "user_type" field. It's identical to UserTypeEQ.
 func UserType(v int) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldEQ(FieldUserType, v))
@@ -95,14 +100,9 @@ func DestLat(v float64) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldEQ(FieldDestLat, v))
 }
 
-// Type applies equality check predicate on the "type" field. It's identical to TypeEQ.
-func Type(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldEQ(FieldType, v))
-}
-
-// LoadLimit applies equality check predicate on the "load_limit" field. It's identical to LoadLimitEQ.
-func LoadLimit(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldEQ(FieldLoadLimit, v))
+// ScheMode applies equality check predicate on the "sche_mode" field. It's identical to ScheModeEQ.
+func ScheMode(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldEQ(FieldScheMode, v))
 }
 
 // State applies equality check predicate on the "state" field. It's identical to StateEQ.
@@ -120,6 +120,11 @@ func Remark(v string) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldEQ(FieldRemark, v))
 }
 
+// RestartScheTime applies equality check predicate on the "restart_sche_time" field. It's identical to RestartScheTimeEQ.
+func RestartScheTime(v time.Time) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldEQ(FieldRestartScheTime, v))
+}
+
 // EndTime applies equality check predicate on the "end_time" field. It's identical to EndTimeEQ.
 func EndTime(v time.Time) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldEQ(FieldEndTime, v))
@@ -133,6 +138,46 @@ func CreateTime(v time.Time) predicate.ScheTask {
 // UpdateTime applies equality check predicate on the "update_time" field. It's identical to UpdateTimeEQ.
 func UpdateTime(v time.Time) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldEQ(FieldUpdateTime, v))
+}
+
+// UserOriginEQ applies the EQ predicate on the "user_origin" field.
+func UserOriginEQ(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldEQ(FieldUserOrigin, v))
+}
+
+// UserOriginNEQ applies the NEQ predicate on the "user_origin" field.
+func UserOriginNEQ(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldNEQ(FieldUserOrigin, v))
+}
+
+// UserOriginIn applies the In predicate on the "user_origin" field.
+func UserOriginIn(vs ...int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldIn(FieldUserOrigin, vs...))
+}
+
+// UserOriginNotIn applies the NotIn predicate on the "user_origin" field.
+func UserOriginNotIn(vs ...int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldNotIn(FieldUserOrigin, vs...))
+}
+
+// UserOriginGT applies the GT predicate on the "user_origin" field.
+func UserOriginGT(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldGT(FieldUserOrigin, v))
+}
+
+// UserOriginGTE applies the GTE predicate on the "user_origin" field.
+func UserOriginGTE(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldGTE(FieldUserOrigin, v))
+}
+
+// UserOriginLT applies the LT predicate on the "user_origin" field.
+func UserOriginLT(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldLT(FieldUserOrigin, v))
+}
+
+// UserOriginLTE applies the LTE predicate on the "user_origin" field.
+func UserOriginLTE(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldLTE(FieldUserOrigin, v))
 }
 
 // UserTypeEQ applies the EQ predicate on the "user_type" field.
@@ -460,84 +505,44 @@ func DestLatLTE(v float64) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldLTE(FieldDestLat, v))
 }
 
-// TypeEQ applies the EQ predicate on the "type" field.
-func TypeEQ(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldEQ(FieldType, v))
+// ScheModeEQ applies the EQ predicate on the "sche_mode" field.
+func ScheModeEQ(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldEQ(FieldScheMode, v))
 }
 
-// TypeNEQ applies the NEQ predicate on the "type" field.
-func TypeNEQ(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldNEQ(FieldType, v))
+// ScheModeNEQ applies the NEQ predicate on the "sche_mode" field.
+func ScheModeNEQ(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldNEQ(FieldScheMode, v))
 }
 
-// TypeIn applies the In predicate on the "type" field.
-func TypeIn(vs ...int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldIn(FieldType, vs...))
+// ScheModeIn applies the In predicate on the "sche_mode" field.
+func ScheModeIn(vs ...int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldIn(FieldScheMode, vs...))
 }
 
-// TypeNotIn applies the NotIn predicate on the "type" field.
-func TypeNotIn(vs ...int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldNotIn(FieldType, vs...))
+// ScheModeNotIn applies the NotIn predicate on the "sche_mode" field.
+func ScheModeNotIn(vs ...int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldNotIn(FieldScheMode, vs...))
 }
 
-// TypeGT applies the GT predicate on the "type" field.
-func TypeGT(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldGT(FieldType, v))
+// ScheModeGT applies the GT predicate on the "sche_mode" field.
+func ScheModeGT(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldGT(FieldScheMode, v))
 }
 
-// TypeGTE applies the GTE predicate on the "type" field.
-func TypeGTE(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldGTE(FieldType, v))
+// ScheModeGTE applies the GTE predicate on the "sche_mode" field.
+func ScheModeGTE(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldGTE(FieldScheMode, v))
 }
 
-// TypeLT applies the LT predicate on the "type" field.
-func TypeLT(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldLT(FieldType, v))
+// ScheModeLT applies the LT predicate on the "sche_mode" field.
+func ScheModeLT(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldLT(FieldScheMode, v))
 }
 
-// TypeLTE applies the LTE predicate on the "type" field.
-func TypeLTE(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldLTE(FieldType, v))
-}
-
-// LoadLimitEQ applies the EQ predicate on the "load_limit" field.
-func LoadLimitEQ(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldEQ(FieldLoadLimit, v))
-}
-
-// LoadLimitNEQ applies the NEQ predicate on the "load_limit" field.
-func LoadLimitNEQ(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldNEQ(FieldLoadLimit, v))
-}
-
-// LoadLimitIn applies the In predicate on the "load_limit" field.
-func LoadLimitIn(vs ...int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldIn(FieldLoadLimit, vs...))
-}
-
-// LoadLimitNotIn applies the NotIn predicate on the "load_limit" field.
-func LoadLimitNotIn(vs ...int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldNotIn(FieldLoadLimit, vs...))
-}
-
-// LoadLimitGT applies the GT predicate on the "load_limit" field.
-func LoadLimitGT(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldGT(FieldLoadLimit, v))
-}
-
-// LoadLimitGTE applies the GTE predicate on the "load_limit" field.
-func LoadLimitGTE(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldGTE(FieldLoadLimit, v))
-}
-
-// LoadLimitLT applies the LT predicate on the "load_limit" field.
-func LoadLimitLT(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldLT(FieldLoadLimit, v))
-}
-
-// LoadLimitLTE applies the LTE predicate on the "load_limit" field.
-func LoadLimitLTE(v int) predicate.ScheTask {
-	return predicate.ScheTask(sql.FieldLTE(FieldLoadLimit, v))
+// ScheModeLTE applies the LTE predicate on the "sche_mode" field.
+func ScheModeLTE(v int) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldLTE(FieldScheMode, v))
 }
 
 // StateEQ applies the EQ predicate on the "state" field.
@@ -683,6 +688,46 @@ func RemarkEqualFold(v string) predicate.ScheTask {
 // RemarkContainsFold applies the ContainsFold predicate on the "remark" field.
 func RemarkContainsFold(v string) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldContainsFold(FieldRemark, v))
+}
+
+// RestartScheTimeEQ applies the EQ predicate on the "restart_sche_time" field.
+func RestartScheTimeEQ(v time.Time) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldEQ(FieldRestartScheTime, v))
+}
+
+// RestartScheTimeNEQ applies the NEQ predicate on the "restart_sche_time" field.
+func RestartScheTimeNEQ(v time.Time) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldNEQ(FieldRestartScheTime, v))
+}
+
+// RestartScheTimeIn applies the In predicate on the "restart_sche_time" field.
+func RestartScheTimeIn(vs ...time.Time) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldIn(FieldRestartScheTime, vs...))
+}
+
+// RestartScheTimeNotIn applies the NotIn predicate on the "restart_sche_time" field.
+func RestartScheTimeNotIn(vs ...time.Time) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldNotIn(FieldRestartScheTime, vs...))
+}
+
+// RestartScheTimeGT applies the GT predicate on the "restart_sche_time" field.
+func RestartScheTimeGT(v time.Time) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldGT(FieldRestartScheTime, v))
+}
+
+// RestartScheTimeGTE applies the GTE predicate on the "restart_sche_time" field.
+func RestartScheTimeGTE(v time.Time) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldGTE(FieldRestartScheTime, v))
+}
+
+// RestartScheTimeLT applies the LT predicate on the "restart_sche_time" field.
+func RestartScheTimeLT(v time.Time) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldLT(FieldRestartScheTime, v))
+}
+
+// RestartScheTimeLTE applies the LTE predicate on the "restart_sche_time" field.
+func RestartScheTimeLTE(v time.Time) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldLTE(FieldRestartScheTime, v))
 }
 
 // EndTimeEQ applies the EQ predicate on the "end_time" field.

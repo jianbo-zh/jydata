@@ -10,6 +10,7 @@ import (
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
+	"entgo.io/ent/dialect/sql/sqljson"
 	"entgo.io/ent/schema/field"
 	"github.com/jianbo-zh/jydata/database/ent/operationuser"
 	"github.com/jianbo-zh/jydata/database/ent/predicate"
@@ -28,24 +29,21 @@ func (ouu *OperationUserUpdate) Where(ps ...predicate.OperationUser) *OperationU
 	return ouu
 }
 
-// SetScenicAreaID sets the "scenic_area_id" field.
-func (ouu *OperationUserUpdate) SetScenicAreaID(i int) *OperationUserUpdate {
-	ouu.mutation.ResetScenicAreaID()
-	ouu.mutation.SetScenicAreaID(i)
+// SetScenicAreaIds sets the "scenic_area_ids" field.
+func (ouu *OperationUserUpdate) SetScenicAreaIds(i []int) *OperationUserUpdate {
+	ouu.mutation.SetScenicAreaIds(i)
 	return ouu
 }
 
-// SetNillableScenicAreaID sets the "scenic_area_id" field if the given value is not nil.
-func (ouu *OperationUserUpdate) SetNillableScenicAreaID(i *int) *OperationUserUpdate {
-	if i != nil {
-		ouu.SetScenicAreaID(*i)
-	}
+// AppendScenicAreaIds appends i to the "scenic_area_ids" field.
+func (ouu *OperationUserUpdate) AppendScenicAreaIds(i []int) *OperationUserUpdate {
+	ouu.mutation.AppendScenicAreaIds(i)
 	return ouu
 }
 
-// AddScenicAreaID adds i to the "scenic_area_id" field.
-func (ouu *OperationUserUpdate) AddScenicAreaID(i int) *OperationUserUpdate {
-	ouu.mutation.AddScenicAreaID(i)
+// ClearScenicAreaIds clears the value of the "scenic_area_ids" field.
+func (ouu *OperationUserUpdate) ClearScenicAreaIds() *OperationUserUpdate {
+	ouu.mutation.ClearScenicAreaIds()
 	return ouu
 }
 
@@ -210,11 +208,16 @@ func (ouu *OperationUserUpdate) sqlSave(ctx context.Context) (n int, err error) 
 			}
 		}
 	}
-	if value, ok := ouu.mutation.ScenicAreaID(); ok {
-		_spec.SetField(operationuser.FieldScenicAreaID, field.TypeInt, value)
+	if value, ok := ouu.mutation.ScenicAreaIds(); ok {
+		_spec.SetField(operationuser.FieldScenicAreaIds, field.TypeJSON, value)
 	}
-	if value, ok := ouu.mutation.AddedScenicAreaID(); ok {
-		_spec.AddField(operationuser.FieldScenicAreaID, field.TypeInt, value)
+	if value, ok := ouu.mutation.AppendedScenicAreaIds(); ok {
+		_spec.AddModifier(func(u *sql.UpdateBuilder) {
+			sqljson.Append(u, operationuser.FieldScenicAreaIds, value)
+		})
+	}
+	if ouu.mutation.ScenicAreaIdsCleared() {
+		_spec.ClearField(operationuser.FieldScenicAreaIds, field.TypeJSON)
 	}
 	if value, ok := ouu.mutation.Username(); ok {
 		_spec.SetField(operationuser.FieldUsername, field.TypeString, value)
@@ -263,24 +266,21 @@ type OperationUserUpdateOne struct {
 	mutation *OperationUserMutation
 }
 
-// SetScenicAreaID sets the "scenic_area_id" field.
-func (ouuo *OperationUserUpdateOne) SetScenicAreaID(i int) *OperationUserUpdateOne {
-	ouuo.mutation.ResetScenicAreaID()
-	ouuo.mutation.SetScenicAreaID(i)
+// SetScenicAreaIds sets the "scenic_area_ids" field.
+func (ouuo *OperationUserUpdateOne) SetScenicAreaIds(i []int) *OperationUserUpdateOne {
+	ouuo.mutation.SetScenicAreaIds(i)
 	return ouuo
 }
 
-// SetNillableScenicAreaID sets the "scenic_area_id" field if the given value is not nil.
-func (ouuo *OperationUserUpdateOne) SetNillableScenicAreaID(i *int) *OperationUserUpdateOne {
-	if i != nil {
-		ouuo.SetScenicAreaID(*i)
-	}
+// AppendScenicAreaIds appends i to the "scenic_area_ids" field.
+func (ouuo *OperationUserUpdateOne) AppendScenicAreaIds(i []int) *OperationUserUpdateOne {
+	ouuo.mutation.AppendScenicAreaIds(i)
 	return ouuo
 }
 
-// AddScenicAreaID adds i to the "scenic_area_id" field.
-func (ouuo *OperationUserUpdateOne) AddScenicAreaID(i int) *OperationUserUpdateOne {
-	ouuo.mutation.AddScenicAreaID(i)
+// ClearScenicAreaIds clears the value of the "scenic_area_ids" field.
+func (ouuo *OperationUserUpdateOne) ClearScenicAreaIds() *OperationUserUpdateOne {
+	ouuo.mutation.ClearScenicAreaIds()
 	return ouuo
 }
 
@@ -475,11 +475,16 @@ func (ouuo *OperationUserUpdateOne) sqlSave(ctx context.Context) (_node *Operati
 			}
 		}
 	}
-	if value, ok := ouuo.mutation.ScenicAreaID(); ok {
-		_spec.SetField(operationuser.FieldScenicAreaID, field.TypeInt, value)
+	if value, ok := ouuo.mutation.ScenicAreaIds(); ok {
+		_spec.SetField(operationuser.FieldScenicAreaIds, field.TypeJSON, value)
 	}
-	if value, ok := ouuo.mutation.AddedScenicAreaID(); ok {
-		_spec.AddField(operationuser.FieldScenicAreaID, field.TypeInt, value)
+	if value, ok := ouuo.mutation.AppendedScenicAreaIds(); ok {
+		_spec.AddModifier(func(u *sql.UpdateBuilder) {
+			sqljson.Append(u, operationuser.FieldScenicAreaIds, value)
+		})
+	}
+	if ouuo.mutation.ScenicAreaIdsCleared() {
+		_spec.ClearField(operationuser.FieldScenicAreaIds, field.TypeJSON)
 	}
 	if value, ok := ouuo.mutation.Username(); ok {
 		_spec.SetField(operationuser.FieldUsername, field.TypeString, value)

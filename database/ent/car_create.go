@@ -200,6 +200,20 @@ func (cc *CarCreate) SetNillableUseOrderID(i *int) *CarCreate {
 	return cc
 }
 
+// SetUseFlightID sets the "use_flight_id" field.
+func (cc *CarCreate) SetUseFlightID(i int) *CarCreate {
+	cc.mutation.SetUseFlightID(i)
+	return cc
+}
+
+// SetNillableUseFlightID sets the "use_flight_id" field if the given value is not nil.
+func (cc *CarCreate) SetNillableUseFlightID(i *int) *CarCreate {
+	if i != nil {
+		cc.SetUseFlightID(*i)
+	}
+	return cc
+}
+
 // SetDispatchTaskID sets the "dispatch_task_id" field.
 func (cc *CarCreate) SetDispatchTaskID(i int) *CarCreate {
 	cc.mutation.SetDispatchTaskID(i)
@@ -214,16 +228,16 @@ func (cc *CarCreate) SetNillableDispatchTaskID(i *int) *CarCreate {
 	return cc
 }
 
-// SetUseFlightID sets the "use_flight_id" field.
-func (cc *CarCreate) SetUseFlightID(i int) *CarCreate {
-	cc.mutation.SetUseFlightID(i)
+// SetDispatchScheMode sets the "dispatch_sche_mode" field.
+func (cc *CarCreate) SetDispatchScheMode(i int) *CarCreate {
+	cc.mutation.SetDispatchScheMode(i)
 	return cc
 }
 
-// SetNillableUseFlightID sets the "use_flight_id" field if the given value is not nil.
-func (cc *CarCreate) SetNillableUseFlightID(i *int) *CarCreate {
+// SetNillableDispatchScheMode sets the "dispatch_sche_mode" field if the given value is not nil.
+func (cc *CarCreate) SetNillableDispatchScheMode(i *int) *CarCreate {
 	if i != nil {
-		cc.SetUseFlightID(*i)
+		cc.SetDispatchScheMode(*i)
 	}
 	return cc
 }
@@ -761,13 +775,17 @@ func (cc *CarCreate) defaults() error {
 		v := car.DefaultUseOrderID
 		cc.mutation.SetUseOrderID(v)
 	}
+	if _, ok := cc.mutation.UseFlightID(); !ok {
+		v := car.DefaultUseFlightID
+		cc.mutation.SetUseFlightID(v)
+	}
 	if _, ok := cc.mutation.DispatchTaskID(); !ok {
 		v := car.DefaultDispatchTaskID
 		cc.mutation.SetDispatchTaskID(v)
 	}
-	if _, ok := cc.mutation.UseFlightID(); !ok {
-		v := car.DefaultUseFlightID
-		cc.mutation.SetUseFlightID(v)
+	if _, ok := cc.mutation.DispatchScheMode(); !ok {
+		v := car.DefaultDispatchScheMode
+		cc.mutation.SetDispatchScheMode(v)
 	}
 	if _, ok := cc.mutation.BindOrderCount(); !ok {
 		v := car.DefaultBindOrderCount
@@ -915,11 +933,14 @@ func (cc *CarCreate) check() error {
 	if _, ok := cc.mutation.UseOrderID(); !ok {
 		return &ValidationError{Name: "use_order_id", err: errors.New(`ent: missing required field "Car.use_order_id"`)}
 	}
+	if _, ok := cc.mutation.UseFlightID(); !ok {
+		return &ValidationError{Name: "use_flight_id", err: errors.New(`ent: missing required field "Car.use_flight_id"`)}
+	}
 	if _, ok := cc.mutation.DispatchTaskID(); !ok {
 		return &ValidationError{Name: "dispatch_task_id", err: errors.New(`ent: missing required field "Car.dispatch_task_id"`)}
 	}
-	if _, ok := cc.mutation.UseFlightID(); !ok {
-		return &ValidationError{Name: "use_flight_id", err: errors.New(`ent: missing required field "Car.use_flight_id"`)}
+	if _, ok := cc.mutation.DispatchScheMode(); !ok {
+		return &ValidationError{Name: "dispatch_sche_mode", err: errors.New(`ent: missing required field "Car.dispatch_sche_mode"`)}
 	}
 	if _, ok := cc.mutation.BindOrderCount(); !ok {
 		return &ValidationError{Name: "bind_order_count", err: errors.New(`ent: missing required field "Car.bind_order_count"`)}
@@ -1086,13 +1107,17 @@ func (cc *CarCreate) createSpec() (*Car, *sqlgraph.CreateSpec) {
 		_spec.SetField(car.FieldUseOrderID, field.TypeInt, value)
 		_node.UseOrderID = value
 	}
+	if value, ok := cc.mutation.UseFlightID(); ok {
+		_spec.SetField(car.FieldUseFlightID, field.TypeInt, value)
+		_node.UseFlightID = value
+	}
 	if value, ok := cc.mutation.DispatchTaskID(); ok {
 		_spec.SetField(car.FieldDispatchTaskID, field.TypeInt, value)
 		_node.DispatchTaskID = value
 	}
-	if value, ok := cc.mutation.UseFlightID(); ok {
-		_spec.SetField(car.FieldUseFlightID, field.TypeInt, value)
-		_node.UseFlightID = value
+	if value, ok := cc.mutation.DispatchScheMode(); ok {
+		_spec.SetField(car.FieldDispatchScheMode, field.TypeInt, value)
+		_node.DispatchScheMode = value
 	}
 	if value, ok := cc.mutation.BindOrderCount(); ok {
 		_spec.SetField(car.FieldBindOrderCount, field.TypeInt, value)

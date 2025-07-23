@@ -20,17 +20,9 @@ type OperationUserCreate struct {
 	hooks    []Hook
 }
 
-// SetScenicAreaID sets the "scenic_area_id" field.
-func (ouc *OperationUserCreate) SetScenicAreaID(i int) *OperationUserCreate {
-	ouc.mutation.SetScenicAreaID(i)
-	return ouc
-}
-
-// SetNillableScenicAreaID sets the "scenic_area_id" field if the given value is not nil.
-func (ouc *OperationUserCreate) SetNillableScenicAreaID(i *int) *OperationUserCreate {
-	if i != nil {
-		ouc.SetScenicAreaID(*i)
-	}
+// SetScenicAreaIds sets the "scenic_area_ids" field.
+func (ouc *OperationUserCreate) SetScenicAreaIds(i []int) *OperationUserCreate {
+	ouc.mutation.SetScenicAreaIds(i)
 	return ouc
 }
 
@@ -177,9 +169,9 @@ func (ouc *OperationUserCreate) ExecX(ctx context.Context) {
 
 // defaults sets the default values of the builder before save.
 func (ouc *OperationUserCreate) defaults() {
-	if _, ok := ouc.mutation.ScenicAreaID(); !ok {
-		v := operationuser.DefaultScenicAreaID
-		ouc.mutation.SetScenicAreaID(v)
+	if _, ok := ouc.mutation.ScenicAreaIds(); !ok {
+		v := operationuser.DefaultScenicAreaIds
+		ouc.mutation.SetScenicAreaIds(v)
 	}
 	if _, ok := ouc.mutation.Nickname(); !ok {
 		v := operationuser.DefaultNickname
@@ -209,9 +201,6 @@ func (ouc *OperationUserCreate) defaults() {
 
 // check runs all checks and user-defined validators on the builder.
 func (ouc *OperationUserCreate) check() error {
-	if _, ok := ouc.mutation.ScenicAreaID(); !ok {
-		return &ValidationError{Name: "scenic_area_id", err: errors.New(`ent: missing required field "OperationUser.scenic_area_id"`)}
-	}
 	if _, ok := ouc.mutation.Username(); !ok {
 		return &ValidationError{Name: "username", err: errors.New(`ent: missing required field "OperationUser.username"`)}
 	}
@@ -271,9 +260,9 @@ func (ouc *OperationUserCreate) createSpec() (*OperationUser, *sqlgraph.CreateSp
 		_node.ID = id
 		_spec.ID.Value = id
 	}
-	if value, ok := ouc.mutation.ScenicAreaID(); ok {
-		_spec.SetField(operationuser.FieldScenicAreaID, field.TypeInt, value)
-		_node.ScenicAreaID = value
+	if value, ok := ouc.mutation.ScenicAreaIds(); ok {
+		_spec.SetField(operationuser.FieldScenicAreaIds, field.TypeJSON, value)
+		_node.ScenicAreaIds = value
 	}
 	if value, ok := ouc.mutation.Username(); ok {
 		_spec.SetField(operationuser.FieldUsername, field.TypeString, value)

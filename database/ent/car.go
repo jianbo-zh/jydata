@@ -56,10 +56,12 @@ type Car struct {
 	EmergencyState int `json:"emergency_state,omitempty"`
 	// 绑定订单ID
 	UseOrderID int `json:"use_order_id,omitempty"`
-	// 调度任务ID
-	DispatchTaskID int `json:"dispatch_task_id,omitempty"`
 	// 班次任务ID
 	UseFlightID int `json:"use_flight_id,omitempty"`
+	// 调度任务ID
+	DispatchTaskID int `json:"dispatch_task_id,omitempty"`
+	// 调度模式（0-无调度 1-自由调度 2-揽客模式 3-部署模式）
+	DispatchScheMode int `json:"dispatch_sche_mode,omitempty"`
 	// 绑定订单数
 	BindOrderCount int `json:"bind_order_count,omitempty"`
 	// 累积订单里程（米）
@@ -224,7 +226,7 @@ func (*Car) scanValues(columns []string) ([]any, error) {
 			values[i] = new([]byte)
 		case car.FieldMaxSpeedLimit:
 			values[i] = new(sql.NullFloat64)
-		case car.FieldID, car.FieldOperationMode, car.FieldScenicAreaID, car.FieldModelID, car.FieldPassengers, car.FieldReservedSeats, car.FieldPowerThreshold, car.FieldState, car.FieldUseState, car.FieldDrivingState, car.FieldEmergencyState, car.FieldUseOrderID, car.FieldDispatchTaskID, car.FieldUseFlightID, car.FieldBindOrderCount, car.FieldTotalOrderMileage, car.FieldTotalOrderTime, car.FieldTotalOrderCount, car.FieldTotalOrderAmount, car.FieldPowerRemaining, car.FieldErrorCount, car.FieldIsDeleted, car.FieldIsCommercialCar, car.FieldIsDrivingStateValid, car.FieldNextMapVersionProcess, car.FieldExtendYokeeID:
+		case car.FieldID, car.FieldOperationMode, car.FieldScenicAreaID, car.FieldModelID, car.FieldPassengers, car.FieldReservedSeats, car.FieldPowerThreshold, car.FieldState, car.FieldUseState, car.FieldDrivingState, car.FieldEmergencyState, car.FieldUseOrderID, car.FieldUseFlightID, car.FieldDispatchTaskID, car.FieldDispatchScheMode, car.FieldBindOrderCount, car.FieldTotalOrderMileage, car.FieldTotalOrderTime, car.FieldTotalOrderCount, car.FieldTotalOrderAmount, car.FieldPowerRemaining, car.FieldErrorCount, car.FieldIsDeleted, car.FieldIsCommercialCar, car.FieldIsDrivingStateValid, car.FieldNextMapVersionProcess, car.FieldExtendYokeeID:
 			values[i] = new(sql.NullInt64)
 		case car.FieldCarName, car.FieldDeviceID, car.FieldLicensePlate, car.FieldActivateCode, car.FieldErrorMessage, car.FieldMapVersion, car.FieldNextMapVersion, car.FieldNextMapVersionState, car.FieldGrAutoVersion, car.FieldGrUIVersion, car.FieldCarproxyID:
 			values[i] = new(sql.NullString)
@@ -361,17 +363,23 @@ func (c *Car) assignValues(columns []string, values []any) error {
 			} else if value.Valid {
 				c.UseOrderID = int(value.Int64)
 			}
+		case car.FieldUseFlightID:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field use_flight_id", values[i])
+			} else if value.Valid {
+				c.UseFlightID = int(value.Int64)
+			}
 		case car.FieldDispatchTaskID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field dispatch_task_id", values[i])
 			} else if value.Valid {
 				c.DispatchTaskID = int(value.Int64)
 			}
-		case car.FieldUseFlightID:
+		case car.FieldDispatchScheMode:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
-				return fmt.Errorf("unexpected type %T for field use_flight_id", values[i])
+				return fmt.Errorf("unexpected type %T for field dispatch_sche_mode", values[i])
 			} else if value.Valid {
-				c.UseFlightID = int(value.Int64)
+				c.DispatchScheMode = int(value.Int64)
 			}
 		case car.FieldBindOrderCount:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -654,11 +662,14 @@ func (c *Car) String() string {
 	builder.WriteString("use_order_id=")
 	builder.WriteString(fmt.Sprintf("%v", c.UseOrderID))
 	builder.WriteString(", ")
+	builder.WriteString("use_flight_id=")
+	builder.WriteString(fmt.Sprintf("%v", c.UseFlightID))
+	builder.WriteString(", ")
 	builder.WriteString("dispatch_task_id=")
 	builder.WriteString(fmt.Sprintf("%v", c.DispatchTaskID))
 	builder.WriteString(", ")
-	builder.WriteString("use_flight_id=")
-	builder.WriteString(fmt.Sprintf("%v", c.UseFlightID))
+	builder.WriteString("dispatch_sche_mode=")
+	builder.WriteString(fmt.Sprintf("%v", c.DispatchScheMode))
 	builder.WriteString(", ")
 	builder.WriteString("bind_order_count=")
 	builder.WriteString(fmt.Sprintf("%v", c.BindOrderCount))

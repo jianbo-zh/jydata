@@ -140,14 +140,19 @@ func UseOrderID(v int) predicate.Car {
 	return predicate.Car(sql.FieldEQ(FieldUseOrderID, v))
 }
 
+// UseFlightID applies equality check predicate on the "use_flight_id" field. It's identical to UseFlightIDEQ.
+func UseFlightID(v int) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldUseFlightID, v))
+}
+
 // DispatchTaskID applies equality check predicate on the "dispatch_task_id" field. It's identical to DispatchTaskIDEQ.
 func DispatchTaskID(v int) predicate.Car {
 	return predicate.Car(sql.FieldEQ(FieldDispatchTaskID, v))
 }
 
-// UseFlightID applies equality check predicate on the "use_flight_id" field. It's identical to UseFlightIDEQ.
-func UseFlightID(v int) predicate.Car {
-	return predicate.Car(sql.FieldEQ(FieldUseFlightID, v))
+// DispatchScheMode applies equality check predicate on the "dispatch_sche_mode" field. It's identical to DispatchScheModeEQ.
+func DispatchScheMode(v int) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldDispatchScheMode, v))
 }
 
 // BindOrderCount applies equality check predicate on the "bind_order_count" field. It's identical to BindOrderCountEQ.
@@ -1025,6 +1030,46 @@ func UseOrderIDLTE(v int) predicate.Car {
 	return predicate.Car(sql.FieldLTE(FieldUseOrderID, v))
 }
 
+// UseFlightIDEQ applies the EQ predicate on the "use_flight_id" field.
+func UseFlightIDEQ(v int) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldUseFlightID, v))
+}
+
+// UseFlightIDNEQ applies the NEQ predicate on the "use_flight_id" field.
+func UseFlightIDNEQ(v int) predicate.Car {
+	return predicate.Car(sql.FieldNEQ(FieldUseFlightID, v))
+}
+
+// UseFlightIDIn applies the In predicate on the "use_flight_id" field.
+func UseFlightIDIn(vs ...int) predicate.Car {
+	return predicate.Car(sql.FieldIn(FieldUseFlightID, vs...))
+}
+
+// UseFlightIDNotIn applies the NotIn predicate on the "use_flight_id" field.
+func UseFlightIDNotIn(vs ...int) predicate.Car {
+	return predicate.Car(sql.FieldNotIn(FieldUseFlightID, vs...))
+}
+
+// UseFlightIDGT applies the GT predicate on the "use_flight_id" field.
+func UseFlightIDGT(v int) predicate.Car {
+	return predicate.Car(sql.FieldGT(FieldUseFlightID, v))
+}
+
+// UseFlightIDGTE applies the GTE predicate on the "use_flight_id" field.
+func UseFlightIDGTE(v int) predicate.Car {
+	return predicate.Car(sql.FieldGTE(FieldUseFlightID, v))
+}
+
+// UseFlightIDLT applies the LT predicate on the "use_flight_id" field.
+func UseFlightIDLT(v int) predicate.Car {
+	return predicate.Car(sql.FieldLT(FieldUseFlightID, v))
+}
+
+// UseFlightIDLTE applies the LTE predicate on the "use_flight_id" field.
+func UseFlightIDLTE(v int) predicate.Car {
+	return predicate.Car(sql.FieldLTE(FieldUseFlightID, v))
+}
+
 // DispatchTaskIDEQ applies the EQ predicate on the "dispatch_task_id" field.
 func DispatchTaskIDEQ(v int) predicate.Car {
 	return predicate.Car(sql.FieldEQ(FieldDispatchTaskID, v))
@@ -1065,44 +1110,44 @@ func DispatchTaskIDLTE(v int) predicate.Car {
 	return predicate.Car(sql.FieldLTE(FieldDispatchTaskID, v))
 }
 
-// UseFlightIDEQ applies the EQ predicate on the "use_flight_id" field.
-func UseFlightIDEQ(v int) predicate.Car {
-	return predicate.Car(sql.FieldEQ(FieldUseFlightID, v))
+// DispatchScheModeEQ applies the EQ predicate on the "dispatch_sche_mode" field.
+func DispatchScheModeEQ(v int) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldDispatchScheMode, v))
 }
 
-// UseFlightIDNEQ applies the NEQ predicate on the "use_flight_id" field.
-func UseFlightIDNEQ(v int) predicate.Car {
-	return predicate.Car(sql.FieldNEQ(FieldUseFlightID, v))
+// DispatchScheModeNEQ applies the NEQ predicate on the "dispatch_sche_mode" field.
+func DispatchScheModeNEQ(v int) predicate.Car {
+	return predicate.Car(sql.FieldNEQ(FieldDispatchScheMode, v))
 }
 
-// UseFlightIDIn applies the In predicate on the "use_flight_id" field.
-func UseFlightIDIn(vs ...int) predicate.Car {
-	return predicate.Car(sql.FieldIn(FieldUseFlightID, vs...))
+// DispatchScheModeIn applies the In predicate on the "dispatch_sche_mode" field.
+func DispatchScheModeIn(vs ...int) predicate.Car {
+	return predicate.Car(sql.FieldIn(FieldDispatchScheMode, vs...))
 }
 
-// UseFlightIDNotIn applies the NotIn predicate on the "use_flight_id" field.
-func UseFlightIDNotIn(vs ...int) predicate.Car {
-	return predicate.Car(sql.FieldNotIn(FieldUseFlightID, vs...))
+// DispatchScheModeNotIn applies the NotIn predicate on the "dispatch_sche_mode" field.
+func DispatchScheModeNotIn(vs ...int) predicate.Car {
+	return predicate.Car(sql.FieldNotIn(FieldDispatchScheMode, vs...))
 }
 
-// UseFlightIDGT applies the GT predicate on the "use_flight_id" field.
-func UseFlightIDGT(v int) predicate.Car {
-	return predicate.Car(sql.FieldGT(FieldUseFlightID, v))
+// DispatchScheModeGT applies the GT predicate on the "dispatch_sche_mode" field.
+func DispatchScheModeGT(v int) predicate.Car {
+	return predicate.Car(sql.FieldGT(FieldDispatchScheMode, v))
 }
 
-// UseFlightIDGTE applies the GTE predicate on the "use_flight_id" field.
-func UseFlightIDGTE(v int) predicate.Car {
-	return predicate.Car(sql.FieldGTE(FieldUseFlightID, v))
+// DispatchScheModeGTE applies the GTE predicate on the "dispatch_sche_mode" field.
+func DispatchScheModeGTE(v int) predicate.Car {
+	return predicate.Car(sql.FieldGTE(FieldDispatchScheMode, v))
 }
 
-// UseFlightIDLT applies the LT predicate on the "use_flight_id" field.
-func UseFlightIDLT(v int) predicate.Car {
-	return predicate.Car(sql.FieldLT(FieldUseFlightID, v))
+// DispatchScheModeLT applies the LT predicate on the "dispatch_sche_mode" field.
+func DispatchScheModeLT(v int) predicate.Car {
+	return predicate.Car(sql.FieldLT(FieldDispatchScheMode, v))
 }
 
-// UseFlightIDLTE applies the LTE predicate on the "use_flight_id" field.
-func UseFlightIDLTE(v int) predicate.Car {
-	return predicate.Car(sql.FieldLTE(FieldUseFlightID, v))
+// DispatchScheModeLTE applies the LTE predicate on the "dispatch_sche_mode" field.
+func DispatchScheModeLTE(v int) predicate.Car {
+	return predicate.Car(sql.FieldLTE(FieldDispatchScheMode, v))
 }
 
 // BindOrderCountEQ applies the EQ predicate on the "bind_order_count" field.

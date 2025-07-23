@@ -39,3 +39,10 @@ const (
 	// 车辆紧急制动中
 	ScheTaskAbnormalState_Estop ScheTaskAbnormalState = 6
 )
+
+type ScheTaskLockState int
+
+const (
+	ScheTaskLockState_MaintainLock  ScheTaskLockState = ScheTaskLockState(DrivingState_Maintain_Lock)  // 维护锁车
+	ScheTaskLockState_OperationLock ScheTaskLockState = ScheTaskLockState(DrivingState_Operation_Lock) // 运营锁车
+)

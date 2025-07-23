@@ -6545,10 +6545,12 @@ type CarMutation struct {
 	addemergency_state            *int
 	use_order_id                  *int
 	adduse_order_id               *int
-	dispatch_task_id              *int
-	adddispatch_task_id           *int
 	use_flight_id                 *int
 	adduse_flight_id              *int
+	dispatch_task_id              *int
+	adddispatch_task_id           *int
+	dispatch_sche_mode            *int
+	adddispatch_sche_mode         *int
 	bind_order_count              *int
 	addbind_order_count           *int
 	total_order_mileage           *int
@@ -7575,6 +7577,62 @@ func (m *CarMutation) ResetUseOrderID() {
 	m.adduse_order_id = nil
 }
 
+// SetUseFlightID sets the "use_flight_id" field.
+func (m *CarMutation) SetUseFlightID(i int) {
+	m.use_flight_id = &i
+	m.adduse_flight_id = nil
+}
+
+// UseFlightID returns the value of the "use_flight_id" field in the mutation.
+func (m *CarMutation) UseFlightID() (r int, exists bool) {
+	v := m.use_flight_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldUseFlightID returns the old "use_flight_id" field's value of the Car entity.
+// If the Car object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *CarMutation) OldUseFlightID(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldUseFlightID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldUseFlightID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldUseFlightID: %w", err)
+	}
+	return oldValue.UseFlightID, nil
+}
+
+// AddUseFlightID adds i to the "use_flight_id" field.
+func (m *CarMutation) AddUseFlightID(i int) {
+	if m.adduse_flight_id != nil {
+		*m.adduse_flight_id += i
+	} else {
+		m.adduse_flight_id = &i
+	}
+}
+
+// AddedUseFlightID returns the value that was added to the "use_flight_id" field in this mutation.
+func (m *CarMutation) AddedUseFlightID() (r int, exists bool) {
+	v := m.adduse_flight_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetUseFlightID resets all changes to the "use_flight_id" field.
+func (m *CarMutation) ResetUseFlightID() {
+	m.use_flight_id = nil
+	m.adduse_flight_id = nil
+}
+
 // SetDispatchTaskID sets the "dispatch_task_id" field.
 func (m *CarMutation) SetDispatchTaskID(i int) {
 	m.dispatch_task_id = &i
@@ -7631,60 +7689,60 @@ func (m *CarMutation) ResetDispatchTaskID() {
 	m.adddispatch_task_id = nil
 }
 
-// SetUseFlightID sets the "use_flight_id" field.
-func (m *CarMutation) SetUseFlightID(i int) {
-	m.use_flight_id = &i
-	m.adduse_flight_id = nil
+// SetDispatchScheMode sets the "dispatch_sche_mode" field.
+func (m *CarMutation) SetDispatchScheMode(i int) {
+	m.dispatch_sche_mode = &i
+	m.adddispatch_sche_mode = nil
 }
 
-// UseFlightID returns the value of the "use_flight_id" field in the mutation.
-func (m *CarMutation) UseFlightID() (r int, exists bool) {
-	v := m.use_flight_id
+// DispatchScheMode returns the value of the "dispatch_sche_mode" field in the mutation.
+func (m *CarMutation) DispatchScheMode() (r int, exists bool) {
+	v := m.dispatch_sche_mode
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldUseFlightID returns the old "use_flight_id" field's value of the Car entity.
+// OldDispatchScheMode returns the old "dispatch_sche_mode" field's value of the Car entity.
 // If the Car object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *CarMutation) OldUseFlightID(ctx context.Context) (v int, err error) {
+func (m *CarMutation) OldDispatchScheMode(ctx context.Context) (v int, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldUseFlightID is only allowed on UpdateOne operations")
+		return v, errors.New("OldDispatchScheMode is only allowed on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldUseFlightID requires an ID field in the mutation")
+		return v, errors.New("OldDispatchScheMode requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldUseFlightID: %w", err)
+		return v, fmt.Errorf("querying old value for OldDispatchScheMode: %w", err)
 	}
-	return oldValue.UseFlightID, nil
+	return oldValue.DispatchScheMode, nil
 }
 
-// AddUseFlightID adds i to the "use_flight_id" field.
-func (m *CarMutation) AddUseFlightID(i int) {
-	if m.adduse_flight_id != nil {
-		*m.adduse_flight_id += i
+// AddDispatchScheMode adds i to the "dispatch_sche_mode" field.
+func (m *CarMutation) AddDispatchScheMode(i int) {
+	if m.adddispatch_sche_mode != nil {
+		*m.adddispatch_sche_mode += i
 	} else {
-		m.adduse_flight_id = &i
+		m.adddispatch_sche_mode = &i
 	}
 }
 
-// AddedUseFlightID returns the value that was added to the "use_flight_id" field in this mutation.
-func (m *CarMutation) AddedUseFlightID() (r int, exists bool) {
-	v := m.adduse_flight_id
+// AddedDispatchScheMode returns the value that was added to the "dispatch_sche_mode" field in this mutation.
+func (m *CarMutation) AddedDispatchScheMode() (r int, exists bool) {
+	v := m.adddispatch_sche_mode
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// ResetUseFlightID resets all changes to the "use_flight_id" field.
-func (m *CarMutation) ResetUseFlightID() {
-	m.use_flight_id = nil
-	m.adduse_flight_id = nil
+// ResetDispatchScheMode resets all changes to the "dispatch_sche_mode" field.
+func (m *CarMutation) ResetDispatchScheMode() {
+	m.dispatch_sche_mode = nil
+	m.adddispatch_sche_mode = nil
 }
 
 // SetBindOrderCount sets the "bind_order_count" field.
@@ -9338,7 +9396,7 @@ func (m *CarMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *CarMutation) Fields() []string {
-	fields := make([]string, 0, 45)
+	fields := make([]string, 0, 46)
 	if m.delete_time != nil {
 		fields = append(fields, car.FieldDeleteTime)
 	}
@@ -9393,11 +9451,14 @@ func (m *CarMutation) Fields() []string {
 	if m.use_order_id != nil {
 		fields = append(fields, car.FieldUseOrderID)
 	}
+	if m.use_flight_id != nil {
+		fields = append(fields, car.FieldUseFlightID)
+	}
 	if m.dispatch_task_id != nil {
 		fields = append(fields, car.FieldDispatchTaskID)
 	}
-	if m.use_flight_id != nil {
-		fields = append(fields, car.FieldUseFlightID)
+	if m.dispatch_sche_mode != nil {
+		fields = append(fields, car.FieldDispatchScheMode)
 	}
 	if m.bind_order_count != nil {
 		fields = append(fields, car.FieldBindOrderCount)
@@ -9518,10 +9579,12 @@ func (m *CarMutation) Field(name string) (ent.Value, bool) {
 		return m.EmergencyState()
 	case car.FieldUseOrderID:
 		return m.UseOrderID()
-	case car.FieldDispatchTaskID:
-		return m.DispatchTaskID()
 	case car.FieldUseFlightID:
 		return m.UseFlightID()
+	case car.FieldDispatchTaskID:
+		return m.DispatchTaskID()
+	case car.FieldDispatchScheMode:
+		return m.DispatchScheMode()
 	case car.FieldBindOrderCount:
 		return m.BindOrderCount()
 	case car.FieldTotalOrderMileage:
@@ -9617,10 +9680,12 @@ func (m *CarMutation) OldField(ctx context.Context, name string) (ent.Value, err
 		return m.OldEmergencyState(ctx)
 	case car.FieldUseOrderID:
 		return m.OldUseOrderID(ctx)
-	case car.FieldDispatchTaskID:
-		return m.OldDispatchTaskID(ctx)
 	case car.FieldUseFlightID:
 		return m.OldUseFlightID(ctx)
+	case car.FieldDispatchTaskID:
+		return m.OldDispatchTaskID(ctx)
+	case car.FieldDispatchScheMode:
+		return m.OldDispatchScheMode(ctx)
 	case car.FieldBindOrderCount:
 		return m.OldBindOrderCount(ctx)
 	case car.FieldTotalOrderMileage:
@@ -9806,6 +9871,13 @@ func (m *CarMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetUseOrderID(v)
 		return nil
+	case car.FieldUseFlightID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetUseFlightID(v)
+		return nil
 	case car.FieldDispatchTaskID:
 		v, ok := value.(int)
 		if !ok {
@@ -9813,12 +9885,12 @@ func (m *CarMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetDispatchTaskID(v)
 		return nil
-	case car.FieldUseFlightID:
+	case car.FieldDispatchScheMode:
 		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetUseFlightID(v)
+		m.SetDispatchScheMode(v)
 		return nil
 	case car.FieldBindOrderCount:
 		v, ok := value.(int)
@@ -10030,11 +10102,14 @@ func (m *CarMutation) AddedFields() []string {
 	if m.adduse_order_id != nil {
 		fields = append(fields, car.FieldUseOrderID)
 	}
+	if m.adduse_flight_id != nil {
+		fields = append(fields, car.FieldUseFlightID)
+	}
 	if m.adddispatch_task_id != nil {
 		fields = append(fields, car.FieldDispatchTaskID)
 	}
-	if m.adduse_flight_id != nil {
-		fields = append(fields, car.FieldUseFlightID)
+	if m.adddispatch_sche_mode != nil {
+		fields = append(fields, car.FieldDispatchScheMode)
 	}
 	if m.addbind_order_count != nil {
 		fields = append(fields, car.FieldBindOrderCount)
@@ -10101,10 +10176,12 @@ func (m *CarMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedEmergencyState()
 	case car.FieldUseOrderID:
 		return m.AddedUseOrderID()
-	case car.FieldDispatchTaskID:
-		return m.AddedDispatchTaskID()
 	case car.FieldUseFlightID:
 		return m.AddedUseFlightID()
+	case car.FieldDispatchTaskID:
+		return m.AddedDispatchTaskID()
+	case car.FieldDispatchScheMode:
+		return m.AddedDispatchScheMode()
 	case car.FieldBindOrderCount:
 		return m.AddedBindOrderCount()
 	case car.FieldTotalOrderMileage:
@@ -10203,6 +10280,13 @@ func (m *CarMutation) AddField(name string, value ent.Value) error {
 		}
 		m.AddUseOrderID(v)
 		return nil
+	case car.FieldUseFlightID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddUseFlightID(v)
+		return nil
 	case car.FieldDispatchTaskID:
 		v, ok := value.(int)
 		if !ok {
@@ -10210,12 +10294,12 @@ func (m *CarMutation) AddField(name string, value ent.Value) error {
 		}
 		m.AddDispatchTaskID(v)
 		return nil
-	case car.FieldUseFlightID:
+	case car.FieldDispatchScheMode:
 		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.AddUseFlightID(v)
+		m.AddDispatchScheMode(v)
 		return nil
 	case car.FieldBindOrderCount:
 		v, ok := value.(int)
@@ -10422,11 +10506,14 @@ func (m *CarMutation) ResetField(name string) error {
 	case car.FieldUseOrderID:
 		m.ResetUseOrderID()
 		return nil
+	case car.FieldUseFlightID:
+		m.ResetUseFlightID()
+		return nil
 	case car.FieldDispatchTaskID:
 		m.ResetDispatchTaskID()
 		return nil
-	case car.FieldUseFlightID:
-		m.ResetUseFlightID()
+	case car.FieldDispatchScheMode:
+		m.ResetDispatchScheMode()
 		return nil
 	case car.FieldBindOrderCount:
 		m.ResetBindOrderCount()
@@ -31222,25 +31309,25 @@ func (m *MapVersionMutation) ResetEdge(name string) error {
 // OperationUserMutation represents an operation that mutates the OperationUser nodes in the graph.
 type OperationUserMutation struct {
 	config
-	op                Op
-	typ               string
-	id                *int
-	scenic_area_id    *int
-	addscenic_area_id *int
-	username          *string
-	nickname          *string
-	phone             *string
-	password          *string
-	open_id           *string
-	avatar_url        *string
-	status            *int
-	addstatus         *int
-	create_time       *time.Time
-	update_time       *time.Time
-	clearedFields     map[string]struct{}
-	done              bool
-	oldValue          func(context.Context) (*OperationUser, error)
-	predicates        []predicate.OperationUser
+	op                    Op
+	typ                   string
+	id                    *int
+	scenic_area_ids       *[]int
+	appendscenic_area_ids []int
+	username              *string
+	nickname              *string
+	phone                 *string
+	password              *string
+	open_id               *string
+	avatar_url            *string
+	status                *int
+	addstatus             *int
+	create_time           *time.Time
+	update_time           *time.Time
+	clearedFields         map[string]struct{}
+	done                  bool
+	oldValue              func(context.Context) (*OperationUser, error)
+	predicates            []predicate.OperationUser
 }
 
 var _ ent.Mutation = (*OperationUserMutation)(nil)
@@ -31347,60 +31434,69 @@ func (m *OperationUserMutation) IDs(ctx context.Context) ([]int, error) {
 	}
 }
 
-// SetScenicAreaID sets the "scenic_area_id" field.
-func (m *OperationUserMutation) SetScenicAreaID(i int) {
-	m.scenic_area_id = &i
-	m.addscenic_area_id = nil
+// SetScenicAreaIds sets the "scenic_area_ids" field.
+func (m *OperationUserMutation) SetScenicAreaIds(i []int) {
+	m.scenic_area_ids = &i
+	m.appendscenic_area_ids = nil
 }
 
-// ScenicAreaID returns the value of the "scenic_area_id" field in the mutation.
-func (m *OperationUserMutation) ScenicAreaID() (r int, exists bool) {
-	v := m.scenic_area_id
+// ScenicAreaIds returns the value of the "scenic_area_ids" field in the mutation.
+func (m *OperationUserMutation) ScenicAreaIds() (r []int, exists bool) {
+	v := m.scenic_area_ids
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldScenicAreaID returns the old "scenic_area_id" field's value of the OperationUser entity.
+// OldScenicAreaIds returns the old "scenic_area_ids" field's value of the OperationUser entity.
 // If the OperationUser object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *OperationUserMutation) OldScenicAreaID(ctx context.Context) (v int, err error) {
+func (m *OperationUserMutation) OldScenicAreaIds(ctx context.Context) (v []int, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldScenicAreaID is only allowed on UpdateOne operations")
+		return v, errors.New("OldScenicAreaIds is only allowed on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldScenicAreaID requires an ID field in the mutation")
+		return v, errors.New("OldScenicAreaIds requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldScenicAreaID: %w", err)
+		return v, fmt.Errorf("querying old value for OldScenicAreaIds: %w", err)
 	}
-	return oldValue.ScenicAreaID, nil
+	return oldValue.ScenicAreaIds, nil
 }
 
-// AddScenicAreaID adds i to the "scenic_area_id" field.
-func (m *OperationUserMutation) AddScenicAreaID(i int) {
-	if m.addscenic_area_id != nil {
-		*m.addscenic_area_id += i
-	} else {
-		m.addscenic_area_id = &i
-	}
+// AppendScenicAreaIds adds i to the "scenic_area_ids" field.
+func (m *OperationUserMutation) AppendScenicAreaIds(i []int) {
+	m.appendscenic_area_ids = append(m.appendscenic_area_ids, i...)
 }
 
-// AddedScenicAreaID returns the value that was added to the "scenic_area_id" field in this mutation.
-func (m *OperationUserMutation) AddedScenicAreaID() (r int, exists bool) {
-	v := m.addscenic_area_id
-	if v == nil {
-		return
+// AppendedScenicAreaIds returns the list of values that were appended to the "scenic_area_ids" field in this mutation.
+func (m *OperationUserMutation) AppendedScenicAreaIds() ([]int, bool) {
+	if len(m.appendscenic_area_ids) == 0 {
+		return nil, false
 	}
-	return *v, true
+	return m.appendscenic_area_ids, true
 }
 
-// ResetScenicAreaID resets all changes to the "scenic_area_id" field.
-func (m *OperationUserMutation) ResetScenicAreaID() {
-	m.scenic_area_id = nil
-	m.addscenic_area_id = nil
+// ClearScenicAreaIds clears the value of the "scenic_area_ids" field.
+func (m *OperationUserMutation) ClearScenicAreaIds() {
+	m.scenic_area_ids = nil
+	m.appendscenic_area_ids = nil
+	m.clearedFields[operationuser.FieldScenicAreaIds] = struct{}{}
+}
+
+// ScenicAreaIdsCleared returns if the "scenic_area_ids" field was cleared in this mutation.
+func (m *OperationUserMutation) ScenicAreaIdsCleared() bool {
+	_, ok := m.clearedFields[operationuser.FieldScenicAreaIds]
+	return ok
+}
+
+// ResetScenicAreaIds resets all changes to the "scenic_area_ids" field.
+func (m *OperationUserMutation) ResetScenicAreaIds() {
+	m.scenic_area_ids = nil
+	m.appendscenic_area_ids = nil
+	delete(m.clearedFields, operationuser.FieldScenicAreaIds)
 }
 
 // SetUsername sets the "username" field.
@@ -31782,8 +31878,8 @@ func (m *OperationUserMutation) Type() string {
 // AddedFields().
 func (m *OperationUserMutation) Fields() []string {
 	fields := make([]string, 0, 10)
-	if m.scenic_area_id != nil {
-		fields = append(fields, operationuser.FieldScenicAreaID)
+	if m.scenic_area_ids != nil {
+		fields = append(fields, operationuser.FieldScenicAreaIds)
 	}
 	if m.username != nil {
 		fields = append(fields, operationuser.FieldUsername)
@@ -31820,8 +31916,8 @@ func (m *OperationUserMutation) Fields() []string {
 // schema.
 func (m *OperationUserMutation) Field(name string) (ent.Value, bool) {
 	switch name {
-	case operationuser.FieldScenicAreaID:
-		return m.ScenicAreaID()
+	case operationuser.FieldScenicAreaIds:
+		return m.ScenicAreaIds()
 	case operationuser.FieldUsername:
 		return m.Username()
 	case operationuser.FieldNickname:
@@ -31849,8 +31945,8 @@ func (m *OperationUserMutation) Field(name string) (ent.Value, bool) {
 // database failed.
 func (m *OperationUserMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
 	switch name {
-	case operationuser.FieldScenicAreaID:
-		return m.OldScenicAreaID(ctx)
+	case operationuser.FieldScenicAreaIds:
+		return m.OldScenicAreaIds(ctx)
 	case operationuser.FieldUsername:
 		return m.OldUsername(ctx)
 	case operationuser.FieldNickname:
@@ -31878,12 +31974,12 @@ func (m *OperationUserMutation) OldField(ctx context.Context, name string) (ent.
 // type.
 func (m *OperationUserMutation) SetField(name string, value ent.Value) error {
 	switch name {
-	case operationuser.FieldScenicAreaID:
-		v, ok := value.(int)
+	case operationuser.FieldScenicAreaIds:
+		v, ok := value.([]int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetScenicAreaID(v)
+		m.SetScenicAreaIds(v)
 		return nil
 	case operationuser.FieldUsername:
 		v, ok := value.(string)
@@ -31956,9 +32052,6 @@ func (m *OperationUserMutation) SetField(name string, value ent.Value) error {
 // this mutation.
 func (m *OperationUserMutation) AddedFields() []string {
 	var fields []string
-	if m.addscenic_area_id != nil {
-		fields = append(fields, operationuser.FieldScenicAreaID)
-	}
 	if m.addstatus != nil {
 		fields = append(fields, operationuser.FieldStatus)
 	}
@@ -31970,8 +32063,6 @@ func (m *OperationUserMutation) AddedFields() []string {
 // was not set, or was not defined in the schema.
 func (m *OperationUserMutation) AddedField(name string) (ent.Value, bool) {
 	switch name {
-	case operationuser.FieldScenicAreaID:
-		return m.AddedScenicAreaID()
 	case operationuser.FieldStatus:
 		return m.AddedStatus()
 	}
@@ -31983,13 +32074,6 @@ func (m *OperationUserMutation) AddedField(name string) (ent.Value, bool) {
 // type.
 func (m *OperationUserMutation) AddField(name string, value ent.Value) error {
 	switch name {
-	case operationuser.FieldScenicAreaID:
-		v, ok := value.(int)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.AddScenicAreaID(v)
-		return nil
 	case operationuser.FieldStatus:
 		v, ok := value.(int)
 		if !ok {
@@ -32004,7 +32088,11 @@ func (m *OperationUserMutation) AddField(name string, value ent.Value) error {
 // ClearedFields returns all nullable fields that were cleared during this
 // mutation.
 func (m *OperationUserMutation) ClearedFields() []string {
-	return nil
+	var fields []string
+	if m.FieldCleared(operationuser.FieldScenicAreaIds) {
+		fields = append(fields, operationuser.FieldScenicAreaIds)
+	}
+	return fields
 }
 
 // FieldCleared returns a boolean indicating if a field with the given name was
@@ -32017,6 +32105,11 @@ func (m *OperationUserMutation) FieldCleared(name string) bool {
 // ClearField clears the value of the field with the given name. It returns an
 // error if the field is not defined in the schema.
 func (m *OperationUserMutation) ClearField(name string) error {
+	switch name {
+	case operationuser.FieldScenicAreaIds:
+		m.ClearScenicAreaIds()
+		return nil
+	}
 	return fmt.Errorf("unknown OperationUser nullable field %s", name)
 }
 
@@ -32024,8 +32117,8 @@ func (m *OperationUserMutation) ClearField(name string) error {
 // It returns an error if the field is not defined in the schema.
 func (m *OperationUserMutation) ResetField(name string) error {
 	switch name {
-	case operationuser.FieldScenicAreaID:
-		m.ResetScenicAreaID()
+	case operationuser.FieldScenicAreaIds:
+		m.ResetScenicAreaIds()
 		return nil
 	case operationuser.FieldUsername:
 		m.ResetUsername()
@@ -56958,6 +57051,8 @@ type ScheTaskMutation struct {
 	op                Op
 	typ               string
 	id                *int
+	user_origin       *int
+	adduser_origin    *int
 	user_type         *int
 	adduser_type      *int
 	user_id           *int
@@ -56971,16 +57066,16 @@ type ScheTaskMutation struct {
 	adddest_lon       *float64
 	dest_lat          *float64
 	adddest_lat       *float64
-	_type             *int
-	add_type          *int
-	load_limit        *int
-	addload_limit     *int
+	sche_mode         *int
+	addsche_mode      *int
+	sche_args         *types.ScheArgs
 	state             *int
 	addstate          *int
 	abnormal_state    *int
 	addabnormal_state *int
 	remark            *string
 	routing_path      *types.RoutingPath
+	restart_sche_time *time.Time
 	end_time          *time.Time
 	create_time       *time.Time
 	update_time       *time.Time
@@ -57097,6 +57192,62 @@ func (m *ScheTaskMutation) IDs(ctx context.Context) ([]int, error) {
 	default:
 		return nil, fmt.Errorf("IDs is not allowed on %s operations", m.op)
 	}
+}
+
+// SetUserOrigin sets the "user_origin" field.
+func (m *ScheTaskMutation) SetUserOrigin(i int) {
+	m.user_origin = &i
+	m.adduser_origin = nil
+}
+
+// UserOrigin returns the value of the "user_origin" field in the mutation.
+func (m *ScheTaskMutation) UserOrigin() (r int, exists bool) {
+	v := m.user_origin
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldUserOrigin returns the old "user_origin" field's value of the ScheTask entity.
+// If the ScheTask object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ScheTaskMutation) OldUserOrigin(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldUserOrigin is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldUserOrigin requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldUserOrigin: %w", err)
+	}
+	return oldValue.UserOrigin, nil
+}
+
+// AddUserOrigin adds i to the "user_origin" field.
+func (m *ScheTaskMutation) AddUserOrigin(i int) {
+	if m.adduser_origin != nil {
+		*m.adduser_origin += i
+	} else {
+		m.adduser_origin = &i
+	}
+}
+
+// AddedUserOrigin returns the value that was added to the "user_origin" field in this mutation.
+func (m *ScheTaskMutation) AddedUserOrigin() (r int, exists bool) {
+	v := m.adduser_origin
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetUserOrigin resets all changes to the "user_origin" field.
+func (m *ScheTaskMutation) ResetUserOrigin() {
+	m.user_origin = nil
+	m.adduser_origin = nil
 }
 
 // SetUserType sets the "user_type" field.
@@ -57507,116 +57658,96 @@ func (m *ScheTaskMutation) ResetDestLat() {
 	m.adddest_lat = nil
 }
 
-// SetType sets the "type" field.
-func (m *ScheTaskMutation) SetType(i int) {
-	m._type = &i
-	m.add_type = nil
+// SetScheMode sets the "sche_mode" field.
+func (m *ScheTaskMutation) SetScheMode(i int) {
+	m.sche_mode = &i
+	m.addsche_mode = nil
 }
 
-// GetType returns the value of the "type" field in the mutation.
-func (m *ScheTaskMutation) GetType() (r int, exists bool) {
-	v := m._type
+// ScheMode returns the value of the "sche_mode" field in the mutation.
+func (m *ScheTaskMutation) ScheMode() (r int, exists bool) {
+	v := m.sche_mode
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldType returns the old "type" field's value of the ScheTask entity.
+// OldScheMode returns the old "sche_mode" field's value of the ScheTask entity.
 // If the ScheTask object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *ScheTaskMutation) OldType(ctx context.Context) (v int, err error) {
+func (m *ScheTaskMutation) OldScheMode(ctx context.Context) (v int, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldType is only allowed on UpdateOne operations")
+		return v, errors.New("OldScheMode is only allowed on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldType requires an ID field in the mutation")
+		return v, errors.New("OldScheMode requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldType: %w", err)
+		return v, fmt.Errorf("querying old value for OldScheMode: %w", err)
 	}
-	return oldValue.Type, nil
+	return oldValue.ScheMode, nil
 }
 
-// AddType adds i to the "type" field.
-func (m *ScheTaskMutation) AddType(i int) {
-	if m.add_type != nil {
-		*m.add_type += i
+// AddScheMode adds i to the "sche_mode" field.
+func (m *ScheTaskMutation) AddScheMode(i int) {
+	if m.addsche_mode != nil {
+		*m.addsche_mode += i
 	} else {
-		m.add_type = &i
+		m.addsche_mode = &i
 	}
 }
 
-// AddedType returns the value that was added to the "type" field in this mutation.
-func (m *ScheTaskMutation) AddedType() (r int, exists bool) {
-	v := m.add_type
+// AddedScheMode returns the value that was added to the "sche_mode" field in this mutation.
+func (m *ScheTaskMutation) AddedScheMode() (r int, exists bool) {
+	v := m.addsche_mode
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// ResetType resets all changes to the "type" field.
-func (m *ScheTaskMutation) ResetType() {
-	m._type = nil
-	m.add_type = nil
+// ResetScheMode resets all changes to the "sche_mode" field.
+func (m *ScheTaskMutation) ResetScheMode() {
+	m.sche_mode = nil
+	m.addsche_mode = nil
 }
 
-// SetLoadLimit sets the "load_limit" field.
-func (m *ScheTaskMutation) SetLoadLimit(i int) {
-	m.load_limit = &i
-	m.addload_limit = nil
+// SetScheArgs sets the "sche_args" field.
+func (m *ScheTaskMutation) SetScheArgs(ta types.ScheArgs) {
+	m.sche_args = &ta
 }
 
-// LoadLimit returns the value of the "load_limit" field in the mutation.
-func (m *ScheTaskMutation) LoadLimit() (r int, exists bool) {
-	v := m.load_limit
+// ScheArgs returns the value of the "sche_args" field in the mutation.
+func (m *ScheTaskMutation) ScheArgs() (r types.ScheArgs, exists bool) {
+	v := m.sche_args
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldLoadLimit returns the old "load_limit" field's value of the ScheTask entity.
+// OldScheArgs returns the old "sche_args" field's value of the ScheTask entity.
 // If the ScheTask object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *ScheTaskMutation) OldLoadLimit(ctx context.Context) (v int, err error) {
+func (m *ScheTaskMutation) OldScheArgs(ctx context.Context) (v types.ScheArgs, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldLoadLimit is only allowed on UpdateOne operations")
+		return v, errors.New("OldScheArgs is only allowed on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldLoadLimit requires an ID field in the mutation")
+		return v, errors.New("OldScheArgs requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldLoadLimit: %w", err)
+		return v, fmt.Errorf("querying old value for OldScheArgs: %w", err)
 	}
-	return oldValue.LoadLimit, nil
+	return oldValue.ScheArgs, nil
 }
 
-// AddLoadLimit adds i to the "load_limit" field.
-func (m *ScheTaskMutation) AddLoadLimit(i int) {
-	if m.addload_limit != nil {
-		*m.addload_limit += i
-	} else {
-		m.addload_limit = &i
-	}
-}
-
-// AddedLoadLimit returns the value that was added to the "load_limit" field in this mutation.
-func (m *ScheTaskMutation) AddedLoadLimit() (r int, exists bool) {
-	v := m.addload_limit
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// ResetLoadLimit resets all changes to the "load_limit" field.
-func (m *ScheTaskMutation) ResetLoadLimit() {
-	m.load_limit = nil
-	m.addload_limit = nil
+// ResetScheArgs resets all changes to the "sche_args" field.
+func (m *ScheTaskMutation) ResetScheArgs() {
+	m.sche_args = nil
 }
 
 // SetState sets the "state" field.
@@ -57801,6 +57932,42 @@ func (m *ScheTaskMutation) OldRoutingPath(ctx context.Context) (v types.RoutingP
 // ResetRoutingPath resets all changes to the "routing_path" field.
 func (m *ScheTaskMutation) ResetRoutingPath() {
 	m.routing_path = nil
+}
+
+// SetRestartScheTime sets the "restart_sche_time" field.
+func (m *ScheTaskMutation) SetRestartScheTime(t time.Time) {
+	m.restart_sche_time = &t
+}
+
+// RestartScheTime returns the value of the "restart_sche_time" field in the mutation.
+func (m *ScheTaskMutation) RestartScheTime() (r time.Time, exists bool) {
+	v := m.restart_sche_time
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldRestartScheTime returns the old "restart_sche_time" field's value of the ScheTask entity.
+// If the ScheTask object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ScheTaskMutation) OldRestartScheTime(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldRestartScheTime is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldRestartScheTime requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldRestartScheTime: %w", err)
+	}
+	return oldValue.RestartScheTime, nil
+}
+
+// ResetRestartScheTime resets all changes to the "restart_sche_time" field.
+func (m *ScheTaskMutation) ResetRestartScheTime() {
+	m.restart_sche_time = nil
 }
 
 // SetEndTime sets the "end_time" field.
@@ -58039,7 +58206,10 @@ func (m *ScheTaskMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *ScheTaskMutation) Fields() []string {
-	fields := make([]string, 0, 17)
+	fields := make([]string, 0, 19)
+	if m.user_origin != nil {
+		fields = append(fields, schetask.FieldUserOrigin)
+	}
 	if m.user_type != nil {
 		fields = append(fields, schetask.FieldUserType)
 	}
@@ -58064,11 +58234,11 @@ func (m *ScheTaskMutation) Fields() []string {
 	if m.dest_lat != nil {
 		fields = append(fields, schetask.FieldDestLat)
 	}
-	if m._type != nil {
-		fields = append(fields, schetask.FieldType)
+	if m.sche_mode != nil {
+		fields = append(fields, schetask.FieldScheMode)
 	}
-	if m.load_limit != nil {
-		fields = append(fields, schetask.FieldLoadLimit)
+	if m.sche_args != nil {
+		fields = append(fields, schetask.FieldScheArgs)
 	}
 	if m.state != nil {
 		fields = append(fields, schetask.FieldState)
@@ -58081,6 +58251,9 @@ func (m *ScheTaskMutation) Fields() []string {
 	}
 	if m.routing_path != nil {
 		fields = append(fields, schetask.FieldRoutingPath)
+	}
+	if m.restart_sche_time != nil {
+		fields = append(fields, schetask.FieldRestartScheTime)
 	}
 	if m.end_time != nil {
 		fields = append(fields, schetask.FieldEndTime)
@@ -58099,6 +58272,8 @@ func (m *ScheTaskMutation) Fields() []string {
 // schema.
 func (m *ScheTaskMutation) Field(name string) (ent.Value, bool) {
 	switch name {
+	case schetask.FieldUserOrigin:
+		return m.UserOrigin()
 	case schetask.FieldUserType:
 		return m.UserType()
 	case schetask.FieldUserID:
@@ -58115,10 +58290,10 @@ func (m *ScheTaskMutation) Field(name string) (ent.Value, bool) {
 		return m.DestLon()
 	case schetask.FieldDestLat:
 		return m.DestLat()
-	case schetask.FieldType:
-		return m.GetType()
-	case schetask.FieldLoadLimit:
-		return m.LoadLimit()
+	case schetask.FieldScheMode:
+		return m.ScheMode()
+	case schetask.FieldScheArgs:
+		return m.ScheArgs()
 	case schetask.FieldState:
 		return m.State()
 	case schetask.FieldAbnormalState:
@@ -58127,6 +58302,8 @@ func (m *ScheTaskMutation) Field(name string) (ent.Value, bool) {
 		return m.Remark()
 	case schetask.FieldRoutingPath:
 		return m.RoutingPath()
+	case schetask.FieldRestartScheTime:
+		return m.RestartScheTime()
 	case schetask.FieldEndTime:
 		return m.EndTime()
 	case schetask.FieldCreateTime:
@@ -58142,6 +58319,8 @@ func (m *ScheTaskMutation) Field(name string) (ent.Value, bool) {
 // database failed.
 func (m *ScheTaskMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
 	switch name {
+	case schetask.FieldUserOrigin:
+		return m.OldUserOrigin(ctx)
 	case schetask.FieldUserType:
 		return m.OldUserType(ctx)
 	case schetask.FieldUserID:
@@ -58158,10 +58337,10 @@ func (m *ScheTaskMutation) OldField(ctx context.Context, name string) (ent.Value
 		return m.OldDestLon(ctx)
 	case schetask.FieldDestLat:
 		return m.OldDestLat(ctx)
-	case schetask.FieldType:
-		return m.OldType(ctx)
-	case schetask.FieldLoadLimit:
-		return m.OldLoadLimit(ctx)
+	case schetask.FieldScheMode:
+		return m.OldScheMode(ctx)
+	case schetask.FieldScheArgs:
+		return m.OldScheArgs(ctx)
 	case schetask.FieldState:
 		return m.OldState(ctx)
 	case schetask.FieldAbnormalState:
@@ -58170,6 +58349,8 @@ func (m *ScheTaskMutation) OldField(ctx context.Context, name string) (ent.Value
 		return m.OldRemark(ctx)
 	case schetask.FieldRoutingPath:
 		return m.OldRoutingPath(ctx)
+	case schetask.FieldRestartScheTime:
+		return m.OldRestartScheTime(ctx)
 	case schetask.FieldEndTime:
 		return m.OldEndTime(ctx)
 	case schetask.FieldCreateTime:
@@ -58185,6 +58366,13 @@ func (m *ScheTaskMutation) OldField(ctx context.Context, name string) (ent.Value
 // type.
 func (m *ScheTaskMutation) SetField(name string, value ent.Value) error {
 	switch name {
+	case schetask.FieldUserOrigin:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetUserOrigin(v)
+		return nil
 	case schetask.FieldUserType:
 		v, ok := value.(int)
 		if !ok {
@@ -58241,19 +58429,19 @@ func (m *ScheTaskMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetDestLat(v)
 		return nil
-	case schetask.FieldType:
+	case schetask.FieldScheMode:
 		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetType(v)
+		m.SetScheMode(v)
 		return nil
-	case schetask.FieldLoadLimit:
-		v, ok := value.(int)
+	case schetask.FieldScheArgs:
+		v, ok := value.(types.ScheArgs)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetLoadLimit(v)
+		m.SetScheArgs(v)
 		return nil
 	case schetask.FieldState:
 		v, ok := value.(int)
@@ -58282,6 +58470,13 @@ func (m *ScheTaskMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetRoutingPath(v)
+		return nil
+	case schetask.FieldRestartScheTime:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetRestartScheTime(v)
 		return nil
 	case schetask.FieldEndTime:
 		v, ok := value.(time.Time)
@@ -58312,6 +58507,9 @@ func (m *ScheTaskMutation) SetField(name string, value ent.Value) error {
 // this mutation.
 func (m *ScheTaskMutation) AddedFields() []string {
 	var fields []string
+	if m.adduser_origin != nil {
+		fields = append(fields, schetask.FieldUserOrigin)
+	}
 	if m.adduser_type != nil {
 		fields = append(fields, schetask.FieldUserType)
 	}
@@ -58330,11 +58528,8 @@ func (m *ScheTaskMutation) AddedFields() []string {
 	if m.adddest_lat != nil {
 		fields = append(fields, schetask.FieldDestLat)
 	}
-	if m.add_type != nil {
-		fields = append(fields, schetask.FieldType)
-	}
-	if m.addload_limit != nil {
-		fields = append(fields, schetask.FieldLoadLimit)
+	if m.addsche_mode != nil {
+		fields = append(fields, schetask.FieldScheMode)
 	}
 	if m.addstate != nil {
 		fields = append(fields, schetask.FieldState)
@@ -58350,6 +58545,8 @@ func (m *ScheTaskMutation) AddedFields() []string {
 // was not set, or was not defined in the schema.
 func (m *ScheTaskMutation) AddedField(name string) (ent.Value, bool) {
 	switch name {
+	case schetask.FieldUserOrigin:
+		return m.AddedUserOrigin()
 	case schetask.FieldUserType:
 		return m.AddedUserType()
 	case schetask.FieldUserID:
@@ -58362,10 +58559,8 @@ func (m *ScheTaskMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedDestLon()
 	case schetask.FieldDestLat:
 		return m.AddedDestLat()
-	case schetask.FieldType:
-		return m.AddedType()
-	case schetask.FieldLoadLimit:
-		return m.AddedLoadLimit()
+	case schetask.FieldScheMode:
+		return m.AddedScheMode()
 	case schetask.FieldState:
 		return m.AddedState()
 	case schetask.FieldAbnormalState:
@@ -58379,6 +58574,13 @@ func (m *ScheTaskMutation) AddedField(name string) (ent.Value, bool) {
 // type.
 func (m *ScheTaskMutation) AddField(name string, value ent.Value) error {
 	switch name {
+	case schetask.FieldUserOrigin:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddUserOrigin(v)
+		return nil
 	case schetask.FieldUserType:
 		v, ok := value.(int)
 		if !ok {
@@ -58421,19 +58623,12 @@ func (m *ScheTaskMutation) AddField(name string, value ent.Value) error {
 		}
 		m.AddDestLat(v)
 		return nil
-	case schetask.FieldType:
+	case schetask.FieldScheMode:
 		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.AddType(v)
-		return nil
-	case schetask.FieldLoadLimit:
-		v, ok := value.(int)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.AddLoadLimit(v)
+		m.AddScheMode(v)
 		return nil
 	case schetask.FieldState:
 		v, ok := value.(int)
@@ -58485,6 +58680,9 @@ func (m *ScheTaskMutation) ClearField(name string) error {
 // It returns an error if the field is not defined in the schema.
 func (m *ScheTaskMutation) ResetField(name string) error {
 	switch name {
+	case schetask.FieldUserOrigin:
+		m.ResetUserOrigin()
+		return nil
 	case schetask.FieldUserType:
 		m.ResetUserType()
 		return nil
@@ -58509,11 +58707,11 @@ func (m *ScheTaskMutation) ResetField(name string) error {
 	case schetask.FieldDestLat:
 		m.ResetDestLat()
 		return nil
-	case schetask.FieldType:
-		m.ResetType()
+	case schetask.FieldScheMode:
+		m.ResetScheMode()
 		return nil
-	case schetask.FieldLoadLimit:
-		m.ResetLoadLimit()
+	case schetask.FieldScheArgs:
+		m.ResetScheArgs()
 		return nil
 	case schetask.FieldState:
 		m.ResetState()
@@ -58526,6 +58724,9 @@ func (m *ScheTaskMutation) ResetField(name string) error {
 		return nil
 	case schetask.FieldRoutingPath:
 		m.ResetRoutingPath()
+		return nil
+	case schetask.FieldRestartScheTime:
+		m.ResetRestartScheTime()
 		return nil
 	case schetask.FieldEndTime:
 		m.ResetEndTime()
@@ -58648,10 +58849,20 @@ type ScheTaskEventMutation struct {
 	op                Op
 	typ               string
 	id                *int
+	scenic_area_id    *int
+	addscenic_area_id *int
+	car_id            *int
+	addcar_id         *int
 	state             *int
 	addstate          *int
 	abnormal_state    *int
 	addabnormal_state *int
+	image_ids         *[]int
+	appendimage_ids   []int
+	lon_wgs84         *float64
+	addlon_wgs84      *float64
+	lat_wgs84         *float64
+	addlat_wgs84      *float64
 	remark            *string
 	create_time       *time.Time
 	clearedFields     map[string]struct{}
@@ -58802,6 +59013,118 @@ func (m *ScheTaskEventMutation) ResetScheTaskID() {
 	m.sche_task = nil
 }
 
+// SetScenicAreaID sets the "scenic_area_id" field.
+func (m *ScheTaskEventMutation) SetScenicAreaID(i int) {
+	m.scenic_area_id = &i
+	m.addscenic_area_id = nil
+}
+
+// ScenicAreaID returns the value of the "scenic_area_id" field in the mutation.
+func (m *ScheTaskEventMutation) ScenicAreaID() (r int, exists bool) {
+	v := m.scenic_area_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldScenicAreaID returns the old "scenic_area_id" field's value of the ScheTaskEvent entity.
+// If the ScheTaskEvent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ScheTaskEventMutation) OldScenicAreaID(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldScenicAreaID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldScenicAreaID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldScenicAreaID: %w", err)
+	}
+	return oldValue.ScenicAreaID, nil
+}
+
+// AddScenicAreaID adds i to the "scenic_area_id" field.
+func (m *ScheTaskEventMutation) AddScenicAreaID(i int) {
+	if m.addscenic_area_id != nil {
+		*m.addscenic_area_id += i
+	} else {
+		m.addscenic_area_id = &i
+	}
+}
+
+// AddedScenicAreaID returns the value that was added to the "scenic_area_id" field in this mutation.
+func (m *ScheTaskEventMutation) AddedScenicAreaID() (r int, exists bool) {
+	v := m.addscenic_area_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetScenicAreaID resets all changes to the "scenic_area_id" field.
+func (m *ScheTaskEventMutation) ResetScenicAreaID() {
+	m.scenic_area_id = nil
+	m.addscenic_area_id = nil
+}
+
+// SetCarID sets the "car_id" field.
+func (m *ScheTaskEventMutation) SetCarID(i int) {
+	m.car_id = &i
+	m.addcar_id = nil
+}
+
+// CarID returns the value of the "car_id" field in the mutation.
+func (m *ScheTaskEventMutation) CarID() (r int, exists bool) {
+	v := m.car_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCarID returns the old "car_id" field's value of the ScheTaskEvent entity.
+// If the ScheTaskEvent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ScheTaskEventMutation) OldCarID(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCarID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCarID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCarID: %w", err)
+	}
+	return oldValue.CarID, nil
+}
+
+// AddCarID adds i to the "car_id" field.
+func (m *ScheTaskEventMutation) AddCarID(i int) {
+	if m.addcar_id != nil {
+		*m.addcar_id += i
+	} else {
+		m.addcar_id = &i
+	}
+}
+
+// AddedCarID returns the value that was added to the "car_id" field in this mutation.
+func (m *ScheTaskEventMutation) AddedCarID() (r int, exists bool) {
+	v := m.addcar_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetCarID resets all changes to the "car_id" field.
+func (m *ScheTaskEventMutation) ResetCarID() {
+	m.car_id = nil
+	m.addcar_id = nil
+}
+
 // SetState sets the "state" field.
 func (m *ScheTaskEventMutation) SetState(i int) {
 	m.state = &i
@@ -58912,6 +59235,169 @@ func (m *ScheTaskEventMutation) AddedAbnormalState() (r int, exists bool) {
 func (m *ScheTaskEventMutation) ResetAbnormalState() {
 	m.abnormal_state = nil
 	m.addabnormal_state = nil
+}
+
+// SetImageIds sets the "image_ids" field.
+func (m *ScheTaskEventMutation) SetImageIds(i []int) {
+	m.image_ids = &i
+	m.appendimage_ids = nil
+}
+
+// ImageIds returns the value of the "image_ids" field in the mutation.
+func (m *ScheTaskEventMutation) ImageIds() (r []int, exists bool) {
+	v := m.image_ids
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldImageIds returns the old "image_ids" field's value of the ScheTaskEvent entity.
+// If the ScheTaskEvent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ScheTaskEventMutation) OldImageIds(ctx context.Context) (v []int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldImageIds is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldImageIds requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldImageIds: %w", err)
+	}
+	return oldValue.ImageIds, nil
+}
+
+// AppendImageIds adds i to the "image_ids" field.
+func (m *ScheTaskEventMutation) AppendImageIds(i []int) {
+	m.appendimage_ids = append(m.appendimage_ids, i...)
+}
+
+// AppendedImageIds returns the list of values that were appended to the "image_ids" field in this mutation.
+func (m *ScheTaskEventMutation) AppendedImageIds() ([]int, bool) {
+	if len(m.appendimage_ids) == 0 {
+		return nil, false
+	}
+	return m.appendimage_ids, true
+}
+
+// ResetImageIds resets all changes to the "image_ids" field.
+func (m *ScheTaskEventMutation) ResetImageIds() {
+	m.image_ids = nil
+	m.appendimage_ids = nil
+}
+
+// SetLonWgs84 sets the "lon_wgs84" field.
+func (m *ScheTaskEventMutation) SetLonWgs84(f float64) {
+	m.lon_wgs84 = &f
+	m.addlon_wgs84 = nil
+}
+
+// LonWgs84 returns the value of the "lon_wgs84" field in the mutation.
+func (m *ScheTaskEventMutation) LonWgs84() (r float64, exists bool) {
+	v := m.lon_wgs84
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldLonWgs84 returns the old "lon_wgs84" field's value of the ScheTaskEvent entity.
+// If the ScheTaskEvent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ScheTaskEventMutation) OldLonWgs84(ctx context.Context) (v float64, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldLonWgs84 is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldLonWgs84 requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldLonWgs84: %w", err)
+	}
+	return oldValue.LonWgs84, nil
+}
+
+// AddLonWgs84 adds f to the "lon_wgs84" field.
+func (m *ScheTaskEventMutation) AddLonWgs84(f float64) {
+	if m.addlon_wgs84 != nil {
+		*m.addlon_wgs84 += f
+	} else {
+		m.addlon_wgs84 = &f
+	}
+}
+
+// AddedLonWgs84 returns the value that was added to the "lon_wgs84" field in this mutation.
+func (m *ScheTaskEventMutation) AddedLonWgs84() (r float64, exists bool) {
+	v := m.addlon_wgs84
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetLonWgs84 resets all changes to the "lon_wgs84" field.
+func (m *ScheTaskEventMutation) ResetLonWgs84() {
+	m.lon_wgs84 = nil
+	m.addlon_wgs84 = nil
+}
+
+// SetLatWgs84 sets the "lat_wgs84" field.
+func (m *ScheTaskEventMutation) SetLatWgs84(f float64) {
+	m.lat_wgs84 = &f
+	m.addlat_wgs84 = nil
+}
+
+// LatWgs84 returns the value of the "lat_wgs84" field in the mutation.
+func (m *ScheTaskEventMutation) LatWgs84() (r float64, exists bool) {
+	v := m.lat_wgs84
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldLatWgs84 returns the old "lat_wgs84" field's value of the ScheTaskEvent entity.
+// If the ScheTaskEvent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ScheTaskEventMutation) OldLatWgs84(ctx context.Context) (v float64, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldLatWgs84 is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldLatWgs84 requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldLatWgs84: %w", err)
+	}
+	return oldValue.LatWgs84, nil
+}
+
+// AddLatWgs84 adds f to the "lat_wgs84" field.
+func (m *ScheTaskEventMutation) AddLatWgs84(f float64) {
+	if m.addlat_wgs84 != nil {
+		*m.addlat_wgs84 += f
+	} else {
+		m.addlat_wgs84 = &f
+	}
+}
+
+// AddedLatWgs84 returns the value that was added to the "lat_wgs84" field in this mutation.
+func (m *ScheTaskEventMutation) AddedLatWgs84() (r float64, exists bool) {
+	v := m.addlat_wgs84
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetLatWgs84 resets all changes to the "lat_wgs84" field.
+func (m *ScheTaskEventMutation) ResetLatWgs84() {
+	m.lat_wgs84 = nil
+	m.addlat_wgs84 = nil
 }
 
 // SetRemark sets the "remark" field.
@@ -59047,15 +59533,30 @@ func (m *ScheTaskEventMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *ScheTaskEventMutation) Fields() []string {
-	fields := make([]string, 0, 5)
+	fields := make([]string, 0, 10)
 	if m.sche_task != nil {
 		fields = append(fields, schetaskevent.FieldScheTaskID)
+	}
+	if m.scenic_area_id != nil {
+		fields = append(fields, schetaskevent.FieldScenicAreaID)
+	}
+	if m.car_id != nil {
+		fields = append(fields, schetaskevent.FieldCarID)
 	}
 	if m.state != nil {
 		fields = append(fields, schetaskevent.FieldState)
 	}
 	if m.abnormal_state != nil {
 		fields = append(fields, schetaskevent.FieldAbnormalState)
+	}
+	if m.image_ids != nil {
+		fields = append(fields, schetaskevent.FieldImageIds)
+	}
+	if m.lon_wgs84 != nil {
+		fields = append(fields, schetaskevent.FieldLonWgs84)
+	}
+	if m.lat_wgs84 != nil {
+		fields = append(fields, schetaskevent.FieldLatWgs84)
 	}
 	if m.remark != nil {
 		fields = append(fields, schetaskevent.FieldRemark)
@@ -59073,10 +59574,20 @@ func (m *ScheTaskEventMutation) Field(name string) (ent.Value, bool) {
 	switch name {
 	case schetaskevent.FieldScheTaskID:
 		return m.ScheTaskID()
+	case schetaskevent.FieldScenicAreaID:
+		return m.ScenicAreaID()
+	case schetaskevent.FieldCarID:
+		return m.CarID()
 	case schetaskevent.FieldState:
 		return m.State()
 	case schetaskevent.FieldAbnormalState:
 		return m.AbnormalState()
+	case schetaskevent.FieldImageIds:
+		return m.ImageIds()
+	case schetaskevent.FieldLonWgs84:
+		return m.LonWgs84()
+	case schetaskevent.FieldLatWgs84:
+		return m.LatWgs84()
 	case schetaskevent.FieldRemark:
 		return m.Remark()
 	case schetaskevent.FieldCreateTime:
@@ -59092,10 +59603,20 @@ func (m *ScheTaskEventMutation) OldField(ctx context.Context, name string) (ent.
 	switch name {
 	case schetaskevent.FieldScheTaskID:
 		return m.OldScheTaskID(ctx)
+	case schetaskevent.FieldScenicAreaID:
+		return m.OldScenicAreaID(ctx)
+	case schetaskevent.FieldCarID:
+		return m.OldCarID(ctx)
 	case schetaskevent.FieldState:
 		return m.OldState(ctx)
 	case schetaskevent.FieldAbnormalState:
 		return m.OldAbnormalState(ctx)
+	case schetaskevent.FieldImageIds:
+		return m.OldImageIds(ctx)
+	case schetaskevent.FieldLonWgs84:
+		return m.OldLonWgs84(ctx)
+	case schetaskevent.FieldLatWgs84:
+		return m.OldLatWgs84(ctx)
 	case schetaskevent.FieldRemark:
 		return m.OldRemark(ctx)
 	case schetaskevent.FieldCreateTime:
@@ -59116,6 +59637,20 @@ func (m *ScheTaskEventMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetScheTaskID(v)
 		return nil
+	case schetaskevent.FieldScenicAreaID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetScenicAreaID(v)
+		return nil
+	case schetaskevent.FieldCarID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCarID(v)
+		return nil
 	case schetaskevent.FieldState:
 		v, ok := value.(int)
 		if !ok {
@@ -59129,6 +59664,27 @@ func (m *ScheTaskEventMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetAbnormalState(v)
+		return nil
+	case schetaskevent.FieldImageIds:
+		v, ok := value.([]int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetImageIds(v)
+		return nil
+	case schetaskevent.FieldLonWgs84:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetLonWgs84(v)
+		return nil
+	case schetaskevent.FieldLatWgs84:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetLatWgs84(v)
 		return nil
 	case schetaskevent.FieldRemark:
 		v, ok := value.(string)
@@ -59152,11 +59708,23 @@ func (m *ScheTaskEventMutation) SetField(name string, value ent.Value) error {
 // this mutation.
 func (m *ScheTaskEventMutation) AddedFields() []string {
 	var fields []string
+	if m.addscenic_area_id != nil {
+		fields = append(fields, schetaskevent.FieldScenicAreaID)
+	}
+	if m.addcar_id != nil {
+		fields = append(fields, schetaskevent.FieldCarID)
+	}
 	if m.addstate != nil {
 		fields = append(fields, schetaskevent.FieldState)
 	}
 	if m.addabnormal_state != nil {
 		fields = append(fields, schetaskevent.FieldAbnormalState)
+	}
+	if m.addlon_wgs84 != nil {
+		fields = append(fields, schetaskevent.FieldLonWgs84)
+	}
+	if m.addlat_wgs84 != nil {
+		fields = append(fields, schetaskevent.FieldLatWgs84)
 	}
 	return fields
 }
@@ -59166,10 +59734,18 @@ func (m *ScheTaskEventMutation) AddedFields() []string {
 // was not set, or was not defined in the schema.
 func (m *ScheTaskEventMutation) AddedField(name string) (ent.Value, bool) {
 	switch name {
+	case schetaskevent.FieldScenicAreaID:
+		return m.AddedScenicAreaID()
+	case schetaskevent.FieldCarID:
+		return m.AddedCarID()
 	case schetaskevent.FieldState:
 		return m.AddedState()
 	case schetaskevent.FieldAbnormalState:
 		return m.AddedAbnormalState()
+	case schetaskevent.FieldLonWgs84:
+		return m.AddedLonWgs84()
+	case schetaskevent.FieldLatWgs84:
+		return m.AddedLatWgs84()
 	}
 	return nil, false
 }
@@ -59179,6 +59755,20 @@ func (m *ScheTaskEventMutation) AddedField(name string) (ent.Value, bool) {
 // type.
 func (m *ScheTaskEventMutation) AddField(name string, value ent.Value) error {
 	switch name {
+	case schetaskevent.FieldScenicAreaID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddScenicAreaID(v)
+		return nil
+	case schetaskevent.FieldCarID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddCarID(v)
+		return nil
 	case schetaskevent.FieldState:
 		v, ok := value.(int)
 		if !ok {
@@ -59192,6 +59782,20 @@ func (m *ScheTaskEventMutation) AddField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddAbnormalState(v)
+		return nil
+	case schetaskevent.FieldLonWgs84:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddLonWgs84(v)
+		return nil
+	case schetaskevent.FieldLatWgs84:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddLatWgs84(v)
 		return nil
 	}
 	return fmt.Errorf("unknown ScheTaskEvent numeric field %s", name)
@@ -59223,11 +59827,26 @@ func (m *ScheTaskEventMutation) ResetField(name string) error {
 	case schetaskevent.FieldScheTaskID:
 		m.ResetScheTaskID()
 		return nil
+	case schetaskevent.FieldScenicAreaID:
+		m.ResetScenicAreaID()
+		return nil
+	case schetaskevent.FieldCarID:
+		m.ResetCarID()
+		return nil
 	case schetaskevent.FieldState:
 		m.ResetState()
 		return nil
 	case schetaskevent.FieldAbnormalState:
 		m.ResetAbnormalState()
+		return nil
+	case schetaskevent.FieldImageIds:
+		m.ResetImageIds()
+		return nil
+	case schetaskevent.FieldLonWgs84:
+		m.ResetLonWgs84()
+		return nil
+	case schetaskevent.FieldLatWgs84:
+		m.ResetLatWgs84()
 		return nil
 	case schetaskevent.FieldRemark:
 		m.ResetRemark()

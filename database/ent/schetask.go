@@ -20,7 +20,9 @@ type ScheTask struct {
 	config `json:"-"`
 	// ID of the ent.
 	ID int `json:"id,omitempty"`
-	// 用户类型(1-user 2-admin 3-devops)
+	// 5-userapp 6-devopsapplet
+	UserOrigin int `json:"user_origin,omitempty"`
+	// 用户类型(1-admin 2-user 3-devops)
 	UserType int `json:"user_type,omitempty"`
 	// 用户ID
 	UserID int `json:"user_id,omitempty"`
@@ -36,10 +38,10 @@ type ScheTask struct {
 	DestLon float64 `json:"dest_lon,omitempty"`
 	// 纬度(wgs84)
 	DestLat float64 `json:"dest_lat,omitempty"`
-	// 调度类型（1-运营调度、2-运维调度）
-	Type int `json:"type,omitempty"`
-	// 负载限制（1-无限制 2-无负载调度 3-有负载调度）
-	LoadLimit int `json:"load_limit,omitempty"`
+	// 调度模式（1-[用户]自由调度 2-[运营]揽客模式 3-[运营]部署模式）
+	ScheMode int `json:"sche_mode,omitempty"`
+	// 调度参数
+	ScheArgs types.ScheArgs `json:"sche_args,omitempty"`
 	// 当前状态（1-初始化 2-调度中 3-已暂停 5-停滞不前 6-已完成 7-已取消 8-系统终止 9-异常状态）
 	State int `json:"state,omitempty"`
 	// 异常子状态（1-无异常 2-离线 3-道路外 4-有载人或物 5-驾驶状态异常 6-紧急制动中）
@@ -48,6 +50,8 @@ type ScheTask struct {
 	Remark string `json:"remark,omitempty"`
 	// 调度路径
 	RoutingPath types.RoutingPath `json:"routing_path,omitempty"`
+	// 调度临停后多久重启调度时间
+	RestartScheTime time.Time `json:"restart_sche_time,omitempty"`
 	// 结束时间
 	EndTime time.Time `json:"end_time,omitempty"`
 	// 创建时间
@@ -96,15 +100,15 @@ func (*ScheTask) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case schetask.FieldRoutingPath:
+		case schetask.FieldScheArgs, schetask.FieldRoutingPath:
 			values[i] = new([]byte)
 		case schetask.FieldDestLon, schetask.FieldDestLat:
 			values[i] = new(sql.NullFloat64)
-		case schetask.FieldID, schetask.FieldUserType, schetask.FieldUserID, schetask.FieldScenicAreaID, schetask.FieldCarID, schetask.FieldDestID, schetask.FieldType, schetask.FieldLoadLimit, schetask.FieldState, schetask.FieldAbnormalState:
+		case schetask.FieldID, schetask.FieldUserOrigin, schetask.FieldUserType, schetask.FieldUserID, schetask.FieldScenicAreaID, schetask.FieldCarID, schetask.FieldDestID, schetask.FieldScheMode, schetask.FieldState, schetask.FieldAbnormalState:
 			values[i] = new(sql.NullInt64)
 		case schetask.FieldDeviceID, schetask.FieldRemark:
 			values[i] = new(sql.NullString)
-		case schetask.FieldEndTime, schetask.FieldCreateTime, schetask.FieldUpdateTime:
+		case schetask.FieldRestartScheTime, schetask.FieldEndTime, schetask.FieldCreateTime, schetask.FieldUpdateTime:
 			values[i] = new(sql.NullTime)
 		default:
 			values[i] = new(sql.UnknownType)
@@ -127,6 +131,12 @@ func (st *ScheTask) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
 			st.ID = int(value.Int64)
+		case schetask.FieldUserOrigin:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field user_origin", values[i])
+			} else if value.Valid {
+				st.UserOrigin = int(value.Int64)
+			}
 		case schetask.FieldUserType:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field user_type", values[i])
@@ -175,17 +185,19 @@ func (st *ScheTask) assignValues(columns []string, values []any) error {
 			} else if value.Valid {
 				st.DestLat = value.Float64
 			}
-		case schetask.FieldType:
+		case schetask.FieldScheMode:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
-				return fmt.Errorf("unexpected type %T for field type", values[i])
+				return fmt.Errorf("unexpected type %T for field sche_mode", values[i])
 			} else if value.Valid {
-				st.Type = int(value.Int64)
+				st.ScheMode = int(value.Int64)
 			}
-		case schetask.FieldLoadLimit:
-			if value, ok := values[i].(*sql.NullInt64); !ok {
-				return fmt.Errorf("unexpected type %T for field load_limit", values[i])
-			} else if value.Valid {
-				st.LoadLimit = int(value.Int64)
+		case schetask.FieldScheArgs:
+			if value, ok := values[i].(*[]byte); !ok {
+				return fmt.Errorf("unexpected type %T for field sche_args", values[i])
+			} else if value != nil && len(*value) > 0 {
+				if err := json.Unmarshal(*value, &st.ScheArgs); err != nil {
+					return fmt.Errorf("unmarshal field sche_args: %w", err)
+				}
 			}
 		case schetask.FieldState:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -212,6 +224,12 @@ func (st *ScheTask) assignValues(columns []string, values []any) error {
 				if err := json.Unmarshal(*value, &st.RoutingPath); err != nil {
 					return fmt.Errorf("unmarshal field routing_path: %w", err)
 				}
+			}
+		case schetask.FieldRestartScheTime:
+			if value, ok := values[i].(*sql.NullTime); !ok {
+				return fmt.Errorf("unexpected type %T for field restart_sche_time", values[i])
+			} else if value.Valid {
+				st.RestartScheTime = value.Time
 			}
 		case schetask.FieldEndTime:
 			if value, ok := values[i].(*sql.NullTime); !ok {
@@ -277,6 +295,9 @@ func (st *ScheTask) String() string {
 	var builder strings.Builder
 	builder.WriteString("ScheTask(")
 	builder.WriteString(fmt.Sprintf("id=%v, ", st.ID))
+	builder.WriteString("user_origin=")
+	builder.WriteString(fmt.Sprintf("%v", st.UserOrigin))
+	builder.WriteString(", ")
 	builder.WriteString("user_type=")
 	builder.WriteString(fmt.Sprintf("%v", st.UserType))
 	builder.WriteString(", ")
@@ -301,11 +322,11 @@ func (st *ScheTask) String() string {
 	builder.WriteString("dest_lat=")
 	builder.WriteString(fmt.Sprintf("%v", st.DestLat))
 	builder.WriteString(", ")
-	builder.WriteString("type=")
-	builder.WriteString(fmt.Sprintf("%v", st.Type))
+	builder.WriteString("sche_mode=")
+	builder.WriteString(fmt.Sprintf("%v", st.ScheMode))
 	builder.WriteString(", ")
-	builder.WriteString("load_limit=")
-	builder.WriteString(fmt.Sprintf("%v", st.LoadLimit))
+	builder.WriteString("sche_args=")
+	builder.WriteString(fmt.Sprintf("%v", st.ScheArgs))
 	builder.WriteString(", ")
 	builder.WriteString("state=")
 	builder.WriteString(fmt.Sprintf("%v", st.State))
@@ -318,6 +339,9 @@ func (st *ScheTask) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("routing_path=")
 	builder.WriteString(fmt.Sprintf("%v", st.RoutingPath))
+	builder.WriteString(", ")
+	builder.WriteString("restart_sche_time=")
+	builder.WriteString(st.RestartScheTime.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("end_time=")
 	builder.WriteString(st.EndTime.Format(time.ANSIC))

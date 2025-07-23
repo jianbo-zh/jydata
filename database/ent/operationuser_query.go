@@ -262,12 +262,12 @@ func (ouq *OperationUserQuery) Clone() *OperationUserQuery {
 // Example:
 //
 //	var v []struct {
-//		ScenicAreaID int `json:"scenic_area_id,omitempty"`
+//		ScenicAreaIds []int `json:"scenic_area_ids,omitempty"`
 //		Count int `json:"count,omitempty"`
 //	}
 //
 //	client.OperationUser.Query().
-//		GroupBy(operationuser.FieldScenicAreaID).
+//		GroupBy(operationuser.FieldScenicAreaIds).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
 func (ouq *OperationUserQuery) GroupBy(field string, fields ...string) *OperationUserGroupBy {
@@ -285,11 +285,11 @@ func (ouq *OperationUserQuery) GroupBy(field string, fields ...string) *Operatio
 // Example:
 //
 //	var v []struct {
-//		ScenicAreaID int `json:"scenic_area_id,omitempty"`
+//		ScenicAreaIds []int `json:"scenic_area_ids,omitempty"`
 //	}
 //
 //	client.OperationUser.Query().
-//		Select(operationuser.FieldScenicAreaID).
+//		Select(operationuser.FieldScenicAreaIds).
 //		Scan(ctx, &v)
 func (ouq *OperationUserQuery) Select(fields ...string) *OperationUserSelect {
 	ouq.ctx.Fields = append(ouq.ctx.Fields, fields...)

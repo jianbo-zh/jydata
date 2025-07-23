@@ -13,8 +13,8 @@ const (
 	Label = "operation_user"
 	// FieldID holds the string denoting the id field in the database.
 	FieldID = "id"
-	// FieldScenicAreaID holds the string denoting the scenic_area_id field in the database.
-	FieldScenicAreaID = "scenic_area_id"
+	// FieldScenicAreaIds holds the string denoting the scenic_area_ids field in the database.
+	FieldScenicAreaIds = "scenic_area_ids"
 	// FieldUsername holds the string denoting the username field in the database.
 	FieldUsername = "username"
 	// FieldNickname holds the string denoting the nickname field in the database.
@@ -40,7 +40,7 @@ const (
 // Columns holds all SQL columns for operationuser fields.
 var Columns = []string{
 	FieldID,
-	FieldScenicAreaID,
+	FieldScenicAreaIds,
 	FieldUsername,
 	FieldNickname,
 	FieldPhone,
@@ -63,8 +63,8 @@ func ValidColumn(column string) bool {
 }
 
 var (
-	// DefaultScenicAreaID holds the default value on creation for the "scenic_area_id" field.
-	DefaultScenicAreaID int
+	// DefaultScenicAreaIds holds the default value on creation for the "scenic_area_ids" field.
+	DefaultScenicAreaIds []int
 	// DefaultNickname holds the default value on creation for the "nickname" field.
 	DefaultNickname string
 	// DefaultOpenID holds the default value on creation for the "open_id" field.
@@ -87,11 +87,6 @@ type OrderOption func(*sql.Selector)
 // ByID orders the results by the id field.
 func ByID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldID, opts...).ToFunc()
-}
-
-// ByScenicAreaID orders the results by the scenic_area_id field.
-func ByScenicAreaID(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldScenicAreaID, opts...).ToFunc()
 }
 
 // ByUsername orders the results by the username field.

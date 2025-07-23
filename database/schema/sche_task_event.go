@@ -20,8 +20,13 @@ func (ScheTaskEvent) Fields() []ent.Field {
 	return []ent.Field{
 		field.Int("id").Unique(),
 		field.Int("sche_task_id").Comment("调度ID"),
+		field.Int("scenic_area_id").Default(0).Comment("景区ID"),
+		field.Int("car_id").Default(0).Comment("车辆ID"),
 		field.Int("state").Comment("调度状态（2-调度中 3-已暂停 5-停滞不前 6-已完成 7-已取消 8-系统终止 9-异常状态）"),
 		field.Int("abnormal_state").Default(0).Comment("异常子状态（1-无异常 2-离线 3-道路外 4-有载人或物 5-驾驶状态异常）"),
+		field.Ints("image_ids").Default(nil).Comment("图片集"),
+		field.Float("lon_wgs84").Default(0).Comment("经度(wgs84)"),
+		field.Float("lat_wgs84").Default(0).Comment("纬度(wgs84)"),
 		field.String("remark").Comment("日志记录"),
 		field.Time("create_time").Immutable().Default(time.Now).Comment("创建时间"),
 	}

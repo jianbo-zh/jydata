@@ -54,11 +54,6 @@ func IDLTE(id int) predicate.OperationUser {
 	return predicate.OperationUser(sql.FieldLTE(FieldID, id))
 }
 
-// ScenicAreaID applies equality check predicate on the "scenic_area_id" field. It's identical to ScenicAreaIDEQ.
-func ScenicAreaID(v int) predicate.OperationUser {
-	return predicate.OperationUser(sql.FieldEQ(FieldScenicAreaID, v))
-}
-
 // Username applies equality check predicate on the "username" field. It's identical to UsernameEQ.
 func Username(v string) predicate.OperationUser {
 	return predicate.OperationUser(sql.FieldEQ(FieldUsername, v))
@@ -104,44 +99,14 @@ func UpdateTime(v time.Time) predicate.OperationUser {
 	return predicate.OperationUser(sql.FieldEQ(FieldUpdateTime, v))
 }
 
-// ScenicAreaIDEQ applies the EQ predicate on the "scenic_area_id" field.
-func ScenicAreaIDEQ(v int) predicate.OperationUser {
-	return predicate.OperationUser(sql.FieldEQ(FieldScenicAreaID, v))
+// ScenicAreaIdsIsNil applies the IsNil predicate on the "scenic_area_ids" field.
+func ScenicAreaIdsIsNil() predicate.OperationUser {
+	return predicate.OperationUser(sql.FieldIsNull(FieldScenicAreaIds))
 }
 
-// ScenicAreaIDNEQ applies the NEQ predicate on the "scenic_area_id" field.
-func ScenicAreaIDNEQ(v int) predicate.OperationUser {
-	return predicate.OperationUser(sql.FieldNEQ(FieldScenicAreaID, v))
-}
-
-// ScenicAreaIDIn applies the In predicate on the "scenic_area_id" field.
-func ScenicAreaIDIn(vs ...int) predicate.OperationUser {
-	return predicate.OperationUser(sql.FieldIn(FieldScenicAreaID, vs...))
-}
-
-// ScenicAreaIDNotIn applies the NotIn predicate on the "scenic_area_id" field.
-func ScenicAreaIDNotIn(vs ...int) predicate.OperationUser {
-	return predicate.OperationUser(sql.FieldNotIn(FieldScenicAreaID, vs...))
-}
-
-// ScenicAreaIDGT applies the GT predicate on the "scenic_area_id" field.
-func ScenicAreaIDGT(v int) predicate.OperationUser {
-	return predicate.OperationUser(sql.FieldGT(FieldScenicAreaID, v))
-}
-
-// ScenicAreaIDGTE applies the GTE predicate on the "scenic_area_id" field.
-func ScenicAreaIDGTE(v int) predicate.OperationUser {
-	return predicate.OperationUser(sql.FieldGTE(FieldScenicAreaID, v))
-}
-
-// ScenicAreaIDLT applies the LT predicate on the "scenic_area_id" field.
-func ScenicAreaIDLT(v int) predicate.OperationUser {
-	return predicate.OperationUser(sql.FieldLT(FieldScenicAreaID, v))
-}
-
-// ScenicAreaIDLTE applies the LTE predicate on the "scenic_area_id" field.
-func ScenicAreaIDLTE(v int) predicate.OperationUser {
-	return predicate.OperationUser(sql.FieldLTE(FieldScenicAreaID, v))
+// ScenicAreaIdsNotNil applies the NotNil predicate on the "scenic_area_ids" field.
+func ScenicAreaIdsNotNil() predicate.OperationUser {
+	return predicate.OperationUser(sql.FieldNotNull(FieldScenicAreaIds))
 }
 
 // UsernameEQ applies the EQ predicate on the "username" field.

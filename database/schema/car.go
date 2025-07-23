@@ -40,8 +40,9 @@ func (Car) Fields() []ent.Field {
 		field.Int("emergency_state").Default(0).Comment("紧急状态(0-无紧急、1-紧急呼救)"),
 
 		field.Int("use_order_id").Default(0).Comment("绑定订单ID"),
-		field.Int("dispatch_task_id").Default(0).Comment("调度任务ID"),
 		field.Int("use_flight_id").Default(0).Comment("班次任务ID"),
+		field.Int("dispatch_task_id").Default(0).Comment("调度任务ID"),
+		field.Int("dispatch_sche_mode").Default(0).Comment("调度模式（0-无调度 1-自由调度 2-揽客模式 3-部署模式）"),
 
 		field.Int("bind_order_count").Default(0).Comment("绑定订单数"),
 		field.Int("total_order_mileage").Default(0).Comment("累积订单里程（米）"),

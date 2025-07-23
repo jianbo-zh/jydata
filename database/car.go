@@ -99,12 +99,13 @@ func (db *Database) UpdateCarAliveTime(ctx context.Context, deviceID string, ali
 		Save(ctx)
 }
 
-func (db *Database) UpdateCarDispatching(ctx context.Context, carID int, useState int, dispatchTaskID int) (*ent.Car, error) {
+func (db *Database) UpdateCarDispatching(ctx context.Context, carID int, dispatchTaskID int, scheMode int) (*ent.Car, error) {
 	return db.MainDB().Car.UpdateOneID(carID).
-		Where(car.UseStateEQ(useState)).
+		Where(car.UseStateEQ(fieldstate.CarUseState_Idle)).
 		Where(car.DispatchTaskIDEQ(0)).
 		SetUseState(fieldstate.CarUseState_Dispatching).
 		SetDispatchTaskID(dispatchTaskID).
+		SetDispatchScheMode(scheMode).
 		Save(ctx)
 }
 
@@ -114,5 +115,6 @@ func (db *Database) UpdateCarDispatchEnd(ctx context.Context, carID int, useStat
 		Where(car.DispatchTaskIDGT(0)).
 		SetUseState(useState).
 		SetDispatchTaskID(0).
+		SetDispatchScheMode(0).
 		Save(ctx)
 }

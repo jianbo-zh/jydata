@@ -27,6 +27,34 @@ func (stec *ScheTaskEventCreate) SetScheTaskID(i int) *ScheTaskEventCreate {
 	return stec
 }
 
+// SetScenicAreaID sets the "scenic_area_id" field.
+func (stec *ScheTaskEventCreate) SetScenicAreaID(i int) *ScheTaskEventCreate {
+	stec.mutation.SetScenicAreaID(i)
+	return stec
+}
+
+// SetNillableScenicAreaID sets the "scenic_area_id" field if the given value is not nil.
+func (stec *ScheTaskEventCreate) SetNillableScenicAreaID(i *int) *ScheTaskEventCreate {
+	if i != nil {
+		stec.SetScenicAreaID(*i)
+	}
+	return stec
+}
+
+// SetCarID sets the "car_id" field.
+func (stec *ScheTaskEventCreate) SetCarID(i int) *ScheTaskEventCreate {
+	stec.mutation.SetCarID(i)
+	return stec
+}
+
+// SetNillableCarID sets the "car_id" field if the given value is not nil.
+func (stec *ScheTaskEventCreate) SetNillableCarID(i *int) *ScheTaskEventCreate {
+	if i != nil {
+		stec.SetCarID(*i)
+	}
+	return stec
+}
+
 // SetState sets the "state" field.
 func (stec *ScheTaskEventCreate) SetState(i int) *ScheTaskEventCreate {
 	stec.mutation.SetState(i)
@@ -43,6 +71,40 @@ func (stec *ScheTaskEventCreate) SetAbnormalState(i int) *ScheTaskEventCreate {
 func (stec *ScheTaskEventCreate) SetNillableAbnormalState(i *int) *ScheTaskEventCreate {
 	if i != nil {
 		stec.SetAbnormalState(*i)
+	}
+	return stec
+}
+
+// SetImageIds sets the "image_ids" field.
+func (stec *ScheTaskEventCreate) SetImageIds(i []int) *ScheTaskEventCreate {
+	stec.mutation.SetImageIds(i)
+	return stec
+}
+
+// SetLonWgs84 sets the "lon_wgs84" field.
+func (stec *ScheTaskEventCreate) SetLonWgs84(f float64) *ScheTaskEventCreate {
+	stec.mutation.SetLonWgs84(f)
+	return stec
+}
+
+// SetNillableLonWgs84 sets the "lon_wgs84" field if the given value is not nil.
+func (stec *ScheTaskEventCreate) SetNillableLonWgs84(f *float64) *ScheTaskEventCreate {
+	if f != nil {
+		stec.SetLonWgs84(*f)
+	}
+	return stec
+}
+
+// SetLatWgs84 sets the "lat_wgs84" field.
+func (stec *ScheTaskEventCreate) SetLatWgs84(f float64) *ScheTaskEventCreate {
+	stec.mutation.SetLatWgs84(f)
+	return stec
+}
+
+// SetNillableLatWgs84 sets the "lat_wgs84" field if the given value is not nil.
+func (stec *ScheTaskEventCreate) SetNillableLatWgs84(f *float64) *ScheTaskEventCreate {
+	if f != nil {
+		stec.SetLatWgs84(*f)
 	}
 	return stec
 }
@@ -113,9 +175,29 @@ func (stec *ScheTaskEventCreate) ExecX(ctx context.Context) {
 
 // defaults sets the default values of the builder before save.
 func (stec *ScheTaskEventCreate) defaults() {
+	if _, ok := stec.mutation.ScenicAreaID(); !ok {
+		v := schetaskevent.DefaultScenicAreaID
+		stec.mutation.SetScenicAreaID(v)
+	}
+	if _, ok := stec.mutation.CarID(); !ok {
+		v := schetaskevent.DefaultCarID
+		stec.mutation.SetCarID(v)
+	}
 	if _, ok := stec.mutation.AbnormalState(); !ok {
 		v := schetaskevent.DefaultAbnormalState
 		stec.mutation.SetAbnormalState(v)
+	}
+	if _, ok := stec.mutation.ImageIds(); !ok {
+		v := schetaskevent.DefaultImageIds
+		stec.mutation.SetImageIds(v)
+	}
+	if _, ok := stec.mutation.LonWgs84(); !ok {
+		v := schetaskevent.DefaultLonWgs84
+		stec.mutation.SetLonWgs84(v)
+	}
+	if _, ok := stec.mutation.LatWgs84(); !ok {
+		v := schetaskevent.DefaultLatWgs84
+		stec.mutation.SetLatWgs84(v)
 	}
 	if _, ok := stec.mutation.CreateTime(); !ok {
 		v := schetaskevent.DefaultCreateTime()
@@ -128,11 +210,26 @@ func (stec *ScheTaskEventCreate) check() error {
 	if _, ok := stec.mutation.ScheTaskID(); !ok {
 		return &ValidationError{Name: "sche_task_id", err: errors.New(`ent: missing required field "ScheTaskEvent.sche_task_id"`)}
 	}
+	if _, ok := stec.mutation.ScenicAreaID(); !ok {
+		return &ValidationError{Name: "scenic_area_id", err: errors.New(`ent: missing required field "ScheTaskEvent.scenic_area_id"`)}
+	}
+	if _, ok := stec.mutation.CarID(); !ok {
+		return &ValidationError{Name: "car_id", err: errors.New(`ent: missing required field "ScheTaskEvent.car_id"`)}
+	}
 	if _, ok := stec.mutation.State(); !ok {
 		return &ValidationError{Name: "state", err: errors.New(`ent: missing required field "ScheTaskEvent.state"`)}
 	}
 	if _, ok := stec.mutation.AbnormalState(); !ok {
 		return &ValidationError{Name: "abnormal_state", err: errors.New(`ent: missing required field "ScheTaskEvent.abnormal_state"`)}
+	}
+	if _, ok := stec.mutation.ImageIds(); !ok {
+		return &ValidationError{Name: "image_ids", err: errors.New(`ent: missing required field "ScheTaskEvent.image_ids"`)}
+	}
+	if _, ok := stec.mutation.LonWgs84(); !ok {
+		return &ValidationError{Name: "lon_wgs84", err: errors.New(`ent: missing required field "ScheTaskEvent.lon_wgs84"`)}
+	}
+	if _, ok := stec.mutation.LatWgs84(); !ok {
+		return &ValidationError{Name: "lat_wgs84", err: errors.New(`ent: missing required field "ScheTaskEvent.lat_wgs84"`)}
 	}
 	if _, ok := stec.mutation.Remark(); !ok {
 		return &ValidationError{Name: "remark", err: errors.New(`ent: missing required field "ScheTaskEvent.remark"`)}
@@ -175,6 +272,14 @@ func (stec *ScheTaskEventCreate) createSpec() (*ScheTaskEvent, *sqlgraph.CreateS
 		_node.ID = id
 		_spec.ID.Value = id
 	}
+	if value, ok := stec.mutation.ScenicAreaID(); ok {
+		_spec.SetField(schetaskevent.FieldScenicAreaID, field.TypeInt, value)
+		_node.ScenicAreaID = value
+	}
+	if value, ok := stec.mutation.CarID(); ok {
+		_spec.SetField(schetaskevent.FieldCarID, field.TypeInt, value)
+		_node.CarID = value
+	}
 	if value, ok := stec.mutation.State(); ok {
 		_spec.SetField(schetaskevent.FieldState, field.TypeInt, value)
 		_node.State = value
@@ -182,6 +287,18 @@ func (stec *ScheTaskEventCreate) createSpec() (*ScheTaskEvent, *sqlgraph.CreateS
 	if value, ok := stec.mutation.AbnormalState(); ok {
 		_spec.SetField(schetaskevent.FieldAbnormalState, field.TypeInt, value)
 		_node.AbnormalState = value
+	}
+	if value, ok := stec.mutation.ImageIds(); ok {
+		_spec.SetField(schetaskevent.FieldImageIds, field.TypeJSON, value)
+		_node.ImageIds = value
+	}
+	if value, ok := stec.mutation.LonWgs84(); ok {
+		_spec.SetField(schetaskevent.FieldLonWgs84, field.TypeFloat64, value)
+		_node.LonWgs84 = value
+	}
+	if value, ok := stec.mutation.LatWgs84(); ok {
+		_spec.SetField(schetaskevent.FieldLatWgs84, field.TypeFloat64, value)
+		_node.LatWgs84 = value
 	}
 	if value, ok := stec.mutation.Remark(); ok {
 		_spec.SetField(schetaskevent.FieldRemark, field.TypeString, value)

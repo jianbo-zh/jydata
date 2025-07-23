@@ -15,6 +15,7 @@ import (
 
 func (m *Database) AddScheTask(ctx context.Context, scheTask *ent.ScheTask) (*ent.ScheTask, error) {
 	return m.MainDB().ScheTask.Create().
+		SetUserOrigin(scheTask.UserOrigin).
 		SetUserType(scheTask.UserType).
 		SetUserID(scheTask.UserID).
 		SetScenicAreaID(scheTask.ScenicAreaID).
@@ -23,8 +24,8 @@ func (m *Database) AddScheTask(ctx context.Context, scheTask *ent.ScheTask) (*en
 		SetDestID(scheTask.DestID).
 		SetDestLon(scheTask.DestLon).
 		SetDestLat(scheTask.DestLat).
-		SetType(scheTask.Type).
-		SetLoadLimit(scheTask.LoadLimit).
+		SetScheMode(scheTask.ScheMode).
+		SetScheArgs(scheTask.ScheArgs).
 		SetState(scheTask.State).
 		SetAbnormalState(scheTask.AbnormalState).
 		SetRemark(scheTask.Remark).

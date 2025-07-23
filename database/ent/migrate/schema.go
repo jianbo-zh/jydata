@@ -177,8 +177,9 @@ var (
 		{Name: "driving_state", Type: field.TypeInt, Default: 0},
 		{Name: "emergency_state", Type: field.TypeInt, Default: 0},
 		{Name: "use_order_id", Type: field.TypeInt, Default: 0},
-		{Name: "dispatch_task_id", Type: field.TypeInt, Default: 0},
 		{Name: "use_flight_id", Type: field.TypeInt, Default: 0},
+		{Name: "dispatch_task_id", Type: field.TypeInt, Default: 0},
+		{Name: "dispatch_sche_mode", Type: field.TypeInt, Default: 0},
 		{Name: "bind_order_count", Type: field.TypeInt, Default: 0},
 		{Name: "total_order_mileage", Type: field.TypeInt, Default: 0},
 		{Name: "total_order_time", Type: field.TypeInt, Default: 0},
@@ -215,13 +216,13 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "cars_cars_models_cars",
-				Columns:    []*schema.Column{CarsColumns[44]},
+				Columns:    []*schema.Column{CarsColumns[45]},
 				RefColumns: []*schema.Column{CarsModelsColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
 			{
 				Symbol:     "cars_scenic_areas_cars",
-				Columns:    []*schema.Column{CarsColumns[45]},
+				Columns:    []*schema.Column{CarsColumns[46]},
 				RefColumns: []*schema.Column{ScenicAreasColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
@@ -684,7 +685,7 @@ var (
 	// OperationUsersColumns holds the columns for the "operation_users" table.
 	OperationUsersColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "scenic_area_id", Type: field.TypeInt, Default: 0},
+		{Name: "scenic_area_ids", Type: field.TypeJSON, Nullable: true},
 		{Name: "username", Type: field.TypeString},
 		{Name: "nickname", Type: field.TypeString, Default: ""},
 		{Name: "phone", Type: field.TypeString, Unique: true},
@@ -1223,6 +1224,7 @@ var (
 	// ScheTasksColumns holds the columns for the "sche_tasks" table.
 	ScheTasksColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
+		{Name: "user_origin", Type: field.TypeInt, Default: 5},
 		{Name: "user_type", Type: field.TypeInt, Default: 1},
 		{Name: "user_id", Type: field.TypeInt, Default: 0},
 		{Name: "scenic_area_id", Type: field.TypeInt},
@@ -1230,12 +1232,13 @@ var (
 		{Name: "dest_id", Type: field.TypeInt},
 		{Name: "dest_lon", Type: field.TypeFloat64},
 		{Name: "dest_lat", Type: field.TypeFloat64},
-		{Name: "type", Type: field.TypeInt},
-		{Name: "load_limit", Type: field.TypeInt, Default: 1},
+		{Name: "sche_mode", Type: field.TypeInt, Default: 1},
+		{Name: "sche_args", Type: field.TypeJSON},
 		{Name: "state", Type: field.TypeInt},
 		{Name: "abnormal_state", Type: field.TypeInt, Default: 0},
 		{Name: "remark", Type: field.TypeString, Default: ""},
 		{Name: "routing_path", Type: field.TypeJSON},
+		{Name: "restart_sche_time", Type: field.TypeTime},
 		{Name: "end_time", Type: field.TypeTime, Nullable: true},
 		{Name: "create_time", Type: field.TypeTime},
 		{Name: "update_time", Type: field.TypeTime},
@@ -1249,7 +1252,7 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "sche_tasks_cars_sche_task",
-				Columns:    []*schema.Column{ScheTasksColumns[17]},
+				Columns:    []*schema.Column{ScheTasksColumns[19]},
 				RefColumns: []*schema.Column{CarsColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
@@ -1258,8 +1261,13 @@ var (
 	// ScheTaskEventsColumns holds the columns for the "sche_task_events" table.
 	ScheTaskEventsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
+		{Name: "scenic_area_id", Type: field.TypeInt, Default: 0},
+		{Name: "car_id", Type: field.TypeInt, Default: 0},
 		{Name: "state", Type: field.TypeInt},
 		{Name: "abnormal_state", Type: field.TypeInt, Default: 0},
+		{Name: "image_ids", Type: field.TypeJSON},
+		{Name: "lon_wgs84", Type: field.TypeFloat64, Default: 0},
+		{Name: "lat_wgs84", Type: field.TypeFloat64, Default: 0},
 		{Name: "remark", Type: field.TypeString},
 		{Name: "create_time", Type: field.TypeTime},
 		{Name: "sche_task_id", Type: field.TypeInt},
@@ -1272,7 +1280,7 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "sche_task_events_sche_tasks_events",
-				Columns:    []*schema.Column{ScheTaskEventsColumns[5]},
+				Columns:    []*schema.Column{ScheTaskEventsColumns[10]},
 				RefColumns: []*schema.Column{ScheTasksColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
@@ -1569,7 +1577,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1752473758},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1753088335},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},

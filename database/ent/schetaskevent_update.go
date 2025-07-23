@@ -9,6 +9,7 @@ import (
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
+	"entgo.io/ent/dialect/sql/sqljson"
 	"entgo.io/ent/schema/field"
 	"github.com/jianbo-zh/jydata/database/ent/predicate"
 	"github.com/jianbo-zh/jydata/database/ent/schetask"
@@ -39,6 +40,48 @@ func (steu *ScheTaskEventUpdate) SetNillableScheTaskID(i *int) *ScheTaskEventUpd
 	if i != nil {
 		steu.SetScheTaskID(*i)
 	}
+	return steu
+}
+
+// SetScenicAreaID sets the "scenic_area_id" field.
+func (steu *ScheTaskEventUpdate) SetScenicAreaID(i int) *ScheTaskEventUpdate {
+	steu.mutation.ResetScenicAreaID()
+	steu.mutation.SetScenicAreaID(i)
+	return steu
+}
+
+// SetNillableScenicAreaID sets the "scenic_area_id" field if the given value is not nil.
+func (steu *ScheTaskEventUpdate) SetNillableScenicAreaID(i *int) *ScheTaskEventUpdate {
+	if i != nil {
+		steu.SetScenicAreaID(*i)
+	}
+	return steu
+}
+
+// AddScenicAreaID adds i to the "scenic_area_id" field.
+func (steu *ScheTaskEventUpdate) AddScenicAreaID(i int) *ScheTaskEventUpdate {
+	steu.mutation.AddScenicAreaID(i)
+	return steu
+}
+
+// SetCarID sets the "car_id" field.
+func (steu *ScheTaskEventUpdate) SetCarID(i int) *ScheTaskEventUpdate {
+	steu.mutation.ResetCarID()
+	steu.mutation.SetCarID(i)
+	return steu
+}
+
+// SetNillableCarID sets the "car_id" field if the given value is not nil.
+func (steu *ScheTaskEventUpdate) SetNillableCarID(i *int) *ScheTaskEventUpdate {
+	if i != nil {
+		steu.SetCarID(*i)
+	}
+	return steu
+}
+
+// AddCarID adds i to the "car_id" field.
+func (steu *ScheTaskEventUpdate) AddCarID(i int) *ScheTaskEventUpdate {
+	steu.mutation.AddCarID(i)
 	return steu
 }
 
@@ -81,6 +124,60 @@ func (steu *ScheTaskEventUpdate) SetNillableAbnormalState(i *int) *ScheTaskEvent
 // AddAbnormalState adds i to the "abnormal_state" field.
 func (steu *ScheTaskEventUpdate) AddAbnormalState(i int) *ScheTaskEventUpdate {
 	steu.mutation.AddAbnormalState(i)
+	return steu
+}
+
+// SetImageIds sets the "image_ids" field.
+func (steu *ScheTaskEventUpdate) SetImageIds(i []int) *ScheTaskEventUpdate {
+	steu.mutation.SetImageIds(i)
+	return steu
+}
+
+// AppendImageIds appends i to the "image_ids" field.
+func (steu *ScheTaskEventUpdate) AppendImageIds(i []int) *ScheTaskEventUpdate {
+	steu.mutation.AppendImageIds(i)
+	return steu
+}
+
+// SetLonWgs84 sets the "lon_wgs84" field.
+func (steu *ScheTaskEventUpdate) SetLonWgs84(f float64) *ScheTaskEventUpdate {
+	steu.mutation.ResetLonWgs84()
+	steu.mutation.SetLonWgs84(f)
+	return steu
+}
+
+// SetNillableLonWgs84 sets the "lon_wgs84" field if the given value is not nil.
+func (steu *ScheTaskEventUpdate) SetNillableLonWgs84(f *float64) *ScheTaskEventUpdate {
+	if f != nil {
+		steu.SetLonWgs84(*f)
+	}
+	return steu
+}
+
+// AddLonWgs84 adds f to the "lon_wgs84" field.
+func (steu *ScheTaskEventUpdate) AddLonWgs84(f float64) *ScheTaskEventUpdate {
+	steu.mutation.AddLonWgs84(f)
+	return steu
+}
+
+// SetLatWgs84 sets the "lat_wgs84" field.
+func (steu *ScheTaskEventUpdate) SetLatWgs84(f float64) *ScheTaskEventUpdate {
+	steu.mutation.ResetLatWgs84()
+	steu.mutation.SetLatWgs84(f)
+	return steu
+}
+
+// SetNillableLatWgs84 sets the "lat_wgs84" field if the given value is not nil.
+func (steu *ScheTaskEventUpdate) SetNillableLatWgs84(f *float64) *ScheTaskEventUpdate {
+	if f != nil {
+		steu.SetLatWgs84(*f)
+	}
+	return steu
+}
+
+// AddLatWgs84 adds f to the "lat_wgs84" field.
+func (steu *ScheTaskEventUpdate) AddLatWgs84(f float64) *ScheTaskEventUpdate {
+	steu.mutation.AddLatWgs84(f)
 	return steu
 }
 
@@ -161,6 +258,18 @@ func (steu *ScheTaskEventUpdate) sqlSave(ctx context.Context) (n int, err error)
 			}
 		}
 	}
+	if value, ok := steu.mutation.ScenicAreaID(); ok {
+		_spec.SetField(schetaskevent.FieldScenicAreaID, field.TypeInt, value)
+	}
+	if value, ok := steu.mutation.AddedScenicAreaID(); ok {
+		_spec.AddField(schetaskevent.FieldScenicAreaID, field.TypeInt, value)
+	}
+	if value, ok := steu.mutation.CarID(); ok {
+		_spec.SetField(schetaskevent.FieldCarID, field.TypeInt, value)
+	}
+	if value, ok := steu.mutation.AddedCarID(); ok {
+		_spec.AddField(schetaskevent.FieldCarID, field.TypeInt, value)
+	}
 	if value, ok := steu.mutation.State(); ok {
 		_spec.SetField(schetaskevent.FieldState, field.TypeInt, value)
 	}
@@ -172,6 +281,26 @@ func (steu *ScheTaskEventUpdate) sqlSave(ctx context.Context) (n int, err error)
 	}
 	if value, ok := steu.mutation.AddedAbnormalState(); ok {
 		_spec.AddField(schetaskevent.FieldAbnormalState, field.TypeInt, value)
+	}
+	if value, ok := steu.mutation.ImageIds(); ok {
+		_spec.SetField(schetaskevent.FieldImageIds, field.TypeJSON, value)
+	}
+	if value, ok := steu.mutation.AppendedImageIds(); ok {
+		_spec.AddModifier(func(u *sql.UpdateBuilder) {
+			sqljson.Append(u, schetaskevent.FieldImageIds, value)
+		})
+	}
+	if value, ok := steu.mutation.LonWgs84(); ok {
+		_spec.SetField(schetaskevent.FieldLonWgs84, field.TypeFloat64, value)
+	}
+	if value, ok := steu.mutation.AddedLonWgs84(); ok {
+		_spec.AddField(schetaskevent.FieldLonWgs84, field.TypeFloat64, value)
+	}
+	if value, ok := steu.mutation.LatWgs84(); ok {
+		_spec.SetField(schetaskevent.FieldLatWgs84, field.TypeFloat64, value)
+	}
+	if value, ok := steu.mutation.AddedLatWgs84(); ok {
+		_spec.AddField(schetaskevent.FieldLatWgs84, field.TypeFloat64, value)
 	}
 	if value, ok := steu.mutation.Remark(); ok {
 		_spec.SetField(schetaskevent.FieldRemark, field.TypeString, value)
@@ -239,6 +368,48 @@ func (steuo *ScheTaskEventUpdateOne) SetNillableScheTaskID(i *int) *ScheTaskEven
 	return steuo
 }
 
+// SetScenicAreaID sets the "scenic_area_id" field.
+func (steuo *ScheTaskEventUpdateOne) SetScenicAreaID(i int) *ScheTaskEventUpdateOne {
+	steuo.mutation.ResetScenicAreaID()
+	steuo.mutation.SetScenicAreaID(i)
+	return steuo
+}
+
+// SetNillableScenicAreaID sets the "scenic_area_id" field if the given value is not nil.
+func (steuo *ScheTaskEventUpdateOne) SetNillableScenicAreaID(i *int) *ScheTaskEventUpdateOne {
+	if i != nil {
+		steuo.SetScenicAreaID(*i)
+	}
+	return steuo
+}
+
+// AddScenicAreaID adds i to the "scenic_area_id" field.
+func (steuo *ScheTaskEventUpdateOne) AddScenicAreaID(i int) *ScheTaskEventUpdateOne {
+	steuo.mutation.AddScenicAreaID(i)
+	return steuo
+}
+
+// SetCarID sets the "car_id" field.
+func (steuo *ScheTaskEventUpdateOne) SetCarID(i int) *ScheTaskEventUpdateOne {
+	steuo.mutation.ResetCarID()
+	steuo.mutation.SetCarID(i)
+	return steuo
+}
+
+// SetNillableCarID sets the "car_id" field if the given value is not nil.
+func (steuo *ScheTaskEventUpdateOne) SetNillableCarID(i *int) *ScheTaskEventUpdateOne {
+	if i != nil {
+		steuo.SetCarID(*i)
+	}
+	return steuo
+}
+
+// AddCarID adds i to the "car_id" field.
+func (steuo *ScheTaskEventUpdateOne) AddCarID(i int) *ScheTaskEventUpdateOne {
+	steuo.mutation.AddCarID(i)
+	return steuo
+}
+
 // SetState sets the "state" field.
 func (steuo *ScheTaskEventUpdateOne) SetState(i int) *ScheTaskEventUpdateOne {
 	steuo.mutation.ResetState()
@@ -278,6 +449,60 @@ func (steuo *ScheTaskEventUpdateOne) SetNillableAbnormalState(i *int) *ScheTaskE
 // AddAbnormalState adds i to the "abnormal_state" field.
 func (steuo *ScheTaskEventUpdateOne) AddAbnormalState(i int) *ScheTaskEventUpdateOne {
 	steuo.mutation.AddAbnormalState(i)
+	return steuo
+}
+
+// SetImageIds sets the "image_ids" field.
+func (steuo *ScheTaskEventUpdateOne) SetImageIds(i []int) *ScheTaskEventUpdateOne {
+	steuo.mutation.SetImageIds(i)
+	return steuo
+}
+
+// AppendImageIds appends i to the "image_ids" field.
+func (steuo *ScheTaskEventUpdateOne) AppendImageIds(i []int) *ScheTaskEventUpdateOne {
+	steuo.mutation.AppendImageIds(i)
+	return steuo
+}
+
+// SetLonWgs84 sets the "lon_wgs84" field.
+func (steuo *ScheTaskEventUpdateOne) SetLonWgs84(f float64) *ScheTaskEventUpdateOne {
+	steuo.mutation.ResetLonWgs84()
+	steuo.mutation.SetLonWgs84(f)
+	return steuo
+}
+
+// SetNillableLonWgs84 sets the "lon_wgs84" field if the given value is not nil.
+func (steuo *ScheTaskEventUpdateOne) SetNillableLonWgs84(f *float64) *ScheTaskEventUpdateOne {
+	if f != nil {
+		steuo.SetLonWgs84(*f)
+	}
+	return steuo
+}
+
+// AddLonWgs84 adds f to the "lon_wgs84" field.
+func (steuo *ScheTaskEventUpdateOne) AddLonWgs84(f float64) *ScheTaskEventUpdateOne {
+	steuo.mutation.AddLonWgs84(f)
+	return steuo
+}
+
+// SetLatWgs84 sets the "lat_wgs84" field.
+func (steuo *ScheTaskEventUpdateOne) SetLatWgs84(f float64) *ScheTaskEventUpdateOne {
+	steuo.mutation.ResetLatWgs84()
+	steuo.mutation.SetLatWgs84(f)
+	return steuo
+}
+
+// SetNillableLatWgs84 sets the "lat_wgs84" field if the given value is not nil.
+func (steuo *ScheTaskEventUpdateOne) SetNillableLatWgs84(f *float64) *ScheTaskEventUpdateOne {
+	if f != nil {
+		steuo.SetLatWgs84(*f)
+	}
+	return steuo
+}
+
+// AddLatWgs84 adds f to the "lat_wgs84" field.
+func (steuo *ScheTaskEventUpdateOne) AddLatWgs84(f float64) *ScheTaskEventUpdateOne {
+	steuo.mutation.AddLatWgs84(f)
 	return steuo
 }
 
@@ -388,6 +613,18 @@ func (steuo *ScheTaskEventUpdateOne) sqlSave(ctx context.Context) (_node *ScheTa
 			}
 		}
 	}
+	if value, ok := steuo.mutation.ScenicAreaID(); ok {
+		_spec.SetField(schetaskevent.FieldScenicAreaID, field.TypeInt, value)
+	}
+	if value, ok := steuo.mutation.AddedScenicAreaID(); ok {
+		_spec.AddField(schetaskevent.FieldScenicAreaID, field.TypeInt, value)
+	}
+	if value, ok := steuo.mutation.CarID(); ok {
+		_spec.SetField(schetaskevent.FieldCarID, field.TypeInt, value)
+	}
+	if value, ok := steuo.mutation.AddedCarID(); ok {
+		_spec.AddField(schetaskevent.FieldCarID, field.TypeInt, value)
+	}
 	if value, ok := steuo.mutation.State(); ok {
 		_spec.SetField(schetaskevent.FieldState, field.TypeInt, value)
 	}
@@ -399,6 +636,26 @@ func (steuo *ScheTaskEventUpdateOne) sqlSave(ctx context.Context) (_node *ScheTa
 	}
 	if value, ok := steuo.mutation.AddedAbnormalState(); ok {
 		_spec.AddField(schetaskevent.FieldAbnormalState, field.TypeInt, value)
+	}
+	if value, ok := steuo.mutation.ImageIds(); ok {
+		_spec.SetField(schetaskevent.FieldImageIds, field.TypeJSON, value)
+	}
+	if value, ok := steuo.mutation.AppendedImageIds(); ok {
+		_spec.AddModifier(func(u *sql.UpdateBuilder) {
+			sqljson.Append(u, schetaskevent.FieldImageIds, value)
+		})
+	}
+	if value, ok := steuo.mutation.LonWgs84(); ok {
+		_spec.SetField(schetaskevent.FieldLonWgs84, field.TypeFloat64, value)
+	}
+	if value, ok := steuo.mutation.AddedLonWgs84(); ok {
+		_spec.AddField(schetaskevent.FieldLonWgs84, field.TypeFloat64, value)
+	}
+	if value, ok := steuo.mutation.LatWgs84(); ok {
+		_spec.SetField(schetaskevent.FieldLatWgs84, field.TypeFloat64, value)
+	}
+	if value, ok := steuo.mutation.AddedLatWgs84(); ok {
+		_spec.AddField(schetaskevent.FieldLatWgs84, field.TypeFloat64, value)
 	}
 	if value, ok := steuo.mutation.Remark(); ok {
 		_spec.SetField(schetaskevent.FieldRemark, field.TypeString, value)

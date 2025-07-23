@@ -3,6 +3,7 @@
 package ent
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 	"time"
@@ -20,10 +21,20 @@ type ScheTaskEvent struct {
 	ID int `json:"id,omitempty"`
 	// 调度ID
 	ScheTaskID int `json:"sche_task_id,omitempty"`
+	// 景区ID
+	ScenicAreaID int `json:"scenic_area_id,omitempty"`
+	// 车辆ID
+	CarID int `json:"car_id,omitempty"`
 	// 调度状态（2-调度中 3-已暂停 5-停滞不前 6-已完成 7-已取消 8-系统终止 9-异常状态）
 	State int `json:"state,omitempty"`
 	// 异常子状态（1-无异常 2-离线 3-道路外 4-有载人或物 5-驾驶状态异常）
 	AbnormalState int `json:"abnormal_state,omitempty"`
+	// 图片集
+	ImageIds []int `json:"image_ids,omitempty"`
+	// 经度(wgs84)
+	LonWgs84 float64 `json:"lon_wgs84,omitempty"`
+	// 纬度(wgs84)
+	LatWgs84 float64 `json:"lat_wgs84,omitempty"`
 	// 日志记录
 	Remark string `json:"remark,omitempty"`
 	// 创建时间
@@ -59,7 +70,11 @@ func (*ScheTaskEvent) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case schetaskevent.FieldID, schetaskevent.FieldScheTaskID, schetaskevent.FieldState, schetaskevent.FieldAbnormalState:
+		case schetaskevent.FieldImageIds:
+			values[i] = new([]byte)
+		case schetaskevent.FieldLonWgs84, schetaskevent.FieldLatWgs84:
+			values[i] = new(sql.NullFloat64)
+		case schetaskevent.FieldID, schetaskevent.FieldScheTaskID, schetaskevent.FieldScenicAreaID, schetaskevent.FieldCarID, schetaskevent.FieldState, schetaskevent.FieldAbnormalState:
 			values[i] = new(sql.NullInt64)
 		case schetaskevent.FieldRemark:
 			values[i] = new(sql.NullString)
@@ -92,6 +107,18 @@ func (ste *ScheTaskEvent) assignValues(columns []string, values []any) error {
 			} else if value.Valid {
 				ste.ScheTaskID = int(value.Int64)
 			}
+		case schetaskevent.FieldScenicAreaID:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field scenic_area_id", values[i])
+			} else if value.Valid {
+				ste.ScenicAreaID = int(value.Int64)
+			}
+		case schetaskevent.FieldCarID:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field car_id", values[i])
+			} else if value.Valid {
+				ste.CarID = int(value.Int64)
+			}
 		case schetaskevent.FieldState:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field state", values[i])
@@ -103,6 +130,26 @@ func (ste *ScheTaskEvent) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field abnormal_state", values[i])
 			} else if value.Valid {
 				ste.AbnormalState = int(value.Int64)
+			}
+		case schetaskevent.FieldImageIds:
+			if value, ok := values[i].(*[]byte); !ok {
+				return fmt.Errorf("unexpected type %T for field image_ids", values[i])
+			} else if value != nil && len(*value) > 0 {
+				if err := json.Unmarshal(*value, &ste.ImageIds); err != nil {
+					return fmt.Errorf("unmarshal field image_ids: %w", err)
+				}
+			}
+		case schetaskevent.FieldLonWgs84:
+			if value, ok := values[i].(*sql.NullFloat64); !ok {
+				return fmt.Errorf("unexpected type %T for field lon_wgs84", values[i])
+			} else if value.Valid {
+				ste.LonWgs84 = value.Float64
+			}
+		case schetaskevent.FieldLatWgs84:
+			if value, ok := values[i].(*sql.NullFloat64); !ok {
+				return fmt.Errorf("unexpected type %T for field lat_wgs84", values[i])
+			} else if value.Valid {
+				ste.LatWgs84 = value.Float64
 			}
 		case schetaskevent.FieldRemark:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -160,11 +207,26 @@ func (ste *ScheTaskEvent) String() string {
 	builder.WriteString("sche_task_id=")
 	builder.WriteString(fmt.Sprintf("%v", ste.ScheTaskID))
 	builder.WriteString(", ")
+	builder.WriteString("scenic_area_id=")
+	builder.WriteString(fmt.Sprintf("%v", ste.ScenicAreaID))
+	builder.WriteString(", ")
+	builder.WriteString("car_id=")
+	builder.WriteString(fmt.Sprintf("%v", ste.CarID))
+	builder.WriteString(", ")
 	builder.WriteString("state=")
 	builder.WriteString(fmt.Sprintf("%v", ste.State))
 	builder.WriteString(", ")
 	builder.WriteString("abnormal_state=")
 	builder.WriteString(fmt.Sprintf("%v", ste.AbnormalState))
+	builder.WriteString(", ")
+	builder.WriteString("image_ids=")
+	builder.WriteString(fmt.Sprintf("%v", ste.ImageIds))
+	builder.WriteString(", ")
+	builder.WriteString("lon_wgs84=")
+	builder.WriteString(fmt.Sprintf("%v", ste.LonWgs84))
+	builder.WriteString(", ")
+	builder.WriteString("lat_wgs84=")
+	builder.WriteString(fmt.Sprintf("%v", ste.LatWgs84))
 	builder.WriteString(", ")
 	builder.WriteString("remark=")
 	builder.WriteString(ste.Remark)

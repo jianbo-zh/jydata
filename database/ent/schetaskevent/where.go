@@ -60,6 +60,16 @@ func ScheTaskID(v int) predicate.ScheTaskEvent {
 	return predicate.ScheTaskEvent(sql.FieldEQ(FieldScheTaskID, v))
 }
 
+// ScenicAreaID applies equality check predicate on the "scenic_area_id" field. It's identical to ScenicAreaIDEQ.
+func ScenicAreaID(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldEQ(FieldScenicAreaID, v))
+}
+
+// CarID applies equality check predicate on the "car_id" field. It's identical to CarIDEQ.
+func CarID(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldEQ(FieldCarID, v))
+}
+
 // State applies equality check predicate on the "state" field. It's identical to StateEQ.
 func State(v int) predicate.ScheTaskEvent {
 	return predicate.ScheTaskEvent(sql.FieldEQ(FieldState, v))
@@ -68,6 +78,16 @@ func State(v int) predicate.ScheTaskEvent {
 // AbnormalState applies equality check predicate on the "abnormal_state" field. It's identical to AbnormalStateEQ.
 func AbnormalState(v int) predicate.ScheTaskEvent {
 	return predicate.ScheTaskEvent(sql.FieldEQ(FieldAbnormalState, v))
+}
+
+// LonWgs84 applies equality check predicate on the "lon_wgs84" field. It's identical to LonWgs84EQ.
+func LonWgs84(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldEQ(FieldLonWgs84, v))
+}
+
+// LatWgs84 applies equality check predicate on the "lat_wgs84" field. It's identical to LatWgs84EQ.
+func LatWgs84(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldEQ(FieldLatWgs84, v))
 }
 
 // Remark applies equality check predicate on the "remark" field. It's identical to RemarkEQ.
@@ -98,6 +118,86 @@ func ScheTaskIDIn(vs ...int) predicate.ScheTaskEvent {
 // ScheTaskIDNotIn applies the NotIn predicate on the "sche_task_id" field.
 func ScheTaskIDNotIn(vs ...int) predicate.ScheTaskEvent {
 	return predicate.ScheTaskEvent(sql.FieldNotIn(FieldScheTaskID, vs...))
+}
+
+// ScenicAreaIDEQ applies the EQ predicate on the "scenic_area_id" field.
+func ScenicAreaIDEQ(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldEQ(FieldScenicAreaID, v))
+}
+
+// ScenicAreaIDNEQ applies the NEQ predicate on the "scenic_area_id" field.
+func ScenicAreaIDNEQ(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldNEQ(FieldScenicAreaID, v))
+}
+
+// ScenicAreaIDIn applies the In predicate on the "scenic_area_id" field.
+func ScenicAreaIDIn(vs ...int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldIn(FieldScenicAreaID, vs...))
+}
+
+// ScenicAreaIDNotIn applies the NotIn predicate on the "scenic_area_id" field.
+func ScenicAreaIDNotIn(vs ...int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldNotIn(FieldScenicAreaID, vs...))
+}
+
+// ScenicAreaIDGT applies the GT predicate on the "scenic_area_id" field.
+func ScenicAreaIDGT(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldGT(FieldScenicAreaID, v))
+}
+
+// ScenicAreaIDGTE applies the GTE predicate on the "scenic_area_id" field.
+func ScenicAreaIDGTE(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldGTE(FieldScenicAreaID, v))
+}
+
+// ScenicAreaIDLT applies the LT predicate on the "scenic_area_id" field.
+func ScenicAreaIDLT(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldLT(FieldScenicAreaID, v))
+}
+
+// ScenicAreaIDLTE applies the LTE predicate on the "scenic_area_id" field.
+func ScenicAreaIDLTE(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldLTE(FieldScenicAreaID, v))
+}
+
+// CarIDEQ applies the EQ predicate on the "car_id" field.
+func CarIDEQ(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldEQ(FieldCarID, v))
+}
+
+// CarIDNEQ applies the NEQ predicate on the "car_id" field.
+func CarIDNEQ(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldNEQ(FieldCarID, v))
+}
+
+// CarIDIn applies the In predicate on the "car_id" field.
+func CarIDIn(vs ...int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldIn(FieldCarID, vs...))
+}
+
+// CarIDNotIn applies the NotIn predicate on the "car_id" field.
+func CarIDNotIn(vs ...int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldNotIn(FieldCarID, vs...))
+}
+
+// CarIDGT applies the GT predicate on the "car_id" field.
+func CarIDGT(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldGT(FieldCarID, v))
+}
+
+// CarIDGTE applies the GTE predicate on the "car_id" field.
+func CarIDGTE(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldGTE(FieldCarID, v))
+}
+
+// CarIDLT applies the LT predicate on the "car_id" field.
+func CarIDLT(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldLT(FieldCarID, v))
+}
+
+// CarIDLTE applies the LTE predicate on the "car_id" field.
+func CarIDLTE(v int) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldLTE(FieldCarID, v))
 }
 
 // StateEQ applies the EQ predicate on the "state" field.
@@ -178,6 +278,86 @@ func AbnormalStateLT(v int) predicate.ScheTaskEvent {
 // AbnormalStateLTE applies the LTE predicate on the "abnormal_state" field.
 func AbnormalStateLTE(v int) predicate.ScheTaskEvent {
 	return predicate.ScheTaskEvent(sql.FieldLTE(FieldAbnormalState, v))
+}
+
+// LonWgs84EQ applies the EQ predicate on the "lon_wgs84" field.
+func LonWgs84EQ(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldEQ(FieldLonWgs84, v))
+}
+
+// LonWgs84NEQ applies the NEQ predicate on the "lon_wgs84" field.
+func LonWgs84NEQ(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldNEQ(FieldLonWgs84, v))
+}
+
+// LonWgs84In applies the In predicate on the "lon_wgs84" field.
+func LonWgs84In(vs ...float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldIn(FieldLonWgs84, vs...))
+}
+
+// LonWgs84NotIn applies the NotIn predicate on the "lon_wgs84" field.
+func LonWgs84NotIn(vs ...float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldNotIn(FieldLonWgs84, vs...))
+}
+
+// LonWgs84GT applies the GT predicate on the "lon_wgs84" field.
+func LonWgs84GT(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldGT(FieldLonWgs84, v))
+}
+
+// LonWgs84GTE applies the GTE predicate on the "lon_wgs84" field.
+func LonWgs84GTE(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldGTE(FieldLonWgs84, v))
+}
+
+// LonWgs84LT applies the LT predicate on the "lon_wgs84" field.
+func LonWgs84LT(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldLT(FieldLonWgs84, v))
+}
+
+// LonWgs84LTE applies the LTE predicate on the "lon_wgs84" field.
+func LonWgs84LTE(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldLTE(FieldLonWgs84, v))
+}
+
+// LatWgs84EQ applies the EQ predicate on the "lat_wgs84" field.
+func LatWgs84EQ(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldEQ(FieldLatWgs84, v))
+}
+
+// LatWgs84NEQ applies the NEQ predicate on the "lat_wgs84" field.
+func LatWgs84NEQ(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldNEQ(FieldLatWgs84, v))
+}
+
+// LatWgs84In applies the In predicate on the "lat_wgs84" field.
+func LatWgs84In(vs ...float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldIn(FieldLatWgs84, vs...))
+}
+
+// LatWgs84NotIn applies the NotIn predicate on the "lat_wgs84" field.
+func LatWgs84NotIn(vs ...float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldNotIn(FieldLatWgs84, vs...))
+}
+
+// LatWgs84GT applies the GT predicate on the "lat_wgs84" field.
+func LatWgs84GT(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldGT(FieldLatWgs84, v))
+}
+
+// LatWgs84GTE applies the GTE predicate on the "lat_wgs84" field.
+func LatWgs84GTE(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldGTE(FieldLatWgs84, v))
+}
+
+// LatWgs84LT applies the LT predicate on the "lat_wgs84" field.
+func LatWgs84LT(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldLT(FieldLatWgs84, v))
+}
+
+// LatWgs84LTE applies the LTE predicate on the "lat_wgs84" field.
+func LatWgs84LTE(v float64) predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldLTE(FieldLatWgs84, v))
 }
 
 // RemarkEQ applies the EQ predicate on the "remark" field.

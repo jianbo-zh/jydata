@@ -14,6 +14,8 @@ const (
 	Label = "sche_task"
 	// FieldID holds the string denoting the id field in the database.
 	FieldID = "id"
+	// FieldUserOrigin holds the string denoting the user_origin field in the database.
+	FieldUserOrigin = "user_origin"
 	// FieldUserType holds the string denoting the user_type field in the database.
 	FieldUserType = "user_type"
 	// FieldUserID holds the string denoting the user_id field in the database.
@@ -30,10 +32,10 @@ const (
 	FieldDestLon = "dest_lon"
 	// FieldDestLat holds the string denoting the dest_lat field in the database.
 	FieldDestLat = "dest_lat"
-	// FieldType holds the string denoting the type field in the database.
-	FieldType = "type"
-	// FieldLoadLimit holds the string denoting the load_limit field in the database.
-	FieldLoadLimit = "load_limit"
+	// FieldScheMode holds the string denoting the sche_mode field in the database.
+	FieldScheMode = "sche_mode"
+	// FieldScheArgs holds the string denoting the sche_args field in the database.
+	FieldScheArgs = "sche_args"
 	// FieldState holds the string denoting the state field in the database.
 	FieldState = "state"
 	// FieldAbnormalState holds the string denoting the abnormal_state field in the database.
@@ -42,6 +44,8 @@ const (
 	FieldRemark = "remark"
 	// FieldRoutingPath holds the string denoting the routing_path field in the database.
 	FieldRoutingPath = "routing_path"
+	// FieldRestartScheTime holds the string denoting the restart_sche_time field in the database.
+	FieldRestartScheTime = "restart_sche_time"
 	// FieldEndTime holds the string denoting the end_time field in the database.
 	FieldEndTime = "end_time"
 	// FieldCreateTime holds the string denoting the create_time field in the database.
@@ -73,6 +77,7 @@ const (
 // Columns holds all SQL columns for schetask fields.
 var Columns = []string{
 	FieldID,
+	FieldUserOrigin,
 	FieldUserType,
 	FieldUserID,
 	FieldScenicAreaID,
@@ -81,12 +86,13 @@ var Columns = []string{
 	FieldDestID,
 	FieldDestLon,
 	FieldDestLat,
-	FieldType,
-	FieldLoadLimit,
+	FieldScheMode,
+	FieldScheArgs,
 	FieldState,
 	FieldAbnormalState,
 	FieldRemark,
 	FieldRoutingPath,
+	FieldRestartScheTime,
 	FieldEndTime,
 	FieldCreateTime,
 	FieldUpdateTime,
@@ -103,16 +109,20 @@ func ValidColumn(column string) bool {
 }
 
 var (
+	// DefaultUserOrigin holds the default value on creation for the "user_origin" field.
+	DefaultUserOrigin int
 	// DefaultUserType holds the default value on creation for the "user_type" field.
 	DefaultUserType int
 	// DefaultUserID holds the default value on creation for the "user_id" field.
 	DefaultUserID int
-	// DefaultLoadLimit holds the default value on creation for the "load_limit" field.
-	DefaultLoadLimit int
+	// DefaultScheMode holds the default value on creation for the "sche_mode" field.
+	DefaultScheMode int
 	// DefaultAbnormalState holds the default value on creation for the "abnormal_state" field.
 	DefaultAbnormalState int
 	// DefaultRemark holds the default value on creation for the "remark" field.
 	DefaultRemark string
+	// DefaultRestartScheTime holds the default value on creation for the "restart_sche_time" field.
+	DefaultRestartScheTime time.Time
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.
 	DefaultCreateTime func() time.Time
 	// DefaultUpdateTime holds the default value on creation for the "update_time" field.
@@ -127,6 +137,11 @@ type OrderOption func(*sql.Selector)
 // ByID orders the results by the id field.
 func ByID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldID, opts...).ToFunc()
+}
+
+// ByUserOrigin orders the results by the user_origin field.
+func ByUserOrigin(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldUserOrigin, opts...).ToFunc()
 }
 
 // ByUserType orders the results by the user_type field.
@@ -169,14 +184,9 @@ func ByDestLat(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldDestLat, opts...).ToFunc()
 }
 
-// ByType orders the results by the type field.
-func ByType(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldType, opts...).ToFunc()
-}
-
-// ByLoadLimit orders the results by the load_limit field.
-func ByLoadLimit(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldLoadLimit, opts...).ToFunc()
+// ByScheMode orders the results by the sche_mode field.
+func ByScheMode(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldScheMode, opts...).ToFunc()
 }
 
 // ByState orders the results by the state field.
@@ -192,6 +202,11 @@ func ByAbnormalState(opts ...sql.OrderTermOption) OrderOption {
 // ByRemark orders the results by the remark field.
 func ByRemark(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldRemark, opts...).ToFunc()
+}
+
+// ByRestartScheTime orders the results by the restart_sche_time field.
+func ByRestartScheTime(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldRestartScheTime, opts...).ToFunc()
 }
 
 // ByEndTime orders the results by the end_time field.
