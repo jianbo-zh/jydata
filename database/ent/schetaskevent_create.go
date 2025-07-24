@@ -222,9 +222,6 @@ func (stec *ScheTaskEventCreate) check() error {
 	if _, ok := stec.mutation.AbnormalState(); !ok {
 		return &ValidationError{Name: "abnormal_state", err: errors.New(`ent: missing required field "ScheTaskEvent.abnormal_state"`)}
 	}
-	if _, ok := stec.mutation.ImageIds(); !ok {
-		return &ValidationError{Name: "image_ids", err: errors.New(`ent: missing required field "ScheTaskEvent.image_ids"`)}
-	}
 	if _, ok := stec.mutation.LonWgs84(); !ok {
 		return &ValidationError{Name: "lon_wgs84", err: errors.New(`ent: missing required field "ScheTaskEvent.lon_wgs84"`)}
 	}

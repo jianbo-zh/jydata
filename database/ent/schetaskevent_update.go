@@ -139,6 +139,12 @@ func (steu *ScheTaskEventUpdate) AppendImageIds(i []int) *ScheTaskEventUpdate {
 	return steu
 }
 
+// ClearImageIds clears the value of the "image_ids" field.
+func (steu *ScheTaskEventUpdate) ClearImageIds() *ScheTaskEventUpdate {
+	steu.mutation.ClearImageIds()
+	return steu
+}
+
 // SetLonWgs84 sets the "lon_wgs84" field.
 func (steu *ScheTaskEventUpdate) SetLonWgs84(f float64) *ScheTaskEventUpdate {
 	steu.mutation.ResetLonWgs84()
@@ -289,6 +295,9 @@ func (steu *ScheTaskEventUpdate) sqlSave(ctx context.Context) (n int, err error)
 		_spec.AddModifier(func(u *sql.UpdateBuilder) {
 			sqljson.Append(u, schetaskevent.FieldImageIds, value)
 		})
+	}
+	if steu.mutation.ImageIdsCleared() {
+		_spec.ClearField(schetaskevent.FieldImageIds, field.TypeJSON)
 	}
 	if value, ok := steu.mutation.LonWgs84(); ok {
 		_spec.SetField(schetaskevent.FieldLonWgs84, field.TypeFloat64, value)
@@ -461,6 +470,12 @@ func (steuo *ScheTaskEventUpdateOne) SetImageIds(i []int) *ScheTaskEventUpdateOn
 // AppendImageIds appends i to the "image_ids" field.
 func (steuo *ScheTaskEventUpdateOne) AppendImageIds(i []int) *ScheTaskEventUpdateOne {
 	steuo.mutation.AppendImageIds(i)
+	return steuo
+}
+
+// ClearImageIds clears the value of the "image_ids" field.
+func (steuo *ScheTaskEventUpdateOne) ClearImageIds() *ScheTaskEventUpdateOne {
+	steuo.mutation.ClearImageIds()
 	return steuo
 }
 
@@ -644,6 +659,9 @@ func (steuo *ScheTaskEventUpdateOne) sqlSave(ctx context.Context) (_node *ScheTa
 		_spec.AddModifier(func(u *sql.UpdateBuilder) {
 			sqljson.Append(u, schetaskevent.FieldImageIds, value)
 		})
+	}
+	if steuo.mutation.ImageIdsCleared() {
+		_spec.ClearField(schetaskevent.FieldImageIds, field.TypeJSON)
 	}
 	if value, ok := steuo.mutation.LonWgs84(); ok {
 		_spec.SetField(schetaskevent.FieldLonWgs84, field.TypeFloat64, value)

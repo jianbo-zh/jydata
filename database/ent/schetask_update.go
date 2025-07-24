@@ -241,6 +241,12 @@ func (stu *ScheTaskUpdate) SetNillableScheArgs(ta *types.ScheArgs) *ScheTaskUpda
 	return stu
 }
 
+// ClearScheArgs clears the value of the "sche_args" field.
+func (stu *ScheTaskUpdate) ClearScheArgs() *ScheTaskUpdate {
+	stu.mutation.ClearScheArgs()
+	return stu
+}
+
 // SetState sets the "state" field.
 func (stu *ScheTaskUpdate) SetState(i int) *ScheTaskUpdate {
 	stu.mutation.ResetState()
@@ -322,6 +328,12 @@ func (stu *ScheTaskUpdate) SetNillableRestartScheTime(t *time.Time) *ScheTaskUpd
 	if t != nil {
 		stu.SetRestartScheTime(*t)
 	}
+	return stu
+}
+
+// ClearRestartScheTime clears the value of the "restart_sche_time" field.
+func (stu *ScheTaskUpdate) ClearRestartScheTime() *ScheTaskUpdate {
+	stu.mutation.ClearRestartScheTime()
 	return stu
 }
 
@@ -513,6 +525,9 @@ func (stu *ScheTaskUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := stu.mutation.ScheArgs(); ok {
 		_spec.SetField(schetask.FieldScheArgs, field.TypeJSON, value)
 	}
+	if stu.mutation.ScheArgsCleared() {
+		_spec.ClearField(schetask.FieldScheArgs, field.TypeJSON)
+	}
 	if value, ok := stu.mutation.State(); ok {
 		_spec.SetField(schetask.FieldState, field.TypeInt, value)
 	}
@@ -533,6 +548,9 @@ func (stu *ScheTaskUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := stu.mutation.RestartScheTime(); ok {
 		_spec.SetField(schetask.FieldRestartScheTime, field.TypeTime, value)
+	}
+	if stu.mutation.RestartScheTimeCleared() {
+		_spec.ClearField(schetask.FieldRestartScheTime, field.TypeTime)
 	}
 	if value, ok := stu.mutation.EndTime(); ok {
 		_spec.SetField(schetask.FieldEndTime, field.TypeTime, value)
@@ -847,6 +865,12 @@ func (stuo *ScheTaskUpdateOne) SetNillableScheArgs(ta *types.ScheArgs) *ScheTask
 	return stuo
 }
 
+// ClearScheArgs clears the value of the "sche_args" field.
+func (stuo *ScheTaskUpdateOne) ClearScheArgs() *ScheTaskUpdateOne {
+	stuo.mutation.ClearScheArgs()
+	return stuo
+}
+
 // SetState sets the "state" field.
 func (stuo *ScheTaskUpdateOne) SetState(i int) *ScheTaskUpdateOne {
 	stuo.mutation.ResetState()
@@ -928,6 +952,12 @@ func (stuo *ScheTaskUpdateOne) SetNillableRestartScheTime(t *time.Time) *ScheTas
 	if t != nil {
 		stuo.SetRestartScheTime(*t)
 	}
+	return stuo
+}
+
+// ClearRestartScheTime clears the value of the "restart_sche_time" field.
+func (stuo *ScheTaskUpdateOne) ClearRestartScheTime() *ScheTaskUpdateOne {
+	stuo.mutation.ClearRestartScheTime()
 	return stuo
 }
 
@@ -1149,6 +1179,9 @@ func (stuo *ScheTaskUpdateOne) sqlSave(ctx context.Context) (_node *ScheTask, er
 	if value, ok := stuo.mutation.ScheArgs(); ok {
 		_spec.SetField(schetask.FieldScheArgs, field.TypeJSON, value)
 	}
+	if stuo.mutation.ScheArgsCleared() {
+		_spec.ClearField(schetask.FieldScheArgs, field.TypeJSON)
+	}
 	if value, ok := stuo.mutation.State(); ok {
 		_spec.SetField(schetask.FieldState, field.TypeInt, value)
 	}
@@ -1169,6 +1202,9 @@ func (stuo *ScheTaskUpdateOne) sqlSave(ctx context.Context) (_node *ScheTask, er
 	}
 	if value, ok := stuo.mutation.RestartScheTime(); ok {
 		_spec.SetField(schetask.FieldRestartScheTime, field.TypeTime, value)
+	}
+	if stuo.mutation.RestartScheTimeCleared() {
+		_spec.ClearField(schetask.FieldRestartScheTime, field.TypeTime)
 	}
 	if value, ok := stuo.mutation.EndTime(); ok {
 		_spec.SetField(schetask.FieldEndTime, field.TypeTime, value)

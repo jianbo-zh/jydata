@@ -57745,9 +57745,22 @@ func (m *ScheTaskMutation) OldScheArgs(ctx context.Context) (v types.ScheArgs, e
 	return oldValue.ScheArgs, nil
 }
 
+// ClearScheArgs clears the value of the "sche_args" field.
+func (m *ScheTaskMutation) ClearScheArgs() {
+	m.sche_args = nil
+	m.clearedFields[schetask.FieldScheArgs] = struct{}{}
+}
+
+// ScheArgsCleared returns if the "sche_args" field was cleared in this mutation.
+func (m *ScheTaskMutation) ScheArgsCleared() bool {
+	_, ok := m.clearedFields[schetask.FieldScheArgs]
+	return ok
+}
+
 // ResetScheArgs resets all changes to the "sche_args" field.
 func (m *ScheTaskMutation) ResetScheArgs() {
 	m.sche_args = nil
+	delete(m.clearedFields, schetask.FieldScheArgs)
 }
 
 // SetState sets the "state" field.
@@ -57965,9 +57978,22 @@ func (m *ScheTaskMutation) OldRestartScheTime(ctx context.Context) (v time.Time,
 	return oldValue.RestartScheTime, nil
 }
 
+// ClearRestartScheTime clears the value of the "restart_sche_time" field.
+func (m *ScheTaskMutation) ClearRestartScheTime() {
+	m.restart_sche_time = nil
+	m.clearedFields[schetask.FieldRestartScheTime] = struct{}{}
+}
+
+// RestartScheTimeCleared returns if the "restart_sche_time" field was cleared in this mutation.
+func (m *ScheTaskMutation) RestartScheTimeCleared() bool {
+	_, ok := m.clearedFields[schetask.FieldRestartScheTime]
+	return ok
+}
+
 // ResetRestartScheTime resets all changes to the "restart_sche_time" field.
 func (m *ScheTaskMutation) ResetRestartScheTime() {
 	m.restart_sche_time = nil
+	delete(m.clearedFields, schetask.FieldRestartScheTime)
 }
 
 // SetEndTime sets the "end_time" field.
@@ -58652,6 +58678,12 @@ func (m *ScheTaskMutation) AddField(name string, value ent.Value) error {
 // mutation.
 func (m *ScheTaskMutation) ClearedFields() []string {
 	var fields []string
+	if m.FieldCleared(schetask.FieldScheArgs) {
+		fields = append(fields, schetask.FieldScheArgs)
+	}
+	if m.FieldCleared(schetask.FieldRestartScheTime) {
+		fields = append(fields, schetask.FieldRestartScheTime)
+	}
 	if m.FieldCleared(schetask.FieldEndTime) {
 		fields = append(fields, schetask.FieldEndTime)
 	}
@@ -58669,6 +58701,12 @@ func (m *ScheTaskMutation) FieldCleared(name string) bool {
 // error if the field is not defined in the schema.
 func (m *ScheTaskMutation) ClearField(name string) error {
 	switch name {
+	case schetask.FieldScheArgs:
+		m.ClearScheArgs()
+		return nil
+	case schetask.FieldRestartScheTime:
+		m.ClearRestartScheTime()
+		return nil
 	case schetask.FieldEndTime:
 		m.ClearEndTime()
 		return nil
@@ -59282,10 +59320,24 @@ func (m *ScheTaskEventMutation) AppendedImageIds() ([]int, bool) {
 	return m.appendimage_ids, true
 }
 
+// ClearImageIds clears the value of the "image_ids" field.
+func (m *ScheTaskEventMutation) ClearImageIds() {
+	m.image_ids = nil
+	m.appendimage_ids = nil
+	m.clearedFields[schetaskevent.FieldImageIds] = struct{}{}
+}
+
+// ImageIdsCleared returns if the "image_ids" field was cleared in this mutation.
+func (m *ScheTaskEventMutation) ImageIdsCleared() bool {
+	_, ok := m.clearedFields[schetaskevent.FieldImageIds]
+	return ok
+}
+
 // ResetImageIds resets all changes to the "image_ids" field.
 func (m *ScheTaskEventMutation) ResetImageIds() {
 	m.image_ids = nil
 	m.appendimage_ids = nil
+	delete(m.clearedFields, schetaskevent.FieldImageIds)
 }
 
 // SetLonWgs84 sets the "lon_wgs84" field.
@@ -59804,7 +59856,11 @@ func (m *ScheTaskEventMutation) AddField(name string, value ent.Value) error {
 // ClearedFields returns all nullable fields that were cleared during this
 // mutation.
 func (m *ScheTaskEventMutation) ClearedFields() []string {
-	return nil
+	var fields []string
+	if m.FieldCleared(schetaskevent.FieldImageIds) {
+		fields = append(fields, schetaskevent.FieldImageIds)
+	}
+	return fields
 }
 
 // FieldCleared returns a boolean indicating if a field with the given name was
@@ -59817,6 +59873,11 @@ func (m *ScheTaskEventMutation) FieldCleared(name string) bool {
 // ClearField clears the value of the field with the given name. It returns an
 // error if the field is not defined in the schema.
 func (m *ScheTaskEventMutation) ClearField(name string) error {
+	switch name {
+	case schetaskevent.FieldImageIds:
+		m.ClearImageIds()
+		return nil
+	}
 	return fmt.Errorf("unknown ScheTaskEvent nullable field %s", name)
 }
 

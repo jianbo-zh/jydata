@@ -545,6 +545,16 @@ func ScheModeLTE(v int) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldLTE(FieldScheMode, v))
 }
 
+// ScheArgsIsNil applies the IsNil predicate on the "sche_args" field.
+func ScheArgsIsNil() predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldIsNull(FieldScheArgs))
+}
+
+// ScheArgsNotNil applies the NotNil predicate on the "sche_args" field.
+func ScheArgsNotNil() predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldNotNull(FieldScheArgs))
+}
+
 // StateEQ applies the EQ predicate on the "state" field.
 func StateEQ(v int) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldEQ(FieldState, v))
@@ -728,6 +738,16 @@ func RestartScheTimeLT(v time.Time) predicate.ScheTask {
 // RestartScheTimeLTE applies the LTE predicate on the "restart_sche_time" field.
 func RestartScheTimeLTE(v time.Time) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldLTE(FieldRestartScheTime, v))
+}
+
+// RestartScheTimeIsNil applies the IsNil predicate on the "restart_sche_time" field.
+func RestartScheTimeIsNil() predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldIsNull(FieldRestartScheTime))
+}
+
+// RestartScheTimeNotNil applies the NotNil predicate on the "restart_sche_time" field.
+func RestartScheTimeNotNil() predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldNotNull(FieldRestartScheTime))
 }
 
 // EndTimeEQ applies the EQ predicate on the "end_time" field.

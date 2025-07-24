@@ -280,6 +280,16 @@ func AbnormalStateLTE(v int) predicate.ScheTaskEvent {
 	return predicate.ScheTaskEvent(sql.FieldLTE(FieldAbnormalState, v))
 }
 
+// ImageIdsIsNil applies the IsNil predicate on the "image_ids" field.
+func ImageIdsIsNil() predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldIsNull(FieldImageIds))
+}
+
+// ImageIdsNotNil applies the NotNil predicate on the "image_ids" field.
+func ImageIdsNotNil() predicate.ScheTaskEvent {
+	return predicate.ScheTaskEvent(sql.FieldNotNull(FieldImageIds))
+}
+
 // LonWgs84EQ applies the EQ predicate on the "lon_wgs84" field.
 func LonWgs84EQ(v float64) predicate.ScheTaskEvent {
 	return predicate.ScheTaskEvent(sql.FieldEQ(FieldLonWgs84, v))

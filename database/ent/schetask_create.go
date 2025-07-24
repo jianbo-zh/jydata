@@ -121,6 +121,14 @@ func (stc *ScheTaskCreate) SetScheArgs(ta types.ScheArgs) *ScheTaskCreate {
 	return stc
 }
 
+// SetNillableScheArgs sets the "sche_args" field if the given value is not nil.
+func (stc *ScheTaskCreate) SetNillableScheArgs(ta *types.ScheArgs) *ScheTaskCreate {
+	if ta != nil {
+		stc.SetScheArgs(*ta)
+	}
+	return stc
+}
+
 // SetState sets the "state" field.
 func (stc *ScheTaskCreate) SetState(i int) *ScheTaskCreate {
 	stc.mutation.SetState(i)
@@ -348,9 +356,6 @@ func (stc *ScheTaskCreate) check() error {
 	if _, ok := stc.mutation.ScheMode(); !ok {
 		return &ValidationError{Name: "sche_mode", err: errors.New(`ent: missing required field "ScheTask.sche_mode"`)}
 	}
-	if _, ok := stc.mutation.ScheArgs(); !ok {
-		return &ValidationError{Name: "sche_args", err: errors.New(`ent: missing required field "ScheTask.sche_args"`)}
-	}
 	if _, ok := stc.mutation.State(); !ok {
 		return &ValidationError{Name: "state", err: errors.New(`ent: missing required field "ScheTask.state"`)}
 	}
@@ -362,9 +367,6 @@ func (stc *ScheTaskCreate) check() error {
 	}
 	if _, ok := stc.mutation.RoutingPath(); !ok {
 		return &ValidationError{Name: "routing_path", err: errors.New(`ent: missing required field "ScheTask.routing_path"`)}
-	}
-	if _, ok := stc.mutation.RestartScheTime(); !ok {
-		return &ValidationError{Name: "restart_sche_time", err: errors.New(`ent: missing required field "ScheTask.restart_sche_time"`)}
 	}
 	if _, ok := stc.mutation.CreateTime(); !ok {
 		return &ValidationError{Name: "create_time", err: errors.New(`ent: missing required field "ScheTask.create_time"`)}
