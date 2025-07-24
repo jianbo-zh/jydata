@@ -11,6 +11,11 @@ import (
 
 func (m *Database) AddScheTaskEvent(ctx context.Context, event *ent.ScheTaskEvent) (*ent.ScheTaskEvent, error) {
 	return m.MainDB().ScheTaskEvent.Create().
+		SetScenicAreaID(event.ScenicAreaID).
+		SetCarID(event.CarID).
+		SetImageIds(event.ImageIds).
+		SetLatWgs84(event.LatWgs84).
+		SetLonWgs84(event.LonWgs84).
 		SetScheTaskID(event.ScheTaskID).
 		SetState(event.State).
 		SetAbnormalState(event.AbnormalState).
