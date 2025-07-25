@@ -21,3 +21,11 @@ deploydev:
 	@scp .bin/jydata jiuyou:${deploy_root_dev}/bin/jydata_2dev.tmp
 	@ssh jiuyou "cd ${deploy_root_dev}/bin/ && { if [ -e jydata_2dev.bak ]; then mv jydata_2dev.bak jydata_2dev.bak2; fi } && { if [ -e jydata_2dev ]; then mv jydata_2dev jydata_2dev.bak; fi } && mv jydata_2dev.tmp jydata_2dev"
 	@ssh jiuyou "${deploy_root_dev}/jydata_restart.sh"
+
+.PHONY: deploytest
+deploy_root_test := /data/wwwtest/api.grandrace.tech
+deploytest:
+	@ssh jiuyou "cd ${deploy_root_test}/bin/ && { if [ -f jydata_test.bak2 ]; then rm jydata_test.bak2; fi } && { if [ -f jydata_test.tmp ]; then rm jydata_test.tmp; fi }"
+	@scp .bin/jydata jiuyou:${deploy_root_test}/bin/jydata_test.tmp
+	@ssh jiuyou "cd ${deploy_root_test}/bin/ && { if [ -e jydata_test.bak ]; then mv jydata_test.bak jydata_test.bak2; fi } && { if [ -e jydata_test ]; then mv jydata_test jydata_test.bak; fi } && mv jydata_test.tmp jydata_test"
+	@ssh jiuyou "${deploy_root_test}/jydata_restart.sh"

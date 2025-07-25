@@ -28,6 +28,10 @@ const (
 	FieldDeviceID = "device_id"
 	// FieldDestID holds the string denoting the dest_id field in the database.
 	FieldDestID = "dest_id"
+	// FieldStartLon holds the string denoting the start_lon field in the database.
+	FieldStartLon = "start_lon"
+	// FieldStartLat holds the string denoting the start_lat field in the database.
+	FieldStartLat = "start_lat"
 	// FieldDestLon holds the string denoting the dest_lon field in the database.
 	FieldDestLon = "dest_lon"
 	// FieldDestLat holds the string denoting the dest_lat field in the database.
@@ -84,6 +88,8 @@ var Columns = []string{
 	FieldCarID,
 	FieldDeviceID,
 	FieldDestID,
+	FieldStartLon,
+	FieldStartLat,
 	FieldDestLon,
 	FieldDestLat,
 	FieldScheMode,
@@ -115,6 +121,10 @@ var (
 	DefaultUserType int
 	// DefaultUserID holds the default value on creation for the "user_id" field.
 	DefaultUserID int
+	// DefaultStartLon holds the default value on creation for the "start_lon" field.
+	DefaultStartLon float64
+	// DefaultStartLat holds the default value on creation for the "start_lat" field.
+	DefaultStartLat float64
 	// DefaultScheMode holds the default value on creation for the "sche_mode" field.
 	DefaultScheMode int
 	// DefaultAbnormalState holds the default value on creation for the "abnormal_state" field.
@@ -172,6 +182,16 @@ func ByDeviceID(opts ...sql.OrderTermOption) OrderOption {
 // ByDestID orders the results by the dest_id field.
 func ByDestID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldDestID, opts...).ToFunc()
+}
+
+// ByStartLon orders the results by the start_lon field.
+func ByStartLon(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldStartLon, opts...).ToFunc()
+}
+
+// ByStartLat orders the results by the start_lat field.
+func ByStartLat(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldStartLat, opts...).ToFunc()
 }
 
 // ByDestLon orders the results by the dest_lon field.

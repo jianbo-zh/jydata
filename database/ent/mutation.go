@@ -57062,6 +57062,10 @@ type ScheTaskMutation struct {
 	device_id         *string
 	dest_id           *int
 	adddest_id        *int
+	start_lon         *float64
+	addstart_lon      *float64
+	start_lat         *float64
+	addstart_lat      *float64
 	dest_lon          *float64
 	adddest_lon       *float64
 	dest_lat          *float64
@@ -57544,6 +57548,118 @@ func (m *ScheTaskMutation) AddedDestID() (r int, exists bool) {
 func (m *ScheTaskMutation) ResetDestID() {
 	m.dest_id = nil
 	m.adddest_id = nil
+}
+
+// SetStartLon sets the "start_lon" field.
+func (m *ScheTaskMutation) SetStartLon(f float64) {
+	m.start_lon = &f
+	m.addstart_lon = nil
+}
+
+// StartLon returns the value of the "start_lon" field in the mutation.
+func (m *ScheTaskMutation) StartLon() (r float64, exists bool) {
+	v := m.start_lon
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldStartLon returns the old "start_lon" field's value of the ScheTask entity.
+// If the ScheTask object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ScheTaskMutation) OldStartLon(ctx context.Context) (v float64, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldStartLon is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldStartLon requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldStartLon: %w", err)
+	}
+	return oldValue.StartLon, nil
+}
+
+// AddStartLon adds f to the "start_lon" field.
+func (m *ScheTaskMutation) AddStartLon(f float64) {
+	if m.addstart_lon != nil {
+		*m.addstart_lon += f
+	} else {
+		m.addstart_lon = &f
+	}
+}
+
+// AddedStartLon returns the value that was added to the "start_lon" field in this mutation.
+func (m *ScheTaskMutation) AddedStartLon() (r float64, exists bool) {
+	v := m.addstart_lon
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetStartLon resets all changes to the "start_lon" field.
+func (m *ScheTaskMutation) ResetStartLon() {
+	m.start_lon = nil
+	m.addstart_lon = nil
+}
+
+// SetStartLat sets the "start_lat" field.
+func (m *ScheTaskMutation) SetStartLat(f float64) {
+	m.start_lat = &f
+	m.addstart_lat = nil
+}
+
+// StartLat returns the value of the "start_lat" field in the mutation.
+func (m *ScheTaskMutation) StartLat() (r float64, exists bool) {
+	v := m.start_lat
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldStartLat returns the old "start_lat" field's value of the ScheTask entity.
+// If the ScheTask object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ScheTaskMutation) OldStartLat(ctx context.Context) (v float64, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldStartLat is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldStartLat requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldStartLat: %w", err)
+	}
+	return oldValue.StartLat, nil
+}
+
+// AddStartLat adds f to the "start_lat" field.
+func (m *ScheTaskMutation) AddStartLat(f float64) {
+	if m.addstart_lat != nil {
+		*m.addstart_lat += f
+	} else {
+		m.addstart_lat = &f
+	}
+}
+
+// AddedStartLat returns the value that was added to the "start_lat" field in this mutation.
+func (m *ScheTaskMutation) AddedStartLat() (r float64, exists bool) {
+	v := m.addstart_lat
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetStartLat resets all changes to the "start_lat" field.
+func (m *ScheTaskMutation) ResetStartLat() {
+	m.start_lat = nil
+	m.addstart_lat = nil
 }
 
 // SetDestLon sets the "dest_lon" field.
@@ -58232,7 +58348,7 @@ func (m *ScheTaskMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *ScheTaskMutation) Fields() []string {
-	fields := make([]string, 0, 19)
+	fields := make([]string, 0, 21)
 	if m.user_origin != nil {
 		fields = append(fields, schetask.FieldUserOrigin)
 	}
@@ -58253,6 +58369,12 @@ func (m *ScheTaskMutation) Fields() []string {
 	}
 	if m.dest_id != nil {
 		fields = append(fields, schetask.FieldDestID)
+	}
+	if m.start_lon != nil {
+		fields = append(fields, schetask.FieldStartLon)
+	}
+	if m.start_lat != nil {
+		fields = append(fields, schetask.FieldStartLat)
 	}
 	if m.dest_lon != nil {
 		fields = append(fields, schetask.FieldDestLon)
@@ -58312,6 +58434,10 @@ func (m *ScheTaskMutation) Field(name string) (ent.Value, bool) {
 		return m.DeviceID()
 	case schetask.FieldDestID:
 		return m.DestID()
+	case schetask.FieldStartLon:
+		return m.StartLon()
+	case schetask.FieldStartLat:
+		return m.StartLat()
 	case schetask.FieldDestLon:
 		return m.DestLon()
 	case schetask.FieldDestLat:
@@ -58359,6 +58485,10 @@ func (m *ScheTaskMutation) OldField(ctx context.Context, name string) (ent.Value
 		return m.OldDeviceID(ctx)
 	case schetask.FieldDestID:
 		return m.OldDestID(ctx)
+	case schetask.FieldStartLon:
+		return m.OldStartLon(ctx)
+	case schetask.FieldStartLat:
+		return m.OldStartLat(ctx)
 	case schetask.FieldDestLon:
 		return m.OldDestLon(ctx)
 	case schetask.FieldDestLat:
@@ -58440,6 +58570,20 @@ func (m *ScheTaskMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetDestID(v)
+		return nil
+	case schetask.FieldStartLon:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetStartLon(v)
+		return nil
+	case schetask.FieldStartLat:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetStartLat(v)
 		return nil
 	case schetask.FieldDestLon:
 		v, ok := value.(float64)
@@ -58548,6 +58692,12 @@ func (m *ScheTaskMutation) AddedFields() []string {
 	if m.adddest_id != nil {
 		fields = append(fields, schetask.FieldDestID)
 	}
+	if m.addstart_lon != nil {
+		fields = append(fields, schetask.FieldStartLon)
+	}
+	if m.addstart_lat != nil {
+		fields = append(fields, schetask.FieldStartLat)
+	}
 	if m.adddest_lon != nil {
 		fields = append(fields, schetask.FieldDestLon)
 	}
@@ -58581,6 +58731,10 @@ func (m *ScheTaskMutation) AddedField(name string) (ent.Value, bool) {
 		return m.AddedScenicAreaID()
 	case schetask.FieldDestID:
 		return m.AddedDestID()
+	case schetask.FieldStartLon:
+		return m.AddedStartLon()
+	case schetask.FieldStartLat:
+		return m.AddedStartLat()
 	case schetask.FieldDestLon:
 		return m.AddedDestLon()
 	case schetask.FieldDestLat:
@@ -58634,6 +58788,20 @@ func (m *ScheTaskMutation) AddField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddDestID(v)
+		return nil
+	case schetask.FieldStartLon:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddStartLon(v)
+		return nil
+	case schetask.FieldStartLat:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddStartLat(v)
 		return nil
 	case schetask.FieldDestLon:
 		v, ok := value.(float64)
@@ -58738,6 +58906,12 @@ func (m *ScheTaskMutation) ResetField(name string) error {
 		return nil
 	case schetask.FieldDestID:
 		m.ResetDestID()
+		return nil
+	case schetask.FieldStartLon:
+		m.ResetStartLon()
+		return nil
+	case schetask.FieldStartLat:
+		m.ResetStartLat()
 		return nil
 	case schetask.FieldDestLon:
 		m.ResetDestLon()

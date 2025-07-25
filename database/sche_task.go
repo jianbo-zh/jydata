@@ -24,6 +24,8 @@ func (m *Database) AddScheTask(ctx context.Context, scheTask *ent.ScheTask) (*en
 		SetDestID(scheTask.DestID).
 		SetDestLon(scheTask.DestLon).
 		SetDestLat(scheTask.DestLat).
+		SetStartLon(scheTask.StartLon).
+		SetStartLat(scheTask.StartLat).
 		SetScheMode(scheTask.ScheMode).
 		SetScheArgs(scheTask.ScheArgs).
 		SetState(scheTask.State).
@@ -34,8 +36,11 @@ func (m *Database) AddScheTask(ctx context.Context, scheTask *ent.ScheTask) (*en
 		Save(ctx)
 }
 
-func (m *Database) GetScheTask(ctx context.Context, taskID int) (*ent.ScheTask, error) {
-	return m.MainDB().ScheTask.Get(ctx, taskID)
+func (m *Database) GetScheTask(ctx context.Context, carId int, taskID int) (*ent.ScheTask, error) {
+	return m.MainDB().ScheTask.Query().
+		Where(schetask.IDEQ(taskID)).
+		Where(schetask.CarIDEQ(carId)).
+		First(ctx)
 }
 
 func (m *Database) GetLastScheTask(ctx context.Context, carID int) (*ent.ScheTask, error) {

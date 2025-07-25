@@ -164,6 +164,48 @@ func (stu *ScheTaskUpdate) AddDestID(i int) *ScheTaskUpdate {
 	return stu
 }
 
+// SetStartLon sets the "start_lon" field.
+func (stu *ScheTaskUpdate) SetStartLon(f float64) *ScheTaskUpdate {
+	stu.mutation.ResetStartLon()
+	stu.mutation.SetStartLon(f)
+	return stu
+}
+
+// SetNillableStartLon sets the "start_lon" field if the given value is not nil.
+func (stu *ScheTaskUpdate) SetNillableStartLon(f *float64) *ScheTaskUpdate {
+	if f != nil {
+		stu.SetStartLon(*f)
+	}
+	return stu
+}
+
+// AddStartLon adds f to the "start_lon" field.
+func (stu *ScheTaskUpdate) AddStartLon(f float64) *ScheTaskUpdate {
+	stu.mutation.AddStartLon(f)
+	return stu
+}
+
+// SetStartLat sets the "start_lat" field.
+func (stu *ScheTaskUpdate) SetStartLat(f float64) *ScheTaskUpdate {
+	stu.mutation.ResetStartLat()
+	stu.mutation.SetStartLat(f)
+	return stu
+}
+
+// SetNillableStartLat sets the "start_lat" field if the given value is not nil.
+func (stu *ScheTaskUpdate) SetNillableStartLat(f *float64) *ScheTaskUpdate {
+	if f != nil {
+		stu.SetStartLat(*f)
+	}
+	return stu
+}
+
+// AddStartLat adds f to the "start_lat" field.
+func (stu *ScheTaskUpdate) AddStartLat(f float64) *ScheTaskUpdate {
+	stu.mutation.AddStartLat(f)
+	return stu
+}
+
 // SetDestLon sets the "dest_lon" field.
 func (stu *ScheTaskUpdate) SetDestLon(f float64) *ScheTaskUpdate {
 	stu.mutation.ResetDestLon()
@@ -504,6 +546,18 @@ func (stu *ScheTaskUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := stu.mutation.AddedDestID(); ok {
 		_spec.AddField(schetask.FieldDestID, field.TypeInt, value)
 	}
+	if value, ok := stu.mutation.StartLon(); ok {
+		_spec.SetField(schetask.FieldStartLon, field.TypeFloat64, value)
+	}
+	if value, ok := stu.mutation.AddedStartLon(); ok {
+		_spec.AddField(schetask.FieldStartLon, field.TypeFloat64, value)
+	}
+	if value, ok := stu.mutation.StartLat(); ok {
+		_spec.SetField(schetask.FieldStartLat, field.TypeFloat64, value)
+	}
+	if value, ok := stu.mutation.AddedStartLat(); ok {
+		_spec.AddField(schetask.FieldStartLat, field.TypeFloat64, value)
+	}
 	if value, ok := stu.mutation.DestLon(); ok {
 		_spec.SetField(schetask.FieldDestLon, field.TypeFloat64, value)
 	}
@@ -785,6 +839,48 @@ func (stuo *ScheTaskUpdateOne) SetNillableDestID(i *int) *ScheTaskUpdateOne {
 // AddDestID adds i to the "dest_id" field.
 func (stuo *ScheTaskUpdateOne) AddDestID(i int) *ScheTaskUpdateOne {
 	stuo.mutation.AddDestID(i)
+	return stuo
+}
+
+// SetStartLon sets the "start_lon" field.
+func (stuo *ScheTaskUpdateOne) SetStartLon(f float64) *ScheTaskUpdateOne {
+	stuo.mutation.ResetStartLon()
+	stuo.mutation.SetStartLon(f)
+	return stuo
+}
+
+// SetNillableStartLon sets the "start_lon" field if the given value is not nil.
+func (stuo *ScheTaskUpdateOne) SetNillableStartLon(f *float64) *ScheTaskUpdateOne {
+	if f != nil {
+		stuo.SetStartLon(*f)
+	}
+	return stuo
+}
+
+// AddStartLon adds f to the "start_lon" field.
+func (stuo *ScheTaskUpdateOne) AddStartLon(f float64) *ScheTaskUpdateOne {
+	stuo.mutation.AddStartLon(f)
+	return stuo
+}
+
+// SetStartLat sets the "start_lat" field.
+func (stuo *ScheTaskUpdateOne) SetStartLat(f float64) *ScheTaskUpdateOne {
+	stuo.mutation.ResetStartLat()
+	stuo.mutation.SetStartLat(f)
+	return stuo
+}
+
+// SetNillableStartLat sets the "start_lat" field if the given value is not nil.
+func (stuo *ScheTaskUpdateOne) SetNillableStartLat(f *float64) *ScheTaskUpdateOne {
+	if f != nil {
+		stuo.SetStartLat(*f)
+	}
+	return stuo
+}
+
+// AddStartLat adds f to the "start_lat" field.
+func (stuo *ScheTaskUpdateOne) AddStartLat(f float64) *ScheTaskUpdateOne {
+	stuo.mutation.AddStartLat(f)
 	return stuo
 }
 
@@ -1157,6 +1253,18 @@ func (stuo *ScheTaskUpdateOne) sqlSave(ctx context.Context) (_node *ScheTask, er
 	}
 	if value, ok := stuo.mutation.AddedDestID(); ok {
 		_spec.AddField(schetask.FieldDestID, field.TypeInt, value)
+	}
+	if value, ok := stuo.mutation.StartLon(); ok {
+		_spec.SetField(schetask.FieldStartLon, field.TypeFloat64, value)
+	}
+	if value, ok := stuo.mutation.AddedStartLon(); ok {
+		_spec.AddField(schetask.FieldStartLon, field.TypeFloat64, value)
+	}
+	if value, ok := stuo.mutation.StartLat(); ok {
+		_spec.SetField(schetask.FieldStartLat, field.TypeFloat64, value)
+	}
+	if value, ok := stuo.mutation.AddedStartLat(); ok {
+		_spec.AddField(schetask.FieldStartLat, field.TypeFloat64, value)
 	}
 	if value, ok := stuo.mutation.DestLon(); ok {
 		_spec.SetField(schetask.FieldDestLon, field.TypeFloat64, value)

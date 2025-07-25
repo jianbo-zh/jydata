@@ -1230,6 +1230,8 @@ var (
 		{Name: "scenic_area_id", Type: field.TypeInt},
 		{Name: "device_id", Type: field.TypeString},
 		{Name: "dest_id", Type: field.TypeInt},
+		{Name: "start_lon", Type: field.TypeFloat64, Default: 0},
+		{Name: "start_lat", Type: field.TypeFloat64, Default: 0},
 		{Name: "dest_lon", Type: field.TypeFloat64},
 		{Name: "dest_lat", Type: field.TypeFloat64},
 		{Name: "sche_mode", Type: field.TypeInt, Default: 1},
@@ -1252,7 +1254,7 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "sche_tasks_cars_sche_task",
-				Columns:    []*schema.Column{ScheTasksColumns[19]},
+				Columns:    []*schema.Column{ScheTasksColumns[21]},
 				RefColumns: []*schema.Column{CarsColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
@@ -1577,7 +1579,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1753339771},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1753427577},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},

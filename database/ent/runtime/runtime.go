@@ -1614,28 +1614,36 @@ func init() {
 	schetaskDescUserID := schetaskFields[3].Descriptor()
 	// schetask.DefaultUserID holds the default value on creation for the user_id field.
 	schetask.DefaultUserID = schetaskDescUserID.Default.(int)
+	// schetaskDescStartLon is the schema descriptor for start_lon field.
+	schetaskDescStartLon := schetaskFields[8].Descriptor()
+	// schetask.DefaultStartLon holds the default value on creation for the start_lon field.
+	schetask.DefaultStartLon = schetaskDescStartLon.Default.(float64)
+	// schetaskDescStartLat is the schema descriptor for start_lat field.
+	schetaskDescStartLat := schetaskFields[9].Descriptor()
+	// schetask.DefaultStartLat holds the default value on creation for the start_lat field.
+	schetask.DefaultStartLat = schetaskDescStartLat.Default.(float64)
 	// schetaskDescScheMode is the schema descriptor for sche_mode field.
-	schetaskDescScheMode := schetaskFields[10].Descriptor()
+	schetaskDescScheMode := schetaskFields[12].Descriptor()
 	// schetask.DefaultScheMode holds the default value on creation for the sche_mode field.
 	schetask.DefaultScheMode = schetaskDescScheMode.Default.(int)
 	// schetaskDescAbnormalState is the schema descriptor for abnormal_state field.
-	schetaskDescAbnormalState := schetaskFields[13].Descriptor()
+	schetaskDescAbnormalState := schetaskFields[15].Descriptor()
 	// schetask.DefaultAbnormalState holds the default value on creation for the abnormal_state field.
 	schetask.DefaultAbnormalState = schetaskDescAbnormalState.Default.(int)
 	// schetaskDescRemark is the schema descriptor for remark field.
-	schetaskDescRemark := schetaskFields[14].Descriptor()
+	schetaskDescRemark := schetaskFields[16].Descriptor()
 	// schetask.DefaultRemark holds the default value on creation for the remark field.
 	schetask.DefaultRemark = schetaskDescRemark.Default.(string)
 	// schetaskDescRestartScheTime is the schema descriptor for restart_sche_time field.
-	schetaskDescRestartScheTime := schetaskFields[16].Descriptor()
+	schetaskDescRestartScheTime := schetaskFields[18].Descriptor()
 	// schetask.DefaultRestartScheTime holds the default value on creation for the restart_sche_time field.
 	schetask.DefaultRestartScheTime = schetaskDescRestartScheTime.Default.(time.Time)
 	// schetaskDescCreateTime is the schema descriptor for create_time field.
-	schetaskDescCreateTime := schetaskFields[18].Descriptor()
+	schetaskDescCreateTime := schetaskFields[20].Descriptor()
 	// schetask.DefaultCreateTime holds the default value on creation for the create_time field.
 	schetask.DefaultCreateTime = schetaskDescCreateTime.Default.(func() time.Time)
 	// schetaskDescUpdateTime is the schema descriptor for update_time field.
-	schetaskDescUpdateTime := schetaskFields[19].Descriptor()
+	schetaskDescUpdateTime := schetaskFields[21].Descriptor()
 	// schetask.DefaultUpdateTime holds the default value on creation for the update_time field.
 	schetask.DefaultUpdateTime = schetaskDescUpdateTime.Default.(func() time.Time)
 	// schetask.UpdateDefaultUpdateTime holds the default value on update for the update_time field.

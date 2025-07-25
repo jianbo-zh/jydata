@@ -34,9 +34,13 @@ type ScheTask struct {
 	DeviceID string `json:"device_id,omitempty"`
 	// 地点ID
 	DestID int `json:"dest_id,omitempty"`
-	// 经度(wgs84)
+	// 起点经度(wgs84)
+	StartLon float64 `json:"start_lon,omitempty"`
+	// 起点纬度(wgs84)
+	StartLat float64 `json:"start_lat,omitempty"`
+	// 目的地经度(wgs84)
 	DestLon float64 `json:"dest_lon,omitempty"`
-	// 纬度(wgs84)
+	// 目的地纬度(wgs84)
 	DestLat float64 `json:"dest_lat,omitempty"`
 	// 调度模式（1-[用户]自由调度 2-[运营]揽客模式 3-[运营]部署模式）
 	ScheMode int `json:"sche_mode,omitempty"`
@@ -102,7 +106,7 @@ func (*ScheTask) scanValues(columns []string) ([]any, error) {
 		switch columns[i] {
 		case schetask.FieldScheArgs, schetask.FieldRoutingPath:
 			values[i] = new([]byte)
-		case schetask.FieldDestLon, schetask.FieldDestLat:
+		case schetask.FieldStartLon, schetask.FieldStartLat, schetask.FieldDestLon, schetask.FieldDestLat:
 			values[i] = new(sql.NullFloat64)
 		case schetask.FieldID, schetask.FieldUserOrigin, schetask.FieldUserType, schetask.FieldUserID, schetask.FieldScenicAreaID, schetask.FieldCarID, schetask.FieldDestID, schetask.FieldScheMode, schetask.FieldState, schetask.FieldAbnormalState:
 			values[i] = new(sql.NullInt64)
@@ -172,6 +176,18 @@ func (st *ScheTask) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field dest_id", values[i])
 			} else if value.Valid {
 				st.DestID = int(value.Int64)
+			}
+		case schetask.FieldStartLon:
+			if value, ok := values[i].(*sql.NullFloat64); !ok {
+				return fmt.Errorf("unexpected type %T for field start_lon", values[i])
+			} else if value.Valid {
+				st.StartLon = value.Float64
+			}
+		case schetask.FieldStartLat:
+			if value, ok := values[i].(*sql.NullFloat64); !ok {
+				return fmt.Errorf("unexpected type %T for field start_lat", values[i])
+			} else if value.Valid {
+				st.StartLat = value.Float64
 			}
 		case schetask.FieldDestLon:
 			if value, ok := values[i].(*sql.NullFloat64); !ok {
@@ -315,6 +331,12 @@ func (st *ScheTask) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("dest_id=")
 	builder.WriteString(fmt.Sprintf("%v", st.DestID))
+	builder.WriteString(", ")
+	builder.WriteString("start_lon=")
+	builder.WriteString(fmt.Sprintf("%v", st.StartLon))
+	builder.WriteString(", ")
+	builder.WriteString("start_lat=")
+	builder.WriteString(fmt.Sprintf("%v", st.StartLat))
 	builder.WriteString(", ")
 	builder.WriteString("dest_lon=")
 	builder.WriteString(fmt.Sprintf("%v", st.DestLon))

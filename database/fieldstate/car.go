@@ -49,3 +49,30 @@ const (
 	DrivingState_Maintain_Remote  DrivingState = 0b0100010 // 维护远程 - 34
 	DrivingState_Maintain_Fault   DrivingState = 0b1000010 // 维护故障 - 66
 )
+
+func (ds DrivingState) String() string {
+	switch ds {
+	case DrivingState_Bootup:
+		return "启动中"
+	case DrivingState_Operation_Lock:
+		return "运营锁车"
+	case DrivingState_Operation_Manual:
+		return "运营手动"
+	case DrivingState_Operation_Auto:
+		return "运营自动"
+	case DrivingState_Operation_Fault:
+		return "运营故障"
+	case DrivingState_Maintain_Lock:
+		return "运维锁车"
+	case DrivingState_Maintain_Manual:
+		return "运维手动"
+	case DrivingState_Maintain_Auto:
+		return "运维自动"
+	case DrivingState_Maintain_Remote:
+		return "运维远程"
+	case DrivingState_Maintain_Fault:
+		return "运维故障"
+	default:
+		return "未知状态"
+	}
+}

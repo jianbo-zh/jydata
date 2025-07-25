@@ -90,6 +90,16 @@ func DestID(v int) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldEQ(FieldDestID, v))
 }
 
+// StartLon applies equality check predicate on the "start_lon" field. It's identical to StartLonEQ.
+func StartLon(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldEQ(FieldStartLon, v))
+}
+
+// StartLat applies equality check predicate on the "start_lat" field. It's identical to StartLatEQ.
+func StartLat(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldEQ(FieldStartLat, v))
+}
+
 // DestLon applies equality check predicate on the "dest_lon" field. It's identical to DestLonEQ.
 func DestLon(v float64) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldEQ(FieldDestLon, v))
@@ -423,6 +433,86 @@ func DestIDLT(v int) predicate.ScheTask {
 // DestIDLTE applies the LTE predicate on the "dest_id" field.
 func DestIDLTE(v int) predicate.ScheTask {
 	return predicate.ScheTask(sql.FieldLTE(FieldDestID, v))
+}
+
+// StartLonEQ applies the EQ predicate on the "start_lon" field.
+func StartLonEQ(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldEQ(FieldStartLon, v))
+}
+
+// StartLonNEQ applies the NEQ predicate on the "start_lon" field.
+func StartLonNEQ(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldNEQ(FieldStartLon, v))
+}
+
+// StartLonIn applies the In predicate on the "start_lon" field.
+func StartLonIn(vs ...float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldIn(FieldStartLon, vs...))
+}
+
+// StartLonNotIn applies the NotIn predicate on the "start_lon" field.
+func StartLonNotIn(vs ...float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldNotIn(FieldStartLon, vs...))
+}
+
+// StartLonGT applies the GT predicate on the "start_lon" field.
+func StartLonGT(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldGT(FieldStartLon, v))
+}
+
+// StartLonGTE applies the GTE predicate on the "start_lon" field.
+func StartLonGTE(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldGTE(FieldStartLon, v))
+}
+
+// StartLonLT applies the LT predicate on the "start_lon" field.
+func StartLonLT(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldLT(FieldStartLon, v))
+}
+
+// StartLonLTE applies the LTE predicate on the "start_lon" field.
+func StartLonLTE(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldLTE(FieldStartLon, v))
+}
+
+// StartLatEQ applies the EQ predicate on the "start_lat" field.
+func StartLatEQ(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldEQ(FieldStartLat, v))
+}
+
+// StartLatNEQ applies the NEQ predicate on the "start_lat" field.
+func StartLatNEQ(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldNEQ(FieldStartLat, v))
+}
+
+// StartLatIn applies the In predicate on the "start_lat" field.
+func StartLatIn(vs ...float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldIn(FieldStartLat, vs...))
+}
+
+// StartLatNotIn applies the NotIn predicate on the "start_lat" field.
+func StartLatNotIn(vs ...float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldNotIn(FieldStartLat, vs...))
+}
+
+// StartLatGT applies the GT predicate on the "start_lat" field.
+func StartLatGT(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldGT(FieldStartLat, v))
+}
+
+// StartLatGTE applies the GTE predicate on the "start_lat" field.
+func StartLatGTE(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldGTE(FieldStartLat, v))
+}
+
+// StartLatLT applies the LT predicate on the "start_lat" field.
+func StartLatLT(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldLT(FieldStartLat, v))
+}
+
+// StartLatLTE applies the LTE predicate on the "start_lat" field.
+func StartLatLTE(v float64) predicate.ScheTask {
+	return predicate.ScheTask(sql.FieldLTE(FieldStartLat, v))
 }
 
 // DestLonEQ applies the EQ predicate on the "dest_lon" field.

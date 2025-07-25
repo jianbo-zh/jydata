@@ -89,6 +89,34 @@ func (stc *ScheTaskCreate) SetDestID(i int) *ScheTaskCreate {
 	return stc
 }
 
+// SetStartLon sets the "start_lon" field.
+func (stc *ScheTaskCreate) SetStartLon(f float64) *ScheTaskCreate {
+	stc.mutation.SetStartLon(f)
+	return stc
+}
+
+// SetNillableStartLon sets the "start_lon" field if the given value is not nil.
+func (stc *ScheTaskCreate) SetNillableStartLon(f *float64) *ScheTaskCreate {
+	if f != nil {
+		stc.SetStartLon(*f)
+	}
+	return stc
+}
+
+// SetStartLat sets the "start_lat" field.
+func (stc *ScheTaskCreate) SetStartLat(f float64) *ScheTaskCreate {
+	stc.mutation.SetStartLat(f)
+	return stc
+}
+
+// SetNillableStartLat sets the "start_lat" field if the given value is not nil.
+func (stc *ScheTaskCreate) SetNillableStartLat(f *float64) *ScheTaskCreate {
+	if f != nil {
+		stc.SetStartLat(*f)
+	}
+	return stc
+}
+
 // SetDestLon sets the "dest_lon" field.
 func (stc *ScheTaskCreate) SetDestLon(f float64) *ScheTaskCreate {
 	stc.mutation.SetDestLon(f)
@@ -298,6 +326,14 @@ func (stc *ScheTaskCreate) defaults() {
 		v := schetask.DefaultUserID
 		stc.mutation.SetUserID(v)
 	}
+	if _, ok := stc.mutation.StartLon(); !ok {
+		v := schetask.DefaultStartLon
+		stc.mutation.SetStartLon(v)
+	}
+	if _, ok := stc.mutation.StartLat(); !ok {
+		v := schetask.DefaultStartLat
+		stc.mutation.SetStartLat(v)
+	}
 	if _, ok := stc.mutation.ScheMode(); !ok {
 		v := schetask.DefaultScheMode
 		stc.mutation.SetScheMode(v)
@@ -346,6 +382,12 @@ func (stc *ScheTaskCreate) check() error {
 	}
 	if _, ok := stc.mutation.DestID(); !ok {
 		return &ValidationError{Name: "dest_id", err: errors.New(`ent: missing required field "ScheTask.dest_id"`)}
+	}
+	if _, ok := stc.mutation.StartLon(); !ok {
+		return &ValidationError{Name: "start_lon", err: errors.New(`ent: missing required field "ScheTask.start_lon"`)}
+	}
+	if _, ok := stc.mutation.StartLat(); !ok {
+		return &ValidationError{Name: "start_lat", err: errors.New(`ent: missing required field "ScheTask.start_lat"`)}
 	}
 	if _, ok := stc.mutation.DestLon(); !ok {
 		return &ValidationError{Name: "dest_lon", err: errors.New(`ent: missing required field "ScheTask.dest_lon"`)}
@@ -432,6 +474,14 @@ func (stc *ScheTaskCreate) createSpec() (*ScheTask, *sqlgraph.CreateSpec) {
 	if value, ok := stc.mutation.DestID(); ok {
 		_spec.SetField(schetask.FieldDestID, field.TypeInt, value)
 		_node.DestID = value
+	}
+	if value, ok := stc.mutation.StartLon(); ok {
+		_spec.SetField(schetask.FieldStartLon, field.TypeFloat64, value)
+		_node.StartLon = value
+	}
+	if value, ok := stc.mutation.StartLat(); ok {
+		_spec.SetField(schetask.FieldStartLat, field.TypeFloat64, value)
+		_node.StartLat = value
 	}
 	if value, ok := stc.mutation.DestLon(); ok {
 		_spec.SetField(schetask.FieldDestLon, field.TypeFloat64, value)
