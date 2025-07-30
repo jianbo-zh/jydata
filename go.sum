@@ -187,8 +187,11 @@ github.com/influxdata/line-protocol v0.0.0-20200327222509-2487e7298839 h1:W9WBk7
 github.com/influxdata/line-protocol v0.0.0-20200327222509-2487e7298839/go.mod h1:xaLFMmpvUxqXtVkUJfg9QmT88cDaCJ3ZKgdZ78oO8Qo=
 github.com/jianbo-zh/jylib v0.3.0 h1:IRKAhqQQHTyPfDIDvP3TxOggVQ8qoozMJQvi/85BhMo=
 github.com/jianbo-zh/jylib v0.3.0/go.mod h1:m0KW0Df7Ml0cRy4XOBMntrx+Ma3BzpPXzWnJHf7Lb2I=
+github.com/jianbo-zh/jylib v0.3.1 h1:dj1fgf6gOEWC42zAt+t6OdErpX8fldIfSYQfZ0ABy6g=
+github.com/jianbo-zh/jylib v0.3.1/go.mod h1:kBlWiIqh4uMxBsQ5vaaBIxvvzp+ecOLs8UUdKgLdy00=
 github.com/jianbo-zh/jypb v0.3.0 h1:Xvqnhi5xgpMFLUe249/iGCQ7N1IrtzDLpKUzAbz/biA=
 github.com/jianbo-zh/jypb v0.3.0/go.mod h1:R5C4R2N/R6EpMjEU4iCfAajZ/SAE7Oc159qD+JrIbSM=
+github.com/jianbo-zh/jypb v0.3.1/go.mod h1:R5C4R2N/R6EpMjEU4iCfAajZ/SAE7Oc159qD+JrIbSM=
 github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af h1:pmfjZENx5imkbgOkpRUYLnmbU7UEFbjtDA2hxJ1ichM=
 github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af/go.mod h1:Nht3zPeWKUH0NzdCt2Blrr5ys8VGpn0CEB0cQHVjt7k=
 github.com/json-iterator/go v1.1.5/go.mod h1:+SdeFBvtyEkXs7REEP0seUULqWtbJapLOCVDaaPEHmU=
