@@ -30,6 +30,8 @@ type CarsModels struct {
 	CarIncr int `json:"car_incr,omitempty"`
 	// 是否已删除：0 - 正常，1 - 已删除
 	IsDeleted int `json:"is_deleted,omitempty"`
+	// 车辆描述文件Id
+	VehicleDescFileID int `json:"vehicle_desc_file_id,omitempty"`
 	// 创建时间
 	CreateTime time.Time `json:"create_time,omitempty"`
 	// 更新时间
@@ -96,7 +98,7 @@ func (*CarsModels) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case carsmodels.FieldID, carsmodels.FieldGroupCount, carsmodels.FieldStatus, carsmodels.FieldCarIncr, carsmodels.FieldIsDeleted:
+		case carsmodels.FieldID, carsmodels.FieldGroupCount, carsmodels.FieldStatus, carsmodels.FieldCarIncr, carsmodels.FieldIsDeleted, carsmodels.FieldVehicleDescFileID:
 			values[i] = new(sql.NullInt64)
 		case carsmodels.FieldModelName, carsmodels.FieldModelRemark:
 			values[i] = new(sql.NullString)
@@ -158,6 +160,12 @@ func (cm *CarsModels) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field is_deleted", values[i])
 			} else if value.Valid {
 				cm.IsDeleted = int(value.Int64)
+			}
+		case carsmodels.FieldVehicleDescFileID:
+			if value, ok := values[i].(*sql.NullInt64); !ok {
+				return fmt.Errorf("unexpected type %T for field vehicle_desc_file_id", values[i])
+			} else if value.Valid {
+				cm.VehicleDescFileID = int(value.Int64)
 			}
 		case carsmodels.FieldCreateTime:
 			if value, ok := values[i].(*sql.NullTime); !ok {
@@ -244,6 +252,9 @@ func (cm *CarsModels) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("is_deleted=")
 	builder.WriteString(fmt.Sprintf("%v", cm.IsDeleted))
+	builder.WriteString(", ")
+	builder.WriteString("vehicle_desc_file_id=")
+	builder.WriteString(fmt.Sprintf("%v", cm.VehicleDescFileID))
 	builder.WriteString(", ")
 	builder.WriteString("create_time=")
 	builder.WriteString(cm.CreateTime.Format(time.ANSIC))

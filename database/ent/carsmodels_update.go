@@ -144,6 +144,27 @@ func (cmu *CarsModelsUpdate) AddIsDeleted(i int) *CarsModelsUpdate {
 	return cmu
 }
 
+// SetVehicleDescFileID sets the "vehicle_desc_file_id" field.
+func (cmu *CarsModelsUpdate) SetVehicleDescFileID(i int) *CarsModelsUpdate {
+	cmu.mutation.ResetVehicleDescFileID()
+	cmu.mutation.SetVehicleDescFileID(i)
+	return cmu
+}
+
+// SetNillableVehicleDescFileID sets the "vehicle_desc_file_id" field if the given value is not nil.
+func (cmu *CarsModelsUpdate) SetNillableVehicleDescFileID(i *int) *CarsModelsUpdate {
+	if i != nil {
+		cmu.SetVehicleDescFileID(*i)
+	}
+	return cmu
+}
+
+// AddVehicleDescFileID adds i to the "vehicle_desc_file_id" field.
+func (cmu *CarsModelsUpdate) AddVehicleDescFileID(i int) *CarsModelsUpdate {
+	cmu.mutation.AddVehicleDescFileID(i)
+	return cmu
+}
+
 // SetUpdateTime sets the "update_time" field.
 func (cmu *CarsModelsUpdate) SetUpdateTime(t time.Time) *CarsModelsUpdate {
 	cmu.mutation.SetUpdateTime(t)
@@ -373,6 +394,12 @@ func (cmu *CarsModelsUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := cmu.mutation.AddedIsDeleted(); ok {
 		_spec.AddField(carsmodels.FieldIsDeleted, field.TypeInt, value)
+	}
+	if value, ok := cmu.mutation.VehicleDescFileID(); ok {
+		_spec.SetField(carsmodels.FieldVehicleDescFileID, field.TypeInt, value)
+	}
+	if value, ok := cmu.mutation.AddedVehicleDescFileID(); ok {
+		_spec.AddField(carsmodels.FieldVehicleDescFileID, field.TypeInt, value)
 	}
 	if value, ok := cmu.mutation.UpdateTime(); ok {
 		_spec.SetField(carsmodels.FieldUpdateTime, field.TypeTime, value)
@@ -689,6 +716,27 @@ func (cmuo *CarsModelsUpdateOne) AddIsDeleted(i int) *CarsModelsUpdateOne {
 	return cmuo
 }
 
+// SetVehicleDescFileID sets the "vehicle_desc_file_id" field.
+func (cmuo *CarsModelsUpdateOne) SetVehicleDescFileID(i int) *CarsModelsUpdateOne {
+	cmuo.mutation.ResetVehicleDescFileID()
+	cmuo.mutation.SetVehicleDescFileID(i)
+	return cmuo
+}
+
+// SetNillableVehicleDescFileID sets the "vehicle_desc_file_id" field if the given value is not nil.
+func (cmuo *CarsModelsUpdateOne) SetNillableVehicleDescFileID(i *int) *CarsModelsUpdateOne {
+	if i != nil {
+		cmuo.SetVehicleDescFileID(*i)
+	}
+	return cmuo
+}
+
+// AddVehicleDescFileID adds i to the "vehicle_desc_file_id" field.
+func (cmuo *CarsModelsUpdateOne) AddVehicleDescFileID(i int) *CarsModelsUpdateOne {
+	cmuo.mutation.AddVehicleDescFileID(i)
+	return cmuo
+}
+
 // SetUpdateTime sets the "update_time" field.
 func (cmuo *CarsModelsUpdateOne) SetUpdateTime(t time.Time) *CarsModelsUpdateOne {
 	cmuo.mutation.SetUpdateTime(t)
@@ -948,6 +996,12 @@ func (cmuo *CarsModelsUpdateOne) sqlSave(ctx context.Context) (_node *CarsModels
 	}
 	if value, ok := cmuo.mutation.AddedIsDeleted(); ok {
 		_spec.AddField(carsmodels.FieldIsDeleted, field.TypeInt, value)
+	}
+	if value, ok := cmuo.mutation.VehicleDescFileID(); ok {
+		_spec.SetField(carsmodels.FieldVehicleDescFileID, field.TypeInt, value)
+	}
+	if value, ok := cmuo.mutation.AddedVehicleDescFileID(); ok {
+		_spec.AddField(carsmodels.FieldVehicleDescFileID, field.TypeInt, value)
 	}
 	if value, ok := cmuo.mutation.UpdateTime(); ok {
 		_spec.SetField(carsmodels.FieldUpdateTime, field.TypeTime, value)

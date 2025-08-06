@@ -26,6 +26,8 @@ const (
 	FieldCarIncr = "car_incr"
 	// FieldIsDeleted holds the string denoting the is_deleted field in the database.
 	FieldIsDeleted = "is_deleted"
+	// FieldVehicleDescFileID holds the string denoting the vehicle_desc_file_id field in the database.
+	FieldVehicleDescFileID = "vehicle_desc_file_id"
 	// FieldCreateTime holds the string denoting the create_time field in the database.
 	FieldCreateTime = "create_time"
 	// FieldUpdateTime holds the string denoting the update_time field in the database.
@@ -79,6 +81,7 @@ var Columns = []string{
 	FieldStatus,
 	FieldCarIncr,
 	FieldIsDeleted,
+	FieldVehicleDescFileID,
 	FieldCreateTime,
 	FieldUpdateTime,
 }
@@ -104,6 +107,8 @@ var (
 	DefaultCarIncr int
 	// DefaultIsDeleted holds the default value on creation for the "is_deleted" field.
 	DefaultIsDeleted int
+	// DefaultVehicleDescFileID holds the default value on creation for the "vehicle_desc_file_id" field.
+	DefaultVehicleDescFileID int
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.
 	DefaultCreateTime func() time.Time
 	// DefaultUpdateTime holds the default value on creation for the "update_time" field.
@@ -148,6 +153,11 @@ func ByCarIncr(opts ...sql.OrderTermOption) OrderOption {
 // ByIsDeleted orders the results by the is_deleted field.
 func ByIsDeleted(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldIsDeleted, opts...).ToFunc()
+}
+
+// ByVehicleDescFileID orders the results by the vehicle_desc_file_id field.
+func ByVehicleDescFileID(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldVehicleDescFileID, opts...).ToFunc()
 }
 
 // ByCreateTime orders the results by the create_time field.

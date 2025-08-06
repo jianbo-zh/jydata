@@ -85,6 +85,11 @@ func IsDeleted(v int) predicate.CarsModels {
 	return predicate.CarsModels(sql.FieldEQ(FieldIsDeleted, v))
 }
 
+// VehicleDescFileID applies equality check predicate on the "vehicle_desc_file_id" field. It's identical to VehicleDescFileIDEQ.
+func VehicleDescFileID(v int) predicate.CarsModels {
+	return predicate.CarsModels(sql.FieldEQ(FieldVehicleDescFileID, v))
+}
+
 // CreateTime applies equality check predicate on the "create_time" field. It's identical to CreateTimeEQ.
 func CreateTime(v time.Time) predicate.CarsModels {
 	return predicate.CarsModels(sql.FieldEQ(FieldCreateTime, v))
@@ -383,6 +388,46 @@ func IsDeletedLT(v int) predicate.CarsModels {
 // IsDeletedLTE applies the LTE predicate on the "is_deleted" field.
 func IsDeletedLTE(v int) predicate.CarsModels {
 	return predicate.CarsModels(sql.FieldLTE(FieldIsDeleted, v))
+}
+
+// VehicleDescFileIDEQ applies the EQ predicate on the "vehicle_desc_file_id" field.
+func VehicleDescFileIDEQ(v int) predicate.CarsModels {
+	return predicate.CarsModels(sql.FieldEQ(FieldVehicleDescFileID, v))
+}
+
+// VehicleDescFileIDNEQ applies the NEQ predicate on the "vehicle_desc_file_id" field.
+func VehicleDescFileIDNEQ(v int) predicate.CarsModels {
+	return predicate.CarsModels(sql.FieldNEQ(FieldVehicleDescFileID, v))
+}
+
+// VehicleDescFileIDIn applies the In predicate on the "vehicle_desc_file_id" field.
+func VehicleDescFileIDIn(vs ...int) predicate.CarsModels {
+	return predicate.CarsModels(sql.FieldIn(FieldVehicleDescFileID, vs...))
+}
+
+// VehicleDescFileIDNotIn applies the NotIn predicate on the "vehicle_desc_file_id" field.
+func VehicleDescFileIDNotIn(vs ...int) predicate.CarsModels {
+	return predicate.CarsModels(sql.FieldNotIn(FieldVehicleDescFileID, vs...))
+}
+
+// VehicleDescFileIDGT applies the GT predicate on the "vehicle_desc_file_id" field.
+func VehicleDescFileIDGT(v int) predicate.CarsModels {
+	return predicate.CarsModels(sql.FieldGT(FieldVehicleDescFileID, v))
+}
+
+// VehicleDescFileIDGTE applies the GTE predicate on the "vehicle_desc_file_id" field.
+func VehicleDescFileIDGTE(v int) predicate.CarsModels {
+	return predicate.CarsModels(sql.FieldGTE(FieldVehicleDescFileID, v))
+}
+
+// VehicleDescFileIDLT applies the LT predicate on the "vehicle_desc_file_id" field.
+func VehicleDescFileIDLT(v int) predicate.CarsModels {
+	return predicate.CarsModels(sql.FieldLT(FieldVehicleDescFileID, v))
+}
+
+// VehicleDescFileIDLTE applies the LTE predicate on the "vehicle_desc_file_id" field.
+func VehicleDescFileIDLTE(v int) predicate.CarsModels {
+	return predicate.CarsModels(sql.FieldLTE(FieldVehicleDescFileID, v))
 }
 
 // CreateTimeEQ applies the EQ predicate on the "create_time" field.

@@ -487,6 +487,7 @@ var (
 		{Name: "status", Type: field.TypeInt, Default: 0},
 		{Name: "car_incr", Type: field.TypeInt, Default: 0},
 		{Name: "is_deleted", Type: field.TypeInt, Default: 0},
+		{Name: "vehicle_desc_file_id", Type: field.TypeInt, Default: 0},
 		{Name: "create_time", Type: field.TypeTime},
 		{Name: "update_time", Type: field.TypeTime},
 	}
@@ -1579,7 +1580,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1753427577},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1754487033},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},

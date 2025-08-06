@@ -33,6 +33,7 @@ type StopStock struct {
 }
 
 type OtaContent struct {
+	ReqSource           int    `json:"rs,omitempty"`
 	BtContent           string `json:"bc,omitempty"`
 	BtContentSignature  string `json:"bcs,omitempty"`
 	OtaContent          string `json:"oc,omitempty"`

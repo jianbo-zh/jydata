@@ -737,12 +737,16 @@ func init() {
 	carsmodelsDescIsDeleted := carsmodelsFields[6].Descriptor()
 	// carsmodels.DefaultIsDeleted holds the default value on creation for the is_deleted field.
 	carsmodels.DefaultIsDeleted = carsmodelsDescIsDeleted.Default.(int)
+	// carsmodelsDescVehicleDescFileID is the schema descriptor for vehicle_desc_file_id field.
+	carsmodelsDescVehicleDescFileID := carsmodelsFields[7].Descriptor()
+	// carsmodels.DefaultVehicleDescFileID holds the default value on creation for the vehicle_desc_file_id field.
+	carsmodels.DefaultVehicleDescFileID = carsmodelsDescVehicleDescFileID.Default.(int)
 	// carsmodelsDescCreateTime is the schema descriptor for create_time field.
-	carsmodelsDescCreateTime := carsmodelsFields[7].Descriptor()
+	carsmodelsDescCreateTime := carsmodelsFields[8].Descriptor()
 	// carsmodels.DefaultCreateTime holds the default value on creation for the create_time field.
 	carsmodels.DefaultCreateTime = carsmodelsDescCreateTime.Default.(func() time.Time)
 	// carsmodelsDescUpdateTime is the schema descriptor for update_time field.
-	carsmodelsDescUpdateTime := carsmodelsFields[8].Descriptor()
+	carsmodelsDescUpdateTime := carsmodelsFields[9].Descriptor()
 	// carsmodels.DefaultUpdateTime holds the default value on creation for the update_time field.
 	carsmodels.DefaultUpdateTime = carsmodelsDescUpdateTime.Default.(func() time.Time)
 	// carsmodels.UpdateDefaultUpdateTime holds the default value on update for the update_time field.

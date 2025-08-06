@@ -100,6 +100,20 @@ func (cmc *CarsModelsCreate) SetNillableIsDeleted(i *int) *CarsModelsCreate {
 	return cmc
 }
 
+// SetVehicleDescFileID sets the "vehicle_desc_file_id" field.
+func (cmc *CarsModelsCreate) SetVehicleDescFileID(i int) *CarsModelsCreate {
+	cmc.mutation.SetVehicleDescFileID(i)
+	return cmc
+}
+
+// SetNillableVehicleDescFileID sets the "vehicle_desc_file_id" field if the given value is not nil.
+func (cmc *CarsModelsCreate) SetNillableVehicleDescFileID(i *int) *CarsModelsCreate {
+	if i != nil {
+		cmc.SetVehicleDescFileID(*i)
+	}
+	return cmc
+}
+
 // SetCreateTime sets the "create_time" field.
 func (cmc *CarsModelsCreate) SetCreateTime(t time.Time) *CarsModelsCreate {
 	cmc.mutation.SetCreateTime(t)
@@ -249,6 +263,10 @@ func (cmc *CarsModelsCreate) defaults() {
 		v := carsmodels.DefaultIsDeleted
 		cmc.mutation.SetIsDeleted(v)
 	}
+	if _, ok := cmc.mutation.VehicleDescFileID(); !ok {
+		v := carsmodels.DefaultVehicleDescFileID
+		cmc.mutation.SetVehicleDescFileID(v)
+	}
 	if _, ok := cmc.mutation.CreateTime(); !ok {
 		v := carsmodels.DefaultCreateTime()
 		cmc.mutation.SetCreateTime(v)
@@ -278,6 +296,9 @@ func (cmc *CarsModelsCreate) check() error {
 	}
 	if _, ok := cmc.mutation.IsDeleted(); !ok {
 		return &ValidationError{Name: "is_deleted", err: errors.New(`ent: missing required field "CarsModels.is_deleted"`)}
+	}
+	if _, ok := cmc.mutation.VehicleDescFileID(); !ok {
+		return &ValidationError{Name: "vehicle_desc_file_id", err: errors.New(`ent: missing required field "CarsModels.vehicle_desc_file_id"`)}
 	}
 	if _, ok := cmc.mutation.CreateTime(); !ok {
 		return &ValidationError{Name: "create_time", err: errors.New(`ent: missing required field "CarsModels.create_time"`)}
@@ -340,6 +361,10 @@ func (cmc *CarsModelsCreate) createSpec() (*CarsModels, *sqlgraph.CreateSpec) {
 	if value, ok := cmc.mutation.IsDeleted(); ok {
 		_spec.SetField(carsmodels.FieldIsDeleted, field.TypeInt, value)
 		_node.IsDeleted = value
+	}
+	if value, ok := cmc.mutation.VehicleDescFileID(); ok {
+		_spec.SetField(carsmodels.FieldVehicleDescFileID, field.TypeInt, value)
+		_node.VehicleDescFileID = value
 	}
 	if value, ok := cmc.mutation.CreateTime(); ok {
 		_spec.SetField(carsmodels.FieldCreateTime, field.TypeTime, value)

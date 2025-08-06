@@ -25,6 +25,7 @@ func (CarsModels) Fields() []ent.Field {
 		field.Int("status").Default(0).Comment("状态：0 - 不可用，1 - 可用"),
 		field.Int("car_incr").Default(0).Comment("车辆数递增值"),
 		field.Int("is_deleted").Default(0).Comment("是否已删除：0 - 正常，1 - 已删除"),
+		field.Int("vehicle_desc_file_id").Default(0).Comment("车辆描述文件Id"),
 		field.Time("create_time").Immutable().Default(time.Now).Comment("创建时间"),
 		field.Time("update_time").Default(time.Now).UpdateDefault(time.Now).Comment("更新时间"),
 	}
