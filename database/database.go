@@ -33,7 +33,11 @@ func (m *Database) MainDB() *ent.Client {
 }
 
 func (m *Database) Begin() (*Database, error) {
-	tx, err := m.maindb.Tx(context.Background())
+	return m.BeginWithContext(context.Background())
+}
+
+func (m *Database) BeginWithContext(ctx context.Context) (*Database, error) {
+	tx, err := m.maindb.Tx(ctx)
 	if err != nil {
 		return nil, err
 	}
