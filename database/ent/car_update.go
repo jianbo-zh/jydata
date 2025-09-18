@@ -796,6 +796,20 @@ func (cu *CarUpdate) AddMaxSpeedLimit(f float32) *CarUpdate {
 	return cu
 }
 
+// SetVin sets the "vin" field.
+func (cu *CarUpdate) SetVin(s string) *CarUpdate {
+	cu.mutation.SetVin(s)
+	return cu
+}
+
+// SetNillableVin sets the "vin" field if the given value is not nil.
+func (cu *CarUpdate) SetNillableVin(s *string) *CarUpdate {
+	if s != nil {
+		cu.SetVin(*s)
+	}
+	return cu
+}
+
 // SetAliveTime sets the "alive_time" field.
 func (cu *CarUpdate) SetAliveTime(t time.Time) *CarUpdate {
 	cu.mutation.SetAliveTime(t)
@@ -1384,6 +1398,9 @@ func (cu *CarUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := cu.mutation.AddedMaxSpeedLimit(); ok {
 		_spec.AddField(car.FieldMaxSpeedLimit, field.TypeFloat32, value)
+	}
+	if value, ok := cu.mutation.Vin(); ok {
+		_spec.SetField(car.FieldVin, field.TypeString, value)
 	}
 	if value, ok := cu.mutation.AliveTime(); ok {
 		_spec.SetField(car.FieldAliveTime, field.TypeTime, value)
@@ -2513,6 +2530,20 @@ func (cuo *CarUpdateOne) AddMaxSpeedLimit(f float32) *CarUpdateOne {
 	return cuo
 }
 
+// SetVin sets the "vin" field.
+func (cuo *CarUpdateOne) SetVin(s string) *CarUpdateOne {
+	cuo.mutation.SetVin(s)
+	return cuo
+}
+
+// SetNillableVin sets the "vin" field if the given value is not nil.
+func (cuo *CarUpdateOne) SetNillableVin(s *string) *CarUpdateOne {
+	if s != nil {
+		cuo.SetVin(*s)
+	}
+	return cuo
+}
+
 // SetAliveTime sets the "alive_time" field.
 func (cuo *CarUpdateOne) SetAliveTime(t time.Time) *CarUpdateOne {
 	cuo.mutation.SetAliveTime(t)
@@ -3131,6 +3162,9 @@ func (cuo *CarUpdateOne) sqlSave(ctx context.Context) (_node *Car, err error) {
 	}
 	if value, ok := cuo.mutation.AddedMaxSpeedLimit(); ok {
 		_spec.AddField(car.FieldMaxSpeedLimit, field.TypeFloat32, value)
+	}
+	if value, ok := cuo.mutation.Vin(); ok {
+		_spec.SetField(car.FieldVin, field.TypeString, value)
 	}
 	if value, ok := cuo.mutation.AliveTime(); ok {
 		_spec.SetField(car.FieldAliveTime, field.TypeTime, value)

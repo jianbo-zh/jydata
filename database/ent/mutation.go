@@ -6584,6 +6584,7 @@ type CarMutation struct {
 	addextend_yokee_id            *int
 	max_speed_limit               *float32
 	addmax_speed_limit            *float32
+	vin                           *string
 	alive_time                    *time.Time
 	register_time                 *time.Time
 	driving_state_time            *time.Time
@@ -8739,6 +8740,42 @@ func (m *CarMutation) ResetMaxSpeedLimit() {
 	m.addmax_speed_limit = nil
 }
 
+// SetVin sets the "vin" field.
+func (m *CarMutation) SetVin(s string) {
+	m.vin = &s
+}
+
+// Vin returns the value of the "vin" field in the mutation.
+func (m *CarMutation) Vin() (r string, exists bool) {
+	v := m.vin
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldVin returns the old "vin" field's value of the Car entity.
+// If the Car object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *CarMutation) OldVin(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldVin is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldVin requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldVin: %w", err)
+	}
+	return oldValue.Vin, nil
+}
+
+// ResetVin resets all changes to the "vin" field.
+func (m *CarMutation) ResetVin() {
+	m.vin = nil
+}
+
 // SetAliveTime sets the "alive_time" field.
 func (m *CarMutation) SetAliveTime(t time.Time) {
 	m.alive_time = &t
@@ -9396,7 +9433,7 @@ func (m *CarMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *CarMutation) Fields() []string {
-	fields := make([]string, 0, 46)
+	fields := make([]string, 0, 47)
 	if m.delete_time != nil {
 		fields = append(fields, car.FieldDeleteTime)
 	}
@@ -9520,6 +9557,9 @@ func (m *CarMutation) Fields() []string {
 	if m.max_speed_limit != nil {
 		fields = append(fields, car.FieldMaxSpeedLimit)
 	}
+	if m.vin != nil {
+		fields = append(fields, car.FieldVin)
+	}
 	if m.alive_time != nil {
 		fields = append(fields, car.FieldAliveTime)
 	}
@@ -9625,6 +9665,8 @@ func (m *CarMutation) Field(name string) (ent.Value, bool) {
 		return m.ExtendYokeeID()
 	case car.FieldMaxSpeedLimit:
 		return m.MaxSpeedLimit()
+	case car.FieldVin:
+		return m.Vin()
 	case car.FieldAliveTime:
 		return m.AliveTime()
 	case car.FieldRegisterTime:
@@ -9726,6 +9768,8 @@ func (m *CarMutation) OldField(ctx context.Context, name string) (ent.Value, err
 		return m.OldExtendYokeeID(ctx)
 	case car.FieldMaxSpeedLimit:
 		return m.OldMaxSpeedLimit(ctx)
+	case car.FieldVin:
+		return m.OldVin(ctx)
 	case car.FieldAliveTime:
 		return m.OldAliveTime(ctx)
 	case car.FieldRegisterTime:
@@ -10031,6 +10075,13 @@ func (m *CarMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetMaxSpeedLimit(v)
+		return nil
+	case car.FieldVin:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetVin(v)
 		return nil
 	case car.FieldAliveTime:
 		v, ok := value.(time.Time)
@@ -10574,6 +10625,9 @@ func (m *CarMutation) ResetField(name string) error {
 		return nil
 	case car.FieldMaxSpeedLimit:
 		m.ResetMaxSpeedLimit()
+		return nil
+	case car.FieldVin:
+		m.ResetVin()
 		return nil
 	case car.FieldAliveTime:
 		m.ResetAliveTime()

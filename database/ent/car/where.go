@@ -255,6 +255,11 @@ func MaxSpeedLimit(v float32) predicate.Car {
 	return predicate.Car(sql.FieldEQ(FieldMaxSpeedLimit, v))
 }
 
+// Vin applies equality check predicate on the "vin" field. It's identical to VinEQ.
+func Vin(v string) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldVin, v))
+}
+
 // AliveTime applies equality check predicate on the "alive_time" field. It's identical to AliveTimeEQ.
 func AliveTime(v time.Time) predicate.Car {
 	return predicate.Car(sql.FieldEQ(FieldAliveTime, v))
@@ -2133,6 +2138,71 @@ func MaxSpeedLimitLT(v float32) predicate.Car {
 // MaxSpeedLimitLTE applies the LTE predicate on the "max_speed_limit" field.
 func MaxSpeedLimitLTE(v float32) predicate.Car {
 	return predicate.Car(sql.FieldLTE(FieldMaxSpeedLimit, v))
+}
+
+// VinEQ applies the EQ predicate on the "vin" field.
+func VinEQ(v string) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldVin, v))
+}
+
+// VinNEQ applies the NEQ predicate on the "vin" field.
+func VinNEQ(v string) predicate.Car {
+	return predicate.Car(sql.FieldNEQ(FieldVin, v))
+}
+
+// VinIn applies the In predicate on the "vin" field.
+func VinIn(vs ...string) predicate.Car {
+	return predicate.Car(sql.FieldIn(FieldVin, vs...))
+}
+
+// VinNotIn applies the NotIn predicate on the "vin" field.
+func VinNotIn(vs ...string) predicate.Car {
+	return predicate.Car(sql.FieldNotIn(FieldVin, vs...))
+}
+
+// VinGT applies the GT predicate on the "vin" field.
+func VinGT(v string) predicate.Car {
+	return predicate.Car(sql.FieldGT(FieldVin, v))
+}
+
+// VinGTE applies the GTE predicate on the "vin" field.
+func VinGTE(v string) predicate.Car {
+	return predicate.Car(sql.FieldGTE(FieldVin, v))
+}
+
+// VinLT applies the LT predicate on the "vin" field.
+func VinLT(v string) predicate.Car {
+	return predicate.Car(sql.FieldLT(FieldVin, v))
+}
+
+// VinLTE applies the LTE predicate on the "vin" field.
+func VinLTE(v string) predicate.Car {
+	return predicate.Car(sql.FieldLTE(FieldVin, v))
+}
+
+// VinContains applies the Contains predicate on the "vin" field.
+func VinContains(v string) predicate.Car {
+	return predicate.Car(sql.FieldContains(FieldVin, v))
+}
+
+// VinHasPrefix applies the HasPrefix predicate on the "vin" field.
+func VinHasPrefix(v string) predicate.Car {
+	return predicate.Car(sql.FieldHasPrefix(FieldVin, v))
+}
+
+// VinHasSuffix applies the HasSuffix predicate on the "vin" field.
+func VinHasSuffix(v string) predicate.Car {
+	return predicate.Car(sql.FieldHasSuffix(FieldVin, v))
+}
+
+// VinEqualFold applies the EqualFold predicate on the "vin" field.
+func VinEqualFold(v string) predicate.Car {
+	return predicate.Car(sql.FieldEqualFold(FieldVin, v))
+}
+
+// VinContainsFold applies the ContainsFold predicate on the "vin" field.
+func VinContainsFold(v string) predicate.Car {
+	return predicate.Car(sql.FieldContainsFold(FieldVin, v))
 }
 
 // AliveTimeEQ applies the EQ predicate on the "alive_time" field.

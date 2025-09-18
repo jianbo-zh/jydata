@@ -102,6 +102,8 @@ type Car struct {
 	ExtendYokeeID *int `json:"extend_yokee_id,omitempty"`
 	// 最大行驶速度(单位：m/s)
 	MaxSpeedLimit float32 `json:"max_speed_limit,omitempty"`
+	// 车架号
+	Vin string `json:"vin,omitempty"`
 	// 心跳时间
 	AliveTime time.Time `json:"alive_time,omitempty"`
 	// 激活时间
@@ -228,7 +230,7 @@ func (*Car) scanValues(columns []string) ([]any, error) {
 			values[i] = new(sql.NullFloat64)
 		case car.FieldID, car.FieldOperationMode, car.FieldScenicAreaID, car.FieldModelID, car.FieldPassengers, car.FieldReservedSeats, car.FieldPowerThreshold, car.FieldState, car.FieldUseState, car.FieldDrivingState, car.FieldEmergencyState, car.FieldUseOrderID, car.FieldUseFlightID, car.FieldDispatchTaskID, car.FieldDispatchScheMode, car.FieldBindOrderCount, car.FieldTotalOrderMileage, car.FieldTotalOrderTime, car.FieldTotalOrderCount, car.FieldTotalOrderAmount, car.FieldPowerRemaining, car.FieldErrorCount, car.FieldIsDeleted, car.FieldIsCommercialCar, car.FieldIsDrivingStateValid, car.FieldNextMapVersionProcess, car.FieldExtendYokeeID:
 			values[i] = new(sql.NullInt64)
-		case car.FieldCarName, car.FieldDeviceID, car.FieldLicensePlate, car.FieldActivateCode, car.FieldErrorMessage, car.FieldMapVersion, car.FieldNextMapVersion, car.FieldNextMapVersionState, car.FieldGrAutoVersion, car.FieldGrUIVersion, car.FieldCarproxyID:
+		case car.FieldCarName, car.FieldDeviceID, car.FieldLicensePlate, car.FieldActivateCode, car.FieldErrorMessage, car.FieldMapVersion, car.FieldNextMapVersion, car.FieldNextMapVersionState, car.FieldGrAutoVersion, car.FieldGrUIVersion, car.FieldCarproxyID, car.FieldVin:
 			values[i] = new(sql.NullString)
 		case car.FieldDeleteTime, car.FieldProduceTime, car.FieldAliveTime, car.FieldRegisterTime, car.FieldDrivingStateTime, car.FieldCreateTime, car.FieldUpdateTime:
 			values[i] = new(sql.NullTime)
@@ -502,6 +504,12 @@ func (c *Car) assignValues(columns []string, values []any) error {
 			} else if value.Valid {
 				c.MaxSpeedLimit = float32(value.Float64)
 			}
+		case car.FieldVin:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field vin", values[i])
+			} else if value.Valid {
+				c.Vin = value.String
+			}
 		case car.FieldAliveTime:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field alive_time", values[i])
@@ -732,6 +740,9 @@ func (c *Car) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("max_speed_limit=")
 	builder.WriteString(fmt.Sprintf("%v", c.MaxSpeedLimit))
+	builder.WriteString(", ")
+	builder.WriteString("vin=")
+	builder.WriteString(c.Vin)
 	builder.WriteString(", ")
 	builder.WriteString("alive_time=")
 	builder.WriteString(c.AliveTime.Format(time.ANSIC))

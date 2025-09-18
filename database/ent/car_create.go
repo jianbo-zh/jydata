@@ -522,6 +522,20 @@ func (cc *CarCreate) SetNillableMaxSpeedLimit(f *float32) *CarCreate {
 	return cc
 }
 
+// SetVin sets the "vin" field.
+func (cc *CarCreate) SetVin(s string) *CarCreate {
+	cc.mutation.SetVin(s)
+	return cc
+}
+
+// SetNillableVin sets the "vin" field if the given value is not nil.
+func (cc *CarCreate) SetNillableVin(s *string) *CarCreate {
+	if s != nil {
+		cc.SetVin(*s)
+	}
+	return cc
+}
+
 // SetAliveTime sets the "alive_time" field.
 func (cc *CarCreate) SetAliveTime(t time.Time) *CarCreate {
 	cc.mutation.SetAliveTime(t)
@@ -863,6 +877,10 @@ func (cc *CarCreate) defaults() error {
 		v := car.DefaultMaxSpeedLimit
 		cc.mutation.SetMaxSpeedLimit(v)
 	}
+	if _, ok := cc.mutation.Vin(); !ok {
+		v := car.DefaultVin
+		cc.mutation.SetVin(v)
+	}
 	if _, ok := cc.mutation.CreateTime(); !ok {
 		if car.DefaultCreateTime == nil {
 			return fmt.Errorf("ent: uninitialized car.DefaultCreateTime (forgotten import ent/runtime?)")
@@ -998,6 +1016,9 @@ func (cc *CarCreate) check() error {
 	}
 	if _, ok := cc.mutation.MaxSpeedLimit(); !ok {
 		return &ValidationError{Name: "max_speed_limit", err: errors.New(`ent: missing required field "Car.max_speed_limit"`)}
+	}
+	if _, ok := cc.mutation.Vin(); !ok {
+		return &ValidationError{Name: "vin", err: errors.New(`ent: missing required field "Car.vin"`)}
 	}
 	if _, ok := cc.mutation.CreateTime(); !ok {
 		return &ValidationError{Name: "create_time", err: errors.New(`ent: missing required field "Car.create_time"`)}
@@ -1198,6 +1219,10 @@ func (cc *CarCreate) createSpec() (*Car, *sqlgraph.CreateSpec) {
 	if value, ok := cc.mutation.MaxSpeedLimit(); ok {
 		_spec.SetField(car.FieldMaxSpeedLimit, field.TypeFloat32, value)
 		_node.MaxSpeedLimit = value
+	}
+	if value, ok := cc.mutation.Vin(); ok {
+		_spec.SetField(car.FieldVin, field.TypeString, value)
+		_node.Vin = value
 	}
 	if value, ok := cc.mutation.AliveTime(); ok {
 		_spec.SetField(car.FieldAliveTime, field.TypeTime, value)

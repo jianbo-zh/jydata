@@ -200,6 +200,7 @@ var (
 		{Name: "carproxy_id", Type: field.TypeString, Default: ""},
 		{Name: "extend_yokee_id", Type: field.TypeInt, Nullable: true},
 		{Name: "max_speed_limit", Type: field.TypeFloat32, Default: 2},
+		{Name: "vin", Type: field.TypeString, Default: ""},
 		{Name: "alive_time", Type: field.TypeTime, Nullable: true},
 		{Name: "register_time", Type: field.TypeTime, Nullable: true},
 		{Name: "driving_state_time", Type: field.TypeTime, Nullable: true},
@@ -216,13 +217,13 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "cars_cars_models_cars",
-				Columns:    []*schema.Column{CarsColumns[45]},
+				Columns:    []*schema.Column{CarsColumns[46]},
 				RefColumns: []*schema.Column{CarsModelsColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
 			{
 				Symbol:     "cars_scenic_areas_cars",
-				Columns:    []*schema.Column{CarsColumns[46]},
+				Columns:    []*schema.Column{CarsColumns[47]},
 				RefColumns: []*schema.Column{ScenicAreasColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
@@ -1580,7 +1581,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1754487033},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1758181739},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},

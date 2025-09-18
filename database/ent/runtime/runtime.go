@@ -420,12 +420,16 @@ func init() {
 	carDescMaxSpeedLimit := carFields[40].Descriptor()
 	// car.DefaultMaxSpeedLimit holds the default value on creation for the max_speed_limit field.
 	car.DefaultMaxSpeedLimit = carDescMaxSpeedLimit.Default.(float32)
+	// carDescVin is the schema descriptor for vin field.
+	carDescVin := carFields[41].Descriptor()
+	// car.DefaultVin holds the default value on creation for the vin field.
+	car.DefaultVin = carDescVin.Default.(string)
 	// carDescCreateTime is the schema descriptor for create_time field.
-	carDescCreateTime := carFields[44].Descriptor()
+	carDescCreateTime := carFields[45].Descriptor()
 	// car.DefaultCreateTime holds the default value on creation for the create_time field.
 	car.DefaultCreateTime = carDescCreateTime.Default.(func() time.Time)
 	// carDescUpdateTime is the schema descriptor for update_time field.
-	carDescUpdateTime := carFields[45].Descriptor()
+	carDescUpdateTime := carFields[46].Descriptor()
 	// car.DefaultUpdateTime holds the default value on creation for the update_time field.
 	car.DefaultUpdateTime = carDescUpdateTime.Default.(func() time.Time)
 	// car.UpdateDefaultUpdateTime holds the default value on update for the update_time field.

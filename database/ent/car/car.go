@@ -97,6 +97,8 @@ const (
 	FieldExtendYokeeID = "extend_yokee_id"
 	// FieldMaxSpeedLimit holds the string denoting the max_speed_limit field in the database.
 	FieldMaxSpeedLimit = "max_speed_limit"
+	// FieldVin holds the string denoting the vin field in the database.
+	FieldVin = "vin"
 	// FieldAliveTime holds the string denoting the alive_time field in the database.
 	FieldAliveTime = "alive_time"
 	// FieldRegisterTime holds the string denoting the register_time field in the database.
@@ -227,6 +229,7 @@ var Columns = []string{
 	FieldCarproxyID,
 	FieldExtendYokeeID,
 	FieldMaxSpeedLimit,
+	FieldVin,
 	FieldAliveTime,
 	FieldRegisterTime,
 	FieldDrivingStateTime,
@@ -310,6 +313,8 @@ var (
 	DefaultCarproxyID string
 	// DefaultMaxSpeedLimit holds the default value on creation for the "max_speed_limit" field.
 	DefaultMaxSpeedLimit float32
+	// DefaultVin holds the default value on creation for the "vin" field.
+	DefaultVin string
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.
 	DefaultCreateTime func() time.Time
 	// DefaultUpdateTime holds the default value on creation for the "update_time" field.
@@ -524,6 +529,11 @@ func ByExtendYokeeID(opts ...sql.OrderTermOption) OrderOption {
 // ByMaxSpeedLimit orders the results by the max_speed_limit field.
 func ByMaxSpeedLimit(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldMaxSpeedLimit, opts...).ToFunc()
+}
+
+// ByVin orders the results by the vin field.
+func ByVin(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldVin, opts...).ToFunc()
 }
 
 // ByAliveTime orders the results by the alive_time field.
