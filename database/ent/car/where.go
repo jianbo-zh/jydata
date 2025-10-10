@@ -240,6 +240,11 @@ func GrUIVersion(v string) predicate.Car {
 	return predicate.Car(sql.FieldEQ(FieldGrUIVersion, v))
 }
 
+// AllVersion applies equality check predicate on the "all_version" field. It's identical to AllVersionEQ.
+func AllVersion(v string) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldAllVersion, v))
+}
+
 // CarproxyID applies equality check predicate on the "carproxy_id" field. It's identical to CarproxyIDEQ.
 func CarproxyID(v string) predicate.Car {
 	return predicate.Car(sql.FieldEQ(FieldCarproxyID, v))
@@ -1983,6 +1988,71 @@ func GrUIVersionEqualFold(v string) predicate.Car {
 // GrUIVersionContainsFold applies the ContainsFold predicate on the "gr_ui_version" field.
 func GrUIVersionContainsFold(v string) predicate.Car {
 	return predicate.Car(sql.FieldContainsFold(FieldGrUIVersion, v))
+}
+
+// AllVersionEQ applies the EQ predicate on the "all_version" field.
+func AllVersionEQ(v string) predicate.Car {
+	return predicate.Car(sql.FieldEQ(FieldAllVersion, v))
+}
+
+// AllVersionNEQ applies the NEQ predicate on the "all_version" field.
+func AllVersionNEQ(v string) predicate.Car {
+	return predicate.Car(sql.FieldNEQ(FieldAllVersion, v))
+}
+
+// AllVersionIn applies the In predicate on the "all_version" field.
+func AllVersionIn(vs ...string) predicate.Car {
+	return predicate.Car(sql.FieldIn(FieldAllVersion, vs...))
+}
+
+// AllVersionNotIn applies the NotIn predicate on the "all_version" field.
+func AllVersionNotIn(vs ...string) predicate.Car {
+	return predicate.Car(sql.FieldNotIn(FieldAllVersion, vs...))
+}
+
+// AllVersionGT applies the GT predicate on the "all_version" field.
+func AllVersionGT(v string) predicate.Car {
+	return predicate.Car(sql.FieldGT(FieldAllVersion, v))
+}
+
+// AllVersionGTE applies the GTE predicate on the "all_version" field.
+func AllVersionGTE(v string) predicate.Car {
+	return predicate.Car(sql.FieldGTE(FieldAllVersion, v))
+}
+
+// AllVersionLT applies the LT predicate on the "all_version" field.
+func AllVersionLT(v string) predicate.Car {
+	return predicate.Car(sql.FieldLT(FieldAllVersion, v))
+}
+
+// AllVersionLTE applies the LTE predicate on the "all_version" field.
+func AllVersionLTE(v string) predicate.Car {
+	return predicate.Car(sql.FieldLTE(FieldAllVersion, v))
+}
+
+// AllVersionContains applies the Contains predicate on the "all_version" field.
+func AllVersionContains(v string) predicate.Car {
+	return predicate.Car(sql.FieldContains(FieldAllVersion, v))
+}
+
+// AllVersionHasPrefix applies the HasPrefix predicate on the "all_version" field.
+func AllVersionHasPrefix(v string) predicate.Car {
+	return predicate.Car(sql.FieldHasPrefix(FieldAllVersion, v))
+}
+
+// AllVersionHasSuffix applies the HasSuffix predicate on the "all_version" field.
+func AllVersionHasSuffix(v string) predicate.Car {
+	return predicate.Car(sql.FieldHasSuffix(FieldAllVersion, v))
+}
+
+// AllVersionEqualFold applies the EqualFold predicate on the "all_version" field.
+func AllVersionEqualFold(v string) predicate.Car {
+	return predicate.Car(sql.FieldEqualFold(FieldAllVersion, v))
+}
+
+// AllVersionContainsFold applies the ContainsFold predicate on the "all_version" field.
+func AllVersionContainsFold(v string) predicate.Car {
+	return predicate.Car(sql.FieldContainsFold(FieldAllVersion, v))
 }
 
 // CarproxyIDEQ applies the EQ predicate on the "carproxy_id" field.

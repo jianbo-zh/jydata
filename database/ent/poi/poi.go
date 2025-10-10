@@ -7,6 +7,7 @@ import (
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
+	"github.com/jianbo-zh/jydata/database/schema/types"
 )
 
 const (
@@ -50,6 +51,8 @@ const (
 	FieldParkingRadius = "parking_radius"
 	// FieldLevel holds the string denoting the level field in the database.
 	FieldLevel = "level"
+	// FieldParkingArea holds the string denoting the parking_area field in the database.
+	FieldParkingArea = "parking_area"
 	// FieldExtendYokeeID holds the string denoting the extend_yokee_id field in the database.
 	FieldExtendYokeeID = "extend_yokee_id"
 	// FieldCreateTime holds the string denoting the create_time field in the database.
@@ -90,6 +93,7 @@ var Columns = []string{
 	FieldBroadcastRadius,
 	FieldParkingRadius,
 	FieldLevel,
+	FieldParkingArea,
 	FieldExtendYokeeID,
 	FieldCreateTime,
 	FieldUpdateTime,
@@ -136,6 +140,8 @@ var (
 	DefaultParkingRadius int
 	// DefaultLevel holds the default value on creation for the "level" field.
 	DefaultLevel int
+	// DefaultParkingArea holds the default value on creation for the "parking_area" field.
+	DefaultParkingArea []types.FullLonLat
 	// DefaultCreateTime holds the default value on creation for the "create_time" field.
 	DefaultCreateTime func() time.Time
 	// DefaultUpdateTime holds the default value on creation for the "update_time" field.

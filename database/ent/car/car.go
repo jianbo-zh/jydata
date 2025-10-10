@@ -91,6 +91,8 @@ const (
 	FieldGrAutoVersion = "gr_auto_version"
 	// FieldGrUIVersion holds the string denoting the gr_ui_version field in the database.
 	FieldGrUIVersion = "gr_ui_version"
+	// FieldAllVersion holds the string denoting the all_version field in the database.
+	FieldAllVersion = "all_version"
 	// FieldCarproxyID holds the string denoting the carproxy_id field in the database.
 	FieldCarproxyID = "carproxy_id"
 	// FieldExtendYokeeID holds the string denoting the extend_yokee_id field in the database.
@@ -226,6 +228,7 @@ var Columns = []string{
 	FieldNextMapVersionProcess,
 	FieldGrAutoVersion,
 	FieldGrUIVersion,
+	FieldAllVersion,
 	FieldCarproxyID,
 	FieldExtendYokeeID,
 	FieldMaxSpeedLimit,
@@ -309,6 +312,8 @@ var (
 	DefaultGrAutoVersion string
 	// DefaultGrUIVersion holds the default value on creation for the "gr_ui_version" field.
 	DefaultGrUIVersion string
+	// DefaultAllVersion holds the default value on creation for the "all_version" field.
+	DefaultAllVersion string
 	// DefaultCarproxyID holds the default value on creation for the "carproxy_id" field.
 	DefaultCarproxyID string
 	// DefaultMaxSpeedLimit holds the default value on creation for the "max_speed_limit" field.
@@ -514,6 +519,11 @@ func ByGrAutoVersion(opts ...sql.OrderTermOption) OrderOption {
 // ByGrUIVersion orders the results by the gr_ui_version field.
 func ByGrUIVersion(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldGrUIVersion, opts...).ToFunc()
+}
+
+// ByAllVersion orders the results by the all_version field.
+func ByAllVersion(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldAllVersion, opts...).ToFunc()
 }
 
 // ByCarproxyID orders the results by the carproxy_id field.

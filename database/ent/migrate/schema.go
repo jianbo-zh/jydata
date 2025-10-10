@@ -197,6 +197,7 @@ var (
 		{Name: "next_map_version_process", Type: field.TypeInt, Default: 0},
 		{Name: "gr_auto_version", Type: field.TypeString, Default: ""},
 		{Name: "gr_ui_version", Type: field.TypeString, Default: ""},
+		{Name: "all_version", Type: field.TypeString, Default: ""},
 		{Name: "carproxy_id", Type: field.TypeString, Default: ""},
 		{Name: "extend_yokee_id", Type: field.TypeInt, Nullable: true},
 		{Name: "max_speed_limit", Type: field.TypeFloat32, Default: 2},
@@ -217,13 +218,13 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "cars_cars_models_cars",
-				Columns:    []*schema.Column{CarsColumns[46]},
+				Columns:    []*schema.Column{CarsColumns[47]},
 				RefColumns: []*schema.Column{CarsModelsColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
 			{
 				Symbol:     "cars_scenic_areas_cars",
-				Columns:    []*schema.Column{CarsColumns[47]},
+				Columns:    []*schema.Column{CarsColumns[48]},
 				RefColumns: []*schema.Column{ScenicAreasColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
@@ -1050,6 +1051,7 @@ var (
 		{Name: "broadcast_radius", Type: field.TypeInt, Default: 0},
 		{Name: "parking_radius", Type: field.TypeInt, Default: 0},
 		{Name: "level", Type: field.TypeInt, Default: 1},
+		{Name: "parking_area", Type: field.TypeJSON, Nullable: true},
 		{Name: "extend_yokee_id", Type: field.TypeInt, Nullable: true},
 		{Name: "create_time", Type: field.TypeTime},
 		{Name: "update_time", Type: field.TypeTime},
@@ -1063,7 +1065,7 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "pois_scenic_areas_pois",
-				Columns:    []*schema.Column{PoisColumns[21]},
+				Columns:    []*schema.Column{PoisColumns[22]},
 				RefColumns: []*schema.Column{ScenicAreasColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
@@ -1581,7 +1583,7 @@ var (
 	// SystemLogsColumns holds the columns for the "system_logs" table.
 	SystemLogsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint64, Increment: true},
-		{Name: "timestamp", Type: field.TypeInt, Default: 1758181739},
+		{Name: "timestamp", Type: field.TypeInt, Default: 1759990995},
 		{Name: "action", Type: field.TypeString},
 		{Name: "user", Type: field.TypeString},
 		{Name: "scenic_area", Type: field.TypeString},

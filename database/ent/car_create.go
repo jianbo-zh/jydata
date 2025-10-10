@@ -480,6 +480,20 @@ func (cc *CarCreate) SetNillableGrUIVersion(s *string) *CarCreate {
 	return cc
 }
 
+// SetAllVersion sets the "all_version" field.
+func (cc *CarCreate) SetAllVersion(s string) *CarCreate {
+	cc.mutation.SetAllVersion(s)
+	return cc
+}
+
+// SetNillableAllVersion sets the "all_version" field if the given value is not nil.
+func (cc *CarCreate) SetNillableAllVersion(s *string) *CarCreate {
+	if s != nil {
+		cc.SetAllVersion(*s)
+	}
+	return cc
+}
+
 // SetCarproxyID sets the "carproxy_id" field.
 func (cc *CarCreate) SetCarproxyID(s string) *CarCreate {
 	cc.mutation.SetCarproxyID(s)
@@ -869,6 +883,10 @@ func (cc *CarCreate) defaults() error {
 		v := car.DefaultGrUIVersion
 		cc.mutation.SetGrUIVersion(v)
 	}
+	if _, ok := cc.mutation.AllVersion(); !ok {
+		v := car.DefaultAllVersion
+		cc.mutation.SetAllVersion(v)
+	}
 	if _, ok := cc.mutation.CarproxyID(); !ok {
 		v := car.DefaultCarproxyID
 		cc.mutation.SetCarproxyID(v)
@@ -1010,6 +1028,9 @@ func (cc *CarCreate) check() error {
 	}
 	if _, ok := cc.mutation.GrUIVersion(); !ok {
 		return &ValidationError{Name: "gr_ui_version", err: errors.New(`ent: missing required field "Car.gr_ui_version"`)}
+	}
+	if _, ok := cc.mutation.AllVersion(); !ok {
+		return &ValidationError{Name: "all_version", err: errors.New(`ent: missing required field "Car.all_version"`)}
 	}
 	if _, ok := cc.mutation.CarproxyID(); !ok {
 		return &ValidationError{Name: "carproxy_id", err: errors.New(`ent: missing required field "Car.carproxy_id"`)}
@@ -1207,6 +1228,10 @@ func (cc *CarCreate) createSpec() (*Car, *sqlgraph.CreateSpec) {
 	if value, ok := cc.mutation.GrUIVersion(); ok {
 		_spec.SetField(car.FieldGrUIVersion, field.TypeString, value)
 		_node.GrUIVersion = value
+	}
+	if value, ok := cc.mutation.AllVersion(); ok {
+		_spec.SetField(car.FieldAllVersion, field.TypeString, value)
+		_node.AllVersion = value
 	}
 	if value, ok := cc.mutation.CarproxyID(); ok {
 		_spec.SetField(car.FieldCarproxyID, field.TypeString, value)

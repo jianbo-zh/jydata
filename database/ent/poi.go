@@ -12,6 +12,7 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"github.com/jianbo-zh/jydata/database/ent/poi"
 	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
+	"github.com/jianbo-zh/jydata/database/schema/types"
 )
 
 // Poi is the model entity for the Poi schema.
@@ -56,6 +57,8 @@ type Poi struct {
 	ParkingRadius int `json:"parking_radius,omitempty"`
 	// POI层级
 	Level int `json:"level,omitempty"`
+	// 停车区区域
+	ParkingArea []types.FullLonLat `json:"parking_area,omitempty"`
 	// Yokee扩展ID
 	ExtendYokeeID *int `json:"extend_yokee_id,omitempty"`
 	// 创建时间
@@ -93,7 +96,7 @@ func (*Poi) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case poi.FieldImageIds:
+		case poi.FieldImageIds, poi.FieldParkingArea:
 			values[i] = new([]byte)
 		case poi.FieldWgsLon, poi.FieldWgsLat, poi.FieldGcjLon, poi.FieldGcjLat, poi.FieldBdLon, poi.FieldBdLat, poi.FieldStopHeading:
 			values[i] = new(sql.NullFloat64)
@@ -234,6 +237,14 @@ func (po *Poi) assignValues(columns []string, values []any) error {
 			} else if value.Valid {
 				po.Level = int(value.Int64)
 			}
+		case poi.FieldParkingArea:
+			if value, ok := values[i].(*[]byte); !ok {
+				return fmt.Errorf("unexpected type %T for field parking_area", values[i])
+			} else if value != nil && len(*value) > 0 {
+				if err := json.Unmarshal(*value, &po.ParkingArea); err != nil {
+					return fmt.Errorf("unmarshal field parking_area: %w", err)
+				}
+			}
 		case poi.FieldExtendYokeeID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field extend_yokee_id", values[i])
@@ -347,6 +358,9 @@ func (po *Poi) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("level=")
 	builder.WriteString(fmt.Sprintf("%v", po.Level))
+	builder.WriteString(", ")
+	builder.WriteString("parking_area=")
+	builder.WriteString(fmt.Sprintf("%v", po.ParkingArea))
 	builder.WriteString(", ")
 	if v := po.ExtendYokeeID; v != nil {
 		builder.WriteString("extend_yokee_id=")

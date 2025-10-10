@@ -15,6 +15,7 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/poi"
 	"github.com/jianbo-zh/jydata/database/ent/predicate"
 	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
+	"github.com/jianbo-zh/jydata/database/schema/types"
 )
 
 // PoiUpdate is the builder for updating Poi entities.
@@ -371,6 +372,24 @@ func (pu *PoiUpdate) AddLevel(i int) *PoiUpdate {
 	return pu
 }
 
+// SetParkingArea sets the "parking_area" field.
+func (pu *PoiUpdate) SetParkingArea(tll []types.FullLonLat) *PoiUpdate {
+	pu.mutation.SetParkingArea(tll)
+	return pu
+}
+
+// AppendParkingArea appends tll to the "parking_area" field.
+func (pu *PoiUpdate) AppendParkingArea(tll []types.FullLonLat) *PoiUpdate {
+	pu.mutation.AppendParkingArea(tll)
+	return pu
+}
+
+// ClearParkingArea clears the value of the "parking_area" field.
+func (pu *PoiUpdate) ClearParkingArea() *PoiUpdate {
+	pu.mutation.ClearParkingArea()
+	return pu
+}
+
 // SetExtendYokeeID sets the "extend_yokee_id" field.
 func (pu *PoiUpdate) SetExtendYokeeID(i int) *PoiUpdate {
 	pu.mutation.ResetExtendYokeeID()
@@ -576,6 +595,17 @@ func (pu *PoiUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := pu.mutation.AddedLevel(); ok {
 		_spec.AddField(poi.FieldLevel, field.TypeInt, value)
+	}
+	if value, ok := pu.mutation.ParkingArea(); ok {
+		_spec.SetField(poi.FieldParkingArea, field.TypeJSON, value)
+	}
+	if value, ok := pu.mutation.AppendedParkingArea(); ok {
+		_spec.AddModifier(func(u *sql.UpdateBuilder) {
+			sqljson.Append(u, poi.FieldParkingArea, value)
+		})
+	}
+	if pu.mutation.ParkingAreaCleared() {
+		_spec.ClearField(poi.FieldParkingArea, field.TypeJSON)
 	}
 	if value, ok := pu.mutation.ExtendYokeeID(); ok {
 		_spec.SetField(poi.FieldExtendYokeeID, field.TypeInt, value)
@@ -979,6 +1009,24 @@ func (puo *PoiUpdateOne) AddLevel(i int) *PoiUpdateOne {
 	return puo
 }
 
+// SetParkingArea sets the "parking_area" field.
+func (puo *PoiUpdateOne) SetParkingArea(tll []types.FullLonLat) *PoiUpdateOne {
+	puo.mutation.SetParkingArea(tll)
+	return puo
+}
+
+// AppendParkingArea appends tll to the "parking_area" field.
+func (puo *PoiUpdateOne) AppendParkingArea(tll []types.FullLonLat) *PoiUpdateOne {
+	puo.mutation.AppendParkingArea(tll)
+	return puo
+}
+
+// ClearParkingArea clears the value of the "parking_area" field.
+func (puo *PoiUpdateOne) ClearParkingArea() *PoiUpdateOne {
+	puo.mutation.ClearParkingArea()
+	return puo
+}
+
 // SetExtendYokeeID sets the "extend_yokee_id" field.
 func (puo *PoiUpdateOne) SetExtendYokeeID(i int) *PoiUpdateOne {
 	puo.mutation.ResetExtendYokeeID()
@@ -1214,6 +1262,17 @@ func (puo *PoiUpdateOne) sqlSave(ctx context.Context) (_node *Poi, err error) {
 	}
 	if value, ok := puo.mutation.AddedLevel(); ok {
 		_spec.AddField(poi.FieldLevel, field.TypeInt, value)
+	}
+	if value, ok := puo.mutation.ParkingArea(); ok {
+		_spec.SetField(poi.FieldParkingArea, field.TypeJSON, value)
+	}
+	if value, ok := puo.mutation.AppendedParkingArea(); ok {
+		_spec.AddModifier(func(u *sql.UpdateBuilder) {
+			sqljson.Append(u, poi.FieldParkingArea, value)
+		})
+	}
+	if puo.mutation.ParkingAreaCleared() {
+		_spec.ClearField(poi.FieldParkingArea, field.TypeJSON)
 	}
 	if value, ok := puo.mutation.ExtendYokeeID(); ok {
 		_spec.SetField(poi.FieldExtendYokeeID, field.TypeInt, value)

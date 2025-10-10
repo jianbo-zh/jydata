@@ -6579,6 +6579,7 @@ type CarMutation struct {
 	addnext_map_version_process   *int
 	gr_auto_version               *string
 	gr_ui_version                 *string
+	all_version                   *string
 	carproxy_id                   *string
 	extend_yokee_id               *int
 	addextend_yokee_id            *int
@@ -8578,6 +8579,42 @@ func (m *CarMutation) ResetGrUIVersion() {
 	m.gr_ui_version = nil
 }
 
+// SetAllVersion sets the "all_version" field.
+func (m *CarMutation) SetAllVersion(s string) {
+	m.all_version = &s
+}
+
+// AllVersion returns the value of the "all_version" field in the mutation.
+func (m *CarMutation) AllVersion() (r string, exists bool) {
+	v := m.all_version
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldAllVersion returns the old "all_version" field's value of the Car entity.
+// If the Car object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *CarMutation) OldAllVersion(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldAllVersion is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldAllVersion requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldAllVersion: %w", err)
+	}
+	return oldValue.AllVersion, nil
+}
+
+// ResetAllVersion resets all changes to the "all_version" field.
+func (m *CarMutation) ResetAllVersion() {
+	m.all_version = nil
+}
+
 // SetCarproxyID sets the "carproxy_id" field.
 func (m *CarMutation) SetCarproxyID(s string) {
 	m.carproxy_id = &s
@@ -9433,7 +9470,7 @@ func (m *CarMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *CarMutation) Fields() []string {
-	fields := make([]string, 0, 47)
+	fields := make([]string, 0, 48)
 	if m.delete_time != nil {
 		fields = append(fields, car.FieldDeleteTime)
 	}
@@ -9548,6 +9585,9 @@ func (m *CarMutation) Fields() []string {
 	if m.gr_ui_version != nil {
 		fields = append(fields, car.FieldGrUIVersion)
 	}
+	if m.all_version != nil {
+		fields = append(fields, car.FieldAllVersion)
+	}
 	if m.carproxy_id != nil {
 		fields = append(fields, car.FieldCarproxyID)
 	}
@@ -9659,6 +9699,8 @@ func (m *CarMutation) Field(name string) (ent.Value, bool) {
 		return m.GrAutoVersion()
 	case car.FieldGrUIVersion:
 		return m.GrUIVersion()
+	case car.FieldAllVersion:
+		return m.AllVersion()
 	case car.FieldCarproxyID:
 		return m.CarproxyID()
 	case car.FieldExtendYokeeID:
@@ -9762,6 +9804,8 @@ func (m *CarMutation) OldField(ctx context.Context, name string) (ent.Value, err
 		return m.OldGrAutoVersion(ctx)
 	case car.FieldGrUIVersion:
 		return m.OldGrUIVersion(ctx)
+	case car.FieldAllVersion:
+		return m.OldAllVersion(ctx)
 	case car.FieldCarproxyID:
 		return m.OldCarproxyID(ctx)
 	case car.FieldExtendYokeeID:
@@ -10054,6 +10098,13 @@ func (m *CarMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetGrUIVersion(v)
+		return nil
+	case car.FieldAllVersion:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetAllVersion(v)
 		return nil
 	case car.FieldCarproxyID:
 		v, ok := value.(string)
@@ -10616,6 +10667,9 @@ func (m *CarMutation) ResetField(name string) error {
 		return nil
 	case car.FieldGrUIVersion:
 		m.ResetGrUIVersion()
+		return nil
+	case car.FieldAllVersion:
+		m.ResetAllVersion()
 		return nil
 	case car.FieldCarproxyID:
 		m.ResetCarproxyID()
@@ -47484,6 +47538,8 @@ type PoiMutation struct {
 	addparking_radius             *int
 	level                         *int
 	addlevel                      *int
+	parking_area                  *[]types.FullLonLat
+	appendparking_area            []types.FullLonLat
 	extend_yokee_id               *int
 	addextend_yokee_id            *int
 	create_time                   *time.Time
@@ -48523,6 +48579,71 @@ func (m *PoiMutation) ResetLevel() {
 	m.addlevel = nil
 }
 
+// SetParkingArea sets the "parking_area" field.
+func (m *PoiMutation) SetParkingArea(tll []types.FullLonLat) {
+	m.parking_area = &tll
+	m.appendparking_area = nil
+}
+
+// ParkingArea returns the value of the "parking_area" field in the mutation.
+func (m *PoiMutation) ParkingArea() (r []types.FullLonLat, exists bool) {
+	v := m.parking_area
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldParkingArea returns the old "parking_area" field's value of the Poi entity.
+// If the Poi object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *PoiMutation) OldParkingArea(ctx context.Context) (v []types.FullLonLat, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldParkingArea is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldParkingArea requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldParkingArea: %w", err)
+	}
+	return oldValue.ParkingArea, nil
+}
+
+// AppendParkingArea adds tll to the "parking_area" field.
+func (m *PoiMutation) AppendParkingArea(tll []types.FullLonLat) {
+	m.appendparking_area = append(m.appendparking_area, tll...)
+}
+
+// AppendedParkingArea returns the list of values that were appended to the "parking_area" field in this mutation.
+func (m *PoiMutation) AppendedParkingArea() ([]types.FullLonLat, bool) {
+	if len(m.appendparking_area) == 0 {
+		return nil, false
+	}
+	return m.appendparking_area, true
+}
+
+// ClearParkingArea clears the value of the "parking_area" field.
+func (m *PoiMutation) ClearParkingArea() {
+	m.parking_area = nil
+	m.appendparking_area = nil
+	m.clearedFields[poi.FieldParkingArea] = struct{}{}
+}
+
+// ParkingAreaCleared returns if the "parking_area" field was cleared in this mutation.
+func (m *PoiMutation) ParkingAreaCleared() bool {
+	_, ok := m.clearedFields[poi.FieldParkingArea]
+	return ok
+}
+
+// ResetParkingArea resets all changes to the "parking_area" field.
+func (m *PoiMutation) ResetParkingArea() {
+	m.parking_area = nil
+	m.appendparking_area = nil
+	delete(m.clearedFields, poi.FieldParkingArea)
+}
+
 // SetExtendYokeeID sets the "extend_yokee_id" field.
 func (m *PoiMutation) SetExtendYokeeID(i int) {
 	m.extend_yokee_id = &i
@@ -48739,7 +48860,7 @@ func (m *PoiMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *PoiMutation) Fields() []string {
-	fields := make([]string, 0, 21)
+	fields := make([]string, 0, 22)
 	if m.name != nil {
 		fields = append(fields, poi.FieldName)
 	}
@@ -48794,6 +48915,9 @@ func (m *PoiMutation) Fields() []string {
 	if m.level != nil {
 		fields = append(fields, poi.FieldLevel)
 	}
+	if m.parking_area != nil {
+		fields = append(fields, poi.FieldParkingArea)
+	}
 	if m.extend_yokee_id != nil {
 		fields = append(fields, poi.FieldExtendYokeeID)
 	}
@@ -48847,6 +48971,8 @@ func (m *PoiMutation) Field(name string) (ent.Value, bool) {
 		return m.ParkingRadius()
 	case poi.FieldLevel:
 		return m.Level()
+	case poi.FieldParkingArea:
+		return m.ParkingArea()
 	case poi.FieldExtendYokeeID:
 		return m.ExtendYokeeID()
 	case poi.FieldCreateTime:
@@ -48898,6 +49024,8 @@ func (m *PoiMutation) OldField(ctx context.Context, name string) (ent.Value, err
 		return m.OldParkingRadius(ctx)
 	case poi.FieldLevel:
 		return m.OldLevel(ctx)
+	case poi.FieldParkingArea:
+		return m.OldParkingArea(ctx)
 	case poi.FieldExtendYokeeID:
 		return m.OldExtendYokeeID(ctx)
 	case poi.FieldCreateTime:
@@ -49038,6 +49166,13 @@ func (m *PoiMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetLevel(v)
+		return nil
+	case poi.FieldParkingArea:
+		v, ok := value.([]types.FullLonLat)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetParkingArea(v)
 		return nil
 	case poi.FieldExtendYokeeID:
 		v, ok := value.(int)
@@ -49261,6 +49396,9 @@ func (m *PoiMutation) AddField(name string, value ent.Value) error {
 // mutation.
 func (m *PoiMutation) ClearedFields() []string {
 	var fields []string
+	if m.FieldCleared(poi.FieldParkingArea) {
+		fields = append(fields, poi.FieldParkingArea)
+	}
 	if m.FieldCleared(poi.FieldExtendYokeeID) {
 		fields = append(fields, poi.FieldExtendYokeeID)
 	}
@@ -49278,6 +49416,9 @@ func (m *PoiMutation) FieldCleared(name string) bool {
 // error if the field is not defined in the schema.
 func (m *PoiMutation) ClearField(name string) error {
 	switch name {
+	case poi.FieldParkingArea:
+		m.ClearParkingArea()
+		return nil
 	case poi.FieldExtendYokeeID:
 		m.ClearExtendYokeeID()
 		return nil
@@ -49342,6 +49483,9 @@ func (m *PoiMutation) ResetField(name string) error {
 		return nil
 	case poi.FieldLevel:
 		m.ResetLevel()
+		return nil
+	case poi.FieldParkingArea:
+		m.ResetParkingArea()
 		return nil
 	case poi.FieldExtendYokeeID:
 		m.ResetExtendYokeeID()

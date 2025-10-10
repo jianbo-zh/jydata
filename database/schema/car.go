@@ -66,6 +66,7 @@ func (Car) Fields() []ent.Field {
 
 		field.String("gr_auto_version").Default("").Comment("车机版本"),
 		field.String("gr_ui_version").Default("").Comment("CarUI版本"),
+		field.String("all_version").Default("").Comment("所有版本信息"),
 
 		field.String("carproxy_id").Default("").Comment("车辆代理服务ID"),
 

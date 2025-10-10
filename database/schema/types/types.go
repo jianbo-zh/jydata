@@ -15,6 +15,15 @@ type Coord struct {
 	Lon float64
 }
 
+type FullLonLat struct {
+	BdLat  float64 `json:"bd_lat,omitempty"`
+	BdLon  float64 `json:"bd_lon,omitempty"`
+	GcjLat float64 `json:"gcj_lat,omitempty"`
+	GcjLon float64 `json:"gcj_lon,omitempty"`
+	WgsLat float64 `json:"wgs_lat,omitempty"`
+	WgsLon float64 `json:"wgs_lon,omitempty"`
+}
+
 type Segement struct {
 	Points []Coord
 	Length float64

@@ -63,6 +63,7 @@ import (
 	"github.com/jianbo-zh/jydata/database/ent/task"
 	"github.com/jianbo-zh/jydata/database/ent/user"
 	"github.com/jianbo-zh/jydata/database/schema"
+	"github.com/jianbo-zh/jydata/database/schema/types"
 )
 
 // The init function reads all schema descriptors with runtime code
@@ -412,24 +413,28 @@ func init() {
 	carDescGrUIVersion := carFields[37].Descriptor()
 	// car.DefaultGrUIVersion holds the default value on creation for the gr_ui_version field.
 	car.DefaultGrUIVersion = carDescGrUIVersion.Default.(string)
+	// carDescAllVersion is the schema descriptor for all_version field.
+	carDescAllVersion := carFields[38].Descriptor()
+	// car.DefaultAllVersion holds the default value on creation for the all_version field.
+	car.DefaultAllVersion = carDescAllVersion.Default.(string)
 	// carDescCarproxyID is the schema descriptor for carproxy_id field.
-	carDescCarproxyID := carFields[38].Descriptor()
+	carDescCarproxyID := carFields[39].Descriptor()
 	// car.DefaultCarproxyID holds the default value on creation for the carproxy_id field.
 	car.DefaultCarproxyID = carDescCarproxyID.Default.(string)
 	// carDescMaxSpeedLimit is the schema descriptor for max_speed_limit field.
-	carDescMaxSpeedLimit := carFields[40].Descriptor()
+	carDescMaxSpeedLimit := carFields[41].Descriptor()
 	// car.DefaultMaxSpeedLimit holds the default value on creation for the max_speed_limit field.
 	car.DefaultMaxSpeedLimit = carDescMaxSpeedLimit.Default.(float32)
 	// carDescVin is the schema descriptor for vin field.
-	carDescVin := carFields[41].Descriptor()
+	carDescVin := carFields[42].Descriptor()
 	// car.DefaultVin holds the default value on creation for the vin field.
 	car.DefaultVin = carDescVin.Default.(string)
 	// carDescCreateTime is the schema descriptor for create_time field.
-	carDescCreateTime := carFields[45].Descriptor()
+	carDescCreateTime := carFields[46].Descriptor()
 	// car.DefaultCreateTime holds the default value on creation for the create_time field.
 	car.DefaultCreateTime = carDescCreateTime.Default.(func() time.Time)
 	// carDescUpdateTime is the schema descriptor for update_time field.
-	carDescUpdateTime := carFields[46].Descriptor()
+	carDescUpdateTime := carFields[47].Descriptor()
 	// car.DefaultUpdateTime holds the default value on creation for the update_time field.
 	car.DefaultUpdateTime = carDescUpdateTime.Default.(func() time.Time)
 	// car.UpdateDefaultUpdateTime holds the default value on update for the update_time field.
@@ -1437,12 +1442,16 @@ func init() {
 	poiDescLevel := poiFields[18].Descriptor()
 	// poi.DefaultLevel holds the default value on creation for the level field.
 	poi.DefaultLevel = poiDescLevel.Default.(int)
+	// poiDescParkingArea is the schema descriptor for parking_area field.
+	poiDescParkingArea := poiFields[19].Descriptor()
+	// poi.DefaultParkingArea holds the default value on creation for the parking_area field.
+	poi.DefaultParkingArea = poiDescParkingArea.Default.([]types.FullLonLat)
 	// poiDescCreateTime is the schema descriptor for create_time field.
-	poiDescCreateTime := poiFields[20].Descriptor()
+	poiDescCreateTime := poiFields[21].Descriptor()
 	// poi.DefaultCreateTime holds the default value on creation for the create_time field.
 	poi.DefaultCreateTime = poiDescCreateTime.Default.(func() time.Time)
 	// poiDescUpdateTime is the schema descriptor for update_time field.
-	poiDescUpdateTime := poiFields[21].Descriptor()
+	poiDescUpdateTime := poiFields[22].Descriptor()
 	// poi.DefaultUpdateTime holds the default value on creation for the update_time field.
 	poi.DefaultUpdateTime = poiDescUpdateTime.Default.(func() time.Time)
 	// poi.UpdateDefaultUpdateTime holds the default value on update for the update_time field.

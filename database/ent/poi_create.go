@@ -12,6 +12,7 @@ import (
 	"entgo.io/ent/schema/field"
 	"github.com/jianbo-zh/jydata/database/ent/poi"
 	"github.com/jianbo-zh/jydata/database/ent/scenicarea"
+	"github.com/jianbo-zh/jydata/database/schema/types"
 )
 
 // PoiCreate is the builder for creating a Poi entity.
@@ -241,6 +242,12 @@ func (pc *PoiCreate) SetNillableLevel(i *int) *PoiCreate {
 	return pc
 }
 
+// SetParkingArea sets the "parking_area" field.
+func (pc *PoiCreate) SetParkingArea(tll []types.FullLonLat) *PoiCreate {
+	pc.mutation.SetParkingArea(tll)
+	return pc
+}
+
 // SetExtendYokeeID sets the "extend_yokee_id" field.
 func (pc *PoiCreate) SetExtendYokeeID(i int) *PoiCreate {
 	pc.mutation.SetExtendYokeeID(i)
@@ -394,6 +401,10 @@ func (pc *PoiCreate) defaults() {
 	if _, ok := pc.mutation.Level(); !ok {
 		v := poi.DefaultLevel
 		pc.mutation.SetLevel(v)
+	}
+	if _, ok := pc.mutation.ParkingArea(); !ok {
+		v := poi.DefaultParkingArea
+		pc.mutation.SetParkingArea(v)
 	}
 	if _, ok := pc.mutation.CreateTime(); !ok {
 		v := poi.DefaultCreateTime()
@@ -569,6 +580,10 @@ func (pc *PoiCreate) createSpec() (*Poi, *sqlgraph.CreateSpec) {
 	if value, ok := pc.mutation.Level(); ok {
 		_spec.SetField(poi.FieldLevel, field.TypeInt, value)
 		_node.Level = value
+	}
+	if value, ok := pc.mutation.ParkingArea(); ok {
+		_spec.SetField(poi.FieldParkingArea, field.TypeJSON, value)
+		_node.ParkingArea = value
 	}
 	if value, ok := pc.mutation.ExtendYokeeID(); ok {
 		_spec.SetField(poi.FieldExtendYokeeID, field.TypeInt, value)

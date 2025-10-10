@@ -36,5 +36,6 @@ func (m *Database) CreatePOI(ctx context.Context, epoi *ent.Poi) (*ent.Poi, erro
 		SetParkingRadius(epoi.ParkingRadius).
 		SetLevel(epoi.Level).
 		SetStopHeading(epoi.StopHeading).
+		SetParkingArea(epoi.ParkingArea).
 		Save(ctx)
 }

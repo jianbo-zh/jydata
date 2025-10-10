@@ -890,6 +890,16 @@ func LevelLTE(v int) predicate.Poi {
 	return predicate.Poi(sql.FieldLTE(FieldLevel, v))
 }
 
+// ParkingAreaIsNil applies the IsNil predicate on the "parking_area" field.
+func ParkingAreaIsNil() predicate.Poi {
+	return predicate.Poi(sql.FieldIsNull(FieldParkingArea))
+}
+
+// ParkingAreaNotNil applies the NotNil predicate on the "parking_area" field.
+func ParkingAreaNotNil() predicate.Poi {
+	return predicate.Poi(sql.FieldNotNull(FieldParkingArea))
+}
+
 // ExtendYokeeIDEQ applies the EQ predicate on the "extend_yokee_id" field.
 func ExtendYokeeIDEQ(v int) predicate.Poi {
 	return predicate.Poi(sql.FieldEQ(FieldExtendYokeeID, v))

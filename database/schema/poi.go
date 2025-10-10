@@ -9,6 +9,7 @@ import (
 	"entgo.io/ent/dialect"
 	"entgo.io/ent/schema/edge"
 	"entgo.io/ent/schema/field"
+	"github.com/jianbo-zh/jydata/database/schema/types"
 )
 
 // Poi holds the schema definition for the Poi entity.
@@ -40,6 +41,7 @@ func (Poi) Fields() []ent.Field {
 		field.Int("broadcast_radius").Default(0).Comment("播报半径"),
 		field.Int("parking_radius").Default(0).Comment("停车半径"),
 		field.Int("level").Default(1).Comment("POI层级"),
+		field.JSON("parking_area", []types.FullLonLat{}).Default([]types.FullLonLat{}).Optional().Comment("停车区区域"),
 		field.Int("extend_yokee_id").Optional().Nillable().Comment("Yokee扩展ID"),
 		field.Time("create_time").Immutable().Default(time.Now).Comment("创建时间"),
 		field.Time("update_time").Default(time.Now).UpdateDefault(time.Now).Comment("更新时间"),

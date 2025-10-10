@@ -734,6 +734,20 @@ func (cu *CarUpdate) SetNillableGrUIVersion(s *string) *CarUpdate {
 	return cu
 }
 
+// SetAllVersion sets the "all_version" field.
+func (cu *CarUpdate) SetAllVersion(s string) *CarUpdate {
+	cu.mutation.SetAllVersion(s)
+	return cu
+}
+
+// SetNillableAllVersion sets the "all_version" field if the given value is not nil.
+func (cu *CarUpdate) SetNillableAllVersion(s *string) *CarUpdate {
+	if s != nil {
+		cu.SetAllVersion(*s)
+	}
+	return cu
+}
+
 // SetCarproxyID sets the "carproxy_id" field.
 func (cu *CarUpdate) SetCarproxyID(s string) *CarUpdate {
 	cu.mutation.SetCarproxyID(s)
@@ -1380,6 +1394,9 @@ func (cu *CarUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := cu.mutation.GrUIVersion(); ok {
 		_spec.SetField(car.FieldGrUIVersion, field.TypeString, value)
+	}
+	if value, ok := cu.mutation.AllVersion(); ok {
+		_spec.SetField(car.FieldAllVersion, field.TypeString, value)
 	}
 	if value, ok := cu.mutation.CarproxyID(); ok {
 		_spec.SetField(car.FieldCarproxyID, field.TypeString, value)
@@ -2468,6 +2485,20 @@ func (cuo *CarUpdateOne) SetNillableGrUIVersion(s *string) *CarUpdateOne {
 	return cuo
 }
 
+// SetAllVersion sets the "all_version" field.
+func (cuo *CarUpdateOne) SetAllVersion(s string) *CarUpdateOne {
+	cuo.mutation.SetAllVersion(s)
+	return cuo
+}
+
+// SetNillableAllVersion sets the "all_version" field if the given value is not nil.
+func (cuo *CarUpdateOne) SetNillableAllVersion(s *string) *CarUpdateOne {
+	if s != nil {
+		cuo.SetAllVersion(*s)
+	}
+	return cuo
+}
+
 // SetCarproxyID sets the "carproxy_id" field.
 func (cuo *CarUpdateOne) SetCarproxyID(s string) *CarUpdateOne {
 	cuo.mutation.SetCarproxyID(s)
@@ -3144,6 +3175,9 @@ func (cuo *CarUpdateOne) sqlSave(ctx context.Context) (_node *Car, err error) {
 	}
 	if value, ok := cuo.mutation.GrUIVersion(); ok {
 		_spec.SetField(car.FieldGrUIVersion, field.TypeString, value)
+	}
+	if value, ok := cuo.mutation.AllVersion(); ok {
+		_spec.SetField(car.FieldAllVersion, field.TypeString, value)
 	}
 	if value, ok := cuo.mutation.CarproxyID(); ok {
 		_spec.SetField(car.FieldCarproxyID, field.TypeString, value)
