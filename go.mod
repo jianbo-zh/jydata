@@ -4,7 +4,7 @@ go 1.23.9
 
 require (
 	entgo.io/ent v0.14.4
-	github.com/go-kratos/kratos/v2 v2.8.4
+	github.com/go-kratos/kratos/v2 v2.9.1
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/go-sql-driver/mysql v1.9.2
 	github.com/google/wire v0.6.0
